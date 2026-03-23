@@ -1,0 +1,550 @@
+[
+  {
+    "Región Norte": [
+      {
+        "id": "19",
+        "municipio": "Bolaños"
+      },
+      {
+        "id": "25",
+        "municipio": "Colotlán"
+      },
+      {
+        "id": "42",
+        "municipio": "Huejuquilla el Alto"
+      },
+      {
+        "id": "76",
+        "municipio": "San Martín de Bolaños"
+      },
+      {
+        "id": "104",
+        "municipio": "Totatiche"
+      },
+      {
+        "id": "31",
+        "municipio": "Chimaltitán"
+      },
+      {
+        "id": "41",
+        "municipio": "Huejúcar"
+      },
+      {
+        "id": "61",
+        "municipio": "Mezquitic"
+      },
+      {
+        "id": "81",
+        "municipio": "Santa María de los Ángeles"
+      },
+      {
+        "id": "115",
+        "municipio": "Villa Guerrero"
+      }
+    ]
+  },
+  {
+    "Región Altos Norte": [
+      {
+        "id": "35",
+        "municipio": "Encarnación de Díaz"
+      },
+      {
+        "id": "64",
+        "municipio": "Ojuelos de Jalisco"
+      },
+      {
+        "id": "73",
+        "municipio": "San Juan de los Lagos"
+      },
+      {
+        "id": "109",
+        "municipio": "Unión de San Antonio"
+      },
+      {
+        "id": "53",
+        "municipio": "Lagos de Moreno"
+      },
+      {
+        "id": "72",
+        "municipio": "San Diego de Alejandría"
+      },
+      {
+        "id": "91",
+        "municipio": "Teocaltiche"
+      },
+      {
+        "id": "116",
+        "municipio": "Villa Hidalgo"
+      }
+    ]
+  },
+  {
+    "Región Altos Sur": [
+      {
+        "id": "1",
+        "municipio": "Acatic"
+      },
+      {
+        "id": "117",
+        "municipio": "Cañadas de Obregón"
+      },
+      {
+        "id": "48",
+        "municipio": "Jesús María"
+      },
+      {
+        "id": "125",
+        "municipio": "San Ignacio Cerro Gordo"
+      },
+      {
+        "id": "78",
+        "municipio": "San Miguel el Alto"
+      },
+      {
+        "id": "111",
+        "municipio": "Valle de Guadalupe"
+      },
+      {
+        "id": "8",
+        "municipio": "Arandas"
+      },
+      {
+        "id": "46",
+        "municipio": "Jalostotitlán"
+      },
+      {
+        "id": "60",
+        "municipio": "Mexticacán"
+      },
+      {
+        "id": "74",
+        "municipio": "San Julián"
+      },
+      {
+        "id": "93",
+        "municipio": "Tepatitlán de Morelos"
+      },
+      {
+        "id": "118",
+        "municipio": "Yahualica de González Gallo"
+      }
+    ]
+  },
+  {
+    "Región Ciénega": [
+      {
+        "id": "13",
+        "municipio": "Atotonilco el Alto"
+      },
+      {
+        "id": "33",
+        "municipio": "Degollado"
+      },
+      {
+        "id": "18",
+        "municipio": "La Barca"
+      },
+      {
+        "id": "66",
+        "municipio": "Poncitlán"
+      },
+      {
+        "id": "123",
+        "municipio": "Zapotlán del Rey"
+      },
+      {
+        "id": "16",
+        "municipio": "Ayotlán"
+      },
+      {
+        "id": "47",
+        "municipio": "Jamay"
+      },
+      {
+        "id": "63",
+        "municipio": "Ocotlán"
+      },
+      {
+        "id": "105",
+        "municipio": "Tototlán"
+      }
+    ]
+  },
+  {
+    "Región Sureste": [
+      {
+        "id": "30",
+        "municipio": "Chapala"
+      },
+      {
+        "id": "50",
+        "municipio": "Jocotepec"
+      },
+      {
+        "id": "59",
+        "municipio": "Mazamitla"
+      },
+      {
+        "id": "56",
+        "municipio": "Santa María del Oro"
+      },
+      {
+        "id": "107",
+        "municipio": "Tuxcueca"
+      },
+      {
+        "id": "26",
+        "municipio": "Concepción de Buenos Aires"
+      },
+      {
+        "id": "57",
+        "municipio": "La Manzanilla de la Paz"
+      },
+      {
+        "id": "69",
+        "municipio": "Quitupan"
+      },
+      {
+        "id": "96",
+        "municipio": "Tizapán el Alto"
+      },
+      {
+        "id": "112",
+        "municipio": "Valle de Juárez"
+      }
+    ]
+  },
+  {
+    "Región Sur": [
+      {
+        "id": "79",
+        "municipio": "Gómez Farías"
+      },
+      {
+        "id": "65",
+        "municipio": "Pihuamo"
+      },
+      {
+        "id": "85",
+        "municipio": "Tamazula de Gordiano"
+      },
+      {
+        "id": "99",
+        "municipio": "Tolimán"
+      },
+      {
+        "id": "108",
+        "municipio": "Tuxpan"
+      },
+      {
+        "id": "122",
+        "municipio": "Zapotitlán de Vadillo"
+      },
+      {
+        "id": "49",
+        "municipio": "Jilotlán de los Dolores"
+      },
+      {
+        "id": "113",
+        "municipio": "San Gabriel"
+      },
+      {
+        "id": "87",
+        "municipio": "Tecalitlán"
+      },
+      {
+        "id": "103",
+        "municipio": "Tonila"
+      },
+      {
+        "id": "121",
+        "municipio": "Zapotiltic"
+      },
+      {
+        "id": "23",
+        "municipio": "Zapotlán el Grande"
+      }
+    ]
+  },
+  {
+    "Región Sierra de Amula": [
+      {
+        "id": "11",
+        "municipio": "Atengo"
+      },
+      {
+        "id": "17",
+        "municipio": "Ayutla"
+      },
+      {
+        "id": "28",
+        "municipio": "Cuautla"
+      },
+      {
+        "id": "37",
+        "municipio": "El Grullo"
+      },
+      {
+        "id": "52",
+        "municipio": "Juchitlán"
+      },
+      {
+        "id": "90",
+        "municipio": "Tenamaxtlán"
+      },
+      {
+        "id": "15",
+        "municipio": "Autlán de Navarro"
+      },
+      {
+        "id": "32",
+        "municipio": "Chiquilistlán"
+      },
+      {
+        "id": "34",
+        "municipio": "Ejutla"
+      },
+      {
+        "id": "54",
+        "municipio": "El Limón"
+      },
+      {
+        "id": "88",
+        "municipio": "Tecolotlán"
+      },
+      {
+        "id": "102",
+        "municipio": "Tonaya"
+      },
+      {
+        "id": "106",
+        "municipio": "Tuxcacuesco"
+      },
+      {
+        "id": "110",
+        "municipio": "Unión de Tula"
+      }
+    ]
+  },
+  {
+    "Región Costa Sur": [
+      {
+        "id": "21",
+        "municipio": "Casimiro Castillo"
+      },
+      {
+        "id": "27",
+        "municipio": "Cuautitlán de García Barragán"
+      },
+      {
+        "id": "100",
+        "municipio": "Tomatlán"
+      },
+      {
+        "id": "22",
+        "municipio": "Cihuatlán"
+      },
+      {
+        "id": "43",
+        "municipio": "La Huerta"
+      },
+      {
+        "id": "68",
+        "municipio": "Villa Purificación"
+      }
+    ]
+  },
+  {
+    "Región Costa-Sierra Occidental": [
+      {
+        "id": "12",
+        "municipio": "Atenguillo"
+      },
+      {
+        "id": "38",
+        "municipio": "Guachinango"
+      },
+      {
+        "id": "62",
+        "municipio": "Mixtlán"
+      },
+      {
+        "id": "80",
+        "municipio": "San Sebastián del Oeste"
+      },
+      {
+        "id": "20",
+        "municipio": "Cabo Corrientes"
+      },
+      {
+        "id": "58",
+        "municipio": "Mascota"
+      },
+      {
+        "id": "67",
+        "municipio": "Puerto Vallarta"
+      },
+      {
+        "id": "84",
+        "municipio": "Talpa de Allende"
+      }
+    ]
+  },
+  {
+    "Región Valles": [
+      {
+        "id": "3",
+        "municipio": "Ahualulco de Mercado"
+      },
+      {
+        "id": "6",
+        "municipio": "Ameca"
+      },
+      {
+        "id": "36",
+        "municipio": "Etzatlán"
+      },
+      {
+        "id": "55",
+        "municipio": "Magdalena"
+      },
+      {
+        "id": "75",
+        "municipio": "San Marcos"
+      },
+      {
+        "id": "94",
+        "municipio": "Tequila"
+      },
+      {
+        "id": "5",
+        "municipio": "Amatitán"
+      },
+      {
+        "id": "9",
+        "municipio": "El Arenal"
+      },
+      {
+        "id": "40",
+        "municipio": "Hostotipaquillo"
+      },
+      {
+        "id": "7",
+        "municipio": "San Juanito de Escobedo"
+      },
+      {
+        "id": "83",
+        "municipio": "Tala"
+      },
+      {
+        "id": "95",
+        "municipio": "Teuchitlán"
+      }
+    ]
+  },
+  {
+    "Región Lagunas": [
+      {
+        "id": "2",
+        "municipio": "Acatlán de Juárez"
+      },
+      {
+        "id": "10",
+        "municipio": "Atemajac de Brizuela"
+      },
+      {
+        "id": "24",
+        "municipio": "Cocula"
+      },
+      {
+        "id": "82",
+        "municipio": "Sayula"
+      },
+      {
+        "id": "89",
+        "municipio": "Techaluta de Montenegro"
+      },
+      {
+        "id": "114",
+        "municipio": "Villa Corona"
+      },
+      {
+        "id": "4",
+        "municipio": "Amacueca"
+      },
+      {
+        "id": "14",
+        "municipio": "Atoyac"
+      },
+      {
+        "id": "77",
+        "municipio": "San Martín Hidalgo"
+      },
+      {
+        "id": "86",
+        "municipio": "Tapalpa"
+      },
+      {
+        "id": "92",
+        "municipio": "Teocuitatlán de Corona"
+      },
+      {
+        "id": "119",
+        "municipio": "Zacoalco de Torres"
+      }
+    ]
+  },
+  {
+    "Región Centro": [
+      {
+        "id": "29",
+        "municipio": "Cuquío"
+      },
+      {
+        "id": "39",
+        "municipio": "Guadalajara"
+      },
+      {
+        "id": "45",
+        "municipio": "Ixtlahuacán del Río"
+      },
+      {
+        "id": "71",
+        "municipio": "San Cristóbal de la Barranca"
+      },
+      {
+        "id": "97",
+        "municipio": "Tlajomulco de Zúñiga"
+      },
+      {
+        "id": "120",
+        "municipio": "Zapopan"
+      },
+      {
+        "id": "70",
+        "municipio": "El Salto"
+      },
+      {
+        "id": "44",
+        "municipio": "Ixtlahuacán de los Membrillos"
+      },
+      {
+        "id": "51",
+        "municipio": "Juanacatlán"
+      },
+      {
+        "id": "98",
+        "municipio": "San Pedro Tlaquepaque"
+      },
+      {
+        "id": "101",
+        "municipio": "Tonalá"
+      },
+      {
+        "id": "124",
+        "municipio": "Zapotlanejo"
+      }
+    ]
+  }
+]
