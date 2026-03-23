@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+commit_msg=$(cat "$1")
+pattern="^(feat|fix|update|refactor|chore|docs|merge)(\([a-z0-9_-]+\))?: .+"
+
+if ! echo "$commit_msg" | grep -qE "$pattern"; then
+    echo "Error: el mensaje de commit no sigue la convención de commits."
+    echo "Formato: type(scope): description"
+    echo "Tipos válidos: feat, fix, update, refactor, chore, docs, merge"
+    echo "Ejemplos:"
+    echo "  feat(historia): adds extract stage"
+    echo "  fix(geografia): handles resizing maps"
+    echo "  update(core): improve connection pooling"
+    exit 1
+fi
