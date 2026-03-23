@@ -1,0 +1,16 @@
+<% extends "base.tex.j2" %>
+
+<% block content %>
+
+\title{
+    \textcolor{primary}{\Huge \textbf{Cuadernillo Municipal}} \\[1em]
+    \textcolor{accent}{\Large << municipio_nombre >>}
+}
+\date{}
+\maketitle
+\tableofcontents
+\newpage
+
+<% include "sections/gobierno_y_seguridad.tex.j2" %>
+
+<% endblock %>
