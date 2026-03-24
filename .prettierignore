@@ -18,3 +18,7 @@ migrations/
 *.csv
 *.json.gz
 *.md
+*.yaml
+*.yml
+*.j2
+*.tex
