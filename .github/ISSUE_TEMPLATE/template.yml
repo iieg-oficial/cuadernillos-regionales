@@ -1,0 +1,53 @@
+name: Template
+description: Crear el template LaTeX de una sección
+title: "[TEMPLATE] "
+labels: ["template"]
+body:
+  - type: input
+    id: nombre
+    attributes:
+      label: Nombre de la sección
+      description: Mismo nombre que el folder en `pipelines/`, en snake_case
+      placeholder: "gobierno_y_seguridad"
+    validations:
+      required: true
+
+  - type: input
+    id: pipeline_issue
+    attributes:
+      label: Issue del pipeline relacionado
+      description: Número del issue donde se define el pipeline de esta sección
+      placeholder: "#12"
+
+  - type: textarea
+    id: variables
+    attributes:
+      label: Variables de contexto disponibles
+      description: Claves del `dict` que retorna `run()` y que el template puede usar
+      placeholder: |
+        - `gs_total_delitos`
+        - `gs_ranking_municipio`
+    validations:
+      required: true
+
+  - type: textarea
+    id: contenido
+    attributes:
+      label: Contenido del template
+      description: Elementos LaTeX que debe incluir (tablas, gráficas, texto)
+      placeholder: |
+        - Tabla de delitos por tipo
+        - Gráfica `gs_delitos_por_tipo.png`
+        - Párrafo de ranking municipal
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Checklist
+      options:
+        - label: "Archivo creado en `templates/sections/<nombre>.tex.j2`"
+        - label: '`reporte.tex.j2` incluye `{% include "sections/<nombre>.tex.j2" %}`'
+        - label: "Todas las variables usadas existen en el contexto del pipeline"
+        - label: "Compila sin errores con `pdflatex`"
