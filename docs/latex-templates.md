@@ -99,7 +99,7 @@ Se convierten en un loop:
 
 ```latex
 <% for row in gs_tabla_delitos %>
-\verb|<< row.clave >>| & \verb|<< row.municipio >>| & \verb|<< row.valor >>| & \verb|<< row.lugar >>| \\
+ row.clave &  row.municipio  & row.anio\_censo  & row.poblacion\_total \\
 \hline
 <% endfor %>
 ```
@@ -109,7 +109,7 @@ Para resaltar una fila con condición:
 ```latex
 <% for row in gs_tabla_delitos %>
 <% if row.es_objetivo %>\rowcolor{rowHighlight}<% endif %>
-\verb|<< row.clave >>| & \verb|<< row.municipio >>| & \verb|<< row.valor >>| & \verb|<< row.lugar >>| \\
+row.clave &  row.municipio  & row.anio\_censo  & row.poblacion\_total \\ \\
 \hline
 <% endfor %>
 ```
