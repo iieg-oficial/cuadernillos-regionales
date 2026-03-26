@@ -6,13 +6,11 @@ Esta guía explica cómo convertir un archivo `.tex` de Overleaf en un template 
 
 Jinja2 usa `{{ }}` y `{% %}` por defecto, pero LaTeX también usa `{}` extensivamente. Para evitar conflictos, el renderer usa delimitadores distintos:
 
-| Propósito   | Apertura | Cierre |
-| ----------- | -------- | ------ |
-| Variables   | `<<`     | `>>`   |
-| Bloques     | `<%`     | `%>`   |
-| Comentarios | `<#`     | `#>`   |
-
-## Convención de variables
+| Propósito   | Apertura              | Cierre                |
+| ----------- | --------------------- | --------------------- |
+| Variables   | `\verb` `<<\|`        | `>>\|`             |
+| Bloques     | `\verb` `<%\|`        | `%>`                  |
+| Comentarios | `\verb` `<#\|`        | `#>`                  |## Convención de variables
 
 Todas las variables del template deben llevar un prefijo con las iniciales de la sección, seguido de guión bajo. Esto evita colisiones entre secciones cuando se fusionan los contextos.
 
@@ -25,16 +23,16 @@ ec_   →  economia
 **Correcto:**
 
 ```latex
-<< gs_municipio_nombre >>
-<< gs_region_nombre >>
-<< gs_tabla_delitos >>
+\verb|<< gs_municipio_nombre >>|
+\verb|<< gs_region_nombre >>|
+\verb|<< gs_tabla_delitos >>|
 ```
 
 **Incorrecto:**
 
 ```latex
-<< municipio_nombre >>
-<< tabla_delitos >>
+\verb|<< municipio_nombre >>|
+\verb|<< tabla_delitos >>|
 ```
 
 ## Pasos
@@ -45,7 +43,8 @@ Crea `templates/sections/nombre_seccion.tex.j2` y pega el contenido de tu `.tex`
 
 ### 2. Identifica los valores dinámicos
 
-Busca todo lo que cambia por municipio: nombre, región, valores de tablas, rutas de imágenes, etc. Esos valores estáticos se reemplazan con variables usando `<< >>`.
+Busca todo lo que cambia por municipio: nombre, región, valores de tablas, rutas de imágenes, etc. Esos valores estáticos se reemplazan con variables usando `\verb|<< >>|
+`.
 
 ### 3. Registra el template en `reporte.tex.j2`
 
@@ -70,7 +69,7 @@ Un valor estático en Overleaf:
 Se convierte en:
 
 ```latex
-\section{<< gs_municipio_nombre >> — << gs_region_nombre >>}
+\section{\verb|<< gs_municipio_nombre >>| — \verb|<< gs_region_nombre >>|}
 ```
 
 Un valor numérico dentro de texto:
@@ -82,7 +81,7 @@ En 2024 se registraron 42 delitos de fuero común.
 Se convierte en:
 
 ```latex
-En << gs_anio_actual >> se registraron << gs_total_delitos >> delitos de fuero común.
+En \verb|<< gs_anio_actual >>| se registraron << gs_total_delitos >> delitos de fuero común.
 ```
 
 ### Tablas
@@ -100,7 +99,7 @@ Se convierten en un loop:
 
 ```latex
 <% for row in gs_tabla_delitos %>
-<< row.clave >> & << row.municipio >> & << row.valor >> & << row.lugar >> \\
+\verb|<< row.clave >>| & \verb|<< row.municipio >>| & \verb|<< row.valor >>| & \verb|<< row.lugar >>| \\
 \hline
 <% endfor %>
 ```
@@ -110,7 +109,7 @@ Para resaltar una fila con condición:
 ```latex
 <% for row in gs_tabla_delitos %>
 <% if row.es_objetivo %>\rowcolor{rowHighlight}<% endif %>
-<< row.clave >> & << row.municipio >> & << row.valor >> & << row.lugar >> \\
+\verb|<< row.clave >>| & \verb|<< row.municipio >>| & \verb|<< row.valor >>| & \verb|<< row.lugar >>| \\
 \hline
 <% endfor %>
 ```
@@ -126,7 +125,7 @@ Una imagen estática en Overleaf:
 Se convierte en:
 
 ```latex
-\includegraphics[width=\textwidth]{<< gs_grafica_delitos >>}
+\includegraphics[width=\textwidth]{\verb|<< gs_grafica_delitos >>|}
 ```
 
 Donde `gs_grafica_delitos` es la ruta absoluta o relativa a la imagen generada, por ejemplo `output/charts/1_cuadernillo/delitos.png`.
