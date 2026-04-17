@@ -1,4 +1,5 @@
 from core.pipelines.stage import Stage
+from core.utils.municipalities import get_same_region
 
 ND = "\\ND"
 MAPA_PLACEHOLDER = (
@@ -632,16 +633,37 @@ class Analizer(Stage):
             for loc in locs_marg
         ]
 
-        ctx["de_localidades_indices"] = [
+        region_ids = {int(m["id"]) for m in get_same_region(str(cve_mun))}
+        marg_by_mun = {m["municipio_id"]: m for m in marginacion_2020}
+        iim_by_mun = {m["municipio_id"]: m for m in jalisco_mun_2020}
+        ctx["de_region_municipios"] = [
             {
-                "clave": loc["cvegeo"],
-                "nombre": loc["localidad"],
-                "poblacion": f"{int(loc['pob_total']):,}"
-                if loc.get("pob_total")
+                "clave": f"14{int(rid):03d}",
+                "nombre": next(
+                    m["municipio"]
+                    for m in get_same_region(str(cve_mun))
+                    if int(m["id"]) == rid
+                ),
+                "poblacion": f"{int(marg_by_mun[14000 + rid]['pob_total']):,}"
+                if (14000 + rid) in marg_by_mun
+                and marg_by_mun[14000 + rid].get("pob_total")
                 else ND,
-                "grado_marginacion": loc.get("grado_marginacion") or ND,
+                "grado_marginacion": marg_by_mun.get(14000 + rid, {}).get(
+                    "grado_marginacion"
+                )
+                or ND,
+                "lugar_marginacion": _marg_ranking(14000 + rid, marginacion_2020)
+                if (14000 + rid) in marg_by_mun
+                else ND,
+                "grado_migracion": iim_by_mun.get(14000 + rid, {}).get("grado_iim")
+                or ND,
+                "lugar_migracion": iim_by_mun.get(14000 + rid, {}).get(
+                    "lugar_contexto_nacional"
+                )
+                or ND,
+                "es_municipio": rid == cve_mun,
             }
-            for loc in locs_marg
+            for rid in sorted(region_ids)
         ]
 
         ctx["de_porcentaje_pobreza"] = ND

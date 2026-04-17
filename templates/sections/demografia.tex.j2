@@ -674,8 +674,9 @@ In\-ten\-si\-dad mi\-gra\-to\-ria Lugar \\
 << de_clave_municipio >> & << de_municipio_nombre >> & << de_tabla_pob_total_2020 >> & << de_grado_marginacion >> & << de_ranking_marginacion >> & \ND & \ND & \ND & \ND & << de_grado_intensidad_migratoria >> & << de_ranking_migracion >> \\
 \hline
 
-<% for loc in de_localidades_indices %>
-<< loc.clave >> & << loc.nombre >> & << loc.poblacion >> & << loc.grado_marginacion >> & \ND & \ND & \ND & \ND & \ND & \ND & \ND \\
+<% for mun in de_region_municipios %>
+<% if mun.es_municipio %>\rowcolor{orange!20}<% endif %>
+<< mun.clave >> & << mun.nombre >> & << mun.poblacion >> & << mun.grado_marginacion >> & << mun.lugar_marginacion >> & \ND & \ND & \ND & \ND & << mun.grado_migracion >> & << mun.lugar_migracion >> \\
 \hline
 <% endfor %>
 

@@ -5,7 +5,7 @@ from sqlalchemy.orm import Session
 def get_iim_municipios(session: Session, fecha: int) -> list[dict]:
     stmt = text("""
         SELECT municipio_id, viv_totales, por_viv_remesas, por_viv_emigrantes,
-               por_viv_circ, por_viv_reto, iim_dp2, lugar_contexto_nacional
+               por_viv_circ, por_viv_reto, iim_dp2, grado_iim, lugar_contexto_nacional
         FROM iim_municipal
         WHERE fecha = :fecha
         ORDER BY iim_dp2 DESC
