@@ -209,6 +209,9 @@ class Analizer(Stage):
             ctx["de_porcentaje_emigrantes_jal"] = _pct(
                 jal_2020.get("por_viv_emigrantes")
             )
+            ctx["de_porcentaje_migrantes_circulares_jal"] = _pct(
+                jal_2020.get("por_viv_circ")
+            )
             ctx["de_porcentaje_migrantes_retorno_jal"] = _pct(
                 jal_2020.get("por_viv_reto")
             )
@@ -221,10 +224,10 @@ class Analizer(Stage):
             ctx["de_ranking_jal_migracion"] = ND
             ctx["de_porcentaje_viviendas_remesas_jal"] = ND
             ctx["de_porcentaje_emigrantes_jal"] = ND
+            ctx["de_porcentaje_migrantes_circulares_jal"] = ND
             ctx["de_porcentaje_migrantes_retorno_jal"] = ND
             ctx["de_jal_grado_migracion"] = ND
             ctx["de_jal_lugar_migracion"] = ND
-        ctx["de_porcentaje_migrantes_circulares_jal"] = ND
 
         jalisco_mun_2020 = [
             m for m in iim_mun_2020 if 14000 < m["municipio_id"] < 15000
@@ -252,6 +255,9 @@ class Analizer(Stage):
             ctx["de_porcentaje_emigrantes_mun"] = _pct(
                 mun_2020.get("por_viv_emigrantes")
             )
+            ctx["de_porcentaje_migrantes_circulares_mun"] = _pct(
+                mun_2020.get("por_viv_circ")
+            )
             ctx["de_porcentaje_migrantes_retorno_mun"] = _pct(
                 mun_2020.get("por_viv_reto")
             )
@@ -267,11 +273,11 @@ class Analizer(Stage):
             ctx["de_ranking_mun_migracion"] = ND
             ctx["de_porcentaje_viviendas_remesas_mun"] = ND
             ctx["de_porcentaje_emigrantes_mun"] = ND
+            ctx["de_porcentaje_migrantes_circulares_mun"] = ND
             ctx["de_porcentaje_migrantes_retorno_mun"] = ND
             ctx["de_grado_intensidad_migratoria"] = ND
             ctx["de_ranking_migracion"] = ND
             ctx["de_ranking_nacional_mun_migracion"] = ND
-        ctx["de_porcentaje_migrantes_circulares_mun"] = ND
 
         jalisco_mun_2010 = [
             m for m in iim_mun_2010 if 14000 < m["municipio_id"] < 15000
@@ -296,10 +302,14 @@ class Analizer(Stage):
             ctx["de_ranking_nacional_mun_migracion_2010"] = (
                 mun_2010.get("lugar_contexto_nacional") or ND
             )
+            ctx["de_porcentaje_migrantes_circulares_anterior_mun"] = _pct(
+                mun_2010.get("por_viv_circ")
+            )
         else:
             ctx["de_grado_intensidad_migratoria_anterior_mun"] = ND
             ctx["de_ranking_anterior_mun_migracion"] = ND
             ctx["de_ranking_nacional_mun_migracion_2010"] = ND
+            ctx["de_porcentaje_migrantes_circulares_anterior_mun"] = ND
 
         ctx["de_iim_mun_2010"] = (
             _fmt(mun_2010["iim_dp2"], 4)
