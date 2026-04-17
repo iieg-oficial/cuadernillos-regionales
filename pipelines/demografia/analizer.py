@@ -1,6 +1,9 @@
 from core.pipelines.stage import Stage
 
 ND = "\\ND"
+MAPA_PLACEHOLDER = (
+    "\\includegraphics[width=\\textwidth]{templates/assets/mapa_placeholder.png}"
+)
 JALISCO_ID = 14
 ANIO_CENSO = 2020
 ANIO_INTERCENSAL = 2015
@@ -350,7 +353,7 @@ class Analizer(Stage):
             _pct(mun_2020.get("por_viv_reto")) if mun_2020 else ND
         )
 
-        ctx["de_mapa_grado_intensidad_migratoria"] = ND
+        ctx["de_mapa_grado_intensidad_migratoria"] = MAPA_PLACEHOLDER
 
         mun_marg_2020 = next(
             (m for m in marginacion_2020 if m["municipio_id"] == cvegeo), None
@@ -609,7 +612,7 @@ class Analizer(Stage):
             ctx["de_jal_marg_piso_tierra"] = ND
             ctx["de_jal_marg_hacinamiento"] = ND
             ctx["de_jal_marg_sin_refrigerador"] = ND
-        ctx["de_mapa_indice_marginacion_municipio"] = ND
+        ctx["de_mapa_indice_marginacion_municipio"] = MAPA_PLACEHOLDER
 
         locs_marg = marginacion_localidades[:5]
         ctx["de_localidades_marginacion"] = [
@@ -653,7 +656,7 @@ class Analizer(Stage):
         ctx["de_poblacion_pobreza_moderada"] = ND
         ctx["de_porcentaje_pobreza_moderada_intercensal"] = ND
         ctx["de_poblacion_pobreza_moderada_intercensal"] = ND
-        ctx["de_mapa_porcentaje_pobreza_multidimensional"] = ND
+        ctx["de_mapa_porcentaje_pobreza_multidimensional"] = MAPA_PLACEHOLDER
 
         total_estatal = input_data.get("total_estatal_2020")
         ctx["de_porcentaje_poblacion"] = (
