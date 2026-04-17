@@ -661,9 +661,9 @@ class Analizer(Stage):
                     "lugar_contexto_nacional"
                 )
                 or ND,
-                "es_municipio": rid == cve_mun,
             }
             for rid in sorted(region_ids)
+            if rid != cve_mun
         ]
 
         ctx["de_porcentaje_pobreza"] = ND

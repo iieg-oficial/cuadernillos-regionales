@@ -39,6 +39,7 @@ def get_marginacion_jalisco(session: Session, anio: int) -> list[dict]:
         SELECT
             mm.municipio_id,
             gm.grado_marginacion,
+            mm.pob_total,
             mm.porc_pob15_analfabeta,
             mm.pob15_sin_educ_bas,
             mm.porc_viv_sin_drenaje_ni_excusado,
