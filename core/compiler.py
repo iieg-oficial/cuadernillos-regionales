@@ -10,7 +10,7 @@ def compile(tex_path: Path) -> Path:
 
     result = subprocess.run(
         [
-            "pdflatex",
+            "xelatex",
             "-interaction=nonstopmode",
             f"-output-directory={output_dir}",
             str(tex_path),

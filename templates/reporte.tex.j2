@@ -2,15 +2,25 @@
 
 <% block content %>
 
-\title{
-    \textcolor{primary}{\Huge \textbf{Cuadernillo Municipal}} \\[1em]
-    \textcolor{accent}{\Large << municipio_nombre >>}
+\clearpage
+\thispagestyle{empty}
+\AddToShipoutPictureBG*{%
+  \includegraphics[width=\paperwidth,height=\paperheight]{templates/assets/portada.png}%
 }
-\date{}
-\maketitle
+\vspace*{5cm}
+\begin{center}
+  {\color{colorTexto}\fontsize{16}{30}\lexendsemibold
+  \shortstack{
+    {\Huge << de_municipio_nombre >>} \\[1.2cm]
+    {\LARGE Diagnóstico del municipio} \\[0.3cm]
+    {\LARGE Agosto 2026}
+  }}
+\end{center}
+\clearpage
+
 \tableofcontents
 \newpage
 
-<% include "sections/gobierno_y_seguridad.tex.j2" %>
+<#% include "sections/gobierno_y_seguridad.tex.j2" %#>
 <% include "sections/demografia.tex.j2" %>
 <% endblock %>
