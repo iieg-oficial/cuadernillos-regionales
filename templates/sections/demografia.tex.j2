@@ -34,12 +34,16 @@ En comparación con << de_anio_censo_anterior >>, la población municipal tuvo u
 \label{tabla_poblacion_total_sexo}
 \centering
 \caption{Población total por sexo y variaciones}
-\resizebox{\textwidth}{!}{%
 \begin{threeparttable}
 \renewcommand{\arraystretch}{1.3}
 \setlength{\tabcolsep}{6pt}
 
-\begin{tabular}{|c|c|c|c|c|c|}
+\begin{tabular}{|>{\centering\arraybackslash}m{1.5cm}
+                |>{\centering\arraybackslash}m{2.0cm}
+                |>{\centering\arraybackslash}m{2.0cm}
+                |>{\centering\arraybackslash}m{2.0cm}
+                |>{\centering\arraybackslash}m{2.8cm}
+                |>{\centering\arraybackslash}m{2.8cm}|}
 \hline
 
 % Subtítulo
@@ -49,7 +53,7 @@ En comparación con << de_anio_censo_anterior >>, la población municipal tuvo u
 
 % Encabezado
 \rowcolor{gray!30}
- & << de_anio_censo_anterior >> & << de_anio_encuesta_intercensal >> & << de_anio_censo >> & Variación \% << de_anio_censo_anterior >>--<< de_anio_encuesta_intercensal >> & Variación \% << de_anio_encuesta_intercensal >>--<< de_anio_censo >> \\
+ & << de_anio_censo_anterior >> & << de_anio_encuesta_intercensal >> & << de_anio_censo >> & \makecell{Variación \% \\ << de_anio_censo_anterior >>--<< de_anio_encuesta_intercensal >>} & \makecell{Variación \% \\ << de_anio_encuesta_intercensal >>--<< de_anio_censo >>} \\
 \hline
 
 Mujeres & << de_tabla_pob_mujeres_2010 >> & << de_tabla_pob_mujeres_2015 >> & << de_tabla_pob_mujeres_2020 >> & << de_tabla_pob_var_pct_mujeres_2010_2015 >> & << de_tabla_pob_var_pct_mujeres_2015_2020 >> \\
@@ -68,8 +72,7 @@ Total & << de_tabla_pob_total_2010 >> & << de_tabla_pob_total_2015 >> & << de_ta
 \item Elaboración del IIEG, con datos de INEGI, Censo de Población y Vivienda << de_anio_censo >> y
 Encuesta Intercensal << de_anio_encuesta_intercensal >>.
 \end{tablenotes}
-\end{threeparttable}%
-}
+\end{threeparttable}
 \end{table}
 
 \newpage
@@ -83,16 +86,15 @@ de la población del municipio.
 \label{tabla_localidades_mas_pobladas}
 \centering
 \caption{Localidades más pobladas}
-\resizebox{\textwidth}{!}{%
 \begin{threeparttable}
 \setlength{\tabcolsep}{3pt}
 
-\begin{tabular}{|>{\centering\arraybackslash}m{2.5cm}
-                |>{\centering\arraybackslash}m{3cm}
-                |>{\centering\arraybackslash}m{2.5cm}
-                |>{\centering\arraybackslash}m{2.5cm}
-                |>{\centering\arraybackslash}m{3.5cm}
-                |>{\centering\arraybackslash}m{2.5cm}|}
+\begin{tabular}{|>{\centering\arraybackslash}m{1.5cm}
+                |>{\centering\arraybackslash}m{3.0cm}
+                |>{\centering\arraybackslash}m{2.0cm}
+                |>{\centering\arraybackslash}m{2.0cm}
+                |>{\centering\arraybackslash}m{2.8cm}
+                |>{\centering\arraybackslash}m{2.8cm}|}
 \hline
 
 % Subtítulo
@@ -124,8 +126,7 @@ Clave & \makecell{Municipio/ \\ Localidad} &
 \item Elaboración del IIEG, con datos de INEGI, Censo de Población y Vivienda << de_anio_censo_anterior >> y
 << de_anio_censo >>.
 \end{tablenotes}
-\end{threeparttable}%
-}
+\end{threeparttable}
 \end{table}
 
 \newpage
@@ -165,7 +166,6 @@ el lugar << de_ranking_anterior_mun_migracion >> con mayor grado dentro de los m
 \label{tabla_intensidad_migratoria_eua}
 \centering
 \caption{Índice de Intensidad Migratoria México-Estados Unidos}
-\resizebox{\textwidth}{!}{%
 \begin{threeparttable}
 \setlength{\tabcolsep}{6pt}
 
@@ -208,8 +208,7 @@ Posición que ocupa el municipio a escala nacional & << de_ranking_nacional_mun_
 << de_anio_censo_anterior >> y << de_anio_censo >>.
 \item *Nota: los indicadores hacen referencia al quinquenio << de_anio_encuesta_intercensal >>--<< de_anio_censo >>.
 \end{tablenotes}
-\end{threeparttable}%
-}
+\end{threeparttable}
 \end{table}
 
 \newpage
@@ -269,11 +268,10 @@ la no pobre y no vulnerable.
 \label{tabla_pobreza_multidimensional_1}
 \centering
 \caption{Pobreza Multidimensional (Parte 1): Indicadores generales}
-\resizebox{\textwidth}{!}{%
 \begin{threeparttable}
-\setlength{\tabcolsep}{6pt}
+\setlength{\tabcolsep}{3pt}
 
-\begin{tabular}{|>{\centering\arraybackslash}m{6cm}
+\begin{tabular}{|>{\centering\arraybackslash}m{5cm}
                 >{\centering\arraybackslash}m{1.3cm}
                 >{\centering\arraybackslash}m{1.3cm}
                 >{\centering\arraybackslash}m{1.5cm}
@@ -348,8 +346,7 @@ Población con al menos tres carencias sociales
 2020.
 \item *Nota: los indicadores hacen referencia al quinquenio 2015--<< de_anio_censo >>.
 \end{tablenotes}
-\end{threeparttable}%
-}
+\end{threeparttable}
 \end{table}
 
 \newpage
@@ -358,11 +355,10 @@ Población con al menos tres carencias sociales
 \label{tabla_pobreza_multidimensional_2}
 \centering
 \caption{Pobreza Multidimensional (Parte 2): Indicadores de carencias y bienestar}
-\resizebox{\textwidth}{!}{%
 \begin{threeparttable}
-\setlength{\tabcolsep}{6pt}
+\setlength{\tabcolsep}{3pt}
 
-\begin{tabular}{|>{\centering\arraybackslash}m{6cm}
+\begin{tabular}{|>{\centering\arraybackslash}m{5cm}
                 >{\centering\arraybackslash}m{1.3cm}
                 >{\centering\arraybackslash}m{1.3cm}
                 >{\centering\arraybackslash}m{1.5cm}
@@ -436,8 +432,7 @@ Población con un ingreso inferior a la línea de bienestar
 << de_anio_censo_anterior >> y << de_anio_censo >>.
 \item *Nota: los indicadores hacen referencia al quinquenio << de_anio_encuesta_intercensal >>--<< de_anio_censo >>.
 \end{tablenotes}
-\end{threeparttable}%
-}
+\end{threeparttable}
 \end{table}
 
 \newpage
@@ -470,9 +465,8 @@ indicadores que lo componen.
 \label{tabla_marginacion_indicadores}
 \centering
 \caption{Índice y grado de marginación e indicadores sociodemográficos}
-\resizebox{\textwidth}{!}{%
 \begin{threeparttable}
-\setlength{\tabcolsep}{6pt}
+\setlength{\tabcolsep}{3pt}
 
 \begin{tabular}{|>{\centering\arraybackslash}m{9cm}
                 >{\centering\arraybackslash}m{1.8cm}
@@ -539,8 +533,7 @@ Grado de marginación & << de_marg_grado_2010 >> & << de_marg_grado_2015 >> & <<
 << de_anio_censo_anterior >>, << de_anio_encuesta_intercensal >>
 y << de_anio_censo >>, CONAPO.
 \end{tablenotes}
-\end{threeparttable}%
-}
+\end{threeparttable}
 \end{table}
 
 \newpage
@@ -555,21 +548,20 @@ para las principales localidades del municipio.
 \label{tabla_grado_marginacion_localidades}
 \centering
 \caption{Grado de marginación e indicadores sociodemográficos en localidades más pobladas en el municipio}
-\resizebox{\textwidth}{!}{%
 \begin{threeparttable}
 \setlength{\tabcolsep}{3pt}
 
-\begin{tabular}{|>{\centering\arraybackslash}m{2.5cm}
-                |>{\centering\arraybackslash}m{2cm}
-                |>{\centering\arraybackslash}m{1.2cm}
-                |>{\centering\arraybackslash}m{1.4cm}
-                |>{\centering\arraybackslash}m{1.4cm}
-                |>{\centering\arraybackslash}m{1.4cm}
-                |>{\centering\arraybackslash}m{1.4cm}
-                |>{\centering\arraybackslash}m{1.4cm}
-                |>{\centering\arraybackslash}m{1.4cm}
-                |>{\centering\arraybackslash}m{1.4cm}
-                |>{\centering\arraybackslash}m{1.4cm}|}
+\begin{tabular}{|>{\centering\arraybackslash}m{1.5cm}
+                |>{\centering\arraybackslash}m{2.0cm}
+                |>{\centering\arraybackslash}m{1.0cm}
+                |>{\centering\arraybackslash}m{1.1cm}
+                |>{\centering\arraybackslash}m{1.1cm}
+                |>{\centering\arraybackslash}m{1.1cm}
+                |>{\centering\arraybackslash}m{1.1cm}
+                |>{\centering\arraybackslash}m{1.1cm}
+                |>{\centering\arraybackslash}m{1.1cm}
+                |>{\centering\arraybackslash}m{1.1cm}
+                |>{\centering\arraybackslash}m{1.1cm}|}
 \hline
 
 \rowcolor{colorSeccion}
@@ -608,8 +600,7 @@ Prom. ocup. por cuarto &
 \small
 \item Elaboración del IIEG con base en el Índice de marginación por localidad << de_anio_censo >>, CONAPO.
 \end{tablenotes}
-\end{threeparttable}%
-}
+\end{threeparttable}
 \end{table}
 
 \newpage
@@ -633,19 +624,18 @@ entre los municipios del estado con mayor valor en el índice.
 \label{tabla_marginacion_pobreza_migracion}
 \centering
 \caption{Población total, Grado de Marginación, Pobreza multidimensional e Intensidad Migratoria}
-\resizebox{\linewidth}{!}{%
-\setlength{\tabcolsep}{3pt}%
-\begin{tabular}{|>{\centering\arraybackslash}m{2.4cm}
-                |>{\centering\arraybackslash}m{2.4cm}
-                |>{\centering\arraybackslash}m{2.2cm}
-                |>{\centering\arraybackslash}m{1.8cm}
-                |>{\centering\arraybackslash}m{1.6cm}
-                |>{\centering\arraybackslash}m{1.8cm}
-                |>{\centering\arraybackslash}m{1.6cm}
-                |>{\centering\arraybackslash}m{1.8cm}
-                |>{\centering\arraybackslash}m{1.6cm}
-                |>{\centering\arraybackslash}m{1.8cm}
-                |>{\centering\arraybackslash}m{1.8cm}|}
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{|>{\centering\arraybackslash}m{0.9cm}
+                |>{\centering\arraybackslash}m{1.9cm}
+                |>{\centering\arraybackslash}m{1.3cm}
+                |>{\centering\arraybackslash}m{1.5cm}
+                |>{\centering\arraybackslash}m{0.8cm}
+                |>{\centering\arraybackslash}m{2.0cm}
+                |>{\centering\arraybackslash}m{0.8cm}
+                |>{\centering\arraybackslash}m{1.3cm}
+                |>{\centering\arraybackslash}m{0.8cm}
+                |>{\centering\arraybackslash}m{1.5cm}
+                |>{\centering\arraybackslash}m{0.8cm}|}
 \hline
 
 % Subtítulo
@@ -653,17 +643,17 @@ entre los municipios del estado con mayor valor en el índice.
 \multicolumn{11}{|c|}{\color{white}<< de_municipio_nombre >>, Jalisco} \\
 \hline
 
-% Encabezado
+% Encabezado fila 1
 \rowcolor{gray!30}
 Clave & Municipio & Población &
-Mar\-gi\-na\-ción Grado &
-Mar\-gi\-na\-ción Lugar &
-Pobreza mul\-ti\-di\-men\-sio\-nal &
-Pobreza Lugar &
-Pobreza extrema &
-Pob. extrema Lugar &
-In\-ten\-si\-dad mi\-gra\-to\-ria Grado &
-In\-ten\-si\-dad mi\-gra\-to\-ria Lugar \\
+\multicolumn{2}{c|}{\cellcolor{gray!30}Marginación} &
+\multicolumn{4}{c|}{\cellcolor{gray!30}Pobreza} &
+\multicolumn{2}{c|}{\cellcolor{gray!30}\makecell{Intensidad\\Migratoria}} \\
+\hline
+
+% Encabezado fila 2
+\rowcolor{gray!30}
+ & & & Grado & Lugar & multidimensional & Lugar & extrema & Lugar & Grado & Lugar \\
 \hline
 
 \rowcolor{orange!20}
@@ -679,8 +669,7 @@ In\-ten\-si\-dad mi\-gra\-to\-ria Lugar \\
 \hline
 <% endfor %>
 
-\end{tabular}%
-}
+\end{tabular}
 \par\vspace{4pt}\parbox{\textwidth}{\footnotesize
 Elaboración del IIEG, con datos de INEGI, Censo de Población y Vivienda << de_anio_censo_anterior >> y << de_anio_censo >>.\\
 *Nota: los indicadores hacen referencia al quinquenio << de_anio_encuesta_intercensal >>--<< de_anio_censo >>.}
