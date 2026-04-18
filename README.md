@@ -47,18 +47,6 @@ cp .env.example/.env.fiscalia.example .env/.env.fiscalia
 # ... repite para cada base de datos
 ```
 
-Copia y ajusta la configuración general de la aplicación:
-
-```bash
-cp .env.example/.env.app.example .env/.env.app
-```
-
-Edita `.env/.env.app` con la ruta donde instalaste las fuentes:
-
-```env
-FONTS_PATH=/home/tu_usuario/.fonts/
-```
-
 ## Uso
 
 Ver [docs/just.md](docs/just.md) para la lista completa de comandos.
