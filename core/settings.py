@@ -24,3 +24,9 @@ class DatabaseSettings(BaseSettings):
     @classmethod
     def from_env(cls, name: str) -> "DatabaseSettings":
         return cls(_env_file=Path(".env") / f".env.{name}")
+
+
+class HistoriaSettings(BaseSettings):
+    HISTORIA_MAPS_URL: str = Field(default="")
+
+    model_config = {"env_file": ".env/.env.historia"}

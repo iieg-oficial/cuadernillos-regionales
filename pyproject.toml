@@ -9,6 +9,7 @@ dependencies = [
     "matplotlib",
     "jinja2",
     "rich",
+    "gdown>=6.0.0",
 ]
 
 [dependency-groups]

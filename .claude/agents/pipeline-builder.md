@@ -14,7 +14,7 @@ Tu tarea se divide en tres fases. No avances a la siguiente hasta completar la a
 
 ## FASE 1 — Limpiar el template
 
-Lee `templates/{seccion}.tex.j2` (el nombre de la sección te lo dan en el prompt). Este archivo viene del equipo de análisis con inconsistencias respecto al patrón del proyecto.
+Si existe, lee `templates/{seccion}.tex.j2` (el nombre de la sección te lo dan en el prompt). Este archivo viene del equipo de análisis con inconsistencias respecto al patrón del proyecto.
 
 ### Correcciones obligatorias
 

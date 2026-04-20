@@ -6,6 +6,7 @@ from core.renderer import render
 from core.utils.logger import Logger
 
 from pipelines.demografia.pipeline import Demografia
+from pipelines.historia.pipeline import Historia
 
 
 def run(municipio_id: str, pipeline: Pipeline) -> None:
@@ -22,6 +23,7 @@ def main() -> None:
 
     pipeline = Pipeline(
         sections=[
+            Historia(),
             Demografia(),
         ]
     )
