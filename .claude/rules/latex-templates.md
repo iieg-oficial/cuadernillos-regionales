@@ -86,6 +86,7 @@ Definido en `base.tex.j2` como `\textcolor{red}{N/D}`. Nunca usar celdas vacías
 ## Estructura de página
 
 - Cada sección nueva abre con `\section{Nombre}`.
+- Las subsecciones usan `\subsection*{Nombre}` (sin numeración). El color morado (`colorSeccion`) está definido globalmente en `base.tex.j2` — no sobreescribir en los templates.
 - Antes de tablas grandes o imágenes, agregar `\newpage` para evitar cortes.
 - Las portadas de sección usan `\clearpage`, `\thispagestyle{empty}` y `\AddToShipoutPictureBG*` con la imagen de fondo `portada.png`.
 
