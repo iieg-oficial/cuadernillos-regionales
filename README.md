@@ -1,6 +1,8 @@
 # Cuadernillos Municipales
 
-Genera un reporte PDF por municipio (125 en total) para Jalisco, México. Extrae datos de PostgreSQL, genera gráficas con matplotlib, renderiza templates Jinja2 LaTeX y compila con `pdflatex`.
+Los Cuadernillos Municipales son reportes estadísticos que el IIEG (Instituto de Información Estadística y Geográfica de Jalisco) publica para cada uno de los 125 municipios del estado. Cada cuadernillo concentra indicadores clave de demografía, economía, salud, seguridad y gobierno, y sirve como referencia oficial para la toma de decisiones en el ámbito municipal.
+
+Este repositorio automatiza la generación de esos reportes: extrae datos de PostgreSQL, genera gráficas con matplotlib, renderiza templates Jinja2 LaTeX y compila con `pdflatex`.
 
 ## Requisitos
 
