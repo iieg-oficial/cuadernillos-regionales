@@ -2,61 +2,7 @@
 
 ## Tablas
 
-Toda tabla sigue esta estructura base:
-
-```latex
-\begin{table}[H]
-\label{tabla_nombre_descriptivo}
-\centering
-\caption{Título de la tabla}
-\begin{threeparttable}
-\setlength{\tabcolsep}{3pt}
-\footnotesize
-\begin{tabular}{|>{\centering\arraybackslash}m{Xcm} ... |}
-\hline
-
-% Subtítulo
-\rowcolor{colorSeccion}
-\multicolumn{N}{|c|}{\color{white}Texto del subtítulo} \\
-\hline
-
-% Encabezado de columnas
-\rowcolor{gray!30}
-Col1 & Col2 & ... \\
-\hline
-
-% Filas de datos
-Valor & Valor & ... \\
-\hline
-
-\end{tabular}
-\begin{tablenotes}
-\small
-\item Elaboración del IIEG, con datos de FUENTE, AÑO.
-\end{tablenotes}
-\end{threeparttable}
-\end{table}
-```
-
-### Reglas de tablas
-
-- Siempre usar `[H]` para fijar la posición.
-- Siempre incluir `\label{}` con nombre en snake_case.
-- Siempre envolver en `\begin{threeparttable}` para poder usar `\begin{tablenotes}`.
-- Siempre usar `\setlength{\tabcolsep}{3pt}` y `\footnotesize` dentro del bloque.
-- El espaciado vertical global (`\renewcommand{\arraystretch}{1.3}`) está definido en `base.tex.j2` — no redefinir en los templates a menos que una tabla específica lo requiera.
-- Definir columnas con `>{\centering\arraybackslash}m{Xcm}` para controlar ancho y alineación.
-  - Usar `>{\raggedright\arraybackslash}m{Xcm}` para columnas de texto largo (etiquetas).
-- La primera fila (subtítulo) siempre usa `\rowcolor{colorSeccion}` con texto `\color{white}`.
-- Los encabezados de columnas usan `\rowcolor{gray!30}`.
-- Las filas de totales, categorías o el municipio objetivo usan `\rowcolor{orange!20}`.
-- Usar `\makecell{}` para encabezados con salto de línea.
-- La fuente siempre va en `\begin{tablenotes}` con `\small`.
-- Si la fuente no cabe en `tablenotes`, usar `\par\vspace{4pt}\parbox{\textwidth}{\footnotesize ...}` después del `\end{tabular}`, antes del `\end{table}`.
-
-## Longtable (tablas que pueden paginar)
-
-Usar `longtable` en lugar de `table`/`tabular` cuando la tabla puede superar una página. No usa `[H]` ni `threeparttable`. La estructura base es:
+Todas las tablas usan `longtable`. No usar `table`/`tabular`/`threeparttable`. La estructura base es:
 
 ```latex
 \setlength{\tabcolsep}{3pt}
