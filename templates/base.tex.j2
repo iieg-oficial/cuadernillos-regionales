@@ -26,7 +26,7 @@
 \usepackage{tabularx}
 \usepackage{longtable}
 \usepackage{caption}
-\captionsetup[longtable]{justification=centering, skip=5pt}
+\captionsetup[longtable]{justification=centering, skip=5pt, labelsep=period}
 
 % Columna de ancho igual para longtable de N columnas (descuenta reglas)
 % Uso: >{\centering\arraybackslash}\ltcoleq{N}
@@ -79,6 +79,7 @@
 \definecolor{accent}{HTML}{465055}
 
 \newcommand{\ND}{\textcolor{red}{N/D}}
+\newcommand{\thdr}[1]{\textbf{\color{black}#1}}
 
 \AtBeginDocument{
   \color{colorTexto}
