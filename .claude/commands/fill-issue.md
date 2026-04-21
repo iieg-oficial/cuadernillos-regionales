@@ -2,7 +2,11 @@ Crea o encuentra el issue de GitHub para el pipeline actual.
 
 ## Pasos
 
-1. Detecta el nombre de la sección del contexto actual (rama, archivos recientes, conversación).
+1. Detecta el nombre de la sección a partir del nombre de la rama actual:
+   ```bash
+   git branch --show-current
+   ```
+   Usa el nombre de la rama como `{seccion}` para buscar y crear el issue.
 
 2. Busca issues abiertos relacionados:
    ```bash
