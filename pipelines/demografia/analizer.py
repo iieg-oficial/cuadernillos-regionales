@@ -66,6 +66,7 @@ class Analizer(Stage):
         marginacion_2010 = input_data["marginacion_jalisco_2010"]
         marginacion_localidades = input_data["marginacion_localidades"]
         marginacion_estatal_2020 = input_data["marginacion_estatal_2020"]
+        cvegeo_localidades = input_data["cvegeo_localidades"]
 
         ctx = {}
 
@@ -615,23 +616,52 @@ class Analizer(Stage):
             ctx["de_jal_marg_sin_refrigerador"] = ND
         ctx["de_mapa_indice_marginacion_municipio"] = MAPA_PLACEHOLDER
 
-        locs_marg = marginacion_localidades[:5]
-        ctx["de_localidades_marginacion"] = [
-            {
-                "clave": loc["cvegeo"],
-                "nombre": loc["localidad"],
-                "grado": loc.get("grado_marginacion") or ND,
-                "analfabeta": _pct(loc.get("porc_pob15_analfabeta")),
-                "sin_educ_bas": _pct(loc.get("porc_pob15_sin_educ_basica")),
-                "sin_drenaje": _pct(loc.get("porc_viv_sin_drenaje_ni_excusado")),
-                "sin_energia": _pct(loc.get("porc_viv_sin_energia")),
-                "sin_agua": _pct(loc.get("porc_viv_sin_agua_entubada")),
-                "piso_tierra": _pct(loc.get("porc_viv_piso_tierra")),
-                "hacinamiento": _fmt(loc.get("prom_ocup_por_cuarto"), 2),
-                "sin_refrigerador": _pct(loc.get("porc_viv_sin_refrigerador")),
-            }
-            for loc in locs_marg
-        ]
+        DASH = "{-}"
+        marg_by_nombre = {loc["localidad"]: loc for loc in marginacion_localidades}
+
+        def _loc_val(marg, key, fn):
+            if marg is None:
+                return DASH
+            return fn(marg.get(key))
+
+        top5_locs = localidades_2020[:5]
+        hay_datos_faltantes = False
+        locs_ctx = []
+        for loc in top5_locs:
+            marg = marg_by_nombre.get(loc["localidad"])
+            sin_datos = marg is None
+            if sin_datos:
+                hay_datos_faltantes = True
+            cvegeo = (
+                marg["cvegeo"]
+                if marg
+                else cvegeo_localidades.get(loc["localidad"], DASH)
+            )
+            locs_ctx.append(
+                {
+                    "clave": cvegeo,
+                    "nombre": loc["localidad"],
+                    "grado": DASH
+                    if sin_datos
+                    else (marg.get("grado_marginacion") or ND),
+                    "analfabeta": _loc_val(marg, "porc_pob15_analfabeta", _pct),
+                    "sin_educ_bas": _loc_val(marg, "porc_pob15_sin_educ_basica", _pct),
+                    "sin_drenaje": _loc_val(
+                        marg, "porc_viv_sin_drenaje_ni_excusado", _pct
+                    ),
+                    "sin_energia": _loc_val(marg, "porc_viv_sin_energia", _pct),
+                    "sin_agua": _loc_val(marg, "porc_viv_sin_agua_entubada", _pct),
+                    "piso_tierra": _loc_val(marg, "porc_viv_piso_tierra", _pct),
+                    "hacinamiento": _loc_val(
+                        marg, "prom_ocup_por_cuarto", lambda v: _fmt(v, 2)
+                    ),
+                    "sin_refrigerador": _loc_val(
+                        marg, "porc_viv_sin_refrigerador", _pct
+                    ),
+                }
+            )
+        ctx["de_localidades_marginacion"] = locs_ctx
+        ctx["de_localidades_hay_datos_faltantes"] = hay_datos_faltantes
 
         region_ids = {int(m["id"]) for m in get_same_region(str(cve_mun))}
         marg_by_mun = {m["municipio_id"]: m for m in marginacion_2020}
