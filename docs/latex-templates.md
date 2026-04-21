@@ -87,59 +87,34 @@ En << gs_anio_actual >> se registraron << gs_total_delitos >> delitos de fuero c
 
 ### Tablas
 
-Todas las tablas del proyecto usan `longtable`. No usar `table`, `tabular` ni `threeparttable`.
+Todas las tablas del proyecto usan `longtable` — no `tabular`. Si tu `.tex` de Overleaf usa `\begin{tabular}`, cámbialo a `\begin{longtable}`.
 
-La estructura base de toda tabla es:
+Las columnas se definen con proporciones de `\linewidth` que sumen 1.00, restando siempre `2\tabcolsep`:
+
+En Overleaf:
 
 ```latex
-\setlength{\tabcolsep}{3pt}
-\footnotesize
-\begin{longtable}{|>{\centering\arraybackslash}p{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
-                  |>{\raggedright\arraybackslash}p{\dimexpr0.40\linewidth - 2\tabcolsep\relax}
-                  |>{\centering\arraybackslash}p{\dimexpr0.30\linewidth - 2\tabcolsep\relax}|}
-
-\caption{Título de la tabla}
-\label{tabla_nombre_descriptivo} \\
-
-\rowcolor{colorSeccion}
-\multicolumn{3}{|c|}{\color{white}<< gs_municipio_nombre >>} \\
-\hline
-\rowcolor{gray!30}
-Col1 & Col2 & Col3 \\
-\hline
-\endfirsthead
-
-\multicolumn{3}{l}{\small\textbf{(continuación)}} \\
-\rowcolor{colorSeccion}
-\multicolumn{3}{|c|}{\color{white}<< gs_municipio_nombre >>} \\
-\hline
-\rowcolor{gray!30}
-Col1 & Col2 & Col3 \\
-\hline
-\endhead
-
-\hline
-\multicolumn{3}{r}{\small\textbf{(continúa)}} \\
-\endfoot
-
-\hline
-\endlastfoot
-
-Valor & Valor & Valor \\
-\hline
-
-\end{longtable}
-\normalsize
-\par\vspace{-4pt}\parbox{\linewidth}{\footnotesize
-Elaboración del IIEG, con datos de FUENTE, AÑO.}
+\begin{tabular}{|c|l|c|c|}
 ```
 
-**Reglas de columnas:**
+En el template:
 
-- Las proporciones de todas las columnas deben sumar exactamente `1.00`.
-- Siempre restar `2\tabcolsep`: `p{\dimexpr0.30\linewidth - 2\tabcolsep\relax}`.
-- Usar `\raggedright\arraybackslash` para columnas de texto (nombres, etiquetas). Usar `\centering\arraybackslash` para columnas numéricas.
-- **Nunca usar macros como `\ltcoleq{N}`** en la especificación de columnas de longtable: aunque el PDF se genera, las líneas verticales interiores no se dibujan.
+```latex
+\begin{longtable}{|>{\centering\arraybackslash}p{\dimexpr0.15\linewidth - 2\tabcolsep\relax}
+                  |>{\raggedright\arraybackslash}p{\dimexpr0.45\linewidth - 2\tabcolsep\relax}
+                  |>{\centering\arraybackslash}p{\dimexpr0.20\linewidth - 2\tabcolsep\relax}
+                  |>{\centering\arraybackslash}p{\dimexpr0.20\linewidth - 2\tabcolsep\relax}|}
+```
+
+La alineación dentro de cada columna la defines según el contenido:
+
+| Alineación | Comando | Cuándo usarla |
+|---|---|---|
+| Centrado | `\centering\arraybackslash` | Números, claves, porcentajes |
+| Izquierda | `\raggedright\arraybackslash` | Texto largo (nombres, etiquetas) |
+| Derecha | `\raggedleft\arraybackslash` | Montos, valores con decimales alineados |
+
+Las proporciones (0.15 + 0.45 + 0.20 + 0.20 = 1.00) las defines tú según el contenido.
 
 Las filas estáticas en Overleaf:
 
