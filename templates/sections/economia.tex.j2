@@ -1,0 +1,349 @@
+% !TEX program = xelatex
+\documentclass[11pt]{article}
+
+\usepackage{fontspec}
+\usepackage{xcolor}
+\usepackage[table]{xcolor}
+\usepackage{etoolbox}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{geometry}
+\usepackage{setspace}
+\usepackage{siunitx}
+\usepackage{float}
+\usepackage{tikz}
+\usepackage{eso-pic}
+%añadido por Lomeli
+\usepackage[spanish]{babel}
+\usepackage{threeparttable}
+\usepackage{array}
+\usepackage{makecell}
+\usepackage{booktabs}
+
+\addto\captionsspanish{
+  \renewcommand{\tablename}{Tabla}
+  \renewcommand{\thetable}{\arabic{table}}
+}
+
+\setmainfont{Lexend}
+\newfontfamily\lexendlight{Lexend Light}
+\newfontfamily\lexendsemibold{Lexend SemiBold}
+
+
+
+\definecolor{colorSeccion}{HTML}{5C2472}
+\definecolor{colorTexto}{HTML}{465055}
+\definecolor{headerGray}{HTML}{7A7A7A}
+\definecolor{lightGray}{HTML}{D9D9D9}
+
+\AtBeginDocument{
+  \color{colorTexto}
+}
+
+\usepackage{titlesec}
+\titleformat{\section}
+  {\color{colorSeccion}\normalfont\large\bfseries}
+  {}{0pt}{}
+
+%--------------------------------------------------------
+\titleformat{\subsection}
+  {\color{colorSeccion}\normalfont\small\bfseries}
+  {}{0pt}{}
+%--------------------------------------------------------
+  
+\setstretch{1.3}
+
+\geometry{
+  left=2.5cm,
+  right=2.5cm,
+  top=3cm,
+  bottom=3cm,
+  headheight=2cm,
+  headsep=1cm,
+  footskip=1.2cm
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+
+% HEADER
+\fancyhead[L]{\hspace{-1cm}\raisebox{-0.3cm}{\includegraphics[height=1.5cm]{logo_header.png}}}
+\fancyhead[R]{\color{colorTexto}\footnotesize Página \thepage}
+% FOOTER
+\fancyfoot[L]{\hspace{-1cm}\raisebox{-1cm}{\includegraphics[height=1.5cm]{logo_footer.png}}}
+
+% Ajustes de espacio
+\setlength{\headheight}{2cm}
+\setlength{\headsep}{1cm}
+\setlength{\footskip}{1.2cm}
+% Quita línea horizontal del header que aparece por defecto
+\renewcommand{\headrulewidth}{0pt}
+
+\begin{document}
+%-------------------------------------
+%Portada de sección
+%-------------------------------------
+
+% Imagen de fondo
+\AddToShipoutPictureBG*{
+\begin{tikzpicture}[remember picture, overlay]
+    \node at (current page.center) {
+        \includegraphics[width=\paperwidth,height=\paperheight]{portada.png}
+    };
+\end{tikzpicture}
+}
+
+% Texto encima
+\begin{tikzpicture}[remember picture, overlay]
+
+    % Título principal
+    \node at (current page.center) [
+        yshift=3cm,
+        align=center,
+        text width=0.8\paperwidth
+    ] {
+        {\color{colorTexto}\bfseries\fontsize{23}{26}\selectfont Economía}
+    };
+
+    % Subtítulo (3 líneas)
+    \node at (current page.center) [
+        yshift=-.5cm,
+        align=center
+    ] {
+        {\color{colorTexto}\fontsize{16}{30}\lexendsemibold
+        \shortstack{
+            \verb|<< ec_municipio_nombre >>|\\[0.3cm]
+            Diagnóstico del municipio\\[0.3cm]
+            Agosto 2026
+        }}
+    };
+
+\end{tikzpicture}
+
+\vspace*{\fill} % asegura página completa
+\restoregeometry % vuelve a márgenes normales para el resto del documento
+
+\section{Número de empresas}
+
+Conforme a la actualización de \verb|<< ec_mes_denue_numero_empresas >>| de \verb|<< ec_anio_denue >>| del Directorio Estadístico Nacional de Unidades Económicas (DENUE) de INEGI, el municipio de \verb|<< ec_municipio_nombre >>| contaba en \verb|<< ec_anio_pasado_denue >>| con \verb|<< ec_unidades_economicas >>| unidades económicas, lo que representó el \verb|<< ec_porcentaje_unidades_economicas >>| \% del total de unidades económicas a nivel estatal, ocupando el lugar \verb|<< ec_posicion_del_municipio_en_la_lista_de_municipios_con_mas_estableciemientos >>| en cuanto a municipios con más número de establecimientos.   
+
+El sector con mayor número de unidades económicas en el municipio fue el\verb|<< ec_sector_mayor_número_unidades_economicas >>|, representando el \verb|<< ec_porcentaje_sector_con_mayor_numero_de_unidades_economicas >>| \% del total de las unidades económicas en el municipio, seguido del sector  \verb| ec_segundo_sector_con_mayor_numero_de_unidades_economicas | con el \verb|<< ec_porcentaje_segundo_sector_con_mayor_numero_de_unidades_economicas >>| \%, y el sector \verb|<< ec_tercer_sector_con_mayor_numero_de_unidades_economicas >>| con el \verb|<< ec_porcentaje_tercer_sector_con_mayor_numero_de_unidades_economicas >>| \%.
+
+ 
+\begin{table}[H]
+\label{tabla_composición_de_las_unidades_economicas_por_sector}
+\centering
+\small
+\begin{threeparttable}
+\caption{Composición de unidades económicas por sector}
+\setlength{\tabcolsep}{4pt}
+    \begin{tabular}{|>{\centering\arraybackslash}m{4cm} |
+                >{\centering\arraybackslash}m{1.2cm}|
+                >{\centering\arraybackslash}m{1.2cm}|
+                >{\centering\arraybackslash}m{1.2cm}|
+                >{\centering\arraybackslash}m{1.2cm}|
+                >{\centering\arraybackslash}m{1.2cm}|
+                >{\centering\arraybackslash}m{1.2cm}|
+                >{\centering\arraybackslash}m{1.2cm}|
+                >{\centering\arraybackslash}m{1.4cm}|
+                >{\centering\arraybackslash}m{1.4cm}|}
+\hline
+    \rowcolor{colorSeccion}
+\multicolumn{10}{|c|}{\color{white}\textbf{ec\_municipio\_nombre, ec\_anio\_denue, (unidades económicas)}} \\ \hline
+ \rowcolor{gray!30}        \textbf{Sector} & \textbf{0 a 5 personas} & \textbf{6 a 10 personas}& \textbf{11 a 30 personas} & \textbf{31 a 50 personas} & \textbf{51 a 100 personas} & \textbf{101 a 250 personas}  & \textbf{251 y más} & \textbf{Total de unidades económicas} & \textbf{\% Total de  unidades económicas} \\ \hline
+       Actividades legislativas, gubernamentales, de impartición de justicia y de organismos internacionales y extraterritoriales  & & & & & & & & & \\ \hline
+       Agricultura, cría y explotación de animales, aprovechamiento forestal, pesca y caza  & & & & & & & & & \\ \hline
+        Comercio al por mayor & & & & & & & & & \\ \hline
+        Comercio al por menor & & & & & & & & & \\ \hline
+        Generación, transmisión, distribución y comercialización de energía eléctrica, suministro de agua y de gas natural por ductos al consumidor final  & & & & & & & & & \\ \hline
+        Industrias manufactureras & & & & & & & & & \\ \hline
+        Información en medios masivos & & & & & & & & & \\ \hline
+        Otro & & & & & & & & & \\ \hline
+        Otros servicios excepto actividades gubernamentales & & & & & & & & & \\ \hline
+        Servicios de alojamiento temporal y de preparación de alimentos y bebidas & & & & & & & & & \\ \hline
+        Servicios de apoyo a los negocios y manejo de residuos, y servicios de remediación & & & & & & & & & \\ \hline
+        Servicios de esparcimiento culturales y deportivos, y otros servicios recreativos& & & & & & & & & \\ \hline
+         Servicios de salud y de asistencia social & & & & & & & & & \\ \hline
+        Servicios educativos & & & & & & & & & \\ \hline
+        Servicios financieros y de seguros & & & & & & & & & \\ \hline
+        Servicios inmobiliarios y de alquiler de bienes muebles e intangibles & & & & & & & & & \\ \hline        
+        Servicios profesionales, científicos y técnicos & & & & & & & & & \\ \hline
+        Transportes, correos y almacenamiento & & & & & & & & & \\ \hline
+        Total & & & & & & & & & \\ \hline
+         & & & & & & & & & \\ \hline
+
+    \end{tabular}
+
+\begin{tablenotes}
+\small
+\item Elaboración del IIEG con datos del Directorio Nacional de Unidades Económicas, INEGI.
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+
+\section{Valor agregado censal bruto}
+
+El valor agregado censal bruto se define como: “el valor de la producción que se añade durante el proceso de trabajo por la actividad creadora y de transformación del personal ocupado, el capital y la organización (factores de la producción), ejercida sobre los materiales que se consumen en la realización de la actividad económica”. En resumen, esta variable se refiere al valor de la producción que añade la actividad económica en su proceso productivo.
+
+Conforme a la información de los Censos económicos de \verb|<< ec_anio_ce_anterior >>| y de \verb|<< ec_anio_ce >>| que publicó el INEGI, el valor agregado censal bruto de \verb|<< ec_municipio_nombre >>| registró una variación real de \verb|<< ec_variacion_valor_agregado_censal >>| \% de \verb|<< ec_anio_ce_anterior >>| a \verb|<< ec_anio_ce >>|.
+En \verb|<< ec_anio_ce >>| los tres subsectores más importantes en la generación de valor agregado censal bruto en el municipio de \verb|<< ec_municipio_nombre >>| fueron “\verb|<< ec_subsector_primer_lugar >>|”, “\verb|<< ec_subsector_segundo_lugar >>|” y “\verb|<< ec_subsector_tercer_lugar >>|” que generaron en conjunto el \verb|<< ec_porcentaje_aportacion_principales_subsectores >>| \% o \verb|<< ec_aportacion_principales_subsectores >>| pesos del total del valor agregado censal bruto registrado en \verb|<< ec_anio_ce >>| en el municipio.
+El subsector de “\verb|<< ec_subsector_mayor_crecimiento >>|” fue el que registró el mayor crecimiento real pasando \verb|<< ec_aportacion_anterior_subsector_mayor_crecimiento >>| pesos en \verb|<< ec_anio_ce_anterior >>| a \verb|<< ec_aportacion_subsector_mayor_crecimiento >>| pesos en \verb|<< ec_anio_ce >>|, representando una variación del \verb|<< ec_variacion_porcentual_aportacion_subsector_mayor_crecimiento >>| \% durante dicho periodo.
+
+\newpage
+
+\begin{table}[H]
+
+\centering
+\small
+\begin{threeparttable}
+\label{subsectores_con_mayor_valor_agregado_censa_bruto}
+\caption{Subsectores con mayor valor agregado censal bruto (VACB)}
+\setlength{\tabcolsep}{4pt}
+    \begin{tabular}{|>{\centering\arraybackslash}m{8cm} |
+                >{\centering\arraybackslash}m{2cm}|
+                >{\centering\arraybackslash}m{2cm}|
+                >{\centering\arraybackslash}m{2cm}|
+                >{\centering\arraybackslash}m{2.5cm}|}
+\hline
+    \rowcolor{colorSeccion}
+\multicolumn{5}{|c|}{\color{white}\textbf{ec\_municipio\_nombre, ec\_anio\_ce\_anterior y ec\_anio\_ce (millones de pesos)}} \\ \hline
+\rowcolor{gray!30}        \textbf{Subsector} & \textbf{ec\_anio\_ce\_anterior} & \textbf{ec\_anio\_ce} & \% \textbf{Part. ec\_anio\_ce} & \textbf{Var \% ec\_anio\_ce\_anterior-ec\_anio\_ce}  \\ \hline
+
+    
+        
+        Comercio al por menor de abarrotes, alimentos, bebidas, hielo y tabaco & & & &  \\ \hline
+         
+         Comercio al por mayor de materias primas agropecuarias y forestales, para la industria, y materiales de desecho& & & & \\ \hline
+         
+         Fabricación de productos a base de minerales no metálicos& & & &  \\ \hline
+         
+         Servicios de preparación de alimentos y bebidas& & & & \\ \hline
+
+         Asociaciones y organizaciones& & & & \\ \hline
+
+         Comercio al por menor de vehículos de motor, refacciones, combustibles y lubricantes& & & & \\ \hline
+
+         Comercio al por menor de productos textiles, bisutería, accesorios de vestir y calzado& & & & \\ \hline
+
+         Comercio al por mayor de abarrotes, alimentos, bebidas, hielo y tabaco& & & & \\ \hline
+
+         Servicios de reparación y mantenimiento& & & & \\ \hline
+
+         Otros& & & & \\ \hline
+
+         Total& & & & \\ \hline
+         
+
+    \end{tabular}
+
+\begin{tablenotes}
+\small
+\item Elaboración del IIEG con información de los Censos Económicos de 2019 y 2024, INEGI.
+\item Nota: El campo otros incluye subsectores con menor valor agregado censal bruto y/o subsectores agrupados por el principio de confidencialidad. 
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+\newpage
+
+
+\section{Empleo}
+\subsection{Trabajadores asegurados en el IMSS}
+
+Información reportada por el Instituto Mexicano del Seguro Social (IMSS), señaló que en \verb|<< ec_mes_corte_imss >>| de \verb|<< ec_anio_corte_imss >>| se registraron en \verb|<< ec_municipio_nombre >>| un total de \verb|<< ec_total_trabajadores_imss >>| trabajadores asegurados en el IMSS, representando el \verb|<< ec_porcentaje_trabajadores_asegurados_region >>| \% del total de trabajadores asegurados en esta institución en Jalisco. 
+
+El número de trabajadores asegurados en \verb|<< ec_municipio_nombre >>| en \verb|<< ec_mes_corte_imss >>| de \verb|<< ec_anio_corte_imss >>| representa una variación anual de \verb|<< ec_porcentaje_variacion_asegurados >>| \% en comparación con el número de trabajadores que se tenían registrados en el mes de \verb|<< ec_mes_corte_imss >>| de \verb|<< ec_anio_anterior_corte_imss >>|. 
+
+
+El grupo económico que más empleos presentó dentro del municipio de \verb|<< ec_municipio_nombre >>| fue el de \verb|<< ec_grupo_ec_con_mas_empleos >>|, ya que en \verb|<< ec_mes_corte_imss >>| de \verb|<< ec_anio_corte_imss >>| registró un total de \verb|<< ec_num_trabajadores_asegurados >>| trabajadores concentrando el \verb|<< porcentaje_trabajadores_asegurados >>| \% del total de asegurados en el municipio.
+
+\begin{table}[H]
+
+\centering
+\small
+\begin{threeparttable}
+\label{trabajadores_asegurados}
+\caption{Trabajadores asegurados}
+\setlength{\tabcolsep}{4pt}
+    \begin{tabular}{|>{\centering\arraybackslash}m{5cm} |
+                >{\centering\arraybackslash}m{1.5cm}|
+                >{\centering\arraybackslash}m{1.5cm}|
+                >{\centering\arraybackslash}m{1.5cm}|
+                >{\centering\arraybackslash}m{1.7cm}|
+                >{\centering\arraybackslash}m{2cm}|
+                >{\centering\arraybackslash}m{2.2cm}|}
+\hline
+    \rowcolor{colorSeccion}
+\multicolumn{7}{|c|}{\color{white}ec\_municipio\_nombre Jalisco} \\ \hline
+\rowcolor{gray!30}        \textbf{Grupo económico} & \textbf{ec\_mes\_corte\_imss ec\_dos\_anios\_atras\_corte\_imss} & \textbf{ec\_mes\_corte\_imss ec\_anio\_anterior\_corte\_imss} & \textbf{ec\_mes\_corte\_imss ec\_anio\_corte\_imss} & \textbf{\% de participación} & \textbf{Variación nominal Junio ec\_anio\_anterior\_corte\_imss-ec\_mes\_corte\_imss ec\_anio\_corte\_imss} & \textbf{Variación porcentual (\%) ec\_mes\_corte\_imss ec\_anio\_anterior\_corte\_imss-junio ec\_anio\_corte\_imss} \\ \hline
+
+        Fabricación de alimentos& & & & & & \\ \hline
+       Agricultura & & & & & & \\ \hline
+       Construcción de edificaciones y de obras de ingeniería civil & & & & & & \\ \hline  
+        Servicios de administración pública y seguridad social& & & & & & \\ \hline 
+        Ganadería & & & & & & \\ \hline
+        Otros & & & & & & \\ \hline
+        Total General & & & & & & \\ \hline
+         
+
+    \end{tabular}
+
+\begin{tablenotes}
+\small
+\item Elaboración del IIEG con información de datos abiertos de Trabajadores asegurados, IMSS.
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+\newpage
+
+\subsection{Trabajadores asegurados por el IMSS en la región ec\_region}
+\\
+En \verb|<< ec_mes_corte_imss >>| de \verb|<< ec_anio_corte_imss >>|, \verb|<< ec_municipio_nombre >>| se presenta como el \verb|<< ec_posicion_municipio_region >>| municipio dentro de la región \verb|<< ec_region >>| con mayor número de trabajadores concentrando el \verb|<< ec_porcentaje_asegurados_region>>| \% del total.
+
+\begin{table}[H]
+
+\centering
+\small
+\begin{threeparttable}
+
+\caption{Trabajadores asegurados}
+\setlength{\tabcolsep}{4pt}
+    \begin{tabular}{|>{\centering\arraybackslash}m{4cm} |
+                >{\centering\arraybackslash}m{1.5cm}|
+                >{\centering\arraybackslash}m{1.5cm}|
+                >{\centering\arraybackslash}m{1.5cm}|
+                >{\centering\arraybackslash}m{2cm}|
+                >{\centering\arraybackslash}m{2.4cm}|}
+\hline
+    \rowcolor{colorSeccion}
+\multicolumn{6}{|c|}{\color{white}\textbf{Región ec\_region}} \\ \hline
+\rowcolor{gray!30}        \textbf{Municipio} & \textbf{ec\_mes\_corte\_imss ec\_anio\_anterior\_corte\_imss} & \textbf{ec\_mes\_corte\_imss ec\_anio\_corte\_imss} & \textbf{\% Participación ec\_mes\_corte\_imss ec\_anio\_corte\_imss} & \textbf{Variación nominal ec\_mes\_corte\_imss ec\_anio\_anterior\_corte\_imss / ec\_mes\_corte\_imss ec\_anio\_corte\_imss} & \textbf{Variación porcentual \% ec\_mes\_corte\_imss ec\_anio\_anterior\_corte\_imss / ec\_mes\_corte\_imss ec\_anio\_corte\_imss}  \\ \hline
+\rowcolor{orange!20} 
+ec\_municipio\_nombre & & & & & \\ \hline
+        & &  & & & \\ \hline
+    \end{tabular}
+
+\begin{tablenotes}
+\small
+\item Elaboración del IIEG con información de datos abiertos de trabajadores asegurados, IMSS.
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+\newpage
+\section{Agricultura y ganadería}
+
+La información sobre producción agrícola que reporta la Secretaría de Agricultura y Desarrollo Rural a través de la Dirección General del Servicio de Información Agroalimentaria y Pesquera, señaló que el valor de la producción agrícola de \verb|<< ec_municipio_nombre >>| en \verb|<< ec_anio_corte_sagarpa >>| fue de \verb|<< ec_valor_producción_agricola >>| millones de pesos, lo que representó el \verb|<< ec_porcentaje_respecto_al_estado_agricola >>| \% del valor total de la producción  estatal.
+
+
+\verb|<< ec_grafica_agricultura >>|
+
+\newpage
+
+El valor de la producción ganadera en \verb|<< ec_municipio_nombre >>| en \verb|<< ec_anio_corte_sagarpa >>| fue de \verb|<< ec_valor_producción_ganado >>| millones de pesos, y  representó el \verb|<< ec_porcentaje_respecto_al_estado_ganado >>| \% del total estatal.
+
+\verb|<< ec_grafica_ganaderia >>|
+
+
+\end{document}
