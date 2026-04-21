@@ -1,46 +1,123 @@
-\documentclass[12pt, letterpaper]{report}
+% !TEX program = xelatex
+\documentclass[11pt]{report}
 
-% Encoding and language
-\usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
-\usepackage[spanish, provide=*]{babel}
-
-% Margins
-\usepackage[top=2.5cm, bottom=2.5cm, left=2.5cm, right=2.5cm]{geometry}
-
-% Fonts
-\usepackage{lmodern}
-
-% Colors
-\usepackage[dvipsnames]{xcolor}
-\definecolor{primary}{HTML}{1A3A5C}
-\definecolor{accent}{HTML}{C8102E}
-
-% Graphics and figures
+\usepackage{fontspec}
+\usepackage{xcolor}
+\usepackage[table]{xcolor}
+\usepackage{etoolbox}
 \usepackage{graphicx}
-\usepackage{float}
-
-% Tables
-\usepackage{booktabs}
-\usepackage{tabularx}
-\usepackage{multirow}
-\usepackage{makecell}
-\usepackage{colortbl}
-\usepackage{array}
-\definecolor{headerBg}{HTML}{1A3A5C}
-\definecolor{subheaderBg}{HTML}{2E6DA4}
-\definecolor{rowHighlight}{HTML}{D6E4F0}
-
-% Headers and footers
 \usepackage{fancyhdr}
+\usepackage{geometry}
+\usepackage{setspace}
+\usepackage{siunitx}
+\usepackage{float}
+\usepackage{tikz}
+\usepackage{eso-pic}
+\usepackage[spanish]{babel}
+\usepackage{threeparttable}
+\usepackage{adjustbox}
+\usepackage{array}
+\usepackage{makecell}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage[hidelinks]{hyperref}
+\usepackage{etoc}
+\usepackage{varwidth} % must be loaded after array
+\usepackage{tabularx}
+
+
+\setcounter{secnumdepth}{-1}
+\setcounter{tocdepth}{2}
+
+\etocsetstyle{section}
+  {}
+  {\vspace{3pt}}
+  {\noindent\footnotesize\textbf{\color{colorTexto}%
+   \expandafter\MakeUppercase\expandafter{\etocname}}%
+   \dotfill\footnotesize\textbf{\color{colorTexto}\etocpage}\par}
+  {}
+
+\etocsetstyle{subsection}
+  {}
+  {}
+  {\hspace{1.0em}\footnotesize\color{colorTexto}\etocname\par\vspace{2pt}}
+  {}
+
+\addto\captionsspanish{
+  \renewcommand{\tablename}{Tabla}
+  \renewcommand{\thetable}{\arabic{table}}
+}
+
+\setmainfont[
+  UprightFont = {Lexend-Regular.ttf},
+  BoldFont = {Lexend-Bold.ttf},
+  ItalicFont = {Lexend-Regular.ttf},
+  BoldItalicFont = {Lexend-Bold.ttf},
+  Path = << fonts_path >>
+]{Lexend}
+\newfontfamily\lexendlight[
+  Path = << fonts_path >>
+]{Lexend-Light.ttf}
+\newfontfamily\lexendsemibold[
+  Path = << fonts_path >>
+]{Lexend-SemiBold.ttf}
+\definecolor{colorSeccion}{HTML}{5C2472}
+\definecolor{colorTexto}{HTML}{465055}
+\definecolor{headerGray}{HTML}{7A7A7A}
+\definecolor{lightGray}{HTML}{D9D9D9}
+\definecolor{headerBg}{HTML}{5C2472}
+\definecolor{subheaderBg}{HTML}{7A4A8A}
+\definecolor{rowHighlight}{HTML}{FFF3CD}
+\definecolor{primary}{HTML}{5C2472}
+\definecolor{accent}{HTML}{465055}
+
+\newcommand{\ND}{\textcolor{red}{N/D}}
+
+\AtBeginDocument{
+  \color{colorTexto}
+}
+
+\usepackage{titlesec}
+\titleformat{\section}
+  {\color{colorSeccion}\normalfont\Huge\bfseries}
+  {}{0pt}{}
+\titleformat{name=\subsection,numberless}
+  {\color{colorSeccion}\normalfont\LARGE\bfseries}
+  {}{0pt}{}
+\titleformat{\subsection}
+  {\color{colorSeccion}\normalfont\LARGE\bfseries}
+  {}{0pt}{}
+\titleformat{\subsubsection}
+  {\color{colorSeccion}\normalfont\Large\bfseries}
+  {}{0pt}{}
+\titleformat{name=\subsubsection,numberless}
+  {\color{colorSeccion}\normalfont\Large\bfseries}
+  {}{0pt}{}
+
+\setstretch{1.3}
+\renewcommand{\arraystretch}{1.3}
+\setlength{\parskip}{0.3cm}
+\setlength{\parindent}{0pt}
+
+\geometry{
+  left=2.5cm,
+  right=2.5cm,
+  top=3cm,
+  bottom=3cm,
+  headheight=2cm,
+  headsep=1cm,
+  footskip=1.2cm
+}
+
 \pagestyle{fancy}
 \fancyhf{}
-\fancyhead[L]{\textcolor{primary}{\small Jalisco en cifras}}
-\fancyhead[R]{\textcolor{primary}{\small \leftmark}}
-\fancyfoot[C]{\thepage}
 
-% Hyperlinks
-\usepackage[hidelinks]{hyperref}
+\fancyhead[R]{\color{colorTexto}\footnotesize Página \thepage}
+
+\setlength{\headheight}{2cm}
+\setlength{\headsep}{1cm}
+\setlength{\footskip}{1.2cm}
+\renewcommand{\headrulewidth}{0pt}
 
 \begin{document}
 

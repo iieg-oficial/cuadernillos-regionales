@@ -1,0 +1,39 @@
+\chapter{Gobierno y Seguridad}
+
+\begin{table}[H]
+\centering
+\renewcommand{\arraystretch}{1.4}
+\begin{tabularx}{\textwidth}{|c|l|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|}
+\setlength{\tabcolsep}{5pt}
+\hline
+\multicolumn{8}{|>{\columncolor{headerBg}}l|}{%
+  \hspace{2cm}\textcolor{white}{\textbf{Tabla. Delitos de fuero común}}} \\
+\hline
+\multicolumn{8}{|>{\columncolor{subheaderBg}}c|}{%
+  \textcolor{white}{<< gs_municipio_nombre >>, << gs_region_nombre >>}} \\
+\hline
+\multirow{2}{*}{\textbf{Clave}} &
+\multirow{2}{*}{\textbf{Municipio}} &
+\multicolumn{2}{c|}{\textbf{\makecell{Delitos de fuero común\\ << gs_anio_anterior >>}}} &
+\multicolumn{2}{c|}{\textbf{\makecell{Delitos de fuero común\\ << gs_anio_actual >>}}} &
+\multicolumn{2}{c|}{\textbf{Variación porcentual}} \\
+\cline{3-8}
+& &
+\textbf{\makecell{Valor\\municipal}} & \textbf{\makecell{Lugar\\estatal}} &
+\textbf{\makecell{Valor\\municipal}} & \textbf{\makecell{Lugar\\estatal}} &
+\textbf{\makecell{Valor\\municipal}} & \textbf{\makecell{Lugar\\estatal}} \\
+\hline
+<% for row in gs_tabla_delitos %>
+<% if row.es_objetivo %>\rowcolor{rowHighlight}<% endif %>
+<% if row.es_objetivo %>\textbf{<< row.clave >>}<% else %><< row.clave >><% endif %> &
+<% if row.es_objetivo %>\textbf{<< row.municipio >>}<% else %><< row.municipio >><% endif %> &
+<% if row.es_objetivo %>\textbf{<< row.valor_anterior >>}<% else %><< row.valor_anterior >><% endif %> &
+<% if row.es_objetivo %>\textbf{<< row.lugar_anterior >>}<% else %><< row.lugar_anterior >><% endif %> &
+<% if row.es_objetivo %>\textbf{<< row.valor_actual >>}<% else %><< row.valor_actual >><% endif %> &
+<% if row.es_objetivo %>\textbf{<< row.lugar_actual >>}<% else %><< row.lugar_actual >><% endif %> &
+<% if row.es_objetivo %>\textbf{<< row.variacion >>}<% else %><< row.variacion >><% endif %> &
+<% if row.es_objetivo %>\textbf{<< row.lugar_variacion >>}<% else %><< row.lugar_variacion >><% endif %> \\
+\hline
+<% endfor %>
+\end{tabularx}
+\end{table}

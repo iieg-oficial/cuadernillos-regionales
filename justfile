@@ -20,6 +20,11 @@ run:
 run-one clave:
     uv run python main.py --municipio {{clave}}
 
+# abre un archivo específico
+[group("reports")]
+open-one clave:
+   open output/pdf/{{clave}}_cuadernillo/{{clave}}_cuadernillo.pdf
+
 # Revisa estilo y formato con ruff
 [group("format code")]
 lint:

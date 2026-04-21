@@ -1,5 +1,7 @@
 .env/
 output/
+assets/maps/
 __pycache__/
 *.pyc
 .venv/
+.claude/settings.local.json

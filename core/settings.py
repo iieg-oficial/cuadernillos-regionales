@@ -4,6 +4,12 @@ from pydantic import Field
 from pydantic_settings import BaseSettings
 
 
+class AppSettings(BaseSettings):
+    FONTS_PATH: str = Field(default="/usr/share/fonts/")
+
+    model_config = {"env_file": ".env/.env.app"}
+
+
 class DatabaseSettings(BaseSettings):
     DB_USER: str = Field(default="postgres")
     DB_PASSWORD: str = Field(default="postgres")
@@ -18,3 +24,9 @@ class DatabaseSettings(BaseSettings):
     @classmethod
     def from_env(cls, name: str) -> "DatabaseSettings":
         return cls(_env_file=Path(".env") / f".env.{name}")
+
+
+class HistoriaSettings(BaseSettings):
+    HISTORIA_MAPS_URL: str = Field(default="")
+
+    model_config = {"env_file": ".env/.env.historia"}
