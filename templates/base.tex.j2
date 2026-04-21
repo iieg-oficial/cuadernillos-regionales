@@ -28,6 +28,10 @@
 \usepackage{caption}
 \captionsetup[longtable]{justification=centering, skip=5pt}
 
+% Columna de ancho igual para longtable de N columnas (descuenta reglas)
+% Uso: >{\centering\arraybackslash}\ltcoleq{N}
+\newcommand{\ltcoleq}[1]{p{\dimexpr(\linewidth - (#1+1)\arrayrulewidth)/#1 - 2\tabcolsep\relax}}
+
 
 \setcounter{secnumdepth}{-1}
 \setcounter{tocdepth}{2}
