@@ -87,6 +87,60 @@ En << gs_anio_actual >> se registraron << gs_total_delitos >> delitos de fuero c
 
 ### Tablas
 
+Todas las tablas del proyecto usan `longtable`. No usar `table`, `tabular` ni `threeparttable`.
+
+La estructura base de toda tabla es:
+
+```latex
+\setlength{\tabcolsep}{3pt}
+\footnotesize
+\begin{longtable}{|>{\centering\arraybackslash}p{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
+                  |>{\raggedright\arraybackslash}p{\dimexpr0.40\linewidth - 2\tabcolsep\relax}
+                  |>{\centering\arraybackslash}p{\dimexpr0.30\linewidth - 2\tabcolsep\relax}|}
+
+\caption{Título de la tabla}
+\label{tabla_nombre_descriptivo} \\
+
+\rowcolor{colorSeccion}
+\multicolumn{3}{|c|}{\color{white}<< gs_municipio_nombre >>} \\
+\hline
+\rowcolor{gray!30}
+Col1 & Col2 & Col3 \\
+\hline
+\endfirsthead
+
+\multicolumn{3}{l}{\small\textbf{(continuación)}} \\
+\rowcolor{colorSeccion}
+\multicolumn{3}{|c|}{\color{white}<< gs_municipio_nombre >>} \\
+\hline
+\rowcolor{gray!30}
+Col1 & Col2 & Col3 \\
+\hline
+\endhead
+
+\hline
+\multicolumn{3}{r}{\small\textbf{(continúa)}} \\
+\endfoot
+
+\hline
+\endlastfoot
+
+Valor & Valor & Valor \\
+\hline
+
+\end{longtable}
+\normalsize
+\par\vspace{-4pt}\parbox{\linewidth}{\footnotesize
+Elaboración del IIEG, con datos de FUENTE, AÑO.}
+```
+
+**Reglas de columnas:**
+
+- Las proporciones de todas las columnas deben sumar exactamente `1.00`.
+- Siempre restar `2\tabcolsep`: `p{\dimexpr0.30\linewidth - 2\tabcolsep\relax}`.
+- Usar `\raggedright\arraybackslash` para columnas de texto (nombres, etiquetas). Usar `\centering\arraybackslash` para columnas numéricas.
+- **Nunca usar macros como `\ltcoleq{N}`** en la especificación de columnas de longtable: aunque el PDF se genera, las líneas verticales interiores no se dibujan.
+
 Las filas estáticas en Overleaf:
 
 ```latex
@@ -137,6 +191,6 @@ Donde `gs_grafica_delitos` es la ruta absoluta o relativa a la imagen generada, 
 
 Los paquetes ya incluidos en `base.tex.j2`:
 
-`inputenc`, `fontenc`, `babel`, `geometry`, `lmodern`, `xcolor`, `graphicx`, `float`, `booktabs`, `tabularx`, `multirow`, `makecell`, `colortbl`, `array`, `fancyhdr`, `hyperref`
+`fontspec`, `xcolor`, `graphicx`, `float`, `geometry`, `fancyhdr`, `setspace`, `siunitx`, `tikz`, `eso-pic`, `babel`, `adjustbox`, `array`, `makecell`, `booktabs`, `multirow`, `hyperref`, `etoc`, `varwidth`, `tabularx`, `longtable`, `caption`
 
 Si tu `.tex` de Overleaf usa algún paquete adicional, agrégalo en `base.tex.j2`.
