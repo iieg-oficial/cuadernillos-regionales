@@ -259,47 +259,65 @@ personas, mientras que en << de_anio_encuesta_intercensal >> la proporción fue 
 << de_porcentaje_pobreza_moderada_intercensal >> por ciento
 (<< de_poblacion_pobreza_moderada_intercensal >> personas).
 
-En las tablas \ref{tabla_pobreza_multidimensional_1} y \ref{tabla_pobreza_multidimensional_2} se muestra
+En la tabla \ref{tabla_pobreza_multidimensional} se muestra
 el porcentaje y número de personas en situación de pobreza
 en << de_anio_encuesta_intercensal >> y << de_anio_censo >> en el municipio,
 así como la población vulnerable por carencias sociales, la vulnerable por ingresos y
 la no pobre y no vulnerable.
 
-\begin{table}[H]
-\label{tabla_pobreza_multidimensional_1}
-\centering
-\caption{Pobreza Multidimensional (Parte 1): Indicadores generales}
-\begin{threeparttable}
 \setlength{\tabcolsep}{3pt}
 \footnotesize
-\begin{tabularx}{\textwidth}{|>{\centering\arraybackslash}X
-                >{\centering\arraybackslash}X
-                >{\centering\arraybackslash}X
-                >{\centering\arraybackslash}X
-                >{\centering\arraybackslash}X
-                >{\centering\arraybackslash}X
-                >{\centering\arraybackslash}X|}
-\hline
+\begin{longtable}{|>{\raggedright\arraybackslash}p{0.27\linewidth}
+                  |>{\centering\arraybackslash}p{0.118\linewidth}
+                  |>{\centering\arraybackslash}p{0.118\linewidth}
+                  |>{\centering\arraybackslash}p{0.118\linewidth}
+                  |>{\centering\arraybackslash}p{0.118\linewidth}
+                  |>{\centering\arraybackslash}p{0.118\linewidth}
+                  |>{\centering\arraybackslash}p{0.118\linewidth}|}
 
-% Subtítulo
+\caption{Pobreza Multidimensional: Indicadores generales y de carencias}
+\label{tabla_pobreza_multidimensional} \\
+
 \rowcolor{colorSeccion}
 \multicolumn{7}{|c|}{\color{white}<< de_municipio_nombre >>, Jalisco} \\
 \hline
-
-% Encabezado fila 1
 \rowcolor{gray!30}
 \textbf{Indicadores de incidencia} &
-\multicolumn{2}{c}{\textbf{Porcentaje}} &
-\multicolumn{2}{c}{\textbf{Personas}} &
-\multicolumn{2}{c}{\textbf{Carencias promedio}} \\
+\multicolumn{2}{c|}{\textbf{Porcentaje}} &
+\multicolumn{2}{c|}{\textbf{Personas}} &
+\multicolumn{2}{c|}{\textbf{Carencias promedio}} \\
 \cline{2-7}
-
-% Encabezado fila 2
 \rowcolor{gray!30}
  & \textbf{<< de_anio_encuesta_intercensal >>} & \textbf{<< de_anio_censo >>} & \textbf{<< de_anio_encuesta_intercensal >>} & \textbf{<< de_anio_censo >>} & \textbf{<< de_anio_encuesta_intercensal >>} & \textbf{<< de_anio_censo >>} \\
 \hline
+\endfirsthead
 
-% FILAS
+\multicolumn{7}{l}{\small\textit{...continuación}} \\
+\rowcolor{colorSeccion}
+\multicolumn{7}{|c|}{\color{white}<< de_municipio_nombre >>, Jalisco} \\
+\hline
+\rowcolor{gray!30}
+\textbf{Indicadores de incidencia} &
+\multicolumn{2}{c|}{\textbf{Porcentaje}} &
+\multicolumn{2}{c|}{\textbf{Personas}} &
+\multicolumn{2}{c|}{\textbf{Carencias promedio}} \\
+\cline{2-7}
+\rowcolor{gray!30}
+ & \textbf{<< de_anio_encuesta_intercensal >>} & \textbf{<< de_anio_censo >>} & \textbf{<< de_anio_encuesta_intercensal >>} & \textbf{<< de_anio_censo >>} & \textbf{<< de_anio_encuesta_intercensal >>} & \textbf{<< de_anio_censo >>} \\
+\hline
+\endhead
+
+\hline
+\multicolumn{7}{r|}{\small\textit{continúa\ldots}} \\
+\endfoot
+
+\hline
+\multicolumn{7}{|l|}{\parbox{0.97\linewidth}{\small
+Elaboración del IIEG, con datos de INEGI, Censo de Población y Vivienda
+<< de_anio_censo_anterior >> y << de_anio_censo >>.\\
+*Nota: los indicadores hacen referencia al quinquenio << de_anio_encuesta_intercensal >>--<< de_anio_censo >>.}} \\
+\endlastfoot
+
 \rowcolor{orange!20}
 \textbf{Pobreza multidimensional} & & & & & & \\
 \hline
@@ -338,52 +356,6 @@ Población con al menos una carencia social
 
 Población con al menos tres carencias sociales
 & & & & & & \\
-\hline
-
-\end{tabularx}
-\begin{tablenotes}
-\small
-\item Elaboración del IIEG, con datos de INEGI, Censo de Población y Vivienda 2010 y
-2020.
-\item *Nota: los indicadores hacen referencia al quinquenio 2015--<< de_anio_censo >>.
-\end{tablenotes}
-\end{threeparttable}
-\end{table}
-
-\newpage
-
-\begin{table}[H]
-\label{tabla_pobreza_multidimensional_2}
-\centering
-\caption{Pobreza Multidimensional (Parte 2): Indicadores de carencias y bienestar}
-\begin{threeparttable}
-\setlength{\tabcolsep}{3pt}
-\footnotesize
-\begin{tabularx}{\textwidth}{|>{\centering\arraybackslash}X
-                >{\centering\arraybackslash}X
-                >{\centering\arraybackslash}X
-                >{\centering\arraybackslash}X
-                >{\centering\arraybackslash}X
-                >{\centering\arraybackslash}X
-                >{\centering\arraybackslash}X|}
-\hline
-
-% Subtítulo
-\rowcolor{colorSeccion}
-\multicolumn{7}{|c|}{\color{white}<< de_municipio_nombre >>, Jalisco} \\
-\hline
-
-% Encabezado fila 1
-\rowcolor{gray!30}
-\textbf{Indicadores de incidencia} &
-\multicolumn{2}{c}{\textbf{Porcentaje}} &
-\multicolumn{2}{c}{\textbf{Personas}} &
-\multicolumn{2}{c}{\textbf{Carencias promedio}} \\
-\cline{2-7}
-
-% Encabezado fila 2
-\rowcolor{gray!30}
- & \textbf{<< de_anio_encuesta_intercensal >>} & \textbf{<< de_anio_censo >>} & \textbf{<< de_anio_encuesta_intercensal >>} & \textbf{<< de_anio_censo >>} & \textbf{<< de_anio_encuesta_intercensal >>} & \textbf{<< de_anio_censo >>} \\
 \hline
 
 \rowcolor{orange!20}
@@ -426,15 +398,8 @@ Población con un ingreso inferior a la línea de bienestar
 & & & & & & \\
 \hline
 
-\end{tabularx}
-\begin{tablenotes}
-\small
-\item Elaboración del IIEG, con datos de INEGI, Censo de Población y Vivienda
-<< de_anio_censo_anterior >> y << de_anio_censo >>.
-\item *Nota: los indicadores hacen referencia al quinquenio << de_anio_encuesta_intercensal >>--<< de_anio_censo >>.
-\end{tablenotes}
-\end{threeparttable}
-\end{table}
+\end{longtable}
+\normalsize
 
 \newpage
 << de_mapa_porcentaje_pobreza_multidimensional >>
