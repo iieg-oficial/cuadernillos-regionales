@@ -1,5 +1,6 @@
 ### Commits
 
+- commits siempre en inglés.
 - Siempre usar: siempre mi nombre de usuario para los commits.
 - Nunca agregar `Co-Authored-By` en el mensaje del commit.
 

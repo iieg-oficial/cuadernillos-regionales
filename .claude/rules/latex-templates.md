@@ -1,5 +1,12 @@
 # Reglas para templates LaTeX
 
+## Referencia
+
+Antes de crear o modificar cualquier template, revisar el pipeline de demografía como referencia de implementación completa:
+
+- Template: `templates/sections/demografia.tex.j2`
+- Pipeline: `pipelines/demografia/`
+
 ## Tablas
 
 Todas las tablas usan `longtable`. No usar `table`/`tabular`/`threeparttable`. La estructura base es:
@@ -57,7 +64,7 @@ Elaboración del IIEG, con datos de FUENTE, AÑO.}
 
 - NUNCA usar el macro `\ltcoleq{N}` en longtable: aunque el PDF se genera, longtable no dibuja las líneas verticales interiores cuando las columnas se definen mediante expansión de macros.
 - Las proporciones de todas las columnas deben sumar exactamente `1.00`.
-- Usar `\raggedright\arraybackslash` para columnas de texto largo (nombres, etiquetas). Usar `\centering\arraybackslash` para columnas numéricas.
+- La alineación depende del contenido: `\centering\arraybackslash` para números y claves, `\raggedright\arraybackslash` para texto largo, `\raggedleft\arraybackslash` para montos o valores con decimales alineados a la derecha.
 
 Ejemplo con 3 columnas (proporciones: 0.25 + 0.35 + 0.40 = 1.00):
 
