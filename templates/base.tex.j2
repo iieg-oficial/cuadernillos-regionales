@@ -21,6 +21,24 @@
 \usepackage{booktabs}
 \usepackage{multirow}
 \usepackage[hidelinks]{hyperref}
+\usepackage{etoc}
+
+\setcounter{secnumdepth}{-1}
+\setcounter{tocdepth}{2}
+
+\etocsetstyle{section}
+  {}
+  {\vspace{3pt}}
+  {\noindent\footnotesize\textbf{\color{colorTexto}%
+   \expandafter\MakeUppercase\expandafter{\etocname}}%
+   \dotfill\footnotesize\textbf{\color{colorTexto}\etocpage}\par}
+  {}
+
+\etocsetstyle{subsection}
+  {}
+  {}
+  {\hspace{1.0em}\footnotesize\color{colorTexto}\etocname\par\vspace{2pt}}
+  {}
 
 \addto\captionsspanish{
   \renewcommand{\tablename}{Tabla}
