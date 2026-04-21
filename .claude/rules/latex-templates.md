@@ -44,6 +44,7 @@ Valor & Valor & ... \\
 - Siempre incluir `\label{}` con nombre en snake_case.
 - Siempre envolver en `\begin{threeparttable}` para poder usar `\begin{tablenotes}`.
 - Siempre usar `\setlength{\tabcolsep}{3pt}` y `\footnotesize` dentro del bloque.
+- El espaciado vertical global (`\renewcommand{\arraystretch}{1.3}`) está definido en `base.tex.j2` — no redefinir en los templates a menos que una tabla específica lo requiera.
 - Definir columnas con `>{\centering\arraybackslash}m{Xcm}` para controlar ancho y alineación.
   - Usar `>{\raggedright\arraybackslash}m{Xcm}` para columnas de texto largo (etiquetas).
 - La primera fila (subtítulo) siempre usa `\rowcolor{colorSeccion}` con texto `\color{white}`.
