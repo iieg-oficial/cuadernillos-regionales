@@ -1,9 +1,10 @@
 \clearpage
 \thispagestyle{empty}
 \AddToShipoutPictureBG*{%
-  \includegraphics[width=\paperwidth,height=\paperheight]{templates/assets/portada.png}%
+  \AtPageUpperLeft{\raisebox{-\height}{\includegraphics[width=\paperwidth]{<< assets_path >>portadilla.png}}}%
+  \AtPageLowerLeft{\includegraphics[width=\paperwidth]{<< assets_path >>footer_section.png}}%
 }
-\vspace*{5cm}
+\vspace*{\stretch{1}}
 \begin{center}
   {\color{colorTexto}\bfseries\fontsize{23}{26}\selectfont Demografía y sociedad} \\[2.5em]
   {\color{colorTexto}\lexendsemibold
@@ -13,6 +14,7 @@
     {\LARGE Agosto 2026}
   }}
 \end{center}
+\vspace*{\stretch{1}}
 \clearpage
 
 \section{Demografía y Sociedad}
@@ -239,7 +241,7 @@ Posición que ocupa el municipio a escala nacional & << de_ranking_nacional_mun_
 \end{longtable}
 \normalsize
 \vspace{-28pt}\noindent{\footnotesize\color{black}
-Fuente:  CONAPO. Índice de Intensidad Migratoria México-Estados Unidos, 2010 y 2020.
+Fuente:  CONAPO. Índice de Intensidad Migratoria México-Estados Unidos,
 << de_anio_censo_anterior >> y << de_anio_censo >>.\\
 *Nota: los indicadores hacen referencia al quinquenio << de_anio_encuesta_intercensal >>--<< de_anio_censo >>.}
 
@@ -653,16 +655,16 @@ entre los municipios del estado con mayor valor en el índice.
 \setlength{\tabcolsep}{3pt}
 \footnotesize
 \begin{longtable}{|>{\centering\arraybackslash}p{\dimexpr0.07\linewidth - 2\tabcolsep\relax}
-                  |>{\raggedright\arraybackslash}p{\dimexpr0.13\linewidth - 2\tabcolsep\relax}
-                  |>{\centering\arraybackslash}p{\dimexpr0.10\linewidth - 2\tabcolsep\relax}
-                  |>{\centering\arraybackslash}p{\dimexpr0.08\linewidth - 2\tabcolsep\relax}
-                  |>{\centering\arraybackslash}p{\dimexpr0.06\linewidth - 2\tabcolsep\relax}
-                  |>{\centering\arraybackslash}p{\dimexpr0.11\linewidth - 2\tabcolsep\relax}
-                  |>{\centering\arraybackslash}p{\dimexpr0.06\linewidth - 2\tabcolsep\relax}
-                  |>{\centering\arraybackslash}p{\dimexpr0.10\linewidth - 2\tabcolsep\relax}
-                  |>{\centering\arraybackslash}p{\dimexpr0.06\linewidth - 2\tabcolsep\relax}
+                  |>{\raggedright\arraybackslash}p{\dimexpr0.14\linewidth - 2\tabcolsep\relax}
                   |>{\centering\arraybackslash}p{\dimexpr0.12\linewidth - 2\tabcolsep\relax}
-                  |>{\centering\arraybackslash}p{\dimexpr0.11\linewidth - 2\tabcolsep\relax}|}
+                  |>{\centering\arraybackslash}p{\dimexpr0.08\linewidth - 2\tabcolsep\relax}
+                  |>{\centering\arraybackslash}p{\dimexpr0.07\linewidth - 2\tabcolsep\relax}
+                  |>{\centering\arraybackslash}p{\dimexpr0.10\linewidth - 2\tabcolsep\relax}
+                  |>{\centering\arraybackslash}p{\dimexpr0.07\linewidth - 2\tabcolsep\relax}
+                  |>{\centering\arraybackslash}p{\dimexpr0.10\linewidth - 2\tabcolsep\relax}
+                  |>{\centering\arraybackslash}p{\dimexpr0.07\linewidth - 2\tabcolsep\relax}
+                  |>{\centering\arraybackslash}p{\dimexpr0.09\linewidth - 2\tabcolsep\relax}
+                  |>{\centering\arraybackslash}p{\dimexpr0.09\linewidth - 2\tabcolsep\relax}|}
 
 \caption{Población total, Grado de Marginación, Pobreza multidimensional e Intensidad Migratoria}
 \label{tabla_marginacion_pobreza_migracion} \\
@@ -673,11 +675,11 @@ entre los municipios del estado con mayor valor en el índice.
 \rowcolor{gray!30}
 \thdr{Clave} & \thdr{Municipio} & \thdr{Población} &
 \multicolumn{2}{c|}{\cellcolor{gray!30}\thdr{Marginación}} &
-\multicolumn{4}{c|}{\cellcolor{gray!30}\thdr{Pobreza}} &
-\multicolumn{2}{>{\centering\arraybackslash}p{\dimexpr0.23\linewidth - 2\tabcolsep + \arrayrulewidth\relax}|}{\cellcolor{gray!30}\thdr{Intensidad Migratoria}} \\
+\multicolumn{4}{c|}{\cellcolor{gray!30}\thdr{Pobreza multidimensional}} &
+\multicolumn{2}{>{\centering\arraybackslash}p{\dimexpr0.18\linewidth - 2\tabcolsep + \arrayrulewidth\relax}|}{\cellcolor{gray!30}\thdr{Intensidad Migratoria}} \\
 \hline
 \rowcolor{gray!30}
- & & & \thdr{Grado} & \thdr{Lugar} & \thdr{\makecell{multi-\\dim.}} & \thdr{Lugar} & \thdr{extrema} & \thdr{Lugar} & \thdr{Grado} & \thdr{Lugar} \\
+ & & & \thdr{Grado} & \thdr{Lugar} & \thdr{Pobreza} & \thdr{Lugar} & \thdr{Pobreza extrema} & \thdr{Lugar} & \thdr{Grado} & \thdr{Lugar} \\
 \hline
 \endfirsthead
 
@@ -688,11 +690,11 @@ entre los municipios del estado con mayor valor en el índice.
 \rowcolor{gray!30}
 \thdr{Clave} & \thdr{Municipio} & \thdr{Población} &
 \multicolumn{2}{c|}{\cellcolor{gray!30}\thdr{Marginación}} &
-\multicolumn{4}{c|}{\cellcolor{gray!30}\thdr{Pobreza}} &
-\multicolumn{2}{>{\centering\arraybackslash}p{\dimexpr0.23\linewidth - 2\tabcolsep + \arrayrulewidth\relax}|}{\cellcolor{gray!30}\thdr{Intensidad Migratoria}} \\
+\multicolumn{4}{c|}{\cellcolor{gray!30}\thdr{Pobreza multidimensional}} &
+\multicolumn{2}{>{\centering\arraybackslash}p{\dimexpr0.18\linewidth - 2\tabcolsep + \arrayrulewidth\relax}|}{\cellcolor{gray!30}\thdr{Intensidad Migratoria}} \\
 \hline
 \rowcolor{gray!30}
- & & & \thdr{Grado} & \thdr{Lugar} & \thdr{\makecell{multi-\\dim.}} & \thdr{Lugar} & \thdr{extrema} & \thdr{Lugar} & \thdr{Grado} & \thdr{Lugar} \\
+ & & & \thdr{Grado} & \thdr{Lugar} & \thdr{Pobreza} & \thdr{Lugar} & \thdr{Pobreza extrema} & \thdr{Lugar} & \thdr{Grado} & \thdr{Lugar} \\
 \hline
 \endhead
 

@@ -21,6 +21,10 @@ def render(municipio_id: str, context: dict) -> Path:
     output_path.parent.mkdir(parents=True, exist_ok=True)
     app_settings = AppSettings()
     output_path.write_text(
-        template.render(fonts_path=app_settings.FONTS_PATH, **context)
+        template.render(
+            fonts_path=app_settings.FONTS_PATH,
+            assets_path=app_settings.ASSETS_PATH,
+            **context,
+        )
     )
     return output_path
