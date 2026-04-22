@@ -1,41 +1,299 @@
-\chapter{Gobierno y Seguridad}
+% !TEX program = xelatex
+\documentclass[11pt]{article}
 
-\begin{table}[H]
-\centering
-\renewcommand{\arraystretch}{1.4}
-\resizebox{\linewidth}{!}{%
-\setlength{\tabcolsep}{5pt}
-\begin{tabular}{|c|l|c|c|c|c|c|c|}
-\hline
-\multicolumn{8}{|>{\columncolor{headerBg}}l|}{%
-  \hspace{2cm}\textcolor{white}{\textbf{Tabla. Delitos de fuero común}}} \\
-\hline
-\multicolumn{8}{|>{\columncolor{subheaderBg}}c|}{%
-  \textcolor{white}{<< gs_municipio_nombre >>, << gs_region_nombre >>}} \\
-\hline
-\multirow{2}{*}{\textbf{Clave}} &
-\multirow{2}{*}{\textbf{Municipio}} &
-\multicolumn{2}{c|}{\textbf{\makecell{Delitos de fuero común\\ << gs_anio_anterior >>}}} &
-\multicolumn{2}{c|}{\textbf{\makecell{Delitos de fuero común\\ << gs_anio_actual >>}}} &
-\multicolumn{2}{c|}{\textbf{Variación porcentual}} \\
-\cline{3-8}
-& &
-\textbf{\makecell{Valor\\municipal}} & \textbf{\makecell{Lugar\\estatal}} &
-\textbf{\makecell{Valor\\municipal}} & \textbf{\makecell{Lugar\\estatal}} &
-\textbf{\makecell{Valor\\municipal}} & \textbf{\makecell{Lugar\\estatal}} \\
-\hline
-<% for row in gs_tabla_delitos %>
-<% if row.es_objetivo %>\rowcolor{rowHighlight}<% endif %>
-<% if row.es_objetivo %>\textbf{<< row.clave >>}<% else %><< row.clave >><% endif %> &
-<% if row.es_objetivo %>\textbf{<< row.municipio >>}<% else %><< row.municipio >><% endif %> &
-<% if row.es_objetivo %>\textbf{<< row.valor_anterior >>}<% else %><< row.valor_anterior >><% endif %> &
-<% if row.es_objetivo %>\textbf{<< row.lugar_anterior >>}<% else %><< row.lugar_anterior >><% endif %> &
-<% if row.es_objetivo %>\textbf{<< row.valor_actual >>}<% else %><< row.valor_actual >><% endif %> &
-<% if row.es_objetivo %>\textbf{<< row.lugar_actual >>}<% else %><< row.lugar_actual >><% endif %> &
-<% if row.es_objetivo %>\textbf{<< row.variacion >>}<% else %><< row.variacion >><% endif %> &
-<% if row.es_objetivo %>\textbf{<< row.lugar_variacion >>}<% else %><< row.lugar_variacion >><% endif %> \\
-\hline
-<% endfor %>
-\end{tabular}
+\usepackage{fontspec}
+\usepackage{xcolor}
+\usepackage[table]{xcolor}
+\usepackage{etoolbox}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{geometry}
+\usepackage{setspace}
+\usepackage{siunitx}
+\usepackage{float}
+\usepackage{tikz}
+\usepackage{eso-pic}
+\usepackage[spanish, mexico]{babel}
+\usepackage{threeparttable}
+\usepackage{caption}
+\usepackage{array}
+\usepackage[capitalise,noabbrev]{cleveref}
+\crefname{table}{tabla}{tablas}
+\Crefname{table}{Tabla}{Tablas}
+\crefname{figure}{figura}{figuras}
+\Crefname{Figure}{Figura}{Figuras}
+
+
+\usepackage{amssymb}  
+
+
+\definecolor{colorSeccion}{HTML}{5C2472}
+\definecolor{colorTexto}{HTML}{465055}
+\definecolor{headerGray}{HTML}{7A7A7A}
+\definecolor{lightGray}{HTML}{D9D9D9}
+
+\AtBeginDocument{
+  \color{colorTexto}
 }
+
+\usepackage{titlesec}
+\titleformat{\section}
+  {\color{colorSeccion}\normalfont\large\bfseries}
+  {}{0pt}{}
+\titleformat{\subsection}
+  {\color{colorSeccion}\normalfont\small\bfseries}
+  {}{0pt}{}  
+
+\setstretch{1.3}
+
+\geometry{
+  left=2.5cm,
+  right=2.5cm,
+  top=3cm,
+  bottom=3cm,
+  headheight=2cm,
+  headsep=1cm,
+  footskip=1.2cm
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+
+% HEADER
+\fancyhead[L]{\hspace{-1cm}\raisebox{-0.3cm}{\includegraphics[height=1.5cm]{logo_header.png}}}
+\fancyhead[R]{\color{colorTexto}\footnotesize Página \thepage}
+% FOOTER
+\fancyfoot[L]{\hspace{-1cm}\raisebox{-1cm}{\includegraphics[height=1.5cm]{logo_footer.png}}}
+
+% Ajustes de espacio
+\setlength{\headheight}{2cm}
+\setlength{\headsep}{1cm}
+\setlength{\footskip}{1.2cm}
+% Quita línea horizontal del header que aparece por defecto
+\renewcommand{\headrulewidth}{0pt}
+
+\begin{document}
+%-------------------------------------
+%Portada de sección
+%-------------------------------------
+\newgeometry{margin=0cm}
+% Imagen de fondo
+\AddToShipoutPictureBG*{
+\begin{tikzpicture}[remember picture, overlay]
+    \node at (current page.center) {
+        \includegraphics[width=\paperwidth,height=\paperheight]{portada.png}
+    };
+\end{tikzpicture}
+}
+
+% Texto encima
+\begin{tikzpicture}[remember picture, overlay]
+
+    % Título principal
+    \node at (current page.center) [
+        yshift=3cm,
+        align=center,
+        text width=0.8\paperwidth
+    ] {
+        {\color{colorTexto}\bfseries\fontsize{23}{26}\selectfont Gobierno y Seguridad}
+    };
+
+    % Subtítulo (3 líneas)
+    \node at (current page.center) [
+        yshift=-.5cm,
+        align=center
+    ] {
+        {\color{colorTexto}\fontsize{16}{30}\lexendsemibold
+        \shortstack{
+            \verb|<< gs_municipio_nombre >>|\\[0.3cm]
+            Diagnóstico del municipio\\[0.3cm]
+            Agosto 2026
+        }}
+    };
+
+\end{tikzpicture}
+
+\vspace*{\fill} % asegura página completa
+\restoregeometry % vuelve a márgenes normales para el resto del documento
+
+\section{Desarrollo institucional}
+El análisis del desarrollo institucional en el ámbito municipal requiere del uso de indicadores objetivos estándar que permitan evaluar dimensiones específicas del funcionamiento gubernamental y de su interacción con la ciudadanía. Estos indicadores tienen gran importancia para el estudio de la gobernanza local, ya que reflejan tanto la capacidad de gestión de los municipios como las condiciones de participación democrática y de seguridad en el territorio.
+
+\begin{enumerate}
+    \item Porcentaje de participación ciudadana en elecciones. Este indicador refleja el nivel de involucramiento de la población en los procesos democráticos a través del voto. La participación electoral constituye una medida esencial de legitimidad institucional y un elemento clave para valorar la fortaleza de los mecanismos de representación política a nivel municipal.
+    \item Porcentaje de ingresos propios e ingresos per cápita. La capacidad de los gobiernos municipales para generar ingresos propios es un componente central de su autonomía financiera y de su sostenibilidad fiscal. El análisis de este indicador, complementado con el cálculo de ingresos per cápita, permite identificar diferencias en el esfuerzo recaudatorio y en la disponibilidad de recursos para la provisión de bienes y servicios públicos.
+    \item Delitos del fuero común. La incidencia delictiva constituye un factor determinante en la evaluación del entorno institucional, ya que la seguridad pública incide directamente en la calidad de vida de la población y en la confianza hacia las instituciones. El seguimiento de los delitos del fuero común a nivel municipal ofrece un acercamiento a los retos de gobernabilidad y a las condiciones de orden público.
+\end{enumerate}
+La  fuente de consulta de cada indicador se encuentra citada explícitamente en cada tabla. Su consideración conjunta permite disponer de un marco de análisis sólido y comparable para examinar la dimensión institucional del desarrollo municipal. A través de ellos es posible identificar fortalezas y limitaciones en la participación democrática, la capacidad financiera y la seguridad, tres aspectos que resultan fundamentales para comprender la solidez institucional y el desempeño de los gobiernos locales.
+
+\newpage
+\section{Porcentaje de participación ciudadana en elecciones}
+
+
+
+
+En \verb|<< gs_anio_elecciones >>|, \verb|<< gs_municipio_nombre >>| registró una participación electoral del \verb|<< gs_porcentaje_participacion_electoral >>|\%, que lo colocó en el lugar \verb|<< gs_posicion_eleccion >>| de los 125 municipios. Durante \verb|<< gs_penultimo_anio_eleccion >>| la participación fue del \verb|<< gs_porcentaje_participacion_penultimo_anio_eleccion >>| \% y ubicó al municipio en el lugar \verb|<< gs_posicion_participacion_penultimo_anio_eleccion >>| a nivel estatal, mientras que en \verb|<< gs_antepenultimo_anio_eleccion >>| fue del \verb|<< gs_porcentaje_participación_antepenultimo_anio_eleccion >>| \% y ocupó el lugar \verb|<< gs_posicion_participacion_antepenultimo_anio_eleccion >>|.
+
+\begin{table}[h!]
+\label{porcentaje_de_participación_ciudadana_en_elecciones}
+\centering
+\small
+\begin{threeparttable}
+\caption{Porcentaje de participación ciudadana en elecciones}
+\setlength{\tabcolsep}{4pt}
+    \begin{tabular}{|>{\centering\arraybackslash}m{1cm} |
+                >{\centering\arraybackslash}m{3cm}|
+                >{\centering\arraybackslash}m{1.8cm}|
+                >{\centering\arraybackslash}m{1.8cm}|
+                >{\centering\arraybackslash}m{1.8cm}|
+                >{\centering\arraybackslash}m{1.8cm}|
+                >{\centering\arraybackslash}m{1.8cm}|
+                >{\centering\arraybackslash}m{1.8cm}|}
+\hline
+    \rowcolor{colorSeccion}
+\multicolumn{8}{|c|}{\color{white} \textbf{gs\_municipio\_nombre, gs\_region\_nombre}} \\ \hline      
+      \rowcolor{gray!30} &&\multicolumn{2}{|c|}{\textbf{Elecciones gs\_antepenultimo\_anio\_eleccion}} &\multicolumn{2}{|c|}{\textbf{Elecciones gs\_penultimo\_anio\_eleccion}}&\multicolumn{2}{|c|}{\textbf{Eleccciones gs\_anio\_elecciones}} \\ \cline{3-8}
+\rowcolor{gray!30} Clave & Municipio & Porcentaje de participación& Lugar estatal &Porcentaje de participación &Lugar estatal&Porcentaje de participación&Lugar estatal\\ \hline
+\rowcolor{orange!20}
+gs\_municipio\_clave &gs\_municipio\_nombre&&&&&& \\ \hline
+&&&&&&& \\ \hline
+    \end{tabular}
+\begin{tablenotes}
+\small
+\item Elaborado por el IIEG, con base en los resultados electorales de las elecciones municipales de gs\_antepenultimo\_anio\_eleccion, gs\_penultimo\_anio\_eleccion y gs\_anio\_elecciones, IEPC.
+\end{tablenotes}
+\end{threeparttable}
 \end{table}
+
+\newpage
+
+\section{Porcentaje de ingresos propios per cápita}
+
+\noindent En \verb|<< gs_anio_efipem >>|, \verb|<< gs_municipio_nombre >>| registró un porcentaje de ingresos propios respecto a su total de ingresos de \verb|<< gs_porcentaje_ingresos_propios_respecto_total >>|\%, que lo colocó en el lugar \verb|<< gs_posicion_nivel_estado_ingresos_per_capita_porcentaje >>| a nivel estatal con mayor porcentaje de ingresos propios. Durante \verb|<< gs_anio_anterior_porcentaje_ingresos_per_capita >>|, dicho porcentaje tuvo un valor de \verb|<< gs_anio_anterior_porcentaje_ingresos_propios_respecto_total >>|\% y lo ubicó en el lugar \verb|<< gs_anio_anterior_posicion_nivel_estado_ingresos_per_capita >>|.
+
+Los ingresos per cápita en En \verb|<< gs_anio_efipem >>| tuvieron un valor de \verb|<< gs_valor_ingresos_per_capita >>|, ubicando a \verb|<< gs_municipio_nombre >>| en el lugar \verb|<< gs_posicion_estatal_ingreso_per_capita >>|. Los ingresos totales per cápita en \verb|<< gs_anio_anterior_ingreso_per_capita >>| tuvieron un valor de \verb|<< gs_anio_anterior_valor_ingreso_per_capita ><|  de pesos y con esta cifra el municipio ocupó el lugar \verb|<< gs_posicion_anio_anterior_ingreso_percapita >>|.
+
+
+
+\begin{table}[h!]
+\centering
+\small
+\begin{threeparttable}
+\caption{Porcentaje de ingresos propios e ingresos per cápita}
+\label{porcentaje_de_ingresos_propios_e_ingresos_per_capita}
+\setlength{\tabcolsep}{2pt} 
+    \begin{tabular}{|>{\centering\arraybackslash}m{1.2cm} |
+                >{\centering\arraybackslash}m{2.5cm}|
+                >{\centering\arraybackslash}m{1.4cm}
+                >{\centering\arraybackslash}m{1.4cm}|
+                >{\centering\arraybackslash}m{1.4cm}
+                >{\centering\arraybackslash}m{1.4cm}|
+                >{\centering\arraybackslash}m{1.4cm}
+                >{\centering\arraybackslash}m{1.4cm}|
+                >{\centering\arraybackslash}m{1.4cm}
+                >{\centering\arraybackslash}m{1.4cm}|}
+\hline
+    \rowcolor{colorSeccion}
+\multicolumn{10}{|c|}{\color{white}gs\_municipio\_nombre, gs\_region\_nombre} \\ \hline      
+      \rowcolor{gray!30} 
+      % Usamos p{2.8cm} aproximadamente para que cubra las dos columnas de 1.3cm
+      & & \multicolumn{2}{>{\centering\arraybackslash}p{3cm}|}{\textbf{Porcentaje de ingresos propios gs\_anio\_anterior\_efipem}} 
+        & \multicolumn{2}{>{\centering\arraybackslash}p{3cm}|}{\textbf{Porcentaje de ingresos propios gs\_anio\_efipem}}
+        & \multicolumn{2}{>{\centering\arraybackslash}p{3cm}|}{\textbf{Ingresos per cápita gs\_anio\_anterior\_efipem}} 
+        & \multicolumn{2}{>{\centering\arraybackslash}p{3cm}|}{\textbf{Ingresos per cápita gs\_anio\_efipem}} \\ \cline{3-10}
+\rowcolor{gray!30} 
+Clave & Municipio & Valor municipal & Lugar estatal & Valor municipal & Lugar estatal &Valor municipal & Lugar estatal & Valor municipal & Lugar estatal \\ \hline
+\rowcolor{orange!20} &&&&&&&&& \\ \hline
+gs\_municipio\_clave &gs\_municipio\_nombre&&&&&&&& \\ \hline
+    \end{tabular}
+\begin{tablenotes}
+\small
+\item NA: No hay datos disponibles.
+\item Fuente:
+\item INEGI. Estadística de Finanzas Públicas Estatales y Municipales, \verb|<< gs_anio_anterior_efipem >>| y \verb|<< gs_anio_efipem >>|.                                             \item CONAPO. Reconstrucción y proyecciones de la población de los municipios de México 1990-2040 (actualizada en \verb|<< mes_actualizacion_conapo >>| de \verb|<< anio_actualizacion_conapo >>|). 
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+\newpage
+
+\section{Delitos del fuero común}
+
+En cuestión de seguridad, en \verb|<< gs_anio_acumulado_seguridad >>| el municipio registró una tasa de \verb|<< gs_tasa_delitos >>| delitos por cada cien mil habitantes, ubicándose en el lugar \verb|<< gs_posicion_estado_delitos >>| de los municipios más seguros en Jalisco en relación a esta tasa. En \verb|<< gs_anio_anterior_acumulado_seguridad >>| el municipio tenía una tasa de \verb|<< gs_tasa_delitos_anio_anterior_ >>| delitos por cada cien mil habitantes y se encontraba en el lugar \verb|<< gs_posicion_estatal_delitos_anio_anterior_ >>|. 
+De \verb|<< gs_anio_pasado_seguridad >>| a \verb|<< gs_anio_seguridad >>| el municipio presentó una variación porcentual del \verb|<< gs_variacion_porcentual_seguridad >>| \%, siendo el lugar \verb|<< gs_posicion_variacion_seguridad >>| a nivel estatal en esta variación. 
+
+
+\begin{table}[h!]
+\centering
+\small
+\begin{threeparttable}
+\caption{Delitos de fuero común por cada 1 000  habitantes}
+\label{porcentaje_de_ingresos_propios_e_ingresos_per_capita}
+\setlength{\tabcolsep}{2pt} % Reducido un poco para dar aire
+    \begin{tabular}{|>{\centering\arraybackslash}m{1.2cm} |
+                >{\centering\arraybackslash}m{3cm}|
+                >{\centering\arraybackslash}m{1.5cm}
+                >{\centering\arraybackslash}m{1.5cm}|
+                >{\centering\arraybackslash}m{1.5cm}
+                >{\centering\arraybackslash}m{1.5cm}|
+                >{\centering\arraybackslash}m{1.5cm}
+                >{\centering\arraybackslash}m{1.5cm}|}
+\hline
+    \rowcolor{colorSeccion}
+\multicolumn{8}{|c|}{\color{white}\textbf{gs\_municipio\_nombre, gs\_region\_nombre}} \\ \hline      
+      \rowcolor{gray!30} 
+      % Usamos p{2.8cm} aproximadamente para que cubra las dos columnas de 1.3cm
+      & & \multicolumn{2}{>{\centering\arraybackslash}p{3.2cm}|}{\textbf{Delitos de fuero común por cada 1 000 habitantes gs\_anio\_anterior\_acumulado\_seguridad}} 
+        & \multicolumn{2}{>{\centering\arraybackslash}p{3.2cm}|}{\textbf{Delitos de fuero común por cada 1 000 habitantes gs\_anio\_acumulado\_seguridad}}
+        & \multicolumn{2}{>{\centering\arraybackslash}p{3.2cm}|}{\textbf{Variación porcentual}}  \\ \cline{3-8}
+\rowcolor{gray!30} 
+Clave & Municipio & Valor municipal & Lugar estatal & Valor municipal & Lugar estatal  & Valor municipal & Lugar estatal \\ \hline
+&&&&&&& \\ \hline
+\rowcolor{orange!20} &&&&&&& \\ \hline
+&&&&&&& \\ \hline
+    \end{tabular}
+\begin{tablenotes}
+\small
+\item Fuente:
+\item  SESNSP. Base de Delitos del Fuero Común, \verb|<< gs_anio_anterior_acumulado_seguridad >>| y \verb|<< gs_anio_acumulado_seguridad >>|.
+\item  CONAPO. Reconstrucción y proyecciones de la población de los municipios de México 1990-2040 (actualizada en \verb|<< mes_actualizacion_conapo >>| de \verb|<< anio_actualizacion_conapo >>|). 
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+\newpage
+\section{Incidencia delictiva}
+Durante el periodo de \verb|<< gs_mes_inicio_periodo_incidencia_delictiva >>| \verb|<< gs_anio_inicio_periodo_incidencia_delictiva >>| a \verb|<< gs_mes_fin_periodo_incidencia_delictiva >>| \verb|<< gs_anio_fin_periodo_incidencia_delictiva >>|, se abrieron un total de \verb|<< gs_total_carpetas_abiertas >>| carpetas de investigación, de las cuales \verb|<< gs_carpetas_aperturadas_primer_anio >>| se aperturaron en los meses de \verb|<< gs_anio_inicio_periodo_incidencia_delictiva >>|, mientras que en los meses de \verb|<< gs_anio_fin_periodo_incidencia_delictiva >>| fueron \verb|<< gs_carpetas_aperturadas_segundo_anio >>|. \verb|<< gs_mes_mas_casos >>| fue el mes de más casos, con \verb|<< gs_total_indagaciones_mes_mas_casos >>| indagaciones. El mes con la menor cantidad de carpetas abiertas es \verb|<< gs_mes_menos_casos >>| con \verb|<< gs_total_indagaciones_mes_menos_casos >>| casos. El promedio de carpetas abiertas por mes en el municipio es de \verb|<< gs_promedio_carpetas_abiertas_por_mes >>|.
+
+\verb|<< gs_grafica_carpetas_de_investigacion_por_mes >>|
+
+\newpage
+
+En \verb|<< gs_municipio_nombre >>|, de \verb|<< gs_mes_inicio_periodo_incidencia_delictiva >>| \verb|<< gs_anio_inicio_periodo_incidencia_delictiva >>| a \verb|<< gs_mes_fin_periodo_incidencia_delictiva >>| \verb|<< gs_anio_fin_periodo_incidencia_delictiva >>|, los tres principales bienes jurídicos afectados fueron \verb|<< gs_principal_bien_juridico_afectado >>| (\verb|<< gs_porcentaje_principal_bien_juridico_afectado >>|\%), \verb|<< gs_segundo_bien_juridico_afectado >>| (\verb|<< gs_porcentaje_segundo_bien_juridico_afectado >>|\%), \verb|<< gs_tercer_bien_juridico_afectado >>| (\verb|<< gs_porcentaje_tercer_bien_juridico_afectado >>|\%).
+
+\verb|<< gs_grafica_distribucion_porcentual_bienes_juridicos_afectados >>|
+
+\newpage
+
+Con relación al bien jurídico de \verb|<< gs_principal_bien_juridico_afectado >>|, que fue el más afectado en el periodo de análisis en el municipio, los delitos con más carpetas de investigación fueron: \verb|<< gs_principal_delito_con_mas_carpetas >>|, con 
+\verb|<< gs_total_carpetas_principal_delito >>|; en segundo puesto se encuentra \verb|<< gs_segundo_delito_con_mas_carpetas >>|, con 
+\verb|<< gs_total_carpetas_segundo_delito >>|; seguido de \verb|<< gs_tercer_delito_con_mas_carpetas >>|, con 
+\verb|<< gs_total_carpetas_tercer_delito >>|. 
+
+\verb|<< gs_grafica_carpetas_cinco_principales_delitos >>|
+
+\newpage
+
+\newgeometry{margin=0cm}
+
+% Imagen de fondo
+\AddToShipoutPictureBG*{
+\begin{tikzpicture}[remember picture, overlay]
+    \node at (current page.center) {
+        \includegraphics[width=\paperwidth,height=\paperheight]{contraportada.png}
+    };
+\end{tikzpicture}
+}
+\vspace*{\fill} 
+
+\end{document}
