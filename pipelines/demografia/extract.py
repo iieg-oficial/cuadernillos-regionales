@@ -2,7 +2,6 @@ from core.db import get_session
 from core.pipelines.stage import Stage
 from core.settings import DatabaseSettings
 from pipelines.demografia.queries.marginacion import (
-    get_cvegeo_localidades,
     get_marginacion_estatal,
     get_marginacion_jalisco,
     get_marginacion_localidades,
@@ -44,7 +43,6 @@ class Extract(Stage):
                 session, cve_mun, 2020
             )
             marginacion_estatal_2020 = get_marginacion_estatal(session, 14, 2020)
-            cvegeo_localidades = get_cvegeo_localidades(session, cve_mun)
 
         return {
             "municipio_nombre": nombre,
@@ -60,5 +58,4 @@ class Extract(Stage):
             "marginacion_jalisco_2010": marginacion_2010,
             "marginacion_localidades": marginacion_localidades,
             "marginacion_estatal_2020": marginacion_estatal_2020,
-            "cvegeo_localidades": cvegeo_localidades,
         }
