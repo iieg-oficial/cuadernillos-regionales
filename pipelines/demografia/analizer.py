@@ -66,7 +66,6 @@ class Analizer(Stage):
         marginacion_2010 = input_data["marginacion_jalisco_2010"]
         marginacion_localidades = input_data["marginacion_localidades"]
         marginacion_estatal_2020 = input_data["marginacion_estatal_2020"]
-        cvegeo_localidades = input_data["cvegeo_localidades"]
 
         ctx = {}
 
@@ -632,11 +631,7 @@ class Analizer(Stage):
             sin_datos = marg is None
             if sin_datos:
                 hay_datos_faltantes = True
-            cvegeo = (
-                marg["cvegeo"]
-                if marg
-                else cvegeo_localidades.get(loc["localidad"], DASH)
-            )
+            cvegeo = marg["cvegeo"] if marg else str(loc["clave"])
             locs_ctx.append(
                 {
                     "clave": cvegeo,

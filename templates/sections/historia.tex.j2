@@ -1,9 +1,10 @@
 \clearpage
 \thispagestyle{empty}
 \AddToShipoutPictureBG*{%
-  \includegraphics[width=\paperwidth,height=\paperheight]{templates/assets/portada.png}%
+  \AtPageUpperLeft{\raisebox{-\height}{\includegraphics[width=\paperwidth]{<< assets_path >>portadilla.png}}}%
+  \AtPageLowerLeft{\includegraphics[width=\paperwidth]{<< assets_path >>footer_section.png}}%
 }
-\vspace*{5cm}
+\vspace*{\stretch{1}}
 \begin{center}
   {\color{colorTexto}\bfseries\fontsize{23}{26}\selectfont Historia} \\[2.5em]
   {\color{colorTexto}\lexendsemibold
@@ -13,6 +14,7 @@
     {\LARGE Agosto 2026}
   }}
 \end{center}
+\vspace*{\stretch{1}}
 \clearpage
 
 \section{Historia}
