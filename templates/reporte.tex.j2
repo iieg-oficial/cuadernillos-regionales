@@ -36,4 +36,13 @@
 <#% include "sections/gobierno_y_seguridad.tex.j2" %#>
 <% include "sections/historia.tex.j2" %>
 <% include "sections/demografia.tex.j2" %>
+
+\clearpage
+\thispagestyle{empty}
+\AddToShipoutPictureBG*{%
+  \includegraphics[width=\paperwidth,height=\paperheight]{<< assets_path >>contra_portada.png}%
+}
+\null
+\clearpage
+
 <% endblock %>
