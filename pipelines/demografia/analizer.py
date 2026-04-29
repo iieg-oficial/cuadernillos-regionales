@@ -14,13 +14,19 @@ ANIO_CENSO_ANTERIOR = 2010
 def _fmt(value, decimals=2) -> str:
     if value is None:
         return ND
-    return f"{round(value, decimals):,}"
+    return f"{round(value, decimals):,.{decimals}f}".replace(",", r"\,")
+
+
+def _fmt_int(value) -> str:
+    if value is None:
+        return ND
+    return f"{int(value):,}".replace(",", r"\,")
 
 
 def _pct(value) -> str:
     if value is None:
         return ND
-    return f"{round(value, 2)}"
+    return f"{value:,.2f}".replace(",", r"\,") + r"\,\%"
 
 
 def _classify_grade(value: float, all_values: list[float]) -> str:
@@ -84,7 +90,7 @@ class Analizer(Stage):
         total_2015 = t2015.get("total", 0) or 0
         total_2010 = t2010.get("total", 0) or 0
 
-        ctx["de_poblacion_total_censo"] = f"{total_2020:,}"
+        ctx["de_poblacion_total_censo"] = _fmt_int(total_2020)
 
         if total_2020:
             h = t2020.get("hombres") or 0
@@ -96,13 +102,13 @@ class Analizer(Stage):
             ctx["de_porcentaje_mujeres"] = ND
 
         var_2015_2020 = total_2020 - total_2015
-        ctx["de_variacion_poblacion_quinquenio_anterior"] = f"{var_2015_2020:,}"
+        ctx["de_variacion_poblacion_quinquenio_anterior"] = _fmt_int(var_2015_2020)
         ctx["de_variacion_porcentual_poblacion_quinquenio_anterior"] = (
             _pct(var_2015_2020 / total_2015 * 100) if total_2015 else ND
         )
 
         var_2010_2020 = total_2020 - total_2010
-        ctx["de_variacion_poblacion_quinquenio"] = f"{var_2010_2020:,}"
+        ctx["de_variacion_poblacion_quinquenio"] = _fmt_int(var_2010_2020)
         ctx["de_variacion_porcentual_poblacion_quinquenio"] = (
             _pct(var_2010_2020 / total_2010 * 100) if total_2010 else ND
         )
@@ -114,15 +120,27 @@ class Analizer(Stage):
         hombres_2015 = t2015.get("hombres") or 0
         hombres_2020 = t2020.get("hombres") or 0
 
-        ctx["de_tabla_pob_mujeres_2010"] = f"{mujeres_2010:,}" if mujeres_2010 else ND
-        ctx["de_tabla_pob_mujeres_2015"] = f"{mujeres_2015:,}" if mujeres_2015 else ND
-        ctx["de_tabla_pob_mujeres_2020"] = f"{mujeres_2020:,}" if mujeres_2020 else ND
-        ctx["de_tabla_pob_hombres_2010"] = f"{hombres_2010:,}" if hombres_2010 else ND
-        ctx["de_tabla_pob_hombres_2015"] = f"{hombres_2015:,}" if hombres_2015 else ND
-        ctx["de_tabla_pob_hombres_2020"] = f"{hombres_2020:,}" if hombres_2020 else ND
-        ctx["de_tabla_pob_total_2010"] = f"{total_2010:,}" if total_2010 else ND
-        ctx["de_tabla_pob_total_2015"] = f"{total_2015:,}" if total_2015 else ND
-        ctx["de_tabla_pob_total_2020"] = f"{total_2020:,}" if total_2020 else ND
+        ctx["de_tabla_pob_mujeres_2010"] = (
+            _fmt_int(mujeres_2010) if mujeres_2010 else ND
+        )
+        ctx["de_tabla_pob_mujeres_2015"] = (
+            _fmt_int(mujeres_2015) if mujeres_2015 else ND
+        )
+        ctx["de_tabla_pob_mujeres_2020"] = (
+            _fmt_int(mujeres_2020) if mujeres_2020 else ND
+        )
+        ctx["de_tabla_pob_hombres_2010"] = (
+            _fmt_int(hombres_2010) if hombres_2010 else ND
+        )
+        ctx["de_tabla_pob_hombres_2015"] = (
+            _fmt_int(hombres_2015) if hombres_2015 else ND
+        )
+        ctx["de_tabla_pob_hombres_2020"] = (
+            _fmt_int(hombres_2020) if hombres_2020 else ND
+        )
+        ctx["de_tabla_pob_total_2010"] = _fmt_int(total_2010) if total_2010 else ND
+        ctx["de_tabla_pob_total_2015"] = _fmt_int(total_2015) if total_2015 else ND
+        ctx["de_tabla_pob_total_2020"] = _fmt_int(total_2020) if total_2020 else ND
         ctx["de_tabla_pob_var_pct_mujeres_2010_2015"] = (
             _pct((mujeres_2015 - mujeres_2010) / mujeres_2010 * 100)
             if (mujeres_2010 and mujeres_2015)
@@ -158,7 +176,7 @@ class Analizer(Stage):
         if localidades_2020:
             top = localidades_2020[0]
             ctx["de_loc_mas_poblada"] = top["localidad"]
-            ctx["de_loc_mas_poblada_habitantes"] = f"{top['total']:,}"
+            ctx["de_loc_mas_poblada_habitantes"] = _fmt_int(top["total"])
             ctx["de_porcentaje_habitantes_loc_mas_poblada"] = (
                 _pct(top["total"] / total_2020 * 100) if total_2020 else ND
             )
@@ -172,12 +190,12 @@ class Analizer(Stage):
             {
                 "clave": str(loc["clave"]),
                 "nombre": loc["localidad"],
-                "total_2010": f"{loc_2010_by_clave[loc['clave']]['total']:,}"
+                "total_2010": _fmt_int(loc_2010_by_clave[loc["clave"]]["total"])
                 if loc["clave"] in loc_2010_by_clave
                 else ND,
-                "total_2020": f"{loc['total']:,}",
-                "hombres_2020": f"{loc['hombres']:,}" if loc.get("hombres") else ND,
-                "mujeres_2020": f"{loc['mujeres']:,}" if loc.get("mujeres") else ND,
+                "total_2020": _fmt_int(loc["total"]),
+                "hombres_2020": _fmt_int(loc["hombres"]) if loc.get("hombres") else ND,
+                "mujeres_2020": _fmt_int(loc["mujeres"]) if loc.get("mujeres") else ND,
                 "pct_2020": _pct(loc["total"] / total_2020 * 100) if total_2020 else ND,
                 "var_pct_2010_2020": _pct(
                     (loc["total"] - loc_2010_by_clave[loc["clave"]]["total"])
@@ -326,12 +344,12 @@ class Analizer(Stage):
             else ND
         )
         ctx["de_viv_totales_mun_2010"] = (
-            f"{mun_2010['viv_totales']:,}"
+            _fmt_int(mun_2010["viv_totales"])
             if (mun_2010 and mun_2010.get("viv_totales"))
             else ND
         )
         ctx["de_viv_totales_mun_2020"] = (
-            f"{mun_2020['viv_totales']:,}"
+            _fmt_int(mun_2020["viv_totales"])
             if (mun_2020 and mun_2020.get("viv_totales"))
             else ND
         )
@@ -569,7 +587,7 @@ class Analizer(Stage):
                 marginacion_estatal_2020.get("grado_marginacion") or ND
             )
             ctx["de_jal_poblacion_2020"] = (
-                f"{int(marginacion_estatal_2020['pob_total']):,}"
+                _fmt_int(marginacion_estatal_2020["pob_total"])
                 if marginacion_estatal_2020.get("pob_total")
                 else ND
             )
@@ -615,23 +633,48 @@ class Analizer(Stage):
             ctx["de_jal_marg_sin_refrigerador"] = ND
         ctx["de_mapa_indice_marginacion_municipio"] = MAPA_PLACEHOLDER
 
-        locs_marg = marginacion_localidades[:5]
-        ctx["de_localidades_marginacion"] = [
-            {
-                "clave": loc["cvegeo"],
-                "nombre": loc["localidad"],
-                "grado": loc.get("grado_marginacion") or ND,
-                "analfabeta": _pct(loc.get("porc_pob15_analfabeta")),
-                "sin_educ_bas": _pct(loc.get("porc_pob15_sin_educ_basica")),
-                "sin_drenaje": _pct(loc.get("porc_viv_sin_drenaje_ni_excusado")),
-                "sin_energia": _pct(loc.get("porc_viv_sin_energia")),
-                "sin_agua": _pct(loc.get("porc_viv_sin_agua_entubada")),
-                "piso_tierra": _pct(loc.get("porc_viv_piso_tierra")),
-                "hacinamiento": _fmt(loc.get("prom_ocup_por_cuarto"), 2),
-                "sin_refrigerador": _pct(loc.get("porc_viv_sin_refrigerador")),
-            }
-            for loc in locs_marg
-        ]
+        DASH = "{-}"
+        marg_by_nombre = {loc["localidad"]: loc for loc in marginacion_localidades}
+
+        def _loc_val(marg, key, fn):
+            if marg is None:
+                return DASH
+            return fn(marg.get(key))
+
+        top5_locs = localidades_2020[:5]
+        hay_datos_faltantes = False
+        locs_ctx = []
+        for loc in top5_locs:
+            marg = marg_by_nombre.get(loc["localidad"])
+            sin_datos = marg is None
+            if sin_datos:
+                hay_datos_faltantes = True
+            cvegeo = marg["cvegeo"] if marg else str(loc["clave"])
+            locs_ctx.append(
+                {
+                    "clave": cvegeo,
+                    "nombre": loc["localidad"],
+                    "grado": DASH
+                    if sin_datos
+                    else (marg.get("grado_marginacion") or ND),
+                    "analfabeta": _loc_val(marg, "porc_pob15_analfabeta", _pct),
+                    "sin_educ_bas": _loc_val(marg, "porc_pob15_sin_educ_basica", _pct),
+                    "sin_drenaje": _loc_val(
+                        marg, "porc_viv_sin_drenaje_ni_excusado", _pct
+                    ),
+                    "sin_energia": _loc_val(marg, "porc_viv_sin_energia", _pct),
+                    "sin_agua": _loc_val(marg, "porc_viv_sin_agua_entubada", _pct),
+                    "piso_tierra": _loc_val(marg, "porc_viv_piso_tierra", _pct),
+                    "hacinamiento": _loc_val(
+                        marg, "prom_ocup_por_cuarto", lambda v: _fmt(v, 2)
+                    ),
+                    "sin_refrigerador": _loc_val(
+                        marg, "porc_viv_sin_refrigerador", _pct
+                    ),
+                }
+            )
+        ctx["de_localidades_marginacion"] = locs_ctx
+        ctx["de_localidades_hay_datos_faltantes"] = hay_datos_faltantes
 
         region_ids = {int(m["id"]) for m in get_same_region(str(cve_mun))}
         marg_by_mun = {m["municipio_id"]: m for m in marginacion_2020}
@@ -644,7 +687,7 @@ class Analizer(Stage):
                     for m in get_same_region(str(cve_mun))
                     if int(m["id"]) == rid
                 ),
-                "poblacion": f"{int(marg_by_mun[14000 + rid]['pob_total']):,}"
+                "poblacion": _fmt_int(marg_by_mun[14000 + rid]["pob_total"])
                 if (14000 + rid) in marg_by_mun
                 and marg_by_mun[14000 + rid].get("pob_total")
                 else ND,

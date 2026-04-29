@@ -1,57 +1,105 @@
 # Reglas para templates LaTeX
 
+## Referencia
+
+Antes de crear o modificar cualquier template, revisar el pipeline de demografía como referencia de implementación completa:
+
+- Template: `templates/sections/demografia.tex.j2`
+- Pipeline: `pipelines/demografia/`
+
 ## Tablas
 
-Toda tabla sigue esta estructura base:
+Todas las tablas usan `longtable`. No usar `table`/`tabular`/`threeparttable`. La estructura base es:
 
 ```latex
-\begin{table}[H]
-\label{tabla_nombre_descriptivo}
-\centering
-\caption{Título de la tabla}
-\begin{threeparttable}
 \setlength{\tabcolsep}{3pt}
 \footnotesize
-\begin{tabular}{|>{\centering\arraybackslash}m{Xcm} ... |}
-\hline
+\begin{longtable}{|>{\centering\arraybackslash}p{\dimexpr0.25\linewidth - 2\tabcolsep\relax}
+                  |>{\raggedright\arraybackslash}p{\dimexpr0.35\linewidth - 2\tabcolsep\relax}
+                  |>{\centering\arraybackslash}p{\dimexpr0.40\linewidth - 2\tabcolsep\relax}|}
 
-% Subtítulo
+\caption{Título de la tabla}
+\label{tabla_nombre_descriptivo} \\
+
+% Encabezado primera página
 \rowcolor{colorSeccion}
-\multicolumn{N}{|c|}{\color{white}Texto del subtítulo} \\
+\multicolumn{3}{|c|}{\color{white}Subtítulo} \\
 \hline
-
-% Encabezado de columnas
 \rowcolor{gray!30}
-Col1 & Col2 & ... \\
+Col1 & Col2 & Col3 \\
+\hline
+\endfirsthead
+
+% Encabezado páginas siguientes
+\multicolumn{3}{l}{\small\textbf{(continuación)}} \\
+\rowcolor{colorSeccion}
+\multicolumn{3}{|c|}{\color{white}Subtítulo} \\
+\hline
+\rowcolor{gray!30}
+Col1 & Col2 & Col3 \\
+\hline
+\endhead
+
+% Pie de página intermedia
+\hline
+\multicolumn{3}{r}{\small\textbf{(continúa)}} \\
+\endfoot
+
+% Pie de última página
+\hline
+\endlastfoot
+
+Valor & Valor & Valor \\
 \hline
 
-% Filas de datos
-Valor & Valor & ... \\
-\hline
-
-\end{tabular}
-\begin{tablenotes}
-\small
-\item Elaboración del IIEG, con datos de FUENTE, AÑO.
-\end{tablenotes}
-\end{threeparttable}
-\end{table}
+\end{longtable}
+\normalsize
+\par\vspace{-4pt}\parbox{\linewidth}{\footnotesize
+Elaboración del IIEG, con datos de FUENTE, AÑO.}
 ```
 
-### Reglas de tablas
+### Reglas de columnas en longtable
 
-- Siempre usar `[H]` para fijar la posición.
-- Siempre incluir `\label{}` con nombre en snake_case.
-- Siempre envolver en `\begin{threeparttable}` para poder usar `\begin{tablenotes}`.
-- Siempre usar `\setlength{\tabcolsep}{3pt}` y `\footnotesize` dentro del bloque.
-- Definir columnas con `>{\centering\arraybackslash}m{Xcm}` para controlar ancho y alineación.
-  - Usar `>{\raggedright\arraybackslash}m{Xcm}` para columnas de texto largo (etiquetas).
-- La primera fila (subtítulo) siempre usa `\rowcolor{colorSeccion}` con texto `\color{white}`.
-- Los encabezados de columnas usan `\rowcolor{gray!30}`.
-- Las filas de totales, categorías o el municipio objetivo usan `\rowcolor{orange!20}`.
-- Usar `\makecell{}` para encabezados con salto de línea.
-- La fuente siempre va en `\begin{tablenotes}` con `\small`.
-- Si la fuente no cabe en `tablenotes`, usar `\par\vspace{4pt}\parbox{\textwidth}{\footnotesize ...}` después del `\end{tabular}`, antes del `\end{table}`.
+**Siempre usar columnas explícitas con `p{\dimexpr X\linewidth - 2\tabcolsep\relax}`.**
+
+- NUNCA usar el macro `\ltcoleq{N}` en longtable: aunque el PDF se genera, longtable no dibuja las líneas verticales interiores cuando las columnas se definen mediante expansión de macros.
+- Las proporciones de todas las columnas deben sumar exactamente `1.00`.
+- La alineación depende del contenido: `\centering\arraybackslash` para números y claves, `\raggedright\arraybackslash` para texto largo, `\raggedleft\arraybackslash` para montos o valores con decimales alineados a la derecha.
+
+Ejemplo con 3 columnas (proporciones: 0.25 + 0.35 + 0.40 = 1.00):
+
+```latex
+\begin{longtable}{|>{\centering\arraybackslash}p{\dimexpr0.25\linewidth - 2\tabcolsep\relax}
+                  |>{\raggedright\arraybackslash}p{\dimexpr0.35\linewidth - 2\tabcolsep\relax}
+                  |>{\centering\arraybackslash}p{\dimexpr0.40\linewidth - 2\tabcolsep\relax}|}
+```
+
+### `\makecell` en encabezados multicolumna
+
+Cuando un `\multicolumn{N}{c|}{}` usa `\makecell` para forzar salto de línea, la celda se vuelve más alta que las celdas adyacentes de una sola línea, dejando espacio en blanco visible.
+
+**Regla:** En encabezados de fila donde varias celdas `\multicolumn` comparten la misma fila, NO mezclar celdas de diferente altura. Opciones:
+
+1. **Dar ancho suficiente** para que el texto quepa en una línea: ajustar las proporciones de las columnas que forman el span.
+2. **Cambiar la alineación del multicolumn de `c` a `p{}`** para que el texto pueda hacer wrapping sin forzar salto manual:
+
+```latex
+% En lugar de:
+\multicolumn{2}{c|}{\makecell{Intensidad\\Migratoria}}
+
+% Usar:
+\multicolumn{2}{>{\centering\arraybackslash}p{\dimexpr A\linewidth + B\linewidth - 2\tabcolsep + \arrayrulewidth\relax}|}{Intensidad Migratoria}
+```
+
+Donde A y B son las proporciones de las dos columnas que forma el span. La fórmula del ancho del `p{}` en el multicolumn es:
+
+```
+WIDTH = (A + B) × \linewidth - 2\tabcolsep + \arrayrulewidth
+```
+
+### `\makecell` con guiones explícitos
+
+NUNCA usar `\makecell{Pobla-\\ción}` con un guión literal. En columnas `p{}`, LaTeX aplica hifenación automática si la palabra no cabe. Si la palabra cabe, no hace falta nada. Si la columna es muy estrecha y el resultado visual es incorrecto, ampliar la proporción de esa columna.
 
 ## Imágenes (mapas y gráficas)
 

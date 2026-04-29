@@ -3,9 +3,8 @@
 \begin{table}[H]
 \centering
 \renewcommand{\arraystretch}{1.4}
-\resizebox{\linewidth}{!}{%
+\begin{tabularx}{\textwidth}{|c|l|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|}
 \setlength{\tabcolsep}{5pt}
-\begin{tabular}{|c|l|c|c|c|c|c|c|}
 \hline
 \multicolumn{8}{|>{\columncolor{headerBg}}l|}{%
   \hspace{2cm}\textcolor{white}{\textbf{Tabla. Delitos de fuero común}}} \\
@@ -36,6 +35,5 @@
 <% if row.es_objetivo %>\textbf{<< row.lugar_variacion >>}<% else %><< row.lugar_variacion >><% endif %> \\
 \hline
 <% endfor %>
-\end{tabular}
-}
+\end{tabularx}
 \end{table}

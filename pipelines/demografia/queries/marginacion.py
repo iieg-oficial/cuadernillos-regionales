@@ -2,6 +2,20 @@ from sqlalchemy import text
 from sqlalchemy.orm import Session
 
 
+def get_cvegeo_localidades(session: Session, cve_mun: int) -> dict[int, str]:
+    municipio_id = 14000 + cve_mun
+    stmt = text("""
+        SELECT
+            l.id,
+            CAST(l.municipio_id AS text) || LPAD(CAST(l.clave_localidad AS text), 4, '0') AS cvegeo
+        FROM localidades l
+        WHERE l.municipio_id = :municipio_id
+          AND l.entidad_id = 14
+    """)
+    rows = session.execute(stmt, {"municipio_id": municipio_id}).fetchall()
+    return {r.id: r.cvegeo for r in rows}
+
+
 def get_marginacion_localidades(
     session: Session, cve_mun: int, anio: int
 ) -> list[dict]:
