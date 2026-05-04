@@ -8,16 +8,16 @@ def compile(tex_path: Path) -> Path:
     output_dir = Path("output/pdf") / tex_path.parent.name
     output_dir.mkdir(parents=True, exist_ok=True)
 
-    result = subprocess.run(
-        [
-            "xelatex",
-            "-interaction=nonstopmode",
-            f"-output-directory={output_dir}",
-            str(tex_path),
-        ],
-        capture_output=True,
-        text=True,
-    )
+    cmd = [
+        "xelatex",
+        "-interaction=nonstopmode",
+        f"-output-directory={output_dir}",
+        str(tex_path),
+    ]
+
+    subprocess.run(cmd, capture_output=True, text=True)
+
+    result = subprocess.run(cmd, capture_output=True, text=True)
 
     pdf_path = output_dir / tex_path.with_suffix(".pdf").name
 
