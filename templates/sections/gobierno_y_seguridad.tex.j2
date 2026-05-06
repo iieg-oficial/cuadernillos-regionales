@@ -129,29 +129,32 @@ La  fuente de consulta de cada indicador se encuentra citada explícitamente en 
 \newpage
 \section{Porcentaje de participación ciudadana en elecciones}
 
-
-
-
-En \verb|<< gs_anio_elecciones >>|, \verb|<< gs_municipio_nombre >>| registró una participación electoral del \verb|<< gs_porcentaje_participacion_electoral >>|\%, que lo colocó en el lugar \verb|<< gs_posicion_eleccion >>| de los 125 municipios. Durante \verb|<< gs_penultimo_anio_eleccion >>| la participación fue del \verb|<< gs_porcentaje_participacion_penultimo_anio_eleccion >>| \% y ubicó al municipio en el lugar \verb|<< gs_posicion_participacion_penultimo_anio_eleccion >>| a nivel estatal, mientras que en \verb|<< gs_antepenultimo_anio_eleccion >>| fue del \verb|<< gs_porcentaje_participación_antepenultimo_anio_eleccion >>| \% y ocupó el lugar \verb|<< gs_posicion_participacion_antepenultimo_anio_eleccion >>|.
+En \verb|<< gs_anio_elecciones >>|, \verb|<< gs_municipio_nombre >>| registró una participación electoral 
+del \verb|<< gs_porcentaje_participacion_electoral >>|\%, que lo colocó en el lugar 
+\verb|<< gs_posicion_eleccion >>| de los 125 municipios. Durante \verb|<< gs_penultimo_anio_eleccion >>| 
+la participación fue del \verb|<< gs_porcentaje_participacion_penultimo_anio_eleccion >>| \% y ubicó al 
+municipio en el lugar \verb|<< gs_posicion_participacion_penultimo_anio_eleccion >>| a nivel estatal, 
+mientras que en \verb|<< gs_antepenultimo_anio_eleccion >>| fue del 
+\verb|<< gs_porcentaje_participación_antepenultimo_anio_eleccion >>| \% y ocupó el lugar 
+\verb|<< gs_posicion_participacion_antepenultimo_anio_eleccion >>|.
 
 \begin{table}[h!]
 \label{porcentaje_de_participación_ciudadana_en_elecciones}
 \centering
 \small
 \begin{threeparttable}
-\caption{Porcentaje de participación ciudadana en elecciones}
+\caption{\textbf{Porcentaje de participación ciudadana en elecciones por municipio en la región << gs_region >>}\\
+<< gs_antepenultimo_anio_eleccion >>, << gs_penultimo_anio_eleccion >> y << gs_anio_elecciones >>}
 \setlength{\tabcolsep}{4pt}
-    \begin{tabular}{|>{\centering\arraybackslash}m{1cm} |
-                >{\centering\arraybackslash}m{3cm}|
-                >{\centering\arraybackslash}m{1.8cm}|
-                >{\centering\arraybackslash}m{1.8cm}|
-                >{\centering\arraybackslash}m{1.8cm}|
-                >{\centering\arraybackslash}m{1.8cm}|
-                >{\centering\arraybackslash}m{1.8cm}|
-                >{\centering\arraybackslash}m{1.8cm}|}
-\hline
-    \rowcolor{colorSeccion}
-\multicolumn{8}{|c|}{\color{white} \textbf{gs\_municipio\_nombre, gs\_region\_nombre}} \\ \hline      
+    \begin{tabular}{>{\centering\arraybackslash}m{1cm} 
+                >{\centering\arraybackslash}m{3cm}
+                >{\centering\arraybackslash}m{1.8cm}
+                >{\centering\arraybackslash}m{1.8cm}
+                >{\centering\arraybackslash}m{1.8cm}
+                >{\centering\arraybackslash}m{1.8cm}
+                >{\centering\arraybackslash}m{1.8cm}
+                >{\centering\arraybackslash}m{1.8cm}}
+\hline     
       \rowcolor{gray!30} &&\multicolumn{2}{|c|}{\textbf{Elecciones gs\_antepenultimo\_anio\_eleccion}} &\multicolumn{2}{|c|}{\textbf{Elecciones gs\_penultimo\_anio\_eleccion}}&\multicolumn{2}{|c|}{\textbf{Eleccciones gs\_anio\_elecciones}} \\ \cline{3-8}
 \rowcolor{gray!30} Clave & Municipio & Porcentaje de participación& Lugar estatal &Porcentaje de participación &Lugar estatal&Porcentaje de participación&Lugar estatal\\ \hline
 \rowcolor{orange!20}
@@ -160,7 +163,8 @@ gs\_municipio\_clave &gs\_municipio\_nombre&&&&&& \\ \hline
     \end{tabular}
 \begin{tablenotes}
 \small
-\item Elaborado por el IIEG, con base en los resultados electorales de las elecciones municipales de gs\_antepenultimo\_anio\_eleccion, gs\_penultimo\_anio\_eleccion y gs\_anio\_elecciones, IEPC.
+\item Fuente:  IEPC. Resultados del Proceso Electoral Local, << gs_antepenultimo_anio_eleccion >> y 
+<< gs_penultimo_anio_eleccion >>, consulta directa con la fuente para los datos del << gs_anio_elecciones >>.
 \end{tablenotes}
 \end{threeparttable}
 \end{table}
@@ -169,9 +173,20 @@ gs\_municipio\_clave &gs\_municipio\_nombre&&&&&& \\ \hline
 
 \section{Porcentaje de ingresos propios per cápita}
 
-\noindent En \verb|<< gs_anio_efipem >>|, \verb|<< gs_municipio_nombre >>| registró un porcentaje de ingresos propios respecto a su total de ingresos de \verb|<< gs_porcentaje_ingresos_propios_respecto_total >>|\%, que lo colocó en el lugar \verb|<< gs_posicion_nivel_estado_ingresos_per_capita_porcentaje >>| a nivel estatal con mayor porcentaje de ingresos propios. Durante \verb|<< gs_anio_anterior_porcentaje_ingresos_per_capita >>|, dicho porcentaje tuvo un valor de \verb|<< gs_anio_anterior_porcentaje_ingresos_propios_respecto_total >>|\% y lo ubicó en el lugar \verb|<< gs_anio_anterior_posicion_nivel_estado_ingresos_per_capita >>|.
+\noindent En \verb|<< gs_anio_efipem >>|, \verb|<< gs_municipio_nombre >>| registró un porcentaje de 
+ingresos propios respecto a su total de ingresos de \verb|<< gs_porcentaje_ingresos_propios_respecto_total >>|\%, 
+que lo colocó en el lugar \verb|<< gs_posicion_nivel_estado_ingresos_per_capita_porcentaje >>| a nivel 
+estatal con mayor porcentaje de ingresos propios. Durante 
+\verb|<< gs_anio_anterior_porcentaje_ingresos_per_capita >>|, dicho porcentaje tuvo un valor de 
+\verb|<< gs_anio_anterior_porcentaje_ingresos_propios_respecto_total >>|\% y lo ubicó en el lugar 
+\verb|<< gs_anio_anterior_posicion_nivel_estado_ingresos_per_capita >>|.
 
-Los ingresos per cápita en En \verb|<< gs_anio_efipem >>| tuvieron un valor de \verb|<< gs_valor_ingresos_per_capita >>|, ubicando a \verb|<< gs_municipio_nombre >>| en el lugar \verb|<< gs_posicion_estatal_ingreso_per_capita >>|. Los ingresos totales per cápita en \verb|<< gs_anio_anterior_ingreso_per_capita >>| tuvieron un valor de \verb|<< gs_anio_anterior_valor_ingreso_per_capita ><|  de pesos y con esta cifra el municipio ocupó el lugar \verb|<< gs_posicion_anio_anterior_ingreso_percapita >>|.
+Los ingresos per cápita en En \verb|<< gs_anio_efipem >>| tuvieron un valor de 
+\verb|<< gs_valor_ingresos_per_capita >>|, ubicando a \verb|<< gs_municipio_nombre >>| en el lugar 
+\verb|<< gs_posicion_estatal_ingreso_per_capita >>|. Los ingresos totales per cápita en 
+\verb|<< gs_anio_anterior_ingreso_per_capita >>| tuvieron un valor de 
+\verb|<< gs_anio_anterior_valor_ingreso_per_capita ><|  de pesos y con esta cifra el municipio ocupó el 
+lugar \verb|<< gs_posicion_anio_anterior_ingreso_percapita >>|.
 
 
 
@@ -179,22 +194,21 @@ Los ingresos per cápita en En \verb|<< gs_anio_efipem >>| tuvieron un valor de 
 \centering
 \small
 \begin{threeparttable}
-\caption{Porcentaje de ingresos propios e ingresos per cápita}
+\caption{\textbf{Porcentaje de ingresos propios e ingresos per cápita por municipio en la región << gs_region >>}\\
+<< gs_anio_anterior_efipem >> y << gs_anio_efipem >>}
 \label{porcentaje_de_ingresos_propios_e_ingresos_per_capita}
 \setlength{\tabcolsep}{2pt} 
-    \begin{tabular}{|>{\centering\arraybackslash}m{1.2cm} |
-                >{\centering\arraybackslash}m{2.5cm}|
+    \begin{tabular}{>{\centering\arraybackslash}m{1.2cm} 
+                >{\centering\arraybackslash}m{2.5cm}
                 >{\centering\arraybackslash}m{1.4cm}
-                >{\centering\arraybackslash}m{1.4cm}|
                 >{\centering\arraybackslash}m{1.4cm}
-                >{\centering\arraybackslash}m{1.4cm}|
                 >{\centering\arraybackslash}m{1.4cm}
-                >{\centering\arraybackslash}m{1.4cm}|
                 >{\centering\arraybackslash}m{1.4cm}
-                >{\centering\arraybackslash}m{1.4cm}|}
-\hline
-    \rowcolor{colorSeccion}
-\multicolumn{10}{|c|}{\color{white}gs\_municipio\_nombre, gs\_region\_nombre} \\ \hline      
+                >{\centering\arraybackslash}m{1.4cm}
+                >{\centering\arraybackslash}m{1.4cm}
+                >{\centering\arraybackslash}m{1.4cm}
+                >{\centering\arraybackslash}m{1.4cm}}
+\hline  
       \rowcolor{gray!30} 
       % Usamos p{2.8cm} aproximadamente para que cubra las dos columnas de 1.3cm
       & & \multicolumn{2}{>{\centering\arraybackslash}p{3cm}|}{\textbf{Porcentaje de ingresos propios gs\_anio\_anterior\_efipem}} 
@@ -209,8 +223,10 @@ gs\_municipio\_clave &gs\_municipio\_nombre&&&&&&&& \\ \hline
 \begin{tablenotes}
 \small
 \item NA: No hay datos disponibles.
-\item Fuente:
-\item INEGI. Estadística de Finanzas Públicas Estatales y Municipales, \verb|<< gs_anio_anterior_efipem >>| y \verb|<< gs_anio_efipem >>|.                                             \item CONAPO. Reconstrucción y proyecciones de la población de los municipios de México 1990-2040 (actualizada en \verb|<< mes_actualizacion_conapo >>| de \verb|<< anio_actualizacion_conapo >>|). 
+\item  Fuente:  IIEG con base en INEGI. Estadística de Finanzas Públicas Estatales y Municipales, 
+\verb|<< gs_anio_anterior_efipem >>| y \verb|<< gs_anio_efipem >>|.
+\item  CONAPO. Reconstrucción y proyecciones de la población de los municipios de México 1990-2040 
+(actualizada en mayo de 2024).
 \end{tablenotes}
 \end{threeparttable}
 \end{table}
@@ -219,28 +235,36 @@ gs\_municipio\_clave &gs\_municipio\_nombre&&&&&&&& \\ \hline
 
 \section{Delitos del fuero común}
 
-En cuestión de seguridad, en \verb|<< gs_anio_acumulado_seguridad >>| el municipio registró una tasa de \verb|<< gs_tasa_delitos >>| delitos por cada cien mil habitantes, ubicándose en el lugar \verb|<< gs_posicion_estado_delitos >>| de los municipios más seguros en Jalisco en relación a esta tasa. En \verb|<< gs_anio_anterior_acumulado_seguridad >>| el municipio tenía una tasa de \verb|<< gs_tasa_delitos_anio_anterior_ >>| delitos por cada cien mil habitantes y se encontraba en el lugar \verb|<< gs_posicion_estatal_delitos_anio_anterior_ >>|. 
-De \verb|<< gs_anio_pasado_seguridad >>| a \verb|<< gs_anio_seguridad >>| el municipio presentó una variación porcentual del \verb|<< gs_variacion_porcentual_seguridad >>| \%, siendo el lugar \verb|<< gs_posicion_variacion_seguridad >>| a nivel estatal en esta variación. 
+En cuestión de seguridad, en \verb|<< gs_anio_acumulado_seguridad >>| el municipio registró 
+una tasa de \verb|<< gs_tasa_delitos >>| delitos por cada cien mil habitantes, ubicándose en 
+el lugar \verb|<< gs_posicion_estado_delitos >>| de los municipios más seguros en Jalisco en 
+relación a esta tasa. En \verb|<< gs_anio_anterior_acumulado_seguridad >>| el municipio tenía una 
+tasa de \verb|<< gs_tasa_delitos_anio_anterior_ >>| delitos por cada cien mil habitantes y se 
+encontraba en el lugar \verb|<< gs_posicion_estatal_delitos_anio_anterior_ >>|. 
+
+De \verb|<< gs_anio_pasado_seguridad >>| a \verb|<< gs_anio_seguridad >>| el municipio presentó 
+una variación porcentual del \verb|<< gs_variacion_porcentual_seguridad >>| \%, siendo el 
+lugar\footnote{El primer lugar es el municipio con mayor decremento en la tasa.} 
+\verb|<< gs_posicion_variacion_seguridad >>| a nivel estatal en esta variación. 
 
 
 \begin{table}[h!]
 \centering
 \small
 \begin{threeparttable}
-\caption{Delitos de fuero común por cada 1 000  habitantes}
 \label{porcentaje_de_ingresos_propios_e_ingresos_per_capita}
 \setlength{\tabcolsep}{2pt} % Reducido un poco para dar aire
-    \begin{tabular}{|>{\centering\arraybackslash}m{1.2cm} |
-                >{\centering\arraybackslash}m{3cm}|
+    \begin{tabular}{>{\centering\arraybackslash}m{1.2cm} 
+                >{\centering\arraybackslash}m{3cm}
                 >{\centering\arraybackslash}m{1.5cm}
-                >{\centering\arraybackslash}m{1.5cm}|
                 >{\centering\arraybackslash}m{1.5cm}
-                >{\centering\arraybackslash}m{1.5cm}|
                 >{\centering\arraybackslash}m{1.5cm}
-                >{\centering\arraybackslash}m{1.5cm}|}
-\hline
-    \rowcolor{colorSeccion}
-\multicolumn{8}{|c|}{\color{white}\textbf{gs\_municipio\_nombre, gs\_region\_nombre}} \\ \hline      
+                >{\centering\arraybackslash}m{1.5cm}
+                >{\centering\arraybackslash}m{1.5cm}
+                >{\centering\arraybackslash}m{1.5cm}}
+\caption{\textbf{Delitos de fuero común por cada 1,000 habitantes por municipios de la región << gs_region >>}}\\
+<< gs_anio_anterior_acumulado_seguridad >> y << gs_anio_acumulado_seguridad >>}
+\hline     
       \rowcolor{gray!30} 
       % Usamos p{2.8cm} aproximadamente para que cubra las dos columnas de 1.3cm
       & & \multicolumn{2}{>{\centering\arraybackslash}p{3.2cm}|}{\textbf{Delitos de fuero común por cada 1 000 habitantes gs\_anio\_anterior\_acumulado\_seguridad}} 
@@ -254,35 +278,89 @@ Clave & Municipio & Valor municipal & Lugar estatal & Valor municipal & Lugar es
     \end{tabular}
 \begin{tablenotes}
 \small
-\item Fuente:
-\item  SESNSP. Base de Delitos del Fuero Común, \verb|<< gs_anio_anterior_acumulado_seguridad >>| y \verb|<< gs_anio_acumulado_seguridad >>|.
-\item  CONAPO. Reconstrucción y proyecciones de la población de los municipios de México 1990-2040 (actualizada en \verb|<< mes_actualizacion_conapo >>| de \verb|<< anio_actualizacion_conapo >>|). 
+\item Fuente: IIEG con base en SESNSP. Base de Delitos del Fuero Común,
+<< gs_anio_anterior_acumulado_seguridad >> y << gs_anio_acumulado_seguridad >>}.
+\item  CONAPO. Reconstrucción y proyecciones de la población de los municipios de México 1990-2040 
+(actualizada en \verb|<< mes_actualizacion_conapo >>| de \verb|<< anio_actualizacion_conapo >>|). 
 \end{tablenotes}
 \end{threeparttable}
 \end{table}
 
 \newpage
 \section{Incidencia delictiva}
-Durante el periodo de \verb|<< gs_mes_inicio_periodo_incidencia_delictiva >>| \verb|<< gs_anio_inicio_periodo_incidencia_delictiva >>| a \verb|<< gs_mes_fin_periodo_incidencia_delictiva >>| \verb|<< gs_anio_fin_periodo_incidencia_delictiva >>|, se abrieron un total de \verb|<< gs_total_carpetas_abiertas >>| carpetas de investigación, de las cuales \verb|<< gs_carpetas_aperturadas_primer_anio >>| se aperturaron en los meses de \verb|<< gs_anio_inicio_periodo_incidencia_delictiva >>|, mientras que en los meses de \verb|<< gs_anio_fin_periodo_incidencia_delictiva >>| fueron \verb|<< gs_carpetas_aperturadas_segundo_anio >>|. \verb|<< gs_mes_mas_casos >>| fue el mes de más casos, con \verb|<< gs_total_indagaciones_mes_mas_casos >>| indagaciones. El mes con la menor cantidad de carpetas abiertas es \verb|<< gs_mes_menos_casos >>| con \verb|<< gs_total_indagaciones_mes_menos_casos >>| casos. El promedio de carpetas abiertas por mes en el municipio es de \verb|<< gs_promedio_carpetas_abiertas_por_mes >>|.
+Durante el periodo de \verb|<< gs_mes_inicio_periodo_incidencia_delictiva >>| 
+\verb|<< gs_anio_inicio_periodo_incidencia_delictiva >>| a 
+\verb|<< gs_mes_fin_periodo_incidencia_delictiva >>| \verb|<< gs_anio_fin_periodo_incidencia_delictiva >>|, 
+se abrieron un total de \verb|<< gs_total_carpetas_abiertas >>| carpetas de investigación, de las cuales 
+\verb|<< gs_carpetas_aperturadas_primer_anio >>| se aperturaron en los meses de 
+\verb|<< gs_anio_inicio_periodo_incidencia_delictiva >>|, mientras que en los meses de 
+\verb|<< gs_anio_fin_periodo_incidencia_delictiva >>| fueron 
+\verb|<< gs_carpetas_aperturadas_segundo_anio >>|. El mes con más casos, fue
+\verb|<< gs_mes_mas_casos >>|, cuando se abrieron \verb|<< gs_total_carpetas_mes_mas_casos >>| carpetas. 
+El mes con la menor cantidad de carpetas abiertas es \verb|<< gs_mes_menos_casos >>| con 
+\verb|<< gs_total_carpetas_mes_menos_casos >>| 
+casos. El promedio de carpetas abiertas por mes en el municipio es de 
+\verb|<< gs_promedio_carpetas_abiertas_por_mes >>|.
 
 \verb|<< gs_grafica_carpetas_de_investigacion_por_mes >>|
 
 \newpage
 
-En \verb|<< gs_municipio_nombre >>|, de \verb|<< gs_mes_inicio_periodo_incidencia_delictiva >>| \verb|<< gs_anio_inicio_periodo_incidencia_delictiva >>| a \verb|<< gs_mes_fin_periodo_incidencia_delictiva >>| \verb|<< gs_anio_fin_periodo_incidencia_delictiva >>|, los tres principales bienes jurídicos afectados fueron \verb|<< gs_principal_bien_juridico_afectado >>| (\verb|<< gs_porcentaje_principal_bien_juridico_afectado >>|\%), \verb|<< gs_segundo_bien_juridico_afectado >>| (\verb|<< gs_porcentaje_segundo_bien_juridico_afectado >>|\%), \verb|<< gs_tercer_bien_juridico_afectado >>| (\verb|<< gs_porcentaje_tercer_bien_juridico_afectado >>|\%).
+En \verb|<< gs_municipio_nombre >>|, de \verb|<< gs_mes_inicio_periodo_incidencia_delictiva >>| de 
+\verb|<< gs_anio_inicio_periodo_incidencia_delictiva >>| a \verb|<< gs_mes_fin_periodo_incidencia_delictiva >>| 
+de \verb|<< gs_anio_fin_periodo_incidencia_delictiva >>|, los tres principales bienes jurídicos afectados 
+fueron \verb|<< gs_principal_bien_juridico_afectado >>| 
+(\verb|<< gs_porcentaje_principal_bien_juridico_afectado >>|\%), \verb|<< gs_segundo_bien_juridico_afectado >>| 
+(\verb|<< gs_porcentaje_segundo_bien_juridico_afectado >>|\%), \verb|<< gs_tercer_bien_juridico_afectado >>| 
+(\verb|<< gs_porcentaje_tercer_bien_juridico_afectado >>|\%).
 
 \verb|<< gs_grafica_distribucion_porcentual_bienes_juridicos_afectados >>|
 
 \newpage
 
-Con relación al bien jurídico de \verb|<< gs_principal_bien_juridico_afectado >>|, que fue el más afectado en el periodo de análisis en el municipio, los delitos con más carpetas de investigación fueron: \verb|<< gs_principal_delito_con_mas_carpetas >>|, con 
-\verb|<< gs_total_carpetas_principal_delito >>|; en segundo puesto se encuentra \verb|<< gs_segundo_delito_con_mas_carpetas >>|, con 
-\verb|<< gs_total_carpetas_segundo_delito >>|; seguido de \verb|<< gs_tercer_delito_con_mas_carpetas >>|, con 
-\verb|<< gs_total_carpetas_tercer_delito >>|. 
+Con relación al bien jurídico de \verb|<< gs_principal_bien_juridico_afectado >>|, que fue el más 
+afectado en el periodo de análisis en el municipio, los delitos con más carpetas de investigación 
+fueron: \verb|<< gs_principal_delito_con_mas_carpetas >>|, con 
+\verb|<< gs_total_carpetas_principal_delito >>|; en segundo puesto se encuentra 
+\verb|<< gs_segundo_delito_con_mas_carpetas >>|, con 
+\verb|<< gs_total_carpetas_segundo_delito >>|; seguido de \verb|<< gs_tercer_delito_con_mas_carpetas >>|, 
+con \verb|<< gs_total_carpetas_tercer_delito >>|. 
 
 \verb|<< gs_grafica_carpetas_cinco_principales_delitos >>|
 
 \newpage
+\subsection{Directorio municipal}
+
+\textbf{Presidente municipal << gs_municipio_nombre >>}.
+
+<< gs_nombre_presidente_municipal >>
+
+<< gs_correo_electronico_presidente_municipal >>
+
+\textbf{Domicilio}
+
+<< gs_domicilio_municipal >>
+
+\textbf{Teléfono}
+
+<< gs_telefono_municipal >>
+
+\textbf{Síndico (a)}
+
+<< gs_nombre_sindico >>
+
+\textbf{Regidores (as)}
+
+<% for row in gs_lista_regidores %>
+ row.clave  \\
+<% endfor %>
+
+\textbf{Partido Político}
+
+<< gs_nombre_partido_politico >>
+
+\newpage
+
 
 \newgeometry{margin=0cm}
 
