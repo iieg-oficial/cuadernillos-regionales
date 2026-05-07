@@ -76,8 +76,8 @@ El identificador sigue este orden, todos alineados a la izquierda con interlinea
 - Las proporciones de todas las columnas deben sumar exactamente `1.00`.
 - La alineación depende del contenido:
   - `\raggedright\arraybackslash` para texto largo (descripciones, nombres)
-  - `\centering\arraybackslash` para claves/IDs y valores categóricos (grados, lugares)
-  - `\raggedleft\arraybackslash` para cifras numéricas (porcentajes, conteos, índices)
+  - `\centering\arraybackslash` para valores categóricos cualitativos (grados de marginación, intensidad migratoria)
+  - `\raggedleft\arraybackslash` para cifras numéricas (porcentajes, conteos, índices) y claves/IDs numéricos
 
 Ejemplo con 3 columnas (proporciones: 0.35 + 0.40 + 0.25 = 1.00):
 
