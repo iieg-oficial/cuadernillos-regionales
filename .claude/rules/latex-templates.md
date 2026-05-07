@@ -14,29 +14,25 @@ Todas las tablas usan `longtable`. No usar `table`/`tabular`/`threeparttable`. L
 ```latex
 \setlength{\tabcolsep}{3pt}
 \footnotesize
-\begin{longtable}{|>{\centering\arraybackslash}p{\dimexpr0.25\linewidth - 2\tabcolsep\relax}
-                  |>{\raggedright\arraybackslash}p{\dimexpr0.35\linewidth - 2\tabcolsep\relax}
-                  |>{\centering\arraybackslash}p{\dimexpr0.40\linewidth - 2\tabcolsep\relax}|}
+\begin{longtable}{>{\raggedright\arraybackslash}p{\dimexpr0.35\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}p{\dimexpr0.40\linewidth - 2\tabcolsep\relax}
+                  >{\centering\arraybackslash}p{\dimexpr0.25\linewidth - 2\tabcolsep\relax}}
 
-\caption{Título de la tabla}
+\caption{\textbf{Título de la tabla} \\ Nota preliminar opcional}
 \label{tabla_nombre_descriptivo} \\
 
 % Encabezado primera página
-\rowcolor{colorSeccion}
-\multicolumn{3}{|c|}{\color{white}Subtítulo} \\
 \hline
 \rowcolor{gray!30}
-Col1 & Col2 & Col3 \\
+\textbf{Col1} & \textbf{Col2} & \textbf{Col3} \\
 \hline
 \endfirsthead
 
 % Encabezado páginas siguientes
 \multicolumn{3}{l}{\small\textbf{(continuación)}} \\
-\rowcolor{colorSeccion}
-\multicolumn{3}{|c|}{\color{white}Subtítulo} \\
 \hline
 \rowcolor{gray!30}
-Col1 & Col2 & Col3 \\
+\textbf{Col1} & \textbf{Col2} & \textbf{Col3} \\
 \hline
 \endhead
 
@@ -55,51 +51,97 @@ Valor & Valor & Valor \\
 \end{longtable}
 \normalsize
 \par\vspace{-4pt}\parbox{\linewidth}{\footnotesize
-Elaboración del IIEG, con datos de FUENTE, AÑO.}
+Nota: texto de nota (opcional).\\
+Fuente: INSTITUCIÓN. Producto consultado, Año.}
+```
+
+### Identificador de la tabla (caption)
+
+El identificador sigue este orden, todos alineados a la izquierda con interlineado sencillo:
+
+1. **Número de tabla** (`Tabla X`) — sin negritas, generado automáticamente por LaTeX
+2. **Título** — en negritas, envuelto en `\textbf{}`
+3. **Nota preliminar** — opcional, sin negritas (subtítulo como años cubiertos)
+
+```latex
+\caption{\textbf{Título de la tabla} \\ Nota preliminar opcional}
 ```
 
 ### Reglas de columnas en longtable
 
 **Siempre usar columnas explícitas con `p{\dimexpr X\linewidth - 2\tabcolsep\relax}`.**
 
-- NUNCA usar el macro `\ltcoleq{N}` en longtable: aunque el PDF se genera, longtable no dibuja las líneas verticales interiores cuando las columnas se definen mediante expansión de macros.
+- NUNCA usar el macro `\ltcoleq{N}` en longtable.
+- NUNCA usar líneas verticales (`|`) en las especificaciones de columna ni en `\multicolumn`.
 - Las proporciones de todas las columnas deben sumar exactamente `1.00`.
-- La alineación depende del contenido: `\centering\arraybackslash` para números y claves, `\raggedright\arraybackslash` para texto largo, `\raggedleft\arraybackslash` para montos o valores con decimales alineados a la derecha.
+- La alineación depende del contenido:
+  - `\raggedright\arraybackslash` para texto largo (descripciones, nombres)
+  - `\centering\arraybackslash` para claves/IDs y valores categóricos (grados, lugares)
+  - `\raggedleft\arraybackslash` para cifras numéricas (porcentajes, conteos, índices)
 
-Ejemplo con 3 columnas (proporciones: 0.25 + 0.35 + 0.40 = 1.00):
+Ejemplo con 3 columnas (proporciones: 0.35 + 0.40 + 0.25 = 1.00):
 
 ```latex
-\begin{longtable}{|>{\centering\arraybackslash}p{\dimexpr0.25\linewidth - 2\tabcolsep\relax}
-                  |>{\raggedright\arraybackslash}p{\dimexpr0.35\linewidth - 2\tabcolsep\relax}
-                  |>{\centering\arraybackslash}p{\dimexpr0.40\linewidth - 2\tabcolsep\relax}|}
+\begin{longtable}{>{\raggedright\arraybackslash}p{\dimexpr0.35\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}p{\dimexpr0.40\linewidth - 2\tabcolsep\relax}
+                  >{\centering\arraybackslash}p{\dimexpr0.25\linewidth - 2\tabcolsep\relax}}
+```
+
+### Encabezados de columna
+
+La información del encabezado debe ir en negritas (`\textbf{}`). Usar `\rowcolor{gray!30}` para el fondo del encabezado.
+
+```latex
+\hline
+\rowcolor{gray!30}
+\textbf{Col1} & \textbf{Col2} & \textbf{Col3} \\
+\hline
+```
+
+### `\multicolumn` sin líneas verticales
+
+En `\multicolumn`, la especificación de columna NO lleva `|`. El ancho del `p{}` para un span de N columnas es:
+
+```
+WIDTH = (A + B + ...) × \linewidth - 2\tabcolsep
+```
+
+Ejemplo con span de 2 columnas (proporciones A=0.09, B=0.07):
+
+```latex
+\multicolumn{2}{>{\centering\arraybackslash}p{\dimexpr0.09\linewidth + 0.07\linewidth - 2\tabcolsep\relax}}{\cellcolor{gray!30}\textbf{Encabezado}}
 ```
 
 ### `\makecell` en encabezados multicolumna
 
-Cuando un `\multicolumn{N}{c|}{}` usa `\makecell` para forzar salto de línea, la celda se vuelve más alta que las celdas adyacentes de una sola línea, dejando espacio en blanco visible.
+Cuando un `\multicolumn{N}{...}{}` usa `\makecell` para forzar salto de línea, la celda se vuelve más alta que las celdas adyacentes de una sola línea, dejando espacio en blanco visible.
 
-**Regla:** En encabezados de fila donde varias celdas `\multicolumn` comparten la misma fila, NO mezclar celdas de diferente altura. Opciones:
-
-1. **Dar ancho suficiente** para que el texto quepa en una línea: ajustar las proporciones de las columnas que forman el span.
-2. **Cambiar la alineación del multicolumn de `c` a `p{}`** para que el texto pueda hacer wrapping sin forzar salto manual:
-
-```latex
-% En lugar de:
-\multicolumn{2}{c|}{\makecell{Intensidad\\Migratoria}}
-
-% Usar:
-\multicolumn{2}{>{\centering\arraybackslash}p{\dimexpr A\linewidth + B\linewidth - 2\tabcolsep + \arrayrulewidth\relax}|}{Intensidad Migratoria}
-```
-
-Donde A y B son las proporciones de las dos columnas que forma el span. La fórmula del ancho del `p{}` en el multicolumn es:
-
-```
-WIDTH = (A + B) × \linewidth - 2\tabcolsep + \arrayrulewidth
-```
+**Regla:** En encabezados de fila donde varias celdas `\multicolumn` comparten la misma fila, NO mezclar celdas de diferente altura. Dar ancho suficiente para que el texto quepa en una línea, o usar `p{}` para que el texto haga wrapping sin forzar salto manual.
 
 ### `\makecell` con guiones explícitos
 
-NUNCA usar `\makecell{Pobla-\\ción}` con un guión literal. En columnas `p{}`, LaTeX aplica hifenación automática si la palabra no cabe. Si la palabra cabe, no hace falta nada. Si la columna es muy estrecha y el resultado visual es incorrecto, ampliar la proporción de esa columna.
+NUNCA usar `\makecell{Pobla-\\ción}` con un guión literal. En columnas `p{}`, LaTeX aplica hifenación automática si la palabra no cabe.
+
+### Pie de tabla
+
+Todos los elementos del pie usan fuente menor (`\footnotesize`). El orden obligatorio es:
+
+1. **Nota** (opcional)
+2. **Llamada** (opcional)
+3. **Símbolos aclaratorios** (opcional)
+4. **Fuente** (obligatorio)
+
+```latex
+\par\vspace{-4pt}\parbox{\linewidth}{\footnotesize
+Nota: texto de nota.\\
+Fuente: INSTITUCIÓN. Producto consultado, Año.}
+```
+
+Para cuadros elaborados por el IIEG con datos de otra fuente:
+
+```latex
+Fuente: IIEG con base en INSTITUCIÓN. Producto consultado, Año.
+```
 
 ## Imágenes (mapas y gráficas)
 
