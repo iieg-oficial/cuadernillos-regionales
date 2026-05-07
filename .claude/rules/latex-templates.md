@@ -19,7 +19,7 @@ Todas las tablas usan `longtable`. No usar `table`/`tabular`/`threeparttable`. L
                   >{\centering\arraybackslash}p{\dimexpr0.25\linewidth - 2\tabcolsep\relax}}
 
 \caption{\textbf{Título de la tabla} \\ Nota preliminar opcional}
-\label{tabla_nombre_descriptivo} \\
+\label{cuadro_nombre_descriptivo} \\
 
 % Encabezado primera página
 \hline
@@ -55,11 +55,11 @@ Nota: texto de nota (opcional).\\
 Fuente: INSTITUCIÓN. Producto consultado, Año.}
 ```
 
-### Identificador de la tabla (caption)
+### Identificador del cuadro (caption)
 
 El identificador sigue este orden, todos alineados a la izquierda con interlineado sencillo:
 
-1. **Número de tabla** (`Tabla X`) — sin negritas, generado automáticamente por LaTeX
+1. **Número de cuadro** (`Cuadro X`) — sin negritas, generado automáticamente por LaTeX
 2. **Título** — en negritas, envuelto en `\textbf{}`
 3. **Nota preliminar** — opcional, sin negritas (subtítulo como años cubiertos)
 
