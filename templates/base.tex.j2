@@ -26,7 +26,8 @@
 \usepackage{tabularx}
 \usepackage{longtable}
 \usepackage{caption}
-\captionsetup[longtable]{justification=centering, skip=5pt, labelsep=period}
+\DeclareCaptionFormat{tablaformat}{#1\newline#3}
+\captionsetup[longtable]{format=tablaformat, justification=raggedright, singlelinecheck=false, skip=5pt, labelsep=none}
 
 % Columna de ancho igual para longtable de N columnas (descuenta reglas)
 % Uso: >{\centering\arraybackslash}\ltcoleq{N}
