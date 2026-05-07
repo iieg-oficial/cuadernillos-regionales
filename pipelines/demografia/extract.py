@@ -13,6 +13,11 @@ from pipelines.demografia.queries.poblacion import (
     get_total_estatal,
     get_totales_municipio,
 )
+from pipelines.demografia.queries.pobreza import (
+    get_pobreza_jalisco,
+    get_pobreza_municipio,
+    get_pobreza_por_entidad,
+)
 
 
 class Extract(Stage):
@@ -22,6 +27,7 @@ class Extract(Stage):
         pob = DatabaseSettings.from_env("censo_poblacion")
         iim = DatabaseSettings.from_env("intensidad_migratoria")
         marg = DatabaseSettings.from_env("marginacion")
+        pob_multi = DatabaseSettings.from_env("pobreza_multidimensional")
 
         with get_session(pob) as session:
             nombre = get_nombre_municipio(session, cve_mun)
@@ -44,6 +50,13 @@ class Extract(Stage):
             )
             marginacion_estatal_2020 = get_marginacion_estatal(session, 14, 2020)
 
+        cve_mun_str = f"14{cve_mun:03d}"
+        with get_session(pob_multi) as session:
+            pobreza_2020 = get_pobreza_municipio(session, cve_mun_str, 2020)
+            pobreza_2015 = get_pobreza_municipio(session, cve_mun_str, 2015)
+            pobreza_jalisco_2020 = get_pobreza_jalisco(session, 2020)
+            pobreza_por_entidad_2020 = get_pobreza_por_entidad(session, 2020)
+
         return {
             "municipio_nombre": nombre,
             "totales_poblacion": totales,
@@ -58,4 +71,8 @@ class Extract(Stage):
             "marginacion_jalisco_2010": marginacion_2010,
             "marginacion_localidades": marginacion_localidades,
             "marginacion_estatal_2020": marginacion_estatal_2020,
+            "pobreza_2020": pobreza_2020,
+            "pobreza_2015": pobreza_2015,
+            "pobreza_jalisco_2020": pobreza_jalisco_2020,
+            "pobreza_por_entidad_2020": pobreza_por_entidad_2020,
         }
