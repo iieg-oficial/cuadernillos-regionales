@@ -80,8 +80,8 @@ Hombres & << de_tabla_pob_hombres_2010 >> & << de_tabla_pob_hombres_2015 >> & <<
 \hline
 
 \rowcolor{orange!20}
-Total & << de_tabla_pob_total_2010 >> & << de_tabla_pob_total_2015 >> & << de_tabla_pob_total_2020 >>
-& << de_tabla_pob_var_pct_total_2010_2015 >> & << de_tabla_pob_var_pct_total_2015_2020 >> \\
+\thdr{Total} & \thdr{<< de_tabla_pob_total_2010 >>} & \thdr{<< de_tabla_pob_total_2015 >>} & \thdr{<< de_tabla_pob_total_2020 >>}
+& \thdr{<< de_tabla_pob_var_pct_total_2010_2015 >>} & \thdr{<< de_tabla_pob_var_pct_total_2015_2020 >>} \\
 \hline
 
 \end{longtable}
@@ -102,7 +102,7 @@ del total de la población del estado de Jalisco en ese mismo año.
 
 En << de_anio_censo >>, << de_municipio_nombre >> contaba con << de_numero_localidades >>
 localidades. La localidad de << de_loc_mas_poblada >> era la más poblada en el municipio con
-<< de_loc_mas_poblada_habitantes >> personas, concentrando el << de_porcentaje_habitantes_loc_mas_poblada >>\%
+<< de_loc_mas_poblada_habitantes >> personas, concentrando el << de_porcentaje_habitantes_loc_mas_poblada >>
 de la población del municipio.
 
 \setlength{\tabcolsep}{3pt}
@@ -121,7 +121,7 @@ más pobladas de << de_municipio_nombre >>} \\
 
 \hline
 \rowcolor{gray!30}
-\thh{0.08}{Clave} & \thh{0.22}{Municipio/\newline Localidad} &
+\thh{0.11}{Clave} & \thh{0.19}{Municipio/\newline Localidad} &
 \thh{0.16}{Población\newline << de_anio_censo_anterior >>} &
 \thh{0.16}{Población\newline << de_anio_censo >>} &
 \thh{0.19}{\% Distribución\newline << de_anio_censo >>} &
@@ -132,7 +132,7 @@ más pobladas de << de_municipio_nombre >>} \\
 \multicolumn{6}{l}{\small\textbf{(continuación)}} \\
 \hline
 \rowcolor{gray!30}
-\thh{0.08}{Clave} & \thh{0.22}{Municipio/\newline Localidad} &
+\thh{0.11}{Clave} & \thh{0.19}{Municipio/\newline Localidad} &
 \thh{0.16}{Población\newline << de_anio_censo_anterior >>} &
 \thh{0.16}{Población\newline << de_anio_censo >>} &
 \thh{0.19}{\% Distribución\newline << de_anio_censo >>} &
@@ -148,7 +148,7 @@ más pobladas de << de_municipio_nombre >>} \\
 \endlastfoot
 
 \rowcolor{orange!20}
-<< de_clave_municipio >> & << de_municipio_nombre >> & << de_tabla_pob_total_2010 >> & << de_tabla_pob_total_2020 >> & 100.00 & << de_variacion_porcentual_poblacion_quinquenio >> \\
+\thdr{<< de_clave_municipio >>} & \thdr{<< de_municipio_nombre >>} & \thdr{<< de_tabla_pob_total_2010 >>} & \thdr{<< de_tabla_pob_total_2020 >>} & \thdr{100.00} & \thdr{<< de_variacion_porcentual_poblacion_quinquenio >>} \\
 \hline
 <% for loc in de_localidades %>
 << loc.clave >> & << loc.nombre >> & << loc.total_2010 >> & << loc.total_2020 >> & << loc.pct_2020 >> & << loc.var_pct_2010_2020 >> \\
@@ -352,7 +352,7 @@ la no pobre y no vulnerable.
 \endlastfoot
 
 \rowcolor{orange!20}
-\textbf{Pobreza multidimensional} & & & & & & \\
+\thdr{Pobreza multidimensional} & & & & & & \\
 \hline
 
 Población en situación de pobreza multidimensional
@@ -380,7 +380,7 @@ Población no pobre multidimensional y no vulnerable
 \hline
 
 \rowcolor{orange!20}
-\textbf{Privación social} & & & & & & \\
+\thdr{Privación social} & & & & & & \\
 \hline
 
 Población con al menos una carencia social
@@ -392,7 +392,7 @@ Población con al menos tres carencias sociales
 \hline
 
 \rowcolor{orange!20}
-\textbf{Indicadores de carencia social} & & & & & & \\
+\thdr{Indicadores de carencia social} & & & & & & \\
 \hline
 
 Rezago educativo
@@ -420,7 +420,7 @@ Acceso a la alimentación
 \hline
 
 \rowcolor{orange!20}
-\textbf{Bienestar} & & & & & & \\
+\thdr{Bienestar} & & & & & & \\
 \hline
 
 Población con un ingreso inferior a la línea de bienestar mínimo
@@ -601,23 +601,23 @@ pobladas de << de_municipio_nombre >>}\\
 \endlastfoot
 
 \rowcolor{orange!20}
-<< de_clave_entidad >> &
-Jalisco &
-<< de_jal_marg_grado >> &
-<< de_jal_marg_analfabeta >> &
-<< de_jal_marg_sin_educ_bas >> &
-<< de_jal_marg_sin_drenaje >> &
-<< de_jal_marg_sin_energia >> \\
+\thdr{<< de_clave_entidad >>} &
+\thdr{Jalisco} &
+\thdr{<< de_jal_marg_grado >>} &
+\thdr{<< de_jal_marg_analfabeta >>} &
+\thdr{<< de_jal_marg_sin_educ_bas >>} &
+\thdr{<< de_jal_marg_sin_drenaje >>} &
+\thdr{<< de_jal_marg_sin_energia >>} \\
 \hline
 
 \rowcolor{orange!20}
-<< de_clave_municipio >> &
-<< de_municipio_nombre >> &
-<< de_marg_grado_2020 >> &
-<< de_marg_analfabeta_pct_2020 >> &
-<< de_marg_sin_educ_bas_pct_2020 >> &
-<< de_marg_sin_drenaje_pct_2020 >> &
-<< de_marg_sin_energia_pct_2020 >> \\
+\thdr{<< de_clave_municipio >>} &
+\thdr{<< de_municipio_nombre >>} &
+\thdr{<< de_marg_grado_2020 >>} &
+\thdr{<< de_marg_analfabeta_pct_2020 >>} &
+\thdr{<< de_marg_sin_educ_bas_pct_2020 >>} &
+\thdr{<< de_marg_sin_drenaje_pct_2020 >>} &
+\thdr{<< de_marg_sin_energia_pct_2020 >>} \\
 \hline
 
 <% for loc in de_localidades_marginacion %>
@@ -683,23 +683,23 @@ pobladas de << de_municipio_nombre >>} \\
 \endlastfoot
 
 \rowcolor{orange!20}
-<< de_clave_entidad >> &
-Jalisco &
-<< de_jal_marg_grado >> &
-<< de_jal_marg_sin_agua >> &
-<< de_jal_marg_piso_tierra >> &
-<< de_jal_marg_hacinamiento >> &
-<< de_jal_marg_sin_refrigerador >> \\
+\thdr{<< de_clave_entidad >>} &
+\thdr{Jalisco} &
+\thdr{<< de_jal_marg_grado >>} &
+\thdr{<< de_jal_marg_sin_agua >>} &
+\thdr{<< de_jal_marg_piso_tierra >>} &
+\thdr{<< de_jal_marg_hacinamiento >>} &
+\thdr{<< de_jal_marg_sin_refrigerador >>} \\
 \hline
 
 \rowcolor{orange!20}
-<< de_clave_municipio >> &
-<< de_municipio_nombre >> &
-<< de_marg_grado_2020 >> &
-<< de_marg_sin_agua_pct_2020 >> &
-<< de_marg_piso_tierra_pct_2020 >> &
-<< de_marg_hacinamiento_pct_2020 >> &
-<< de_marg_sin_refrigerador_2020 >> \\
+\thdr{<< de_clave_municipio >>} &
+\thdr{<< de_municipio_nombre >>} &
+\thdr{<< de_marg_grado_2020 >>} &
+\thdr{<< de_marg_sin_agua_pct_2020 >>} &
+\thdr{<< de_marg_piso_tierra_pct_2020 >>} &
+\thdr{<< de_marg_hacinamiento_pct_2020 >>} &
+\thdr{<< de_marg_sin_refrigerador_2020 >>} \\
 \hline
 
 <% for loc in de_localidades_marginacion %>
