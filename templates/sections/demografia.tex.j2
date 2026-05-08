@@ -86,9 +86,11 @@ Total & << de_tabla_pob_total_2010 >> & << de_tabla_pob_total_2015 >> & << de_ta
 
 \end{longtable}
 \normalsize
-\par\vspace{-4pt}\parbox{\linewidth}{\footnotesize
-Fuente: INEGI, Censo de Población y Vivienda, << de_anio_censo_anterior >> y << de_anio_censo >>.\\
-INEGI, Encuesta Intercensal, << de_anio_encuesta_intercensal >>.}
+\par\vspace{-4pt}{\footnotesize\noindent%
+\begin{tabular}[t]{@{}l@{\hspace{0.5em}}l@{}}
+Fuente: & INEGI, Censo de Población y Vivienda, << de_anio_censo_anterior >> y << de_anio_censo >>.\\[2pt]
+& INEGI, Encuesta Intercensal, << de_anio_encuesta_intercensal >>.
+\end{tabular}}
 
 Las personas habitantes del municipio de << de_municipio_nombre >> representaron
 el << de_porcentaje_habitantes_region >> % del total de la región
@@ -204,14 +206,14 @@ el lugar << de_ranking_anterior_mun_migracion >> con mayor grado dentro de los m
 \label{cuadro_intensidad_migratoria_eua} \\
 
 \hline
-\rowcolor{gray!50}
+\rowcolor{gray!30}
 \textbf{Índice y grado de intensidad migratoria e indicadores socioeconómicos} & \thh{0.20}{<< de_anio_censo_anterior >>} & \thh{0.20}{<< de_anio_censo >>} \\
 \hline
 \endfirsthead
 
 \multicolumn{3}{l}{\small\textbf{(continuación)}} \\
 \hline
-\rowcolor{gray!50}
+\rowcolor{gray!30}
 \textbf{Índice y grado de intensidad migratoria e indicadores socioeconómicos} & \thh{0.20}{<< de_anio_censo_anterior >>} & \thh{0.20}{<< de_anio_censo >>} \\
 \hline
 \endhead
@@ -244,12 +246,11 @@ Posición que ocupa el municipio a escala nacional & << de_ranking_nacional_mun_
 
 \end{longtable}
 \normalsize
-\par\vspace{-4pt}\parbox{\linewidth}{\footnotesize
-Nota: los indicadores hacen referencia al quinquenio anterior referido a
-<< de_anio_encuesta_intercensal_anterior >>--<< de_anio_censo_anterior >> y
-<< de_anio_encuesta_intercensal >>--<< de_anio_censo >>.\\
-Fuente: CONAPO. Índice de Intensidad Migratoria México-Estados Unidos,
-<< de_anio_censo_anterior >> y << de_anio_censo >>.}
+\par\vspace{-4pt}{\footnotesize\noindent%
+\begin{tabular}[t]{@{}l@{\hspace{0.5em}}l@{}}
+Nota: & Los indicadores hacen referencia al quinquenio anterior referido a << de_anio_encuesta_intercensal_anterior >>--<< de_anio_censo_anterior >> y << de_anio_encuesta_intercensal >>--<< de_anio_censo >>.\\[4pt]
+Fuente: & CONAPO. Índice de Intensidad Migratoria México-Estados Unidos, << de_anio_censo_anterior >> y << de_anio_censo >>.
+\end{tabular}}
 
 \newpage
 << de_mapa_grado_intensidad_migratoria >>
@@ -433,10 +434,10 @@ Población con un ingreso inferior a la línea de bienestar
 \end{longtable}
 \normalsize
 \renewcommand{\arraystretch}{1.3}
-\par\vspace{-4pt}\parbox{\linewidth}{\footnotesize
-Nota: los indicadores hacen referencia al quinquenio << de_anio_encuesta_intercensal >>--<< de_anio_censo >>.\\
-Fuente: CONEVAL. Medición de pobreza a nivel municipal,
-<< de_anio_encuesta_intercensal >> y << de_anio_censo >>.}
+\par\vspace{-4pt}{\footnotesize\noindent%
+\begin{tabular}[t]{@{}l@{\hspace{0.5em}}l@{}}
+Fuente: & CONEVAL. Medición de pobreza a nivel municipal, << de_anio_encuesta_intercensal >> y << de_anio_censo >>.
+\end{tabular}}
 
 
 \newpage
@@ -579,7 +580,6 @@ pobladas de << de_municipio_nombre >>}\\
 \thh{0.15}{Porcentaje de ocupantes en viviendas particulares habitadas sin energía eléctrica} \\
 \hline
 \endfirsthead
-
 \multicolumn{7}{l}{\small\textbf{(continuación)}} \\
 \hline
 \rowcolor{gray!30}
@@ -635,6 +635,7 @@ Jalisco &
 \normalsize
 \addtocounter{table}{-1}
 
+\newpage
 \setlength{\tabcolsep}{3pt}
 \footnotesize
 \begin{longtable}{>{\raggedleft\arraybackslash}p{\dimexpr0.08\linewidth - 2\tabcolsep\relax}
@@ -737,9 +738,9 @@ entre los municipios del estado con mayor valor en el índice.
 \footnotesize
 \begin{longtable}{>{\raggedleft\arraybackslash}p{\dimexpr0.07\linewidth - 2\tabcolsep\relax}
                   >{\raggedright\arraybackslash}p{\dimexpr0.17\linewidth - 2\tabcolsep\relax}
-                  >{\raggedleft\arraybackslash}p{\dimexpr0.10\linewidth - 2\tabcolsep\relax}
-                  >{\centering\arraybackslash}p{\dimexpr0.09\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}p{\dimexpr0.11\linewidth - 2\tabcolsep\relax}
                   >{\centering\arraybackslash}p{\dimexpr0.07\linewidth - 2\tabcolsep\relax}
+                  >{\centering\arraybackslash}p{\dimexpr0.08\linewidth - 2\tabcolsep\relax}
                   >{\raggedleft\arraybackslash}p{\dimexpr0.09\linewidth - 2\tabcolsep\relax}
                   >{\centering\arraybackslash}p{\dimexpr0.07\linewidth - 2\tabcolsep\relax}
                   >{\raggedleft\arraybackslash}p{\dimexpr0.09\linewidth - 2\tabcolsep\relax}
@@ -754,26 +755,24 @@ en la región << de_nombre_region >>}\\
 
 \hline
 \rowcolor{gray!30}
-\thh{0.07}{Clave} & \textbf{Municipio} & \thh{0.10}{Población} &
-\multicolumn{2}{>{\raggedright\arraybackslash}p{\dimexpr0.09\linewidth + 0.07\linewidth - 2\tabcolsep\relax}}{\cellcolor{gray!30}\textbf{Marginación}} &
-\multicolumn{4}{>{\raggedright\arraybackslash}p{\dimexpr0.09\linewidth + 0.07\linewidth + 0.09\linewidth + 0.07\linewidth - 2\tabcolsep\relax}}{\cellcolor{gray!30}\textbf{Pobreza}} &
+\thh{0.07}{Clave} & \textbf{Municipio} & \thh{0.11}{Población} &
+\multicolumn{2}{>{\raggedright\arraybackslash}p{\dimexpr0.07\linewidth + 0.08\linewidth - 2\tabcolsep\relax}}{\cellcolor{gray!30}\textbf{Marginación}} &
+\multicolumn{4}{>{\raggedright\arraybackslash}p{\dimexpr0.09\linewidth + 0.07\linewidth + 0.09\linewidth + 0.07\linewidth - 2\tabcolsep\relax}}{\cellcolor{gray!30}\textbf{Pobreza multidimensional}} &
 \multicolumn{2}{>{\raggedright\arraybackslash}p{\dimexpr0.09\linewidth + 0.09\linewidth - 2\tabcolsep\relax}}{\cellcolor{gray!30}\textbf{Intensidad Migratoria}} \\
-\hline
 \rowcolor{gray!30}
- & & & \thh{0.09}{Grado} & \thh{0.07}{Lugar} & \thh{0.09}{multidimensional} & \thh{0.07}{Lugar} & \thh{0.09}{extrema} & \thh{0.07}{Lugar} & \thh{0.09}{Grado} & \thh{0.09}{Lugar} \\
+ & & & \thh{0.07}{Grado} & \thh{0.08}{Lugar} & \thh{0.09}{pobreza} & \thh{0.07}{Lugar} & \thh{0.09}{pobreza\newline extrema} & \thh{0.07}{Lugar} & \thh{0.09}{Grado} & \thh{0.09}{Lugar} \\
 \hline
 \endfirsthead
 
 \multicolumn{11}{l}{\small\textbf{(continuación)}} \\
 \hline
 \rowcolor{gray!30}
-\thh{0.07}{Clave} & \textbf{Municipio} & \thh{0.10}{Población} &
-\multicolumn{2}{>{\raggedright\arraybackslash}p{\dimexpr0.09\linewidth + 0.07\linewidth - 2\tabcolsep\relax}}{\cellcolor{gray!30}\textbf{Marginación}} &
-\multicolumn{4}{>{\raggedright\arraybackslash}p{\dimexpr0.09\linewidth + 0.07\linewidth + 0.09\linewidth + 0.07\linewidth - 2\tabcolsep\relax}}{\cellcolor{gray!30}\textbf{Pobreza}} &
+\thh{0.07}{Clave} & \textbf{Municipio} & \thh{0.11}{Población} &
+\multicolumn{2}{>{\raggedright\arraybackslash}p{\dimexpr0.07\linewidth + 0.08\linewidth - 2\tabcolsep\relax}}{\cellcolor{gray!30}\textbf{Marginación}} &
+\multicolumn{4}{>{\raggedright\arraybackslash}p{\dimexpr0.09\linewidth + 0.07\linewidth + 0.09\linewidth + 0.07\linewidth - 2\tabcolsep\relax}}{\cellcolor{gray!30}\textbf{Pobreza multidimensional}} &
 \multicolumn{2}{>{\raggedright\arraybackslash}p{\dimexpr0.09\linewidth + 0.09\linewidth - 2\tabcolsep\relax}}{\cellcolor{gray!30}\textbf{Intensidad Migratoria}} \\
-\hline
 \rowcolor{gray!30}
- & & & \thh{0.09}{Grado} & \thh{0.07}{Lugar} & \thh{0.09}{multidimensional} & \thh{0.07}{Lugar} & \thh{0.09}{extrema} & \thh{0.07}{Lugar} & \thh{0.09}{Grado} & \thh{0.09}{Lugar} \\
+ & & & \thh{0.07}{Grado} & \thh{0.08}{Lugar} & \thh{0.09}{pobreza} & \thh{0.07}{Lugar} & \thh{0.09}{pobreza\newline extrema} & \thh{0.07}{Lugar} & \thh{0.09}{Grado} & \thh{0.09}{Lugar} \\
 \hline
 \endhead
 
@@ -799,8 +798,9 @@ en la región << de_nombre_region >>}\\
 
 \end{longtable}
 \normalsize
-\par\vspace{-4pt}\parbox{\linewidth}{\footnotesize
-Fuente: CONAPO. Índices de marginación << de_anio_censo >>;
-Índice de Intensidad Migratoria << de_anio_censo >>. \\
-CONEVAL. Pobreza Multidimensional << de_anio_censo >>. \\
-INEGI. Censo de Población y Vivienda << de_anio_censo >>.}
+\par\vspace{-4pt}{\footnotesize\noindent%
+\begin{tabular}[t]{@{}l@{\hspace{0.5em}}l@{}}
+Fuente: & CONAPO. Índices de marginación << de_anio_censo >>; Índice de Intensidad Migratoria << de_anio_censo >>.\\[2pt]
+& CONEVAL. Pobreza Multidimensional << de_anio_censo >>.\\[2pt]
+& INEGI. Censo de Población y Vivienda << de_anio_censo >>.
+\end{tabular}}

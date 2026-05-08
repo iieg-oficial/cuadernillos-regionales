@@ -1,10 +1,22 @@
+from pathlib import Path
+
 from core.pipelines.stage import Stage
 from core.utils.municipalities import get_same_region
 
 ND = "\\ND"
-MAPA_PLACEHOLDER = (
-    "\\includegraphics[width=\\textwidth]{templates/assets/mapa_placeholder.png}"
-)
+MAPA_PLACEHOLDER = Path("templates/assets/mapa_placeholder.png")
+
+
+def _mapa_latex(path: Path, caption: str) -> str:
+    return (
+        "\\begin{figure}[H]\n"
+        "\\centering\n"
+        f"\\caption{{\\textbf{{{caption}}}}}\n"
+        f"\\includegraphics[width=\\textwidth]{{{path}}}\n"
+        "\\end{figure}"
+    )
+
+
 JALISCO_ID = 14
 ANIO_CENSO = 2020
 ANIO_INTERCENSAL = 2015
@@ -72,6 +84,9 @@ class Analizer(Stage):
         marginacion_2010 = input_data["marginacion_jalisco_2010"]
         marginacion_localidades = input_data["marginacion_localidades"]
         marginacion_estatal_2020 = input_data["marginacion_estatal_2020"]
+        mapa_migracion = input_data.get("mapa_migracion") or MAPA_PLACEHOLDER
+        mapa_pobreza = input_data.get("mapa_pobreza") or MAPA_PLACEHOLDER
+        mapa_marginacion = input_data.get("mapa_marginacion") or MAPA_PLACEHOLDER
 
         ctx = {}
 
@@ -81,6 +96,7 @@ class Analizer(Stage):
         ctx["de_anio_censo"] = ANIO_CENSO
         ctx["de_anio_encuesta_intercensal"] = ANIO_INTERCENSAL
         ctx["de_anio_censo_anterior"] = ANIO_CENSO_ANTERIOR
+        ctx["de_anio_encuesta_intercensal_anterior"] = ANIO_CENSO_ANTERIOR - 5
 
         t2020 = totales.get(ANIO_CENSO, {})
         t2015 = totales.get(ANIO_INTERCENSAL, {})
@@ -254,9 +270,6 @@ class Analizer(Stage):
         jalisco_mun_2020 = [
             m for m in iim_mun_2020 if 14000 < m["municipio_id"] < 15000
         ]
-        all_mun_vals_2020 = [
-            m["iim_dp2"] for m in iim_mun_2020 if m["iim_dp2"] is not None
-        ]
         jal_mun_vals_2020 = [
             m["iim_dp2"] for m in jalisco_mun_2020 if m["iim_dp2"] is not None
         ]
@@ -372,7 +385,10 @@ class Analizer(Stage):
             _pct(mun_2020.get("por_viv_reto")) if mun_2020 else ND
         )
 
-        ctx["de_mapa_grado_intensidad_migratoria"] = MAPA_PLACEHOLDER
+        ctx["de_mapa_grado_intensidad_migratoria"] = _mapa_latex(
+            mapa_migracion,
+            f"Grado de Intensidad Migratoria a Estados Unidos. Jalisco, {ANIO_CENSO}",
+        )
 
         mun_marg_2020 = next(
             (m for m in marginacion_2020 if m["municipio_id"] == cvegeo), None
@@ -631,9 +647,12 @@ class Analizer(Stage):
             ctx["de_jal_marg_piso_tierra"] = ND
             ctx["de_jal_marg_hacinamiento"] = ND
             ctx["de_jal_marg_sin_refrigerador"] = ND
-        ctx["de_mapa_indice_marginacion_municipio"] = MAPA_PLACEHOLDER
+        ctx["de_mapa_indice_marginacion_municipio"] = _mapa_latex(
+            mapa_marginacion,
+            f"Índice de marginación por municipio. Jalisco, {ANIO_CENSO}",
+        )
 
-        DASH = "{-}"
+        DASH = "{--}"
         marg_by_nombre = {loc["localidad"]: loc for loc in marginacion_localidades}
 
         def _loc_val(marg, key, fn):
@@ -975,7 +994,10 @@ class Analizer(Stage):
         ctx["de_lpi_prom_2015"] = _p(pobreza_2015, "lpi_promedio", _fmt)
         ctx["de_lpi_prom_2020"] = _p(pobreza_2020, "lpi_promedio", _fmt)
 
-        ctx["de_mapa_porcentaje_pobreza_multidimensional"] = MAPA_PLACEHOLDER
+        ctx["de_mapa_porcentaje_pobreza_multidimensional"] = _mapa_latex(
+            mapa_pobreza,
+            f"Porcentaje de población en situación de pobreza multidimensional por municipio. Jalisco, {ANIO_CENSO}",
+        )
 
         total_estatal = input_data.get("total_estatal_2020")
         ctx["de_porcentaje_poblacion"] = (

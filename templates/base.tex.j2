@@ -28,6 +28,7 @@
 \usepackage{caption}
 \DeclareCaptionFormat{tablaformat}{#1\newline#3}
 \captionsetup[longtable]{format=tablaformat, justification=raggedright, singlelinecheck=false, skip=5pt, labelsep=none}
+\captionsetup[figure]{format=tablaformat, justification=raggedright, singlelinecheck=false, skip=5pt, labelsep=none}
 
 % Columna de ancho igual para longtable de N columnas (descuenta reglas)
 % Uso: >{\centering\arraybackslash}\ltcoleq{N}
@@ -54,6 +55,8 @@
 \addto\captionsspanish{
   \renewcommand{\tablename}{Cuadro}
   \renewcommand{\thetable}{\arabic{table}}
+  \renewcommand{\figurename}{Mapa}
+  \renewcommand{\thefigure}{\arabic{figure}}
 }
 
 \setmainfont[
@@ -80,7 +83,7 @@
 \definecolor{accent}{HTML}{465055}
 
 \newcommand{\ND}{\textcolor{red}{N/D}}
-\newcommand{\thdr}[1]{\textbf{\color{black}#1}}
+\newcommand{\thdr}[1]{\textbf{\color{colorTexto}#1}}
 \newcommand{\thh}[2]{\multicolumn{1}{>{\raggedright\arraybackslash}p{\dimexpr#1\linewidth - 2\tabcolsep\relax}}{\cellcolor{gray!30}\textbf{#2}}}
 
 \AtBeginDocument{
