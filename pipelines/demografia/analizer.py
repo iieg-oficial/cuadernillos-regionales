@@ -423,31 +423,31 @@ class Analizer(Stage):
                 mun_marg_2020.get("indice_marginacion"), 4
             )
             ctx["de_marg_grado_2020"] = mun_marg_2020.get("grado_marginacion") or ND
-            ctx["de_marg_analfabeta_2020"] = _pct(
+            ctx["de_marg_analfabeta_2020"] = _fmt(
                 mun_marg_2020.get("porc_pob15_analfabeta")
             )
-            ctx["de_marg_sin_educ_bas_2020"] = _pct(
+            ctx["de_marg_sin_educ_bas_2020"] = _fmt(
                 mun_marg_2020.get("pob15_sin_educ_bas")
             )
-            ctx["de_marg_sin_drenaje_2020"] = _pct(
+            ctx["de_marg_sin_drenaje_2020"] = _fmt(
                 mun_marg_2020.get("porc_viv_sin_drenaje_ni_excusado")
             )
-            ctx["de_marg_sin_energia_2020"] = _pct(
+            ctx["de_marg_sin_energia_2020"] = _fmt(
                 mun_marg_2020.get("porc_viv_sin_energia")
             )
-            ctx["de_marg_sin_agua_2020"] = _pct(
+            ctx["de_marg_sin_agua_2020"] = _fmt(
                 mun_marg_2020.get("porc_viv_sin_agua_entubada")
             )
-            ctx["de_marg_piso_tierra_2020"] = _pct(
+            ctx["de_marg_piso_tierra_2020"] = _fmt(
                 mun_marg_2020.get("porc_viv_piso_tierra")
             )
             ctx["de_marg_hacinamiento_2020"] = _fmt(
                 mun_marg_2020.get("prom_ocup_por_cuarto"), 2
             )
-            ctx["de_marg_loc_menos5000_2020"] = _pct(
+            ctx["de_marg_loc_menos5000_2020"] = _fmt(
                 mun_marg_2020.get("porc_pob_loc_menos5000_hab")
             )
-            ctx["de_marg_hasta2salmin_2020"] = _pct(
+            ctx["de_marg_hasta2salmin_2020"] = _fmt(
                 mun_marg_2020.get("pob_ocup_hasta_2_sal_min")
             )
             ctx["de_marg_sin_refrigerador_2020"] = _pct(
@@ -482,31 +482,31 @@ class Analizer(Stage):
                 mun_marg_2015.get("indice_marginacion"), 4
             )
             ctx["de_marg_grado_2015"] = mun_marg_2015.get("grado_marginacion") or ND
-            ctx["de_marg_analfabeta_2015"] = _pct(
+            ctx["de_marg_analfabeta_2015"] = _fmt(
                 mun_marg_2015.get("porc_pob15_analfabeta")
             )
-            ctx["de_marg_sin_educ_bas_2015"] = _pct(
+            ctx["de_marg_sin_educ_bas_2015"] = _fmt(
                 mun_marg_2015.get("pob15_sin_educ_bas")
             )
-            ctx["de_marg_sin_drenaje_2015"] = _pct(
+            ctx["de_marg_sin_drenaje_2015"] = _fmt(
                 mun_marg_2015.get("porc_viv_sin_drenaje_ni_excusado")
             )
-            ctx["de_marg_sin_energia_2015"] = _pct(
+            ctx["de_marg_sin_energia_2015"] = _fmt(
                 mun_marg_2015.get("porc_viv_sin_energia")
             )
-            ctx["de_marg_sin_agua_2015"] = _pct(
+            ctx["de_marg_sin_agua_2015"] = _fmt(
                 mun_marg_2015.get("porc_viv_sin_agua_entubada")
             )
-            ctx["de_marg_piso_tierra_2015"] = _pct(
+            ctx["de_marg_piso_tierra_2015"] = _fmt(
                 mun_marg_2015.get("porc_viv_piso_tierra")
             )
             ctx["de_marg_hacinamiento_2015"] = _fmt(
                 mun_marg_2015.get("prom_ocup_por_cuarto"), 2
             )
-            ctx["de_marg_loc_menos5000_2015"] = _pct(
+            ctx["de_marg_loc_menos5000_2015"] = _fmt(
                 mun_marg_2015.get("porc_pob_loc_menos5000_hab")
             )
-            ctx["de_marg_hasta2salmin_2015"] = _pct(
+            ctx["de_marg_hasta2salmin_2015"] = _fmt(
                 mun_marg_2015.get("pob_ocup_hasta_2_sal_min")
             )
             ctx["de_marg_pos_entidad_2015"] = _marg_ranking(cvegeo, marginacion_2015)
@@ -541,31 +541,31 @@ class Analizer(Stage):
                 mun_marg_2010.get("indice_marginacion"), 4
             )
             ctx["de_marg_grado_2010"] = mun_marg_2010.get("grado_marginacion") or ND
-            ctx["de_marg_analfabeta_2010"] = _pct(
+            ctx["de_marg_analfabeta_2010"] = _fmt(
                 mun_marg_2010.get("porc_pob15_analfabeta")
             )
-            ctx["de_marg_sin_educ_bas_2010"] = _pct(
+            ctx["de_marg_sin_educ_bas_2010"] = _fmt(
                 mun_marg_2010.get("pob15_sin_educ_bas")
             )
-            ctx["de_marg_sin_drenaje_2010"] = _pct(
+            ctx["de_marg_sin_drenaje_2010"] = _fmt(
                 mun_marg_2010.get("porc_viv_sin_drenaje_ni_excusado")
             )
-            ctx["de_marg_sin_energia_2010"] = _pct(
+            ctx["de_marg_sin_energia_2010"] = _fmt(
                 mun_marg_2010.get("porc_viv_sin_energia")
             )
-            ctx["de_marg_sin_agua_2010"] = _pct(
+            ctx["de_marg_sin_agua_2010"] = _fmt(
                 mun_marg_2010.get("porc_viv_sin_agua_entubada")
             )
-            ctx["de_marg_piso_tierra_2010"] = _pct(
+            ctx["de_marg_piso_tierra_2010"] = _fmt(
                 mun_marg_2010.get("porc_viv_piso_tierra")
             )
             ctx["de_marg_hacinamiento_2010"] = _fmt(
                 mun_marg_2010.get("prom_ocup_por_cuarto"), 2
             )
-            ctx["de_marg_loc_menos5000_2010"] = _pct(
+            ctx["de_marg_loc_menos5000_2010"] = _fmt(
                 mun_marg_2010.get("porc_pob_loc_menos5000_hab")
             )
-            ctx["de_marg_hasta2salmin_2010"] = _pct(
+            ctx["de_marg_hasta2salmin_2010"] = _fmt(
                 mun_marg_2010.get("pob_ocup_hasta_2_sal_min")
             )
             ctx["de_marg_pos_entidad_2010"] = _marg_ranking(cvegeo, marginacion_2010)
