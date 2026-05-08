@@ -290,7 +290,7 @@ class Analizer(Stage):
             ctx["de_porcentaje_emigrantes_mun"] = _pct(
                 mun_2020.get("por_viv_emigrantes")
             )
-            ctx["de_porcentaje_migrantes_circulares_mun"] = _pct(
+            ctx["de_porcentaje_migrantes_circulares_mun"] = _fmt(
                 mun_2020.get("por_viv_circ")
             )
             ctx["de_porcentaje_migrantes_retorno_mun"] = _pct(
@@ -337,7 +337,7 @@ class Analizer(Stage):
             ctx["de_ranking_nacional_mun_migracion_2010"] = (
                 mun_2010.get("lugar_contexto_nacional") or ND
             )
-            ctx["de_porcentaje_migrantes_circulares_anterior_mun"] = _pct(
+            ctx["de_porcentaje_migrantes_circulares_anterior_mun"] = _fmt(
                 mun_2010.get("por_viv_circ")
             )
         else:
@@ -367,22 +367,22 @@ class Analizer(Stage):
             else ND
         )
         ctx["de_por_viv_remesas_mun_2010"] = (
-            _pct(mun_2010.get("por_viv_remesas")) if mun_2010 else ND
+            _fmt(mun_2010.get("por_viv_remesas")) if mun_2010 else ND
         )
         ctx["de_por_viv_remesas_mun_2020"] = (
-            _pct(mun_2020.get("por_viv_remesas")) if mun_2020 else ND
+            _fmt(mun_2020.get("por_viv_remesas")) if mun_2020 else ND
         )
         ctx["de_por_viv_emigrantes_mun_2010"] = (
-            _pct(mun_2010.get("por_viv_emigrantes")) if mun_2010 else ND
+            _fmt(mun_2010.get("por_viv_emigrantes")) if mun_2010 else ND
         )
         ctx["de_por_viv_emigrantes_mun_2020"] = (
-            _pct(mun_2020.get("por_viv_emigrantes")) if mun_2020 else ND
+            _fmt(mun_2020.get("por_viv_emigrantes")) if mun_2020 else ND
         )
         ctx["de_por_viv_retorno_mun_2010"] = (
-            _pct(mun_2010.get("por_viv_reto")) if mun_2010 else ND
+            _fmt(mun_2010.get("por_viv_reto")) if mun_2010 else ND
         )
         ctx["de_por_viv_retorno_mun_2020"] = (
-            _pct(mun_2020.get("por_viv_reto")) if mun_2020 else ND
+            _fmt(mun_2020.get("por_viv_reto")) if mun_2020 else ND
         )
 
         ctx["de_mapa_grado_intensidad_migratoria"] = _mapa_latex(
@@ -444,6 +444,9 @@ class Analizer(Stage):
             ctx["de_marg_hacinamiento_2020"] = _fmt(
                 mun_marg_2020.get("prom_ocup_por_cuarto"), 2
             )
+            ctx["de_marg_hacinamiento_pct_2020"] = _pct(
+                mun_marg_2020.get("prom_ocup_por_cuarto")
+            )
             ctx["de_marg_loc_menos5000_2020"] = _fmt(
                 mun_marg_2020.get("porc_pob_loc_menos5000_hab")
             )
@@ -471,6 +474,7 @@ class Analizer(Stage):
             ctx["de_marg_sin_agua_2020"] = ND
             ctx["de_marg_piso_tierra_2020"] = ND
             ctx["de_marg_hacinamiento_2020"] = ND
+            ctx["de_marg_hacinamiento_pct_2020"] = ND
             ctx["de_marg_loc_menos5000_2020"] = ND
             ctx["de_marg_hasta2salmin_2020"] = ND
             ctx["de_marg_sin_refrigerador_2020"] = ND
@@ -684,9 +688,7 @@ class Analizer(Stage):
                     "sin_energia": _loc_val(marg, "porc_viv_sin_energia", _pct),
                     "sin_agua": _loc_val(marg, "porc_viv_sin_agua_entubada", _pct),
                     "piso_tierra": _loc_val(marg, "porc_viv_piso_tierra", _pct),
-                    "hacinamiento": _loc_val(
-                        marg, "prom_ocup_por_cuarto", lambda v: _fmt(v, 2)
-                    ),
+                    "hacinamiento": _loc_val(marg, "prom_ocup_por_cuarto", _pct),
                     "sin_refrigerador": _loc_val(
                         marg, "porc_viv_sin_refrigerador", _pct
                     ),
