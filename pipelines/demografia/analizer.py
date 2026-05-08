@@ -426,19 +426,37 @@ class Analizer(Stage):
             ctx["de_marg_analfabeta_2020"] = _fmt(
                 mun_marg_2020.get("porc_pob15_analfabeta")
             )
+            ctx["de_marg_analfabeta_pct_2020"] = _pct(
+                mun_marg_2020.get("porc_pob15_analfabeta")
+            )
             ctx["de_marg_sin_educ_bas_2020"] = _fmt(
+                mun_marg_2020.get("pob15_sin_educ_bas")
+            )
+            ctx["de_marg_sin_educ_bas_pct_2020"] = _pct(
                 mun_marg_2020.get("pob15_sin_educ_bas")
             )
             ctx["de_marg_sin_drenaje_2020"] = _fmt(
                 mun_marg_2020.get("porc_viv_sin_drenaje_ni_excusado")
             )
+            ctx["de_marg_sin_drenaje_pct_2020"] = _pct(
+                mun_marg_2020.get("porc_viv_sin_drenaje_ni_excusado")
+            )
             ctx["de_marg_sin_energia_2020"] = _fmt(
+                mun_marg_2020.get("porc_viv_sin_energia")
+            )
+            ctx["de_marg_sin_energia_pct_2020"] = _pct(
                 mun_marg_2020.get("porc_viv_sin_energia")
             )
             ctx["de_marg_sin_agua_2020"] = _fmt(
                 mun_marg_2020.get("porc_viv_sin_agua_entubada")
             )
+            ctx["de_marg_sin_agua_pct_2020"] = _pct(
+                mun_marg_2020.get("porc_viv_sin_agua_entubada")
+            )
             ctx["de_marg_piso_tierra_2020"] = _fmt(
+                mun_marg_2020.get("porc_viv_piso_tierra")
+            )
+            ctx["de_marg_piso_tierra_pct_2020"] = _pct(
                 mun_marg_2020.get("porc_viv_piso_tierra")
             )
             ctx["de_marg_hacinamiento_2020"] = _fmt(
@@ -468,11 +486,17 @@ class Analizer(Stage):
             ctx["de_marg_indice_2020"] = ND
             ctx["de_marg_grado_2020"] = ND
             ctx["de_marg_analfabeta_2020"] = ND
+            ctx["de_marg_analfabeta_pct_2020"] = ND
             ctx["de_marg_sin_educ_bas_2020"] = ND
+            ctx["de_marg_sin_educ_bas_pct_2020"] = ND
             ctx["de_marg_sin_drenaje_2020"] = ND
+            ctx["de_marg_sin_drenaje_pct_2020"] = ND
             ctx["de_marg_sin_energia_2020"] = ND
+            ctx["de_marg_sin_energia_pct_2020"] = ND
             ctx["de_marg_sin_agua_2020"] = ND
+            ctx["de_marg_sin_agua_pct_2020"] = ND
             ctx["de_marg_piso_tierra_2020"] = ND
+            ctx["de_marg_piso_tierra_pct_2020"] = ND
             ctx["de_marg_hacinamiento_2020"] = ND
             ctx["de_marg_hacinamiento_pct_2020"] = ND
             ctx["de_marg_loc_menos5000_2020"] = ND
