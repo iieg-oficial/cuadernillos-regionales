@@ -4,6 +4,7 @@ from core.pipelines.stage import Stage
 from core.utils.municipalities import get_same_region
 
 ND = "\\ND"
+DASH = "{--}"
 MAPA_PLACEHOLDER = Path("templates/assets/mapa_placeholder.png")
 
 
@@ -208,11 +209,17 @@ class Analizer(Stage):
                 "nombre": loc["localidad"],
                 "total_2010": _fmt_int(loc_2010_by_clave[loc["clave"]]["total"])
                 if loc["clave"] in loc_2010_by_clave
-                else ND,
+                else DASH,
                 "total_2020": _fmt_int(loc["total"]),
-                "hombres_2020": _fmt_int(loc["hombres"]) if loc.get("hombres") else ND,
-                "mujeres_2020": _fmt_int(loc["mujeres"]) if loc.get("mujeres") else ND,
-                "pct_2020": _fmt(loc["total"] / total_2020 * 100) if total_2020 else ND,
+                "hombres_2020": _fmt_int(loc["hombres"])
+                if loc.get("hombres")
+                else DASH,
+                "mujeres_2020": _fmt_int(loc["mujeres"])
+                if loc.get("mujeres")
+                else DASH,
+                "pct_2020": _fmt(loc["total"] / total_2020 * 100)
+                if total_2020
+                else DASH,
                 "var_pct_2010_2020": _fmt(
                     (loc["total"] - loc_2010_by_clave[loc["clave"]]["total"])
                     / loc_2010_by_clave[loc["clave"]]["total"]
@@ -222,7 +229,7 @@ class Analizer(Stage):
                     loc["clave"] in loc_2010_by_clave
                     and loc_2010_by_clave[loc["clave"]]["total"]
                 )
-                else ND,
+                else DASH,
             }
             for loc in localidades_2020[:5]
         ]
@@ -680,7 +687,6 @@ class Analizer(Stage):
             f"Índice de marginación por municipio. Jalisco, {ANIO_CENSO}",
         )
 
-        DASH = "{--}"
         marg_by_nombre = {loc["localidad"]: loc for loc in marginacion_localidades}
 
         def _loc_val(marg, key, fn):
