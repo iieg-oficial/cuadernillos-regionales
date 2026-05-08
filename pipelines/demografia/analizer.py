@@ -126,7 +126,7 @@ class Analizer(Stage):
         var_2010_2020 = total_2020 - total_2010
         ctx["de_variacion_poblacion_quinquenio"] = _fmt_int(var_2010_2020)
         ctx["de_variacion_porcentual_poblacion_quinquenio"] = (
-            _pct(var_2010_2020 / total_2010 * 100) if total_2010 else ND
+            _fmt(var_2010_2020 / total_2010 * 100) if total_2010 else ND
         )
 
         mujeres_2010 = t2010.get("mujeres") or 0
@@ -158,32 +158,32 @@ class Analizer(Stage):
         ctx["de_tabla_pob_total_2015"] = _fmt_int(total_2015) if total_2015 else ND
         ctx["de_tabla_pob_total_2020"] = _fmt_int(total_2020) if total_2020 else ND
         ctx["de_tabla_pob_var_pct_mujeres_2010_2015"] = (
-            _pct((mujeres_2015 - mujeres_2010) / mujeres_2010 * 100)
+            _fmt((mujeres_2015 - mujeres_2010) / mujeres_2010 * 100)
             if (mujeres_2010 and mujeres_2015)
             else ND
         )
         ctx["de_tabla_pob_var_pct_mujeres_2015_2020"] = (
-            _pct((mujeres_2020 - mujeres_2015) / mujeres_2015 * 100)
+            _fmt((mujeres_2020 - mujeres_2015) / mujeres_2015 * 100)
             if (mujeres_2015 and mujeres_2020)
             else ND
         )
         ctx["de_tabla_pob_var_pct_hombres_2010_2015"] = (
-            _pct((hombres_2015 - hombres_2010) / hombres_2010 * 100)
+            _fmt((hombres_2015 - hombres_2010) / hombres_2010 * 100)
             if (hombres_2010 and hombres_2015)
             else ND
         )
         ctx["de_tabla_pob_var_pct_hombres_2015_2020"] = (
-            _pct((hombres_2020 - hombres_2015) / hombres_2015 * 100)
+            _fmt((hombres_2020 - hombres_2015) / hombres_2015 * 100)
             if (hombres_2015 and hombres_2020)
             else ND
         )
         ctx["de_tabla_pob_var_pct_total_2010_2015"] = (
-            _pct((total_2015 - total_2010) / total_2010 * 100)
+            _fmt((total_2015 - total_2010) / total_2010 * 100)
             if (total_2010 and total_2015)
             else ND
         )
         ctx["de_tabla_pob_var_pct_total_2015_2020"] = (
-            _pct((total_2020 - total_2015) / total_2015 * 100)
+            _fmt((total_2020 - total_2015) / total_2015 * 100)
             if (total_2015 and total_2020)
             else ND
         )
@@ -212,8 +212,8 @@ class Analizer(Stage):
                 "total_2020": _fmt_int(loc["total"]),
                 "hombres_2020": _fmt_int(loc["hombres"]) if loc.get("hombres") else ND,
                 "mujeres_2020": _fmt_int(loc["mujeres"]) if loc.get("mujeres") else ND,
-                "pct_2020": _pct(loc["total"] / total_2020 * 100) if total_2020 else ND,
-                "var_pct_2010_2020": _pct(
+                "pct_2020": _fmt(loc["total"] / total_2020 * 100) if total_2020 else ND,
+                "var_pct_2010_2020": _fmt(
                     (loc["total"] - loc_2010_by_clave[loc["clave"]]["total"])
                     / loc_2010_by_clave[loc["clave"]]["total"]
                     * 100
