@@ -50,7 +50,7 @@ sector << ec_sector_tercer_unidades >> con el << ec_porcentaje_sector_tercer_uni
 
 \caption{\textbf{Cantidad de unidades económicas por sector y según composición en << ec_municipio_nombre >> }\\
 << ec_anio_denue >>}
-
+\label{tabla_denue} \\
 \rowcolor{colorSeccion}
 \multicolumn{10}{|c|}{\rule[-10pt]{0pt}{26pt}\color{white}\textbf{<< ec_municipio_nombre >>, << ec_anio_denue >> (unidades económicas)}} \\
 \hline
@@ -144,6 +144,7 @@ real pasando << ec_aportacion_anterior_subsector_mayor_crecimiento >> pesos en
                   |>{\centering\arraybackslash}p{\dimexpr0.14\linewidth - 2\tabcolsep\relax}|}
 \caption{\textbf{Subsectores con mayor valor agregado censal bruto (VACB) en << ec_municipio_nombre >> }\\
 << ec_anio_denue >>}
+\label{tabla_vacb} \\
 \hline
 \rowcolor{gray!30}
 \textbf{\thdr{Subsector}} & \textbf{\thdr{<< ec_anio_ce_anterior >>}} & \textbf{\thdr{<< ec_anio_ce >>}} & \textbf{\thdr{\% Part. << ec_anio_ce >>}} & \textbf{\thdr{Var\,\% << ec_anio_ce_anterior >>--<< ec_anio_ce >>}} \\
@@ -217,6 +218,7 @@ concentrando el << ec_porcentaje_trabajadores_grupo_mayor >> del total de asegur
 \caption{\textbf{Trabajadores asegurados por grupo económico en << ec_municipio_nombre >>}\\
 << ec_mes_corte_imss >> << ec_dos_anios_atras_corte_imss >>, << ec_anio_anterior_corte_imss >>,
 << ec_anio_corte_imss >>}
+\label{tabla_imss_grupos} \\
 \hline
 \rowcolor{gray!30}
 \textbf{\thdr{Grupo económico}} & \textbf{\thdr{<< ec_mes_corte_imss >> << ec_dos_anios_atras_corte_imss >>}} & \textbf{\thdr{<< ec_mes_corte_imss >> << ec_anio_anterior_corte_imss >>}} & \textbf{\thdr{<< ec_mes_corte_imss >> << ec_anio_corte_imss >>}} & \textbf{\thdr{\% Part.}} & \textbf{\thdr{Var. nominal << ec_anio_anterior_corte_imss >>--<< ec_anio_corte_imss >>}} & \textbf{\thdr{Var. \% << ec_anio_anterior_corte_imss >>--<< ec_anio_corte_imss >>}} \\
@@ -271,6 +273,7 @@ de trabajadores, concentrando el << ec_porcentaje_asegurados_region >> del total
                   |>{\centering\arraybackslash}p{\dimexpr0.16\linewidth - 2\tabcolsep\relax}|}
 \caption{\textbf{Trabajadores asegurados por municipio en la región << ec_region >>}\\
 << ec_mes_corte_imss >>  de << ec_anio_anterior_corte_imss >> y << ec_anio_corte_imss >>}
+\label{tabla_imss_region} \\
 \hline
 \rowcolor{gray!30}
 \textbf{\thdr{Municipio}} & \textbf{\thdr{<< ec_mes_corte_imss >> << ec_anio_anterior_corte_imss >>}} & \textbf{\thdr{<< ec_mes_corte_imss >> << ec_anio_corte_imss >>}} & \textbf{\thdr{\% Part. << ec_mes_corte_imss >> << ec_anio_corte_imss >>}} & \textbf{\thdr{Var. nominal << ec_anio_anterior_corte_imss >>/<< ec_anio_corte_imss >>}} & \textbf{\thdr{Var. \% << ec_anio_anterior_corte_imss >>/<< ec_anio_corte_imss >>}} \\
