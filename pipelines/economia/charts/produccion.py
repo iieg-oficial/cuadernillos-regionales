@@ -24,7 +24,7 @@ def grafica_produccion(
 
     fig, ax = plt.subplots(figsize=(10, 5.5))
 
-    bars = ax.bar(anios, valores, color=colores, width=0.6, edgecolor="none")
+    bars = ax.bar(anios, valores, color=colores, width=0.85, edgecolor="none")
 
     for bar, val in zip(bars, valores):
         ax.text(
@@ -49,22 +49,7 @@ def grafica_produccion(
     ax.spines["bottom"].set_color(COLOR_TEXTO)
     ax.tick_params(colors=COLOR_TEXTO)
 
-    anio_ini = anios[0]
-    anio_fin = anios[-1]
-    titulo = (
-        f"Valor de la producción {tipo} de "
-        f"{municipio} {anio_ini}-{anio_fin} (miles de pesos)"
-    )
-    fig.suptitle(
-        titulo,
-        fontsize=13,
-        fontweight="bold",
-        color=COLOR_TEXTO,
-        x=0.05,
-        ha="left",
-    )
-
-    fig.tight_layout(rect=[0, 0, 1, 0.93])
+    fig.tight_layout()
     output_path.parent.mkdir(parents=True, exist_ok=True)
     fig.savefig(output_path, dpi=150, bbox_inches="tight")
     plt.close(fig)

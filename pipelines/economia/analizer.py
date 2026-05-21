@@ -45,17 +45,21 @@ def _pct(value) -> str:
     return f"{value:,.2f}".replace(",", r"\,") + r"\,\%"
 
 
-def _figura_latex(path, municipio, tipo, datos):
+def _grafica_latex(path, municipio, tipo, datos, num):
     n = min(6, len(datos))
     ultimos = datos[-n:]
     anio_ini = ultimos[0]["anio"]
     anio_fin = ultimos[-1]["anio"]
+    titulo = (
+        f"Valor de la producción {tipo} de "
+        f"{municipio}, {anio_ini}-{anio_fin} (miles de pesos)"
+    )
     return (
         "\\begin{figure}[H]\n"
-        "\\centering\n"
+        f"{{\\color{{colorTexto}}Gráfica {num}}}\\\\\n"
+        f"{{\\color{{colorTexto}}\\textbf{{{titulo}}}}}\n"
+        "\\vspace{0.3cm}\n\n"
         f"\\includegraphics[width=0.95\\textwidth]{{{path}}}\n"
-        f"\\caption{{Valor de la producción {tipo} de "
-        f"{municipio} {anio_ini}-{anio_fin} (miles de pesos)}}\n"
         "\\end{figure}"
     )
 
@@ -381,8 +385,8 @@ class Analizer(Stage):
         if len(agricola_anual) >= 2:
             chart_path = CHARTS_DIR / municipio_id_str / "ec_agricultura.png"
             grafica_produccion(agricola_anual, municipio_nombre, "agrícola", chart_path)
-            ctx["ec_grafica_agricultura"] = _figura_latex(
-                chart_path, municipio_nombre, "agrícola", agricola_anual
+            ctx["ec_grafica_agricultura"] = _grafica_latex(
+                chart_path, municipio_nombre, "agrícola", agricola_anual, 1
             )
         else:
             ctx["ec_grafica_agricultura"] = MAPA_PLACEHOLDER
@@ -402,8 +406,8 @@ class Analizer(Stage):
         if len(ganadera_anual) >= 2:
             chart_path = CHARTS_DIR / municipio_id_str / "ec_ganaderia.png"
             grafica_produccion(ganadera_anual, municipio_nombre, "ganadera", chart_path)
-            ctx["ec_grafica_ganaderia"] = _figura_latex(
-                chart_path, municipio_nombre, "ganadera", ganadera_anual
+            ctx["ec_grafica_ganaderia"] = _grafica_latex(
+                chart_path, municipio_nombre, "ganadera", ganadera_anual, 2
             )
         else:
             ctx["ec_grafica_ganaderia"] = MAPA_PLACEHOLDER
