@@ -7,8 +7,7 @@ from pipelines.economia.queries.censos_economicos import (
 )
 from pipelines.economia.queries.denue import (
     get_nombre_municipio,
-    get_ranking_municipio_unidades,
-    get_total_estatal_unidades,
+    get_ranking_y_total_estatal,
     get_ultima_actualizacion,
     get_unidades_por_sector_y_rango,
 )
@@ -31,12 +30,16 @@ class Extract(Stage):
             denue = DatabaseSettings.from_env("denue")
             with get_session(denue) as session:
                 nombre = get_nombre_municipio(session, cve_mun)
-                ultima_act = get_ultima_actualizacion(session)
-                unidades_sector_rango = get_unidades_por_sector_y_rango(
-                    session, cve_mun
-                )
-                total_estatal_denue = get_total_estatal_unidades(session)
-                ranking_denue = get_ranking_municipio_unidades(session, cve_mun)
+                act_row = get_ultima_actualizacion(session)
+                if act_row:
+                    ultima_act = act_row.fecha_actualizacion
+                    act_id = act_row.id
+                    unidades_sector_rango = get_unidades_por_sector_y_rango(
+                        session, cve_mun, act_id
+                    )
+                    total_estatal_denue, ranking_denue = get_ranking_y_total_estatal(
+                        session, cve_mun, act_id
+                    )
         except Exception:
             pass
 
