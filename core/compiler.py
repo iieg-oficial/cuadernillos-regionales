@@ -16,16 +16,15 @@ def compile(tex_path: Path) -> Path:
     ]
 
     subprocess.run(cmd, capture_output=True, text=True)
-
     result = subprocess.run(cmd, capture_output=True, text=True)
 
     pdf_path = output_dir / tex_path.with_suffix(".pdf").name
 
     if result.returncode != 0:
         if not pdf_path.exists():
-            Logger.error(f"pdflatex failed for {tex_path.name}:\n{result.stdout}")
-            raise RuntimeError(f"pdflatex failed for {tex_path.name}")
-        Logger.warning(f"pdflatex warnings for {tex_path.name} (PDF still generated)")
+            Logger.error(f"xelatex failed for {tex_path.name}:\n{result.stdout}")
+            raise RuntimeError(f"xelatex failed for {tex_path.name}")
+        Logger.warning(f"xelatex warnings for {tex_path.name} (PDF still generated)")
 
     Logger.info(f"PDF generated: {pdf_path}")
     return pdf_path
