@@ -1,10 +1,15 @@
+from pathlib import Path
+
 from core.pipelines.stage import Stage
 from core.utils.municipalities import get_region, get_same_region
+from pipelines.economia.charts.produccion import grafica_produccion
 
 ND = "\\ND"
 MAPA_PLACEHOLDER = (
     "\\includegraphics[width=\\textwidth]{templates/assets/mapa_placeholder.png}"
 )
+
+CHARTS_DIR = Path("output/charts")
 
 ANIO_CE = 2024
 ANIO_CE_ANTERIOR = 2019
@@ -38,6 +43,21 @@ def _pct(value) -> str:
     if value is None:
         return ND
     return f"{value:,.2f}".replace(",", r"\,") + r"\,\%"
+
+
+def _figura_latex(path, municipio, tipo, datos):
+    n = min(6, len(datos))
+    ultimos = datos[-n:]
+    anio_ini = ultimos[0]["anio"]
+    anio_fin = ultimos[-1]["anio"]
+    return (
+        "\\begin{figure}[H]\n"
+        "\\centering\n"
+        f"\\includegraphics[width=0.95\\textwidth]{{{path}}}\n"
+        f"\\caption{{Valor de la producción {tipo} de "
+        f"{municipio} {anio_ini}-{anio_fin} (miles de pesos)}}\n"
+        "\\end{figure}"
+    )
 
 
 def _build_denue_table(unidades_sector_rango):
@@ -332,12 +352,60 @@ class Analizer(Stage):
         ctx["ec_porcentaje_asegurados_region"] = ND
         ctx["ec_tabla_imss_region"] = []
 
-        ctx["ec_anio_corte_sagarpa"] = ND
-        ctx["ec_valor_produccion_agricola"] = ND
-        ctx["ec_porcentaje_respecto_al_estado_agricola"] = ND
-        ctx["ec_valor_produccion_ganado"] = ND
-        ctx["ec_porcentaje_respecto_al_estado_ganado"] = ND
-        ctx["ec_grafica_agricultura"] = MAPA_PLACEHOLDER
-        ctx["ec_grafica_ganaderia"] = MAPA_PLACEHOLDER
+        anio_agricola = input_data.get("anio_agricola")
+        agricola_anual = input_data.get("agricola_anual", [])
+        agricola_mun = input_data.get("agricola_municipal_mdp")
+        agricola_est = input_data.get("agricola_estatal_mdp")
+        anio_ganadero = input_data.get("anio_ganadero")
+        ganadera_anual = input_data.get("ganadera_anual", [])
+        ganadera_mun = input_data.get("ganadera_municipal_mdp")
+        ganadera_est = input_data.get("ganadera_estatal_mdp")
+
+        anio_corte = anio_agricola or anio_ganadero
+        ctx["ec_anio_corte_sagarpa"] = anio_corte if anio_corte else ND
+
+        municipio_nombre = input_data.get("municipio_nombre") or ""
+
+        if agricola_mun is not None:
+            ctx["ec_valor_produccion_agricola"] = _fmt(agricola_mun)
+        else:
+            ctx["ec_valor_produccion_agricola"] = ND
+
+        if agricola_mun and agricola_est:
+            ctx["ec_porcentaje_respecto_al_estado_agricola"] = _pct(
+                agricola_mun / agricola_est * 100
+            )
+        else:
+            ctx["ec_porcentaje_respecto_al_estado_agricola"] = ND
+
+        if len(agricola_anual) >= 2:
+            chart_path = CHARTS_DIR / municipio_id_str / "ec_agricultura.png"
+            grafica_produccion(agricola_anual, municipio_nombre, "agrícola", chart_path)
+            ctx["ec_grafica_agricultura"] = _figura_latex(
+                chart_path, municipio_nombre, "agrícola", agricola_anual
+            )
+        else:
+            ctx["ec_grafica_agricultura"] = MAPA_PLACEHOLDER
+
+        if ganadera_mun is not None:
+            ctx["ec_valor_produccion_ganado"] = _fmt(ganadera_mun)
+        else:
+            ctx["ec_valor_produccion_ganado"] = ND
+
+        if ganadera_mun and ganadera_est:
+            ctx["ec_porcentaje_respecto_al_estado_ganado"] = _pct(
+                ganadera_mun / ganadera_est * 100
+            )
+        else:
+            ctx["ec_porcentaje_respecto_al_estado_ganado"] = ND
+
+        if len(ganadera_anual) >= 2:
+            chart_path = CHARTS_DIR / municipio_id_str / "ec_ganaderia.png"
+            grafica_produccion(ganadera_anual, municipio_nombre, "ganadera", chart_path)
+            ctx["ec_grafica_ganaderia"] = _figura_latex(
+                chart_path, municipio_nombre, "ganadera", ganadera_anual
+            )
+        else:
+            ctx["ec_grafica_ganaderia"] = MAPA_PLACEHOLDER
 
         return ctx

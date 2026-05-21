@@ -1,6 +1,12 @@
 from core.db import get_session
 from core.pipelines.stage import Stage
 from core.settings import DatabaseSettings
+from pipelines.economia.queries.agropecuario import (
+    get_ultimo_anio_agricola,
+    get_valor_produccion_agricola_anual,
+    get_valor_produccion_agricola_estatal,
+    get_valor_produccion_agricola_municipal,
+)
 from pipelines.economia.queries.censos_economicos import (
     get_vacb_por_subsector,
     get_vacb_total,
@@ -10,6 +16,12 @@ from pipelines.economia.queries.denue import (
     get_ranking_y_total_estatal,
     get_ultima_actualizacion,
     get_unidades_por_sector_y_rango,
+)
+from pipelines.economia.queries.ganaderia import (
+    get_ultimo_anio_ganadero,
+    get_valor_produccion_ganadera_anual,
+    get_valor_produccion_ganadera_estatal,
+    get_valor_produccion_ganadera_municipal,
 )
 
 ANIO_CE = 2024
@@ -60,6 +72,50 @@ class Extract(Stage):
         except Exception:
             pass
 
+        agricola_anual = []
+        agricola_municipal_mdp = None
+        agricola_estatal_mdp = None
+        anio_agricola = None
+
+        try:
+            siap = DatabaseSettings.from_env("agropecuario_siap")
+            with get_session(siap) as session:
+                anio_agricola = get_ultimo_anio_agricola(session)
+                if anio_agricola:
+                    agricola_anual = get_valor_produccion_agricola_anual(
+                        session, cve_mun
+                    )
+                    agricola_municipal_mdp = get_valor_produccion_agricola_municipal(
+                        session, cve_mun, anio_agricola
+                    )
+                    agricola_estatal_mdp = get_valor_produccion_agricola_estatal(
+                        session, anio_agricola
+                    )
+        except Exception:
+            pass
+
+        ganadera_anual = []
+        ganadera_municipal_mdp = None
+        ganadera_estatal_mdp = None
+        anio_ganadero = None
+
+        try:
+            gan = DatabaseSettings.from_env("produccion_ganadera")
+            with get_session(gan) as session:
+                anio_ganadero = get_ultimo_anio_ganadero(session)
+                if anio_ganadero:
+                    ganadera_anual = get_valor_produccion_ganadera_anual(
+                        session, cve_mun
+                    )
+                    ganadera_municipal_mdp = get_valor_produccion_ganadera_municipal(
+                        session, cve_mun, anio_ganadero
+                    )
+                    ganadera_estatal_mdp = get_valor_produccion_ganadera_estatal(
+                        session, anio_ganadero
+                    )
+        except Exception:
+            pass
+
         return {
             "cve_mun": cve_mun,
             "municipio_nombre": nombre,
@@ -73,4 +129,12 @@ class Extract(Stage):
             "vacb_anterior": vacb_anterior,
             "vacb_total_actual": vacb_total_actual,
             "vacb_total_anterior": vacb_total_anterior,
+            "anio_agricola": anio_agricola,
+            "agricola_anual": agricola_anual,
+            "agricola_municipal_mdp": agricola_municipal_mdp,
+            "agricola_estatal_mdp": agricola_estatal_mdp,
+            "anio_ganadero": anio_ganadero,
+            "ganadera_anual": ganadera_anual,
+            "ganadera_municipal_mdp": ganadera_municipal_mdp,
+            "ganadera_estatal_mdp": ganadera_estatal_mdp,
         }

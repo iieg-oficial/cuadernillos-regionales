@@ -289,19 +289,122 @@ Validar:
 - [ ] Variacion porcentual
 - [ ] El municipio actual aparece resaltado
 
-## Agricultura y ganaderia
+## Agricultura
 
-> Pipeline no implementado. Todas las variables se muestran como N/D.
+Base de datos: `agropecuario_siap`
+
+Reemplazar `{anio}` con el anio de corte (ej. 2024).
 
 ### Texto
 
 - [ ] `ec_anio_corte_sagarpa`: anio de corte de la informacion agropecuaria
-- [ ] `ec_valor_produccion_agricola`: valor de la produccion agricola en millones de pesos
-- [ ] `ec_porcentaje_respecto_al_estado_agricola`: porcentaje respecto al total estatal
-- [ ] `ec_valor_produccion_ganado`: valor de la produccion ganadera en millones de pesos
-- [ ] `ec_porcentaje_respecto_al_estado_ganado`: porcentaje respecto al total estatal
 
-### Graficas
+> Usar el anio mas reciente con datos disponibles:
+
+```sql
+SELECT DISTINCT anio
+FROM public.stg_agricola
+WHERE entidad_id = 14
+ORDER BY anio DESC
+LIMIT 1;
+```
+
+- [ ] `ec_valor_produccion_agricola`: valor de la produccion agricola en millones de pesos
+
+```sql
+SELECT
+    ROUND(SUM(valor_produccion) / 1000000.0, 2) AS valor_produccion_mdp
+FROM public.stg_agricola
+WHERE entidad_id = 14
+  AND municipio_id = {cve_mun}
+  AND anio = {anio};
+```
+
+- [ ] `ec_porcentaje_respecto_al_estado_agricola`: porcentaje respecto al total estatal
+
+```sql
+WITH estatal AS (
+    SELECT SUM(valor_produccion) AS total
+    FROM public.stg_agricola
+    WHERE entidad_id = 14
+      AND anio = {anio}
+),
+municipal AS (
+    SELECT SUM(valor_produccion) AS total
+    FROM public.stg_agricola
+    WHERE entidad_id = 14
+      AND municipio_id = {cve_mun}
+      AND anio = {anio}
+)
+SELECT ROUND(municipal.total * 100.0 / estatal.total, 2) AS porcentaje
+FROM municipal, estatal;
+```
+
+### Grafica
 
 - [ ] `ec_grafica_agricultura`: grafica de produccion agricola generada correctamente
+
+> Para validar los datos de la grafica, usar la vista:
+
+```sql
+SELECT cultivo, SUM(valor_produccion) AS valor_produccion
+FROM public.view_agricola_jalisco
+WHERE municipio_id = {cve_mun}
+  AND anio = {anio}
+GROUP BY cultivo
+ORDER BY valor_produccion DESC;
+```
+
+## Ganaderia
+
+Base de datos: `produccion_ganadera`
+
+Reemplazar `{anio}` con el anio de corte (ej. 2024).
+
+### Texto
+
+- [ ] `ec_valor_produccion_ganado`: valor de la produccion ganadera en millones de pesos
+
+```sql
+SELECT
+    ROUND(SUM(valor_produccion) / 1000000.0, 2) AS valor_produccion_mdp
+FROM public.stg_ganadera
+WHERE entidad_id = 14
+  AND municipio_id = {cve_mun}
+  AND anio = {anio};
+```
+
+- [ ] `ec_porcentaje_respecto_al_estado_ganado`: porcentaje respecto al total estatal
+
+```sql
+WITH estatal AS (
+    SELECT SUM(valor_produccion) AS total
+    FROM public.stg_ganadera
+    WHERE entidad_id = 14
+      AND anio = {anio}
+),
+municipal AS (
+    SELECT SUM(valor_produccion) AS total
+    FROM public.stg_ganadera
+    WHERE entidad_id = 14
+      AND municipio_id = {cve_mun}
+      AND anio = {anio}
+)
+SELECT ROUND(municipal.total * 100.0 / estatal.total, 2) AS porcentaje
+FROM municipal, estatal;
+```
+
+### Grafica
+
 - [ ] `ec_grafica_ganaderia`: grafica de produccion ganadera generada correctamente
+
+> Para validar los datos de la grafica, usar la vista:
+
+```sql
+SELECT especie, producto, SUM(valor_produccion) AS valor_produccion
+FROM public.view_ganadera_jalisco
+WHERE municipio_id = {cve_mun}
+  AND anio = {anio}
+GROUP BY especie, producto
+ORDER BY valor_produccion DESC;
+```
