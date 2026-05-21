@@ -15,8 +15,8 @@ def compile(tex_path: Path) -> Path:
         str(tex_path),
     ]
 
-    subprocess.run(cmd, capture_output=True, text=True)
-    result = subprocess.run(cmd, capture_output=True, text=True)
+    for _ in range(2):
+        result = subprocess.run(cmd, capture_output=True, text=True)
 
     pdf_path = output_dir / tex_path.with_suffix(".pdf").name
 

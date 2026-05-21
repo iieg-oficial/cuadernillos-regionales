@@ -31,3 +31,11 @@ class HistoriaSettings(BaseSettings):
     HISTORIA_MAPS_URL: str = Field(default="")
 
     model_config = {"env_file": ".env/.env.historia"}
+
+
+class DemografiaSettings(BaseSettings):
+    DEMOGRAFIA_MAPS_MIGRACION_URL: str = Field(default="")
+    DEMOGRAFIA_MAPS_POBREZA_URL: str = Field(default="")
+    DEMOGRAFIA_MAPS_MARGINACION_URL: str = Field(default="")
+
+    model_config = {"env_file": ".env/.env.demografia"}

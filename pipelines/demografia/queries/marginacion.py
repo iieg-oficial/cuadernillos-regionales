@@ -71,7 +71,7 @@ def get_marginacion_jalisco(session: Session, anio: int) -> list[dict]:
         LEFT JOIN cvegeo_municipalities m ON m.cvegeo = mm.municipio_id
         WHERE m.cve_ent = 14
           AND EXTRACT(YEAR FROM mm.fecha_actualizacion) = :anio
-        ORDER BY mm.indice_marginacion DESC
+        ORDER BY mm.indice_marginacion ASC
     """)
     rows = session.execute(stmt, {"anio": anio}).fetchall()
     return [dict(r._mapping) for r in rows]
