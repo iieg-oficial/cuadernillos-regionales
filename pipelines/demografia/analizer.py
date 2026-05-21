@@ -1,10 +1,9 @@
 from pathlib import Path
 
+from core.constants import DASH, ND
 from core.pipelines.stage import Stage
 from core.utils.municipalities import get_same_region
 
-ND = "\\ND"
-DASH = "{--}"
 MAPA_PLACEHOLDER = Path("templates/assets/mapa_placeholder.png")
 
 

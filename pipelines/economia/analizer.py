@@ -1,10 +1,10 @@
 from pathlib import Path
 
+from core.constants import DASH, ND
 from core.pipelines.stage import Stage
 from core.utils.municipalities import get_region, get_same_region
 from pipelines.economia.charts.produccion import grafica_produccion
 
-ND = "\\ND"
 MAPA_PLACEHOLDER = (
     "\\includegraphics[width=\\textwidth]{templates/assets/mapa_placeholder.png}"
 )
@@ -136,11 +136,11 @@ def _build_vacb_table(vacb_actual, vacb_anterior, vacb_total_actual):
             var = (vact - vant) / vant * 100
             var_str = _fmt(var)
         else:
-            var_str = ND
+            var_str = DASH
         rows.append(
             {
                 "subsector": sub,
-                "vacb_anterior": _fmt(vant, 2) if vant else ND,
+                "vacb_anterior": _fmt(vant, 2) if vant else _fmt(0),
                 "vacb_actual": _fmt(vact, 2) if vact else ND,
                 "pct_part": pct_part,
                 "var_pct": var_str,
@@ -161,11 +161,11 @@ def _build_vacb_table(vacb_actual, vacb_anterior, vacb_total_actual):
         if otros_ant and otros_act:
             var_otros = _fmt((otros_act - otros_ant) / otros_ant * 100)
         else:
-            var_otros = ND
+            var_otros = DASH
         rows.append(
             {
                 "subsector": "Otros",
-                "vacb_anterior": _fmt(otros_ant, 2) if otros_ant else ND,
+                "vacb_anterior": _fmt(otros_ant, 2) if otros_ant else _fmt(0),
                 "vacb_actual": _fmt(otros_act, 2) if otros_act else ND,
                 "pct_part": pct_otros,
                 "var_pct": var_otros,

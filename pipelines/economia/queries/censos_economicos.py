@@ -22,8 +22,7 @@ def get_vacb_por_subsector(session: Session, cve_mun: int, anio: int):
             WHERE v.cve_ent = 14
               AND v.cve_mun = :cve_mun
               AND v.estrato_id = 1
-              AND v.subsector IS NOT NULL
-              AND v.subsector != ''
+              AND LENGTH(SPLIT_PART(v.subsector, '.', 1)) = 3
               AND v.valor_agregado_censal_bruto_mdp IS NOT NULL
             GROUP BY SPLIT_PART(v.subsector, '.', 1), ca.descripcion
             ORDER BY vacb DESC NULLS LAST
@@ -63,8 +62,7 @@ def get_vacb_total(session: Session, cve_mun: int, anio: int):
             WHERE v.cve_ent = 14
               AND v.cve_mun = :cve_mun
               AND v.estrato_id = 1
-              AND v.subsector IS NOT NULL
-              AND v.subsector != ''
+              AND LENGTH(SPLIT_PART(v.subsector, '.', 1)) = 3
               AND v.valor_agregado_censal_bruto_mdp IS NOT NULL
         """)
     else:
