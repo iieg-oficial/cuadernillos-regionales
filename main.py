@@ -4,10 +4,10 @@ from core.compiler import compile
 from core.pipelines.pipeline import Pipeline
 from core.renderer import render
 from core.utils.logger import Logger
-
 from pipelines.demografia.pipeline import Demografia
 from pipelines.directorio_municipal.pipeline import DirectorioMunicipal
 from pipelines.economia.pipeline import Economia
+from pipelines.gobierno_y_seguridad.pipeline import GobiernoYSeguridad
 from pipelines.historia.pipeline import Historia
 
 
@@ -29,6 +29,7 @@ def main() -> None:
             Demografia(),
             DirectorioMunicipal(),
             Economia(),
+            GobiernoYSeguridad(),
         ]
     )
 

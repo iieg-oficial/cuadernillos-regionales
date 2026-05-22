@@ -5,5 +5,5 @@ from pipelines.gobierno_y_seguridad.extract import Extract
 
 class GobiernoYSeguridad(Section):
     def run(self, municipio_id: str) -> dict:
-        raw = Extract().execute()
+        raw = Extract().execute(municipio_id)
         return Analizer(municipio_id).execute(raw)
