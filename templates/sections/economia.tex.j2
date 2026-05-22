@@ -37,54 +37,49 @@ sector << ec_sector_tercer_unidades >> con el << ec_porcentaje_sector_tercer_uni
 
 \setlength{\tabcolsep}{3pt}
 \footnotesize
-\begin{longtable}{|>{\raggedright\arraybackslash}p{\dimexpr0.20\linewidth - 2\tabcolsep\relax}
-                  |>{\centering\arraybackslash}p{\dimexpr0.08\linewidth - 2\tabcolsep\relax}
-                  |>{\centering\arraybackslash}p{\dimexpr0.08\linewidth - 2\tabcolsep\relax}
-                  |>{\centering\arraybackslash}p{\dimexpr0.08\linewidth - 2\tabcolsep\relax}
-                  |>{\centering\arraybackslash}p{\dimexpr0.08\linewidth - 2\tabcolsep\relax}
-                  |>{\centering\arraybackslash}p{\dimexpr0.08\linewidth - 2\tabcolsep\relax}
-                  |>{\centering\arraybackslash}p{\dimexpr0.08\linewidth - 2\tabcolsep\relax}
-                  |>{\centering\arraybackslash}p{\dimexpr0.08\linewidth - 2\tabcolsep\relax}
-                  |>{\centering\arraybackslash}p{\dimexpr0.12\linewidth - 2\tabcolsep\relax}
-                  |>{\centering\arraybackslash}p{\dimexpr0.12\linewidth - 2\tabcolsep\relax}|}
+\begin{longtable}{>{\raggedright\arraybackslash}m{\dimexpr0.20\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.08\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.08\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.08\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.08\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.08\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.08\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.08\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.12\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.12\linewidth - 2\tabcolsep\relax}}
 
-\caption{\textbf{Cantidad de unidades económicas por sector y según composición en << ec_municipio_nombre >> }\\
+\caption{\textbf{Cantidad de unidades económicas por sector y según composición en << ec_municipio_nombre >>} \\
 << ec_anio_denue >>}
 \label{tabla_denue} \\
-\rowcolor{colorSeccion}
-\multicolumn{10}{|c|}{\rule[-10pt]{0pt}{26pt}\color{white}\textbf{<< ec_municipio_nombre >>, << ec_anio_denue >> (unidades económicas)}} \\
+
 \hline
 \rowcolor{gray!30}
 \textbf{Sector} &
-\textbf{0 a 5 personas} &
-\textbf{6 a 10 personas} &
-\textbf{11 a 30 personas} &
-\textbf{31 a 50 personas} &
-\textbf{51 a 100 personas} &
-\textbf{101 a 250 personas} &
-\textbf{251 y más} &
-\textbf{Total de unidades económicas} &
-\textbf{\% Total de unidades económicas} \\
+\thh{0.08}{0 a 5 personas} &
+\thh{0.08}{6 a 10 personas} &
+\thh{0.08}{11 a 30 personas} &
+\thh{0.08}{31 a 50 personas} &
+\thh{0.08}{51 a 100 personas} &
+\thh{0.08}{101 a 250 personas} &
+\thh{0.08}{251 y más} &
+\thh{0.12}{Total de unidades económicas} &
+\thh{0.12}{\% Total de unidades económicas} \\
 \hline
 \endfirsthead
 
 \multicolumn{10}{l}{\small\textbf{(continuación)}} \\
-\rowcolor{colorSeccion}
-\multicolumn{10}{|c|}{\rule[-10pt]{0pt}{26pt}\color{white}\textbf{<< ec_municipio_nombre >>, << ec_anio_denue >> (unidades económicas)}} \\
 \hline
 \rowcolor{gray!30}
-
 \textbf{Sector} &
-\textbf{0 a 5 personas} &
-\textbf{6 a 10 personas} &
-\textbf{11 a 30 personas} &
-\textbf{31 a 50 personas} &
-\textbf{51 a 100 personas} &
-\textbf{101 a 250 personas} &
-\textbf{251 y más} &
-\textbf{Total de unidades económicas} &
-\textbf{\% Total de unidades económicas} \\
-
+\thh{0.08}{0 a 5 personas} &
+\thh{0.08}{6 a 10 personas} &
+\thh{0.08}{11 a 30 personas} &
+\thh{0.08}{31 a 50 personas} &
+\thh{0.08}{51 a 100 personas} &
+\thh{0.08}{101 a 250 personas} &
+\thh{0.08}{251 y más} &
+\thh{0.12}{Total de unidades económicas} &
+\thh{0.12}{\% Total de unidades económicas} \\
 \hline
 \endhead
 
@@ -100,13 +95,13 @@ sector << ec_sector_tercer_unidades >> con el << ec_porcentaje_sector_tercer_uni
 \hline
 <% endfor %>
 \rowcolor{orange!20}
-Total & << ec_denue_total_r0a5 >> & << ec_denue_total_r6a10 >> & << ec_denue_total_r11a30 >> & << ec_denue_total_r31a50 >> & << ec_denue_total_r51a100 >> & << ec_denue_total_r101a250 >> & << ec_denue_total_r251mas >> & << ec_unidades_economicas >> & 100.00 \\
+\thdr{Total} & \thdr{<< ec_denue_total_r0a5 >>} & \thdr{<< ec_denue_total_r6a10 >>} & \thdr{<< ec_denue_total_r11a30 >>} & \thdr{<< ec_denue_total_r31a50 >>} & \thdr{<< ec_denue_total_r51a100 >>} & \thdr{<< ec_denue_total_r101a250 >>} & \thdr{<< ec_denue_total_r251mas >>} & \thdr{<< ec_unidades_economicas >>} & \thdr{100.00} \\
 \hline
 
 \end{longtable}
 \normalsize
-\par\vspace{-4pt}\parbox{\linewidth}{\footnotesize
-Fuente:  INEGI. Directorio Estadístico Nacional de Unidades Económicas, << ec_anio_denue >>.}
+\vspace{-28pt}\noindent\parbox{\linewidth}{\footnotesize
+Fuente: INEGI. Directorio Estadístico Nacional de Unidades Económicas, << ec_anio_denue >>.}
 
 \subsection{Valor agregado censal bruto}
 
@@ -137,26 +132,34 @@ real pasando << ec_aportacion_anterior_subsector_mayor_crecimiento >> pesos en
 
 \setlength{\tabcolsep}{3pt}
 \footnotesize
-\begin{longtable}{|>{\raggedright\arraybackslash}p{\dimexpr0.44\linewidth - 2\tabcolsep\relax}
-                  |>{\centering\arraybackslash}p{\dimexpr0.14\linewidth - 2\tabcolsep\relax}
-                  |>{\centering\arraybackslash}p{\dimexpr0.14\linewidth - 2\tabcolsep\relax}
-                  |>{\centering\arraybackslash}p{\dimexpr0.14\linewidth - 2\tabcolsep\relax}
-                  |>{\centering\arraybackslash}p{\dimexpr0.14\linewidth - 2\tabcolsep\relax}|}
-\caption{\textbf{Subsectores con mayor valor agregado censal bruto (VACB) en << ec_municipio_nombre >> }\\
-<< ec_anio_denue >>}
+\begin{longtable}{>{\raggedright\arraybackslash}m{\dimexpr0.44\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.14\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.14\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.14\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.14\linewidth - 2\tabcolsep\relax}}
+
+\caption{\textbf{Subsectores con mayor valor agregado censal bruto (VACB) en << ec_municipio_nombre >>} \\
+<< ec_anio_ce_anterior >> y << ec_anio_ce >>}
 \label{tabla_vacb} \\
+
 \hline
 \rowcolor{gray!30}
-\textbf{\thdr{Subsector}} & \textbf{\thdr{<< ec_anio_ce_anterior >>}} & \textbf{\thdr{<< ec_anio_ce >>}} & \textbf{\thdr{\% Part. << ec_anio_ce >>}} & \textbf{\thdr{Var\,\% << ec_anio_ce_anterior >>--<< ec_anio_ce >>}} \\
+\textbf{Subsector} &
+\thh{0.14}{<< ec_anio_ce_anterior >>} &
+\thh{0.14}{<< ec_anio_ce >>} &
+\thh{0.14}{\% Part. << ec_anio_ce >>} &
+\thh{0.14}{Var\,\%\newline << ec_anio_ce_anterior >>--<< ec_anio_ce >>} \\
 \hline
 \endfirsthead
 
 \multicolumn{5}{l}{\small\textbf{(continuación)}} \\
-\rowcolor{colorSeccion}
-\multicolumn{5}{|c|}{\rule[-10pt]{0pt}{26pt}\color{white}\textbf{<< ec_municipio_nombre >>, << ec_anio_ce_anterior >> y << ec_anio_ce >> (millones de pesos)}} \\
 \hline
 \rowcolor{gray!30}
-\textbf{\thdr{Subsector}} & \textbf{\thdr{<< ec_anio_ce_anterior >>}} & \textbf{\thdr{<< ec_anio_ce >>}} & \textbf{\thdr{\% Part. << ec_anio_ce >>}} & \textbf{\thdr{Var\,\% << ec_anio_ce_anterior >>--<< ec_anio_ce >>}} \\
+\textbf{Subsector} &
+\thh{0.14}{<< ec_anio_ce_anterior >>} &
+\thh{0.14}{<< ec_anio_ce >>} &
+\thh{0.14}{\% Part. << ec_anio_ce >>} &
+\thh{0.14}{Var\,\%\newline << ec_anio_ce_anterior >>--<< ec_anio_ce >>} \\
 \hline
 \endhead
 
@@ -172,18 +175,19 @@ real pasando << ec_aportacion_anterior_subsector_mayor_crecimiento >> pesos en
 \hline
 <% endfor %>
 \rowcolor{orange!20}
-Total & << ec_vacb_total_anterior >> & << ec_vacb_total_actual >> & 100.00 & << ec_variacion_vacb_total >> \\
+\thdr{Total} & \thdr{<< ec_vacb_total_anterior >>} & \thdr{<< ec_vacb_total_actual >>} & \thdr{100.00} & \thdr{<< ec_variacion_vacb_total >>} \\
 \hline
 
 \end{longtable}
 \normalsize
-\par\vspace{-4pt}\parbox{\linewidth}{\footnotesize
-Nota: El campo otros incluye subsectores con menor valor agregado censal bruto y/o subsectores agrupados
-por el principio de confidencialidad. \\
-Fuente: IIEG con base en INEGI. Censos Económicos, << ec_anio_publicacion_ce_anterior >> y
-<< ec_anio_publicacion_ce >>. \\
-INEGI. Índice Nacional de Precios al Consumidor. Base segunda quincena Julio 2018.
-Los valores de 2018 fueron ajustados teniendo como base el promedio del INPC de 2023.}
+\vspace{-28pt}\noindent{\footnotesize
+\begin{tabular}[t]{@{}l@{\hspace{0.5em}}l@{}}
+Nota: & El campo otros incluye subsectores con menor valor agregado censal bruto y/o subsectores\\
+& agrupados por el principio de confidencialidad.\\[2pt]
+Fuente: & IIEG con base en INEGI. Censos Económicos, << ec_anio_publicacion_ce_anterior >> y << ec_anio_publicacion_ce >>.\\[2pt]
+& INEGI. Índice Nacional de Precios al Consumidor. Base segunda quincena Julio 2018.\\
+& Los valores de 2018 fueron ajustados teniendo como base el promedio del INPC de 2023.
+\end{tabular}}
 
 \newpage
 
@@ -208,29 +212,41 @@ concentrando el << ec_porcentaje_trabajadores_grupo_mayor >> del total de asegur
 
 \setlength{\tabcolsep}{3pt}
 \footnotesize
-\begin{longtable}{|>{\raggedright\arraybackslash}p{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
-                  |>{\centering\arraybackslash}p{\dimexpr0.10\linewidth - 2\tabcolsep\relax}
-                  |>{\centering\arraybackslash}p{\dimexpr0.10\linewidth - 2\tabcolsep\relax}
-                  |>{\centering\arraybackslash}p{\dimexpr0.10\linewidth - 2\tabcolsep\relax}
-                  |>{\centering\arraybackslash}p{\dimexpr0.10\linewidth - 2\tabcolsep\relax}
-                  |>{\centering\arraybackslash}p{\dimexpr0.15\linewidth - 2\tabcolsep\relax}
-                  |>{\centering\arraybackslash}p{\dimexpr0.15\linewidth - 2\tabcolsep\relax}|}
-\caption{\textbf{Trabajadores asegurados por grupo económico en << ec_municipio_nombre >>}\\
-<< ec_mes_corte_imss >> << ec_dos_anios_atras_corte_imss >>, << ec_anio_anterior_corte_imss >>,
-<< ec_anio_corte_imss >>}
+\begin{longtable}{>{\raggedright\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.10\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.10\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.10\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.10\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.15\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.15\linewidth - 2\tabcolsep\relax}}
+
+\caption{\textbf{Trabajadores asegurados por grupo económico en << ec_municipio_nombre >>} \\
+<< ec_mes_corte_imss >> << ec_dos_anios_atras_corte_imss >>, << ec_anio_anterior_corte_imss >>
+y << ec_anio_corte_imss >>}
 \label{tabla_imss_grupos} \\
+
 \hline
 \rowcolor{gray!30}
-\textbf{\thdr{Grupo económico}} & \textbf{\thdr{<< ec_mes_corte_imss >> << ec_dos_anios_atras_corte_imss >>}} & \textbf{\thdr{<< ec_mes_corte_imss >> << ec_anio_anterior_corte_imss >>}} & \textbf{\thdr{<< ec_mes_corte_imss >> << ec_anio_corte_imss >>}} & \textbf{\thdr{\% Part.}} & \textbf{\thdr{Var. nominal << ec_anio_anterior_corte_imss >>--<< ec_anio_corte_imss >>}} & \textbf{\thdr{Var. \% << ec_anio_anterior_corte_imss >>--<< ec_anio_corte_imss >>}} \\
+\textbf{Grupo económico} &
+\thh{0.10}{<< ec_mes_corte_imss >> << ec_dos_anios_atras_corte_imss >>} &
+\thh{0.10}{<< ec_mes_corte_imss >> << ec_anio_anterior_corte_imss >>} &
+\thh{0.10}{<< ec_mes_corte_imss >> << ec_anio_corte_imss >>} &
+\thh{0.10}{\% Part.} &
+\thh{0.15}{Var. nominal << ec_anio_anterior_corte_imss >>--<< ec_anio_corte_imss >>} &
+\thh{0.15}{Var. \% << ec_anio_anterior_corte_imss >>--<< ec_anio_corte_imss >>} \\
 \hline
 \endfirsthead
 
 \multicolumn{7}{l}{\small\textbf{(continuación)}} \\
-\rowcolor{colorSeccion}
-\multicolumn{7}{|c|}{\rule[-10pt]{0pt}{26pt}\color{white}\textbf{<< ec_municipio_nombre >>, Jalisco}} \\
 \hline
 \rowcolor{gray!30}
-\textbf{\thdr{Grupo económico}} & \textbf{\thdr{<< ec_mes_corte_imss >> << ec_dos_anios_atras_corte_imss >>}} & \textbf{\thdr{<< ec_mes_corte_imss >> << ec_anio_anterior_corte_imss >>}} & \textbf{\thdr{<< ec_mes_corte_imss >> << ec_anio_corte_imss >>}} & \textbf{\thdr{\% Part.}} & \textbf{\thdr{Var. nominal << ec_anio_anterior_corte_imss >>--<< ec_anio_corte_imss >>}} & \textbf{\thdr{Var. \% << ec_anio_anterior_corte_imss >>--<< ec_anio_corte_imss >>}} \\
+\textbf{Grupo económico} &
+\thh{0.10}{<< ec_mes_corte_imss >> << ec_dos_anios_atras_corte_imss >>} &
+\thh{0.10}{<< ec_mes_corte_imss >> << ec_anio_anterior_corte_imss >>} &
+\thh{0.10}{<< ec_mes_corte_imss >> << ec_anio_corte_imss >>} &
+\thh{0.10}{\% Part.} &
+\thh{0.15}{Var. nominal << ec_anio_anterior_corte_imss >>--<< ec_anio_corte_imss >>} &
+\thh{0.15}{Var. \% << ec_anio_anterior_corte_imss >>--<< ec_anio_corte_imss >>} \\
 \hline
 \endhead
 
@@ -246,13 +262,13 @@ concentrando el << ec_porcentaje_trabajadores_grupo_mayor >> del total de asegur
 \hline
 <% endfor %>
 \rowcolor{orange!20}
-Total General & \ND & \ND & << ec_total_trabajadores_imss >> & \ND & \ND & << ec_porcentaje_variacion_asegurados >> \\
+\thdr{Total General} & \thdr{\ND} & \thdr{\ND} & \thdr{<< ec_total_trabajadores_imss >>} & \thdr{\ND} & \thdr{\ND} & \thdr{<< ec_porcentaje_variacion_asegurados >>} \\
 \hline
 
 \end{longtable}
 \normalsize
-\par\vspace{-4pt}\parbox{\linewidth}{\footnotesize
-Fuente:  IIEG con base en IMSS. Datos abiertos de Trabajadores Asegurados, << ec_dos_anios_atras_corte_imss >>,
+\vspace{-28pt}\noindent\parbox{\linewidth}{\footnotesize
+Fuente: IIEG con base en IMSS. Datos abiertos de Trabajadores Asegurados, << ec_dos_anios_atras_corte_imss >>,
 << ec_anio_anterior_corte_imss >> y << ec_anio_corte_imss >>.}
 
 \newpage
@@ -265,27 +281,37 @@ de trabajadores, concentrando el << ec_porcentaje_asegurados_region >> del total
 
 \setlength{\tabcolsep}{3pt}
 \footnotesize
-\begin{longtable}{|>{\raggedright\arraybackslash}p{\dimexpr0.28\linewidth - 2\tabcolsep\relax}
-                  |>{\centering\arraybackslash}p{\dimexpr0.12\linewidth - 2\tabcolsep\relax}
-                  |>{\centering\arraybackslash}p{\dimexpr0.12\linewidth - 2\tabcolsep\relax}
-                  |>{\centering\arraybackslash}p{\dimexpr0.16\linewidth - 2\tabcolsep\relax}
-                  |>{\centering\arraybackslash}p{\dimexpr0.16\linewidth - 2\tabcolsep\relax}
-                  |>{\centering\arraybackslash}p{\dimexpr0.16\linewidth - 2\tabcolsep\relax}|}
-\caption{\textbf{Trabajadores asegurados por municipio en la región << ec_region >>}\\
-<< ec_mes_corte_imss >>  de << ec_anio_anterior_corte_imss >> y << ec_anio_corte_imss >>}
+\begin{longtable}{>{\raggedright\arraybackslash}m{\dimexpr0.28\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.12\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.12\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.16\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.16\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.16\linewidth - 2\tabcolsep\relax}}
+
+\caption{\textbf{Trabajadores asegurados por municipio en la región << ec_region >>} \\
+<< ec_mes_corte_imss >> de << ec_anio_anterior_corte_imss >> y << ec_anio_corte_imss >>}
 \label{tabla_imss_region} \\
+
 \hline
 \rowcolor{gray!30}
-\textbf{\thdr{Municipio}} & \textbf{\thdr{<< ec_mes_corte_imss >> << ec_anio_anterior_corte_imss >>}} & \textbf{\thdr{<< ec_mes_corte_imss >> << ec_anio_corte_imss >>}} & \textbf{\thdr{\% Part. << ec_mes_corte_imss >> << ec_anio_corte_imss >>}} & \textbf{\thdr{Var. nominal << ec_anio_anterior_corte_imss >>/<< ec_anio_corte_imss >>}} & \textbf{\thdr{Var. \% << ec_anio_anterior_corte_imss >>/<< ec_anio_corte_imss >>}} \\
+\textbf{Municipio} &
+\thh{0.12}{<< ec_mes_corte_imss >> << ec_anio_anterior_corte_imss >>} &
+\thh{0.12}{<< ec_mes_corte_imss >> << ec_anio_corte_imss >>} &
+\thh{0.16}{\% Part. << ec_mes_corte_imss >> << ec_anio_corte_imss >>} &
+\thh{0.16}{Var. nominal << ec_anio_anterior_corte_imss >>/<< ec_anio_corte_imss >>} &
+\thh{0.16}{Var. \% << ec_anio_anterior_corte_imss >>/<< ec_anio_corte_imss >>} \\
 \hline
 \endfirsthead
 
 \multicolumn{6}{l}{\small\textbf{(continuación)}} \\
-\rowcolor{colorSeccion}
-\multicolumn{6}{|c|}{\rule[-10pt]{0pt}{26pt}\color{white}\textbf{Región << ec_region >>}} \\
 \hline
 \rowcolor{gray!30}
-\textbf{\thdr{Municipio}} & \textbf{\thdr{<< ec_mes_corte_imss >> << ec_anio_anterior_corte_imss >>}} & \textbf{\thdr{<< ec_mes_corte_imss >> << ec_anio_corte_imss >>}} & \textbf{\thdr{\% Part. << ec_mes_corte_imss >> << ec_anio_corte_imss >>}} & \textbf{\thdr{Var. nominal << ec_anio_anterior_corte_imss >>/<< ec_anio_corte_imss >>}} & \textbf{\thdr{Var. \% << ec_anio_anterior_corte_imss >>/<< ec_anio_corte_imss >>}} \\
+\textbf{Municipio} &
+\thh{0.12}{<< ec_mes_corte_imss >> << ec_anio_anterior_corte_imss >>} &
+\thh{0.12}{<< ec_mes_corte_imss >> << ec_anio_corte_imss >>} &
+\thh{0.16}{\% Part. << ec_mes_corte_imss >> << ec_anio_corte_imss >>} &
+\thh{0.16}{Var. nominal << ec_anio_anterior_corte_imss >>/<< ec_anio_corte_imss >>} &
+\thh{0.16}{Var. \% << ec_anio_anterior_corte_imss >>/<< ec_anio_corte_imss >>} \\
 \hline
 \endhead
 
@@ -297,7 +323,7 @@ de trabajadores, concentrando el << ec_porcentaje_asegurados_region >> del total
 \endlastfoot
 
 \rowcolor{orange!20}
-<< ec_municipio_nombre >> & \ND & << ec_total_trabajadores_imss >> & << ec_porcentaje_asegurados_region >> & \ND & \ND \\
+\thdr{<< ec_municipio_nombre >>} & \thdr{\ND} & \thdr{<< ec_total_trabajadores_imss >>} & \thdr{<< ec_porcentaje_asegurados_region >>} & \thdr{\ND} & \thdr{\ND} \\
 \hline
 <% for fila in ec_tabla_imss_region %>
 << fila.municipio >> & \ND & << fila.total >> & << fila.pct_part >> & \ND & \ND \\
@@ -306,8 +332,8 @@ de trabajadores, concentrando el << ec_porcentaje_asegurados_region >> del total
 
 \end{longtable}
 \normalsize
-\par\vspace{-4pt}\parbox{\linewidth}{\footnotesize
-Fuente:  IIEG con base en IMSS. Datos abiertos de Trabajadores Asegurados, << ec_anio_anterior_corte_imss >>
+\vspace{-28pt}\noindent\parbox{\linewidth}{\footnotesize
+Fuente: IIEG con base en IMSS. Datos abiertos de Trabajadores Asegurados, << ec_anio_anterior_corte_imss >>
 y << ec_anio_corte_imss >>.}
 
 \newpage
