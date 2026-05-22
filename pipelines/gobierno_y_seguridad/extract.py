@@ -11,6 +11,9 @@ from pipelines.gobierno_y_seguridad.queries.incidencia import (
     get_casos_por_bien_afectado,
     get_casos_por_delito,
 )
+from pipelines.gobierno_y_seguridad.queries.participacion import (
+    get_participacion_por_municipio,
+)
 
 
 class Extract(Stage):
@@ -22,6 +25,7 @@ class Extract(Stage):
         carpetas_por_mes = []
         casos_bien_afectado = []
         casos_por_delito = []
+        participacion = []
         anio_actual = 2024
         anio_anterior = 2023
 
@@ -60,6 +64,15 @@ class Extract(Stage):
                 "No se pudo conectar a la base de datos de delitos_fuero_comun"
             )
 
+        try:
+            settings_pc = DatabaseSettings.from_env("participacion_ciudadana")
+            with get_session(settings_pc) as session:
+                participacion = get_participacion_por_municipio(session)
+        except Exception:
+            Logger.warning(
+                "No se pudo conectar a la base de datos de participacion_ciudadana"
+            )
+
         return {
             "anio_actual": anio_actual,
             "anio_anterior": anio_anterior,
@@ -67,4 +80,5 @@ class Extract(Stage):
             "carpetas_por_mes": carpetas_por_mes,
             "casos_bien_afectado": casos_bien_afectado,
             "casos_por_delito": casos_por_delito,
+            "participacion": participacion,
         }

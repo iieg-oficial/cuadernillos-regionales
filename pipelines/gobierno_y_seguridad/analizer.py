@@ -47,27 +47,79 @@ def _grafica_placeholder(caption: str) -> str:
     )
 
 
-def _build_participacion_table(municipio_id: str) -> list[dict]:
-    region_munis = get_same_region(municipio_id)
-    cvegeo_objetivo = f"14{int(municipio_id):03d}"
-    rows = []
+def _process_participacion(participacion, municipio_id):
+    cve_mun = int(municipio_id)
+
+    anios = sorted({r["anio"] for r in participacion}, reverse=True)
+    anio_ultimo = anios[0] if len(anios) >= 1 else 2024
+    anio_penultimo = anios[1] if len(anios) >= 2 else 2021
+    anio_antepenultimo = anios[2] if len(anios) >= 3 else 2018
+
+    by_anio = {}
+    for r in participacion:
+        by_anio.setdefault(r["anio"], {})[r["municipio_id"]] = r
+
+    def _rank_anio(anio):
+        entries = by_anio.get(anio, {})
+        ranked = sorted(entries.values(), key=lambda x: x["pct"], reverse=True)
+        return {r["municipio_id"]: i + 1 for i, r in enumerate(ranked)}
+
+    ranks = {
+        a: _rank_anio(a) for a in [anio_antepenultimo, anio_penultimo, anio_ultimo]
+    }
+
+    mun_data = {}
+    for r in participacion:
+        if r["municipio_id"] == cve_mun:
+            mun_data[r["anio"]] = r
+
+    ctx = {}
+    ctx["gs_anio_elecciones"] = anio_ultimo
+    ctx["gs_penultimo_anio_eleccion"] = anio_penultimo
+    ctx["gs_antepenultimo_anio_eleccion"] = anio_antepenultimo
+
+    d = mun_data.get(anio_ultimo)
+    ctx["gs_porcentaje_participacion_electoral"] = _fmt(d["pct"]) if d else ND
+    ctx["gs_posicion_eleccion"] = ranks[anio_ultimo].get(cve_mun, ND)
+
+    d = mun_data.get(anio_penultimo)
+    ctx["gs_porcentaje_participacion_penultimo_anio_eleccion"] = (
+        _fmt(d["pct"]) if d else ND
+    )
+    ctx["gs_posicion_participacion_penultimo_anio_eleccion"] = ranks[
+        anio_penultimo
+    ].get(cve_mun, ND)
+
+    d = mun_data.get(anio_antepenultimo)
+    ctx["gs_porcentaje_participacion_antepenultimo_anio_eleccion"] = (
+        _fmt(d["pct"]) if d else ND
+    )
+    ctx["gs_posicion_participacion_antepenultimo_anio_eleccion"] = ranks[
+        anio_antepenultimo
+    ].get(cve_mun, ND)
+
+    region_munis = get_same_region(str(cve_mun))
+    table_rows = []
     for m in sorted(region_munis, key=lambda x: int(x["id"])):
-        cvegeo = f"14{int(m['id']):03d}"
-        rows.append(
-            {
-                "clave": m["id"],
-                "municipio": m["municipio"],
-                "pct_antepenultimo": ND,
-                "pos_antepenultimo": ND,
-                "pct_penultimo": ND,
-                "pos_penultimo": ND,
-                "pct_ultimo": ND,
-                "pos_ultimo": ND,
-                "es_objetivo": cvegeo == cvegeo_objetivo,
-            }
-        )
-    rows.sort(key=lambda r: (0 if r["es_objetivo"] else 1, r["clave"]))
-    return rows
+        mid = int(m["id"])
+        row = {
+            "clave": m["id"],
+            "municipio": m["municipio"],
+            "es_objetivo": mid == cve_mun,
+        }
+        for anio, prefix in [
+            (anio_antepenultimo, "antepenultimo"),
+            (anio_penultimo, "penultimo"),
+            (anio_ultimo, "ultimo"),
+        ]:
+            entry = by_anio.get(anio, {}).get(mid)
+            row[f"pct_{prefix}"] = _fmt(entry["pct"]) if entry else ND
+            row[f"pos_{prefix}"] = ranks[anio].get(mid, ND)
+        table_rows.append(row)
+    table_rows.sort(key=lambda r: (0 if r["es_objetivo"] else 1, r["clave"]))
+
+    ctx["gs_tabla_participacion"] = table_rows
+    return ctx
 
 
 def _build_ingresos_table(municipio_id: str) -> list[dict]:
@@ -201,6 +253,7 @@ class Analizer(Stage):
         carpetas_por_mes = input_data["carpetas_por_mes"]
         casos_bien_afectado = input_data["casos_bien_afectado"]
         casos_por_delito = input_data["casos_por_delito"]
+        participacion = input_data["participacion"]
         anio_actual = input_data["anio_actual"]
         anio_anterior = input_data["anio_anterior"]
 
@@ -256,16 +309,8 @@ class Analizer(Stage):
             ctx["gs_variacion_porcentual_seguridad"] = ND
             ctx["gs_posicion_variacion_seguridad"] = ND
 
-        ctx["gs_anio_elecciones"] = 2024
-        ctx["gs_penultimo_anio_eleccion"] = 2021
-        ctx["gs_antepenultimo_anio_eleccion"] = 2018
-        ctx["gs_porcentaje_participacion_electoral"] = ND
-        ctx["gs_posicion_eleccion"] = ND
-        ctx["gs_porcentaje_participacion_penultimo_anio_eleccion"] = ND
-        ctx["gs_posicion_participacion_penultimo_anio_eleccion"] = ND
-        ctx["gs_porcentaje_participacion_antepenultimo_anio_eleccion"] = ND
-        ctx["gs_posicion_participacion_antepenultimo_anio_eleccion"] = ND
-        ctx["gs_tabla_participacion"] = _build_participacion_table(mun_id)
+        participacion_ctx = _process_participacion(participacion, mun_id)
+        ctx.update(participacion_ctx)
 
         ctx["gs_anio_efipem"] = 2023
         ctx["gs_anio_anterior_efipem"] = 2022

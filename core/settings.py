@@ -12,6 +12,8 @@ class AppSettings(BaseSettings):
 
 
 class DatabaseSettings(BaseSettings):
+    model_config = {"extra": "ignore"}
+
     DB_USER: str = Field(default="postgres")
     DB_PASSWORD: str = Field(default="postgres")
     DB_HOST: str = Field(default="localhost")
