@@ -6,6 +6,7 @@ from pydantic_settings import BaseSettings
 
 class AppSettings(BaseSettings):
     FONTS_PATH: str = Field(default="/usr/share/fonts/")
+    ASSETS_PATH: str = Field(default="templates/assets/")
 
     model_config = {"env_file": ".env/.env.app"}
 
@@ -30,3 +31,11 @@ class HistoriaSettings(BaseSettings):
     HISTORIA_MAPS_URL: str = Field(default="")
 
     model_config = {"env_file": ".env/.env.historia"}
+
+
+class DemografiaSettings(BaseSettings):
+    DEMOGRAFIA_MAPS_MIGRACION_URL: str = Field(default="")
+    DEMOGRAFIA_MAPS_POBREZA_URL: str = Field(default="")
+    DEMOGRAFIA_MAPS_MARGINACION_URL: str = Field(default="")
+
+    model_config = {"env_file": ".env/.env.demografia"}

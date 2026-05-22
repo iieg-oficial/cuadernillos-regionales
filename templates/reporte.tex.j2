@@ -18,10 +18,33 @@
 \end{center}
 \clearpage
 
+\etocsettocstyle{%
+  \begingroup
+  \setlength{\parskip}{0pt}%
+  \setstretch{1.1}%
+  \noindent{\color{colorTexto}\bfseries\Huge << de_municipio_nombre >>}\par
+  \vspace{0.4cm}
+  \noindent{\color{colorTexto}\huge DIAGNÓSTICO DEL MUNICIPIO}\par
+  \vspace{0.6cm}
+  \noindent{\color{colorTexto}\LARGE Agosto 2026}\\[-4pt]
+  \noindent\rule{\textwidth}{0.4pt}\par
+  \vspace{0.15cm}
+}{\endgroup}
 \tableofcontents
 \newpage
 
 <#% include "sections/gobierno_y_seguridad.tex.j2" %#>
 <% include "sections/historia.tex.j2" %>
 <% include "sections/demografia.tex.j2" %>
+<% include "sections/economia.tex.j2" %>
+<% include "sections/directorio_municipal.tex.j2" %>
+
+\clearpage
+\thispagestyle{empty}
+\AddToShipoutPictureBG*{%
+  \includegraphics[width=\paperwidth,height=\paperheight]{<< assets_path >>contra_portada.png}%
+}
+\null
+\clearpage
+
 <% endblock %>

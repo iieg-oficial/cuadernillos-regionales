@@ -6,6 +6,8 @@ from core.renderer import render
 from core.utils.logger import Logger
 
 from pipelines.demografia.pipeline import Demografia
+from pipelines.directorio_municipal.pipeline import DirectorioMunicipal
+from pipelines.economia.pipeline import Economia
 from pipelines.historia.pipeline import Historia
 
 
@@ -25,6 +27,8 @@ def main() -> None:
         sections=[
             Historia(),
             Demografia(),
+            DirectorioMunicipal(),
+            Economia(),
         ]
     )
 

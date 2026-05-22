@@ -21,10 +21,42 @@
 \usepackage{booktabs}
 \usepackage{multirow}
 \usepackage[hidelinks]{hyperref}
+\usepackage{etoc}
+\usepackage{varwidth} % must be loaded after array
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{caption}
+\DeclareCaptionFormat{tablaformat}{#1\newline#3}
+\captionsetup[longtable]{format=tablaformat, justification=raggedright, singlelinecheck=false, skip=5pt, labelsep=none}
+\captionsetup[figure]{format=tablaformat, justification=raggedright, singlelinecheck=false, skip=5pt, labelsep=none}
+
+% Columna de ancho igual para longtable de N columnas (descuenta reglas)
+% Uso: >{\centering\arraybackslash}\ltcoleq{N}
+\newcommand{\ltcoleq}[1]{p{\dimexpr(\linewidth - (#1+1)\arrayrulewidth)/#1 - 2\tabcolsep\relax}}
+
+
+\setcounter{secnumdepth}{-1}
+\setcounter{tocdepth}{2}
+
+\etocsetstyle{section}
+  {}
+  {\vspace{3pt}}
+  {\noindent\footnotesize\textbf{\color{colorTexto}%
+   \expandafter\MakeUppercase\expandafter{\etocname}}%
+   \dotfill\footnotesize\textbf{\color{colorTexto}\etocpage}\par}
+  {}
+
+\etocsetstyle{subsection}
+  {}
+  {}
+  {\hspace{1.0em}\footnotesize\color{colorTexto}\etocname\par\vspace{2pt}}
+  {}
 
 \addto\captionsspanish{
-  \renewcommand{\tablename}{Tabla}
+  \renewcommand{\tablename}{Cuadro}
   \renewcommand{\thetable}{\arabic{table}}
+  \renewcommand{\figurename}{Mapa}
+  \renewcommand{\thefigure}{\arabic{figure}}
 }
 
 \setmainfont[
@@ -51,6 +83,8 @@
 \definecolor{accent}{HTML}{465055}
 
 \newcommand{\ND}{\textcolor{red}{N/D}}
+\newcommand{\thdr}[1]{\textbf{\color{colorTexto}#1}}
+\newcommand{\thh}[2]{\multicolumn{1}{>{\raggedright\arraybackslash}p{\dimexpr#1\linewidth - 2\tabcolsep\relax}}{\cellcolor{gray!30}\textbf{#2}}}
 
 \AtBeginDocument{
   \color{colorTexto}
@@ -73,7 +107,8 @@
   {\color{colorSeccion}\normalfont\Large\bfseries}
   {}{0pt}{}
 
-\setstretch{1.3}
+\setstretch{1.25}
+\renewcommand{\arraystretch}{1.5}
 \setlength{\parskip}{0.3cm}
 \setlength{\parindent}{0pt}
 
@@ -90,12 +125,15 @@
 \pagestyle{fancy}
 \fancyhf{}
 
+\fancyhead[L]{\includegraphics[height=1.7cm]{<< assets_path >>logo_header.png}}
 \fancyhead[R]{\color{colorTexto}\footnotesize Página \thepage}
+\fancyfoot[L]{\includegraphics[height=1.5cm]{<< assets_path >>logo_footer.png}}
 
 \setlength{\headheight}{2cm}
 \setlength{\headsep}{1cm}
-\setlength{\footskip}{1.2cm}
+\setlength{\footskip}{1.8cm}
 \renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
 
 \begin{document}
 
