@@ -8,16 +8,13 @@ import gdown
 
 from core.settings import GeografiaSettings
 from core.utils.logger import Logger
+from core.utils.maps import get_draft_path
 
 MAPS_DIR = Path("assets/maps/geografia")
-DRAFT_DIR = Path("output/maps")
 
 MAPA_PLACEHOLDER = (
     "\\includegraphics[width=\\textwidth]{templates/assets/mapa_placeholder.png}"
 )
-
-DRAFT_MAX_HEIGHT = 2000
-DRAFT_QUALITY = 82
 
 TOPIC_FOLDERS = {
     "base": "mapa_base",
@@ -68,22 +65,6 @@ def _normalize(text):
 def _is_draft():
     settings = GeografiaSettings()
     return settings.GEOGRAFIA_MAPS_QUALITY == "draft"
-
-
-def _compress_map(src, dest):
-    from PIL import Image
-
-    dest.parent.mkdir(parents=True, exist_ok=True)
-    with Image.open(src) as im:
-        if im.height > DRAFT_MAX_HEIGHT:
-            ratio = DRAFT_MAX_HEIGHT / im.height
-            new_size = (int(im.width * ratio), DRAFT_MAX_HEIGHT)
-            im = im.resize(new_size, Image.LANCZOS)
-        if im.mode == "RGBA":
-            bg = Image.new("RGB", im.size, (255, 255, 255))
-            bg.paste(im, mask=im.split()[3])
-            im = bg
-        im.save(dest, "JPEG", quality=DRAFT_QUALITY, optimize=True)
 
 
 def ensure_maps():
@@ -175,18 +156,10 @@ def resolve_maps(cve_geo, municipio):
         path = find_map_for_topic(short, cve_geo, municipio)
         if path:
             if draft:
-                path = _get_draft_path(path, cve_geo, short)
+                path = get_draft_path(path, f"geografia/{cve_geo}", f"ge_{short}")
             ctx[f"ge_{short}_mapa"] = map_includegraphics(path)
             ctx[f"ge_{short}_mapa_activo"] = True
         else:
             ctx[f"ge_{short}_mapa"] = MAPA_PLACEHOLDER
             ctx[f"ge_{short}_mapa_activo"] = False
     return ctx
-
-
-def _get_draft_path(original, cve_geo, short):
-    draft_path = DRAFT_DIR / cve_geo / f"ge_{short}.jpg"
-    if draft_path.exists():
-        return draft_path
-    _compress_map(original, draft_path)
-    return draft_path

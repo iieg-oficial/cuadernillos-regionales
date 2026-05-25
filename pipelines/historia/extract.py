@@ -11,6 +11,8 @@ import gdown
 
 from core.pipelines.stage import Stage
 from core.settings import HistoriaSettings
+from core.utils.logger import Logger
+from core.utils.maps import get_draft_path
 
 CATALOG_PATH = Path("assets/catalogs/historia.json")
 MAPS_DIR = Path("assets/maps/historia")
@@ -168,7 +170,12 @@ def _find_map(municipio_id: str) -> Path | None:
     if not MAPS_DIR.exists():
         return None
     p = MAPS_DIR / f"ubicacion_14{municipio_id}.png"
-    return p if p.exists() else None
+    if not p.exists():
+        return None
+    settings = HistoriaSettings()
+    if settings.HISTORIA_MAPS_QUALITY == "draft":
+        return get_draft_path(p, f"historia/14{municipio_id}", "hi_ubicacion")
+    return p
 
 
 class Extract(Stage):
@@ -176,6 +183,7 @@ class Extract(Stage):
         municipio_id = str(input_data).zfill(3)
 
         if not CATALOG_PATH.exists():
+            Logger.info("Historia: generando catálogo desde PDFs...")
             mun_ids = _load_municipios()
             pdf_links = _fetch_pdf_links()
             catalog = _build_catalog(pdf_links, mun_ids)
@@ -184,8 +192,10 @@ class Extract(Stage):
                 json.dump(catalog, f, ensure_ascii=False, indent=2)
 
         if not MAPS_DIR.exists() or not any(MAPS_DIR.iterdir()):
+            Logger.info("Historia: descargando mapas...")
             _download_maps()
 
+        Logger.info("Historia: extrayendo datos del catálogo...")
         with CATALOG_PATH.open(encoding="utf-8") as f:
             catalog = json.load(f)
 
