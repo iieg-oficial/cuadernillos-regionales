@@ -70,7 +70,7 @@ class Analizer(Stage):
         self.municipio_id = municipio_id
 
     def execute(self, input_data: dict) -> dict:
-        Logger.info("Demografía: procesando indicadores...")
+        Logger.info("Demografía: procesando indicadores")
         cvegeo = 14000 + int(self.municipio_id)
         cve_mun = int(self.municipio_id)
 

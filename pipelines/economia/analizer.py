@@ -181,7 +181,7 @@ class Analizer(Stage):
         self.municipio_id = municipio_id
 
     def execute(self, input_data: dict) -> dict:
-        Logger.info("Economía: procesando indicadores...")
+        Logger.info("Economía: procesando indicadores")
         cve_mun = input_data["cve_mun"]
         municipio_id_str = str(self.municipio_id)
 

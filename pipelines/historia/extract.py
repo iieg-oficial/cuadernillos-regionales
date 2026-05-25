@@ -183,7 +183,7 @@ class Extract(Stage):
         municipio_id = str(input_data).zfill(3)
 
         if not CATALOG_PATH.exists():
-            Logger.info("Historia: generando catálogo desde PDFs...")
+            Logger.info("Historia: generando catálogo desde PDFs")
             mun_ids = _load_municipios()
             pdf_links = _fetch_pdf_links()
             catalog = _build_catalog(pdf_links, mun_ids)
@@ -192,10 +192,10 @@ class Extract(Stage):
                 json.dump(catalog, f, ensure_ascii=False, indent=2)
 
         if not MAPS_DIR.exists() or not any(MAPS_DIR.iterdir()):
-            Logger.info("Historia: descargando mapas...")
+            Logger.info("Historia: descargando mapas")
             _download_maps()
 
-        Logger.info("Historia: extrayendo datos del catálogo...")
+        Logger.info("Historia: extrayendo datos del catálogo")
         with CATALOG_PATH.open(encoding="utf-8") as f:
             catalog = json.load(f)
 

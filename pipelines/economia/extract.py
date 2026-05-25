@@ -33,7 +33,7 @@ class Extract(Stage):
     def execute(self, input_data: str = None) -> dict:
         cve_mun = int(input_data)
 
-        Logger.info("Economía: conectando a bases de datos...")
+        Logger.info("Economía: conectando a bases de datos")
 
         nombre = None
         ultima_act = None
@@ -42,7 +42,7 @@ class Extract(Stage):
         ranking_denue = None
 
         try:
-            Logger.info("Economía: extrayendo datos del DENUE...")
+            Logger.info("Economía: extrayendo datos del DENUE")
             denue = DatabaseSettings.from_env("denue")
             with get_session(denue) as session:
                 nombre = get_nombre_municipio(session, cve_mun)
@@ -65,7 +65,7 @@ class Extract(Stage):
         vacb_total_anterior = None
 
         try:
-            Logger.info("Economía: extrayendo censos económicos...")
+            Logger.info("Economía: extrayendo censos económicos")
             ce = DatabaseSettings.from_env("censos_economicos")
             with get_session(ce) as session:
                 vacb_actual = get_vacb_por_subsector(session, cve_mun, ANIO_CE)
@@ -83,7 +83,7 @@ class Extract(Stage):
         anio_agricola = None
 
         try:
-            Logger.info("Economía: extrayendo datos agropecuarios...")
+            Logger.info("Economía: extrayendo datos agropecuarios")
             siap = DatabaseSettings.from_env("agropecuario_siap")
             with get_session(siap) as session:
                 anio_agricola = get_ultimo_anio_agricola(session)
@@ -106,7 +106,7 @@ class Extract(Stage):
         anio_ganadero = None
 
         try:
-            Logger.info("Economía: extrayendo datos ganaderos...")
+            Logger.info("Economía: extrayendo datos ganaderos")
             gan = DatabaseSettings.from_env("produccion_ganadera")
             with get_session(gan) as session:
                 anio_ganadero = get_ultimo_anio_ganadero(session)

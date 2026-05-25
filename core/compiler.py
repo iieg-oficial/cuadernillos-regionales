@@ -8,7 +8,7 @@ def compile(tex_path: Path) -> Path:
     output_dir = Path("output/pdf") / tex_path.parent.name
     output_dir.mkdir(parents=True, exist_ok=True)
 
-    Logger.info(f"Compilando PDF con xelatex ({tex_path.name})...")
+    Logger.info(f"Compilando PDF con xelatex ({tex_path.name})")
     cmd = [
         "xelatex",
         "-interaction=nonstopmode",

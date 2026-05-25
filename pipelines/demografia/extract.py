@@ -41,7 +41,7 @@ def _ensure_maps() -> None:
         if not url or (dest.exists() and len(list(dest.glob("*.png"))) >= 125):
             continue
         dest.mkdir(parents=True, exist_ok=True)
-        Logger.info(f"Descargando mapas de {subdir} desde Google Drive...")
+        Logger.info(f"Descargando mapas de {subdir} desde Google Drive")
         with tempfile.TemporaryDirectory() as tmp:
             zip_path = Path(tmp) / f"{subdir}.zip"
             gdown.download(url=url, output=str(zip_path), quiet=True)
@@ -73,13 +73,13 @@ class Extract(Stage):
 
         _ensure_maps()
 
-        Logger.info("Demografía: conectando a bases de datos...")
+        Logger.info("Demografía: conectando a bases de datos")
         pob = DatabaseSettings.from_env("censo_poblacion")
         iim = DatabaseSettings.from_env("intensidad_migratoria")
         marg = DatabaseSettings.from_env("marginacion")
         pob_multi = DatabaseSettings.from_env("pobreza_multidimensional")
 
-        Logger.info("Demografía: extrayendo datos de población...")
+        Logger.info("Demografía: extrayendo datos de población")
         with get_session(pob) as session:
             nombre = get_nombre_municipio(session, cve_mun)
             totales = get_totales_municipio(session, cve_mun)
@@ -87,13 +87,13 @@ class Extract(Stage):
             localidades_2010 = get_localidades_por_anio(session, cve_mun, 2010)
             total_estatal_2020 = get_total_estatal(session, 2020)
 
-        Logger.info("Demografía: extrayendo datos de migración...")
+        Logger.info("Demografía: extrayendo datos de migración")
         with get_session(iim) as session:
             iim_mun_2020 = get_iim_municipios(session, 2020)
             iim_mun_2010 = get_iim_municipios(session, 2010)
             iim_estados_2020 = get_iim_estados(session, 2020)
 
-        Logger.info("Demografía: extrayendo datos de marginación...")
+        Logger.info("Demografía: extrayendo datos de marginación")
         with get_session(marg) as session:
             marginacion_2020 = get_marginacion_jalisco(session, 2020)
             marginacion_2015 = get_marginacion_jalisco(session, 2015)
@@ -103,7 +103,7 @@ class Extract(Stage):
             )
             marginacion_estatal_2020 = get_marginacion_estatal(session, 14, 2020)
 
-        Logger.info("Demografía: extrayendo datos de pobreza...")
+        Logger.info("Demografía: extrayendo datos de pobreza")
         cve_mun_str = f"14{cve_mun:03d}"
         with get_session(pob_multi) as session:
             pobreza_2020 = get_pobreza_municipio(session, cve_mun_str, 2020)

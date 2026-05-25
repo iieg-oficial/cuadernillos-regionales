@@ -250,7 +250,7 @@ class Analizer(Stage):
         self.municipio_id = municipio_id
 
     def execute(self, input_data: dict) -> dict:
-        Logger.info("Gobierno y Seguridad: procesando indicadores...")
+        Logger.info("Gobierno y Seguridad: procesando indicadores")
         conteo = input_data["conteo_municipio_anio"]
         carpetas_por_mes = input_data["carpetas_por_mes"]
         casos_bien_afectado = input_data["casos_bien_afectado"]

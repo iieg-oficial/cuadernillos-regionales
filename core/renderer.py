@@ -20,7 +20,7 @@ def _get_nombre_municipio(municipio_id: str) -> str:
 
 
 def render(municipio_id: str, context: dict) -> Path:
-    Logger.info("Renderizando template LaTeX...")
+    Logger.info("Renderizando template LaTeX")
     env = Environment(
         loader=FileSystemLoader("templates"),
         block_start_string="<%",
