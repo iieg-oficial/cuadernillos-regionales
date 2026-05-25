@@ -4,6 +4,7 @@ from pathlib import Path
 from jinja2 import Environment, FileSystemLoader
 
 from core.settings import AppSettings
+from core.utils.logger import Logger
 
 
 def _get_nombre_municipio(municipio_id: str) -> str:
@@ -19,6 +20,7 @@ def _get_nombre_municipio(municipio_id: str) -> str:
 
 
 def render(municipio_id: str, context: dict) -> Path:
+    Logger.info("Renderizando template LaTeX...")
     env = Environment(
         loader=FileSystemLoader("templates"),
         block_start_string="<%",
