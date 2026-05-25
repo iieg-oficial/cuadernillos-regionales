@@ -31,3 +31,10 @@ class HistoriaSettings(BaseSettings):
     HISTORIA_MAPS_URL: str = Field(default="")
 
     model_config = {"env_file": ".env/.env.historia"}
+
+
+class GeografiaSettings(BaseSettings):
+    GEOGRAFIA_MAPS_FOLDER_URL: str = Field(default="")
+    GEOGRAFIA_MAPS_QUALITY: str = Field(default="full")
+
+    model_config = {"env_file": ".env/.env.geografia"}
