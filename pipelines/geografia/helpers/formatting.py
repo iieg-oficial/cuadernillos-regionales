@@ -64,15 +64,16 @@ def format_number_es(value):
 
 
 def fmt(value, field_name=None):
-    normalized = value
     field = (field_name or "").lower()
     if (
         field
         and field not in RAW_FIELD_NAMES
         and not any(token in field for token in RAW_FIELD_TOKENS)
     ):
-        normalized = format_number_es(value)
-    return latex_escape(normalized)
+        formatted = format_number_es(value)
+        if formatted is not value:
+            return formatted
+    return latex_escape(value)
 
 
 def strip_percent_symbol(value):
