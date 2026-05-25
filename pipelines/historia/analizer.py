@@ -1,6 +1,7 @@
 from pathlib import Path
 
 from core.pipelines.stage import Stage
+from core.utils.logger import Logger
 
 ND = "\\ND"
 MAPA_PLACEHOLDER = Path("templates/assets/mapa_placeholder.png")
@@ -45,11 +46,13 @@ class Analizer(Stage):
         self.municipio_id = municipio_id
 
     def execute(self, input_data: dict) -> dict:
+        Logger.info("Historia: procesando texto...")
         toponimia = _normalize(input_data.get("toponimia") or "") or ND
         contexto = _normalize(input_data.get("contexto_historico") or "") or ND
         mapa_path = input_data.get("mapa_path") or MAPA_PLACEHOLDER
         nombre = input_data.get("municipio_nombre", "")
 
+        Logger.info("Historia: análisis completo")
         return {
             "hi_toponimia": toponimia,
             "hi_contexto_historico": contexto,

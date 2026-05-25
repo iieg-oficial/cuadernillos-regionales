@@ -1,6 +1,7 @@
 from core.db import get_session
 from core.pipelines.stage import Stage
 from core.settings import DatabaseSettings
+from core.utils.logger import Logger
 from pipelines.economia.queries.agropecuario import (
     get_ultimo_anio_agricola,
     get_valor_produccion_agricola_anual,
@@ -32,6 +33,8 @@ class Extract(Stage):
     def execute(self, input_data: str = None) -> dict:
         cve_mun = int(input_data)
 
+        Logger.info("Economía: conectando a bases de datos...")
+
         nombre = None
         ultima_act = None
         unidades_sector_rango = []
@@ -39,6 +42,7 @@ class Extract(Stage):
         ranking_denue = None
 
         try:
+            Logger.info("Economía: extrayendo datos del DENUE...")
             denue = DatabaseSettings.from_env("denue")
             with get_session(denue) as session:
                 nombre = get_nombre_municipio(session, cve_mun)
@@ -53,7 +57,7 @@ class Extract(Stage):
                         session, cve_mun, act_id
                     )
         except Exception:
-            pass
+            Logger.warning("Economía: no se pudo conectar a DENUE")
 
         vacb_actual = []
         vacb_anterior = []
@@ -61,6 +65,7 @@ class Extract(Stage):
         vacb_total_anterior = None
 
         try:
+            Logger.info("Economía: extrayendo censos económicos...")
             ce = DatabaseSettings.from_env("censos_economicos")
             with get_session(ce) as session:
                 vacb_actual = get_vacb_por_subsector(session, cve_mun, ANIO_CE)
@@ -70,7 +75,7 @@ class Extract(Stage):
                 vacb_total_actual = get_vacb_total(session, cve_mun, ANIO_CE)
                 vacb_total_anterior = get_vacb_total(session, cve_mun, ANIO_CE_ANTERIOR)
         except Exception:
-            pass
+            Logger.warning("Economía: no se pudo conectar a censos económicos")
 
         agricola_anual = []
         agricola_municipal_mdp = None
@@ -78,6 +83,7 @@ class Extract(Stage):
         anio_agricola = None
 
         try:
+            Logger.info("Economía: extrayendo datos agropecuarios...")
             siap = DatabaseSettings.from_env("agropecuario_siap")
             with get_session(siap) as session:
                 anio_agricola = get_ultimo_anio_agricola(session)
@@ -92,7 +98,7 @@ class Extract(Stage):
                         session, anio_agricola
                     )
         except Exception:
-            pass
+            Logger.warning("Economía: no se pudo conectar a agropecuario SIAP")
 
         ganadera_anual = []
         ganadera_municipal_mdp = None
@@ -100,6 +106,7 @@ class Extract(Stage):
         anio_ganadero = None
 
         try:
+            Logger.info("Economía: extrayendo datos ganaderos...")
             gan = DatabaseSettings.from_env("produccion_ganadera")
             with get_session(gan) as session:
                 anio_ganadero = get_ultimo_anio_ganadero(session)
@@ -114,7 +121,7 @@ class Extract(Stage):
                         session, anio_ganadero
                     )
         except Exception:
-            pass
+            Logger.warning("Economía: no se pudo conectar a producción ganadera")
 
         return {
             "cve_mun": cve_mun,

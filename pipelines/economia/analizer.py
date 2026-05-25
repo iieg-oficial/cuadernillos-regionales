@@ -2,6 +2,7 @@ from pathlib import Path
 
 from core.constants import DASH, ND
 from core.pipelines.stage import Stage
+from core.utils.logger import Logger
 from core.utils.municipalities import get_region, get_same_region
 from pipelines.economia.charts.produccion import grafica_produccion
 
@@ -180,6 +181,7 @@ class Analizer(Stage):
         self.municipio_id = municipio_id
 
     def execute(self, input_data: dict) -> dict:
+        Logger.info("Economía: procesando indicadores...")
         cve_mun = input_data["cve_mun"]
         municipio_id_str = str(self.municipio_id)
 
@@ -412,4 +414,5 @@ class Analizer(Stage):
         else:
             ctx["ec_grafica_ganaderia"] = MAPA_PLACEHOLDER
 
+        Logger.info("Economía: análisis completo")
         return ctx

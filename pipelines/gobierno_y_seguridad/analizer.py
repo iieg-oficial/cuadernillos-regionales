@@ -2,6 +2,7 @@ from pathlib import Path
 
 from core.constants import ND
 from core.pipelines.stage import Stage
+from core.utils.logger import Logger
 from core.utils.municipalities import get_region, get_same_region
 from pipelines.gobierno_y_seguridad.helpers.aggregate import aggregate
 from pipelines.gobierno_y_seguridad.helpers.ranking import rank
@@ -249,6 +250,7 @@ class Analizer(Stage):
         self.municipio_id = municipio_id
 
     def execute(self, input_data: dict) -> dict:
+        Logger.info("Gobierno y Seguridad: procesando indicadores...")
         conteo = input_data["conteo_municipio_anio"]
         carpetas_por_mes = input_data["carpetas_por_mes"]
         casos_bien_afectado = input_data["casos_bien_afectado"]
@@ -343,4 +345,5 @@ class Analizer(Stage):
             f"Carpetas de investigación por los cinco principales delitos. {nombre}"
         )
 
+        Logger.info("Gobierno y Seguridad: análisis completo")
         return ctx

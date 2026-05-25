@@ -2,6 +2,7 @@ from pathlib import Path
 
 from core.constants import DASH, ND
 from core.pipelines.stage import Stage
+from core.utils.logger import Logger
 from core.utils.municipalities import get_same_region
 
 MAPA_PLACEHOLDER = Path("templates/assets/mapa_placeholder.png")
@@ -69,6 +70,7 @@ class Analizer(Stage):
         self.municipio_id = municipio_id
 
     def execute(self, input_data: dict) -> dict:
+        Logger.info("Demografía: procesando indicadores...")
         cvegeo = 14000 + int(self.municipio_id)
         cve_mun = int(self.municipio_id)
 
@@ -1041,4 +1043,5 @@ class Analizer(Stage):
         )
         ctx["de_ranking_pobreza_extrema"] = pob_ext_rank.get(f"14{cve_mun:03d}", ND)
 
+        Logger.info("Demografía: análisis completo")
         return ctx

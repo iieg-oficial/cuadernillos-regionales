@@ -18,6 +18,7 @@ from pipelines.gobierno_y_seguridad.queries.participacion import (
 
 class Extract(Stage):
     def execute(self, input_data: str = None) -> dict:
+        Logger.info("Gobierno y Seguridad: conectando a bases de datos...")
         cve_mun = int(input_data)
         cve_municipio = f"14{cve_mun:03d}"
 
@@ -30,6 +31,7 @@ class Extract(Stage):
         anio_anterior = 2023
 
         try:
+            Logger.info("Gobierno y Seguridad: extrayendo datos de delitos...")
             settings = DatabaseSettings.from_env("delitos_fuero_comun")
             with get_session(settings) as session:
                 anios = get_anios_disponibles(session)
@@ -65,6 +67,7 @@ class Extract(Stage):
             )
 
         try:
+            Logger.info("Gobierno y Seguridad: extrayendo participación ciudadana...")
             settings_pc = DatabaseSettings.from_env("participacion_ciudadana")
             with get_session(settings_pc) as session:
                 participacion = get_participacion_por_municipio(session)
