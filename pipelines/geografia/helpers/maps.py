@@ -165,7 +165,7 @@ def find_map_for_topic(short, cve_geo, municipio):
 
 def map_includegraphics(path):
     posix = str(path).replace("\\", "/")
-    return f"\\includegraphics[width=\\textwidth]{{\\detokenize{{{posix}}}}}"
+    return f"\\includegraphics[width=0.95\\textwidth]{{\\detokenize{{{posix}}}}}"
 
 
 def resolve_maps(cve_geo, municipio):
