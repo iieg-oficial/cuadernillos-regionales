@@ -1,6 +1,13 @@
+import tempfile
+import zipfile
+from pathlib import Path
+
+import gdown
+
 from core.db import get_session
 from core.pipelines.stage import Stage
-from core.settings import DatabaseSettings
+from core.settings import DatabaseSettings, DemografiaSettings
+from core.utils.logger import Logger
 from pipelines.demografia.queries.marginacion import (
     get_marginacion_estatal,
     get_marginacion_jalisco,
@@ -19,10 +26,46 @@ from pipelines.demografia.queries.pobreza import (
     get_pobreza_por_entidad,
 )
 
+MAPS_DIR = Path("assets/maps/demografia")
+
+
+def _ensure_maps() -> None:
+    settings = DemografiaSettings()
+    for subdir, url in (
+        ("migracion", settings.DEMOGRAFIA_MAPS_MIGRACION_URL),
+        ("pobreza", settings.DEMOGRAFIA_MAPS_POBREZA_URL),
+        ("marginacion", settings.DEMOGRAFIA_MAPS_MARGINACION_URL),
+    ):
+        dest = MAPS_DIR / subdir
+        if not url or (dest.exists() and len(list(dest.glob("*.png"))) >= 125):
+            continue
+        dest.mkdir(parents=True, exist_ok=True)
+        Logger.info(f"Descargando mapas de {subdir} desde Google Drive...")
+        with tempfile.TemporaryDirectory() as tmp:
+            zip_path = Path(tmp) / f"{subdir}.zip"
+            gdown.download(url=url, output=str(zip_path), quiet=True)
+            with zipfile.ZipFile(zip_path) as zf:
+                for member in zf.infolist():
+                    filename = Path(member.filename).name
+                    if not filename or not filename.endswith(".png"):
+                        continue
+                    with zf.open(member) as src, (dest / filename).open("wb") as dst:
+                        dst.write(src.read())
+        n = len(list(dest.iterdir()))
+        Logger.info(f"Mapas de {subdir} descargados ({n} archivos)")
+
+
+def _find_map(subdir: str, municipio_id: int) -> Path | None:
+    cvegeo = f"14{municipio_id:03d}"
+    p = MAPS_DIR / subdir / f"{subdir}_{cvegeo}.png"
+    return p if p.exists() else None
+
 
 class Extract(Stage):
     def execute(self, input_data: str = None) -> dict:
         cve_mun = int(input_data)
+
+        _ensure_maps()
 
         pob = DatabaseSettings.from_env("censo_poblacion")
         iim = DatabaseSettings.from_env("intensidad_migratoria")
@@ -75,4 +118,7 @@ class Extract(Stage):
             "pobreza_2015": pobreza_2015,
             "pobreza_jalisco_2020": pobreza_jalisco_2020,
             "pobreza_por_entidad_2020": pobreza_por_entidad_2020,
+            "mapa_migracion": _find_map("migracion", cve_mun),
+            "mapa_pobreza": _find_map("pobreza", cve_mun),
+            "mapa_marginacion": _find_map("marginacion", cve_mun),
         }

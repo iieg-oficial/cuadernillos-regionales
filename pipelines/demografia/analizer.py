@@ -1,10 +1,22 @@
+from pathlib import Path
+
+from core.constants import DASH, ND
 from core.pipelines.stage import Stage
 from core.utils.municipalities import get_same_region
 
-ND = "\\ND"
-MAPA_PLACEHOLDER = (
-    "\\includegraphics[width=\\textwidth]{templates/assets/mapa_placeholder.png}"
-)
+MAPA_PLACEHOLDER = Path("templates/assets/mapa_placeholder.png")
+
+
+def _mapa_latex(path: Path, caption: str) -> str:
+    return (
+        "\\begin{figure}[H]\n"
+        "\\centering\n"
+        f"\\caption{{\\textbf{{{caption}}}}}\n"
+        f"\\includegraphics[width=\\textwidth]{{{path}}}\n"
+        "\\end{figure}"
+    )
+
+
 JALISCO_ID = 14
 ANIO_CENSO = 2020
 ANIO_INTERCENSAL = 2015
@@ -72,6 +84,9 @@ class Analizer(Stage):
         marginacion_2010 = input_data["marginacion_jalisco_2010"]
         marginacion_localidades = input_data["marginacion_localidades"]
         marginacion_estatal_2020 = input_data["marginacion_estatal_2020"]
+        mapa_migracion = input_data.get("mapa_migracion") or MAPA_PLACEHOLDER
+        mapa_pobreza = input_data.get("mapa_pobreza") or MAPA_PLACEHOLDER
+        mapa_marginacion = input_data.get("mapa_marginacion") or MAPA_PLACEHOLDER
 
         ctx = {}
 
@@ -81,6 +96,7 @@ class Analizer(Stage):
         ctx["de_anio_censo"] = ANIO_CENSO
         ctx["de_anio_encuesta_intercensal"] = ANIO_INTERCENSAL
         ctx["de_anio_censo_anterior"] = ANIO_CENSO_ANTERIOR
+        ctx["de_anio_encuesta_intercensal_anterior"] = ANIO_CENSO_ANTERIOR - 5
 
         t2020 = totales.get(ANIO_CENSO, {})
         t2015 = totales.get(ANIO_INTERCENSAL, {})
@@ -110,7 +126,7 @@ class Analizer(Stage):
         var_2010_2020 = total_2020 - total_2010
         ctx["de_variacion_poblacion_quinquenio"] = _fmt_int(var_2010_2020)
         ctx["de_variacion_porcentual_poblacion_quinquenio"] = (
-            _pct(var_2010_2020 / total_2010 * 100) if total_2010 else ND
+            _fmt(var_2010_2020 / total_2010 * 100) if total_2010 else ND
         )
 
         mujeres_2010 = t2010.get("mujeres") or 0
@@ -142,32 +158,32 @@ class Analizer(Stage):
         ctx["de_tabla_pob_total_2015"] = _fmt_int(total_2015) if total_2015 else ND
         ctx["de_tabla_pob_total_2020"] = _fmt_int(total_2020) if total_2020 else ND
         ctx["de_tabla_pob_var_pct_mujeres_2010_2015"] = (
-            _pct((mujeres_2015 - mujeres_2010) / mujeres_2010 * 100)
+            _fmt((mujeres_2015 - mujeres_2010) / mujeres_2010 * 100)
             if (mujeres_2010 and mujeres_2015)
             else ND
         )
         ctx["de_tabla_pob_var_pct_mujeres_2015_2020"] = (
-            _pct((mujeres_2020 - mujeres_2015) / mujeres_2015 * 100)
+            _fmt((mujeres_2020 - mujeres_2015) / mujeres_2015 * 100)
             if (mujeres_2015 and mujeres_2020)
             else ND
         )
         ctx["de_tabla_pob_var_pct_hombres_2010_2015"] = (
-            _pct((hombres_2015 - hombres_2010) / hombres_2010 * 100)
+            _fmt((hombres_2015 - hombres_2010) / hombres_2010 * 100)
             if (hombres_2010 and hombres_2015)
             else ND
         )
         ctx["de_tabla_pob_var_pct_hombres_2015_2020"] = (
-            _pct((hombres_2020 - hombres_2015) / hombres_2015 * 100)
+            _fmt((hombres_2020 - hombres_2015) / hombres_2015 * 100)
             if (hombres_2015 and hombres_2020)
             else ND
         )
         ctx["de_tabla_pob_var_pct_total_2010_2015"] = (
-            _pct((total_2015 - total_2010) / total_2010 * 100)
+            _fmt((total_2015 - total_2010) / total_2010 * 100)
             if (total_2010 and total_2015)
             else ND
         )
         ctx["de_tabla_pob_var_pct_total_2015_2020"] = (
-            _pct((total_2020 - total_2015) / total_2015 * 100)
+            _fmt((total_2020 - total_2015) / total_2015 * 100)
             if (total_2015 and total_2020)
             else ND
         )
@@ -192,12 +208,18 @@ class Analizer(Stage):
                 "nombre": loc["localidad"],
                 "total_2010": _fmt_int(loc_2010_by_clave[loc["clave"]]["total"])
                 if loc["clave"] in loc_2010_by_clave
-                else ND,
+                else DASH,
                 "total_2020": _fmt_int(loc["total"]),
-                "hombres_2020": _fmt_int(loc["hombres"]) if loc.get("hombres") else ND,
-                "mujeres_2020": _fmt_int(loc["mujeres"]) if loc.get("mujeres") else ND,
-                "pct_2020": _pct(loc["total"] / total_2020 * 100) if total_2020 else ND,
-                "var_pct_2010_2020": _pct(
+                "hombres_2020": _fmt_int(loc["hombres"])
+                if loc.get("hombres")
+                else DASH,
+                "mujeres_2020": _fmt_int(loc["mujeres"])
+                if loc.get("mujeres")
+                else DASH,
+                "pct_2020": _fmt(loc["total"] / total_2020 * 100)
+                if total_2020
+                else DASH,
+                "var_pct_2010_2020": _fmt(
                     (loc["total"] - loc_2010_by_clave[loc["clave"]]["total"])
                     / loc_2010_by_clave[loc["clave"]]["total"]
                     * 100
@@ -206,7 +228,7 @@ class Analizer(Stage):
                     loc["clave"] in loc_2010_by_clave
                     and loc_2010_by_clave[loc["clave"]]["total"]
                 )
-                else ND,
+                else DASH,
             }
             for loc in localidades_2020[:5]
         ]
@@ -254,9 +276,6 @@ class Analizer(Stage):
         jalisco_mun_2020 = [
             m for m in iim_mun_2020 if 14000 < m["municipio_id"] < 15000
         ]
-        all_mun_vals_2020 = [
-            m["iim_dp2"] for m in iim_mun_2020 if m["iim_dp2"] is not None
-        ]
         jal_mun_vals_2020 = [
             m["iim_dp2"] for m in jalisco_mun_2020 if m["iim_dp2"] is not None
         ]
@@ -277,7 +296,7 @@ class Analizer(Stage):
             ctx["de_porcentaje_emigrantes_mun"] = _pct(
                 mun_2020.get("por_viv_emigrantes")
             )
-            ctx["de_porcentaje_migrantes_circulares_mun"] = _pct(
+            ctx["de_porcentaje_migrantes_circulares_mun"] = _fmt(
                 mun_2020.get("por_viv_circ")
             )
             ctx["de_porcentaje_migrantes_retorno_mun"] = _pct(
@@ -324,7 +343,7 @@ class Analizer(Stage):
             ctx["de_ranking_nacional_mun_migracion_2010"] = (
                 mun_2010.get("lugar_contexto_nacional") or ND
             )
-            ctx["de_porcentaje_migrantes_circulares_anterior_mun"] = _pct(
+            ctx["de_porcentaje_migrantes_circulares_anterior_mun"] = _fmt(
                 mun_2010.get("por_viv_circ")
             )
         else:
@@ -354,25 +373,28 @@ class Analizer(Stage):
             else ND
         )
         ctx["de_por_viv_remesas_mun_2010"] = (
-            _pct(mun_2010.get("por_viv_remesas")) if mun_2010 else ND
+            _fmt(mun_2010.get("por_viv_remesas")) if mun_2010 else ND
         )
         ctx["de_por_viv_remesas_mun_2020"] = (
-            _pct(mun_2020.get("por_viv_remesas")) if mun_2020 else ND
+            _fmt(mun_2020.get("por_viv_remesas")) if mun_2020 else ND
         )
         ctx["de_por_viv_emigrantes_mun_2010"] = (
-            _pct(mun_2010.get("por_viv_emigrantes")) if mun_2010 else ND
+            _fmt(mun_2010.get("por_viv_emigrantes")) if mun_2010 else ND
         )
         ctx["de_por_viv_emigrantes_mun_2020"] = (
-            _pct(mun_2020.get("por_viv_emigrantes")) if mun_2020 else ND
+            _fmt(mun_2020.get("por_viv_emigrantes")) if mun_2020 else ND
         )
         ctx["de_por_viv_retorno_mun_2010"] = (
-            _pct(mun_2010.get("por_viv_reto")) if mun_2010 else ND
+            _fmt(mun_2010.get("por_viv_reto")) if mun_2010 else ND
         )
         ctx["de_por_viv_retorno_mun_2020"] = (
-            _pct(mun_2020.get("por_viv_reto")) if mun_2020 else ND
+            _fmt(mun_2020.get("por_viv_reto")) if mun_2020 else ND
         )
 
-        ctx["de_mapa_grado_intensidad_migratoria"] = MAPA_PLACEHOLDER
+        ctx["de_mapa_grado_intensidad_migratoria"] = _mapa_latex(
+            mapa_migracion,
+            f"Grado de Intensidad Migratoria a Estados Unidos. Jalisco, {ANIO_CENSO}",
+        )
 
         mun_marg_2020 = next(
             (m for m in marginacion_2020 if m["municipio_id"] == cvegeo), None
@@ -407,31 +429,52 @@ class Analizer(Stage):
                 mun_marg_2020.get("indice_marginacion"), 4
             )
             ctx["de_marg_grado_2020"] = mun_marg_2020.get("grado_marginacion") or ND
-            ctx["de_marg_analfabeta_2020"] = _pct(
+            ctx["de_marg_analfabeta_2020"] = _fmt(
                 mun_marg_2020.get("porc_pob15_analfabeta")
             )
-            ctx["de_marg_sin_educ_bas_2020"] = _pct(
+            ctx["de_marg_analfabeta_pct_2020"] = _pct(
+                mun_marg_2020.get("porc_pob15_analfabeta")
+            )
+            ctx["de_marg_sin_educ_bas_2020"] = _fmt(
                 mun_marg_2020.get("pob15_sin_educ_bas")
             )
-            ctx["de_marg_sin_drenaje_2020"] = _pct(
+            ctx["de_marg_sin_educ_bas_pct_2020"] = _pct(
+                mun_marg_2020.get("pob15_sin_educ_bas")
+            )
+            ctx["de_marg_sin_drenaje_2020"] = _fmt(
                 mun_marg_2020.get("porc_viv_sin_drenaje_ni_excusado")
             )
-            ctx["de_marg_sin_energia_2020"] = _pct(
+            ctx["de_marg_sin_drenaje_pct_2020"] = _pct(
+                mun_marg_2020.get("porc_viv_sin_drenaje_ni_excusado")
+            )
+            ctx["de_marg_sin_energia_2020"] = _fmt(
                 mun_marg_2020.get("porc_viv_sin_energia")
             )
-            ctx["de_marg_sin_agua_2020"] = _pct(
+            ctx["de_marg_sin_energia_pct_2020"] = _pct(
+                mun_marg_2020.get("porc_viv_sin_energia")
+            )
+            ctx["de_marg_sin_agua_2020"] = _fmt(
                 mun_marg_2020.get("porc_viv_sin_agua_entubada")
             )
-            ctx["de_marg_piso_tierra_2020"] = _pct(
+            ctx["de_marg_sin_agua_pct_2020"] = _pct(
+                mun_marg_2020.get("porc_viv_sin_agua_entubada")
+            )
+            ctx["de_marg_piso_tierra_2020"] = _fmt(
+                mun_marg_2020.get("porc_viv_piso_tierra")
+            )
+            ctx["de_marg_piso_tierra_pct_2020"] = _pct(
                 mun_marg_2020.get("porc_viv_piso_tierra")
             )
             ctx["de_marg_hacinamiento_2020"] = _fmt(
                 mun_marg_2020.get("prom_ocup_por_cuarto"), 2
             )
-            ctx["de_marg_loc_menos5000_2020"] = _pct(
+            ctx["de_marg_hacinamiento_pct_2020"] = _pct(
+                mun_marg_2020.get("prom_ocup_por_cuarto")
+            )
+            ctx["de_marg_loc_menos5000_2020"] = _fmt(
                 mun_marg_2020.get("porc_pob_loc_menos5000_hab")
             )
-            ctx["de_marg_hasta2salmin_2020"] = _pct(
+            ctx["de_marg_hasta2salmin_2020"] = _fmt(
                 mun_marg_2020.get("pob_ocup_hasta_2_sal_min")
             )
             ctx["de_marg_sin_refrigerador_2020"] = _pct(
@@ -449,12 +492,19 @@ class Analizer(Stage):
             ctx["de_marg_indice_2020"] = ND
             ctx["de_marg_grado_2020"] = ND
             ctx["de_marg_analfabeta_2020"] = ND
+            ctx["de_marg_analfabeta_pct_2020"] = ND
             ctx["de_marg_sin_educ_bas_2020"] = ND
+            ctx["de_marg_sin_educ_bas_pct_2020"] = ND
             ctx["de_marg_sin_drenaje_2020"] = ND
+            ctx["de_marg_sin_drenaje_pct_2020"] = ND
             ctx["de_marg_sin_energia_2020"] = ND
+            ctx["de_marg_sin_energia_pct_2020"] = ND
             ctx["de_marg_sin_agua_2020"] = ND
+            ctx["de_marg_sin_agua_pct_2020"] = ND
             ctx["de_marg_piso_tierra_2020"] = ND
+            ctx["de_marg_piso_tierra_pct_2020"] = ND
             ctx["de_marg_hacinamiento_2020"] = ND
+            ctx["de_marg_hacinamiento_pct_2020"] = ND
             ctx["de_marg_loc_menos5000_2020"] = ND
             ctx["de_marg_hasta2salmin_2020"] = ND
             ctx["de_marg_sin_refrigerador_2020"] = ND
@@ -466,31 +516,31 @@ class Analizer(Stage):
                 mun_marg_2015.get("indice_marginacion"), 4
             )
             ctx["de_marg_grado_2015"] = mun_marg_2015.get("grado_marginacion") or ND
-            ctx["de_marg_analfabeta_2015"] = _pct(
+            ctx["de_marg_analfabeta_2015"] = _fmt(
                 mun_marg_2015.get("porc_pob15_analfabeta")
             )
-            ctx["de_marg_sin_educ_bas_2015"] = _pct(
+            ctx["de_marg_sin_educ_bas_2015"] = _fmt(
                 mun_marg_2015.get("pob15_sin_educ_bas")
             )
-            ctx["de_marg_sin_drenaje_2015"] = _pct(
+            ctx["de_marg_sin_drenaje_2015"] = _fmt(
                 mun_marg_2015.get("porc_viv_sin_drenaje_ni_excusado")
             )
-            ctx["de_marg_sin_energia_2015"] = _pct(
+            ctx["de_marg_sin_energia_2015"] = _fmt(
                 mun_marg_2015.get("porc_viv_sin_energia")
             )
-            ctx["de_marg_sin_agua_2015"] = _pct(
+            ctx["de_marg_sin_agua_2015"] = _fmt(
                 mun_marg_2015.get("porc_viv_sin_agua_entubada")
             )
-            ctx["de_marg_piso_tierra_2015"] = _pct(
+            ctx["de_marg_piso_tierra_2015"] = _fmt(
                 mun_marg_2015.get("porc_viv_piso_tierra")
             )
             ctx["de_marg_hacinamiento_2015"] = _fmt(
                 mun_marg_2015.get("prom_ocup_por_cuarto"), 2
             )
-            ctx["de_marg_loc_menos5000_2015"] = _pct(
+            ctx["de_marg_loc_menos5000_2015"] = _fmt(
                 mun_marg_2015.get("porc_pob_loc_menos5000_hab")
             )
-            ctx["de_marg_hasta2salmin_2015"] = _pct(
+            ctx["de_marg_hasta2salmin_2015"] = _fmt(
                 mun_marg_2015.get("pob_ocup_hasta_2_sal_min")
             )
             ctx["de_marg_pos_entidad_2015"] = _marg_ranking(cvegeo, marginacion_2015)
@@ -525,31 +575,31 @@ class Analizer(Stage):
                 mun_marg_2010.get("indice_marginacion"), 4
             )
             ctx["de_marg_grado_2010"] = mun_marg_2010.get("grado_marginacion") or ND
-            ctx["de_marg_analfabeta_2010"] = _pct(
+            ctx["de_marg_analfabeta_2010"] = _fmt(
                 mun_marg_2010.get("porc_pob15_analfabeta")
             )
-            ctx["de_marg_sin_educ_bas_2010"] = _pct(
+            ctx["de_marg_sin_educ_bas_2010"] = _fmt(
                 mun_marg_2010.get("pob15_sin_educ_bas")
             )
-            ctx["de_marg_sin_drenaje_2010"] = _pct(
+            ctx["de_marg_sin_drenaje_2010"] = _fmt(
                 mun_marg_2010.get("porc_viv_sin_drenaje_ni_excusado")
             )
-            ctx["de_marg_sin_energia_2010"] = _pct(
+            ctx["de_marg_sin_energia_2010"] = _fmt(
                 mun_marg_2010.get("porc_viv_sin_energia")
             )
-            ctx["de_marg_sin_agua_2010"] = _pct(
+            ctx["de_marg_sin_agua_2010"] = _fmt(
                 mun_marg_2010.get("porc_viv_sin_agua_entubada")
             )
-            ctx["de_marg_piso_tierra_2010"] = _pct(
+            ctx["de_marg_piso_tierra_2010"] = _fmt(
                 mun_marg_2010.get("porc_viv_piso_tierra")
             )
             ctx["de_marg_hacinamiento_2010"] = _fmt(
                 mun_marg_2010.get("prom_ocup_por_cuarto"), 2
             )
-            ctx["de_marg_loc_menos5000_2010"] = _pct(
+            ctx["de_marg_loc_menos5000_2010"] = _fmt(
                 mun_marg_2010.get("porc_pob_loc_menos5000_hab")
             )
-            ctx["de_marg_hasta2salmin_2010"] = _pct(
+            ctx["de_marg_hasta2salmin_2010"] = _fmt(
                 mun_marg_2010.get("pob_ocup_hasta_2_sal_min")
             )
             ctx["de_marg_pos_entidad_2010"] = _marg_ranking(cvegeo, marginacion_2010)
@@ -631,9 +681,11 @@ class Analizer(Stage):
             ctx["de_jal_marg_piso_tierra"] = ND
             ctx["de_jal_marg_hacinamiento"] = ND
             ctx["de_jal_marg_sin_refrigerador"] = ND
-        ctx["de_mapa_indice_marginacion_municipio"] = MAPA_PLACEHOLDER
+        ctx["de_mapa_indice_marginacion_municipio"] = _mapa_latex(
+            mapa_marginacion,
+            f"Índice de marginación por municipio. Jalisco, {ANIO_CENSO}",
+        )
 
-        DASH = "{-}"
         marg_by_nombre = {loc["localidad"]: loc for loc in marginacion_localidades}
 
         def _loc_val(marg, key, fn):
@@ -665,9 +717,7 @@ class Analizer(Stage):
                     "sin_energia": _loc_val(marg, "porc_viv_sin_energia", _pct),
                     "sin_agua": _loc_val(marg, "porc_viv_sin_agua_entubada", _pct),
                     "piso_tierra": _loc_val(marg, "porc_viv_piso_tierra", _pct),
-                    "hacinamiento": _loc_val(
-                        marg, "prom_ocup_por_cuarto", lambda v: _fmt(v, 2)
-                    ),
+                    "hacinamiento": _loc_val(marg, "prom_ocup_por_cuarto", _pct),
                     "sin_refrigerador": _loc_val(
                         marg, "porc_viv_sin_refrigerador", _pct
                     ),
@@ -975,7 +1025,10 @@ class Analizer(Stage):
         ctx["de_lpi_prom_2015"] = _p(pobreza_2015, "lpi_promedio", _fmt)
         ctx["de_lpi_prom_2020"] = _p(pobreza_2020, "lpi_promedio", _fmt)
 
-        ctx["de_mapa_porcentaje_pobreza_multidimensional"] = MAPA_PLACEHOLDER
+        ctx["de_mapa_porcentaje_pobreza_multidimensional"] = _mapa_latex(
+            mapa_pobreza,
+            f"Porcentaje de población en situación de pobreza multidimensional por municipio. Jalisco, {ANIO_CENSO}",
+        )
 
         total_estatal = input_data.get("total_estatal_2020")
         ctx["de_porcentaje_poblacion"] = (
