@@ -6,6 +6,26 @@ ND = r"\ND"
 DISPLAY_NUMBER_RE = re.compile(r"^\s*(-?\d+)(\.\d+)?\s*$")
 RAW_FIELD_TOKENS = ("lat", "lon", "coord", "coordenada", "clave", "cve", "id")
 RAW_FIELD_NAMES = {"class_value", "categoria"}
+NUMERIC_FIELD_TOKENS = (
+    "superficie",
+    "porcentaje",
+    "pct",
+    "conteo",
+    "total",
+    "num",
+    "cantidad",
+    "min",
+    "max",
+    "mean",
+    "med",
+    "longitud",
+    "area",
+    "elevacion",
+    "elev",
+    "temp",
+    "prec",
+    "densidad",
+)
 
 
 def latex_escape(value):
@@ -65,11 +85,17 @@ def format_number_es(value):
 
 def fmt(value, field_name=None):
     field = (field_name or "").lower()
-    if (
+    is_data_field = (
         field
         and field not in RAW_FIELD_NAMES
         and not any(token in field for token in RAW_FIELD_TOKENS)
-    ):
+    )
+    is_numeric = is_data_field and any(t in field for t in NUMERIC_FIELD_TOKENS)
+    if is_data_field:
+        if is_numeric and (
+            value is None or (isinstance(value, float) and math.isnan(value))
+        ):
+            return "0"
         formatted = format_number_es(value)
         if formatted is not value:
             return formatted
