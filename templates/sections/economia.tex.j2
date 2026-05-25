@@ -1,0 +1,356 @@
+\clearpage
+\thispagestyle{empty}
+\AddToShipoutPictureBG*{%
+  \AtPageUpperLeft{\raisebox{-\height}{\includegraphics[width=\paperwidth]{<< assets_path >>portadilla.png}}}%
+  \AtPageLowerLeft{\includegraphics[width=\paperwidth]{<< assets_path >>footer_section.png}}%
+}
+\vspace*{\stretch{1}}
+\begin{center}
+  {\color{colorTexto}\bfseries\fontsize{23}{26}\selectfont Economía} \\[2.5em]
+  {\color{colorTexto}\lexendsemibold
+  \shortstack{
+    {\LARGE << ec_municipio_nombre >>} \\[0.3cm]
+    {\LARGE Diagnóstico del municipio} \\[0.3cm]
+    {\LARGE Agosto 2026}
+  }}
+\end{center}
+\vspace*{\stretch{1}}
+\clearpage
+
+\section{Economía}
+
+\subsection{Número de empresas}
+
+Conforme a la actualización de << ec_mes_denue_numero_empresas >> de << ec_anio_denue >>
+del Directorio Estadístico Nacional de Unidades Económicas (DENUE) de INEGI, el municipio de
+<< ec_municipio_nombre >> contaba en << ec_anio_pasado_denue >> con
+<< ec_unidades_economicas >> unidades económicas, lo que representó el
+<< ec_porcentaje_unidades_economicas >>  del total de unidades económicas a nivel estatal,
+ocupando el lugar << ec_posicion_municipio_establecimientos >> en cuanto a municipios
+con más número de establecimientos.
+
+El sector con mayor número de unidades económicas en el municipio fue
+el de << ec_sector_mayor_unidades >>, representando el << ec_porcentaje_sector_mayor_unidades >>
+del total de las unidades económicas en el municipio, seguido del sector
+<< ec_sector_segundo_unidades >> con el << ec_porcentaje_sector_segundo_unidades >> , y el
+sector << ec_sector_tercer_unidades >> con el << ec_porcentaje_sector_tercer_unidades >> .
+
+\setlength{\tabcolsep}{3pt}
+\footnotesize
+\begin{longtable}{>{\raggedright\arraybackslash}m{\dimexpr0.20\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.08\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.08\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.08\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.08\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.08\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.08\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.08\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.12\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.12\linewidth - 2\tabcolsep\relax}}
+
+\caption{\textbf{Cantidad de unidades económicas por sector y según composición en << ec_municipio_nombre >>} \\
+<< ec_anio_denue >>}
+\label{tabla_denue} \\
+
+\hline
+\rowcolor{gray!30}
+\textbf{Sector} &
+\thh{0.08}{0 a 5 personas} &
+\thh{0.08}{6 a 10 personas} &
+\thh{0.08}{11 a 30 personas} &
+\thh{0.08}{31 a 50 personas} &
+\thh{0.08}{51 a 100 personas} &
+\thh{0.08}{101 a 250 personas} &
+\thh{0.08}{251 y más} &
+\thh{0.12}{Total de unidades económicas} &
+\thh{0.12}{\% Total de unidades económicas} \\
+\hline
+\endfirsthead
+
+\multicolumn{10}{l}{\small\textbf{(continuación)}} \\
+\hline
+\rowcolor{gray!30}
+\textbf{Sector} &
+\thh{0.08}{0 a 5 personas} &
+\thh{0.08}{6 a 10 personas} &
+\thh{0.08}{11 a 30 personas} &
+\thh{0.08}{31 a 50 personas} &
+\thh{0.08}{51 a 100 personas} &
+\thh{0.08}{101 a 250 personas} &
+\thh{0.08}{251 y más} &
+\thh{0.12}{Total de unidades económicas} &
+\thh{0.12}{\% Total de unidades económicas} \\
+\hline
+\endhead
+
+\hline
+\multicolumn{10}{r}{\small\textbf{(continúa)}} \\
+\endfoot
+
+\hline
+\endlastfoot
+
+<% for fila in ec_tabla_denue %>
+<< fila.sector >> & << fila.r0a5 >> & << fila.r6a10 >> & << fila.r11a30 >> & << fila.r31a50 >> & << fila.r51a100 >> & << fila.r101a250 >> & << fila.r251mas >> & << fila.total >> & << fila.pct_total >> \\
+\hline
+<% endfor %>
+\rowcolor{orange!20}
+\thdr{Total} & \thdr{<< ec_denue_total_r0a5 >>} & \thdr{<< ec_denue_total_r6a10 >>} & \thdr{<< ec_denue_total_r11a30 >>} & \thdr{<< ec_denue_total_r31a50 >>} & \thdr{<< ec_denue_total_r51a100 >>} & \thdr{<< ec_denue_total_r101a250 >>} & \thdr{<< ec_denue_total_r251mas >>} & \thdr{<< ec_unidades_economicas >>} & \thdr{100.00} \\
+\hline
+
+\end{longtable}
+\normalsize
+\vspace{-28pt}\noindent\parbox{\linewidth}{\footnotesize
+Fuente: INEGI. Directorio Estadístico Nacional de Unidades Económicas, << ec_anio_denue >>.}
+
+\subsection{Valor agregado censal bruto}
+
+El valor agregado censal bruto se define como: "el valor de la producción que se añade durante
+el proceso de trabajo por la actividad creadora y de transformación del personal ocupado, el
+capital y la organización (factores de la producción), ejercida sobre los materiales que se consumen en
+la realización de la actividad económica". En resumen, esta variable se refiere al valor de la producción
+que añade la actividad económica en su proceso productivo.
+
+Conforme a la información de los Censos económicos de << ec_anio_publicacion_ce_anterior >> y de
+<< ec_anio_publicacion_ce >>\footnote{Los Censos Económicos de << ec_anio_publicacion_ce_anterior >> y
+<< ec_anio_publicacion_ce >>, presentan información del valor agregado censal bruto relativo a
+un año anterior al año del censo.} que publicó el INEGI, el valor agregado censal bruto de
+<< ec_municipio_nombre >> registró una variación real de << ec_variacion_valor_agregado_censal >>
+de << ec_anio_ce_anterior >> a << ec_anio_ce >>.
+En << ec_anio_ce >> los tres subsectores más importantes en la generación de valor agregado censal bruto
+en el municipio de << ec_municipio_nombre >> fueron "<< ec_subsector_primer_lugar >>",
+"<< ec_subsector_segundo_lugar >>" y "<< ec_subsector_tercer_lugar >>" que generaron en conjunto el
+<< ec_porcentaje_aportacion_principales_subsectores >> o << ec_aportacion_principales_subsectores >>
+pesos del total del valor agregado censal bruto registrado en << ec_anio_ce >> en el municipio.
+El subsector de "<< ec_subsector_mayor_crecimiento >>" fue el que registró el mayor crecimiento
+real pasando << ec_aportacion_anterior_subsector_mayor_crecimiento >> pesos en
+<< ec_anio_ce_anterior >> a << ec_aportacion_subsector_mayor_crecimiento >> pesos en
+<< ec_anio_ce >>, representando una variación del
+<< ec_variacion_porcentual_aportacion_subsector_mayor_crecimiento >> durante dicho periodo.
+
+\newpage
+
+\setlength{\tabcolsep}{3pt}
+\footnotesize
+\begin{longtable}{>{\raggedright\arraybackslash}m{\dimexpr0.44\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.14\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.14\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.14\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.14\linewidth - 2\tabcolsep\relax}}
+
+\caption{\textbf{Subsectores con mayor valor agregado censal bruto (VACB) en << ec_municipio_nombre >>} \\
+<< ec_anio_ce_anterior >> y << ec_anio_ce >>}
+\label{tabla_vacb} \\
+
+\hline
+\rowcolor{gray!30}
+\textbf{Subsector} &
+\thh{0.14}{<< ec_anio_ce_anterior >>} &
+\thh{0.14}{<< ec_anio_ce >>} &
+\thh{0.14}{\% Part. << ec_anio_ce >>} &
+\thh{0.14}{Var\,\%\newline << ec_anio_ce_anterior >>--<< ec_anio_ce >>} \\
+\hline
+\endfirsthead
+
+\multicolumn{5}{l}{\small\textbf{(continuación)}} \\
+\hline
+\rowcolor{gray!30}
+\textbf{Subsector} &
+\thh{0.14}{<< ec_anio_ce_anterior >>} &
+\thh{0.14}{<< ec_anio_ce >>} &
+\thh{0.14}{\% Part. << ec_anio_ce >>} &
+\thh{0.14}{Var\,\%\newline << ec_anio_ce_anterior >>--<< ec_anio_ce >>} \\
+\hline
+\endhead
+
+\hline
+\multicolumn{5}{r}{\small\textbf{(continúa)}} \\
+\endfoot
+
+\hline
+\endlastfoot
+
+<% for fila in ec_tabla_vacb %>
+<< fila.subsector >> & << fila.vacb_anterior >> & << fila.vacb_actual >> & << fila.pct_part >> & << fila.var_pct >> \\
+\hline
+<% endfor %>
+\rowcolor{orange!20}
+\thdr{Total} & \thdr{<< ec_vacb_total_anterior >>} & \thdr{<< ec_vacb_total_actual >>} & \thdr{100.00} & \thdr{<< ec_variacion_vacb_total >>} \\
+\hline
+
+\end{longtable}
+\normalsize
+\vspace{-28pt}\noindent{\footnotesize
+\begin{tabular}[t]{@{}l@{\hspace{0.5em}}l@{}}
+Nota: & El campo otros incluye subsectores con menor valor agregado censal bruto y/o subsectores\\
+& agrupados por el principio de confidencialidad.\\[2pt]
+Fuente: & IIEG con base en INEGI. Censos Económicos, << ec_anio_publicacion_ce_anterior >> y << ec_anio_publicacion_ce >>.\\[2pt]
+& INEGI. Índice Nacional de Precios al Consumidor. Base segunda quincena Julio 2018.\\
+& Los valores de 2018 fueron ajustados teniendo como base el promedio del INPC de 2023.
+\end{tabular}}
+
+\newpage
+
+\subsection{Empleo}
+\subsubsection*{Trabajadores asegurados en el IMSS}
+
+Información reportada por el Instituto Mexicano del Seguro Social (IMSS), señaló que en
+<< ec_mes_corte_imss >> de << ec_anio_corte_imss >> se registraron en << ec_municipio_nombre >> un
+total de << ec_total_trabajadores_imss >> trabajadores asegurados en el IMSS, representando el
+<< ec_porcentaje_trabajadores_asegurados_jalisco >> del total de trabajadores asegurados en esta
+institución en Jalisco.
+
+El número de trabajadores asegurados en << ec_municipio_nombre >> al mes de << ec_mes_corte_imss >> de
+<< ec_anio_corte_imss >> representa una variación anual de << ec_porcentaje_variacion_asegurados >>
+en comparación con el número de trabajadores que se tenían registrados al mes de
+<< ec_mes_corte_imss >> de << ec_anio_anterior_corte_imss >>.
+
+El grupo económico que más empleos presentó dentro del municipio de << ec_municipio_nombre >>
+fue el de << ec_grupo_ec_con_mas_empleos >>, ya que a << ec_mes_corte_imss >> de
+<< ec_anio_corte_imss >> registró un total de << ec_num_trabajadores_grupo_mayor >> trabajadores,
+concentrando el << ec_porcentaje_trabajadores_grupo_mayor >> del total de asegurados en el municipio.
+
+\setlength{\tabcolsep}{3pt}
+\footnotesize
+\begin{longtable}{>{\raggedright\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.10\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.10\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.10\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.10\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.15\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.15\linewidth - 2\tabcolsep\relax}}
+
+\caption{\textbf{Trabajadores asegurados por grupo económico en << ec_municipio_nombre >>} \\
+<< ec_mes_corte_imss >> << ec_dos_anios_atras_corte_imss >>, << ec_anio_anterior_corte_imss >>
+y << ec_anio_corte_imss >>}
+\label{tabla_imss_grupos} \\
+
+\hline
+\rowcolor{gray!30}
+\textbf{Grupo económico} &
+\thh{0.10}{<< ec_mes_corte_imss >> << ec_dos_anios_atras_corte_imss >>} &
+\thh{0.10}{<< ec_mes_corte_imss >> << ec_anio_anterior_corte_imss >>} &
+\thh{0.10}{<< ec_mes_corte_imss >> << ec_anio_corte_imss >>} &
+\thh{0.10}{\% Part.} &
+\thh{0.15}{Var. nominal << ec_anio_anterior_corte_imss >>--<< ec_anio_corte_imss >>} &
+\thh{0.15}{Var. \% << ec_anio_anterior_corte_imss >>--<< ec_anio_corte_imss >>} \\
+\hline
+\endfirsthead
+
+\multicolumn{7}{l}{\small\textbf{(continuación)}} \\
+\hline
+\rowcolor{gray!30}
+\textbf{Grupo económico} &
+\thh{0.10}{<< ec_mes_corte_imss >> << ec_dos_anios_atras_corte_imss >>} &
+\thh{0.10}{<< ec_mes_corte_imss >> << ec_anio_anterior_corte_imss >>} &
+\thh{0.10}{<< ec_mes_corte_imss >> << ec_anio_corte_imss >>} &
+\thh{0.10}{\% Part.} &
+\thh{0.15}{Var. nominal << ec_anio_anterior_corte_imss >>--<< ec_anio_corte_imss >>} &
+\thh{0.15}{Var. \% << ec_anio_anterior_corte_imss >>--<< ec_anio_corte_imss >>} \\
+\hline
+\endhead
+
+\hline
+\multicolumn{7}{r}{\small\textbf{(continúa)}} \\
+\endfoot
+
+\hline
+\endlastfoot
+
+<% for fila in ec_tabla_imss_grupos %>
+<< fila.grupo >> & << fila.t2 >> & << fila.t1 >> & << fila.t0 >> & << fila.pct_part >> & << fila.var_nominal >> & << fila.var_pct >> \\
+\hline
+<% endfor %>
+\rowcolor{orange!20}
+\thdr{Total General} & \thdr{\ND} & \thdr{\ND} & \thdr{<< ec_total_trabajadores_imss >>} & \thdr{\ND} & \thdr{\ND} & \thdr{<< ec_porcentaje_variacion_asegurados >>} \\
+\hline
+
+\end{longtable}
+\normalsize
+\vspace{-28pt}\noindent\parbox{\linewidth}{\footnotesize
+Fuente: IIEG con base en IMSS. Datos abiertos de Trabajadores Asegurados, << ec_dos_anios_atras_corte_imss >>,
+<< ec_anio_anterior_corte_imss >> y << ec_anio_corte_imss >>.}
+
+\newpage
+
+\subsubsection*{Trabajadores asegurados por el IMSS en la región << ec_region >>}
+
+En << ec_mes_corte_imss >> de << ec_anio_corte_imss >>, << ec_municipio_nombre >> se presenta como el
+<< ec_posicion_municipio_region >> municipio dentro de la región << ec_region >> con mayor número
+de trabajadores, concentrando el << ec_porcentaje_asegurados_region >> del total.
+
+\setlength{\tabcolsep}{3pt}
+\footnotesize
+\begin{longtable}{>{\raggedright\arraybackslash}m{\dimexpr0.28\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.12\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.12\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.16\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.16\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.16\linewidth - 2\tabcolsep\relax}}
+
+\caption{\textbf{Trabajadores asegurados por municipio en la región << ec_region >>} \\
+<< ec_mes_corte_imss >> de << ec_anio_anterior_corte_imss >> y << ec_anio_corte_imss >>}
+\label{tabla_imss_region} \\
+
+\hline
+\rowcolor{gray!30}
+\textbf{Municipio} &
+\thh{0.12}{<< ec_mes_corte_imss >> << ec_anio_anterior_corte_imss >>} &
+\thh{0.12}{<< ec_mes_corte_imss >> << ec_anio_corte_imss >>} &
+\thh{0.16}{\% Part. << ec_mes_corte_imss >> << ec_anio_corte_imss >>} &
+\thh{0.16}{Var. nominal << ec_anio_anterior_corte_imss >>/<< ec_anio_corte_imss >>} &
+\thh{0.16}{Var. \% << ec_anio_anterior_corte_imss >>/<< ec_anio_corte_imss >>} \\
+\hline
+\endfirsthead
+
+\multicolumn{6}{l}{\small\textbf{(continuación)}} \\
+\hline
+\rowcolor{gray!30}
+\textbf{Municipio} &
+\thh{0.12}{<< ec_mes_corte_imss >> << ec_anio_anterior_corte_imss >>} &
+\thh{0.12}{<< ec_mes_corte_imss >> << ec_anio_corte_imss >>} &
+\thh{0.16}{\% Part. << ec_mes_corte_imss >> << ec_anio_corte_imss >>} &
+\thh{0.16}{Var. nominal << ec_anio_anterior_corte_imss >>/<< ec_anio_corte_imss >>} &
+\thh{0.16}{Var. \% << ec_anio_anterior_corte_imss >>/<< ec_anio_corte_imss >>} \\
+\hline
+\endhead
+
+\hline
+\multicolumn{6}{r}{\small\textbf{(continúa)}} \\
+\endfoot
+
+\hline
+\endlastfoot
+
+\rowcolor{orange!20}
+\thdr{<< ec_municipio_nombre >>} & \thdr{\ND} & \thdr{<< ec_total_trabajadores_imss >>} & \thdr{<< ec_porcentaje_asegurados_region >>} & \thdr{\ND} & \thdr{\ND} \\
+\hline
+<% for fila in ec_tabla_imss_region %>
+<< fila.municipio >> & \ND & << fila.total >> & << fila.pct_part >> & \ND & \ND \\
+\hline
+<% endfor %>
+
+\end{longtable}
+\normalsize
+\vspace{-28pt}\noindent\parbox{\linewidth}{\footnotesize
+Fuente: IIEG con base en IMSS. Datos abiertos de Trabajadores Asegurados, << ec_anio_anterior_corte_imss >>
+y << ec_anio_corte_imss >>.}
+
+\newpage
+\subsection{Agricultura y ganadería}
+
+La información sobre producción agrícola que reporta la Secretaría de Agricultura y Desarrollo Rural a
+través de la Dirección General del Servicio de Información Agroalimentaria y Pesquera, señala que el valor
+de la producción agrícola de << ec_municipio_nombre >> en << ec_anio_corte_sagarpa >> fue de
+<< ec_valor_produccion_agricola >> millones de pesos, lo que representó el
+<< ec_porcentaje_respecto_al_estado_agricola >> del valor total de la producción estatal.
+
+\vspace{0.3cm}
+<< ec_grafica_agricultura >>
+
+El valor de la producción ganadera en << ec_municipio_nombre >> en << ec_anio_corte_sagarpa >>
+fue de << ec_valor_produccion_ganado >> millones de pesos, y representó el
+<< ec_porcentaje_respecto_al_estado_ganado >> del total estatal.
+
+\vspace{0.3cm}
+<< ec_grafica_ganaderia >>
