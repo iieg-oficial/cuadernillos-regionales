@@ -1,7 +1,27 @@
+\clearpage
+\thispagestyle{empty}
+\AddToShipoutPictureBG*{%
+  \AtPageUpperLeft{\raisebox{-\height}{\includegraphics[width=\paperwidth]{<< assets_path >>portadilla.png}}}%
+  \AtPageLowerLeft{\includegraphics[width=\paperwidth]{<< assets_path >>footer_section.png}}%
+}
+\vspace*{\stretch{1}}
+\begin{center}
+  {\color{colorTexto}\bfseries\fontsize{23}{26}\selectfont Geografía y Medio Ambiente} \\[2.5em]
+  {\color{colorTexto}\lexendsemibold
+  \shortstack{
+    {\LARGE << ge_municipio >>} \\[0.3cm]
+    {\LARGE Diagnóstico del municipio} \\[0.3cm]
+    {\LARGE Agosto 2026}
+  }}
+\end{center}
+\vspace*{\stretch{1}}
+\clearpage
 
-\section{Información Geoespacial}
+\section{Geografía y Medio Ambiente}
 
-\subsection*{Descripción general}
+\subsection{Información Geoespacial}
+
+\subsubsection{Descripción general}
 
 El municipio de << ge_dg_nombre >> se localiza en la región << ge_dg_region >> del estado de Jalisco. Sus municipios colindantes son << ge_dg_colindantes >> (ver mapa~\ref{map:ge_base}). Tiene una extensión territorial de << ge_dg_area_km2 >> kilómetros cuadrados.
 
@@ -87,9 +107,9 @@ Elaboración del IIEG, con base en información geoespacial municipal, 2026.}
 Elaboración del IIEG, con datos de INEGI. Conjunto nacional de información topográfica a escala 1:50 000, 2025. INEGI. Continuo de Elevaciones Mexicano 4.0, 2025. INEGI. Marco Geoestadístico, 2025.}
 <% endif %>
 
-\subsection*{1. Subsistema natural}
+\subsection{Subsistema Natural}
 
-\subsubsection*{1.1. Geología}
+\subsubsection{Geología}
 
 La unidad geológica predominante en el municipio es << ge_geo_dominante >>, con una cobertura de << ge_geo_dominante_pct >> \% de la superficie municipal.
 
@@ -147,7 +167,7 @@ Elaboración del IIEG, con datos de INEGI. Conjunto de datos vectoriales Geológ
 Elaboración del IIEG, con datos de INEGI. Conjunto de datos vectoriales Geológicos serie I, 1988.}
 <% endif %>
 
-\subsubsection*{1.2. Edafología}
+\subsubsection{Edafología}
 
 Los suelos predominantes en el municipio corresponden a << ge_ed_dominante >>, con una cobertura de << ge_ed_dominante_pct >> \% del territorio.
 
@@ -205,7 +225,7 @@ Elaboración del IIEG, con datos de INEGI. Carta edafológica escala 1:250 000 S
 Elaboración del IIEG, con datos de INEGI. Carta edafológica escala 1:250 000 Serie III, 2025.}
 <% endif %>
 
-\subsubsection*{1.3. Topografía y pendientes}
+\subsubsection{Topografía y pendientes}
 
 La topografía del municipio presenta un predominio de pendientes del rango << ge_tp_dominante >>, las cuales abarcan << ge_tp_dominante_pct >> \% del territorio.
 
@@ -263,7 +283,7 @@ Elaboración del IIEG, con datos de INEGI. Conjunto nacional de información top
 Elaboración del IIEG, con datos de INEGI. Conjunto nacional de información topográfica a escala 1:50 000, 2025. INEGI. Continuo de Elevaciones Mexicano 4.0, 2025.}
 <% endif %>
 
-\subsubsection*{1.4. Cuencas}
+\subsubsection{Cuencas}
 
 El territorio municipal se ubica dentro de las cuencas << ge_cu_nombres_cuencas >>. Del total de la superficie municipal comprendida en ellas, << ge_cu_pct_con_disponibilidad >> \% presenta disponibilidad y << ge_cu_pct_sin_disponibilidad >> \% presenta déficit de disponibilidad de agua superficial.
 
@@ -332,7 +352,7 @@ Elaboración del IIEG, con datos de CONAGUA. Disponibilidad en cuencas hidrológ
 Elaboración del IIEG, con datos de CONAGUA. Disponibilidad en cuencas hidrológicas, 2023. CONAGUA. Ordenamiento de aguas superficial, 2023.}
 <% endif %>
 
-\subsubsection*{1.5. Acuíferos}
+\subsubsection{Acuíferos}
 
 El territorio está ubicado dentro de los acuíferos << ge_ac_nombres_acuiferos >>. Del total de la superficie municipal comprendida en ellas, << ge_ac_pct_sin_disponibilidad >> \% no tiene disponibilidad y << ge_ac_pct_con_disponibilidad >> \% cuenta con disponibilidad de agua subterránea.
 
@@ -392,7 +412,7 @@ Elaboración del IIEG, con datos de CONAGUA. Disponibilidad media anual de aguas
 Elaboración del IIEG, con datos de CONAGUA. Disponibilidad media anual de aguas subterráneas, 2024. CONAGUA. Condición de acuíferos, 2023.}
 <% endif %>
 
-\subsubsection*{1.6. Temperatura}
+\subsubsection{Temperatura}
 
 La temperatura media mensual conforme a la normal climatológica de 1995 hasta 2025, indica que la media anual es de << ge_tm_media_anual >> °C. Los valores promedio más bajos se presentan en << ge_t_meses_menor_temp >>, con << ge_t_valores_menor_temp >> °C, mientras que las temperaturas promedio más altas se registran en << ge_t_meses_mayor_temp >>, con << ge_t_valores_mayor_temp >> °C.
 
@@ -471,7 +491,7 @@ Elaboración del IIEG, con datos de SMN. Información Estadística Climatológic
 Elaboración del IIEG, con datos de SMN. Información Estadística Climatológica, 1995-2026.}
 <% endif %>
 
-\subsubsection*{1.7. Precipitación}
+\subsubsection{Precipitación}
 
 La precipitación media mensual conforme a la normal climatológica de 1995 hasta 2025, indica que la precipitación acumulada anual es de << ge_p_acumulada_anual >> mm. El mes de menor precipitación es << ge_p_mes_menos_lluvia >>, con una media de << ge_p_media_menos_lluvia >> mm, una mínima de << ge_p_min_menos_lluvia >> mm y una máxima de << ge_p_max_menos_lluvia >> mm. Por su parte, el mes de mayor precipitación es << ge_p_mes_mas_lluvia >>, con una media de << ge_p_media_mas_lluvia >> mm, una mínima de << ge_p_min_mas_lluvia >> mm y una máxima de << ge_p_max_mas_lluvia >> mm.
 
@@ -550,7 +570,7 @@ Elaboración del IIEG, con datos de SMN. Información Estadística Climatológic
 Elaboración del IIEG, con datos de SMN. Información Estadística Climatológica, 1995-2026.}
 <% endif %>
 
-\subsubsection*{1.8. Clima}
+\subsubsection{Clima}
 
 El municipio presenta un clima predominante de tipo << ge_cl_tipo_predominante >>, que abarca << ge_cl_pct_predominante >> \% del territorio. En segundo lugar se presenta << ge_cl_secundario >> con << ge_cl_secundario_pct >> \%. Además se identifican variantes como << ge_cl_otros_nombres >>, que representan << ge_cl_otros_pct >> \%.
 
@@ -606,7 +626,7 @@ Elaboración del IIEG, con datos de SMN. Información Estadística Climatológic
 Elaboración del IIEG, con datos de SMN. Información Estadística Climatológica, 1995-2026.}
 <% endif %>
 
-\subsubsection*{1.9. Uso de suelo y vegetación}
+\subsubsection{Uso de suelo y vegetación}
 
 La cobertura de uso de suelo y vegetación predominante en el municipio es << ge_usv_dominante >>, con una participación de << ge_usv_dominante_pct >> \% de la superficie. Le sigue << ge_usv_secundario >>, con << ge_usv_secundario_pct >> \%. El resto de las coberturas representa en conjunto << ge_usv_demas_pct >> \% del territorio.
 
@@ -662,7 +682,7 @@ Elaboración del IIEG, con datos de INEGI. Conjunto de datos vectoriales de uso 
 Elaboración del IIEG, con datos de INEGI. Conjunto de datos vectoriales de uso del suelo y vegetación Serie VII, 2018.}
 <% endif %>
 
-\subsubsection*{1.10. NDVI}
+\subsubsection{NDVI}
 
 El Índice de Vegetación de Diferencia Normalizada (NDVI) permite monitorear el estado de la vegetación.
 
@@ -720,7 +740,7 @@ Elaboración del IIEG, con datos de USGS. Landsat Collection 2 Level-2 Science P
 Elaboración del IIEG, con datos de USGS. Landsat Collection 2 Level-2 Science Products, 2025.}
 <% endif %>
 
-\subsubsection*{1.11. NDWI}
+\subsubsection{NDWI}
 
 El Índice de Agua de Diferencia Normalizada (NDWI) mide el contenido de humedad en la superficie.
 
@@ -778,7 +798,7 @@ Elaboración del IIEG, con datos de USGS. Landsat Collection 2 Level-2 Science P
 Elaboración del IIEG, con datos de USGS. Landsat Collection 2 Level-2 Science Products, 2025.}
 <% endif %>
 
-\subsubsection*{1.12. Áreas naturales protegidas y humedales}
+\subsubsection{Áreas naturales protegidas y humedales}
 
 << ge_anp_texto_automatico >>.
 
@@ -825,7 +845,7 @@ Elaboración del IIEG, con datos de CONANP. Áreas Naturales Protegidas, 2025. C
 Elaboración del IIEG, con datos de CONANP. Áreas Naturales Protegidas, 2025. CONAGUA. Inventario Nacional de Humedales, 2021.}
 <% endif %>
 
-\subsubsection*{1.13. Sequía}
+\subsubsection{Sequía}
 
 En 2025, la categoría << ge_s_dominante >> es la de mayor presencia, con << ge_s_dominante_pct >> \%, seguida por << ge_s_secundario >> con << ge_s_secundario_pct >> \%, mientras que el resto de categorías representa << ge_s_demas_pct >> \% del territorio.
 
@@ -881,7 +901,7 @@ Elaboración del IIEG, con datos de USGS. Landsat Collection 2 Level-2 Science P
 Elaboración del IIEG, con datos de USGS. Landsat Collection 2 Level-2 Science Products, 2025.}
 <% endif %>
 
-\subsubsection*{1.14. Erosión potencial}
+\subsubsection{Erosión potencial}
 
 En el municipio, predominan pérdidas potenciales de suelo de << ge_er_dominante_rango >> t/ha/año, clasificadas como << ge_er_dominante_tipo >> que representa el << ge_er_dominante_pct >> \% de la superficie municipal. En segundo lugar, las pérdidas potenciales de suelo de << ge_er_secundario_rango >> abarcan el << ge_er_secundario_pct >> \%. El resto de categorías representan el << ge_er_demas_pct >> \% del territorio.
 
@@ -937,7 +957,7 @@ Elaboración del IIEG, con datos de SMN, INEGI. Carta edafológica Serie III y C
 Elaboración del IIEG, con datos de SMN, INEGI. Carta edafológica Serie III y CEM 4.0.}
 <% endif %>
 
-\subsubsection*{1.15. Erosión efectiva}
+\subsubsection{Erosión efectiva}
 
 En el municipio, predominan pérdidas de suelo de << ge_ee_dominante_rango >> t/ha/año, clasificadas como << ge_ee_dominante_tipo >> que representa << ge_ee_dominante_pct >> \% de la superficie municipal. En segundo lugar, las potenciales pérdidas de suelo de << ge_ee_secundario_rango >> abarcan el << ge_ee_secundario_pct >> \%. El resto de categorías representan el << ge_ee_demas_pct >> \% del territorio.
 
@@ -993,9 +1013,9 @@ Elaboración del IIEG, con datos de SMN, INEGI. Carta edafológica Serie III, CE
 Elaboración del IIEG, con datos de SMN, INEGI. Carta edafológica Serie III, CEM 4.0 y USV Serie VII.}
 <% endif %>
 
-\subsection*{2. Subsistema antrópico}
+\subsection{Subsistema Antrópico}
 
-\subsubsection*{2.1. Índice Territorial Urbano-Rural}
+\subsubsection{Índice Territorial Urbano-Rural}
 
 En el municipio predomina la categoría << ge_itur_dominante >>, con una cobertura de << ge_itur_dominante_pct >> \% del territorio. Le sigue la categoría << ge_itur_secundario >>, con << ge_itur_secundario_pct >> \%. El resto de las categorías representa << ge_itur_demas_pct >> \% del territorio.
 
@@ -1051,7 +1071,7 @@ Elaboración del IIEG, con datos de INEGI. Índice Territorial Urbano-Rural (ITU
 Elaboración del IIEG, con datos de INEGI. Índice Territorial Urbano-Rural (ITUR), 2025.}
 <% endif %>
 
-\subsubsection*{2.2. Salud}
+\subsubsection{Salud}
 
 De acuerdo con los registros de la Secretaría de Salud, en el municipio se identifican << ge_salud_total_puntos_muni >> unidades de servicio de salud, entre consultorios, hospitales, farmacias, laboratorios y unidades móviles. De las cuales << ge_salud_primer_pct >> \% son de primer nivel.
 
@@ -1099,7 +1119,7 @@ Elaboración del IIEG, con datos de Dirección General de Información en Salud.
 Elaboración del IIEG, con datos de Dirección General de Información en Salud. Clave Única de Establecimientos de Salud, 2025.}
 <% endif %>
 
-\subsubsection*{2.3. Educación}
+\subsubsection{Educación}
 
 De acuerdo con los registros del Sistema de Información y Gestión Educativa, en el municipio existen << ge_edu_total_escuelas_muni >> centros educativos distribuidos en distintos niveles y sectores.
 
@@ -1147,7 +1167,7 @@ Elaboración del IIEG, con datos de Sistema de Información y Gestión Educativa
 Elaboración del IIEG, con datos de Sistema de Información y Gestión Educativa (SIGED). Consulta de escuelas, 2025.}
 <% endif %>
 
-\subsubsection*{2.4. Espacios públicos}
+\subsubsection{Espacios públicos}
 
 En el municipio existen << ge_ep_total_puntos_muni >> espacios. Predomina el tipo << ge_ep_dominante >>, que representa << ge_ep_dominante_pct >> \% del total. El resto de los espacios públicos representa << ge_ep_pct_otros >> \% del total.
 
@@ -1193,7 +1213,7 @@ Elaboración del IIEG, con datos de INEGI. Marco Geoestadístico, 2025.}
 Elaboración del IIEG, con datos de INEGI. Marco Geoestadístico, 2025.}
 <% endif %>
 
-\subsubsection*{2.5. Infraestructura energética}
+\subsubsection{Infraestructura energética}
 
 La infraestructura energética del municipio integra elementos estratégicos para el suministro y distribución de energía en el territorio.
 El municipio cuenta con << ge_ene_conteo_total_municipio >> subestación(es) eléctrica(s).
