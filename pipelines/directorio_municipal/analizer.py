@@ -1,12 +1,11 @@
+from core.constants import ND
 from core.pipelines.stage import Stage
 from core.utils.logger import Logger
-
-ND = "\\ND"
 
 
 class Analizer(Stage):
     def execute(self, input_data: dict) -> dict:
-        Logger.info("Directorio Municipal: procesando datos...")
+        Logger.info("Directorio Municipal: procesando datos")
         r = input_data
 
         return {
