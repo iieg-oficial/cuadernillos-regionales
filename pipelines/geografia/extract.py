@@ -75,7 +75,7 @@ class Extract(Stage):
         ensure_maps()
 
         settings = DatabaseSettings.from_env("cuadernillos_geo")
-        Logger.info("Geografía: conectando a base de datos...")
+        Logger.info("Geografía: conectando a base de datos")
 
         with get_session(settings) as session:
             from sqlalchemy import text
@@ -90,7 +90,7 @@ class Extract(Stage):
                 )
 
             municipio = dg_row["dg_nombre"]
-            Logger.info(f"Geografía: extrayendo datos de {municipio}...")
+            Logger.info(f"Geografía: extrayendo datos de {municipio}")
 
             texto = {}
             for topic in TEXT_TOPICS:
@@ -110,7 +110,7 @@ class Extract(Stage):
                     session.rollback()
                     detalle[topic] = []
 
-            Logger.info("Geografía: extrayendo datos climáticos...")
+            Logger.info("Geografía: extrayendo datos climáticos")
             temp_long = get_temperatura_long(session, municipio)
             temp_resumen = get_temperatura_resumen(session, municipio)
             prec_long = get_precipitacion_long(session, municipio)

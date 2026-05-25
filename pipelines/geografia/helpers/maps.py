@@ -84,10 +84,10 @@ def ensure_maps():
         f"Faltan {len(missing)} carpetas de mapas: "
         f"{', '.join(missing[:5])}{'...' if len(missing) > 5 else ''}"
     )
-    Logger.info("Descargando mapas de geografía desde Google Drive...")
+    Logger.info("Descargando mapas de geografía desde Google Drive")
     with tempfile.TemporaryDirectory() as tmp:
         tmp_path = Path(tmp)
-        Logger.info("Descargando ZIPs desde Drive...")
+        Logger.info("Descargando ZIPs desde Drive")
         gdown.download_folder(url, output=str(tmp_path), quiet=True)
         zips = sorted(tmp_path.rglob("*.zip"))
         Logger.info(f"  {len(zips)} archivos ZIP descargados")

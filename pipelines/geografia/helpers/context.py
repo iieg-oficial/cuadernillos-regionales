@@ -1,3 +1,4 @@
+from core.constants import ND
 from pipelines.geografia.helpers.formatting import (
     first_value,
     fmt,
@@ -31,30 +32,26 @@ def climate_context(long_rows, prefix):
         if not entry:
             continue
         short, _ = entry
-        out[f"{prefix}_min_{short}"] = fmt(row.get("min"), field_name="min")
-        out[f"{prefix}_max_{short}"] = fmt(row.get("max"), field_name="max")
-        out[f"{prefix}_med_{short}"] = fmt(row.get("mean"), field_name="mean")
+        out[f"{prefix}_min_{short}"] = fmt(row.get("min"))
+        out[f"{prefix}_max_{short}"] = fmt(row.get("max"))
+        out[f"{prefix}_med_{short}"] = fmt(row.get("mean"))
         if prefix == "pp":
-            out[f"{prefix}_media_{short}"] = fmt(row.get("mean"), field_name="mean")
+            out[f"{prefix}_media_{short}"] = fmt(row.get("mean"))
     return out
 
 
 def build_anp_text(ctx):
-    municipio = fmt(
-        first_value(ctx, "anp_nombre", "dg_nombre", "municipio"),
-        field_name="municipio",
-    )
+    municipio = first_value(ctx, "anp_nombre", "dg_nombre", "municipio") or ND
     has_anp = is_positive(ctx.get("anp_num_anp")) or is_positive(
         ctx.get("anp_superficie_anp")
     )
     has_humedales = is_positive(ctx.get("anp_pct_humedales"))
 
     if has_anp:
-        count = fmt(ctx.get("anp_num_anp"), field_name="anp_num_anp")
-        superficie = fmt(ctx.get("anp_superficie_anp"), field_name="anp_superficie_anp")
-        pct = fmt(
-            strip_percent_symbol(ctx.get("anp_pct_anp")), field_name="anp_pct_anp"
-        )
+        count = ctx.get("anp_num_anp", ND)
+        superficie = ctx.get("anp_superficie_anp", ND)
+        pct_raw = ctx.get("anp_pct_anp", ND)
+        pct = strip_percent_symbol(pct_raw) if pct_raw != ND else ND
         area_word = (
             "área natural protegida"
             if to_number(ctx.get("anp_num_anp")) == 1
@@ -72,10 +69,8 @@ def build_anp_text(ctx):
         ]
 
     if has_humedales:
-        pct_h = fmt(
-            strip_percent_symbol(ctx.get("anp_pct_humedales")),
-            field_name="anp_pct_humedales",
-        )
+        pct_h_raw = ctx.get("anp_pct_humedales", ND)
+        pct_h = strip_percent_symbol(pct_h_raw) if pct_h_raw != ND else ND
         prefix = "Asimismo, " if has_anp else ""
         parts.append(
             f"{prefix}Los humedales abarcan {pct_h} \\% del territorio municipal."
@@ -98,10 +93,7 @@ def build_linea_transmision_text(value):
         )
     if number <= 0:
         return "No existen redes de alta tensión registradas."
-    return (
-        f"Existen {fmt(value, field_name='longitud_km_total_municipio')} "
-        "kilómetros lineales de redes de alta tensión."
-    )
+    return f"Existen {fmt(number)} kilómetros lineales de redes de alta tensión."
 
 
 def municipal_value(rows, column):

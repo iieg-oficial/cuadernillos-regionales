@@ -1,5 +1,6 @@
 from pathlib import Path
 
+from core.constants import ND
 from core.pipelines.stage import Stage
 from core.utils.logger import Logger
 from pipelines.geografia.charts.clima import (
@@ -20,7 +21,10 @@ from pipelines.geografia.helpers.context import (
 from pipelines.geografia.helpers.formatting import (
     first_value,
     fmt,
+    fmt_int,
+    latex_escape,
     strip_percent_symbol,
+    to_number,
 )
 from pipelines.geografia.helpers.maps import resolve_maps
 from pipelines.geografia.helpers.tables import (
@@ -107,11 +111,21 @@ def _generate_stacked_chart(
         return False
 
 
+def _fmt_field(val):
+    if val is None:
+        return ND
+    if isinstance(val, float):
+        return fmt(val)
+    if isinstance(val, int) and not isinstance(val, bool):
+        return fmt_int(val)
+    return latex_escape(val)
+
+
 class Analizer(Stage):
-    def __init__(self, municipio_id):
+    def __init__(self, municipio_id: str):
         self.municipio_id = municipio_id
 
-    def execute(self, input_data):
+    def execute(self, input_data: dict) -> dict:
         municipio = input_data["municipio"]
         mid = str(self.municipio_id)
         dg = input_data["descripcion_general"]
@@ -125,88 +139,80 @@ class Analizer(Stage):
 
         ctx = {}
 
-        ctx["ge_municipio"] = fmt(municipio, field_name="municipio")
+        ctx["ge_municipio"] = latex_escape(municipio)
         ctx["ge_fecha_documento"] = "Abril 2026"
 
         for key, val in dg.items():
             if key == "dg_fid":
                 continue
-            ctx[f"ge_{key}"] = fmt(val, field_name=key)
+            ctx[f"ge_{key}"] = _fmt_field(val)
 
         ctx["ge_dg_municipio"] = ctx["ge_dg_nombre"]
-        ctx["ge_dg_sup_mun_km2"] = ctx.get("ge_dg_area_km2", "ND")
-        ctx["ge_dg_nom_cabecera"] = ctx.get("ge_dg_nombre_cabecera", "ND")
-        ctx["ge_dg_cabecera_lat"] = ctx.get("ge_dg_lat", "ND")
-        ctx["ge_dg_cabecera_lon"] = ctx.get("ge_dg_lon", "ND")
-        ctx["ge_dg_cabecera_alt"] = ctx.get("ge_dg_elev1", "ND")
-        ctx["ge_dg_altitud_min"] = ctx.get("ge_dg_elevmin", "ND")
-        ctx["ge_dg_altitud_max"] = ctx.get("ge_dg_elevmax", "ND")
-        ctx["ge_dg_mun_colindantes"] = ctx.get("ge_dg_colindantes", "ND")
+        ctx["ge_dg_sup_mun_km2"] = ctx.get("ge_dg_area_km2", ND)
+        ctx["ge_dg_nom_cabecera"] = ctx.get("ge_dg_nombre_cabecera", ND)
+        ctx["ge_dg_cabecera_lat"] = ctx.get("ge_dg_lat", ND)
+        ctx["ge_dg_cabecera_lon"] = ctx.get("ge_dg_lon", ND)
+        ctx["ge_dg_cabecera_alt"] = ctx.get("ge_dg_elev1", ND)
+        ctx["ge_dg_altitud_min"] = ctx.get("ge_dg_elevmin", ND)
+        ctx["ge_dg_altitud_max"] = ctx.get("ge_dg_elevmax", ND)
+        ctx["ge_dg_mun_colindantes"] = ctx.get("ge_dg_colindantes", ND)
 
         for topic, data in texto.items():
             for key, val in data.items():
                 if key == "nombre":
                     continue
-                ctx[f"ge_{key}"] = fmt(val, field_name=key)
+                ctx[f"ge_{key}"] = _fmt_field(val)
 
         cl_texto = texto.get("clima_koppen", {})
         ctx["ge_dg_clima_predom"] = ctx.get(
             "ge_cl_tipo_predominante",
-            fmt(
-                cl_texto.get("cl_tipo_predominante"), field_name="cl_tipo_predominante"
-            ),
+            latex_escape(cl_texto.get("cl_tipo_predominante")),
         )
         ctx["ge_dg_temp_media"] = ctx.get(
             "ge_tm_media_anual",
-            fmt(temp_resumen.get("tm_media_anual"), field_name="tm_media_anual"),
+            fmt(temp_resumen.get("tm_media_anual")),
         )
         ctx["ge_dg_prec_acum"] = ctx.get(
             "ge_p_acumulada_anual",
-            fmt(prec_resumen.get("p_acumulada_anual"), field_name="p_acumulada_anual"),
+            fmt(prec_resumen.get("p_acumulada_anual")),
         )
 
         geo_texto = texto.get("geologia", {})
         ctx["ge_dg_geo_predom"] = ctx.get(
             "ge_geo_dominante",
-            fmt(geo_texto.get("geo_dominante"), field_name="geo_dominante"),
+            latex_escape(geo_texto.get("geo_dominante")),
         )
         ed_texto = texto.get("edafologia", {})
         ctx["ge_dg_edaf_predom"] = ctx.get(
             "ge_ed_dominante",
-            fmt(ed_texto.get("ed_dominante"), field_name="ed_dominante"),
+            latex_escape(ed_texto.get("ed_dominante")),
         )
         tp_texto = texto.get("pendiente_clasificada", {})
         ctx["ge_dg_pendiente_predom"] = ctx.get(
             "ge_tp_dominante",
-            fmt(tp_texto.get("tp_dominante"), field_name="tp_dominante"),
+            latex_escape(tp_texto.get("tp_dominante")),
         )
 
         vientos = texto.get("vientos_dominantes", {})
-        ctx["ge_dg_viento_predom"] = fmt(
-            first_value(vientos, "dg_viento_predom", default="ND"),
-            field_name="dg_viento_predom",
-        )
-        ctx["ge_dg_viento_predom_fr"] = fmt(
-            strip_percent_symbol(
-                first_value(vientos, "dg_viento_predom_fr", default="ND")
-            ),
-            field_name="dg_viento_predom_fr",
-        )
+        wind_dir = first_value(vientos, "dg_viento_predom")
+        ctx["ge_dg_viento_predom"] = latex_escape(wind_dir) if wind_dir else ND
+        wind_fr = strip_percent_symbol(first_value(vientos, "dg_viento_predom_fr"))
+        ctx["ge_dg_viento_predom_fr"] = fmt(to_number(wind_fr)) if wind_fr else ND
 
         ctx.update({f"ge_{k}": v for k, v in climate_context(temp_long, "tm").items()})
         ctx.update({f"ge_{k}": v for k, v in climate_context(prec_long, "pp").items()})
 
         for key in ["tm_media_anual", "t_media_anual"]:
             if temp_resumen.get(key) is not None:
-                ctx[f"ge_{key}"] = fmt(temp_resumen[key], field_name=key)
+                ctx[f"ge_{key}"] = fmt(temp_resumen[key])
 
         for key in temp_resumen:
             if key != "municipio" and f"ge_{key}" not in ctx:
-                ctx[f"ge_{key}"] = fmt(temp_resumen[key], field_name=key)
+                ctx[f"ge_{key}"] = _fmt_field(temp_resumen[key])
 
         for key in prec_resumen:
             if key != "municipio" and f"ge_{key}" not in ctx:
-                ctx[f"ge_{key}"] = fmt(prec_resumen[key], field_name=key)
+                ctx[f"ge_{key}"] = _fmt_field(prec_resumen[key])
 
         ctx["ge_geo_unidades_geologicas"] = rows_for(
             detalle.get("geologia", []),
@@ -381,13 +387,12 @@ class Analizer(Stage):
             ac_cond, ["no explotado", "no sobreexplotado"]
         )
 
-        ctx["ge_salud_total_unidades"] = ctx.get("ge_salud_total_puntos_muni", "ND")
+        ctx["ge_salud_total_unidades"] = ctx.get("ge_salud_total_puntos_muni", ND)
         ctx["ge_ene_conteo_total_municipio"] = ctx.get(
-            "ge_ie_conteo_total_municipio", "ND"
+            "ge_ie_conteo_total_municipio", ND
         )
         ctx["ge_ene_linea_transm_l_km"] = fmt(
-            municipal_value(linea_t, "longitud_km_total_municipio"),
-            field_name="longitud_km_total_municipio",
+            municipal_value(linea_t, "longitud_km_total_municipio")
         )
 
         anp_ctx = {}
@@ -400,7 +405,7 @@ class Analizer(Stage):
             municipal_value(linea_t, "longitud_km_total_municipio")
         )
 
-        Logger.info("Geografía: generando gráficas...")
+        Logger.info("Geografía: generando gráficas")
         for topic, cat_col, val_col, sort_col in SIMPLE_CHART_TOPICS:
             chart_name = {
                 "geologia": "geo",
@@ -477,7 +482,7 @@ class Analizer(Stage):
             ctx["ge_dg_viento_grafica"] = ""
             ctx["ge_dg_viento_grafica_activa"] = False
 
-        Logger.info("Geografía: resolviendo mapas...")
+        Logger.info("Geografía: resolviendo mapas")
         ctx.update(resolve_maps(input_data["cve_geo"], municipio))
         Logger.info("Geografía: análisis completo")
 

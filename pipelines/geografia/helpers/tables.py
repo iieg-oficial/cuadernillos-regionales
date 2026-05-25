@@ -1,6 +1,13 @@
 import unicodedata
 
-from pipelines.geografia.helpers.formatting import fmt, sentence_case, to_number
+from core.constants import ND
+from pipelines.geografia.helpers.formatting import (
+    fmt,
+    fmt_int,
+    latex_escape,
+    sentence_case,
+    to_number,
+)
 
 
 def rows_for(rows, columns, order_col="orden_pct", transforms=None):
@@ -21,7 +28,14 @@ def rows_for(rows, columns, order_col="orden_pct", transforms=None):
             transform = transforms.get(src)
             if transform is not None:
                 value = transform(value)
-            current[out] = fmt(value, field_name=src)
+            if value is None:
+                current[out] = ND
+            elif isinstance(value, float):
+                current[out] = fmt(value)
+            elif isinstance(value, int) and not isinstance(value, bool):
+                current[out] = fmt_int(value)
+            else:
+                current[out] = latex_escape(value)
         result.append(current)
     return result
 
@@ -68,15 +82,13 @@ def health_rows_for(rows):
     for row in work:
         result.append(
             {
-                "nombre_de_la_institucion": fmt(
-                    row.get("nombre_de_la_institucion"),
-                    field_name="nombre_de_la_institucion",
+                "nombre_de_la_institucion": latex_escape(
+                    row.get("nombre_de_la_institucion")
                 ),
-                "nivel_atencion": fmt(
-                    health_level_label(row.get("nivel_de_atencion")),
-                    field_name="nivel_de_atencion",
+                "nivel_atencion": latex_escape(
+                    health_level_label(row.get("nivel_de_atencion"))
                 ),
-                "cantidad": fmt(row.get("conteo"), field_name="conteo"),
+                "cantidad": fmt_int(row.get("conteo")),
             }
         )
     return result
@@ -121,12 +133,9 @@ def education_rows_for(rows):
         nivel = EDUCATION_LEVEL_LABELS.get(nivel, nivel)
         result.append(
             {
-                "nivel_educativo": fmt(nivel, field_name="nivel"),
-                "sector": fmt(
-                    row.get("sostenimiento_reclasificado"),
-                    field_name="sostenimiento_reclasificado",
-                ),
-                "cantidad": fmt(row.get("conteo"), field_name="conteo"),
+                "nivel_educativo": latex_escape(nivel),
+                "sector": latex_escape(row.get("sostenimiento_reclasificado")),
+                "cantidad": fmt_int(row.get("conteo")),
             }
         )
     return result
@@ -141,7 +150,7 @@ def pct_sum(rows, contains, value_col="porcentaje"):
             val = to_number(row.get(value_col))
             if val is not None:
                 total += val
-    return fmt(total, field_name=value_col)
+    return fmt(total)
 
 
 def sup_sum(rows, contains, value_col="superficie_ha"):
