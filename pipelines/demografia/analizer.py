@@ -42,6 +42,12 @@ def _pct(value) -> str:
     return f"{value:,.2f}".replace(",", r"\,") + r"\,\%"
 
 
+def _grado(value) -> str:
+    if value is None:
+        return ND
+    return value.lower()
+
+
 class Analizer(Stage):
     def __init__(self, municipio_id: str):
         self.municipio_id = municipio_id
@@ -231,7 +237,9 @@ class Analizer(Stage):
             (e for e in iim_estados_2020 if e["entidad_id"] == JALISCO_ID), None
         )
         if jal_2020 and jal_2020["iim_dp2"] is not None:
-            ctx["de_grado_intensidad_migratoria_jal"] = jal_2020.get("grado_iim") or ND
+            ctx["de_grado_intensidad_migratoria_jal"] = _grado(
+                jal_2020.get("grado_iim")
+            )
             ctx["de_ranking_jal_migracion"] = (
                 jal_2020.get("lugar_contexto_nacional") or ND
             )
@@ -247,7 +255,7 @@ class Analizer(Stage):
             ctx["de_porcentaje_migrantes_retorno_jal"] = _pct(
                 jal_2020.get("por_viv_reto")
             )
-            ctx["de_jal_grado_migracion"] = jal_2020.get("grado_iim") or ND
+            ctx["de_jal_grado_migracion"] = _grado(jal_2020.get("grado_iim"))
             ctx["de_jal_lugar_migracion"] = (
                 jal_2020.get("lugar_contexto_nacional") or ND
             )
@@ -275,7 +283,9 @@ class Analizer(Stage):
             (m for m in jalisco_mun_2020 if m["municipio_id"] == cvegeo), None
         )
         if mun_2020 and mun_2020["iim_dp2"] is not None:
-            ctx["de_grado_intensidad_migratoria_mun"] = mun_2020.get("grado_iim") or ND
+            ctx["de_grado_intensidad_migratoria_mun"] = _grado(
+                mun_2020.get("grado_iim")
+            )
             ctx["de_ranking_mun_migracion"] = jal_rank_2020.get(cvegeo, ND)
             ctx["de_porcentaje_viviendas_remesas_mun"] = _pct(
                 mun_2020.get("por_viv_remesas")
@@ -322,8 +332,8 @@ class Analizer(Stage):
         )
 
         if mun_2010 and mun_2010["iim_dp2"] is not None:
-            ctx["de_grado_intensidad_migratoria_anterior_mun"] = (
-                mun_2010.get("grado_iim") or ND
+            ctx["de_grado_intensidad_migratoria_anterior_mun"] = _grado(
+                mun_2010.get("grado_iim")
             )
             ctx["de_ranking_anterior_mun_migracion"] = jal_rank_2010.get(cvegeo, ND)
             ctx["de_ranking_nacional_mun_migracion_2010"] = (
@@ -403,8 +413,8 @@ class Analizer(Stage):
             )
 
         if mun_marg_2020:
-            ctx["de_grado_marginacion_municipio"] = (
-                mun_marg_2020.get("grado_marginacion") or ND
+            ctx["de_grado_marginacion_municipio"] = _grado(
+                mun_marg_2020.get("grado_marginacion")
             )
             ctx["de_ranking_marginacion_municipio"] = _marg_ranking(
                 cvegeo, marginacion_2020
@@ -414,7 +424,7 @@ class Analizer(Stage):
             ctx["de_marg_indice_2020"] = _fmt(
                 mun_marg_2020.get("indice_marginacion"), 4
             )
-            ctx["de_marg_grado_2020"] = mun_marg_2020.get("grado_marginacion") or ND
+            ctx["de_marg_grado_2020"] = _grado(mun_marg_2020.get("grado_marginacion"))
             ctx["de_marg_analfabeta_2020"] = _fmt(
                 mun_marg_2020.get("porc_pob15_analfabeta")
             )
@@ -501,7 +511,7 @@ class Analizer(Stage):
             ctx["de_marg_indice_2015"] = _fmt(
                 mun_marg_2015.get("indice_marginacion"), 4
             )
-            ctx["de_marg_grado_2015"] = mun_marg_2015.get("grado_marginacion") or ND
+            ctx["de_marg_grado_2015"] = _grado(mun_marg_2015.get("grado_marginacion"))
             ctx["de_marg_analfabeta_2015"] = _fmt(
                 mun_marg_2015.get("porc_pob15_analfabeta")
             )
@@ -533,8 +543,8 @@ class Analizer(Stage):
             ctx["de_marg_pos_nacional_2015"] = (
                 mun_marg_2015.get("lugar_contexto_nacional") or ND
             )
-            ctx["de_grado_marginacion_intercensal_mun"] = (
-                mun_marg_2015.get("grado_marginacion") or ND
+            ctx["de_grado_marginacion_intercensal_mun"] = _grado(
+                mun_marg_2015.get("grado_marginacion")
             )
             ctx["de_ranking_marginacion_intercensal_mun"] = ctx[
                 "de_marg_pos_entidad_2015"
@@ -560,7 +570,7 @@ class Analizer(Stage):
             ctx["de_marg_indice_2010"] = _fmt(
                 mun_marg_2010.get("indice_marginacion"), 4
             )
-            ctx["de_marg_grado_2010"] = mun_marg_2010.get("grado_marginacion") or ND
+            ctx["de_marg_grado_2010"] = _grado(mun_marg_2010.get("grado_marginacion"))
             ctx["de_marg_analfabeta_2010"] = _fmt(
                 mun_marg_2010.get("porc_pob15_analfabeta")
             )
@@ -592,8 +602,8 @@ class Analizer(Stage):
             ctx["de_marg_pos_nacional_2010"] = (
                 mun_marg_2010.get("lugar_contexto_nacional") or ND
             )
-            ctx["de_grado_marginacion_anterior"] = (
-                mun_marg_2010.get("grado_marginacion") or ND
+            ctx["de_grado_marginacion_anterior"] = _grado(
+                mun_marg_2010.get("grado_marginacion")
             )
             ctx["de_ranking_marginacion_censo_anterior"] = ctx[
                 "de_marg_pos_entidad_2010"
@@ -616,11 +626,11 @@ class Analizer(Stage):
             ctx["de_ranking_marginacion_censo_anterior"] = ND
 
         if marginacion_estatal_2020:
-            ctx["de_grado_marginacion_jalisco"] = (
-                marginacion_estatal_2020.get("grado_marginacion") or ND
+            ctx["de_grado_marginacion_jalisco"] = _grado(
+                marginacion_estatal_2020.get("grado_marginacion")
             )
-            ctx["de_jal_marg_grado"] = (
-                marginacion_estatal_2020.get("grado_marginacion") or ND
+            ctx["de_jal_marg_grado"] = _grado(
+                marginacion_estatal_2020.get("grado_marginacion")
             )
             ctx["de_jal_poblacion_2020"] = (
                 _fmt_int(marginacion_estatal_2020["pob_total"])
@@ -694,7 +704,7 @@ class Analizer(Stage):
                     "nombre": loc["localidad"],
                     "grado": DASH
                     if sin_datos
-                    else (marg.get("grado_marginacion") or ND),
+                    else _grado(marg.get("grado_marginacion")),
                     "analfabeta": _loc_val(marg, "porc_pob15_analfabeta", _pct),
                     "sin_educ_bas": _loc_val(marg, "porc_pob15_sin_educ_basica", _pct),
                     "sin_drenaje": _loc_val(
@@ -803,15 +813,15 @@ class Analizer(Stage):
                 if (14000 + rid) in marg_by_mun
                 and marg_by_mun[14000 + rid].get("pob_total")
                 else ND,
-                "grado_marginacion": marg_by_mun.get(14000 + rid, {}).get(
-                    "grado_marginacion"
-                )
-                or ND,
+                "grado_marginacion": _grado(
+                    marg_by_mun.get(14000 + rid, {}).get("grado_marginacion")
+                ),
                 "lugar_marginacion": _marg_ranking(14000 + rid, marginacion_2020)
                 if (14000 + rid) in marg_by_mun
                 else ND,
-                "grado_migracion": iim_by_mun.get(14000 + rid, {}).get("grado_iim")
-                or ND,
+                "grado_migracion": _grado(
+                    iim_by_mun.get(14000 + rid, {}).get("grado_iim")
+                ),
                 "lugar_migracion": jal_rank_2020.get(14000 + rid, ND),
                 "pobreza_pct": _pct(
                     pob_by_cve.get(f"14{int(rid):03d}", {}).get("pobreza_porcentaje")
