@@ -9,6 +9,7 @@ from core.pipelines.stage import Stage
 from core.settings import DatabaseSettings, DemografiaSettings
 from core.utils.logger import Logger
 from core.utils.maps import get_draft_path
+from core.utils.municipalities import get_region, get_same_region_ids
 from pipelines.demografia.queries.marginacion import (
     get_marginacion_estatal,
     get_marginacion_jalisco,
@@ -19,6 +20,7 @@ from pipelines.demografia.queries.poblacion import (
     get_localidades_por_anio,
     get_nombre_municipio,
     get_total_estatal,
+    get_total_region,
     get_totales_municipio,
 )
 from pipelines.demografia.queries.pobreza import (
@@ -79,6 +81,9 @@ class Extract(Stage):
         marg = DatabaseSettings.from_env("marginacion")
         pob_multi = DatabaseSettings.from_env("pobreza_multidimensional")
 
+        region_name = get_region(str(cve_mun))
+        region_ids = [int(mid) for mid in get_same_region_ids(str(cve_mun))]
+
         Logger.info("Demografía: extrayendo datos de población")
         with get_session(pob) as session:
             nombre = get_nombre_municipio(session, cve_mun)
@@ -86,6 +91,7 @@ class Extract(Stage):
             localidades_2020 = get_localidades_por_anio(session, cve_mun, 2020)
             localidades_2010 = get_localidades_por_anio(session, cve_mun, 2010)
             total_estatal_2020 = get_total_estatal(session, 2020)
+            total_region_2020 = get_total_region(session, region_ids, 2020)
 
         Logger.info("Demografía: extrayendo datos de migración")
         with get_session(iim) as session:
@@ -113,7 +119,9 @@ class Extract(Stage):
 
         return {
             "municipio_nombre": nombre,
+            "region_nombre": region_name,
             "totales_poblacion": totales,
+            "total_region_2020": total_region_2020,
             "localidades_2020": localidades_2020,
             "localidades_2010": localidades_2010,
             "total_estatal_2020": total_estatal_2020,

@@ -50,6 +50,20 @@ def get_total_estatal(session: Session, anio: int) -> int | None:
     return row[0] if row else None
 
 
+def get_total_region(session: Session, cve_muns: list[int], anio: int) -> int | None:
+    stmt = text("""
+        SELECT SUM(p.total)
+        FROM poblacion p
+        JOIN fuentes f ON f.id = p.fuente_id
+        WHERE p.entidad_id = 14
+          AND p.localidad_id IS NULL
+          AND p.municipio_id = ANY(:cve_muns)
+          AND f.fecha = :anio
+    """)
+    row = session.execute(stmt, {"cve_muns": cve_muns, "anio": anio}).fetchone()
+    return row[0] if row else None
+
+
 def get_localidades_por_anio(session: Session, cve_mun: int, anio: int) -> list[dict]:
     stmt = text("""
         SELECT l.id, l.localidad, p.total, p.total_hombres, p.total_mujeres

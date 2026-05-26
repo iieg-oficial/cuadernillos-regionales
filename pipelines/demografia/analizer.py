@@ -75,6 +75,8 @@ class Analizer(Stage):
         cve_mun = int(self.municipio_id)
 
         nombre = input_data["municipio_nombre"]
+        region_nombre = input_data["region_nombre"]
+        total_region = input_data.get("total_region_2020")
         totales = input_data["totales_poblacion"]
         localidades_2020 = input_data["localidades_2020"]
         localidades_2010 = input_data["localidades_2010"]
@@ -109,6 +111,19 @@ class Analizer(Stage):
         total_2010 = t2010.get("total", 0) or 0
 
         ctx["de_poblacion_total_censo"] = _fmt_int(total_2020)
+
+        total_estatal = input_data.get("total_estatal_2020")
+        ctx["de_nombre_region"] = region_nombre
+        ctx["de_porcentaje_habitantes_region"] = (
+            _fmt(total_2020 / total_region * 100)
+            if (total_2020 and total_region)
+            else ND
+        )
+        ctx["de_porcentaje_habitantes_jalisco"] = (
+            _fmt(total_2020 / total_estatal * 100)
+            if (total_2020 and total_estatal)
+            else ND
+        )
 
         if total_2020:
             h = t2020.get("hombres") or 0
