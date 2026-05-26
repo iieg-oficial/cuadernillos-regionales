@@ -58,13 +58,6 @@ def _classify_grade(value: float, all_values: list[float]) -> str:
     return "Muy alto"
 
 
-def _rank_desc(value: float, all_values: list[float]) -> int:
-    sorted_desc = sorted(all_values, reverse=True)
-    return next(
-        (i + 1 for i, v in enumerate(sorted_desc) if v <= value), len(sorted_desc)
-    )
-
-
 class Analizer(Stage):
     def __init__(self, municipio_id: str):
         self.municipio_id = municipio_id
@@ -261,8 +254,8 @@ class Analizer(Stage):
             ctx["de_grado_intensidad_migratoria_jal"] = _classify_grade(
                 jal_2020["iim_dp2"], all_estado_vals
             )
-            ctx["de_ranking_jal_migracion"] = _rank_desc(
-                jal_2020["iim_dp2"], all_estado_vals
+            ctx["de_ranking_jal_migracion"] = (
+                jal_2020.get("lugar_contexto_nacional") or ND
             )
             ctx["de_porcentaje_viviendas_remesas_jal"] = _pct(
                 jal_2020.get("por_viv_remesas")
@@ -304,8 +297,8 @@ class Analizer(Stage):
             ctx["de_grado_intensidad_migratoria_mun"] = _classify_grade(
                 mun_2020["iim_dp2"], jal_mun_vals_2020
             )
-            ctx["de_ranking_mun_migracion"] = _rank_desc(
-                mun_2020["iim_dp2"], jal_mun_vals_2020
+            ctx["de_ranking_mun_migracion"] = (
+                mun_2020.get("lugar_contexto_nacional") or ND
             )
             ctx["de_porcentaje_viviendas_remesas_mun"] = _pct(
                 mun_2020.get("por_viv_remesas")
@@ -343,9 +336,6 @@ class Analizer(Stage):
         all_mun_vals_2010 = [
             m["iim_dp2"] for m in iim_mun_2010 if m["iim_dp2"] is not None
         ]
-        jal_mun_vals_2010 = [
-            m["iim_dp2"] for m in jalisco_mun_2010 if m["iim_dp2"] is not None
-        ]
         mun_2010 = next(
             (m for m in jalisco_mun_2010 if m["municipio_id"] == cvegeo), None
         )
@@ -354,8 +344,8 @@ class Analizer(Stage):
             ctx["de_grado_intensidad_migratoria_anterior_mun"] = _classify_grade(
                 mun_2010["iim_dp2"], all_mun_vals_2010
             )
-            ctx["de_ranking_anterior_mun_migracion"] = _rank_desc(
-                mun_2010["iim_dp2"], jal_mun_vals_2010
+            ctx["de_ranking_anterior_mun_migracion"] = (
+                mun_2010.get("lugar_contexto_nacional") or ND
             )
             ctx["de_ranking_nacional_mun_migracion_2010"] = (
                 mun_2010.get("lugar_contexto_nacional") or ND
