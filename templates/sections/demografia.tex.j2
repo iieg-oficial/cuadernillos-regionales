@@ -10,7 +10,6 @@
   {\color{colorTexto}\lexendsemibold
   \shortstack{
     {\LARGE << de_municipio_nombre >>} \\[0.3cm]
-    {\LARGE Diagnóstico del municipio} \\[0.3cm]
     {\LARGE Agosto 2026}
   }}
 \end{center}
@@ -48,6 +47,7 @@ En comparación con << de_anio_censo_anterior >>, la población municipal tuvo u
 \label{cuadro_poblacion_total_sexo} \\
 
 \hline
+
 \rowcolor{gray!30}
  & \thh{0.14}{<< de_anio_censo_anterior >>} & \thh{0.14}{<< de_anio_encuesta_intercensal >>} & \thh{0.14}{<< de_anio_censo >>}
  & \thh{0.21}{Variación \%\newline << de_anio_censo_anterior >>--<< de_anio_encuesta_intercensal >>}
@@ -207,14 +207,14 @@ el lugar << de_ranking_anterior_mun_migracion >> con mayor grado dentro de los m
 
 \hline
 \rowcolor{gray!30}
-\textbf{Índice y grado de intensidad migratoria e indicadores socioeconómicos} & \thh{0.20}{<< de_anio_censo_anterior >>} & \thh{0.20}{<< de_anio_censo >>} \\
+\thh{0.60}{Índice y grado de intensidad migratoria e indicadores socioeconómicos} & \thh{0.20}{<< de_anio_censo_anterior >>} & \thh{0.20}{<< de_anio_censo >>} \\
 \hline
 \endfirsthead
 
 \multicolumn{3}{l}{\small\textbf{(continuación)}} \\
 \hline
 \rowcolor{gray!30}
-\textbf{Índice y grado de intensidad migratoria e indicadores socioeconómicos} & \thh{0.20}{<< de_anio_censo_anterior >>} & \thh{0.20}{<< de_anio_censo >>} \\
+\thh{0.60}{Índice y grado de intensidad migratoria e indicadores socioeconómicos} & \thh{0.20}{<< de_anio_censo_anterior >>} & \thh{0.20}{<< de_anio_censo >>} \\
 \hline
 \endhead
 
@@ -306,7 +306,6 @@ así como la población vulnerable por carencias sociales, la vulnerable por ing
 la no pobre y no vulnerable.
 
 \setlength{\tabcolsep}{3pt}
-\renewcommand{\arraystretch}{1.5}
 \footnotesize
 \begin{longtable}{>{\raggedright\arraybackslash}m{\dimexpr0.28\linewidth - 2\tabcolsep\relax}
                   >{\raggedleft\arraybackslash}m{\dimexpr0.12\linewidth - 2\tabcolsep\relax}
@@ -321,10 +320,10 @@ la no pobre y no vulnerable.
 
 \hline
 \rowcolor{gray!30}
-\textbf{Indicadores de incidencia} &
-\multicolumn{2}{>{\raggedright\arraybackslash}m{\dimexpr0.24\linewidth - 2\tabcolsep\relax}}{\textbf{Porcentaje}} &
-\multicolumn{2}{>{\raggedright\arraybackslash}m{\dimexpr0.24\linewidth - 2\tabcolsep\relax}}{\textbf{Personas}} &
-\multicolumn{2}{>{\raggedright\arraybackslash}m{\dimexpr0.24\linewidth - 2\tabcolsep\relax}}{\textbf{Carencias promedio}} \\
+\thh{0.28}{Indicadores de incidencia} &
+\multicolumn{2}{>{\centering\arraybackslash}m{\dimexpr0.24\linewidth - 2\tabcolsep\relax}}{\cellcolor{gray!30}\textbf{Porcentaje}} &
+\multicolumn{2}{>{\centering\arraybackslash}m{\dimexpr0.24\linewidth - 2\tabcolsep\relax}}{\cellcolor{gray!30}\textbf{Personas}} &
+\multicolumn{2}{>{\centering\arraybackslash}m{\dimexpr0.24\linewidth - 2\tabcolsep\relax}}{\cellcolor{gray!30}\textbf{Carencias promedio}} \\
 \cline{2-7}
 \rowcolor{gray!30}
  & \thh{0.12}{<< de_anio_encuesta_intercensal >>} & \thh{0.12}{<< de_anio_censo >>} & \thh{0.12}{<< de_anio_encuesta_intercensal >>} & \thh{0.12}{<< de_anio_censo >>} & \thh{0.12}{<< de_anio_encuesta_intercensal >>} & \thh{0.12}{<< de_anio_censo >>} \\
@@ -334,10 +333,10 @@ la no pobre y no vulnerable.
 \multicolumn{7}{l}{\small\textbf{(continuación)}} \\
 \hline
 \rowcolor{gray!30}
-\textbf{Indicadores de incidencia} &
-\multicolumn{2}{>{\raggedright\arraybackslash}m{\dimexpr0.24\linewidth - 2\tabcolsep\relax}}{\textbf{Porcentaje}} &
-\multicolumn{2}{>{\raggedright\arraybackslash}m{\dimexpr0.24\linewidth - 2\tabcolsep\relax}}{\textbf{Personas}} &
-\multicolumn{2}{>{\raggedright\arraybackslash}m{\dimexpr0.24\linewidth - 2\tabcolsep\relax}}{\textbf{Carencias promedio}} \\
+\thh{0.28}{Indicadores de incidencia} &
+\multicolumn{2}{>{\centering\arraybackslash}m{\dimexpr0.24\linewidth - 2\tabcolsep\relax}}{\cellcolor{gray!30}\textbf{Porcentaje}} &
+\multicolumn{2}{>{\centering\arraybackslash}m{\dimexpr0.24\linewidth - 2\tabcolsep\relax}}{\cellcolor{gray!30}\textbf{Personas}} &
+\multicolumn{2}{>{\centering\arraybackslash}m{\dimexpr0.24\linewidth - 2\tabcolsep\relax}}{\cellcolor{gray!30}\textbf{Carencias promedio}} \\
 \cline{2-7}
 \rowcolor{gray!30}
  & \thh{0.12}{<< de_anio_encuesta_intercensal >>} & \thh{0.12}{<< de_anio_censo >>} & \thh{0.12}{<< de_anio_encuesta_intercensal >>} & \thh{0.12}{<< de_anio_censo >>} & \thh{0.12}{<< de_anio_encuesta_intercensal >>} & \thh{0.12}{<< de_anio_censo >>} \\
@@ -755,10 +754,10 @@ en la región << de_nombre_region >>}\\
 
 \hline
 \rowcolor{gray!30}
-\thh{0.07}{Clave} & \textbf{Municipio} & \thh{0.11}{Población} &
-\multicolumn{2}{>{\raggedright\arraybackslash}m{\dimexpr0.07\linewidth + 0.08\linewidth - 2\tabcolsep\relax}}{\cellcolor{gray!30}\textbf{Marginación}} &
-\multicolumn{4}{>{\raggedright\arraybackslash}m{\dimexpr0.09\linewidth + 0.07\linewidth + 0.09\linewidth + 0.07\linewidth - 2\tabcolsep\relax}}{\cellcolor{gray!30}\textbf{Pobreza multidimensional}} &
-\multicolumn{2}{>{\raggedright\arraybackslash}m{\dimexpr0.09\linewidth + 0.09\linewidth - 2\tabcolsep\relax}}{\cellcolor{gray!30}\textbf{Intensidad Migratoria}} \\
+\thh{0.07}{Clave} & \thh{0.17}{Municipio} & \thh{0.11}{Población} &
+\multicolumn{2}{>{\centering\arraybackslash}m{\dimexpr0.07\linewidth + 0.08\linewidth - 2\tabcolsep\relax}}{\cellcolor{gray!30}\textbf{Marginación}} &
+\multicolumn{4}{>{\centering\arraybackslash}m{\dimexpr0.09\linewidth + 0.07\linewidth + 0.09\linewidth + 0.07\linewidth - 2\tabcolsep\relax}}{\cellcolor{gray!30}\textbf{Pobreza multidimensional}} &
+\multicolumn{2}{>{\centering\arraybackslash}m{\dimexpr0.09\linewidth + 0.09\linewidth - 2\tabcolsep\relax}}{\cellcolor{gray!30}\textbf{Intensidad Migratoria}} \\
 \rowcolor{gray!30}
  & & & \thh{0.07}{Grado} & \thh{0.08}{Lugar} & \thh{0.09}{pobreza} & \thh{0.07}{Lugar} & \thh{0.09}{pobreza\newline extrema} & \thh{0.07}{Lugar} & \thh{0.09}{Grado} & \thh{0.09}{Lugar} \\
 \hline
@@ -767,10 +766,10 @@ en la región << de_nombre_region >>}\\
 \multicolumn{11}{l}{\small\textbf{(continuación)}} \\
 \hline
 \rowcolor{gray!30}
-\thh{0.07}{Clave} & \textbf{Municipio} & \thh{0.11}{Población} &
-\multicolumn{2}{>{\raggedright\arraybackslash}m{\dimexpr0.07\linewidth + 0.08\linewidth - 2\tabcolsep\relax}}{\cellcolor{gray!30}\textbf{Marginación}} &
-\multicolumn{4}{>{\raggedright\arraybackslash}m{\dimexpr0.09\linewidth + 0.07\linewidth + 0.09\linewidth + 0.07\linewidth - 2\tabcolsep\relax}}{\cellcolor{gray!30}\textbf{Pobreza multidimensional}} &
-\multicolumn{2}{>{\raggedright\arraybackslash}m{\dimexpr0.09\linewidth + 0.09\linewidth - 2\tabcolsep\relax}}{\cellcolor{gray!30}\textbf{Intensidad Migratoria}} \\
+\thh{0.07}{Clave} & \thh{0.17}{Municipio} & \thh{0.11}{Población} &
+\multicolumn{2}{>{\centering\arraybackslash}m{\dimexpr0.07\linewidth + 0.08\linewidth - 2\tabcolsep\relax}}{\cellcolor{gray!30}\textbf{Marginación}} &
+\multicolumn{4}{>{\centering\arraybackslash}m{\dimexpr0.09\linewidth + 0.07\linewidth + 0.09\linewidth + 0.07\linewidth - 2\tabcolsep\relax}}{\cellcolor{gray!30}\textbf{Pobreza multidimensional}} &
+\multicolumn{2}{>{\centering\arraybackslash}m{\dimexpr0.09\linewidth + 0.09\linewidth - 2\tabcolsep\relax}}{\cellcolor{gray!30}\textbf{Intensidad Migratoria}} \\
 \rowcolor{gray!30}
  & & & \thh{0.07}{Grado} & \thh{0.08}{Lugar} & \thh{0.09}{pobreza} & \thh{0.07}{Lugar} & \thh{0.09}{pobreza\newline extrema} & \thh{0.07}{Lugar} & \thh{0.09}{Grado} & \thh{0.09}{Lugar} \\
 \hline
