@@ -42,22 +42,6 @@ def _pct(value) -> str:
     return f"{value:,.2f}".replace(",", r"\,") + r"\,\%"
 
 
-def _classify_grade(value: float, all_values: list[float]) -> str:
-    sorted_vals = sorted(all_values)
-    n = len(sorted_vals)
-    rank = next((i for i, v in enumerate(sorted_vals) if v >= value), n - 1)
-    pct = rank / n
-    if pct < 0.2:
-        return "Muy bajo"
-    elif pct < 0.4:
-        return "Bajo"
-    elif pct < 0.6:
-        return "Medio"
-    elif pct < 0.8:
-        return "Alto"
-    return "Muy alto"
-
-
 class Analizer(Stage):
     def __init__(self, municipio_id: str):
         self.municipio_id = municipio_id
@@ -246,14 +230,8 @@ class Analizer(Stage):
         jal_2020 = next(
             (e for e in iim_estados_2020 if e["entidad_id"] == JALISCO_ID), None
         )
-        all_estado_vals = [
-            e["iim_dp2"] for e in iim_estados_2020 if e["iim_dp2"] is not None
-        ]
-
         if jal_2020 and jal_2020["iim_dp2"] is not None:
-            ctx["de_grado_intensidad_migratoria_jal"] = _classify_grade(
-                jal_2020["iim_dp2"], all_estado_vals
-            )
+            ctx["de_grado_intensidad_migratoria_jal"] = jal_2020.get("grado_iim") or ND
             ctx["de_ranking_jal_migracion"] = (
                 jal_2020.get("lugar_contexto_nacional") or ND
             )
@@ -286,17 +264,11 @@ class Analizer(Stage):
         jalisco_mun_2020 = [
             m for m in iim_mun_2020 if 14000 < m["municipio_id"] < 15000
         ]
-        jal_mun_vals_2020 = [
-            m["iim_dp2"] for m in jalisco_mun_2020 if m["iim_dp2"] is not None
-        ]
-
         mun_2020 = next(
             (m for m in jalisco_mun_2020 if m["municipio_id"] == cvegeo), None
         )
         if mun_2020 and mun_2020["iim_dp2"] is not None:
-            ctx["de_grado_intensidad_migratoria_mun"] = _classify_grade(
-                mun_2020["iim_dp2"], jal_mun_vals_2020
-            )
+            ctx["de_grado_intensidad_migratoria_mun"] = mun_2020.get("grado_iim") or ND
             ctx["de_ranking_mun_migracion"] = (
                 mun_2020.get("lugar_contexto_nacional") or ND
             )
@@ -333,16 +305,13 @@ class Analizer(Stage):
         jalisco_mun_2010 = [
             m for m in iim_mun_2010 if 14000 < m["municipio_id"] < 15000
         ]
-        all_mun_vals_2010 = [
-            m["iim_dp2"] for m in iim_mun_2010 if m["iim_dp2"] is not None
-        ]
         mun_2010 = next(
             (m for m in jalisco_mun_2010 if m["municipio_id"] == cvegeo), None
         )
 
         if mun_2010 and mun_2010["iim_dp2"] is not None:
-            ctx["de_grado_intensidad_migratoria_anterior_mun"] = _classify_grade(
-                mun_2010["iim_dp2"], all_mun_vals_2010
+            ctx["de_grado_intensidad_migratoria_anterior_mun"] = (
+                mun_2010.get("grado_iim") or ND
             )
             ctx["de_ranking_anterior_mun_migracion"] = (
                 mun_2010.get("lugar_contexto_nacional") or ND
