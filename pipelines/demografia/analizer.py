@@ -264,14 +264,19 @@ class Analizer(Stage):
         jalisco_mun_2020 = [
             m for m in iim_mun_2020 if 14000 < m["municipio_id"] < 15000
         ]
+        jal_ranked_2020 = sorted(
+            [m for m in jalisco_mun_2020 if m.get("lugar_contexto_nacional")],
+            key=lambda m: m["lugar_contexto_nacional"],
+        )
+        jal_rank_2020 = {
+            m["municipio_id"]: i + 1 for i, m in enumerate(jal_ranked_2020)
+        }
         mun_2020 = next(
             (m for m in jalisco_mun_2020 if m["municipio_id"] == cvegeo), None
         )
         if mun_2020 and mun_2020["iim_dp2"] is not None:
             ctx["de_grado_intensidad_migratoria_mun"] = mun_2020.get("grado_iim") or ND
-            ctx["de_ranking_mun_migracion"] = (
-                mun_2020.get("lugar_contexto_nacional") or ND
-            )
+            ctx["de_ranking_mun_migracion"] = jal_rank_2020.get(cvegeo, ND)
             ctx["de_porcentaje_viviendas_remesas_mun"] = _pct(
                 mun_2020.get("por_viv_remesas")
             )
@@ -305,6 +310,13 @@ class Analizer(Stage):
         jalisco_mun_2010 = [
             m for m in iim_mun_2010 if 14000 < m["municipio_id"] < 15000
         ]
+        jal_ranked_2010 = sorted(
+            [m for m in jalisco_mun_2010 if m.get("lugar_contexto_nacional")],
+            key=lambda m: m["lugar_contexto_nacional"],
+        )
+        jal_rank_2010 = {
+            m["municipio_id"]: i + 1 for i, m in enumerate(jal_ranked_2010)
+        }
         mun_2010 = next(
             (m for m in jalisco_mun_2010 if m["municipio_id"] == cvegeo), None
         )
@@ -313,9 +325,7 @@ class Analizer(Stage):
             ctx["de_grado_intensidad_migratoria_anterior_mun"] = (
                 mun_2010.get("grado_iim") or ND
             )
-            ctx["de_ranking_anterior_mun_migracion"] = (
-                mun_2010.get("lugar_contexto_nacional") or ND
-            )
+            ctx["de_ranking_anterior_mun_migracion"] = jal_rank_2010.get(cvegeo, ND)
             ctx["de_ranking_nacional_mun_migracion_2010"] = (
                 mun_2010.get("lugar_contexto_nacional") or ND
             )
@@ -778,16 +788,6 @@ class Analizer(Stage):
             )
         }
 
-        iim_jal_rank = {
-            m["municipio_id"]: i + 1
-            for i, m in enumerate(
-                sorted(
-                    [m for m in jalisco_mun_2020 if m.get("iim_dp2") is not None],
-                    key=lambda m: m["iim_dp2"],
-                )
-            )
-        }
-
         region_ids = {int(m["id"]) for m in get_same_region(str(cve_mun))}
         marg_by_mun = {m["municipio_id"]: m for m in marginacion_2020}
         iim_by_mun = {m["municipio_id"]: m for m in jalisco_mun_2020}
@@ -812,7 +812,7 @@ class Analizer(Stage):
                 else ND,
                 "grado_migracion": iim_by_mun.get(14000 + rid, {}).get("grado_iim")
                 or ND,
-                "lugar_migracion": iim_jal_rank.get(14000 + rid, ND),
+                "lugar_migracion": jal_rank_2020.get(14000 + rid, ND),
                 "pobreza_pct": _pct(
                     pob_by_cve.get(f"14{int(rid):03d}", {}).get("pobreza_porcentaje")
                 ),
