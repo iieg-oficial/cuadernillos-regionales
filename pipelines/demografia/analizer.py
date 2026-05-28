@@ -403,43 +403,43 @@ class Analizer(Stage):
             ctx["de_marg_analfabeta_2020"] = _fmt(
                 mun_marg_2020.get("porc_pob15_analfabeta")
             )
-            ctx["de_marg_analfabeta_pct_2020"] = _pct(
+            ctx["de_marg_analfabeta_pct_2020"] = _fmt(
                 mun_marg_2020.get("porc_pob15_analfabeta")
             )
             ctx["de_marg_sin_educ_bas_2020"] = _fmt(
                 mun_marg_2020.get("pob15_sin_educ_bas")
             )
-            ctx["de_marg_sin_educ_bas_pct_2020"] = _pct(
+            ctx["de_marg_sin_educ_bas_pct_2020"] = _fmt(
                 mun_marg_2020.get("pob15_sin_educ_bas")
             )
             ctx["de_marg_sin_drenaje_2020"] = _fmt(
                 mun_marg_2020.get("porc_viv_sin_drenaje_ni_excusado")
             )
-            ctx["de_marg_sin_drenaje_pct_2020"] = _pct(
+            ctx["de_marg_sin_drenaje_pct_2020"] = _fmt(
                 mun_marg_2020.get("porc_viv_sin_drenaje_ni_excusado")
             )
             ctx["de_marg_sin_energia_2020"] = _fmt(
                 mun_marg_2020.get("porc_viv_sin_energia")
             )
-            ctx["de_marg_sin_energia_pct_2020"] = _pct(
+            ctx["de_marg_sin_energia_pct_2020"] = _fmt(
                 mun_marg_2020.get("porc_viv_sin_energia")
             )
             ctx["de_marg_sin_agua_2020"] = _fmt(
                 mun_marg_2020.get("porc_viv_sin_agua_entubada")
             )
-            ctx["de_marg_sin_agua_pct_2020"] = _pct(
+            ctx["de_marg_sin_agua_pct_2020"] = _fmt(
                 mun_marg_2020.get("porc_viv_sin_agua_entubada")
             )
             ctx["de_marg_piso_tierra_2020"] = _fmt(
                 mun_marg_2020.get("porc_viv_piso_tierra")
             )
-            ctx["de_marg_piso_tierra_pct_2020"] = _pct(
+            ctx["de_marg_piso_tierra_pct_2020"] = _fmt(
                 mun_marg_2020.get("porc_viv_piso_tierra")
             )
             ctx["de_marg_hacinamiento_2020"] = _fmt(
                 mun_marg_2020.get("prom_ocup_por_cuarto"), 2
             )
-            ctx["de_marg_hacinamiento_pct_2020"] = _pct(
+            ctx["de_marg_hacinamiento_pct_2020"] = _fmt(
                 mun_marg_2020.get("prom_ocup_por_cuarto")
             )
             ctx["de_marg_loc_menos5000_2020"] = _fmt(
@@ -448,7 +448,7 @@ class Analizer(Stage):
             ctx["de_marg_hasta2salmin_2020"] = _fmt(
                 mun_marg_2020.get("pob_ocup_hasta_2_sal_min")
             )
-            ctx["de_marg_sin_refrigerador_2020"] = _pct(
+            ctx["de_marg_sin_refrigerador_2020"] = _fmt(
                 mun_marg_2020.get("porc_viv_sin_refrigerador")
             )
             ctx["de_marg_pos_entidad_2020"] = ctx["de_ranking_marginacion_municipio"]
@@ -615,28 +615,28 @@ class Analizer(Stage):
             ctx["de_jal_marg_lugar_nacional"] = (
                 marginacion_estatal_2020.get("lugar_contexto_nacional") or ND
             )
-            ctx["de_jal_marg_analfabeta"] = _pct(
+            ctx["de_jal_marg_analfabeta"] = _fmt(
                 marginacion_estatal_2020.get("porc_pob15_analfabeta")
             )
-            ctx["de_jal_marg_sin_educ_bas"] = _pct(
+            ctx["de_jal_marg_sin_educ_bas"] = _fmt(
                 marginacion_estatal_2020.get("pob15_sin_educ_bas")
             )
-            ctx["de_jal_marg_sin_drenaje"] = _pct(
+            ctx["de_jal_marg_sin_drenaje"] = _fmt(
                 marginacion_estatal_2020.get("porc_viv_sin_drenaje_ni_excusado")
             )
-            ctx["de_jal_marg_sin_energia"] = _pct(
+            ctx["de_jal_marg_sin_energia"] = _fmt(
                 marginacion_estatal_2020.get("porc_viv_sin_energia")
             )
-            ctx["de_jal_marg_sin_agua"] = _pct(
+            ctx["de_jal_marg_sin_agua"] = _fmt(
                 marginacion_estatal_2020.get("porc_viv_sin_agua_entubada")
             )
-            ctx["de_jal_marg_piso_tierra"] = _pct(
+            ctx["de_jal_marg_piso_tierra"] = _fmt(
                 marginacion_estatal_2020.get("porc_viv_piso_tierra")
             )
-            ctx["de_jal_marg_hacinamiento"] = _pct(
+            ctx["de_jal_marg_hacinamiento"] = _fmt(
                 marginacion_estatal_2020.get("porc_viv_con_hacinamiento")
             )
-            ctx["de_jal_marg_sin_refrigerador"] = _pct(
+            ctx["de_jal_marg_sin_refrigerador"] = _fmt(
                 marginacion_estatal_2020.get("porc_viv_sin_refrigerador")
             )
         else:
@@ -681,17 +681,17 @@ class Analizer(Stage):
                     "grado": DASH
                     if sin_datos
                     else _grado(marg.get("grado_marginacion")),
-                    "analfabeta": _loc_val(marg, "porc_pob15_analfabeta", _pct),
-                    "sin_educ_bas": _loc_val(marg, "porc_pob15_sin_educ_basica", _pct),
+                    "analfabeta": _loc_val(marg, "porc_pob15_analfabeta", _fmt),
+                    "sin_educ_bas": _loc_val(marg, "porc_pob15_sin_educ_basica", _fmt),
                     "sin_drenaje": _loc_val(
-                        marg, "porc_viv_sin_drenaje_ni_excusado", _pct
+                        marg, "porc_viv_sin_drenaje_ni_excusado", _fmt
                     ),
-                    "sin_energia": _loc_val(marg, "porc_viv_sin_energia", _pct),
-                    "sin_agua": _loc_val(marg, "porc_viv_sin_agua_entubada", _pct),
-                    "piso_tierra": _loc_val(marg, "porc_viv_piso_tierra", _pct),
-                    "hacinamiento": _loc_val(marg, "prom_ocup_por_cuarto", _pct),
+                    "sin_energia": _loc_val(marg, "porc_viv_sin_energia", _fmt),
+                    "sin_agua": _loc_val(marg, "porc_viv_sin_agua_entubada", _fmt),
+                    "piso_tierra": _loc_val(marg, "porc_viv_piso_tierra", _fmt),
+                    "hacinamiento": _loc_val(marg, "prom_ocup_por_cuarto", _fmt),
                     "sin_refrigerador": _loc_val(
-                        marg, "porc_viv_sin_refrigerador", _pct
+                        marg, "porc_viv_sin_refrigerador", _fmt
                     ),
                 }
             )
