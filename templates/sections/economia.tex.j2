@@ -53,32 +53,32 @@ sector << ec_sector_tercer_unidades >> con el << ec_porcentaje_sector_tercer_uni
 
 \hline
 \rowcolor{gray!30}
-\thh{0.20}{Sector} &
-\thh{0.08}{0 a 5 personas} &
-\thh{0.08}{6 a 10 personas} &
-\thh{0.08}{11 a 30 personas} &
-\thh{0.08}{31 a 50 personas} &
-\thh{0.08}{51 a 100 personas} &
-\thh{0.08}{101 a 250 personas} &
-\thh{0.08}{251 y más} &
-\thh{0.12}{Total de unidades económicas} &
-\thh{0.12}{\% Total de unidades económicas} \\
+\thh{0.20}{\scriptsize Sector} &
+\thhl{0.08}{\scriptsize 0 a 5 personas} &
+\thhl{0.08}{\scriptsize 6 a 10 personas} &
+\thhl{0.08}{\scriptsize 11 a 30 personas} &
+\thhl{0.08}{\scriptsize 31 a 50 personas} &
+\thhl{0.08}{\scriptsize 51 a 100 personas} &
+\thhl{0.08}{\scriptsize 101 a 250 personas} &
+\thhl{0.08}{\scriptsize 251 y más} &
+\thhl{0.12}{\scriptsize Total de unidades económicas} &
+\thhl{0.12}{\scriptsize Total de unidades económicas (\%)} \\
 \hline
 \endfirsthead
 
 \multicolumn{10}{l}{\small\textbf{(continuación)}} \\
 \hline
 \rowcolor{gray!30}
-\thh{0.20}{Sector} &
-\thh{0.08}{0 a 5 personas} &
-\thh{0.08}{6 a 10 personas} &
-\thh{0.08}{11 a 30 personas} &
-\thh{0.08}{31 a 50 personas} &
-\thh{0.08}{51 a 100 personas} &
-\thh{0.08}{101 a 250 personas} &
-\thh{0.08}{251 y más} &
-\thh{0.12}{Total de unidades económicas} &
-\thh{0.12}{\% Total de unidades económicas} \\
+\thh{0.20}{\scriptsize Sector} &
+\thhl{0.08}{\scriptsize 0 a 5 personas} &
+\thhl{0.08}{\scriptsize 6 a 10 personas} &
+\thhl{0.08}{\scriptsize 11 a 30 personas} &
+\thhl{0.08}{\scriptsize 31 a 50 personas} &
+\thhl{0.08}{\scriptsize 51 a 100 personas} &
+\thhl{0.08}{\scriptsize 101 a 250 personas} &
+\thhl{0.08}{\scriptsize 251 y más} &
+\thhl{0.12}{\scriptsize Total de unidades económicas} &
+\thhl{0.12}{\scriptsize Total de unidades económicas (\%)} \\
 \hline
 \endhead
 
@@ -89,13 +89,14 @@ sector << ec_sector_tercer_unidades >> con el << ec_porcentaje_sector_tercer_uni
 \hline
 \endlastfoot
 
+\rowcolor{orange!20}
+\thdr{Total} & \thdr{<< ec_denue_total_r0a5 >>} & \thdr{<< ec_denue_total_r6a10 >>} & \thdr{<< ec_denue_total_r11a30 >>} & \thdr{<< ec_denue_total_r31a50 >>} & \thdr{<< ec_denue_total_r51a100 >>} & \thdr{<< ec_denue_total_r101a250 >>} & \thdr{<< ec_denue_total_r251mas >>} & \thdr{<< ec_unidades_economicas >>} & \thdr{100.00} \\
+\hline
+
 <% for fila in ec_tabla_denue %>
 << fila.sector >> & << fila.r0a5 >> & << fila.r6a10 >> & << fila.r11a30 >> & << fila.r31a50 >> & << fila.r51a100 >> & << fila.r101a250 >> & << fila.r251mas >> & << fila.total >> & << fila.pct_total >> \\
 \hline
 <% endfor %>
-\rowcolor{orange!20}
-\thdr{Total} & \thdr{<< ec_denue_total_r0a5 >>} & \thdr{<< ec_denue_total_r6a10 >>} & \thdr{<< ec_denue_total_r11a30 >>} & \thdr{<< ec_denue_total_r31a50 >>} & \thdr{<< ec_denue_total_r51a100 >>} & \thdr{<< ec_denue_total_r101a250 >>} & \thdr{<< ec_denue_total_r251mas >>} & \thdr{<< ec_unidades_economicas >>} & \thdr{100.00} \\
-\hline
 
 \end{longtable}
 \normalsize
@@ -104,10 +105,10 @@ Fuente: INEGI. Directorio Estadístico Nacional de Unidades Económicas, << ec_a
 
 \subsection{Valor agregado censal bruto}
 
-El valor agregado censal bruto se define como: "el valor de la producción que se añade durante
+El valor agregado censal bruto se define como: \guillemotleft el valor de la producción que se añade durante
 el proceso de trabajo por la actividad creadora y de transformación del personal ocupado, el
 capital y la organización (factores de la producción), ejercida sobre los materiales que se consumen en
-la realización de la actividad económica". En resumen, esta variable se refiere al valor de la producción
+la realización de la actividad económica\guillemotright. En resumen, esta variable se refiere al valor de la producción
 que añade la actividad económica en su proceso productivo.
 
 Conforme a la información de los Censos económicos de << ec_anio_publicacion_ce_anterior >> y de
@@ -117,11 +118,11 @@ un año anterior al año del censo.} que publicó el INEGI, el valor agregado ce
 << ec_municipio_nombre >> registró una variación real de << ec_variacion_valor_agregado_censal >>
 de << ec_anio_ce_anterior >> a << ec_anio_ce >>.
 En << ec_anio_ce >> los tres subsectores más importantes en la generación de valor agregado censal bruto
-en el municipio de << ec_municipio_nombre >> fueron "<< ec_subsector_primer_lugar >>",
-"<< ec_subsector_segundo_lugar >>" y "<< ec_subsector_tercer_lugar >>" que generaron en conjunto el
+en el municipio de << ec_municipio_nombre >> fueron \guillemotleft<< ec_subsector_primer_lugar >>\guillemotright,
+\guillemotleft<< ec_subsector_segundo_lugar >>\guillemotright y \guillemotleft<< ec_subsector_tercer_lugar >>\guillemotright que generaron en conjunto el
 << ec_porcentaje_aportacion_principales_subsectores >> o << ec_aportacion_principales_subsectores >>
 pesos del total del valor agregado censal bruto registrado en << ec_anio_ce >> en el municipio.
-El subsector de "<< ec_subsector_mayor_crecimiento >>" fue el que registró el mayor crecimiento
+El subsector de \guillemotleft<< ec_subsector_mayor_crecimiento >>\guillemotright  fue el que registró el mayor crecimiento
 real pasando << ec_aportacion_anterior_subsector_mayor_crecimiento >> pesos en
 << ec_anio_ce_anterior >> a << ec_aportacion_subsector_mayor_crecimiento >> pesos en
 << ec_anio_ce >>, representando una variación del
@@ -144,10 +145,10 @@ real pasando << ec_aportacion_anterior_subsector_mayor_crecimiento >> pesos en
 \hline
 \rowcolor{gray!30}
 \thh{0.44}{Subsector} &
-\thh{0.14}{<< ec_anio_ce_anterior >>} &
-\thh{0.14}{<< ec_anio_ce >>} &
-\thh{0.14}{\% Part. << ec_anio_ce >>} &
-\thh{0.14}{Var\,\%\newline << ec_anio_ce_anterior >>--<< ec_anio_ce >>} \\
+\thhl{0.14}{<< ec_anio_ce_anterior >>} &
+\thhl{0.14}{<< ec_anio_ce >>} &
+\thhl{0.14}{Part. (\%) << ec_anio_ce >>} &
+\thhl{0.14}{Var. (\%)\newline << ec_anio_ce_anterior >>--<< ec_anio_ce >>} \\
 \hline
 \endfirsthead
 
@@ -155,10 +156,10 @@ real pasando << ec_aportacion_anterior_subsector_mayor_crecimiento >> pesos en
 \hline
 \rowcolor{gray!30}
 \thh{0.44}{Subsector} &
-\thh{0.14}{<< ec_anio_ce_anterior >>} &
-\thh{0.14}{<< ec_anio_ce >>} &
-\thh{0.14}{\% Part. << ec_anio_ce >>} &
-\thh{0.14}{Var\,\%\newline << ec_anio_ce_anterior >>--<< ec_anio_ce >>} \\
+\thhl{0.14}{<< ec_anio_ce_anterior >>} &
+\thhl{0.14}{<< ec_anio_ce >>} &
+\thhl{0.14}{Part. (\%) << ec_anio_ce >>} &
+\thhl{0.14}{Var. (\%)\newline << ec_anio_ce_anterior >>--<< ec_anio_ce >>} \\
 \hline
 \endhead
 
@@ -169,24 +170,21 @@ real pasando << ec_aportacion_anterior_subsector_mayor_crecimiento >> pesos en
 \hline
 \endlastfoot
 
-<% for fila in ec_tabla_vacb %>
-<< fila.subsector >> & << fila.vacb_anterior >> & << fila.vacb_actual >> & << fila.pct_part >> & << fila.var_pct >> \\
-\hline
-<% endfor %>
 \rowcolor{orange!20}
 \thdr{Total} & \thdr{<< ec_vacb_total_anterior >>} & \thdr{<< ec_vacb_total_actual >>} & \thdr{100.00} & \thdr{<< ec_variacion_vacb_total >>} \\
 \hline
 
+<% for fila in ec_tabla_vacb %>
+<< fila.subsector >> & << fila.vacb_anterior >> & << fila.vacb_actual >> & << fila.pct_part >> & << fila.var_pct >> \\
+\hline
+<% endfor %>
+
 \end{longtable}
 \normalsize
-\vspace{-28pt}\noindent{\footnotesize
-\begin{tabular}[t]{@{}l@{\hspace{0.5em}}l@{}}
-Nota: & El campo otros incluye subsectores con menor valor agregado censal bruto y/o subsectores\\
-& agrupados por el principio de confidencialidad.\\
+\tablefooter{Nota: & El campo otros incluye subsectores con menor valor agregado censal bruto y/o subsectores agrupados por el principio de confidencialidad.\\
 Fuente: & IIEG con base en INEGI. Censos Económicos, << ec_anio_publicacion_ce_anterior >> y << ec_anio_publicacion_ce >>.\\
 & INEGI. Índice Nacional de Precios al Consumidor. Base segunda quincena Julio 2018.\\
-& Los valores de 2018 fueron ajustados teniendo como base el promedio del INPC de 2023.
-\end{tabular}}
+& Los valores de 2018 fueron ajustados teniendo como base el promedio del INPC de 2023.}
 
 \newpage
 
