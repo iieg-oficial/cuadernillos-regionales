@@ -90,7 +90,7 @@
 \newcommand{\tablefooter}[1]{%
   \vspace{-28pt}\noindent{\footnotesize
   \renewcommand{\arraystretch}{1.0}%
-  \begin{tabular}[t]{@{}l@{\hspace{0.5em}}l@{}}#1\end{tabular}%
+  \begin{tabular}[t]{@{}l@{\hspace{0.5em}}p{\dimexpr\linewidth - 4em\relax}@{}}#1\end{tabular}%
   \renewcommand{\arraystretch}{1.5}}}
 
 \AtBeginDocument{
