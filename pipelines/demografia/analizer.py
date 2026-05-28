@@ -236,10 +236,8 @@ class Analizer(Stage):
         jal_2020 = next(
             (e for e in iim_estados_2020 if e["entidad_id"] == JALISCO_ID), None
         )
-        if jal_2020 and jal_2020["iim_dp2"] is not None:
-            ctx["de_grado_intensidad_migratoria_jal"] = _grado(
-                jal_2020.get("grado_iim")
-            )
+        if jal_2020 and jal_2020["iim"] is not None:
+            ctx["de_grado_intensidad_migratoria_jal"] = _grado(jal_2020.get("grado"))
             ctx["de_ranking_jal_migracion"] = (
                 jal_2020.get("lugar_contexto_nacional") or ND
             )
@@ -255,7 +253,7 @@ class Analizer(Stage):
             ctx["de_porcentaje_migrantes_retorno_jal"] = _pct(
                 jal_2020.get("por_viv_reto")
             )
-            ctx["de_jal_grado_migracion"] = _grado(jal_2020.get("grado_iim"))
+            ctx["de_jal_grado_migracion"] = _grado(jal_2020.get("grado"))
             ctx["de_jal_lugar_migracion"] = (
                 jal_2020.get("lugar_contexto_nacional") or ND
             )
@@ -269,24 +267,11 @@ class Analizer(Stage):
             ctx["de_jal_grado_migracion"] = ND
             ctx["de_jal_lugar_migracion"] = ND
 
-        jalisco_mun_2020 = [
-            m for m in iim_mun_2020 if 14000 < m["municipio_id"] < 15000
-        ]
-        jal_ranked_2020 = sorted(
-            [m for m in jalisco_mun_2020 if m.get("lugar_contexto_nacional")],
-            key=lambda m: m["lugar_contexto_nacional"],
-        )
-        jal_rank_2020 = {
-            m["municipio_id"]: i + 1 for i, m in enumerate(jal_ranked_2020)
-        }
-        mun_2020 = next(
-            (m for m in jalisco_mun_2020 if m["municipio_id"] == cvegeo), None
-        )
-        if mun_2020 and mun_2020["iim_dp2"] is not None:
-            ctx["de_grado_intensidad_migratoria_mun"] = _grado(
-                mun_2020.get("grado_iim")
-            )
-            ctx["de_ranking_mun_migracion"] = jal_rank_2020.get(cvegeo, ND)
+        iim_by_mun_2020 = {m["municipio_id"]: m for m in iim_mun_2020}
+        mun_2020 = iim_by_mun_2020.get(cvegeo)
+        if mun_2020 and mun_2020["iim"] is not None:
+            ctx["de_grado_intensidad_migratoria_mun"] = _grado(mun_2020.get("grado"))
+            ctx["de_ranking_mun_migracion"] = mun_2020.get("lugar_entidad", ND)
             ctx["de_porcentaje_viviendas_remesas_mun"] = _pct(
                 mun_2020.get("por_viv_remesas")
             )
@@ -317,25 +302,14 @@ class Analizer(Stage):
             ctx["de_ranking_migracion"] = ND
             ctx["de_ranking_nacional_mun_migracion"] = ND
 
-        jalisco_mun_2010 = [
-            m for m in iim_mun_2010 if 14000 < m["municipio_id"] < 15000
-        ]
-        jal_ranked_2010 = sorted(
-            [m for m in jalisco_mun_2010 if m.get("lugar_contexto_nacional")],
-            key=lambda m: m["lugar_contexto_nacional"],
-        )
-        jal_rank_2010 = {
-            m["municipio_id"]: i + 1 for i, m in enumerate(jal_ranked_2010)
-        }
-        mun_2010 = next(
-            (m for m in jalisco_mun_2010 if m["municipio_id"] == cvegeo), None
-        )
+        iim_by_mun_2010 = {m["municipio_id"]: m for m in iim_mun_2010}
+        mun_2010 = iim_by_mun_2010.get(cvegeo)
 
-        if mun_2010 and mun_2010["iim_dp2"] is not None:
+        if mun_2010 and mun_2010["iim"] is not None:
             ctx["de_grado_intensidad_migratoria_anterior_mun"] = _grado(
-                mun_2010.get("grado_iim")
+                mun_2010.get("grado")
             )
-            ctx["de_ranking_anterior_mun_migracion"] = jal_rank_2010.get(cvegeo, ND)
+            ctx["de_ranking_anterior_mun_migracion"] = mun_2010.get("lugar_entidad", ND)
             ctx["de_ranking_nacional_mun_migracion_2010"] = (
                 mun_2010.get("lugar_contexto_nacional") or ND
             )
@@ -349,13 +323,13 @@ class Analizer(Stage):
             ctx["de_porcentaje_migrantes_circulares_anterior_mun"] = ND
 
         ctx["de_iim_mun_2010"] = (
-            _fmt(mun_2010["iim_dp2"], 4)
-            if (mun_2010 and mun_2010.get("iim_dp2") is not None)
+            _fmt(mun_2010["iim"], 4)
+            if (mun_2010 and mun_2010.get("iim") is not None)
             else ND
         )
         ctx["de_iim_mun_2020"] = (
-            _fmt(mun_2020["iim_dp2"], 4)
-            if (mun_2020 and mun_2020.get("iim_dp2") is not None)
+            _fmt(mun_2020["iim"], 4)
+            if (mun_2020 and mun_2020.get("iim") is not None)
             else ND
         )
         ctx["de_viv_totales_mun_2010"] = (
@@ -389,7 +363,8 @@ class Analizer(Stage):
 
         ctx["de_mapa_grado_intensidad_migratoria"] = _mapa_latex(
             mapa_migracion,
-            f"Grado de Intensidad Migratoria a Estados Unidos. Jalisco, {ANIO_CENSO}",
+            f"Grado de Intensidad Migratoria a Estados Unidos en {nombre}"
+            f" y el resto de municipios de Jalisco, {ANIO_CENSO}",
         )
 
         mun_marg_2020 = next(
@@ -679,7 +654,8 @@ class Analizer(Stage):
             ctx["de_jal_marg_sin_refrigerador"] = ND
         ctx["de_mapa_indice_marginacion_municipio"] = _mapa_latex(
             mapa_marginacion,
-            f"Índice de marginación por municipio. Jalisco, {ANIO_CENSO}",
+            f"Índice de marginación en {nombre}"
+            f" y el resto de municipios de Jalisco, {ANIO_CENSO}",
         )
 
         marg_by_nombre = {loc["localidad"]: loc for loc in marginacion_localidades}
@@ -727,7 +703,7 @@ class Analizer(Stage):
         pobreza_jalisco_2020 = input_data.get("pobreza_jalisco_2020") or []
         pobreza_por_entidad_2020 = input_data.get("pobreza_por_entidad_2020") or []
 
-        def _p(data, key, fn=_pct):
+        def _get_field(data, key, fn=_fmt):
             return fn(data.get(key))
 
         ent_pob_rank = {
@@ -800,7 +776,7 @@ class Analizer(Stage):
 
         region_ids = {int(m["id"]) for m in get_same_region(str(cve_mun))}
         marg_by_mun = {m["municipio_id"]: m for m in marginacion_2020}
-        iim_by_mun = {m["municipio_id"]: m for m in jalisco_mun_2020}
+        iim_by_mun = iim_by_mun_2020
         ctx["de_region_municipios"] = [
             {
                 "clave": f"14{int(rid):03d}",
@@ -819,10 +795,10 @@ class Analizer(Stage):
                 "lugar_marginacion": _marg_ranking(14000 + rid, marginacion_2020)
                 if (14000 + rid) in marg_by_mun
                 else ND,
-                "grado_migracion": _grado(
-                    iim_by_mun.get(14000 + rid, {}).get("grado_iim")
+                "grado_migracion": _grado(iim_by_mun.get(14000 + rid, {}).get("grado")),
+                "lugar_migracion": iim_by_mun.get(14000 + rid, {}).get(
+                    "lugar_entidad", ND
                 ),
-                "lugar_migracion": jal_rank_2020.get(14000 + rid, ND),
                 "pobreza_pct": _pct(
                     pob_by_cve.get(f"14{int(rid):03d}", {}).get("pobreza_porcentaje")
                 ),
@@ -838,182 +814,263 @@ class Analizer(Stage):
             if rid != cve_mun
         ]
 
-        ctx["de_porcentaje_pobreza"] = _p(pobreza_2020, "pobreza_porcentaje")
-        ctx["de_poblacion_pobreza"] = _p(pobreza_2020, "pobreza_personas", _fmt_int)
-        ctx["de_porcentaje_vulnerabilidad_carencias"] = _p(
-            pobreza_2020, "vul_carencia_porcentaje"
+        ctx["de_porcentaje_pobreza"] = _get_field(
+            pobreza_2020, "pobreza_porcentaje", _pct
         )
-        ctx["de_poblacion_vulnerabilidad_carencias"] = _p(
+        ctx["de_poblacion_pobreza"] = _get_field(
+            pobreza_2020, "pobreza_personas", _fmt_int
+        )
+        ctx["de_porcentaje_vulnerabilidad_carencias"] = _get_field(
+            pobreza_2020, "vul_carencia_porcentaje", _pct
+        )
+        ctx["de_poblacion_vulnerabilidad_carencias"] = _get_field(
             pobreza_2020, "vul_carencia_personas", _fmt_int
         )
-        ctx["de_porcentaje_vulnerabilidad_ingresos"] = _p(
-            pobreza_2020, "vul_ingreso_porcentaje"
+        ctx["de_porcentaje_vulnerabilidad_ingresos"] = _get_field(
+            pobreza_2020, "vul_ingreso_porcentaje", _pct
         )
-        ctx["de_porcentaje_no_pobre_no_vulnerable"] = _p(
-            pobreza_2020, "no_pobre_porcentaje"
+        ctx["de_porcentaje_no_pobre_no_vulnerable"] = _get_field(
+            pobreza_2020, "no_pobre_porcentaje", _pct
         )
-        ctx["de_porcentaje_pobreza_extrema"] = _p(
-            pobreza_2020, "pobreza_ext_porcentaje"
+        ctx["de_porcentaje_pobreza_extrema"] = _get_field(
+            pobreza_2020, "pobreza_ext_porcentaje", _pct
         )
-        ctx["de_porcentaje_pobreza_extrema_intercensal"] = _p(
-            pobreza_2015, "pobreza_ext_porcentaje"
+        ctx["de_porcentaje_pobreza_extrema_intercensal"] = _get_field(
+            pobreza_2015, "pobreza_ext_porcentaje", _pct
         )
-        ctx["de_porcentaje_pobreza_moderada"] = _p(
-            pobreza_2020, "pobreza_mod_porcentaje"
+        ctx["de_porcentaje_pobreza_moderada"] = _get_field(
+            pobreza_2020, "pobreza_mod_porcentaje", _pct
         )
-        ctx["de_poblacion_pobreza_moderada"] = _p(
+        ctx["de_poblacion_pobreza_moderada"] = _get_field(
             pobreza_2020, "pobreza_mod_personas", _fmt_int
         )
-        ctx["de_porcentaje_pobreza_moderada_intercensal"] = _p(
+        ctx["de_porcentaje_pobreza_moderada_intercensal"] = _get_field(
+            pobreza_2015, "pobreza_mod_porcentaje", _pct
+        )
+        ctx["de_poblacion_pobreza_moderada_intercensal"] = _get_field(
+            pobreza_2015, "pobreza_mod_personas", _fmt_int
+        )
+
+        ctx["de_pobreza_pct_2015"] = _get_field(pobreza_2015, "pobreza_porcentaje")
+        ctx["de_pobreza_pct_2020"] = _get_field(pobreza_2020, "pobreza_porcentaje")
+        ctx["de_pobreza_prs_2015"] = _get_field(
+            pobreza_2015, "pobreza_personas", _fmt_int
+        )
+        ctx["de_pobreza_prs_2020"] = _get_field(
+            pobreza_2020, "pobreza_personas", _fmt_int
+        )
+        ctx["de_pobreza_prom_2015"] = _get_field(pobreza_2015, "pobreza_promedio", _fmt)
+        ctx["de_pobreza_prom_2020"] = _get_field(pobreza_2020, "pobreza_promedio", _fmt)
+
+        ctx["de_pobreza_mod_pct_2015"] = _get_field(
             pobreza_2015, "pobreza_mod_porcentaje"
         )
-        ctx["de_poblacion_pobreza_moderada_intercensal"] = _p(
+        ctx["de_pobreza_mod_pct_2020"] = _get_field(
+            pobreza_2020, "pobreza_mod_porcentaje"
+        )
+        ctx["de_pobreza_mod_prs_2015"] = _get_field(
             pobreza_2015, "pobreza_mod_personas", _fmt_int
         )
-
-        ctx["de_pobreza_pct_2015"] = _p(pobreza_2015, "pobreza_porcentaje")
-        ctx["de_pobreza_pct_2020"] = _p(pobreza_2020, "pobreza_porcentaje")
-        ctx["de_pobreza_prs_2015"] = _p(pobreza_2015, "pobreza_personas", _fmt_int)
-        ctx["de_pobreza_prs_2020"] = _p(pobreza_2020, "pobreza_personas", _fmt_int)
-        ctx["de_pobreza_prom_2015"] = _p(pobreza_2015, "pobreza_promedio", _fmt)
-        ctx["de_pobreza_prom_2020"] = _p(pobreza_2020, "pobreza_promedio", _fmt)
-
-        ctx["de_pobreza_mod_pct_2015"] = _p(pobreza_2015, "pobreza_mod_porcentaje")
-        ctx["de_pobreza_mod_pct_2020"] = _p(pobreza_2020, "pobreza_mod_porcentaje")
-        ctx["de_pobreza_mod_prs_2015"] = _p(
-            pobreza_2015, "pobreza_mod_personas", _fmt_int
-        )
-        ctx["de_pobreza_mod_prs_2020"] = _p(
+        ctx["de_pobreza_mod_prs_2020"] = _get_field(
             pobreza_2020, "pobreza_mod_personas", _fmt_int
         )
-        ctx["de_pobreza_mod_prom_2015"] = _p(pobreza_2015, "pobreza_mod_promedio", _fmt)
-        ctx["de_pobreza_mod_prom_2020"] = _p(pobreza_2020, "pobreza_mod_promedio", _fmt)
+        ctx["de_pobreza_mod_prom_2015"] = _get_field(
+            pobreza_2015, "pobreza_mod_promedio", _fmt
+        )
+        ctx["de_pobreza_mod_prom_2020"] = _get_field(
+            pobreza_2020, "pobreza_mod_promedio", _fmt
+        )
 
-        ctx["de_pobreza_ext_pct_2015"] = _p(pobreza_2015, "pobreza_ext_porcentaje")
-        ctx["de_pobreza_ext_pct_2020"] = _p(pobreza_2020, "pobreza_ext_porcentaje")
-        ctx["de_pobreza_ext_prs_2015"] = _p(
+        ctx["de_pobreza_ext_pct_2015"] = _get_field(
+            pobreza_2015, "pobreza_ext_porcentaje"
+        )
+        ctx["de_pobreza_ext_pct_2020"] = _get_field(
+            pobreza_2020, "pobreza_ext_porcentaje"
+        )
+        ctx["de_pobreza_ext_prs_2015"] = _get_field(
             pobreza_2015, "pobreza_ext_personas", _fmt_int
         )
-        ctx["de_pobreza_ext_prs_2020"] = _p(
+        ctx["de_pobreza_ext_prs_2020"] = _get_field(
             pobreza_2020, "pobreza_ext_personas", _fmt_int
         )
-        ctx["de_pobreza_ext_prom_2015"] = _p(pobreza_2015, "pobreza_ext_promedio", _fmt)
-        ctx["de_pobreza_ext_prom_2020"] = _p(pobreza_2020, "pobreza_ext_promedio", _fmt)
+        ctx["de_pobreza_ext_prom_2015"] = _get_field(
+            pobreza_2015, "pobreza_ext_promedio", _fmt
+        )
+        ctx["de_pobreza_ext_prom_2020"] = _get_field(
+            pobreza_2020, "pobreza_ext_promedio", _fmt
+        )
 
-        ctx["de_vul_carencia_pct_2015"] = _p(pobreza_2015, "vul_carencia_porcentaje")
-        ctx["de_vul_carencia_pct_2020"] = _p(pobreza_2020, "vul_carencia_porcentaje")
-        ctx["de_vul_carencia_prs_2015"] = _p(
+        ctx["de_vul_carencia_pct_2015"] = _get_field(
+            pobreza_2015, "vul_carencia_porcentaje"
+        )
+        ctx["de_vul_carencia_pct_2020"] = _get_field(
+            pobreza_2020, "vul_carencia_porcentaje"
+        )
+        ctx["de_vul_carencia_prs_2015"] = _get_field(
             pobreza_2015, "vul_carencia_personas", _fmt_int
         )
-        ctx["de_vul_carencia_prs_2020"] = _p(
+        ctx["de_vul_carencia_prs_2020"] = _get_field(
             pobreza_2020, "vul_carencia_personas", _fmt_int
         )
-        ctx["de_vul_carencia_prom_2015"] = _p(
+        ctx["de_vul_carencia_prom_2015"] = _get_field(
             pobreza_2015, "vul_carencia_promedio", _fmt
         )
-        ctx["de_vul_carencia_prom_2020"] = _p(
+        ctx["de_vul_carencia_prom_2020"] = _get_field(
             pobreza_2020, "vul_carencia_promedio", _fmt
         )
 
-        ctx["de_vul_ingreso_pct_2015"] = _p(pobreza_2015, "vul_ingreso_porcentaje")
-        ctx["de_vul_ingreso_pct_2020"] = _p(pobreza_2020, "vul_ingreso_porcentaje")
-        ctx["de_vul_ingreso_prs_2015"] = _p(
+        ctx["de_vul_ingreso_pct_2015"] = _get_field(
+            pobreza_2015, "vul_ingreso_porcentaje"
+        )
+        ctx["de_vul_ingreso_pct_2020"] = _get_field(
+            pobreza_2020, "vul_ingreso_porcentaje"
+        )
+        ctx["de_vul_ingreso_prs_2015"] = _get_field(
             pobreza_2015, "vul_ingreso_personas", _fmt_int
         )
-        ctx["de_vul_ingreso_prs_2020"] = _p(
+        ctx["de_vul_ingreso_prs_2020"] = _get_field(
             pobreza_2020, "vul_ingreso_personas", _fmt_int
         )
 
-        ctx["de_no_pobre_pct_2015"] = _p(pobreza_2015, "no_pobre_porcentaje")
-        ctx["de_no_pobre_pct_2020"] = _p(pobreza_2020, "no_pobre_porcentaje")
-        ctx["de_no_pobre_prs_2015"] = _p(pobreza_2015, "no_pobre_personas", _fmt_int)
-        ctx["de_no_pobre_prs_2020"] = _p(pobreza_2020, "no_pobre_personas", _fmt_int)
+        ctx["de_no_pobre_pct_2015"] = _get_field(pobreza_2015, "no_pobre_porcentaje")
+        ctx["de_no_pobre_pct_2020"] = _get_field(pobreza_2020, "no_pobre_porcentaje")
+        ctx["de_no_pobre_prs_2015"] = _get_field(
+            pobreza_2015, "no_pobre_personas", _fmt_int
+        )
+        ctx["de_no_pobre_prs_2020"] = _get_field(
+            pobreza_2020, "no_pobre_personas", _fmt_int
+        )
 
-        ctx["de_al_1_car_pct_2015"] = _p(pobreza_2015, "al_1_car_porcentaje")
-        ctx["de_al_1_car_pct_2020"] = _p(pobreza_2020, "al_1_car_porcentaje")
-        ctx["de_al_1_car_prs_2015"] = _p(pobreza_2015, "al_1_car_personas", _fmt_int)
-        ctx["de_al_1_car_prs_2020"] = _p(pobreza_2020, "al_1_car_personas", _fmt_int)
-        ctx["de_al_1_car_prom_2015"] = _p(pobreza_2015, "al_1_car_promedio", _fmt)
-        ctx["de_al_1_car_prom_2020"] = _p(pobreza_2020, "al_1_car_promedio", _fmt)
+        ctx["de_al_1_car_pct_2015"] = _get_field(pobreza_2015, "al_1_car_porcentaje")
+        ctx["de_al_1_car_pct_2020"] = _get_field(pobreza_2020, "al_1_car_porcentaje")
+        ctx["de_al_1_car_prs_2015"] = _get_field(
+            pobreza_2015, "al_1_car_personas", _fmt_int
+        )
+        ctx["de_al_1_car_prs_2020"] = _get_field(
+            pobreza_2020, "al_1_car_personas", _fmt_int
+        )
+        ctx["de_al_1_car_prom_2015"] = _get_field(
+            pobreza_2015, "al_1_car_promedio", _fmt
+        )
+        ctx["de_al_1_car_prom_2020"] = _get_field(
+            pobreza_2020, "al_1_car_promedio", _fmt
+        )
 
-        ctx["de_tres_mas_car_pct_2015"] = _p(pobreza_2015, "tres_mas_car_porcentaje")
-        ctx["de_tres_mas_car_pct_2020"] = _p(pobreza_2020, "tres_mas_car_porcentaje")
-        ctx["de_tres_mas_car_prs_2015"] = _p(
+        ctx["de_tres_mas_car_pct_2015"] = _get_field(
+            pobreza_2015, "tres_mas_car_porcentaje"
+        )
+        ctx["de_tres_mas_car_pct_2020"] = _get_field(
+            pobreza_2020, "tres_mas_car_porcentaje"
+        )
+        ctx["de_tres_mas_car_prs_2015"] = _get_field(
             pobreza_2015, "tres_mas_car_personas", _fmt_int
         )
-        ctx["de_tres_mas_car_prs_2020"] = _p(
+        ctx["de_tres_mas_car_prs_2020"] = _get_field(
             pobreza_2020, "tres_mas_car_personas", _fmt_int
         )
-        ctx["de_tres_mas_car_prom_2015"] = _p(
+        ctx["de_tres_mas_car_prom_2015"] = _get_field(
             pobreza_2015, "tres_mas_car_promedio", _fmt
         )
-        ctx["de_tres_mas_car_prom_2020"] = _p(
+        ctx["de_tres_mas_car_prom_2020"] = _get_field(
             pobreza_2020, "tres_mas_car_promedio", _fmt
         )
 
-        ctx["de_rez_edu_pct_2015"] = _p(pobreza_2015, "rez_edu_porcentaje")
-        ctx["de_rez_edu_pct_2020"] = _p(pobreza_2020, "rez_edu_porcentaje")
-        ctx["de_rez_edu_prs_2015"] = _p(pobreza_2015, "rez_edu_personas", _fmt_int)
-        ctx["de_rez_edu_prs_2020"] = _p(pobreza_2020, "rez_edu_personas", _fmt_int)
-        ctx["de_rez_edu_prom_2015"] = _p(pobreza_2015, "rez_edu_promedio", _fmt)
-        ctx["de_rez_edu_prom_2020"] = _p(pobreza_2020, "rez_edu_promedio", _fmt)
+        ctx["de_rez_edu_pct_2015"] = _get_field(pobreza_2015, "rez_edu_porcentaje")
+        ctx["de_rez_edu_pct_2020"] = _get_field(pobreza_2020, "rez_edu_porcentaje")
+        ctx["de_rez_edu_prs_2015"] = _get_field(
+            pobreza_2015, "rez_edu_personas", _fmt_int
+        )
+        ctx["de_rez_edu_prs_2020"] = _get_field(
+            pobreza_2020, "rez_edu_personas", _fmt_int
+        )
+        ctx["de_rez_edu_prom_2015"] = _get_field(pobreza_2015, "rez_edu_promedio", _fmt)
+        ctx["de_rez_edu_prom_2020"] = _get_field(pobreza_2020, "rez_edu_promedio", _fmt)
 
-        ctx["de_car_salud_pct_2015"] = _p(pobreza_2015, "car_salud_porcentaje")
-        ctx["de_car_salud_pct_2020"] = _p(pobreza_2020, "car_salud_porcentaje")
-        ctx["de_car_salud_prs_2015"] = _p(pobreza_2015, "car_salud_personas", _fmt_int)
-        ctx["de_car_salud_prs_2020"] = _p(pobreza_2020, "car_salud_personas", _fmt_int)
-        ctx["de_car_salud_prom_2015"] = _p(pobreza_2015, "car_salud_promedio", _fmt)
-        ctx["de_car_salud_prom_2020"] = _p(pobreza_2020, "car_salud_promedio", _fmt)
+        ctx["de_car_salud_pct_2015"] = _get_field(pobreza_2015, "car_salud_porcentaje")
+        ctx["de_car_salud_pct_2020"] = _get_field(pobreza_2020, "car_salud_porcentaje")
+        ctx["de_car_salud_prs_2015"] = _get_field(
+            pobreza_2015, "car_salud_personas", _fmt_int
+        )
+        ctx["de_car_salud_prs_2020"] = _get_field(
+            pobreza_2020, "car_salud_personas", _fmt_int
+        )
+        ctx["de_car_salud_prom_2015"] = _get_field(
+            pobreza_2015, "car_salud_promedio", _fmt
+        )
+        ctx["de_car_salud_prom_2020"] = _get_field(
+            pobreza_2020, "car_salud_promedio", _fmt
+        )
 
-        ctx["de_car_seg_soc_pct_2015"] = _p(pobreza_2015, "car_seg_soc_porcentaje")
-        ctx["de_car_seg_soc_pct_2020"] = _p(pobreza_2020, "car_seg_soc_porcentaje")
-        ctx["de_car_seg_soc_prs_2015"] = _p(
+        ctx["de_car_seg_soc_pct_2015"] = _get_field(
+            pobreza_2015, "car_seg_soc_porcentaje"
+        )
+        ctx["de_car_seg_soc_pct_2020"] = _get_field(
+            pobreza_2020, "car_seg_soc_porcentaje"
+        )
+        ctx["de_car_seg_soc_prs_2015"] = _get_field(
             pobreza_2015, "car_seg_soc_personas", _fmt_int
         )
-        ctx["de_car_seg_soc_prs_2020"] = _p(
+        ctx["de_car_seg_soc_prs_2020"] = _get_field(
             pobreza_2020, "car_seg_soc_personas", _fmt_int
         )
-        ctx["de_car_seg_soc_prom_2015"] = _p(pobreza_2015, "car_seg_soc_promedio", _fmt)
-        ctx["de_car_seg_soc_prom_2020"] = _p(pobreza_2020, "car_seg_soc_promedio", _fmt)
+        ctx["de_car_seg_soc_prom_2015"] = _get_field(
+            pobreza_2015, "car_seg_soc_promedio", _fmt
+        )
+        ctx["de_car_seg_soc_prom_2020"] = _get_field(
+            pobreza_2020, "car_seg_soc_promedio", _fmt
+        )
 
-        ctx["de_car_viv_pct_2015"] = _p(pobreza_2015, "car_viv_porcentaje")
-        ctx["de_car_viv_pct_2020"] = _p(pobreza_2020, "car_viv_porcentaje")
-        ctx["de_car_viv_prs_2015"] = _p(pobreza_2015, "car_viv_personas", _fmt_int)
-        ctx["de_car_viv_prs_2020"] = _p(pobreza_2020, "car_viv_personas", _fmt_int)
-        ctx["de_car_viv_prom_2015"] = _p(pobreza_2015, "car_viv_promedio", _fmt)
-        ctx["de_car_viv_prom_2020"] = _p(pobreza_2020, "car_viv_promedio", _fmt)
+        ctx["de_car_viv_pct_2015"] = _get_field(pobreza_2015, "car_viv_porcentaje")
+        ctx["de_car_viv_pct_2020"] = _get_field(pobreza_2020, "car_viv_porcentaje")
+        ctx["de_car_viv_prs_2015"] = _get_field(
+            pobreza_2015, "car_viv_personas", _fmt_int
+        )
+        ctx["de_car_viv_prs_2020"] = _get_field(
+            pobreza_2020, "car_viv_personas", _fmt_int
+        )
+        ctx["de_car_viv_prom_2015"] = _get_field(pobreza_2015, "car_viv_promedio", _fmt)
+        ctx["de_car_viv_prom_2020"] = _get_field(pobreza_2020, "car_viv_promedio", _fmt)
 
-        ctx["de_car_sbv_pct_2015"] = _p(pobreza_2015, "car_sbv_porcentaje")
-        ctx["de_car_sbv_pct_2020"] = _p(pobreza_2020, "car_sbv_porcentaje")
-        ctx["de_car_sbv_prs_2015"] = _p(pobreza_2015, "car_sbv_personas", _fmt_int)
-        ctx["de_car_sbv_prs_2020"] = _p(pobreza_2020, "car_sbv_personas", _fmt_int)
-        ctx["de_car_sbv_prom_2015"] = _p(pobreza_2015, "car_sbv_promedio", _fmt)
-        ctx["de_car_sbv_prom_2020"] = _p(pobreza_2020, "car_sbv_promedio", _fmt)
+        ctx["de_car_sbv_pct_2015"] = _get_field(pobreza_2015, "car_sbv_porcentaje")
+        ctx["de_car_sbv_pct_2020"] = _get_field(pobreza_2020, "car_sbv_porcentaje")
+        ctx["de_car_sbv_prs_2015"] = _get_field(
+            pobreza_2015, "car_sbv_personas", _fmt_int
+        )
+        ctx["de_car_sbv_prs_2020"] = _get_field(
+            pobreza_2020, "car_sbv_personas", _fmt_int
+        )
+        ctx["de_car_sbv_prom_2015"] = _get_field(pobreza_2015, "car_sbv_promedio", _fmt)
+        ctx["de_car_sbv_prom_2020"] = _get_field(pobreza_2020, "car_sbv_promedio", _fmt)
 
-        ctx["de_car_ali_pct_2015"] = _p(pobreza_2015, "car_ali_porcentaje")
-        ctx["de_car_ali_pct_2020"] = _p(pobreza_2020, "car_ali_porcentaje")
-        ctx["de_car_ali_prs_2015"] = _p(pobreza_2015, "car_ali_personas", _fmt_int)
-        ctx["de_car_ali_prs_2020"] = _p(pobreza_2020, "car_ali_personas", _fmt_int)
-        ctx["de_car_ali_prom_2015"] = _p(pobreza_2015, "car_ali_promedio", _fmt)
-        ctx["de_car_ali_prom_2020"] = _p(pobreza_2020, "car_ali_promedio", _fmt)
+        ctx["de_car_ali_pct_2015"] = _get_field(pobreza_2015, "car_ali_porcentaje")
+        ctx["de_car_ali_pct_2020"] = _get_field(pobreza_2020, "car_ali_porcentaje")
+        ctx["de_car_ali_prs_2015"] = _get_field(
+            pobreza_2015, "car_ali_personas", _fmt_int
+        )
+        ctx["de_car_ali_prs_2020"] = _get_field(
+            pobreza_2020, "car_ali_personas", _fmt_int
+        )
+        ctx["de_car_ali_prom_2015"] = _get_field(pobreza_2015, "car_ali_promedio", _fmt)
+        ctx["de_car_ali_prom_2020"] = _get_field(pobreza_2020, "car_ali_promedio", _fmt)
 
-        ctx["de_lpei_pct_2015"] = _p(pobreza_2015, "lpei_porcentaje")
-        ctx["de_lpei_pct_2020"] = _p(pobreza_2020, "lpei_porcentaje")
-        ctx["de_lpei_prs_2015"] = _p(pobreza_2015, "lpei_personas", _fmt_int)
-        ctx["de_lpei_prs_2020"] = _p(pobreza_2020, "lpei_personas", _fmt_int)
-        ctx["de_lpei_prom_2015"] = _p(pobreza_2015, "lpei_promedio", _fmt)
-        ctx["de_lpei_prom_2020"] = _p(pobreza_2020, "lpei_promedio", _fmt)
+        ctx["de_lpei_pct_2015"] = _get_field(pobreza_2015, "lpei_porcentaje")
+        ctx["de_lpei_pct_2020"] = _get_field(pobreza_2020, "lpei_porcentaje")
+        ctx["de_lpei_prs_2015"] = _get_field(pobreza_2015, "lpei_personas", _fmt_int)
+        ctx["de_lpei_prs_2020"] = _get_field(pobreza_2020, "lpei_personas", _fmt_int)
+        ctx["de_lpei_prom_2015"] = _get_field(pobreza_2015, "lpei_promedio", _fmt)
+        ctx["de_lpei_prom_2020"] = _get_field(pobreza_2020, "lpei_promedio", _fmt)
 
-        ctx["de_lpi_pct_2015"] = _p(pobreza_2015, "lpi_porcentaje")
-        ctx["de_lpi_pct_2020"] = _p(pobreza_2020, "lpi_porcentaje")
-        ctx["de_lpi_prs_2015"] = _p(pobreza_2015, "lpi_personas", _fmt_int)
-        ctx["de_lpi_prs_2020"] = _p(pobreza_2020, "lpi_personas", _fmt_int)
-        ctx["de_lpi_prom_2015"] = _p(pobreza_2015, "lpi_promedio", _fmt)
-        ctx["de_lpi_prom_2020"] = _p(pobreza_2020, "lpi_promedio", _fmt)
+        ctx["de_lpi_pct_2015"] = _get_field(pobreza_2015, "lpi_porcentaje")
+        ctx["de_lpi_pct_2020"] = _get_field(pobreza_2020, "lpi_porcentaje")
+        ctx["de_lpi_prs_2015"] = _get_field(pobreza_2015, "lpi_personas", _fmt_int)
+        ctx["de_lpi_prs_2020"] = _get_field(pobreza_2020, "lpi_personas", _fmt_int)
+        ctx["de_lpi_prom_2015"] = _get_field(pobreza_2015, "lpi_promedio", _fmt)
+        ctx["de_lpi_prom_2020"] = _get_field(pobreza_2020, "lpi_promedio", _fmt)
 
         ctx["de_mapa_porcentaje_pobreza_multidimensional"] = _mapa_latex(
             mapa_pobreza,
-            f"Porcentaje de población en situación de pobreza multidimensional por municipio. Jalisco, {ANIO_CENSO}",
+            f"Porcentaje de población en situación de pobreza multidimensional"
+            f" en {nombre} y el resto de municipios de Jalisco, {ANIO_CENSO}",
         )
 
         total_estatal = input_data.get("total_estatal_2020")
