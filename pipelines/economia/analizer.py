@@ -3,7 +3,7 @@ from pathlib import Path
 from core.constants import DASH, ND
 from core.pipelines.stage import Stage
 from core.utils.logger import Logger
-from core.utils.municipalities import get_region, get_same_region
+from core.utils.municipalities import get_region, get_same_region, get_same_region_ids
 from pipelines.economia.charts.produccion import grafica_produccion
 
 MAPA_PLACEHOLDER = (
@@ -176,6 +176,75 @@ def _build_vacb_table(vacb_actual, vacb_anterior, vacb_total_actual):
     return rows
 
 
+def _build_imss_grupos(divisiones, total_t0):
+    rows = []
+    for d in divisiones:
+        t0, t1, t2 = d["t0"], d["t1"], d["t2"]
+        pct = _fmt(t0 / total_t0 * 100) if total_t0 else ND
+        if t1:
+            var_nom = t0 - t1
+            var_pct_val = var_nom / t1 * 100
+            rows.append(
+                {
+                    "grupo": d["division"],
+                    "t2": _fmt_int(t2),
+                    "t1": _fmt_int(t1),
+                    "t0": _fmt_int(t0),
+                    "pct_part": pct,
+                    "var_nominal": _fmt_int(var_nom),
+                    "var_pct": _fmt(var_pct_val),
+                }
+            )
+        else:
+            rows.append(
+                {
+                    "grupo": d["division"],
+                    "t2": _fmt_int(t2),
+                    "t1": _fmt_int(t1),
+                    "t0": _fmt_int(t0),
+                    "pct_part": pct,
+                    "var_nominal": DASH,
+                    "var_pct": DASH,
+                }
+            )
+    return rows
+
+
+def _build_imss_region(sorted_region, region_total, names, cvegeo_mun):
+    rows = []
+    for m in sorted_region:
+        if m["cvegeo"] == cvegeo_mun:
+            continue
+        t0, t1 = m["t0"], m["t1"]
+        nombre = names.get(m["cvegeo"], str(m["cvegeo"]))
+        pct = _fmt(t0 / region_total * 100) if region_total else ND
+        if t1:
+            var_nom = t0 - t1
+            var_pct_val = var_nom / t1 * 100
+            rows.append(
+                {
+                    "municipio": nombre,
+                    "t1": _fmt_int(t1),
+                    "total": _fmt_int(t0),
+                    "pct_part": pct,
+                    "var_nominal": _fmt_int(var_nom),
+                    "var_pct": _fmt(var_pct_val),
+                }
+            )
+        else:
+            rows.append(
+                {
+                    "municipio": nombre,
+                    "t1": _fmt_int(t1),
+                    "total": _fmt_int(t0),
+                    "pct_part": pct,
+                    "var_nominal": DASH,
+                    "var_pct": DASH,
+                }
+            )
+    return rows
+
+
 class Analizer(Stage):
     def __init__(self, municipio_id: str):
         self.municipio_id = municipio_id
@@ -187,10 +256,8 @@ class Analizer(Stage):
 
         try:
             region = get_region(municipio_id_str)
-            region_municipios = get_same_region(municipio_id_str)
         except ValueError:
             region = ND
-            region_municipios = []
 
         ultima_act = input_data["ultima_actualizacion_denue"]
         unidades_sector_rango = input_data["unidades_sector_rango"]
@@ -343,20 +410,132 @@ class Analizer(Stage):
             _fmt(vacb_total_actual, 2) if vacb_total_actual else ND
         )
 
-        ctx["ec_mes_corte_imss"] = ND
-        ctx["ec_anio_corte_imss"] = ND
-        ctx["ec_anio_anterior_corte_imss"] = ND
-        ctx["ec_dos_anios_atras_corte_imss"] = ND
-        ctx["ec_total_trabajadores_imss"] = ND
-        ctx["ec_porcentaje_trabajadores_asegurados_jalisco"] = ND
-        ctx["ec_porcentaje_variacion_asegurados"] = ND
-        ctx["ec_grupo_ec_con_mas_empleos"] = ND
-        ctx["ec_num_trabajadores_grupo_mayor"] = ND
-        ctx["ec_porcentaje_trabajadores_grupo_mayor"] = ND
-        ctx["ec_tabla_imss_grupos"] = []
-        ctx["ec_posicion_municipio_region"] = ND
-        ctx["ec_porcentaje_asegurados_region"] = ND
-        ctx["ec_tabla_imss_region"] = []
+        imss_fecha = input_data.get("imss_fecha_corte")
+        imss_mun = input_data.get("imss_asegurados_mun", {})
+        imss_estatal = input_data.get("imss_asegurados_estatal", 0)
+        imss_divisiones = input_data.get("imss_por_division", [])
+        imss_todos = input_data.get("imss_todos_municipios", [])
+
+        if imss_fecha and imss_mun:
+            meses = [
+                "enero",
+                "febrero",
+                "marzo",
+                "abril",
+                "mayo",
+                "junio",
+                "julio",
+                "agosto",
+                "septiembre",
+                "octubre",
+                "noviembre",
+                "diciembre",
+            ]
+            ctx["ec_mes_corte_imss"] = meses[imss_fecha.month - 1]
+            ctx["ec_anio_corte_imss"] = imss_fecha.year
+            ctx["ec_anio_anterior_corte_imss"] = imss_fecha.year - 1
+            ctx["ec_dos_anios_atras_corte_imss"] = imss_fecha.year - 2
+
+            mun_t0 = imss_mun.get("t0", 0)
+            mun_t1 = imss_mun.get("t1", 0)
+            mun_t2 = imss_mun.get("t2", 0)
+
+            ctx["ec_total_trabajadores_imss"] = _fmt_int(mun_t0)
+            ctx["ec_total_trabajadores_imss_t1"] = _fmt_int(mun_t1)
+            ctx["ec_total_trabajadores_imss_t2"] = _fmt_int(mun_t2)
+
+            ctx["ec_porcentaje_trabajadores_asegurados_jalisco"] = (
+                _pct(mun_t0 / imss_estatal * 100) if imss_estatal else ND
+            )
+
+            if mun_t1:
+                var_anual = (mun_t0 - mun_t1) / mun_t1 * 100
+                ctx["ec_porcentaje_variacion_asegurados"] = _pct(var_anual)
+                ctx["ec_total_var_nominal_imss"] = _fmt_int(mun_t0 - mun_t1)
+            else:
+                ctx["ec_porcentaje_variacion_asegurados"] = ND
+                ctx["ec_total_var_nominal_imss"] = ND
+
+            ctx["ec_tabla_imss_grupos"] = _build_imss_grupos(imss_divisiones, mun_t0)
+
+            if imss_divisiones:
+                top = imss_divisiones[0]
+                ctx["ec_grupo_ec_con_mas_empleos"] = top["division"]
+                ctx["ec_num_trabajadores_grupo_mayor"] = _fmt_int(top["t0"])
+                ctx["ec_porcentaje_trabajadores_grupo_mayor"] = (
+                    _pct(top["t0"] / mun_t0 * 100) if mun_t0 else ND
+                )
+            else:
+                ctx["ec_grupo_ec_con_mas_empleos"] = ND
+                ctx["ec_num_trabajadores_grupo_mayor"] = ND
+                ctx["ec_porcentaje_trabajadores_grupo_mayor"] = ND
+
+            region_cvegeos = {
+                14000 + int(m) for m in get_same_region_ids(municipio_id_str)
+            }
+            region_data = [m for m in imss_todos if m["cvegeo"] in region_cvegeos]
+            region_total = sum(m["t0"] for m in region_data)
+
+            sorted_region = sorted(region_data, key=lambda x: x["t0"], reverse=True)
+            cvegeo_mun = 14000 + cve_mun
+            posicion = next(
+                (
+                    i + 1
+                    for i, m in enumerate(sorted_region)
+                    if m["cvegeo"] == cvegeo_mun
+                ),
+                None,
+            )
+            ctx["ec_posicion_municipio_region"] = str(posicion) if posicion else ND
+            ctx["ec_porcentaje_asegurados_region"] = (
+                _pct(mun_t0 / region_total * 100) if region_total else ND
+            )
+
+            region_names = {
+                14000 + int(m["id"]): m["municipio"]
+                for m in get_same_region(municipio_id_str)
+            }
+            ctx["ec_tabla_imss_region"] = _build_imss_region(
+                sorted_region, region_total, region_names, cvegeo_mun
+            )
+            ctx["ec_trabajadores_imss_t1"] = _fmt_int(
+                next(
+                    (m["t1"] for m in region_data if m["cvegeo"] == cvegeo_mun),
+                    0,
+                )
+            )
+            mun_region_t1 = next(
+                (m["t1"] for m in region_data if m["cvegeo"] == cvegeo_mun), 0
+            )
+            if mun_region_t1:
+                ctx["ec_var_nominal_imss"] = _fmt_int(mun_t0 - mun_region_t1)
+                ctx["ec_var_pct_imss"] = _pct(
+                    (mun_t0 - mun_region_t1) / mun_region_t1 * 100
+                )
+            else:
+                ctx["ec_var_nominal_imss"] = ND
+                ctx["ec_var_pct_imss"] = ND
+        else:
+            ctx["ec_mes_corte_imss"] = ND
+            ctx["ec_anio_corte_imss"] = ND
+            ctx["ec_anio_anterior_corte_imss"] = ND
+            ctx["ec_dos_anios_atras_corte_imss"] = ND
+            ctx["ec_total_trabajadores_imss"] = ND
+            ctx["ec_total_trabajadores_imss_t1"] = ND
+            ctx["ec_total_trabajadores_imss_t2"] = ND
+            ctx["ec_porcentaje_trabajadores_asegurados_jalisco"] = ND
+            ctx["ec_porcentaje_variacion_asegurados"] = ND
+            ctx["ec_total_var_nominal_imss"] = ND
+            ctx["ec_grupo_ec_con_mas_empleos"] = ND
+            ctx["ec_num_trabajadores_grupo_mayor"] = ND
+            ctx["ec_porcentaje_trabajadores_grupo_mayor"] = ND
+            ctx["ec_tabla_imss_grupos"] = []
+            ctx["ec_posicion_municipio_region"] = ND
+            ctx["ec_porcentaje_asegurados_region"] = ND
+            ctx["ec_tabla_imss_region"] = []
+            ctx["ec_trabajadores_imss_t1"] = ND
+            ctx["ec_var_nominal_imss"] = ND
+            ctx["ec_var_pct_imss"] = ND
 
         anio_agricola = input_data.get("anio_agricola")
         agricola_anual = input_data.get("agricola_anual", [])

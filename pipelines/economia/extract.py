@@ -24,6 +24,14 @@ from pipelines.economia.queries.ganaderia import (
     get_valor_produccion_ganadera_estatal,
     get_valor_produccion_ganadera_municipal,
 )
+from pipelines.economia.queries.imss import (
+    get_asegurados_estatal,
+    get_asegurados_municipio,
+    get_asegurados_por_division,
+    get_asegurados_todos_municipios,
+    get_fechas_comparacion,
+    get_ultimo_corte,
+)
 
 ANIO_CE = 2024
 ANIO_CE_ANTERIOR = 2019
@@ -123,6 +131,33 @@ class Extract(Stage):
         except Exception:
             Logger.warning("Economía: no se pudo conectar a producción ganadera")
 
+        imss_fecha_corte = None
+        imss_asegurados_mun = {}
+        imss_asegurados_estatal = 0
+        imss_por_division = []
+        imss_todos_municipios = []
+
+        try:
+            Logger.info("Economía: extrayendo datos del IMSS")
+            imss = DatabaseSettings.from_env("asg_imss")
+            with get_session(imss) as session:
+                imss_fecha_corte = get_ultimo_corte(session)
+                if imss_fecha_corte:
+                    cvegeo = 14000 + cve_mun
+                    t0, t1, t2 = get_fechas_comparacion(imss_fecha_corte)
+                    imss_asegurados_mun = get_asegurados_municipio(
+                        session, cvegeo, t0, t1, t2
+                    )
+                    imss_asegurados_estatal = get_asegurados_estatal(session, t0)
+                    imss_por_division = get_asegurados_por_division(
+                        session, cvegeo, t0, t1, t2
+                    )
+                    imss_todos_municipios = get_asegurados_todos_municipios(
+                        session, t0, t1
+                    )
+        except Exception:
+            Logger.warning("Economía: no se pudo conectar a IMSS")
+
         return {
             "cve_mun": cve_mun,
             "municipio_nombre": nombre,
@@ -144,4 +179,9 @@ class Extract(Stage):
             "ganadera_anual": ganadera_anual,
             "ganadera_municipal_mdp": ganadera_municipal_mdp,
             "ganadera_estatal_mdp": ganadera_estatal_mdp,
+            "imss_fecha_corte": imss_fecha_corte,
+            "imss_asegurados_mun": imss_asegurados_mun,
+            "imss_asegurados_estatal": imss_asegurados_estatal,
+            "imss_por_division": imss_por_division,
+            "imss_todos_municipios": imss_todos_municipios,
         }
