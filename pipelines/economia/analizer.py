@@ -329,6 +329,8 @@ class Analizer(Stage):
 
         ctx["ec_anio_ce"] = anio_ce
         ctx["ec_anio_ce_anterior"] = anio_ce_anterior
+        ctx["ec_anio_publicacion_ce"] = anio_ce + 1
+        ctx["ec_anio_publicacion_ce_anterior"] = anio_ce_anterior + 1
 
         if vacb_total_actual and vacb_total_anterior:
             var_vacb = (
