@@ -84,7 +84,13 @@
 
 \newcommand{\ND}{\textcolor{red}{N/D}}
 \newcommand{\thdr}[1]{\textbf{\color{colorTexto}#1}}
-\newcommand{\thh}[2]{\multicolumn{1}{>{\centering\arraybackslash}m{\dimexpr#1\linewidth - 2\tabcolsep\relax}}{\cellcolor{gray!30}\vspace{5pt}\begin{varwidth}{\linewidth}\bfseries #2\end{varwidth}\vspace{5pt}}}
+\newcommand{\thh}[2]{\multicolumn{1}{>{\raggedright\arraybackslash}m{\dimexpr#1\linewidth - 2\tabcolsep\relax}}{\cellcolor{gray!30}\vspace{5pt}\begin{varwidth}{\linewidth}\bfseries #2\end{varwidth}\vspace{5pt}}}
+\newcommand{\thhl}[2]{\multicolumn{1}{>{\raggedleft\arraybackslash}m{\dimexpr#1\linewidth - 2\tabcolsep\relax}}{\cellcolor{gray!30}\vspace{5pt}\begin{varwidth}{\linewidth}\bfseries #2\end{varwidth}\vspace{5pt}}}
+\newcommand{\tablefooter}[1]{%
+  \vspace{-28pt}\noindent{\footnotesize
+  \renewcommand{\arraystretch}{1.0}%
+  \begin{tabular}[t]{@{}l@{\hspace{0.5em}}l@{}}#1\end{tabular}%
+  \renewcommand{\arraystretch}{1.5}}}
 
 \AtBeginDocument{
   \color{colorTexto}
