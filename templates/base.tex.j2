@@ -96,6 +96,11 @@
 \AtBeginDocument{
   \color{colorTexto}
 }
+\makeatletter
+\renewcommand{\@makefnmark}{\hbox{\textsuperscript{\color{colorTexto}\@thefnmark}}}
+\renewcommand{\@makefntext}[1]{%
+  \noindent\hb@xt@1.8em{\hss\color{colorTexto}\@makefnmark}~\color{colorTexto}#1}
+\makeatother
 
 \usepackage{titlesec}
 \titleformat{\section}
