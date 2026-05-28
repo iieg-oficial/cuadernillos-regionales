@@ -3,7 +3,7 @@ from pathlib import Path
 from core.constants import ND
 from core.pipelines.stage import Stage
 from core.utils.logger import Logger
-from core.utils.municipalities import get_region, get_same_region
+from core.utils.municipalities import get_same_region
 from pipelines.gobierno_y_seguridad.helpers.aggregate import aggregate
 from pipelines.gobierno_y_seguridad.helpers.ranking import rank
 from pipelines.gobierno_y_seguridad.helpers.region import filter_region
@@ -282,8 +282,6 @@ class Analizer(Stage):
 
         ctx = {}
         ctx["gs_municipio_nombre"] = nombre
-        ctx["gs_region_nombre"] = get_region(mun_id)
-        ctx["gs_region"] = get_region(mun_id)
         ctx["gs_municipio_clave"] = cvegeo_objetivo
         ctx["gs_anio_anterior"] = anio_anterior
         ctx["gs_anio_actual"] = anio_actual

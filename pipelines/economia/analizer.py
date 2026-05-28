@@ -3,7 +3,7 @@ from pathlib import Path
 from core.constants import DASH, ND
 from core.pipelines.stage import Stage
 from core.utils.logger import Logger
-from core.utils.municipalities import get_region, get_same_region, get_same_region_ids
+from core.utils.municipalities import get_same_region, get_same_region_ids
 from pipelines.economia.charts.produccion import grafica_produccion
 
 MAPA_PLACEHOLDER = (
@@ -254,11 +254,6 @@ class Analizer(Stage):
         cve_mun = input_data["cve_mun"]
         municipio_id_str = str(self.municipio_id)
 
-        try:
-            region = get_region(municipio_id_str)
-        except ValueError:
-            region = ND
-
         ultima_act = input_data["ultima_actualizacion_denue"]
         unidades_sector_rango = input_data["unidades_sector_rango"]
         total_estatal_denue = input_data["total_estatal_denue"]
@@ -273,8 +268,6 @@ class Analizer(Stage):
         ctx = {}
 
         ctx["ec_municipio_nombre"] = input_data.get("municipio_nombre") or ND
-
-        ctx["ec_region"] = region if region != ND else ND
 
         if ultima_act:
             mes_nombre = [

@@ -9,7 +9,7 @@ from core.pipelines.stage import Stage
 from core.settings import DatabaseSettings, DemografiaSettings
 from core.utils.logger import Logger
 from core.utils.maps import get_draft_path
-from core.utils.municipalities import get_region, get_same_region_ids
+from core.utils.municipalities import get_same_region_ids
 from pipelines.demografia.queries.marginacion import (
     get_marginacion_estatal,
     get_marginacion_jalisco,
@@ -81,7 +81,6 @@ class Extract(Stage):
         marg = DatabaseSettings.from_env("marginacion")
         pob_multi = DatabaseSettings.from_env("pobreza_multidimensional")
 
-        region_name = get_region(str(cve_mun))
         region_ids = [int(mid) for mid in get_same_region_ids(str(cve_mun))]
 
         Logger.info("Demografía: extrayendo datos de población")
@@ -119,7 +118,6 @@ class Extract(Stage):
 
         return {
             "municipio_nombre": nombre,
-            "region_nombre": region_name,
             "totales_poblacion": totales,
             "total_region_2020": total_region_2020,
             "localidades_2020": localidades_2020,
