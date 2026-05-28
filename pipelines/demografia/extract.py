@@ -15,7 +15,7 @@ from pipelines.demografia.queries.marginacion import (
     get_marginacion_jalisco,
     get_marginacion_localidades,
 )
-from pipelines.demografia.queries.migracion import get_iim_estados, get_iim_municipios
+from pipelines.demografia.queries.migracion import get_iim_estados, get_iim_jalisco
 from pipelines.demografia.queries.poblacion import (
     get_localidades_por_anio,
     get_nombre_municipio,
@@ -95,8 +95,8 @@ class Extract(Stage):
 
         Logger.info("Demografía: extrayendo datos de migración")
         with get_session(iim) as session:
-            iim_mun_2020 = get_iim_municipios(session, 2020)
-            iim_mun_2010 = get_iim_municipios(session, 2010)
+            iim_mun_2020 = get_iim_jalisco(session, 2020)
+            iim_mun_2010 = get_iim_jalisco(session, 2010)
             iim_estados_2020 = get_iim_estados(session, 2020)
 
         Logger.info("Demografía: extrayendo datos de marginación")
