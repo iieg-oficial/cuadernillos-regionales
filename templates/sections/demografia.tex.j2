@@ -468,7 +468,7 @@ indicadores que lo componen.
 \multicolumn{4}{l}{\small\textbf{(continuación)}} \\
 \hline
 \rowcolor{gray!30}
- & \thh{0.14}{<< de_anio_censo_anterior >>} & \thh{0.14}{<< de_anio_encuesta_intercensal >>} & \thh{0.14}{<< de_anio_censo >>} \\
+ & \thhl{0.14}{<< de_anio_censo_anterior >>} & \thhl{0.14}{<< de_anio_encuesta_intercensal >>} & \thhl{0.14}{<< de_anio_censo >>} \\
 \hline
 \endhead
 
@@ -693,15 +693,16 @@ para las principales localidades del municipio.
 
 \end{longtable}
 \normalsize
-\tablefooter{Fuente: & CONAPO. Índices de marginación por localidad << de_anio_censo >>.}
+\tablefooter{Nota: & Únicamente se presenta información para las localidades más pobladas del municipio.\\
+Fuente: & CONAPO. Índices de marginación por localidad << de_anio_censo >>.}
 \newpage
 
-\subsection{Índices Sociodemográficos}
+\subsection{Índices sociodemográficos}
 
 El municipio de << de_municipio_nombre >> representó el << de_porcentaje_poblacion >>
 del total de la población estatal en << de_anio_censo >>. Con un grado
 << de_grado_marginacion >> de marginación en << de_anio_censo >>, ocupó el lugar
-<< de_ranking_marginacion >> entre los municipios del estado más marginados.
+<< de_ranking_marginacion >> entre los municipios del estado.
 
 En cuanto a la pobreza multidimensional, el municipio se localizó en el lugar
 << de_ranking_pobreza_multidimensional >> a nivel estatal, y en porcentaje de población
@@ -709,47 +710,47 @@ en situación de pobreza extrema ocupó el lugar << de_ranking_pobreza_extrema >
 
 Finalmente, << de_municipio_nombre >> se clasificó con grado << de_grado_intensidad_migratoria >>
 de intensidad migratoria en << de_anio_censo >> y se posicionó en el lugar << de_ranking_migracion >>
-entre los municipios del estado con mayor valor en el índice.
+entre los municipios del estado.
 
 \setlength{\tabcolsep}{3pt}
 \footnotesize
-\begin{longtable}{>{\raggedleft\arraybackslash}m{\dimexpr0.07\linewidth - 2\tabcolsep\relax}
+\begin{longtable}{>{\raggedright\arraybackslash}m{\dimexpr0.07\linewidth - 2\tabcolsep\relax}
                   >{\raggedright\arraybackslash}m{\dimexpr0.17\linewidth - 2\tabcolsep\relax}
                   >{\raggedleft\arraybackslash}m{\dimexpr0.11\linewidth - 2\tabcolsep\relax}
-                  >{\centering\arraybackslash}m{\dimexpr0.07\linewidth - 2\tabcolsep\relax}
-                  >{\centering\arraybackslash}m{\dimexpr0.08\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.07\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.08\linewidth - 2\tabcolsep\relax}
                   >{\raggedleft\arraybackslash}m{\dimexpr0.09\linewidth - 2\tabcolsep\relax}
-                  >{\centering\arraybackslash}m{\dimexpr0.07\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.07\linewidth - 2\tabcolsep\relax}
                   >{\raggedleft\arraybackslash}m{\dimexpr0.09\linewidth - 2\tabcolsep\relax}
-                  >{\centering\arraybackslash}m{\dimexpr0.07\linewidth - 2\tabcolsep\relax}
-                  >{\centering\arraybackslash}m{\dimexpr0.09\linewidth - 2\tabcolsep\relax}
-                  >{\centering\arraybackslash}m{\dimexpr0.09\linewidth - 2\tabcolsep\relax}}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.07\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.09\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.09\linewidth - 2\tabcolsep\relax}}
 
 \caption{\textbf{Población total, grado de marginación, pobreza multidimensional e intensidad migratoria
-en la región << de_nombre_region >>}\\
+en la  << de_nombre_region >>}\\
 << de_anio_censo >>}
 \label{cuadro_marginacion_pobreza_migracion} \\
 
 \hline
 \rowcolor{gray!30}
-\thh{0.07}{Clave} & \thh{0.17}{Municipio} & \thh{0.11}{Población} &
-\multicolumn{2}{>{\centering\arraybackslash}m{\dimexpr0.07\linewidth + 0.08\linewidth - 2\tabcolsep\relax}}{\cellcolor{gray!30}\textbf{Marginación}} &
-\multicolumn{4}{>{\centering\arraybackslash}m{\dimexpr0.09\linewidth + 0.07\linewidth + 0.09\linewidth + 0.07\linewidth - 2\tabcolsep\relax}}{\cellcolor{gray!30}\textbf{Pobreza multidimensional}} &
-\multicolumn{2}{>{\centering\arraybackslash}m{\dimexpr0.09\linewidth + 0.09\linewidth - 2\tabcolsep\relax}}{\cellcolor{gray!30}\textbf{Intensidad Migratoria}} \\
+\thh{0.07}{\scriptsize Clave} & \thh{0.17}{\scriptsize Municipio} & \thhl{0.11}{\scriptsize Población} &
+\multicolumn{2}{>{\centering\arraybackslash}m{\dimexpr0.07\linewidth + 0.08\linewidth - 2\tabcolsep\relax}}{\cellcolor{gray!30}\scriptsize\textbf{Marginación}} &
+\multicolumn{4}{>{\centering\arraybackslash}m{\dimexpr0.09\linewidth + 0.07\linewidth + 0.09\linewidth + 0.07\linewidth - 2\tabcolsep\relax}}{\cellcolor{gray!30}\scriptsize\textbf{Pobreza multidimensional}} &
+\multicolumn{2}{>{\centering\arraybackslash}m{\dimexpr0.09\linewidth + 0.09\linewidth - 2\tabcolsep\relax}}{\cellcolor{gray!30}\scriptsize\textbf{Intensidad Migratoria}} \\
 \rowcolor{gray!30}
- & & & \thh{0.07}{Grado} & \thh{0.08}{Lugar} & \thh{0.09}{pobreza} & \thh{0.07}{Lugar} & \thh{0.09}{pobreza\newline extrema} & \thh{0.07}{Lugar} & \thh{0.09}{Grado} & \thh{0.09}{Lugar} \\
+ & & & \thhl{0.07}{\scriptsize Grado} & \thhl{0.08}{\scriptsize Lugar} & \thhl{0.09}{\scriptsize Pobreza} & \thhl{0.07}{\scriptsize Lugar} & \thhl{0.09}{\scriptsize Pobreza\newline extrema} & \thhl{0.07}{\scriptsize Lugar} & \thhl{0.09}{\scriptsize Grado} & \thhl{0.09}{\scriptsize Lugar} \\
 \hline
 \endfirsthead
 
 \multicolumn{11}{l}{\small\textbf{(continuación)}} \\
 \hline
 \rowcolor{gray!30}
-\thh{0.07}{Clave} & \thh{0.17}{Municipio} & \thh{0.11}{Población} &
-\multicolumn{2}{>{\centering\arraybackslash}m{\dimexpr0.07\linewidth + 0.08\linewidth - 2\tabcolsep\relax}}{\cellcolor{gray!30}\textbf{Marginación}} &
-\multicolumn{4}{>{\centering\arraybackslash}m{\dimexpr0.09\linewidth + 0.07\linewidth + 0.09\linewidth + 0.07\linewidth - 2\tabcolsep\relax}}{\cellcolor{gray!30}\textbf{Pobreza multidimensional}} &
-\multicolumn{2}{>{\centering\arraybackslash}m{\dimexpr0.09\linewidth + 0.09\linewidth - 2\tabcolsep\relax}}{\cellcolor{gray!30}\textbf{Intensidad Migratoria}} \\
+\thh{0.07}{\scriptsize Clave} & \thh{0.17}{\scriptsize Municipio} & \thhl{0.11}{\scriptsize Población} &
+\multicolumn{2}{>{\centering\arraybackslash}m{\dimexpr0.07\linewidth + 0.08\linewidth - 2\tabcolsep\relax}}{\cellcolor{gray!30}\scriptsize\textbf{Marginación}} &
+\multicolumn{4}{>{\centering\arraybackslash}m{\dimexpr0.09\linewidth + 0.07\linewidth + 0.09\linewidth + 0.07\linewidth - 2\tabcolsep\relax}}{\cellcolor{gray!30}\scriptsize\textbf{Pobreza multidimensional}} &
+\multicolumn{2}{>{\centering\arraybackslash}m{\dimexpr0.09\linewidth + 0.09\linewidth - 2\tabcolsep\relax}}{\cellcolor{gray!30}\scriptsize\textbf{Intensidad Migratoria}} \\
 \rowcolor{gray!30}
- & & & \thh{0.07}{Grado} & \thh{0.08}{Lugar} & \thh{0.09}{pobreza} & \thh{0.07}{Lugar} & \thh{0.09}{pobreza\newline extrema} & \thh{0.07}{Lugar} & \thh{0.09}{Grado} & \thh{0.09}{Lugar} \\
+ & & & \thhl{0.07}{\scriptsize Grado} & \thhl{0.08}{\scriptsize Lugar} & \thhl{0.09}{\scriptsize Pobreza} & \thhl{0.07}{\scriptsize Lugar} & \thhl{0.09}{\scriptsize Pobreza\newline extrema} & \thhl{0.07}{\scriptsize Lugar} & \thhl{0.09}{\scriptsize Grado} & \thhl{0.09}{\scriptsize Lugar} \\
 \hline
 \endhead
 
