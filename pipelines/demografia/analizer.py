@@ -96,7 +96,7 @@ class Analizer(Stage):
         ctx["de_poblacion_total_censo"] = _fmt_int(total_2020)
 
         total_estatal = input_data.get("total_estatal_2020")
-        ctx["de_nombre_region"] = region_nombre
+        ctx["de_nombre_region"] = region_nombre[0].lower() + region_nombre[1:]
         ctx["de_porcentaje_habitantes_region"] = (
             _fmt(total_2020 / total_region * 100)
             if (total_2020 and total_region)
