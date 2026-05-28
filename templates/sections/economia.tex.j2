@@ -261,7 +261,7 @@ y << ec_anio_corte_imss >>}
 \hline
 <% endfor %>
 \rowcolor{orange!20}
-\thdr{Total General} & \thdr{\ND} & \thdr{\ND} & \thdr{<< ec_total_trabajadores_imss >>} & \thdr{\ND} & \thdr{\ND} & \thdr{<< ec_porcentaje_variacion_asegurados >>} \\
+\thdr{Total General} & \thdr{<< ec_total_trabajadores_imss_t2 >>} & \thdr{<< ec_total_trabajadores_imss_t1 >>} & \thdr{<< ec_total_trabajadores_imss >>} & \thdr{100.00} & \thdr{<< ec_total_var_nominal_imss >>} & \thdr{<< ec_porcentaje_variacion_asegurados >>} \\
 \hline
 
 \end{longtable}
@@ -322,10 +322,10 @@ de trabajadores, concentrando el << ec_porcentaje_asegurados_region >> del total
 \endlastfoot
 
 \rowcolor{orange!20}
-\thdr{<< ec_municipio_nombre >>} & \thdr{\ND} & \thdr{<< ec_total_trabajadores_imss >>} & \thdr{<< ec_porcentaje_asegurados_region >>} & \thdr{\ND} & \thdr{\ND} \\
+\thdr{<< ec_municipio_nombre >>} & \thdr{<< ec_trabajadores_imss_t1 >>} & \thdr{<< ec_total_trabajadores_imss >>} & \thdr{<< ec_porcentaje_asegurados_region >>} & \thdr{<< ec_var_nominal_imss >>} & \thdr{<< ec_var_pct_imss >>} \\
 \hline
 <% for fila in ec_tabla_imss_region %>
-<< fila.municipio >> & \ND & << fila.total >> & << fila.pct_part >> & \ND & \ND \\
+<< fila.municipio >> & << fila.t1 >> & << fila.total >> & << fila.pct_part >> & << fila.var_nominal >> & << fila.var_pct >> \\
 \hline
 <% endfor %>
 
