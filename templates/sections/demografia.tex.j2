@@ -16,11 +16,11 @@
 \vspace*{\stretch{1}}
 \clearpage
 
-\section{Demografía y Sociedad}
+\section{Demografía y sociedad}
 
-\subsection{Aspectos Demográficos}
+\subsection{Aspectos demográficos}
 
-Conforme a la información del Censo de Población y Vivienda que publicó INEGI,
+Conforme a la información del Censo de Población y Vivienda 2020 que publicó INEGI,
 el municipio de << de_municipio_nombre >> tenía una población de << de_poblacion_total_censo >>
 personas en << de_anio_censo >>, de las cuales el << de_porcentaje_hombres >> eran
 hombres y << de_porcentaje_mujeres >> mujeres.
@@ -31,7 +31,7 @@ variación relativa de << de_variacion_porcentual_poblacion_quinquenio_anterior 
 
 En comparación con << de_anio_censo_anterior >>, la población municipal tuvo una variación de
 << de_variacion_poblacion_quinquenio >> personas, representando una variación de
-<< de_variacion_porcentual_poblacion_quinquenio >> de << de_anio_censo_anterior >> a << de_anio_censo >>.
+<< de_variacion_porcentual_poblacion_quinquenio >> \% de << de_anio_censo_anterior >> a << de_anio_censo >>.
 
 \setlength{\tabcolsep}{3pt}
 \footnotesize
@@ -49,18 +49,18 @@ En comparación con << de_anio_censo_anterior >>, la población municipal tuvo u
 \hline
 
 \rowcolor{gray!30}
- & \thh{0.14}{<< de_anio_censo_anterior >>} & \thh{0.14}{<< de_anio_encuesta_intercensal >>} & \thh{0.14}{<< de_anio_censo >>}
- & \thh{0.21}{Variación \%\newline << de_anio_censo_anterior >>--<< de_anio_encuesta_intercensal >>}
- & \thh{0.21}{Variación \%\newline << de_anio_encuesta_intercensal >>--<< de_anio_censo >>} \\
+ & \thhl{0.14}{<< de_anio_censo_anterior >>} & \thhl{0.14}{<< de_anio_encuesta_intercensal >>} & \thhl{0.14}{<< de_anio_censo >>}
+ & \thhl{0.21}{Variación \%\newline << de_anio_censo_anterior >>--<< de_anio_encuesta_intercensal >>}
+ & \thhl{0.21}{Variación \%\newline << de_anio_encuesta_intercensal >>--<< de_anio_censo >>} \\
 \hline
 \endfirsthead
 
 \multicolumn{6}{l}{\small\textbf{(continuación)}} \\
 \hline
 \rowcolor{gray!30}
- & \thh{0.14}{<< de_anio_censo_anterior >>} & \thh{0.14}{<< de_anio_encuesta_intercensal >>} & \thh{0.14}{<< de_anio_censo >>}
- & \thh{0.21}{Variación \%\newline << de_anio_censo_anterior >>--<< de_anio_encuesta_intercensal >>}
- & \thh{0.21}{Variación \%\newline << de_anio_encuesta_intercensal >>--<< de_anio_censo >>} \\
+ & \thhl{0.14}{<< de_anio_censo_anterior >>} & \thhl{0.14}{<< de_anio_encuesta_intercensal >>} & \thhl{0.14}{<< de_anio_censo >>}
+ & \thhl{0.21}{Variación \%\newline << de_anio_censo_anterior >>--<< de_anio_encuesta_intercensal >>}
+ & \thhl{0.21}{Variación \%\newline << de_anio_encuesta_intercensal >>--<< de_anio_censo >>} \\
 \hline
 \endhead
 
@@ -71,6 +71,11 @@ En comparación con << de_anio_censo_anterior >>, la población municipal tuvo u
 \hline
 \endlastfoot
 
+\rowcolor{orange!20}
+\thdr{Total} & \thdr{<< de_tabla_pob_total_2010 >>} & \thdr{<< de_tabla_pob_total_2015 >>} & \thdr{<< de_tabla_pob_total_2020 >>}
+& \thdr{<< de_tabla_pob_var_pct_total_2010_2015 >>} & \thdr{<< de_tabla_pob_var_pct_total_2015_2020 >>} \\
+\hline
+
 Mujeres & << de_tabla_pob_mujeres_2010 >> & << de_tabla_pob_mujeres_2015 >> & << de_tabla_pob_mujeres_2020 >>
 & << de_tabla_pob_var_pct_mujeres_2010_2015 >> & << de_tabla_pob_var_pct_mujeres_2015_2020 >> \\
 \hline
@@ -79,18 +84,11 @@ Hombres & << de_tabla_pob_hombres_2010 >> & << de_tabla_pob_hombres_2015 >> & <<
 & << de_tabla_pob_var_pct_hombres_2010_2015 >> & << de_tabla_pob_var_pct_hombres_2015_2020 >> \\
 \hline
 
-\rowcolor{orange!20}
-\thdr{Total} & \thdr{<< de_tabla_pob_total_2010 >>} & \thdr{<< de_tabla_pob_total_2015 >>} & \thdr{<< de_tabla_pob_total_2020 >>}
-& \thdr{<< de_tabla_pob_var_pct_total_2010_2015 >>} & \thdr{<< de_tabla_pob_var_pct_total_2015_2020 >>} \\
-\hline
 
 \end{longtable}
 \normalsize
-\vspace{-28pt}\noindent{\footnotesize
-\begin{tabular}[t]{@{}l@{\hspace{0.5em}}l@{}}
-Fuente: & INEGI, Censo de Población y Vivienda, << de_anio_censo_anterior >> y << de_anio_censo >>.\\[2pt]
-& INEGI, Encuesta Intercensal, << de_anio_encuesta_intercensal >>.
-\end{tabular}}
+\tablefooter{Fuente: & INEGI, Censo de Población y Vivienda, << de_anio_censo_anterior >> y << de_anio_censo >>.\\
+& INEGI, Encuesta Intercensal, << de_anio_encuesta_intercensal >>.}
 
 Las personas habitantes del municipio de << de_municipio_nombre >> representaron
 el << de_porcentaje_habitantes_region >> \% del total de la región
@@ -107,25 +105,24 @@ de la población del municipio.
 
 \setlength{\tabcolsep}{3pt}
 \footnotesize
-\begin{longtable}{>{\raggedleft\arraybackslash}m{\dimexpr0.11\linewidth - 2\tabcolsep\relax}
-                  >{\raggedleft\arraybackslash}m{\dimexpr0.19\linewidth - 2\tabcolsep\relax}
+\begin{longtable}{>{\raggedright\arraybackslash}m{\dimexpr0.11\linewidth - 2\tabcolsep\relax}
+                  >{\raggedright\arraybackslash}m{\dimexpr0.19\linewidth - 2\tabcolsep\relax}
                   >{\raggedleft\arraybackslash}m{\dimexpr0.16\linewidth - 2\tabcolsep\relax}
                   >{\raggedleft\arraybackslash}m{\dimexpr0.16\linewidth - 2\tabcolsep\relax}
                   >{\raggedleft\arraybackslash}m{\dimexpr0.19\linewidth - 2\tabcolsep\relax}
                   >{\raggedleft\arraybackslash}m{\dimexpr0.19\linewidth - 2\tabcolsep\relax}}
 
-\caption{\textbf{Número de habitantes, distribución y variación porcentual en las localidades
-más pobladas de << de_municipio_nombre >>} \\
+\caption{\textbf{Número de habitantes, distribución y variación porcentual en localidades de << de_municipio_nombre >>} \\
 << de_anio_censo_anterior >> y << de_anio_censo >>}
 \label{cuadro_localidades_mas_pobladas} \\
 
 \hline
 \rowcolor{gray!30}
 \thh{0.11}{Clave} & \thh{0.19}{Municipio/\newline Localidad} &
-\thh{0.16}{Población\newline << de_anio_censo_anterior >>} &
-\thh{0.16}{Población\newline << de_anio_censo >>} &
-\thh{0.19}{\% Distribución\newline << de_anio_censo >>} &
-\thh{0.19}{\% Variación\newline << de_anio_censo_anterior >>--<< de_anio_censo >>} \\
+\thhl{0.16}{Población\newline << de_anio_censo_anterior >>} &
+\thhl{0.16}{Población\newline << de_anio_censo >>} &
+\thhl{0.19}{\% Distribución\newline << de_anio_censo >>} &
+\thhl{0.19}{\% Variación\newline << de_anio_censo_anterior >>--<< de_anio_censo >>} \\
 \hline
 \endfirsthead
 
@@ -133,10 +130,10 @@ más pobladas de << de_municipio_nombre >>} \\
 \hline
 \rowcolor{gray!30}
 \thh{0.11}{Clave} & \thh{0.19}{Municipio/\newline Localidad} &
-\thh{0.16}{Población\newline << de_anio_censo_anterior >>} &
-\thh{0.16}{Población\newline << de_anio_censo >>} &
-\thh{0.19}{\% Distribución\newline << de_anio_censo >>} &
-\thh{0.19}{\% Variación\newline << de_anio_censo_anterior >>--<< de_anio_censo >>} \\
+\thhl{0.16}{Población\newline << de_anio_censo_anterior >>} &
+\thhl{0.16}{Población\newline << de_anio_censo >>} &
+\thhl{0.19}{\% Distribución\newline << de_anio_censo >>} &
+\thhl{0.19}{\% Variación\newline << de_anio_censo_anterior >>--<< de_anio_censo >>} \\
 \hline
 \endhead
 
@@ -148,7 +145,7 @@ más pobladas de << de_municipio_nombre >>} \\
 \endlastfoot
 
 \rowcolor{orange!20}
-\thdr{<< de_clave_municipio >>} & \thdr{<< de_municipio_nombre >>} & \thdr{<< de_tabla_pob_total_2010 >>} & \thdr{<< de_tabla_pob_total_2020 >>} & \thdr{100.00} & \thdr{<< de_variacion_porcentual_poblacion_quinquenio >>} \\
+\thdl{<< de_clave_municipio >>} & \thdl{<< de_municipio_nombre >>} & \thdr{<< de_tabla_pob_total_2010 >>} & \thdr{<< de_tabla_pob_total_2020 >>} & \thdr{100.00} & \thdr{<< de_variacion_porcentual_poblacion_quinquenio >>} \\
 \hline
 <% for loc in de_localidades %>
 << loc.clave >> & << loc.nombre >> & << loc.total_2010 >> & << loc.total_2020 >> & << loc.pct_2020 >> & << loc.var_pct_2010_2020 >> \\
@@ -157,8 +154,8 @@ más pobladas de << de_municipio_nombre >>} \\
 
 \end{longtable}
 \normalsize
-\vspace{-28pt}\noindent\parbox{\linewidth}{\footnotesize
-Fuente: INEGI. Censo de Población y Vivienda, << de_anio_censo_anterior >> y << de_anio_censo >>.}
+\tablefooter{Nota: & se presenta la información para las cinco localidades más pobladas de << de_municipio_nombre >>.\\
+Fuente: & INEGI. Censo de Población y Vivienda, << de_anio_censo_anterior >> y << de_anio_censo >>.}
 
 \newpage
 
@@ -169,29 +166,26 @@ Consejo Nacional de Población (CONAPO), mide de manera sintética el fenómeno 
 entre ambos países.
 
 De acuerdo con este índice, Jalisco se clasificó con un grado << de_grado_intensidad_migratoria_jal >>
-de intensidad migratoria, ocupando el lugar << de_ranking_jal_migracion >> entre las entidades
-federativas con mayor intensidad migratoria en << de_anio_censo >>.
+de intensidad migratoria, ocupando el lugar << de_ranking_jal_migracion >> a nivel nacional en << de_anio_censo >>.
 
 Conforme a los datos procesados para la estimación del índice, en << de_anio_censo >> un
 << de_porcentaje_viviendas_remesas_jal >> de viviendas de Jalisco recibían remesas, un
-<< de_porcentaje_emigrantes_jal >> de viviendas tenían emigrantes con destino a Estados Unidos
-residentes en Estados Unidos, un << de_porcentaje_migrantes_circulares_jal >> de viviendas tenían
+<< de_porcentaje_emigrantes_jal >> de viviendas tenían emigrantes residentes en Estados Unidos, un << de_porcentaje_migrantes_circulares_jal >> de viviendas tenían
 migrantes circulares y un << de_porcentaje_migrantes_retorno_jal >> de las viviendas contaban con
 migrantes de retorno de Estados Unidos.
 
 En << de_anio_censo >> el municipio de << de_municipio_nombre >> tuvo un grado
 << de_grado_intensidad_migratoria_mun >> de intensidad migratoria y se ubicó en el lugar
-<< de_ranking_mun_migracion >> con mayor intensidad migratoria dentro de los municipios del estado
+<< de_ranking_mun_migracion >> en intensidad migratoria dentro de los municipios del estado
 de Jalisco. Durante este año, un << de_porcentaje_viviendas_remesas_mun >> de las viviendas
-del municipio recibieron remesas, en un << de_porcentaje_emigrantes_mun >> se reportaron emigrantes
-con destino a Estados Unidos residentes en Estados Unidos, en el << de_porcentaje_migrantes_circulares_mun >>\,\%
+del municipio recibieron remesas, en un << de_porcentaje_emigrantes_mun >> se reportaron emigrantes residentes en Estados Unidos, en el << de_porcentaje_migrantes_circulares_mun >>\,\%
 de las viviendas se registraron migrantes circulares del quinquenio anterior (<< de_anio_encuesta_intercensal >>
 --<< de_anio_censo >>) y el << de_porcentaje_migrantes_retorno_mun >> de las viviendas
 contaban con migrantes de retorno de Estados Unidos (ver cuadro \ref{cuadro_intensidad_migratoria_eua}).
 
 En el cálculo del índice del año << de_anio_censo_anterior >>, << de_municipio_nombre >>
 tenía un grado << de_grado_intensidad_migratoria_anterior_mun >> de intensidad migratoria y ocupaba
-el lugar << de_ranking_anterior_mun_migracion >> con mayor grado dentro de los municipios del estado de Jalisco.
+el lugar << de_ranking_anterior_mun_migracion >> a nivel estatal.
 
 \newpage
 
@@ -207,14 +201,14 @@ el lugar << de_ranking_anterior_mun_migracion >> con mayor grado dentro de los m
 
 \hline
 \rowcolor{gray!30}
-\thh{0.60}{Índice y grado de intensidad migratoria e indicadores socioeconómicos} & \thh{0.20}{<< de_anio_censo_anterior >>} & \thh{0.20}{<< de_anio_censo >>} \\
+\thh{0.60}{Grado de intensidad migratoria e indicadores socioeconómicos} & \thhl{0.20}{<< de_anio_censo_anterior >>} & \thhl{0.20}{<< de_anio_censo >>} \\
 \hline
 \endfirsthead
 
 \multicolumn{3}{l}{\small\textbf{(continuación)}} \\
 \hline
 \rowcolor{gray!30}
-\thh{0.60}{Índice y grado de intensidad migratoria e indicadores socioeconómicos} & \thh{0.20}{<< de_anio_censo_anterior >>} & \thh{0.20}{<< de_anio_censo >>} \\
+\thh{0.60}{Grado de intensidad migratoria e indicadores socioeconómicos} & \thhl{0.20}{<< de_anio_censo_anterior >>} & \thhl{0.20}{<< de_anio_censo >>} \\
 \hline
 \endhead
 
@@ -225,8 +219,6 @@ el lugar << de_ranking_anterior_mun_migracion >> con mayor grado dentro de los m
 \hline
 \endlastfoot
 
-Índice de intensidad migratoria & << de_iim_mun_2010 >> & << de_iim_mun_2020 >> \\
-\hline
 Grado de intensidad migratoria & << de_grado_intensidad_migratoria_anterior_mun >> & << de_grado_intensidad_migratoria_mun >> \\
 \hline
 Total de viviendas & << de_viv_totales_mun_2010 >> & << de_viv_totales_mun_2020 >> \\
@@ -246,11 +238,8 @@ Posición que ocupa el municipio a escala nacional & << de_ranking_nacional_mun_
 
 \end{longtable}
 \normalsize
-\vspace{-28pt}\noindent{\footnotesize
-\begin{tabular}[t]{@{}l@{\hspace{0.5em}}l@{}}
-Nota: & Los indicadores hacen referencia al quinquenio anterior referido a << de_anio_encuesta_intercensal_anterior >>--<< de_anio_censo_anterior >> y << de_anio_encuesta_intercensal >>--<< de_anio_censo >>.\\[4pt]
-Fuente: & CONAPO. Índice de Intensidad Migratoria México-Estados Unidos, << de_anio_censo_anterior >> y << de_anio_censo >>.
-\end{tabular}}
+\tablefooter{Nota: & Los indicadores hacen referencia al quinquenio anterior referido a << de_anio_encuesta_intercensal_anterior >>--<< de_anio_censo_anterior >> y << de_anio_encuesta_intercensal >>--<< de_anio_censo >>.\\
+Fuente: & CONAPO. Índice de Intensidad Migratoria México-Estados Unidos, << de_anio_censo_anterior >> y << de_anio_censo >>.}
 
 \newpage
 << de_mapa_grado_intensidad_migratoria >>
@@ -433,10 +422,7 @@ Población con un ingreso inferior a la línea de bienestar
 \end{longtable}
 \normalsize
 \renewcommand{\arraystretch}{1.5}
-\vspace{-28pt}\noindent{\footnotesize
-\begin{tabular}[t]{@{}l@{\hspace{0.5em}}l@{}}
-Fuente: & CONEVAL. Medición de pobreza a nivel municipal, << de_anio_encuesta_intercensal >> y << de_anio_censo >>.
-\end{tabular}}
+\tablefooter{Fuente: & CONEVAL. Medición de pobreza a nivel municipal, << de_anio_encuesta_intercensal >> y << de_anio_censo >>.}
 
 
 \newpage
@@ -541,8 +527,7 @@ Grado de marginación & << de_marg_grado_2010 >> & << de_marg_grado_2015 >> & <<
 
 \end{longtable}
 \normalsize
-\vspace{-28pt}\noindent\parbox{\linewidth}{\footnotesize
-Fuente: CONAPO. Índices de marginación municipal,
+\tablefooter{Fuente: & CONAPO. Índices de marginación municipal,
 << de_anio_censo_anterior >>, << de_anio_encuesta_intercensal >> y << de_anio_censo >>.}
 
 \newpage
@@ -714,8 +699,7 @@ pobladas de << de_municipio_nombre >>} \\
 
 \end{longtable}
 \normalsize
-\vspace{-28pt}\noindent\parbox{\linewidth}{\footnotesize
-Fuente: CONAPO. Índices de marginación por localidad << de_anio_censo >>.}
+\tablefooter{Fuente: & CONAPO. Índices de marginación por localidad << de_anio_censo >>.}
 \newpage
 
 \subsection{Índices Sociodemográficos}
@@ -797,9 +781,6 @@ en la región << de_nombre_region >>}\\
 
 \end{longtable}
 \normalsize
-\vspace{-28pt}\noindent{\footnotesize
-\begin{tabular}[t]{@{}l@{\hspace{0.5em}}l@{}}
-Fuente: & CONAPO. Índices de marginación << de_anio_censo >>; Índice de Intensidad Migratoria << de_anio_censo >>.\\[2pt]
-& CONEVAL. Pobreza Multidimensional << de_anio_censo >>.\\[2pt]
-& INEGI. Censo de Población y Vivienda << de_anio_censo >>.
-\end{tabular}}
+\tablefooter{Fuente: & CONAPO. Índices de marginación << de_anio_censo >>; Índice de Intensidad Migratoria << de_anio_censo >>.\\
+& CONEVAL. Pobreza Multidimensional << de_anio_censo >>.\\
+& INEGI. Censo de Población y Vivienda << de_anio_censo >>.}
