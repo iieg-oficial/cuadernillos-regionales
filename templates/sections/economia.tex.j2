@@ -225,12 +225,12 @@ y << ec_anio_corte_imss >>}
 \hline
 \rowcolor{gray!30}
 \thh{0.30}{Grupo económico} &
-\thh{0.10}{<< ec_mes_corte_imss >> << ec_dos_anios_atras_corte_imss >>} &
-\thh{0.10}{<< ec_mes_corte_imss >> << ec_anio_anterior_corte_imss >>} &
-\thh{0.10}{<< ec_mes_corte_imss >> << ec_anio_corte_imss >>} &
-\thh{0.10}{\% Part.} &
-\thh{0.15}{Var. nominal << ec_anio_anterior_corte_imss >>--<< ec_anio_corte_imss >>} &
-\thh{0.15}{Var. \% << ec_anio_anterior_corte_imss >>--<< ec_anio_corte_imss >>} \\
+\thhl{0.10}{<< ec_mes_corte_imss >>\newline << ec_dos_anios_atras_corte_imss >>} &
+\thhl{0.10}{<< ec_mes_corte_imss >>\newline << ec_anio_anterior_corte_imss >>} &
+\thhl{0.10}{<< ec_mes_corte_imss >>\newline << ec_anio_corte_imss >>} &
+\thhl{0.10}{Part. (\%)} &
+\thhl{0.15}{Var. nominal\newline << ec_anio_anterior_corte_imss >>--<< ec_anio_corte_imss >>} &
+\thhl{0.15}{Var. (\%)\newline << ec_anio_anterior_corte_imss >>--<< ec_anio_corte_imss >>} \\
 \hline
 \endfirsthead
 
@@ -238,12 +238,12 @@ y << ec_anio_corte_imss >>}
 \hline
 \rowcolor{gray!30}
 \thh{0.30}{Grupo económico} &
-\thh{0.10}{<< ec_mes_corte_imss >> << ec_dos_anios_atras_corte_imss >>} &
-\thh{0.10}{<< ec_mes_corte_imss >> << ec_anio_anterior_corte_imss >>} &
-\thh{0.10}{<< ec_mes_corte_imss >> << ec_anio_corte_imss >>} &
-\thh{0.10}{\% Part.} &
-\thh{0.15}{Var. nominal << ec_anio_anterior_corte_imss >>--<< ec_anio_corte_imss >>} &
-\thh{0.15}{Var. \% << ec_anio_anterior_corte_imss >>--<< ec_anio_corte_imss >>} \\
+\thhl{0.10}{<< ec_mes_corte_imss >>\newline << ec_dos_anios_atras_corte_imss >>} &
+\thhl{0.10}{<< ec_mes_corte_imss >>\newline << ec_anio_anterior_corte_imss >>} &
+\thhl{0.10}{<< ec_mes_corte_imss >>\newline << ec_anio_corte_imss >>} &
+\thhl{0.10}{Part. (\%)} &
+\thhl{0.15}{Var. nominal\newline << ec_anio_anterior_corte_imss >>--<< ec_anio_corte_imss >>} &
+\thhl{0.15}{Var. (\%)\newline << ec_anio_anterior_corte_imss >>--<< ec_anio_corte_imss >>} \\
 \hline
 \endhead
 
@@ -254,18 +254,18 @@ y << ec_anio_corte_imss >>}
 \hline
 \endlastfoot
 
+\rowcolor{orange!20}
+\thdr{Total} & \thdr{<< ec_total_trabajadores_imss_t2 >>} & \thdr{<< ec_total_trabajadores_imss_t1 >>} & \thdr{<< ec_total_trabajadores_imss >>} & \thdr{100.00} & \thdr{<< ec_total_var_nominal_imss >>} & \thdr{<< ec_var_pct_total_imss >>} \\
+\hline
+
 <% for fila in ec_tabla_imss_grupos %>
 << fila.grupo >> & << fila.t2 >> & << fila.t1 >> & << fila.t0 >> & << fila.pct_part >> & << fila.var_nominal >> & << fila.var_pct >> \\
 \hline
 <% endfor %>
-\rowcolor{orange!20}
-\thdr{Total General} & \thdr{<< ec_total_trabajadores_imss_t2 >>} & \thdr{<< ec_total_trabajadores_imss_t1 >>} & \thdr{<< ec_total_trabajadores_imss >>} & \thdr{100.00} & \thdr{<< ec_total_var_nominal_imss >>} & \thdr{<< ec_porcentaje_variacion_asegurados >>} \\
-\hline
 
 \end{longtable}
 \normalsize
-\vspace{-28pt}\noindent\parbox{\linewidth}{\footnotesize
-Fuente: IIEG con base en IMSS. Datos abiertos de Trabajadores Asegurados, << ec_dos_anios_atras_corte_imss >>,
+\tablefooter{Fuente: & IIEG con base en IMSS. Datos abiertos de Trabajadores Asegurados, << ec_dos_anios_atras_corte_imss >>,
 << ec_anio_anterior_corte_imss >> y << ec_anio_corte_imss >>.}
 
 \newpage
@@ -292,11 +292,11 @@ de trabajadores, concentrando el << ec_porcentaje_asegurados_region >> del total
 \hline
 \rowcolor{gray!30}
 \thh{0.28}{Municipio} &
-\thh{0.12}{<< ec_mes_corte_imss >> << ec_anio_anterior_corte_imss >>} &
-\thh{0.12}{<< ec_mes_corte_imss >> << ec_anio_corte_imss >>} &
-\thh{0.16}{\% Part. << ec_mes_corte_imss >> << ec_anio_corte_imss >>} &
-\thh{0.16}{Var. nominal << ec_anio_anterior_corte_imss >>/<< ec_anio_corte_imss >>} &
-\thh{0.16}{Var. \% << ec_anio_anterior_corte_imss >>/<< ec_anio_corte_imss >>} \\
+\thhl{0.12}{<< ec_mes_corte_imss >>\newline << ec_anio_anterior_corte_imss >>} &
+\thhl{0.12}{<< ec_mes_corte_imss >>\newline << ec_anio_corte_imss >>} &
+\thhl{0.16}{Part. (\%)\newline << ec_mes_corte_imss >> << ec_anio_corte_imss >>} &
+\thhl{0.16}{Var. nominal\newline << ec_anio_anterior_corte_imss >>--<< ec_anio_corte_imss >>} &
+\thhl{0.16}{Var. (\%)\newline << ec_anio_anterior_corte_imss >>--<< ec_anio_corte_imss >>} \\
 \hline
 \endfirsthead
 
@@ -304,11 +304,11 @@ de trabajadores, concentrando el << ec_porcentaje_asegurados_region >> del total
 \hline
 \rowcolor{gray!30}
 \thh{0.28}{Municipio} &
-\thh{0.12}{<< ec_mes_corte_imss >> << ec_anio_anterior_corte_imss >>} &
-\thh{0.12}{<< ec_mes_corte_imss >> << ec_anio_corte_imss >>} &
-\thh{0.16}{\% Part. << ec_mes_corte_imss >> << ec_anio_corte_imss >>} &
-\thh{0.16}{Var. nominal << ec_anio_anterior_corte_imss >>/<< ec_anio_corte_imss >>} &
-\thh{0.16}{Var. \% << ec_anio_anterior_corte_imss >>/<< ec_anio_corte_imss >>} \\
+\thhl{0.12}{<< ec_mes_corte_imss >>\newline << ec_anio_anterior_corte_imss >>} &
+\thhl{0.12}{<< ec_mes_corte_imss >>\newline << ec_anio_corte_imss >>} &
+\thhl{0.16}{Part. (\%)\newline << ec_mes_corte_imss >> << ec_anio_corte_imss >>} &
+\thhl{0.16}{Var. nominal\newline << ec_anio_anterior_corte_imss >>--<< ec_anio_corte_imss >>} &
+\thhl{0.16}{Var. (\%)\newline << ec_anio_anterior_corte_imss >>--<< ec_anio_corte_imss >>} \\
 \hline
 \endhead
 
@@ -320,7 +320,7 @@ de trabajadores, concentrando el << ec_porcentaje_asegurados_region >> del total
 \endlastfoot
 
 \rowcolor{orange!20}
-\thdr{<< ec_municipio_nombre >>} & \thdr{<< ec_trabajadores_imss_t1 >>} & \thdr{<< ec_total_trabajadores_imss >>} & \thdr{<< ec_porcentaje_asegurados_region >>} & \thdr{<< ec_var_nominal_imss >>} & \thdr{<< ec_var_pct_imss >>} \\
+\thdr{<< ec_municipio_nombre >>} & \thdr{<< ec_trabajadores_imss_t1 >>} & \thdr{<< ec_total_trabajadores_imss >>} & \thdr{<< ec_pct_asegurados_region_tabla >>} & \thdr{<< ec_var_nominal_imss >>} & \thdr{<< ec_var_pct_imss_tabla >>} \\
 \hline
 <% for fila in ec_tabla_imss_region %>
 << fila.municipio >> & << fila.t1 >> & << fila.total >> & << fila.pct_part >> & << fila.var_nominal >> & << fila.var_pct >> \\
@@ -329,8 +329,7 @@ de trabajadores, concentrando el << ec_porcentaje_asegurados_region >> del total
 
 \end{longtable}
 \normalsize
-\vspace{-28pt}\noindent\parbox{\linewidth}{\footnotesize
-Fuente: IIEG con base en IMSS. Datos abiertos de Trabajadores Asegurados, << ec_anio_anterior_corte_imss >>
+\tablefooter{Fuente: & IIEG con base en IMSS. Datos abiertos de Trabajadores Asegurados, << ec_anio_anterior_corte_imss >>
 y << ec_anio_corte_imss >>.}
 
 \newpage
