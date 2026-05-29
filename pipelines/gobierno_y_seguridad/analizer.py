@@ -4,11 +4,17 @@ from core.constants import ND
 from core.pipelines.stage import Stage
 from core.utils.logger import Logger
 from core.utils.municipalities import get_same_region
+from pipelines.gobierno_y_seguridad.charts.incidencia import (
+    grafica_bienes_juridicos,
+    grafica_carpetas_por_mes,
+    grafica_principales_delitos,
+)
 from pipelines.gobierno_y_seguridad.helpers.aggregate import aggregate
 from pipelines.gobierno_y_seguridad.helpers.ranking import rank
 from pipelines.gobierno_y_seguridad.helpers.region import filter_region
 
 MAPA_PLACEHOLDER = Path("templates/assets/mapa_placeholder.png")
+CHARTS_DIR = Path("output/charts")
 
 MESES = {
     1: "enero",
@@ -44,6 +50,18 @@ def _grafica_placeholder(caption: str) -> str:
         "\\centering\n"
         f"\\caption{{\\textbf{{{caption}}}}}\n"
         f"\\includegraphics[width=\\textwidth]{{{MAPA_PLACEHOLDER}}}\n"
+        "\\end{figure}"
+    )
+
+
+def _grafica_latex(path, num, titulo, fuente):
+    return (
+        "\\begin{figure}[H]\n"
+        f"{{\\color{{colorTexto}}Gráfica {num}}}\\\\\n"
+        f"{{\\color{{colorTexto}}\\textbf{{{titulo}}}}}\n"
+        "\\vspace{0.3cm}\n\n"
+        f"\\includegraphics[width=0.95\\textwidth]{{{path}}}\n\n"
+        f"{{\\footnotesize {fuente}}}\n"
         "\\end{figure}"
     )
 
@@ -458,17 +476,74 @@ class Analizer(Stage):
         )
         ctx.update(incidencia_ctx)
 
-        ctx["gs_grafica_carpetas_de_investigacion_por_mes"] = _grafica_placeholder(
-            f"Carpetas de investigación abiertas por mes. {nombre}"
+        fuente_sesnsp = (
+            "Elaborado por el IIEG con datos del Secretariado "
+            "Ejecutivo del Sistema Nacional de Seguridad Pública."
         )
-        ctx["gs_grafica_distribucion_porcentual_bienes_juridicos_afectados"] = (
-            _grafica_placeholder(
-                f"Distribución porcentual de bienes jurídicos afectados. {nombre}"
+        mun_id_str = str(cve_mun)
+
+        if carpetas_por_mes:
+            sorted_carp = sorted(carpetas_por_mes, key=lambda r: (r["anio"], r["mes"]))
+            p_ini = sorted_carp[0]
+            p_fin = sorted_carp[-1]
+            periodo = (
+                f"{nombre} {MESES[p_ini['mes']]} {p_ini['anio']} "
+                f"a {MESES[p_fin['mes']]} {p_fin['anio']}"
             )
-        )
-        ctx["gs_grafica_carpetas_cinco_principales_delitos"] = _grafica_placeholder(
-            f"Carpetas de investigación por los cinco principales delitos. {nombre}"
-        )
+
+            chart_path = CHARTS_DIR / mun_id_str / "gs_carpetas_mes.png"
+            grafica_carpetas_por_mes(carpetas_por_mes, nombre, chart_path)
+            ctx["gs_grafica_carpetas_de_investigacion_por_mes"] = _grafica_latex(
+                chart_path,
+                1,
+                f"Cantidad de carpetas de investigación por mes, {periodo}",
+                fuente_sesnsp,
+            )
+        else:
+            ctx["gs_grafica_carpetas_de_investigacion_por_mes"] = _grafica_placeholder(
+                f"Carpetas de investigación abiertas por mes. {nombre}"
+            )
+            periodo = nombre
+
+        if casos_bien_afectado:
+            chart_path = CHARTS_DIR / mun_id_str / "gs_bienes_juridicos.png"
+            grafica_bienes_juridicos(casos_bien_afectado, nombre, chart_path)
+            ctx["gs_grafica_distribucion_porcentual_bienes_juridicos_afectados"] = (
+                _grafica_latex(
+                    chart_path,
+                    2,
+                    "Distribución porcentual de los bienes jurídicos "
+                    f"afectados, {periodo}",
+                    fuente_sesnsp,
+                )
+            )
+        else:
+            ctx["gs_grafica_distribucion_porcentual_bienes_juridicos_afectados"] = (
+                _grafica_placeholder(
+                    f"Distribución porcentual de bienes jurídicos afectados. {nombre}"
+                )
+            )
+
+        if casos_por_delito and casos_bien_afectado:
+            bien_principal = casos_bien_afectado[0]["bien_afectado"].lower()
+            chart_path = CHARTS_DIR / mun_id_str / "gs_principales_delitos.png"
+            grafica_principales_delitos(
+                casos_por_delito,
+                bien_principal,
+                nombre,
+                chart_path,
+            )
+            ctx["gs_grafica_carpetas_cinco_principales_delitos"] = _grafica_latex(
+                chart_path,
+                3,
+                "Cantidad de carpetas por los 5 subtipos de delitos "
+                f"que afectaron más a {bien_principal}, {periodo}",
+                fuente_sesnsp,
+            )
+        else:
+            ctx["gs_grafica_carpetas_cinco_principales_delitos"] = _grafica_placeholder(
+                f"Carpetas de investigación por los cinco principales delitos. {nombre}"
+            )
 
         Logger.info("Gobierno y Seguridad: análisis completo")
         return ctx
