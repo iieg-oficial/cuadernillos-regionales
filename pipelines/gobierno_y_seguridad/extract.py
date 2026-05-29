@@ -11,6 +11,11 @@ from pipelines.gobierno_y_seguridad.queries.incidencia import (
     get_casos_por_bien_afectado,
     get_casos_por_delito,
 )
+from pipelines.gobierno_y_seguridad.queries.ingresos import (
+    get_anios_efipem,
+    get_ingresos_municipales,
+    get_poblacion_municipal,
+)
 from pipelines.gobierno_y_seguridad.queries.participacion import (
     get_participacion_por_municipio,
 )
@@ -76,6 +81,38 @@ class Extract(Stage):
                 "No se pudo conectar a la base de datos de participacion_ciudadana"
             )
 
+        ingresos_raw = []
+        anio_efipem = None
+        anio_anterior_efipem = None
+        poblacion = []
+
+        try:
+            Logger.info("Gobierno y Seguridad: extrayendo datos de EFIPEM")
+            settings_efipem = DatabaseSettings.from_env("efipem")
+            with get_session(settings_efipem) as session:
+                anios_efipem = get_anios_efipem(session)
+                if len(anios_efipem) >= 2:
+                    anio_efipem = anios_efipem[0]
+                    anio_anterior_efipem = anios_efipem[1]
+                elif anios_efipem:
+                    anio_efipem = anios_efipem[0]
+                    anio_anterior_efipem = anio_efipem - 1
+
+                if anio_efipem:
+                    ingresos_raw = get_ingresos_municipales(
+                        session, anio_efipem, anio_anterior_efipem
+                    )
+        except Exception:
+            Logger.warning("No se pudo conectar a la base de datos de efipem")
+
+        try:
+            Logger.info("Gobierno y Seguridad: extrayendo población municipal")
+            settings_pob = DatabaseSettings.from_env("censo_poblacion")
+            with get_session(settings_pob) as session:
+                poblacion = get_poblacion_municipal(session)
+        except Exception:
+            Logger.warning("No se pudo conectar a la base de datos de censo_poblacion")
+
         return {
             "anio_actual": anio_actual,
             "anio_anterior": anio_anterior,
@@ -84,4 +121,8 @@ class Extract(Stage):
             "casos_bien_afectado": casos_bien_afectado,
             "casos_por_delito": casos_por_delito,
             "participacion": participacion,
+            "ingresos_raw": ingresos_raw,
+            "anio_efipem": anio_efipem,
+            "anio_anterior_efipem": anio_anterior_efipem,
+            "poblacion": poblacion,
         }

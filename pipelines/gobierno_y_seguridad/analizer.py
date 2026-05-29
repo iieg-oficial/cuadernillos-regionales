@@ -123,29 +123,145 @@ def _process_participacion(participacion, municipio_id):
     return ctx
 
 
-def _build_ingresos_table(municipio_id: str) -> list[dict]:
-    region_munis = get_same_region(municipio_id)
-    cvegeo_objetivo = f"14{int(municipio_id):03d}"
-    rows = []
-    for m in sorted(region_munis, key=lambda x: int(x["id"])):
-        cvegeo = f"14{int(m['id']):03d}"
-        rows.append(
-            {
-                "clave": m["id"],
-                "municipio": m["municipio"],
-                "pct_ing_ant": ND,
-                "pos_ing_ant": ND,
-                "pct_ing_act": ND,
-                "pos_ing_act": ND,
-                "pc_ant": ND,
-                "pos_pc_ant": ND,
-                "pc_act": ND,
-                "pos_pc_act": ND,
-                "es_objetivo": cvegeo == cvegeo_objetivo,
-            }
+CONCEPTOS_PROPIOS = {
+    "Impuestos",
+    "Cuotas y Aportaciones de Seguridad Social",
+    "Contribuciones de Mejoras",
+    "Derechos",
+    "Productos",
+    "Aprovechamientos",
+}
+
+
+def _build_ingresos_por_municipio(ingresos_raw):
+    data = {}
+    for r in ingresos_raw:
+        key = (r["cvegeo"], r["anio"])
+        entry = data.setdefault(
+            key, {"total": 0, "propios": 0, "cve_mun": r["cve_mun"]}
         )
-    rows.sort(key=lambda r: (0 if r["es_objetivo"] else 1, r["clave"]))
-    return rows
+        if r["clasificador"] == "Tema":
+            entry["total"] = r["valor"]
+        elif r["concepto"] in CONCEPTOS_PROPIOS:
+            entry["propios"] += r["valor"]
+    return data
+
+
+def _rank_metric(data, anio, metric_fn):
+    entries = [
+        (cvegeo, metric_fn(v))
+        for (cvegeo, a), v in data.items()
+        if a == anio and metric_fn(v) is not None
+    ]
+    entries.sort(key=lambda x: x[1], reverse=True)
+    return {cvegeo: pos + 1 for pos, (cvegeo, _) in enumerate(entries)}
+
+
+def _process_ingresos(
+    ingresos_raw, poblacion, municipio_id, anio_efipem, anio_anterior_efipem
+):
+    ctx = {}
+    cve_mun = int(municipio_id)
+    cvegeo_objetivo = f"14{cve_mun:03d}"
+
+    if not ingresos_raw or not anio_efipem:
+        return None
+
+    pob_map = {r["cve_mun"]: r["total"] for r in poblacion}
+    data = _build_ingresos_por_municipio(ingresos_raw)
+
+    def pct_propios(v):
+        return v["propios"] / v["total"] * 100 if v["total"] else None
+
+    def per_capita(v):
+        pob = pob_map.get(v["cve_mun"])
+        return v["total"] / pob if pob else None
+
+    rank_pct_act = _rank_metric(data, anio_efipem, pct_propios)
+    rank_pct_ant = _rank_metric(data, anio_anterior_efipem, pct_propios)
+    rank_pc_act = _rank_metric(data, anio_efipem, per_capita)
+    rank_pc_ant = _rank_metric(data, anio_anterior_efipem, per_capita)
+
+    ctx["gs_anio_efipem"] = anio_efipem
+    ctx["gs_anio_anterior_efipem"] = anio_anterior_efipem
+    ctx["gs_anio_anterior_porcentaje_ingresos_per_capita"] = anio_anterior_efipem
+    ctx["gs_anio_anterior_ingreso_per_capita"] = anio_anterior_efipem
+
+    mun_act = data.get((cvegeo_objetivo, anio_efipem))
+    mun_ant = data.get((cvegeo_objetivo, anio_anterior_efipem))
+
+    if mun_act and mun_act["total"]:
+        pct_act = pct_propios(mun_act)
+        ctx["gs_porcentaje_ingresos_propios_respecto_total"] = _fmt(pct_act)
+        ctx["gs_posicion_nivel_estado_ingresos_per_capita_porcentaje"] = (
+            rank_pct_act.get(cvegeo_objetivo, ND)
+        )
+        pc_act = per_capita(mun_act)
+        ctx["gs_valor_ingresos_per_capita"] = _fmt(pc_act) if pc_act else ND
+        ctx["gs_posicion_estatal_ingreso_per_capita"] = rank_pc_act.get(
+            cvegeo_objetivo, ND
+        )
+    else:
+        ctx["gs_porcentaje_ingresos_propios_respecto_total"] = ND
+        ctx["gs_posicion_nivel_estado_ingresos_per_capita_porcentaje"] = ND
+        ctx["gs_valor_ingresos_per_capita"] = ND
+        ctx["gs_posicion_estatal_ingreso_per_capita"] = ND
+
+    if mun_ant and mun_ant["total"]:
+        pct_ant = pct_propios(mun_ant)
+        ctx["gs_anio_anterior_porcentaje_ingresos_propios_respecto_total"] = _fmt(
+            pct_ant
+        )
+        ctx["gs_anio_anterior_posicion_nivel_estado_ingresos_per_capita"] = (
+            rank_pct_ant.get(cvegeo_objetivo, ND)
+        )
+        pc_ant = per_capita(mun_ant)
+        ctx["gs_anio_anterior_valor_ingreso_per_capita"] = (
+            _fmt(pc_ant) if pc_ant else ND
+        )
+        ctx["gs_posicion_anio_anterior_ingreso_percapita"] = rank_pc_ant.get(
+            cvegeo_objetivo, ND
+        )
+    else:
+        ctx["gs_anio_anterior_porcentaje_ingresos_propios_respecto_total"] = ND
+        ctx["gs_anio_anterior_posicion_nivel_estado_ingresos_per_capita"] = ND
+        ctx["gs_anio_anterior_valor_ingreso_per_capita"] = ND
+        ctx["gs_posicion_anio_anterior_ingreso_percapita"] = ND
+
+    region_munis = get_same_region(municipio_id)
+    table_rows = []
+    for m in sorted(region_munis, key=lambda x: int(x["id"])):
+        mid = int(m["id"])
+        cvegeo = f"14{mid:03d}"
+        row = {
+            "clave": m["id"],
+            "municipio": m["municipio"],
+            "es_objetivo": cvegeo == cvegeo_objetivo,
+        }
+
+        for anio, suffix, rank_pct, rank_pc in [
+            (anio_anterior_efipem, "ant", rank_pct_ant, rank_pc_ant),
+            (anio_efipem, "act", rank_pct_act, rank_pc_act),
+        ]:
+            entry = data.get((cvegeo, anio))
+            if entry and entry["total"]:
+                pct = pct_propios(entry)
+                pc = per_capita(entry)
+                row[f"pct_ing_{suffix}"] = _fmt(pct) if pct is not None else ND
+                row[f"pos_ing_{suffix}"] = rank_pct.get(cvegeo, ND)
+                row[f"pc_{suffix}"] = _fmt(pc) if pc is not None else ND
+                row[f"pos_pc_{suffix}"] = rank_pc.get(cvegeo, ND)
+            else:
+                row[f"pct_ing_{suffix}"] = ND
+                row[f"pos_ing_{suffix}"] = ND
+                row[f"pc_{suffix}"] = ND
+                row[f"pos_pc_{suffix}"] = ND
+
+        table_rows.append(row)
+    table_rows.sort(key=lambda r: (0 if r["es_objetivo"] else 1, r["clave"]))
+
+    ctx["gs_tabla_ingresos"] = table_rows
+    return ctx
 
 
 def _process_incidencia(carpetas_por_mes, casos_bien_afectado, casos_por_delito):
@@ -312,19 +428,30 @@ class Analizer(Stage):
         participacion_ctx = _process_participacion(participacion, mun_id)
         ctx.update(participacion_ctx)
 
-        ctx["gs_anio_efipem"] = 2023
-        ctx["gs_anio_anterior_efipem"] = 2022
-        ctx["gs_anio_anterior_porcentaje_ingresos_per_capita"] = 2022
-        ctx["gs_anio_anterior_ingreso_per_capita"] = 2022
-        ctx["gs_porcentaje_ingresos_propios_respecto_total"] = ND
-        ctx["gs_posicion_nivel_estado_ingresos_per_capita_porcentaje"] = ND
-        ctx["gs_anio_anterior_porcentaje_ingresos_propios_respecto_total"] = ND
-        ctx["gs_anio_anterior_posicion_nivel_estado_ingresos_per_capita"] = ND
-        ctx["gs_valor_ingresos_per_capita"] = ND
-        ctx["gs_posicion_estatal_ingreso_per_capita"] = ND
-        ctx["gs_anio_anterior_valor_ingreso_per_capita"] = ND
-        ctx["gs_posicion_anio_anterior_ingreso_percapita"] = ND
-        ctx["gs_tabla_ingresos"] = _build_ingresos_table(mun_id)
+        ingresos_raw = input_data.get("ingresos_raw", [])
+        poblacion = input_data.get("poblacion", [])
+        anio_efipem = input_data.get("anio_efipem")
+        anio_anterior_efipem = input_data.get("anio_anterior_efipem")
+
+        ingresos_ctx = _process_ingresos(
+            ingresos_raw, poblacion, mun_id, anio_efipem, anio_anterior_efipem
+        )
+        if ingresos_ctx:
+            ctx.update(ingresos_ctx)
+        else:
+            ctx["gs_anio_efipem"] = ND
+            ctx["gs_anio_anterior_efipem"] = ND
+            ctx["gs_anio_anterior_porcentaje_ingresos_per_capita"] = ND
+            ctx["gs_anio_anterior_ingreso_per_capita"] = ND
+            ctx["gs_porcentaje_ingresos_propios_respecto_total"] = ND
+            ctx["gs_posicion_nivel_estado_ingresos_per_capita_porcentaje"] = ND
+            ctx["gs_anio_anterior_porcentaje_ingresos_propios_respecto_total"] = ND
+            ctx["gs_anio_anterior_posicion_nivel_estado_ingresos_per_capita"] = ND
+            ctx["gs_valor_ingresos_per_capita"] = ND
+            ctx["gs_posicion_estatal_ingreso_per_capita"] = ND
+            ctx["gs_anio_anterior_valor_ingreso_per_capita"] = ND
+            ctx["gs_posicion_anio_anterior_ingreso_percapita"] = ND
+            ctx["gs_tabla_ingresos"] = []
 
         incidencia_ctx = _process_incidencia(
             carpetas_por_mes, casos_bien_afectado, casos_por_delito
