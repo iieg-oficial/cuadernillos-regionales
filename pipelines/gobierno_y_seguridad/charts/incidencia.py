@@ -135,9 +135,10 @@ def grafica_bienes_juridicos(
     valores = [d["pct"] for d in datos]
     colores = COLORES_BIENES[: len(datos)]
 
-    fig, ax = plt.subplots(figsize=(10, 5.5))
+    fig, ax = plt.subplots(figsize=(8, 8))
     ax.set_xlim(0, 100)
     ax.set_ylim(0, 100)
+    ax.set_aspect("equal")
 
     squarify.plot(
         sizes=valores,
