@@ -145,7 +145,7 @@ def grafica_bienes_juridicos(
         color=colores,
         alpha=1.0,
         ax=ax,
-        pad=2,
+        pad=False,
     )
 
     rects = [
