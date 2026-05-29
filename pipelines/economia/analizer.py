@@ -446,9 +446,11 @@ class Analizer(Stage):
             if mun_t1:
                 var_anual = (mun_t0 - mun_t1) / mun_t1 * 100
                 ctx["ec_porcentaje_variacion_asegurados"] = _pct(var_anual)
+                ctx["ec_var_pct_total_imss"] = _fmt(var_anual)
                 ctx["ec_total_var_nominal_imss"] = _fmt_int(mun_t0 - mun_t1)
             else:
                 ctx["ec_porcentaje_variacion_asegurados"] = ND
+                ctx["ec_var_pct_total_imss"] = ND
                 ctx["ec_total_var_nominal_imss"] = ND
 
             ctx["ec_tabla_imss_grupos"] = _build_imss_grupos(imss_divisiones, mun_t0)
@@ -485,6 +487,9 @@ class Analizer(Stage):
             ctx["ec_porcentaje_asegurados_region"] = (
                 _pct(mun_t0 / region_total * 100) if region_total else ND
             )
+            ctx["ec_pct_asegurados_region_tabla"] = (
+                _fmt(mun_t0 / region_total * 100) if region_total else ND
+            )
 
             region_names = {
                 14000 + int(m["id"]): m["municipio"]
@@ -504,12 +509,13 @@ class Analizer(Stage):
             )
             if mun_region_t1:
                 ctx["ec_var_nominal_imss"] = _fmt_int(mun_t0 - mun_region_t1)
-                ctx["ec_var_pct_imss"] = _pct(
-                    (mun_t0 - mun_region_t1) / mun_region_t1 * 100
-                )
+                var_pct_region = (mun_t0 - mun_region_t1) / mun_region_t1 * 100
+                ctx["ec_var_pct_imss"] = _pct(var_pct_region)
+                ctx["ec_var_pct_imss_tabla"] = _fmt(var_pct_region)
             else:
                 ctx["ec_var_nominal_imss"] = ND
                 ctx["ec_var_pct_imss"] = ND
+                ctx["ec_var_pct_imss_tabla"] = ND
         else:
             ctx["ec_mes_corte_imss"] = ND
             ctx["ec_anio_corte_imss"] = ND
@@ -520,6 +526,7 @@ class Analizer(Stage):
             ctx["ec_total_trabajadores_imss_t2"] = ND
             ctx["ec_porcentaje_trabajadores_asegurados_jalisco"] = ND
             ctx["ec_porcentaje_variacion_asegurados"] = ND
+            ctx["ec_var_pct_total_imss"] = ND
             ctx["ec_total_var_nominal_imss"] = ND
             ctx["ec_grupo_ec_con_mas_empleos"] = ND
             ctx["ec_num_trabajadores_grupo_mayor"] = ND
@@ -527,10 +534,12 @@ class Analizer(Stage):
             ctx["ec_tabla_imss_grupos"] = []
             ctx["ec_posicion_municipio_region"] = ND
             ctx["ec_porcentaje_asegurados_region"] = ND
+            ctx["ec_pct_asegurados_region_tabla"] = ND
             ctx["ec_tabla_imss_region"] = []
             ctx["ec_trabajadores_imss_t1"] = ND
             ctx["ec_var_nominal_imss"] = ND
             ctx["ec_var_pct_imss"] = ND
+            ctx["ec_var_pct_imss_tabla"] = ND
 
         anio_agricola = input_data.get("anio_agricola")
         agricola_anual = input_data.get("agricola_anual", [])
