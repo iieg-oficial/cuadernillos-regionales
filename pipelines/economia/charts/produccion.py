@@ -3,9 +3,8 @@ from pathlib import Path
 import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
 
-COLOR_SECCION = "#5C2472"
-COLOR_GRIS = "#B0B0B0"
-COLOR_TEXTO = "#465055"
+from core.constants import COLOR_GRIS, COLOR_SECCION, COLOR_TEXTO
+
 N_ANIOS = 6
 
 
