@@ -30,7 +30,7 @@ def grafica_produccion(
         ax.text(
             bar.get_x() + bar.get_width() / 2,
             bar.get_height(),
-            f"{val:,.2f}",
+            f"{val:,.2f}".replace(",", " "),
             ha="center",
             va="bottom",
             fontsize=10,
@@ -40,7 +40,9 @@ def grafica_produccion(
 
     ax.set_xlabel("Año", fontsize=11, color=COLOR_TEXTO)
     ax.set_ylabel("Valor de la producción", fontsize=11, color=COLOR_TEXTO)
-    ax.yaxis.set_major_formatter(ticker.FuncFormatter(lambda x, _: f"{x:,.0f}"))
+    ax.yaxis.set_major_formatter(
+        ticker.FuncFormatter(lambda x, _: f"{x:,.0f}".replace(",", " "))
+    )
     ax.set_ylim(0, max(valores) * 1.15)
 
     ax.spines["top"].set_visible(False)
