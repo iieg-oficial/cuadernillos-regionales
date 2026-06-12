@@ -84,9 +84,9 @@ def grafica_carpetas_por_mes(
         zorder=1,
     )
     ax.text(
-        len(etiquetas) - 1,
+        len(etiquetas) - 0.5,
         media,
-        media_label,
+        f"  {media_label}",
         ha="left",
         va="bottom",
         fontsize=8,
@@ -160,7 +160,16 @@ def grafica_bienes_juridicos(
         x = rect.get_x() + rect.get_width() / 2
         y = rect.get_y() + rect.get_height() / 2
         pct_text = f"{dato['pct']:.1f} %"
-        fontsize = 14 if dato["pct"] > 15 else 10 if dato["pct"] > 5 else 7
+        rw = rect.get_width()
+        rh = rect.get_height()
+        if rw < 5 or rh < 4:
+            fontsize = 5
+        elif dato["pct"] > 15:
+            fontsize = 14
+        elif dato["pct"] > 5:
+            fontsize = 10
+        else:
+            fontsize = 7
         ax.text(
             x,
             y,
@@ -177,7 +186,7 @@ def grafica_bienes_juridicos(
         handles,
         nombres,
         loc="lower center",
-        bbox_to_anchor=(0.5, -0.15),
+        bbox_to_anchor=(0.5, -0.11),
         ncol=3,
         fontsize=8,
         frameon=False,
