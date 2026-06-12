@@ -10,7 +10,7 @@ def filter_region(munis: list[dict], municipio_id: str) -> list[dict]:
     )
 
     for row in region:
-        row["clave"] = str(int(row["cvegeo"][2:]))
+        row["clave"] = row["cvegeo"]
         row["es_objetivo"] = row["cvegeo"] == cvegeo_objetivo
 
     return region

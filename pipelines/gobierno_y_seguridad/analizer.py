@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from core.constants import ND
+from core.constants import DASH, ND
 from core.pipelines.stage import Stage
 from core.utils.logger import Logger
 from core.utils.municipalities import get_same_region
@@ -122,7 +122,7 @@ def _process_participacion(participacion, municipio_id):
     for m in sorted(region_munis, key=lambda x: int(x["id"])):
         mid = int(m["id"])
         row = {
-            "clave": m["id"],
+            "clave": f"14{mid:03d}",
             "municipio": m["municipio"],
             "es_objetivo": mid == cve_mun,
         }
@@ -212,18 +212,18 @@ def _process_ingresos(
         pct_act = pct_propios(mun_act)
         ctx["gs_porcentaje_ingresos_propios_respecto_total"] = _fmt(pct_act)
         ctx["gs_posicion_nivel_estado_ingresos_per_capita_porcentaje"] = (
-            rank_pct_act.get(cvegeo_objetivo, ND)
+            rank_pct_act.get(cvegeo_objetivo, DASH)
         )
         pc_act = per_capita(mun_act)
-        ctx["gs_valor_ingresos_per_capita"] = _fmt(pc_act) if pc_act else ND
+        ctx["gs_valor_ingresos_per_capita"] = _fmt(pc_act) if pc_act else DASH
         ctx["gs_posicion_estatal_ingreso_per_capita"] = rank_pc_act.get(
-            cvegeo_objetivo, ND
+            cvegeo_objetivo, DASH
         )
     else:
-        ctx["gs_porcentaje_ingresos_propios_respecto_total"] = ND
-        ctx["gs_posicion_nivel_estado_ingresos_per_capita_porcentaje"] = ND
-        ctx["gs_valor_ingresos_per_capita"] = ND
-        ctx["gs_posicion_estatal_ingreso_per_capita"] = ND
+        ctx["gs_porcentaje_ingresos_propios_respecto_total"] = DASH
+        ctx["gs_posicion_nivel_estado_ingresos_per_capita_porcentaje"] = DASH
+        ctx["gs_valor_ingresos_per_capita"] = DASH
+        ctx["gs_posicion_estatal_ingreso_per_capita"] = DASH
 
     if mun_ant and mun_ant["total"]:
         pct_ant = pct_propios(mun_ant)
@@ -231,20 +231,20 @@ def _process_ingresos(
             pct_ant
         )
         ctx["gs_anio_anterior_posicion_nivel_estado_ingresos_per_capita"] = (
-            rank_pct_ant.get(cvegeo_objetivo, ND)
+            rank_pct_ant.get(cvegeo_objetivo, DASH)
         )
         pc_ant = per_capita(mun_ant)
         ctx["gs_anio_anterior_valor_ingreso_per_capita"] = (
-            _fmt(pc_ant) if pc_ant else ND
+            _fmt(pc_ant) if pc_ant else DASH
         )
         ctx["gs_posicion_anio_anterior_ingreso_percapita"] = rank_pc_ant.get(
-            cvegeo_objetivo, ND
+            cvegeo_objetivo, DASH
         )
     else:
-        ctx["gs_anio_anterior_porcentaje_ingresos_propios_respecto_total"] = ND
-        ctx["gs_anio_anterior_posicion_nivel_estado_ingresos_per_capita"] = ND
-        ctx["gs_anio_anterior_valor_ingreso_per_capita"] = ND
-        ctx["gs_posicion_anio_anterior_ingreso_percapita"] = ND
+        ctx["gs_anio_anterior_porcentaje_ingresos_propios_respecto_total"] = DASH
+        ctx["gs_anio_anterior_posicion_nivel_estado_ingresos_per_capita"] = DASH
+        ctx["gs_anio_anterior_valor_ingreso_per_capita"] = DASH
+        ctx["gs_posicion_anio_anterior_ingreso_percapita"] = DASH
 
     region_munis = get_same_region(municipio_id)
     table_rows = []
@@ -252,7 +252,7 @@ def _process_ingresos(
         mid = int(m["id"])
         cvegeo = f"14{mid:03d}"
         row = {
-            "clave": m["id"],
+            "clave": cvegeo,
             "municipio": m["municipio"],
             "es_objetivo": cvegeo == cvegeo_objetivo,
         }
@@ -265,15 +265,15 @@ def _process_ingresos(
             if entry and entry["total"]:
                 pct = pct_propios(entry)
                 pc = per_capita(entry)
-                row[f"pct_ing_{suffix}"] = _fmt(pct) if pct is not None else ND
-                row[f"pos_ing_{suffix}"] = rank_pct.get(cvegeo, ND)
-                row[f"pc_{suffix}"] = _fmt(pc) if pc is not None else ND
-                row[f"pos_pc_{suffix}"] = rank_pc.get(cvegeo, ND)
+                row[f"pct_ing_{suffix}"] = _fmt(pct) if pct is not None else DASH
+                row[f"pos_ing_{suffix}"] = rank_pct.get(cvegeo, DASH)
+                row[f"pc_{suffix}"] = _fmt(pc) if pc is not None else DASH
+                row[f"pos_pc_{suffix}"] = rank_pc.get(cvegeo, DASH)
             else:
-                row[f"pct_ing_{suffix}"] = ND
-                row[f"pos_ing_{suffix}"] = ND
-                row[f"pc_{suffix}"] = ND
-                row[f"pos_pc_{suffix}"] = ND
+                row[f"pct_ing_{suffix}"] = DASH
+                row[f"pos_ing_{suffix}"] = DASH
+                row[f"pc_{suffix}"] = DASH
+                row[f"pos_pc_{suffix}"] = DASH
 
         table_rows.append(row)
     table_rows.sort(key=lambda r: (0 if r["es_objetivo"] else 1, r["clave"]))
@@ -419,8 +419,6 @@ class Analizer(Stage):
         ctx["gs_municipio_clave"] = cvegeo_objetivo
         ctx["gs_anio_anterior"] = anio_anterior
         ctx["gs_anio_actual"] = anio_actual
-        ctx["gs_tabla_delitos"] = region
-
         ctx["gs_anio_acumulado_seguridad"] = anio_actual
         ctx["gs_anio_anterior_acumulado_seguridad"] = anio_anterior
         ctx["gs_anio_pasado_seguridad"] = anio_anterior
@@ -435,7 +433,14 @@ class Analizer(Stage):
             )
             ctx["gs_variacion_porcentual_seguridad"] = _fmt(mun_data["variacion"])
             ctx["gs_posicion_variacion_seguridad"] = mun_data.get("lugar_variacion", ND)
-        else:
+
+        for row in region:
+            row["valor_anterior"] = _fmt(row["valor_anterior"])
+            row["valor_actual"] = _fmt(row["valor_actual"])
+            row["variacion"] = _fmt(row["variacion"])
+        ctx["gs_tabla_delitos"] = region
+
+        if not mun_data:
             ctx["gs_tasa_delitos"] = ND
             ctx["gs_posicion_estado_delitos"] = ND
             ctx["gs_tasa_delitos_anio_anterior"] = ND
@@ -487,7 +492,8 @@ class Analizer(Stage):
             p_ini = sorted_carp[0]
             p_fin = sorted_carp[-1]
             periodo = (
-                f"{nombre} {MESES[p_ini['mes']]} {p_ini['anio']} "
+                f"en el municipio de {nombre} desde "
+                f"{MESES[p_ini['mes']]} {p_ini['anio']} "
                 f"a {MESES[p_fin['mes']]} {p_fin['anio']}"
             )
 
