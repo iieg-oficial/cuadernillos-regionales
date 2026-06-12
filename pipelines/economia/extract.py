@@ -1,3 +1,6 @@
+import json
+from pathlib import Path
+
 from core.db import get_session
 from core.pipelines.stage import Stage
 from core.settings import DatabaseSettings
@@ -13,7 +16,6 @@ from pipelines.economia.queries.censos_economicos import (
     get_vacb_total,
 )
 from pipelines.economia.queries.denue import (
-    get_nombre_municipio,
     get_ranking_y_total_estatal,
     get_ultima_actualizacion,
     get_unidades_por_sector_y_rango,
@@ -36,6 +38,19 @@ from pipelines.economia.queries.imss import (
 ANIO_CE = 2024
 ANIO_CE_ANTERIOR = 2019
 
+REGIONS_PATH = Path("assets/catalogs/regions.json")
+
+
+def _get_nombre_municipio(cve_mun: int) -> str:
+    with REGIONS_PATH.open() as f:
+        data = json.load(f)
+    for region in data:
+        for muns in region.values():
+            for m in muns:
+                if str(m["id"]) == str(cve_mun):
+                    return m["municipio"]
+    return str(cve_mun)
+
 
 class Extract(Stage):
     def execute(self, input_data: str = None) -> dict:
@@ -43,7 +58,7 @@ class Extract(Stage):
 
         Logger.info("Economía: conectando a bases de datos")
 
-        nombre = None
+        nombre = _get_nombre_municipio(cve_mun)
         ultima_act = None
         unidades_sector_rango = []
         total_estatal_denue = 0
@@ -53,7 +68,6 @@ class Extract(Stage):
             Logger.info("Economía: extrayendo datos del DENUE")
             denue = DatabaseSettings.from_env("denue")
             with get_session(denue) as session:
-                nombre = get_nombre_municipio(session, cve_mun)
                 act_row = get_ultima_actualizacion(session)
                 if act_row:
                     ultima_act = act_row.fecha_actualizacion

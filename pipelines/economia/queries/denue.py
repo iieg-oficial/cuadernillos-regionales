@@ -2,17 +2,6 @@ from sqlalchemy import text
 from sqlalchemy.orm import Session
 
 
-def get_nombre_municipio(session: Session, cve_mun: int) -> str:
-    stmt = text("""
-        SELECT m.nomgeo
-        FROM cvegeo_municipalities m
-        WHERE m.cve_mun = :cve_mun AND m.cve_ent = 14
-        LIMIT 1
-    """)
-    row = session.execute(stmt, {"cve_mun": cve_mun}).fetchone()
-    return row.nomgeo if row else str(cve_mun)
-
-
 def get_ultima_actualizacion(session: Session):
     stmt = text("""
         SELECT id, fecha_actualizacion
@@ -28,13 +17,12 @@ def get_unidades_por_sector_y_rango(session: Session, cve_mun: int, act_id: int)
     stmt = text("""
         SELECT s.sector, rp.descripcion AS rango_personal, rp.id AS rango_id,
                COUNT(*) AS total
-        FROM stg_establecimientos e
+        FROM stg_est_jal e
         JOIN cat_localidades l ON e.localidad_id = l.id
         JOIN cat_sectores s ON e.sector_id = s.id
         JOIN cat_rangos_personal rp ON e.rango_personal_id = rp.id
         WHERE e.actualizacion_id = :act_id
           AND l.municipio_id = :cve_mun
-          AND l.entidad_id = 14
         GROUP BY s.sector, rp.descripcion, rp.id
         ORDER BY s.sector, rp.id
     """)
@@ -55,10 +43,9 @@ def get_ranking_y_total_estatal(session: Session, cve_mun: int, act_id: int):
             SELECT
                 l.municipio_id,
                 COUNT(*) AS total
-            FROM stg_establecimientos e
+            FROM stg_est_jal e
             JOIN cat_localidades l ON e.localidad_id = l.id
             WHERE e.actualizacion_id = :act_id
-              AND l.entidad_id = 14
             GROUP BY l.municipio_id
         ),
         ranked AS (
