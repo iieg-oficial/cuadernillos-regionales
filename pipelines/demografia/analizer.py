@@ -755,10 +755,10 @@ class Analizer(Stage):
             (r for r in pobreza_por_entidad_2020 if r["cve_ent"] == "14"), None
         )
         ctx["de_pobreza_jal_pct"] = (
-            _pct(jal_ent["pobreza_porcentaje"]) if jal_ent else ND
+            _fmt(jal_ent["pobreza_porcentaje"]) if jal_ent else ND
         )
         ctx["de_pobreza_jal_ext_pct"] = (
-            _pct(jal_ent["pobreza_ext_porcentaje"]) if jal_ent else ND
+            _fmt(jal_ent["pobreza_ext_porcentaje"]) if jal_ent else ND
         )
         ctx["de_ranking_pobreza_jal"] = ent_pob_rank.get("14", ND)
         ctx["de_ranking_pobreza_ext_jal"] = ent_pob_ext_rank.get("14", ND)
@@ -818,11 +818,11 @@ class Analizer(Stage):
                 "lugar_migracion": iim_by_mun.get(14000 + rid, {}).get(
                     "lugar_entidad", ND
                 ),
-                "pobreza_pct": _pct(
+                "pobreza_pct": _fmt(
                     pob_by_cve.get(f"14{int(rid):03d}", {}).get("pobreza_porcentaje")
                 ),
                 "pobreza_lugar": pob_rank.get(f"14{int(rid):03d}", ND),
-                "pobreza_ext_pct": _pct(
+                "pobreza_ext_pct": _fmt(
                     pob_by_cve.get(f"14{int(rid):03d}", {}).get(
                         "pobreza_ext_porcentaje"
                     )
@@ -835,6 +835,12 @@ class Analizer(Stage):
 
         ctx["de_porcentaje_pobreza"] = _get_field(
             pobreza_2020, "pobreza_porcentaje", _pct
+        )
+        ctx["de_tabla_pobreza_pct"] = _get_field(
+            pobreza_2020, "pobreza_porcentaje", _fmt
+        )
+        ctx["de_tabla_pobreza_ext_pct"] = _get_field(
+            pobreza_2020, "pobreza_ext_porcentaje", _fmt
         )
         ctx["de_poblacion_pobreza"] = _get_field(
             pobreza_2020, "pobreza_personas", _fmt_int
