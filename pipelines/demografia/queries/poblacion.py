@@ -39,11 +39,12 @@ def get_totales_municipio(session: Session, cve_mun: int) -> dict[int, dict]:
 
 def get_total_estatal(session: Session, anio: int) -> int | None:
     stmt = text("""
-        SELECT SUM(p.total)
+        SELECT p.total
         FROM poblacion p
         JOIN fuentes f ON f.id = p.fuente_id
         WHERE p.entidad_id = 14
           AND p.localidad_id IS NULL
+          AND p.municipio_id = 0
           AND f.fecha = :anio
     """)
     row = session.execute(stmt, {"anio": anio}).fetchone()
