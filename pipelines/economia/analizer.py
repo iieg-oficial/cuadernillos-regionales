@@ -123,7 +123,7 @@ def _top_sectores(sector_data, grand_total):
     return result
 
 
-def _build_vacb_table(vacb_actual, vacb_anterior, vacb_total_actual):
+def _build_vacb_table(vacb_actual, vacb_anterior, vacb_total_actual, factor):
     anterior_by_codigo = {r["codigo"]: r["vacb"] for r in vacb_anterior}
 
     top_actual = vacb_actual[:9]
@@ -131,11 +131,11 @@ def _build_vacb_table(vacb_actual, vacb_anterior, vacb_total_actual):
     for r in top_actual:
         sub = r["subsector"]
         vact = r["vacb"]
+        vact_real = vact * factor if (vact is not None and factor) else None
         vant = anterior_by_codigo.get(r["codigo"])
         pct_part = _fmt(vact / vacb_total_actual * 100) if vacb_total_actual else ND
-        if vant and vact is not None:
-            var = (vact - vant) / vant * 100
-            var_str = _fmt(var)
+        if vant and vact_real is not None:
+            var_str = _fmt((vact_real - vant) / vant * 100)
         else:
             var_str = DASH
         rows.append(
@@ -143,6 +143,7 @@ def _build_vacb_table(vacb_actual, vacb_anterior, vacb_total_actual):
                 "subsector": sub,
                 "vacb_anterior": _fmt(vant, 2) if vant else _fmt(0),
                 "vacb_actual": _fmt(vact, 2) if vact else ND,
+                "vacb_real": _fmt(vact_real, 2) if vact_real is not None else ND,
                 "pct_part": pct_part,
                 "var_pct": var_str,
             }
@@ -150,6 +151,7 @@ def _build_vacb_table(vacb_actual, vacb_anterior, vacb_total_actual):
 
     if len(vacb_actual) > 9:
         otros_act = sum(r["vacb"] for r in vacb_actual[9:] if r["vacb"])
+        otros_act_real = otros_act * factor if factor else None
         top9_codigos = {x["codigo"] for x in vacb_actual[:9]}
         otros_ant = sum(
             r["vacb"]
@@ -159,8 +161,8 @@ def _build_vacb_table(vacb_actual, vacb_anterior, vacb_total_actual):
         pct_otros = (
             _fmt(otros_act / vacb_total_actual * 100) if vacb_total_actual else ND
         )
-        if otros_ant and otros_act:
-            var_otros = _fmt((otros_act - otros_ant) / otros_ant * 100)
+        if otros_ant and otros_act_real:
+            var_otros = _fmt((otros_act_real - otros_ant) / otros_ant * 100)
         else:
             var_otros = DASH
         rows.append(
@@ -168,6 +170,9 @@ def _build_vacb_table(vacb_actual, vacb_anterior, vacb_total_actual):
                 "subsector": "Otros",
                 "vacb_anterior": _fmt(otros_ant, 2) if otros_ant else _fmt(0),
                 "vacb_actual": _fmt(otros_act, 2) if otros_act else ND,
+                "vacb_real": _fmt(otros_act_real, 2)
+                if otros_act_real is not None
+                else ND,
                 "pct_part": pct_otros,
                 "var_pct": var_otros,
             }
@@ -264,6 +269,15 @@ class Analizer(Stage):
         vacb_anterior = input_data["vacb_anterior"]
         vacb_total_actual = input_data["vacb_total_actual"]
         vacb_total_anterior = input_data["vacb_total_anterior"]
+        inpc_promedio_actual = input_data.get("inpc_promedio_actual")
+        factor_deflactacion = (
+            100 / inpc_promedio_actual if inpc_promedio_actual else None
+        )
+        vacb_total_actual_real = (
+            vacb_total_actual * factor_deflactacion
+            if (vacb_total_actual and factor_deflactacion)
+            else None
+        )
 
         ctx = {}
 
@@ -286,7 +300,7 @@ class Analizer(Stage):
             ][ultima_act.month - 1]
             ctx["ec_mes_denue_numero_empresas"] = mes_nombre
             ctx["ec_anio_denue"] = ultima_act.year
-            ctx["ec_anio_pasado_denue"] = ultima_act.year
+            ctx["ec_anio_pasado_denue"] = ultima_act.year - 1
         else:
             ctx["ec_mes_denue_numero_empresas"] = ND
             ctx["ec_anio_denue"] = ND
@@ -308,11 +322,11 @@ class Analizer(Stage):
         )
 
         top3 = _top_sectores(sector_data, grand_total)
-        ctx["ec_sector_mayor_unidades"] = top3[0]["sector"]
+        ctx["ec_sector_mayor_unidades"] = top3[0]["sector"].lower()
         ctx["ec_porcentaje_sector_mayor_unidades"] = top3[0]["pct"]
-        ctx["ec_sector_segundo_unidades"] = top3[1]["sector"]
+        ctx["ec_sector_segundo_unidades"] = top3[1]["sector"].lower()
         ctx["ec_porcentaje_sector_segundo_unidades"] = top3[1]["pct"]
-        ctx["ec_sector_tercer_unidades"] = top3[2]["sector"]
+        ctx["ec_sector_tercer_unidades"] = top3[2]["sector"].lower()
         ctx["ec_porcentaje_sector_tercer_unidades"] = top3[2]["pct"]
 
         totales_rango = {k: 0 for k in RANGO_KEYS}
@@ -327,14 +341,16 @@ class Analizer(Stage):
         ctx["ec_denue_total_r101a250"] = _fmt_int(totales_rango["r101a250"])
         ctx["ec_denue_total_r251mas"] = _fmt_int(totales_rango["r251mas"])
 
-        ctx["ec_anio_ce"] = anio_ce
-        ctx["ec_anio_ce_anterior"] = anio_ce_anterior
-        ctx["ec_anio_publicacion_ce"] = anio_ce + 1
-        ctx["ec_anio_publicacion_ce_anterior"] = anio_ce_anterior + 1
+        ctx["ec_anio_ce"] = anio_ce - 1
+        ctx["ec_anio_ce_anterior"] = anio_ce_anterior - 1
+        ctx["ec_anio_publicacion_ce"] = anio_ce
+        ctx["ec_anio_publicacion_ce_anterior"] = anio_ce_anterior
 
-        if vacb_total_actual and vacb_total_anterior:
+        if vacb_total_actual_real and vacb_total_anterior:
             var_vacb = (
-                (vacb_total_actual - vacb_total_anterior) / vacb_total_anterior * 100
+                (vacb_total_actual_real - vacb_total_anterior)
+                / vacb_total_anterior
+                * 100
             )
             ctx["ec_variacion_valor_agregado_censal"] = _pct(var_vacb)
             ctx["ec_variacion_vacb_total"] = _fmt(var_vacb)
@@ -344,13 +360,13 @@ class Analizer(Stage):
 
         top3_vacb = vacb_actual[:3] if len(vacb_actual) >= 3 else vacb_actual
         ctx["ec_subsector_primer_lugar"] = (
-            top3_vacb[0]["subsector"] if len(top3_vacb) > 0 else ND
+            top3_vacb[0]["subsector"].lower() if len(top3_vacb) > 0 else ND
         )
         ctx["ec_subsector_segundo_lugar"] = (
-            top3_vacb[1]["subsector"] if len(top3_vacb) > 1 else ND
+            top3_vacb[1]["subsector"].lower() if len(top3_vacb) > 1 else ND
         )
         ctx["ec_subsector_tercer_lugar"] = (
-            top3_vacb[2]["subsector"] if len(top3_vacb) > 2 else ND
+            top3_vacb[2]["subsector"].lower() if len(top3_vacb) > 2 else ND
         )
 
         if len(top3_vacb) >= 3 and vacb_total_actual:
@@ -368,23 +384,31 @@ class Analizer(Stage):
         mayor_tasa = None
         for r in vacb_actual:
             vact = r["vacb"]
+            vact_real = (
+                vact * factor_deflactacion if (vact and factor_deflactacion) else None
+            )
             vant = anterior_by_codigo2.get(r["codigo"])
-            if vact and vant:
-                tasa = (vact - vant) / vant * 100
+            if vact_real and vant:
+                tasa = (vact_real - vant) / vant * 100
                 if mayor_tasa is None or tasa > mayor_tasa:
                     mayor_tasa = tasa
                     mayor_crecimiento = r
 
         if mayor_crecimiento:
-            sub_mc = mayor_crecimiento["subsector"]
+            sub_mc = mayor_crecimiento["subsector"].lower()
             vact_mc = mayor_crecimiento["vacb"]
+            vact_mc_real = (
+                vact_mc * factor_deflactacion
+                if (vact_mc and factor_deflactacion)
+                else None
+            )
             vant_mc = anterior_by_codigo2.get(mayor_crecimiento["codigo"])
             ctx["ec_subsector_mayor_crecimiento"] = sub_mc
             ctx["ec_aportacion_anterior_subsector_mayor_crecimiento"] = (
                 _fmt(vant_mc, 2) if vant_mc else ND
             )
             ctx["ec_aportacion_subsector_mayor_crecimiento"] = (
-                _fmt(vact_mc, 2) if vact_mc else ND
+                _fmt(vact_mc_real, 2) if vact_mc_real is not None else ND
             )
             ctx["ec_variacion_porcentual_aportacion_subsector_mayor_crecimiento"] = (
                 _pct(mayor_tasa) if mayor_tasa is not None else ND
@@ -396,7 +420,12 @@ class Analizer(Stage):
             ctx["ec_variacion_porcentual_aportacion_subsector_mayor_crecimiento"] = ND
 
         ctx["ec_tabla_vacb"] = _build_vacb_table(
-            vacb_actual, vacb_anterior, vacb_total_actual
+            vacb_actual, vacb_anterior, vacb_total_actual, factor_deflactacion
+        )
+        ctx["ec_vacb_total_real"] = (
+            _fmt(vacb_total_actual_real, 2)
+            if vacb_total_actual_real is not None
+            else ND
         )
         ctx["ec_vacb_total_anterior"] = (
             _fmt(vacb_total_anterior, 2) if vacb_total_anterior else ND

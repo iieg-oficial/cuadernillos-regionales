@@ -25,14 +25,13 @@ del Directorio Estadístico Nacional de Unidades Económicas (DENUE) de INEGI, e
 << ec_municipio_nombre >> contaba en << ec_anio_pasado_denue >> con
 << ec_unidades_economicas >> unidades económicas, lo que representó el
 << ec_porcentaje_unidades_economicas >>  del total de unidades económicas a nivel estatal,
-ocupando el lugar << ec_posicion_municipio_establecimientos >> en cuanto a municipios
-con más número de establecimientos.
+ocupando el lugar << ec_posicion_municipio_establecimientos >> a nivel estatal en número de establecimientos.
 
 El sector con mayor número de unidades económicas en el municipio fue
 el de << ec_sector_mayor_unidades >>, representando el << ec_porcentaje_sector_mayor_unidades >>
-del total de las unidades económicas en el municipio, seguido del sector
-<< ec_sector_segundo_unidades >> con el << ec_porcentaje_sector_segundo_unidades >> , y el
-sector << ec_sector_tercer_unidades >> con el << ec_porcentaje_sector_tercer_unidades >> .
+del total de las unidades económicas en el municipio, seguido del sector de
+<< ec_sector_segundo_unidades >> con el << ec_porcentaje_sector_segundo_unidades >>, y el
+sector de << ec_sector_tercer_unidades >> con el << ec_porcentaje_sector_tercer_unidades >>.
 
 \setlength{\tabcolsep}{3pt}
 \footnotesize
@@ -105,11 +104,8 @@ Fuente: INEGI. Directorio Estadístico Nacional de Unidades Económicas, << ec_a
 
 \subsection{Valor agregado censal bruto}
 
-El valor agregado censal bruto se define como: \guillemotleft el valor de la producción que se añade durante
-el proceso de trabajo por la actividad creadora y de transformación del personal ocupado, el
-capital y la organización (factores de la producción), ejercida sobre los materiales que se consumen en
-la realización de la actividad económica\guillemotright. En resumen, esta variable se refiere al valor de la producción
-que añade la actividad económica en su proceso productivo.
+El Valor Agregado Censal Bruto (VACB) es valor de la producción añadido durante el proceso de trabajo.
+Se calcula restando el consumo intermedio (el dinero gastado en los bienes y servicios necesarios para operar) de la producción bruta total.
 
 Conforme a la información de los Censos económicos de << ec_anio_publicacion_ce_anterior >> y de
 << ec_anio_publicacion_ce >>\footnote{Los Censos Económicos de << ec_anio_publicacion_ce_anterior >> y
@@ -118,13 +114,13 @@ un año anterior al año del censo.} que publicó el INEGI, el valor agregado ce
 << ec_municipio_nombre >> registró una variación real de << ec_variacion_valor_agregado_censal >>
 de << ec_anio_ce_anterior >> a << ec_anio_ce >>.
 En << ec_anio_ce >> los tres subsectores más importantes en la generación de valor agregado censal bruto
-en el municipio de << ec_municipio_nombre >> fueron \guillemotleft<< ec_subsector_primer_lugar >>\guillemotright,
-\guillemotleft<< ec_subsector_segundo_lugar >>\guillemotright y \guillemotleft<< ec_subsector_tercer_lugar >>\guillemotright que generaron en conjunto el
+en el municipio de << ec_municipio_nombre >> fueron el de << ec_subsector_primer_lugar >>,
+el de << ec_subsector_segundo_lugar >> y el de << ec_subsector_tercer_lugar >> que generaron en conjunto el
 << ec_porcentaje_aportacion_principales_subsectores >> o << ec_aportacion_principales_subsectores >>
-pesos del total del valor agregado censal bruto registrado en << ec_anio_ce >> en el municipio.
-El subsector de \guillemotleft<< ec_subsector_mayor_crecimiento >>\guillemotright  fue el que registró el mayor crecimiento
-real pasando << ec_aportacion_anterior_subsector_mayor_crecimiento >> pesos en
-<< ec_anio_ce_anterior >> a << ec_aportacion_subsector_mayor_crecimiento >> pesos en
+millones de pesos del total del valor agregado censal bruto registrado en << ec_anio_ce >> en el municipio.
+El subsector de << ec_subsector_mayor_crecimiento >> fue el que registró el mayor crecimiento
+real pasando de << ec_aportacion_anterior_subsector_mayor_crecimiento >> millones de pesos en
+<< ec_anio_ce_anterior >> a << ec_aportacion_subsector_mayor_crecimiento >> millones de pesos en
 << ec_anio_ce >>, representando una variación del
 << ec_variacion_porcentual_aportacion_subsector_mayor_crecimiento >> durante dicho periodo.
 
@@ -132,10 +128,11 @@ real pasando << ec_aportacion_anterior_subsector_mayor_crecimiento >> pesos en
 
 \setlength{\tabcolsep}{3pt}
 \footnotesize
-\begin{longtable}{>{\raggedright\arraybackslash}m{\dimexpr0.44\linewidth - 2\tabcolsep\relax}
-                  >{\raggedleft\arraybackslash}m{\dimexpr0.14\linewidth - 2\tabcolsep\relax}
-                  >{\raggedleft\arraybackslash}m{\dimexpr0.14\linewidth - 2\tabcolsep\relax}
-                  >{\raggedleft\arraybackslash}m{\dimexpr0.14\linewidth - 2\tabcolsep\relax}
+\begin{longtable}{>{\raggedright\arraybackslash}m{\dimexpr0.35\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.13\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.13\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.13\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.12\linewidth - 2\tabcolsep\relax}
                   >{\raggedleft\arraybackslash}m{\dimexpr0.14\linewidth - 2\tabcolsep\relax}}
 
 \caption{\textbf{Subsectores con mayor valor agregado censal bruto (VACB) en << ec_municipio_nombre >>} \\
@@ -144,38 +141,40 @@ real pasando << ec_aportacion_anterior_subsector_mayor_crecimiento >> pesos en
 
 \hline
 \rowcolor{gray!30}
-\thh{0.44}{Subsector} &
-\thhl{0.14}{<< ec_anio_ce_anterior >>} &
-\thhl{0.14}{<< ec_anio_ce >>} &
-\thhl{0.14}{Part. (\%) << ec_anio_ce >>} &
-\thhl{0.14}{Var. (\%)\newline << ec_anio_ce_anterior >>--<< ec_anio_ce >>} \\
+\thh{0.35}{Subsector} &
+\thhl{0.13}{<< ec_anio_ce_anterior >> (millones de pesos)} &
+\thhl{0.13}{<< ec_anio_ce >> nominal (millones de pesos)} &
+\thhl{0.13}{<< ec_anio_ce >> real (millones de pesos)} &
+\thhl{0.12}{Part. (\%)\newline << ec_anio_ce >>} &
+\thhl{0.14}{Var. real (\%)\newline << ec_anio_ce_anterior >>--<< ec_anio_ce >>} \\
 \hline
 \endfirsthead
 
-\multicolumn{5}{l}{\small\textbf{(continuación)}} \\
+\multicolumn{6}{l}{\small\textbf{(continuación)}} \\
 \hline
 \rowcolor{gray!30}
-\thh{0.44}{Subsector} &
-\thhl{0.14}{<< ec_anio_ce_anterior >>} &
-\thhl{0.14}{<< ec_anio_ce >>} &
-\thhl{0.14}{Part. (\%) << ec_anio_ce >>} &
-\thhl{0.14}{Var. (\%)\newline << ec_anio_ce_anterior >>--<< ec_anio_ce >>} \\
+\thh{0.35}{Subsector} &
+\thhl{0.13}{<< ec_anio_ce_anterior >> (millones de pesos)} &
+\thhl{0.13}{<< ec_anio_ce >> nominal (millones de pesos)} &
+\thhl{0.13}{<< ec_anio_ce >> real (millones de pesos)} &
+\thhl{0.12}{Part. (\%)\newline << ec_anio_ce >>} &
+\thhl{0.14}{Var. real (\%)\newline << ec_anio_ce_anterior >>--<< ec_anio_ce >>} \\
 \hline
 \endhead
 
 \hline
-\multicolumn{5}{r}{\small\textbf{(continúa)}} \\
+\multicolumn{6}{r}{\small\textbf{(continúa)}} \\
 \endfoot
 
 \hline
 \endlastfoot
 
 \rowcolor{orange!20}
-\thdr{Total} & \thdr{<< ec_vacb_total_anterior >>} & \thdr{<< ec_vacb_total_actual >>} & \thdr{100.00} & \thdr{<< ec_variacion_vacb_total >>} \\
+\thdr{Total} & \thdr{<< ec_vacb_total_anterior >>} & \thdr{<< ec_vacb_total_actual >>} & \thdr{<< ec_vacb_total_real >>} & \thdr{100.00} & \thdr{<< ec_variacion_vacb_total >>} \\
 \hline
 
 <% for fila in ec_tabla_vacb %>
-<< fila.subsector >> & << fila.vacb_anterior >> & << fila.vacb_actual >> & << fila.pct_part >> & << fila.var_pct >> \\
+<< fila.subsector >> & << fila.vacb_anterior >> & << fila.vacb_actual >> & << fila.vacb_real >> & << fila.pct_part >> & << fila.var_pct >> \\
 \hline
 <% endfor %>
 
@@ -184,7 +183,7 @@ real pasando << ec_aportacion_anterior_subsector_mayor_crecimiento >> pesos en
 \tablefooter{Nota: & El campo otros incluye subsectores con menor valor agregado censal bruto y/o subsectores agrupados por el principio de confidencialidad.\\
 Fuente: & IIEG con base en INEGI. Censos Económicos, << ec_anio_publicacion_ce_anterior >> y << ec_anio_publicacion_ce >>.\\
 & INEGI. Índice Nacional de Precios al Consumidor. Base segunda quincena Julio 2018.\\
-& Los valores de 2018 fueron ajustados teniendo como base el promedio del INPC de 2023.}
+& Los valores de << ec_anio_ce >> fueron deflactados a precios de << ec_anio_ce_anterior >> con base en el promedio anual del INPC.}
 
 \newpage
 
