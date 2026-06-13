@@ -26,6 +26,7 @@ from pipelines.economia.queries.ganaderia import (
     get_valor_produccion_ganadera_estatal,
     get_valor_produccion_ganadera_municipal,
 )
+from pipelines.economia.queries.inpc import get_inpc_promedio_anual
 from pipelines.economia.queries.imss import (
     get_asegurados_estatal,
     get_asegurados_municipio,
@@ -98,6 +99,16 @@ class Extract(Stage):
                 vacb_total_anterior = get_vacb_total(session, cve_mun, ANIO_CE_ANTERIOR)
         except Exception:
             Logger.warning("Economía: no se pudo conectar a censos económicos")
+
+        inpc_promedio_actual = None
+
+        try:
+            Logger.info("Economía: extrayendo INPC")
+            inpc = DatabaseSettings.from_env("inpc")
+            with get_session(inpc) as session:
+                inpc_promedio_actual = get_inpc_promedio_anual(session, ANIO_CE - 1)
+        except Exception:
+            Logger.warning("Economía: no se pudo conectar a INPC")
 
         agricola_anual = []
         agricola_municipal_mdp = None
@@ -185,6 +196,7 @@ class Extract(Stage):
             "vacb_anterior": vacb_anterior,
             "vacb_total_actual": vacb_total_actual,
             "vacb_total_anterior": vacb_total_anterior,
+            "inpc_promedio_actual": inpc_promedio_actual,
             "anio_agricola": anio_agricola,
             "agricola_anual": agricola_anual,
             "agricola_municipal_mdp": agricola_municipal_mdp,
