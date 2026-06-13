@@ -8,14 +8,27 @@ from core.utils.municipalities import get_same_region
 MAPA_PLACEHOLDER = Path("templates/assets/mapa_placeholder.png")
 
 
-def _mapa_latex(path: Path, caption: str) -> str:
-    return (
+def _mapa_latex(path: Path, caption: str, fuentes: list[str] | None = None) -> str:
+    bloque = (
         "\\begin{figure}[H]\n"
         "\\centering\n"
         f"\\caption{{\\textbf{{{caption}}}}}\n"
-        f"\\includegraphics[width=\\textwidth]{{{path}}}\n"
+        f"\\includegraphics[width=0.85\\textwidth]{{{path}}}\n"
         "\\end{figure}"
     )
+    if fuentes:
+        lineas = [f"Fuente: & {fuentes[0]}\\\\"]
+        lineas += [f"& {f}\\\\" for f in fuentes[1:]]
+        cuerpo = "\n".join(lineas).rstrip("\\")
+        bloque += f"\n\\tablefooter{{{cuerpo}}}"
+    return bloque
+
+
+FUENTES_MAPA_BASE = [
+    "IIEG. Mapa General del Estado de Jalisco, 2012.",
+    "INEGI. Conjunto nacional de información topográfica a escala 1:50\\,000, 2025.",
+    "INEGI. Marco Geoestadístico, 2025.",
+]
 
 
 JALISCO_ID = 14
@@ -363,6 +376,10 @@ class Analizer(Stage):
             mapa_migracion,
             f"Grado de Intensidad Migratoria a Estados Unidos en {nombre}"
             f" y el resto de municipios de Jalisco, {ANIO_CENSO}",
+            [
+                "CONAPO. Índice de Intensidad Migratoria, 2020.",
+                *FUENTES_MAPA_BASE,
+            ],
         )
 
         mun_marg_2020 = next(
@@ -652,11 +669,15 @@ class Analizer(Stage):
             ctx["de_jal_marg_sin_refrigerador"] = ND
         ctx["de_mapa_indice_marginacion_municipio"] = _mapa_latex(
             mapa_marginacion,
-            f"Índice de marginación en {nombre}"
+            f"Grado de marginación en {nombre}"
             f" y el resto de municipios de Jalisco, {ANIO_CENSO}",
+            [
+                "CONAPO. Grado de Marginación, 2020.",
+                *FUENTES_MAPA_BASE,
+            ],
         )
 
-        marg_by_nombre = {loc["localidad"]: loc for loc in marginacion_localidades}
+        marg_by_cvegeo = {str(loc["cvegeo"]): loc for loc in marginacion_localidades}
 
         def _loc_val(marg, key, fn):
             if marg is None:
@@ -667,7 +688,7 @@ class Analizer(Stage):
         hay_datos_faltantes = False
         locs_ctx = []
         for loc in top5_locs:
-            marg = marg_by_nombre.get(loc["localidad"])
+            marg = marg_by_cvegeo.get(str(loc["clave"]))
             sin_datos = marg is None
             if sin_datos:
                 hay_datos_faltantes = True
@@ -1069,6 +1090,10 @@ class Analizer(Stage):
             mapa_pobreza,
             f"Porcentaje de población en situación de pobreza multidimensional"
             f" en {nombre} y el resto de municipios de Jalisco, {ANIO_CENSO}",
+            [
+                "CONEVAL. Medición de la pobreza a nivel municipal, 2020.",
+                *FUENTES_MAPA_BASE,
+            ],
         )
 
         total_estatal = input_data.get("total_estatal_2020")
