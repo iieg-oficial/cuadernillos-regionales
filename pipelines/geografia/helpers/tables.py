@@ -8,6 +8,7 @@ from pipelines.geografia.helpers.formatting import (
     sentence_case,
     to_number,
 )
+from pipelines.geografia.mappings import HEALTH_INSTITUTION_ACCENTS
 
 
 def rows_for(rows, columns, order_col="orden_pct", transforms=None):
@@ -44,6 +45,11 @@ def _sort_text_key(value):
     text = "" if value is None else str(value).strip().lower()
     text = unicodedata.normalize("NFKD", text)
     return "".join(ch for ch in text if not unicodedata.combining(ch))
+
+
+def health_institution_label(value):
+    base = sentence_case(value)
+    return HEALTH_INSTITUTION_ACCENTS.get(base, base)
 
 
 def health_level_label(value):
@@ -83,7 +89,7 @@ def health_rows_for(rows):
         result.append(
             {
                 "nombre_de_la_institucion": latex_escape(
-                    row.get("nombre_de_la_institucion")
+                    health_institution_label(row.get("nombre_de_la_institucion"))
                 ),
                 "nivel_atencion": latex_escape(
                     health_level_label(row.get("nivel_de_atencion"))

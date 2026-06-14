@@ -387,7 +387,13 @@ class Analizer(Stage):
             ac_cond, ["no explotado", "no sobreexplotado"]
         )
 
-        ctx["ge_salud_total_unidades"] = ctx.get("ge_salud_total_puntos_muni", ND)
+        salud_total = to_number(
+            texto.get("salud_nivel_atencion", {}).get("salud_total_puntos_muni")
+        )
+        ctx["ge_salud_total_puntos_muni"] = (
+            fmt_int(salud_total) if salud_total is not None else ND
+        )
+        ctx["ge_salud_total_unidades"] = ctx["ge_salud_total_puntos_muni"]
         ctx["ge_ene_conteo_total_municipio"] = ctx.get(
             "ge_ie_conteo_total_municipio", ND
         )
