@@ -30,14 +30,13 @@ def _normalize(text: str) -> str:
 def _mapa_latex(path: Path, nombre: str) -> str:
     return (
         "\\begin{figure}[H]\n"
+        "\\noindent Gráfica 1\\\\\n"
+        f"\\textbf{{Localización geográfica de {nombre}, Jalisco}}\\par\\vspace{{4pt}}\n"
         "\\centering\n"
-        f"\\textbf{{Figura 1. {nombre}, Jalisco.}}\\\\\n"
-        "Localización geográfica.\n\n"
         f"\\includegraphics[width=0.9\\textwidth]{{{path}}}\n"
-        "\\par\\vspace{4pt}\n"
-        "{\\footnotesize\\centering Elaboración del IIEG. "
-        "Mapa General del Estado de Jalisco, 2026.\\par}\n"
-        "\\end{figure}"
+        "\\end{figure}\n"
+        "\\par\\vspace{-4pt}\\parbox{\\linewidth}{\\footnotesize\n"
+        "Fuente: IIEG. Mapa General del Estado de Jalisco, 2026.}"
     )
 
 
