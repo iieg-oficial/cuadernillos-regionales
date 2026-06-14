@@ -224,13 +224,27 @@ def _split_rectangles(values, x, y, w, h):
     )
 
 
+def _balanced_ncol(n):
+    best = None
+    for c in (3, 4, 5):
+        if c >= n:
+            continue
+        nrows = math.ceil(n / c)
+        empties = nrows * c - n
+        sizes = [nrows] * (c - empties) + [nrows - 1] * empties
+        key = (max(sizes) - min(sizes), -min(sizes), -c)
+        if best is None or key < best[0]:
+            best = (key, c)
+    return best[1] if best else min(n, 5)
+
+
 def _get_legend_ncol(topic_key, n):
     if n <= 0:
         return 1
     if topic_key == "uso_suelo":
         return n if n <= 5 else 3 if n == 6 else 4
     if topic_key in {"edafologia", "geologia"}:
-        return n if n <= 5 else max(1, math.ceil(n / 2))
+        return n if n <= 5 else _balanced_ncol(n)
     if topic_key == "clima_koppen":
         return min(8 if n <= 16 else 9, n)
     if topic_key.startswith("erosion_"):
@@ -297,18 +311,19 @@ def plot_proportional_blocks(categories, values, topic_key, output_path):
             Rectangle((x, y), w, h, facecolor=c, edgecolor="none", linewidth=0)
         )
         area_share = (w * h) / (100 * TREEMAP_HEIGHT)
-        if (
+        big = (
             area_share >= TREEMAP_LABEL_AREA_MIN
             and w >= TREEMAP_LABEL_WIDTH_MIN
             and h >= TREEMAP_LABEL_HEIGHT_MIN
-        ):
+        )
+        if w >= 3.5 and h >= 4.0:
             ax.text(
                 x + w / 2,
                 y + h / 2,
-                f"{val:.1f} %",
+                f"{val:.2f} %",
                 ha="center",
                 va="center",
-                fontsize=10,
+                fontsize=10 if big else 5.5,
                 fontweight="bold",
                 color=_contrast_text_color(c),
             )
@@ -364,13 +379,13 @@ def plot_stacked_pair(row_data, topic_key, output_path):
                 edgecolor="none",
                 linewidth=0,
                 height=0.72,
-                label=cat,
+                label=cat if val >= 0.5 else "_nolegend_",
             )
             if val >= 6:
                 ax.text(
                     left + val / 2,
                     y,
-                    f"{val:.1f} %",
+                    f"{val:.2f} %",
                     ha="center",
                     va="center",
                     color=_contrast_text_color(c),
@@ -388,13 +403,14 @@ def plot_stacked_pair(row_data, topic_key, output_path):
         ax.legend(
             lh,
             ll,
-            loc="lower center",
-            bbox_to_anchor=(0.5, -0.04),
+            loc="upper center",
+            bbox_to_anchor=(0.5, -0.06),
             ncol=ncol,
             frameon=False,
             fontsize=8.2,
             handlelength=1.0,
             columnspacing=0.9,
+            labelspacing=0.7,
         )
     fig.patch.set_alpha(0)
     ax.patch.set_alpha(0)
