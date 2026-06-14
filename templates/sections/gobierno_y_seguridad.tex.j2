@@ -85,7 +85,7 @@ mientras que en << gs_antepenultimo_anio_eleccion >> fue del
 \endlastfoot
 
 <% for row in gs_tabla_participacion %>
-<% if row.es_objetivo %>\rowcolor{orange!20}<% endif %>
+<% if row.es_objetivo %>\rowcolor{filaResaltada}<% endif %>
 <% if row.es_objetivo %>\thdr{<< row.clave >>}<% else %><< row.clave >><% endif %> &
 <% if row.es_objetivo %>\thdr{<< row.municipio >>}<% else %><< row.municipio >><% endif %> &
 <% if row.es_objetivo %>\thdr{<< row.pct_antepenultimo >>}<% else %><< row.pct_antepenultimo >><% endif %> &
@@ -173,7 +173,7 @@ lugar << gs_posicion_anio_anterior_ingreso_percapita >>.
 \endlastfoot
 
 <% for row in gs_tabla_ingresos %>
-<% if row.es_objetivo %>\rowcolor{orange!20}<% endif %>
+<% if row.es_objetivo %>\rowcolor{filaResaltada}<% endif %>
 <% if row.es_objetivo %>\thdr{<< row.clave >>}<% else %><< row.clave >><% endif %> &
 <% if row.es_objetivo %>\thdr{<< row.municipio >>}<% else %><< row.municipio >><% endif %> &
 <% if row.es_objetivo %>\thdr{<< row.pct_ing_ant >>}<% else %><< row.pct_ing_ant >><% endif %> &
@@ -258,7 +258,7 @@ lugar\footnote{El primer lugar es el municipio con mayor decremento en la tasa.}
 \endlastfoot
 
 <% for row in gs_tabla_delitos %>
-<% if row.es_objetivo %>\rowcolor{orange!20}<% endif %>
+<% if row.es_objetivo %>\rowcolor{filaResaltada}<% endif %>
 <% if row.es_objetivo %>\thdr{<< row.clave >>}<% else %><< row.clave >><% endif %> &
 <% if row.es_objetivo %>\thdr{<< row.municipio >>}<% else %><< row.municipio >><% endif %> &
 <% if row.es_objetivo %>\thdr{<< row.valor_anterior >>}<% else %><< row.valor_anterior >><% endif %> &
