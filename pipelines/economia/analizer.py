@@ -187,6 +187,11 @@ def _norm_grupo(nombre):
     return nombre.lower().replace("ind eléctrica", "ind. eléctrica")
 
 
+def _cap_grupo(nombre):
+    s = _norm_grupo(nombre)
+    return s[:1].upper() + s[1:]
+
+
 def _build_imss_grupos(divisiones, total_t0):
     rows = []
     for d in divisiones:
@@ -197,7 +202,7 @@ def _build_imss_grupos(divisiones, total_t0):
             var_pct_val = var_nom / t1 * 100
             rows.append(
                 {
-                    "grupo": _norm_grupo(d["division"]),
+                    "grupo": _cap_grupo(d["division"]),
                     "t2": _fmt_int(t2),
                     "t1": _fmt_int(t1),
                     "t0": _fmt_int(t0),
@@ -209,7 +214,7 @@ def _build_imss_grupos(divisiones, total_t0):
         else:
             rows.append(
                 {
-                    "grupo": _norm_grupo(d["division"]),
+                    "grupo": _cap_grupo(d["division"]),
                     "t2": _fmt_int(t2),
                     "t1": _fmt_int(t1),
                     "t0": _fmt_int(t0),
