@@ -117,25 +117,31 @@ def education_rows_for(rows):
     if not work:
         return []
 
-    work.sort(
-        key=lambda r: (
-            EDUCATION_LEVEL_ORDER.get(str(r.get("nivel", "")).strip(), 999),
-            str(r.get("nivel", "")),
-            EDUCATION_SECTOR_ORDER.get(
-                str(r.get("sostenimiento_reclasificado", "")).strip(), 999
-            ),
-        )
+    niveles = {}
+    for row in work:
+        nivel = str(row.get("nivel", "")).strip()
+        sector = str(row.get("sostenimiento_reclasificado", "")).strip()
+        conteo = row.get("conteo") or 0
+        bucket = niveles.setdefault(nivel, {"Público": 0, "Particular": 0})
+        if sector in bucket:
+            bucket[sector] += conteo
+
+    ordered = sorted(
+        niveles.items(),
+        key=lambda item: (
+            EDUCATION_LEVEL_ORDER.get(item[0], 999),
+            item[0],
+        ),
     )
 
     result = []
-    for row in work:
-        nivel = str(row.get("nivel", "")).strip()
+    for nivel, sectores in ordered:
         nivel = EDUCATION_LEVEL_LABELS.get(nivel, nivel)
         result.append(
             {
                 "nivel_educativo": latex_escape(nivel),
-                "sector": latex_escape(row.get("sostenimiento_reclasificado")),
-                "cantidad": fmt_int(row.get("conteo")),
+                "publico": fmt_int(sectores["Público"]),
+                "particular": fmt_int(sectores["Particular"]),
             }
         )
     return result

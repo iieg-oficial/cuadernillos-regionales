@@ -6,7 +6,7 @@
 }
 \vspace*{\stretch{1}}
 \begin{center}
-  {\color{colorTexto}\bfseries\fontsize{30}{34}\selectfont Geografía y Medio Ambiente} \\[2.5em]
+  {\color{colorTexto}\bfseries\fontsize{30}{34}\selectfont \shortstack{Geografía\\[0.3cm] y \\[0.3cm] Medio Ambiente}} \\[2.5em]
   {\color{colorTexto}\lexendsemibold
   \shortstack{
     {\huge << ge_municipio >>} \\[0.3cm]
@@ -20,12 +20,16 @@
 \newcounter{mapa}
 \newcommand{\graficatitulo}[1]{%
   \refstepcounter{grafica}%
-  \noindent\textbf{Gráfica \thegrafica}\\
-  #1\par\vspace{4pt}}
+  \noindent Gráfica \thegrafica\\
+  \textbf{#1}\par\vspace{4pt}}
 \newcommand{\mapatitulo}[1]{%
   \refstepcounter{mapa}%
-  \noindent\textbf{Mapa \themapa}\\
-  #1\par\vspace{4pt}}
+  \noindent Mapa \themapa\\
+  \textbf{#1}\par\vspace{4pt}}
+\newcommand{\mapafuente}[1]{%
+  \par\vspace{-4pt}\noindent{\footnotesize
+  \renewcommand{\arraystretch}{1.0}%
+  \begin{tabular}[t]{@{}l@{\hspace{0.5em}}p{\dimexpr\linewidth - 4em\relax}@{}}#1\end{tabular}}}
 
 \section{Geografía y Medio Ambiente}
 
@@ -57,7 +61,7 @@ Fuente: IIEG, con base en Technical University of Denmark (DTU Wind) y el World 
 \setlength{\tabcolsep}{3pt}
 \footnotesize
 \begin{longtable}{>{\raggedright\arraybackslash}m{\dimexpr0.50\linewidth - 2\tabcolsep\relax}
-                  >{\centering\arraybackslash}m{\dimexpr0.50\linewidth - 2\tabcolsep\relax}}
+                  >{\raggedright\arraybackslash}m{\dimexpr0.50\linewidth - 2\tabcolsep\relax}}
 
 \caption{\textbf{Síntesis geoespacial del territorio de << ge_dg_nombre >>}}
 \label{tabla_ge_sintesis} \\
@@ -117,8 +121,10 @@ Fuente: IIEG, con base en información geoespacial municipal, 2026.}
 \mapatitulo{Mapa base de << ge_municipio >>}
 \label{map:ge_base}
 << ge_base_mapa >>
-\par\vspace{-4pt}\parbox{\linewidth}{\footnotesize
-Fuente: IIEG, con base en INEGI. Conjunto nacional de información topográfica a escala 1:50 000, 2025. INEGI. Continuo de Elevaciones Mexicano 4.0, 2025. INEGI. Marco Geoestadístico, 2025.}
+\mapafuente{Fuente: & IIEG. Mapa General del Estado de Jalisco, 2012.\\
+ & INEGI. Conjunto nacional de información topográfica a escala 1:50\,000, 2025.\\
+ & INEGI. Marco Geoestadístico, 2025.\\
+ & INEGI. Conjunto de datos vectoriales de uso del suelo y vegetación Serie VII, 2018.}
 <% endif %>
 
 \subsection{Subsistema natural}
@@ -143,8 +149,8 @@ Fuente: IIEG, con base en INEGI. Conjunto de datos vectoriales Geológicos serie
 \setlength{\tabcolsep}{3pt}
 \footnotesize
 \begin{longtable}{>{\raggedright\arraybackslash}m{\dimexpr0.40\linewidth - 2\tabcolsep\relax}
-                  >{\centering\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
-                  >{\centering\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}}
 
 \caption{\textbf{Geología de << ge_municipio >>}}
 \label{tabla_ge_geologia} \\
@@ -181,8 +187,10 @@ Fuente: IIEG, con base en INEGI. Conjunto de datos vectoriales Geológicos serie
 \clearpage
 \mapatitulo{Geología de << ge_municipio >>}
 << ge_geo_mapa >>
-\par\vspace{-4pt}\parbox{\linewidth}{\footnotesize
-Fuente: IIEG, con base en INEGI. Conjunto de datos vectoriales Geológicos serie I, 1988.}
+\mapafuente{Fuente: & INEGI. Conjunto de datos vectoriales geológicos serie I, 1988.\\
+ & IIEG. Mapa General del Estado de Jalisco, 2012.\\
+ & INEGI. Conjunto nacional de información topográfica a escala 1:50\,000, 2025.\\
+ & INEGI. Marco Geoestadístico, 2025.}
 <% endif %>
 
 \subsubsection{Edafología}
@@ -205,8 +213,8 @@ Fuente: IIEG, con base en INEGI. Carta edafológica escala 1:250 000 Serie III, 
 \setlength{\tabcolsep}{3pt}
 \footnotesize
 \begin{longtable}{>{\raggedright\arraybackslash}m{\dimexpr0.40\linewidth - 2\tabcolsep\relax}
-                  >{\centering\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
-                  >{\centering\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}}
 
 \caption{\textbf{Edafología de << ge_municipio >>}}
 \label{tabla_ge_edafologia} \\
@@ -243,8 +251,10 @@ Fuente: IIEG, con base en INEGI. Carta edafológica escala 1:250 000 Serie III, 
 \clearpage
 \mapatitulo{Edafología de << ge_municipio >>}
 << ge_ed_mapa >>
-\par\vspace{-4pt}\parbox{\linewidth}{\footnotesize
-Fuente: IIEG, con base en INEGI. Carta edafológica escala 1:250 000 Serie III, 2025.}
+\mapafuente{Fuente: & INEGI. Carta edafológica escala 1:250\,000 Serie III, 2025.\\
+ & IIEG. Mapa General del Estado de Jalisco, 2012.\\
+ & INEGI. Conjunto nacional de información topográfica a escala 1:50\,000, 2025.\\
+ & INEGI. Marco Geoestadístico, 2025.}
 <% endif %>
 
 \subsubsection{Topografía y pendientes}
@@ -259,16 +269,16 @@ El rango << ge_tp_secundario >> representa << ge_tp_secundario_pct >> \%. El res
 \centering
 \includegraphics[width=\textwidth]{<< ge_tp_grafica >>}
 \end{figure}
-\par\vspace{-4pt}\parbox{\linewidth}{\footnotesize
-Fuente: IIEG, con base en INEGI. Conjunto nacional de información topográfica a escala 1:50 000, 2025. INEGI. Continuo de Elevaciones Mexicano 4.0, 2025.}
+\mapafuente{Fuente: & IIEG, con base en INEGI. Conjunto nacional de información topográfica a escala 1:50\,000, 2025.\\
+ & INEGI. Continuo de Elevaciones Mexicano 4.0, 2025.}
 <% endif %>
 
 \newpage
 \setlength{\tabcolsep}{3pt}
 \footnotesize
 \begin{longtable}{>{\raggedright\arraybackslash}m{\dimexpr0.40\linewidth - 2\tabcolsep\relax}
-                  >{\centering\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
-                  >{\centering\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}}
 
 \caption{\textbf{Topografía y pendientes de << ge_municipio >>}}
 \label{tabla_ge_pendientes} \\
@@ -298,15 +308,17 @@ Fuente: IIEG, con base en INEGI. Conjunto nacional de información topográfica 
 
 \end{longtable}
 \normalsize
-\par\vspace{-4pt}\parbox{\linewidth}{\footnotesize
-Fuente: IIEG, con base en INEGI. Conjunto nacional de información topográfica a escala 1:50 000, 2025. INEGI. Continuo de Elevaciones Mexicano 4.0, 2025.}
+\mapafuente{Fuente: & IIEG, con base en INEGI. Conjunto nacional de información topográfica a escala 1:50\,000, 2025.\\
+ & INEGI. Continuo de Elevaciones Mexicano 4.0, 2025.}
 
 <% if ge_tp_mapa_activo %>
 \clearpage
 \mapatitulo{Pendientes de << ge_municipio >>}
 << ge_tp_mapa >>
-\par\vspace{-4pt}\parbox{\linewidth}{\footnotesize
-Fuente: IIEG, con base en INEGI. Conjunto nacional de información topográfica a escala 1:50 000, 2025. INEGI. Continuo de Elevaciones Mexicano 4.0, 2025.}
+\mapafuente{Fuente: & INEGI. Continuo de Elevaciones Mexicano 4.0, 2025.\\
+ & IIEG. Mapa General del Estado de Jalisco, 2012.\\
+ & INEGI. Conjunto nacional de información topográfica a escala 1:50\,000, 2025.\\
+ & INEGI. Marco Geoestadístico, 2025.}
 <% endif %>
 
 \subsubsection{Cuencas}
@@ -327,8 +339,8 @@ Fuente: IIEG, con base en CONAGUA. Disponibilidad en cuencas hidrológicas, 2023
 \setlength{\tabcolsep}{3pt}
 \footnotesize
 \begin{longtable}{>{\raggedright\arraybackslash}m{\dimexpr0.40\linewidth - 2\tabcolsep\relax}
-                  >{\centering\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
-                  >{\centering\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}}
 
 \caption{\textbf{Cuencas de << ge_municipio >>}}
 \label{tabla_ge_cuencas} \\
@@ -378,8 +390,11 @@ Fuente: IIEG, con base en CONAGUA. Disponibilidad en cuencas hidrológicas, 2023
 \clearpage
 \mapatitulo{Cuencas de << ge_municipio >>}
 << ge_cu_mapa >>
-\par\vspace{-4pt}\parbox{\linewidth}{\footnotesize
-Fuente: IIEG, con base en CONAGUA. Disponibilidad en cuencas hidrológicas, 2023. CONAGUA. Ordenamiento de aguas superficial, 2023.}
+\mapafuente{Fuente: & CONAGUA. Disponibilidad en cuencas hidrológicas, 2023.\\
+ & CONAGUA. Ordenamiento de aguas superficial, 2023.\\
+ & IIEG. Mapa General del Estado de Jalisco, 2012.\\
+ & INEGI. Conjunto nacional de información topográfica a escala 1:50\,000, 2025.\\
+ & INEGI. Marco Geoestadístico, 2025.}
 <% endif %>
 
 \subsubsection{Acuíferos}
@@ -400,8 +415,8 @@ Fuente: IIEG, con base en CONAGUA. Disponibilidad media anual de aguas subterrá
 \setlength{\tabcolsep}{3pt}
 \footnotesize
 \begin{longtable}{>{\raggedright\arraybackslash}m{\dimexpr0.40\linewidth - 2\tabcolsep\relax}
-                  >{\centering\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
-                  >{\centering\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}}
 
 \caption{\textbf{Acuíferos de << ge_municipio >>}}
 \label{tabla_ge_acuiferos} \\
@@ -442,8 +457,11 @@ Fuente: IIEG, con base en CONAGUA. Disponibilidad media anual de aguas subterrá
 \clearpage
 \mapatitulo{Acuíferos de << ge_municipio >>}
 << ge_ac_mapa >>
-\par\vspace{-4pt}\parbox{\linewidth}{\footnotesize
-Fuente: IIEG, con base en CONAGUA. Disponibilidad media anual de aguas subterráneas, 2024. CONAGUA. Condición de acuíferos, 2023.}
+\mapafuente{Fuente: & CONAGUA. Disponibilidad media anual de aguas subterráneas, 2024.\\
+ & CONAGUA. Condición de acuíferos, 2023.\\
+ & IIEG. Mapa General del Estado de Jalisco, 2012.\\
+ & INEGI. Conjunto nacional de información topográfica a escala 1:50\,000, 2025.\\
+ & INEGI. Marco Geoestadístico, 2025.}
 <% endif %>
 
 \subsubsection{Temperatura}
@@ -464,11 +482,11 @@ Fuente: IIEG, con base en SMN. Información Estadística Climatológica, 1995-20
 \setlength{\tabcolsep}{3pt}
 \footnotesize
 \begin{longtable}{>{\raggedright\arraybackslash}m{\dimexpr0.25\linewidth - 2\tabcolsep\relax}
-                  >{\centering\arraybackslash}m{\dimexpr0.25\linewidth - 2\tabcolsep\relax}
-                  >{\centering\arraybackslash}m{\dimexpr0.25\linewidth - 2\tabcolsep\relax}
-                  >{\centering\arraybackslash}m{\dimexpr0.25\linewidth - 2\tabcolsep\relax}}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.25\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.25\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.25\linewidth - 2\tabcolsep\relax}}
 
-\caption{\textbf{Temperatura media mensual y anual de << ge_municipio >>}}
+\caption{\textbf{Temperatura mensual y anual de << ge_municipio >>}}
 \label{tabla_ge_temperatura} \\
 
 \hline
@@ -489,6 +507,9 @@ Fuente: IIEG, con base en SMN. Información Estadística Climatológica, 1995-20
 \hline
 \endlastfoot
 
+\rowcolor{orange!20}
+\thdr{Anual} & \thdr{<< ge_tm_min_anual >>} & \thdr{<< ge_tm_max_anual >>} & \thdr{<< ge_tm_media_anual >>} \\
+\hline
 Enero & << ge_tm_min_ene >> & << ge_tm_max_ene >> & << ge_tm_med_ene >> \\
 \hline
 Febrero & << ge_tm_min_feb >> & << ge_tm_max_feb >> & << ge_tm_med_feb >> \\
@@ -513,8 +534,6 @@ Noviembre & << ge_tm_min_nov >> & << ge_tm_max_nov >> & << ge_tm_med_nov >> \\
 \hline
 Diciembre & << ge_tm_min_dic >> & << ge_tm_max_dic >> & << ge_tm_med_dic >> \\
 \hline
-Anual & << ge_tm_min_anual >> & << ge_tm_max_anual >> & << ge_tm_media_anual >> \\
-\hline
 
 \end{longtable}
 \normalsize
@@ -525,8 +544,10 @@ Fuente: IIEG, con base en SMN. Información Estadística Climatológica, 1995-20
 \clearpage
 \mapatitulo{Temperatura media anual histórica de << ge_municipio >>}
 << ge_tm_mapa >>
-\par\vspace{-4pt}\parbox{\linewidth}{\footnotesize
-Fuente: IIEG, con base en SMN. Información Estadística Climatológica, 1995-2026.}
+\mapafuente{Fuente: & SMN. Información Estadística Climatológica, 1995-2026.\\
+ & IIEG. Mapa General del Estado de Jalisco, 2012.\\
+ & INEGI. Conjunto nacional de información topográfica a escala 1:50\,000, 2025.\\
+ & INEGI. Marco Geoestadístico, 2025.}
 <% endif %>
 
 \subsubsection{Precipitación}
@@ -535,7 +556,7 @@ La precipitación media mensual conforme a la normal climatológica de 1995 hast
 
 <% if ge_pp_grafica_activa %>
 \begin{figure}[H]
-\graficatitulo{Precipitación media mensual de << ge_municipio >>}
+\graficatitulo{Precipitación mensual de << ge_municipio >>}
 \centering
 \includegraphics[width=\textwidth]{<< ge_pp_grafica >>}
 \end{figure}
@@ -547,9 +568,9 @@ Fuente: IIEG, con base en SMN. Información Estadística Climatológica, 1995-20
 \setlength{\tabcolsep}{3pt}
 \footnotesize
 \begin{longtable}{>{\raggedright\arraybackslash}m{\dimexpr0.25\linewidth - 2\tabcolsep\relax}
-                  >{\centering\arraybackslash}m{\dimexpr0.25\linewidth - 2\tabcolsep\relax}
-                  >{\centering\arraybackslash}m{\dimexpr0.25\linewidth - 2\tabcolsep\relax}
-                  >{\centering\arraybackslash}m{\dimexpr0.25\linewidth - 2\tabcolsep\relax}}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.25\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.25\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.25\linewidth - 2\tabcolsep\relax}}
 
 \caption{\textbf{Precipitación media mensual y acumulada de << ge_municipio >>}}
 \label{tabla_ge_precipitacion} \\
@@ -572,6 +593,9 @@ Fuente: IIEG, con base en SMN. Información Estadística Climatológica, 1995-20
 \hline
 \endlastfoot
 
+\rowcolor{orange!20}
+\thdr{Anual} & \thdr{<< ge_pp_media_anual >>} & \thdr{<< ge_pp_min_anual >>} & \thdr{<< ge_pp_max_anual >>} \\
+\hline
 Enero & << ge_pp_med_ene >> & << ge_pp_min_ene >> & << ge_pp_max_ene >> \\
 \hline
 Febrero & << ge_pp_med_feb >> & << ge_pp_min_feb >> & << ge_pp_max_feb >> \\
@@ -596,8 +620,6 @@ Noviembre & << ge_pp_med_nov >> & << ge_pp_min_nov >> & << ge_pp_max_nov >> \\
 \hline
 Diciembre & << ge_pp_med_dic >> & << ge_pp_min_dic >> & << ge_pp_max_dic >> \\
 \hline
-Anual & << ge_pp_media_anual >> & << ge_pp_min_anual >> & << ge_pp_max_anual >> \\
-\hline
 
 \end{longtable}
 \normalsize
@@ -608,8 +630,10 @@ Fuente: IIEG, con base en SMN. Información Estadística Climatológica, 1995-20
 \clearpage
 \mapatitulo{Precipitación histórica acumulada de << ge_municipio >>}
 << ge_pp_mapa >>
-\par\vspace{-4pt}\parbox{\linewidth}{\footnotesize
-Fuente: IIEG, con base en SMN. Información Estadística Climatológica, 1995-2026.}
+\mapafuente{Fuente: & SMN. Información Estadística Climatológica, 1995-2026.\\
+ & IIEG. Mapa General del Estado de Jalisco, 2012.\\
+ & INEGI. Conjunto nacional de información topográfica a escala 1:50\,000, 2025.\\
+ & INEGI. Marco Geoestadístico, 2025.}
 <% endif %>
 
 \subsubsection{Clima}
@@ -630,8 +654,8 @@ Fuente: IIEG, con base en SMN. Información Estadística Climatológica, 1995-20
 \setlength{\tabcolsep}{3pt}
 \footnotesize
 \begin{longtable}{>{\raggedright\arraybackslash}m{\dimexpr0.40\linewidth - 2\tabcolsep\relax}
-                  >{\centering\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
-                  >{\centering\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}}
 
 \caption{\textbf{Clima de << ge_municipio >>}}
 \label{tabla_ge_clima} \\
@@ -668,8 +692,10 @@ Fuente: IIEG, con base en SMN. Información Estadística Climatológica, 1995-20
 \clearpage
 \mapatitulo{Clima de << ge_municipio >>}
 << ge_cl_mapa >>
-\par\vspace{-4pt}\parbox{\linewidth}{\footnotesize
-Fuente: IIEG, con base en SMN. Información Estadística Climatológica, 1995-2026.}
+\mapafuente{Fuente: & SMN. Información Estadística Climatológica, 1995-2026.\\
+ & IIEG. Mapa General del Estado de Jalisco, 2012.\\
+ & INEGI. Conjunto nacional de información topográfica a escala 1:50\,000, 2025.\\
+ & INEGI. Marco Geoestadístico, 2025.}
 <% endif %>
 
 \subsubsection{Uso de suelo y vegetación}
@@ -690,8 +716,8 @@ Fuente: IIEG, con base en INEGI. Conjunto de datos vectoriales de uso del suelo 
 \setlength{\tabcolsep}{3pt}
 \footnotesize
 \begin{longtable}{>{\raggedright\arraybackslash}m{\dimexpr0.40\linewidth - 2\tabcolsep\relax}
-                  >{\centering\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
-                  >{\centering\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}}
 
 \caption{\textbf{Uso de suelo y vegetación de << ge_municipio >>}}
 \label{tabla_ge_uso_suelo} \\
@@ -728,8 +754,10 @@ Fuente: IIEG, con base en INEGI. Conjunto de datos vectoriales de uso del suelo 
 \clearpage
 \mapatitulo{Uso de suelo y vegetación de << ge_municipio >>}
 << ge_usv_mapa >>
-\par\vspace{-4pt}\parbox{\linewidth}{\footnotesize
-Fuente: IIEG, con base en INEGI. Conjunto de datos vectoriales de uso del suelo y vegetación Serie VII, 2018.}
+\mapafuente{Fuente: & INEGI. Conjunto de datos vectoriales de uso del suelo y vegetación Serie VII, 2018.\\
+ & IIEG. Mapa General del Estado de Jalisco, 2012.\\
+ & INEGI. Conjunto nacional de información topográfica a escala 1:50\,000, 2025.\\
+ & INEGI. Marco Geoestadístico, 2025.}
 <% endif %>
 
 \subsubsection{NDVI}
@@ -752,8 +780,8 @@ Fuente: IIEG, con base en USGS. Landsat Collection 2 Level-2 Science Products, 2
 \setlength{\tabcolsep}{3pt}
 \footnotesize
 \begin{longtable}{>{\raggedright\arraybackslash}m{\dimexpr0.40\linewidth - 2\tabcolsep\relax}
-                  >{\centering\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
-                  >{\centering\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}}
 
 \caption{\textbf{NDVI de << ge_municipio >>}}
 \label{tabla_ge_ndvi} \\
@@ -790,8 +818,10 @@ Fuente: IIEG, con base en USGS. Landsat Collection 2 Level-2 Science Products, 2
 \clearpage
 \mapatitulo{NDVI de << ge_municipio >>}
 << ge_ndvi_mapa >>
-\par\vspace{-4pt}\parbox{\linewidth}{\footnotesize
-Fuente: IIEG, con base en USGS. Landsat Collection 2 Level-2 Science Products, 2025.}
+\mapafuente{Fuente: & USGS. Landsat Collection 2 Level-2 Science Products, 2025.\\
+ & IIEG. Mapa General del Estado de Jalisco, 2012.\\
+ & INEGI. Conjunto nacional de información topográfica a escala 1:50\,000, 2025.\\
+ & INEGI. Marco Geoestadístico, 2025.}
 <% endif %>
 
 \subsubsection{NDWI}
@@ -814,8 +844,8 @@ Fuente: IIEG, con base en USGS. Landsat Collection 2 Level-2 Science Products, 2
 \setlength{\tabcolsep}{3pt}
 \footnotesize
 \begin{longtable}{>{\raggedright\arraybackslash}m{\dimexpr0.40\linewidth - 2\tabcolsep\relax}
-                  >{\centering\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
-                  >{\centering\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}}
 
 \caption{\textbf{NDWI de << ge_municipio >>}}
 \label{tabla_ge_ndwi} \\
@@ -852,20 +882,21 @@ Fuente: IIEG, con base en USGS. Landsat Collection 2 Level-2 Science Products, 2
 \clearpage
 \mapatitulo{NDWI de << ge_municipio >>}
 << ge_ndwi_mapa >>
-\par\vspace{-4pt}\parbox{\linewidth}{\footnotesize
-Fuente: IIEG, con base en USGS. Landsat Collection 2 Level-2 Science Products, 2025.}
+\mapafuente{Fuente: & USGS. Landsat Collection 2 Level-2 Science Products, 2025.\\
+ & IIEG. Mapa General del Estado de Jalisco, 2012.\\
+ & INEGI. Conjunto nacional de información topográfica a escala 1:50\,000, 2025.\\
+ & INEGI. Marco Geoestadístico, 2025.}
 <% endif %>
 
 \subsubsection{Áreas naturales protegidas y humedales}
 
 << ge_anp_texto_automatico >>.
 
-\newpage
 \setlength{\tabcolsep}{3pt}
 \footnotesize
 \begin{longtable}{>{\raggedright\arraybackslash}m{\dimexpr0.20\linewidth - 2\tabcolsep\relax}
-                  >{\centering\arraybackslash}m{\dimexpr0.20\linewidth - 2\tabcolsep\relax}
-                  >{\centering\arraybackslash}m{\dimexpr0.20\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.20\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.20\linewidth - 2\tabcolsep\relax}
                   >{\raggedright\arraybackslash}m{\dimexpr0.40\linewidth - 2\tabcolsep\relax}}
 
 \caption{\textbf{Áreas naturales protegidas y humedales de << ge_municipio >>}}
@@ -903,8 +934,11 @@ Fuente: IIEG, con base en CONANP. Áreas Naturales Protegidas, 2025. CONAGUA. In
 \clearpage
 \mapatitulo{Áreas naturales protegidas y humedales de << ge_municipio >>}
 << ge_anp_mapa >>
-\par\vspace{-4pt}\parbox{\linewidth}{\footnotesize
-Fuente: IIEG, con base en CONANP. Áreas Naturales Protegidas, 2025. CONAGUA. Inventario Nacional de Humedales, 2021.}
+\mapafuente{Fuente: & CONANP. Áreas Naturales Protegidas, 2025.\\
+ & CONAGUA. Inventario Nacional de Humedales, 2021.\\
+ & IIEG. Mapa General del Estado de Jalisco, 2012.\\
+ & INEGI. Conjunto nacional de información topográfica a escala 1:50\,000, 2025.\\
+ & INEGI. Marco Geoestadístico, 2025.}
 <% endif %>
 
 \subsubsection{Sequía}
@@ -925,8 +959,8 @@ Fuente: IIEG, con base en USGS. Landsat Collection 2 Level-2 Science Products, 2
 \setlength{\tabcolsep}{3pt}
 \footnotesize
 \begin{longtable}{>{\raggedright\arraybackslash}m{\dimexpr0.40\linewidth - 2\tabcolsep\relax}
-                  >{\centering\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
-                  >{\centering\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}}
 
 \caption{\textbf{Índice de sequía de << ge_municipio >>}}
 \label{tabla_ge_sequia} \\
@@ -963,8 +997,10 @@ Fuente: IIEG, con base en USGS. Landsat Collection 2 Level-2 Science Products, 2
 \clearpage
 \mapatitulo{Índice de sequía de << ge_municipio >>}
 << ge_ds_mapa >>
-\par\vspace{-4pt}\parbox{\linewidth}{\footnotesize
-Fuente: IIEG, con base en USGS. Landsat Collection 2 Level-2 Science Products, 2025.}
+\mapafuente{Fuente: & USGS. Landsat Collection 2 Level-2 Science Products, 2025.\\
+ & IIEG. Mapa General del Estado de Jalisco, 2012.\\
+ & INEGI. Conjunto nacional de información topográfica a escala 1:50\,000, 2025.\\
+ & INEGI. Marco Geoestadístico, 2025.}
 <% endif %>
 
 \subsubsection{Erosión potencial}
@@ -985,8 +1021,8 @@ Fuente: IIEG, con base en SMN, INEGI. Carta edafológica Serie III y CEM 4.0.}
 \setlength{\tabcolsep}{3pt}
 \footnotesize
 \begin{longtable}{>{\raggedright\arraybackslash}m{\dimexpr0.40\linewidth - 2\tabcolsep\relax}
-                  >{\centering\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
-                  >{\centering\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}}
 
 \caption{\textbf{Erosión potencial de << ge_municipio >>}}
 \label{tabla_ge_erosion_pot} \\
@@ -1023,8 +1059,9 @@ Fuente: IIEG, con base en SMN, INEGI. Carta edafológica Serie III y CEM 4.0.}
 \clearpage
 \mapatitulo{Erosión potencial de << ge_municipio >>}
 << ge_er_mapa >>
-\par\vspace{-4pt}\parbox{\linewidth}{\footnotesize
-Fuente: IIEG, con base en SMN, INEGI. Carta edafológica Serie III y CEM 4.0.}
+\mapafuente{Fuente: & SMN. Información Estadística Climatológica, 1995-2026.\\
+ & INEGI. Carta edafológica escala 1:250\,000 Serie III, 2025.\\
+ & INEGI. Continuo de Elevaciones Mexicano 4.0, 2025.}
 <% endif %>
 
 \subsubsection{Erosión efectiva}
@@ -1045,8 +1082,8 @@ Fuente: IIEG, con base en SMN, INEGI. Carta edafológica Serie III, CEM 4.0 y US
 \setlength{\tabcolsep}{3pt}
 \footnotesize
 \begin{longtable}{>{\raggedright\arraybackslash}m{\dimexpr0.40\linewidth - 2\tabcolsep\relax}
-                  >{\centering\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
-                  >{\centering\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}}
 
 \caption{\textbf{Erosión efectiva de << ge_municipio >>}}
 \label{tabla_ge_erosion_ef} \\
@@ -1083,8 +1120,10 @@ Fuente: IIEG, con base en SMN, INEGI. Carta edafológica Serie III, CEM 4.0 y US
 \clearpage
 \mapatitulo{Erosión efectiva de << ge_municipio >>}
 << ge_ee_mapa >>
-\par\vspace{-4pt}\parbox{\linewidth}{\footnotesize
-Fuente: IIEG, con base en SMN, INEGI. Carta edafológica Serie III, CEM 4.0 y USV Serie VII.}
+\mapafuente{Fuente: & SMN. Información Estadística Climatológica, 1995-2026.\\
+ & INEGI. Carta edafológica escala 1:250\,000 Serie III, 2025.\\
+ & INEGI. Continuo de Elevaciones Mexicano 4.0, 2025.\\
+ & INEGI. Conjunto de datos vectoriales de uso del suelo y vegetación Serie VII, 2018.}
 <% endif %>
 
 \subsection{Subsistema antrópico}
@@ -1107,8 +1146,8 @@ Fuente: IIEG, con base en INEGI. Índice Territorial Urbano-Rural (ITUR), 2025.}
 \setlength{\tabcolsep}{3pt}
 \footnotesize
 \begin{longtable}{>{\raggedright\arraybackslash}m{\dimexpr0.40\linewidth - 2\tabcolsep\relax}
-                  >{\centering\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
-                  >{\centering\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}}
 
 \caption{\textbf{Índice territorial urbano-rural de << ge_municipio >>}}
 \label{tabla_ge_itur} \\
@@ -1145,20 +1184,21 @@ Fuente: IIEG, con base en INEGI. Índice Territorial Urbano-Rural (ITUR), 2025.}
 \clearpage
 \mapatitulo{Índice Territorial Urbano-Rural de << ge_municipio >>}
 << ge_itur_mapa >>
-\par\vspace{-4pt}\parbox{\linewidth}{\footnotesize
-Fuente: IIEG, con base en INEGI. Índice Territorial Urbano-Rural (ITUR), 2025.}
+\mapafuente{Fuente: & INEGI. Índice Territorial Urbano-Rural (ITUR), 2025.\\
+ & IIEG. Mapa General del Estado de Jalisco, 2012.\\
+ & INEGI. Conjunto nacional de información topográfica a escala 1:50\,000, 2025.\\
+ & INEGI. Marco Geoestadístico, 2025.}
 <% endif %>
 
 \subsubsection{Salud}
 
 De acuerdo con los registros de la Secretaría de Salud, en el municipio se identifican << ge_salud_total_puntos_muni >> unidades de servicio de salud, entre consultorios, hospitales, farmacias, laboratorios y unidades móviles. De las cuales << ge_salud_primer_pct >> \% son de primer nivel.
 
-\newpage
 \setlength{\tabcolsep}{3pt}
 \footnotesize
 \begin{longtable}{>{\raggedright\arraybackslash}m{\dimexpr0.45\linewidth - 2\tabcolsep\relax}
-                  >{\centering\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
-                  >{\centering\arraybackslash}m{\dimexpr0.25\linewidth - 2\tabcolsep\relax}}
+                  >{\raggedright\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.25\linewidth - 2\tabcolsep\relax}}
 
 \caption{\textbf{Unidades de salud de << ge_municipio >>}}
 \label{tabla_ge_salud} \\
@@ -1181,12 +1221,13 @@ De acuerdo con los registros de la Secretaría de Salud, en el municipio se iden
 \hline
 \endlastfoot
 
+\rowcolor{orange!20}
+\thdr{Total del municipio} & & \thdr{<< ge_salud_total_unidades >>} \\
+\hline
 <% for fila in ge_salud_unidades %>
 << fila.nombre_de_la_institucion >> & << fila.nivel_atencion >> & << fila.cantidad >> \\
 \hline
 <% endfor %>
-Total del municipio & & << ge_salud_total_unidades >> \\
-\hline
 
 \end{longtable}
 \normalsize
@@ -1197,8 +1238,10 @@ Fuente: IIEG, con base en Dirección General de Información en Salud. Clave Ún
 \clearpage
 \mapatitulo{Unidades de salud de << ge_municipio >>}
 << ge_salud_mapa >>
-\par\vspace{-4pt}\parbox{\linewidth}{\footnotesize
-Fuente: IIEG, con base en Dirección General de Información en Salud. Clave Única de Establecimientos de Salud, 2025.}
+\mapafuente{Fuente: & Dirección General de Información en Salud (DGIS). CLUES (Clave Única de Establecimientos de Salud), 2025.\\
+ & IIEG. Mapa General del Estado de Jalisco, 2012.\\
+ & INEGI. Conjunto nacional de información topográfica a escala 1:50\,000, 2025.\\
+ & INEGI. Marco Geoestadístico, 2025.}
 <% endif %>
 
 \subsubsection{Educación}
@@ -1207,25 +1250,24 @@ De acuerdo con los registros del Sistema de Información y Gestión Educativa, e
 
 La oferta educativa se organiza en niveles de educación inicial, básica, media y superior, con presencia tanto de instituciones públicas como privadas.
 
-\newpage
 \setlength{\tabcolsep}{3pt}
 \footnotesize
 \begin{longtable}{>{\raggedright\arraybackslash}m{\dimexpr0.40\linewidth - 2\tabcolsep\relax}
-                  >{\centering\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
-                  >{\centering\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}}
 
 \caption{\textbf{Centros educativos de << ge_municipio >>}}
 \label{tabla_ge_educacion} \\
 
 \hline
 \rowcolor{gray!30}
-\thh{0.40}{Nivel educativo}  &  \textbf{Sector}  &  \textbf{Cantidad}  \\
+\thh{0.40}{Nivel educativo}  &  \textbf{Sector público}  &  \textbf{Sector particular}  \\
 \hline
 \endfirsthead
 \multicolumn{3}{l}{\small\textbf{(continuación)}} \\
 \hline
 \rowcolor{gray!30}
-\thh{0.40}{Nivel educativo}  &  \textbf{Sector}  &  \textbf{Cantidad}  \\
+\thh{0.40}{Nivel educativo}  &  \textbf{Sector público}  &  \textbf{Sector particular}  \\
 \hline
 \endhead
 \hline
@@ -1236,7 +1278,7 @@ La oferta educativa se organiza en niveles de educación inicial, básica, media
 \endlastfoot
 
 <% for fila in ge_edu_centros %>
-<< fila.nivel_educativo >> & << fila.sector >> & << fila.cantidad >> \\
+<< fila.nivel_educativo >> & << fila.publico >> & << fila.particular >> \\
 \hline
 <% endfor %>
 
@@ -1249,20 +1291,21 @@ Fuente: IIEG, con base en Sistema de Información y Gestión Educativa (SIGED). 
 \clearpage
 \mapatitulo{Educación de << ge_municipio >>}
 << ge_edu_mapa >>
-\par\vspace{-4pt}\parbox{\linewidth}{\footnotesize
-Fuente: IIEG, con base en Sistema de Información y Gestión Educativa (SIGED). Consulta de escuelas, 2025.}
+\mapafuente{Fuente: & Sistema de Información y Gestión Educativa (SIGED). Consulta de escuelas, 2025.\\
+ & IIEG. Mapa General del Estado de Jalisco, 2012.\\
+ & INEGI. Conjunto nacional de información topográfica a escala 1:50\,000, 2025.\\
+ & INEGI. Marco Geoestadístico, 2025.}
 <% endif %>
 
 \subsubsection{Espacios públicos}
 
 En el municipio existen << ge_ep_total_puntos_muni >> espacios. Predomina el tipo << ge_ep_dominante >>, que representa << ge_ep_dominante_pct >> \% del total. El resto de los espacios públicos representa << ge_ep_pct_otros >> \% del total.
 
-\newpage
 \setlength{\tabcolsep}{3pt}
 \footnotesize
 \begin{longtable}{>{\raggedright\arraybackslash}m{\dimexpr0.40\linewidth - 2\tabcolsep\relax}
-                  >{\centering\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
-                  >{\centering\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}}
 
 \caption{\textbf{Espacios públicos de << ge_municipio >>}}
 \label{tabla_ge_espacios} \\
@@ -1299,8 +1342,9 @@ Fuente: IIEG, con base en INEGI. Marco Geoestadístico, 2025.}
 \clearpage
 \mapatitulo{Espacios públicos de << ge_municipio >>}
 << ge_ep_mapa >>
-\par\vspace{-4pt}\parbox{\linewidth}{\footnotesize
-Fuente: IIEG, con base en INEGI. Marco Geoestadístico, 2025.}
+\mapafuente{Fuente: & INEGI. Marco Geoestadístico, 2025.\\
+ & IIEG. Mapa General del Estado de Jalisco, 2012.\\
+ & INEGI. Conjunto nacional de información topográfica a escala 1:50\,000, 2025.}
 <% endif %>
 
 \subsubsection{Infraestructura energética}
@@ -1311,12 +1355,11 @@ El municipio cuenta con << ge_ene_conteo_total_municipio >> subestación(es) el�
 
 Con respecto a unidades económicas, predomina el tipo de << ge_ie_dominante >>, con un valor de << ge_ie_dominante_valor >>, equivalente a << ge_ie_dominante_pct >> \% del total identificado. También se registran << ge_ie_tipos_secundarios >>, que complementan la red energética municipal.
 
-\newpage
 \setlength{\tabcolsep}{3pt}
 \footnotesize
 \begin{longtable}{>{\raggedright\arraybackslash}m{\dimexpr0.40\linewidth - 2\tabcolsep\relax}
-                  >{\centering\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
-                  >{\centering\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}}
 
 \caption{\textbf{Infraestructura energética de << ge_municipio >>}}
 \label{tabla_ge_energia} \\
@@ -1352,6 +1395,7 @@ Fuente: IIEG, con base en INEGI. DENUE, 2025. INEGI. Topografía 1:50 000, 2025.
 \clearpage
 \mapatitulo{Infraestructura energética de << ge_municipio >>}
 << ge_ie_mapa >>
-\par\vspace{-4pt}\parbox{\linewidth}{\footnotesize
-Fuente: IIEG, con base en INEGI. DENUE, 2025. INEGI. Topografía 1:50 000, 2025. SENER. Mapa de Hidrocarburos, 2025.}
+\mapafuente{Fuente: & INEGI. Directorio Estadístico Nacional de Unidades Económicas, 2025.\\
+ & INEGI. Conjunto nacional de información topográfica a escala 1:50\,000, 2025.\\
+ & SENER. Mapa de Hidrocarburos, 2025.}
 <% endif %>
