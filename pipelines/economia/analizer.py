@@ -53,7 +53,7 @@ def _grafica_latex(path, municipio, tipo, datos, num):
     anio_fin = ultimos[-1]["anio"]
     titulo = (
         f"Valor de la producción {tipo} de "
-        f"{municipio}, {anio_ini}-{anio_fin} (miles de pesos)"
+        f"{municipio}, {anio_ini}-{anio_fin} (millones de pesos)"
     )
     return (
         "\\begin{figure}[H]\n"
@@ -61,7 +61,9 @@ def _grafica_latex(path, municipio, tipo, datos, num):
         f"{{\\color{{colorTexto}}\\textbf{{{titulo}}}}}\n"
         "\\vspace{0.3cm}\n\n"
         f"\\includegraphics[width=0.95\\textwidth]{{{path}}}\n"
-        "\\end{figure}"
+        "\\end{figure}\n"
+        "\\vspace{-10pt}\\noindent{\\footnotesize Fuente: SAGARPA. "
+        f"Datos abiertos de la DGSIAP, {anio_ini}--{anio_fin}.}}"
     )
 
 
@@ -181,6 +183,10 @@ def _build_vacb_table(vacb_actual, vacb_anterior, vacb_total_actual, factor):
     return rows
 
 
+def _norm_grupo(nombre):
+    return nombre.lower().replace("ind eléctrica", "ind. eléctrica")
+
+
 def _build_imss_grupos(divisiones, total_t0):
     rows = []
     for d in divisiones:
@@ -191,7 +197,7 @@ def _build_imss_grupos(divisiones, total_t0):
             var_pct_val = var_nom / t1 * 100
             rows.append(
                 {
-                    "grupo": d["division"],
+                    "grupo": _norm_grupo(d["division"]),
                     "t2": _fmt_int(t2),
                     "t1": _fmt_int(t1),
                     "t0": _fmt_int(t0),
@@ -203,7 +209,7 @@ def _build_imss_grupos(divisiones, total_t0):
         else:
             rows.append(
                 {
-                    "grupo": d["division"],
+                    "grupo": _norm_grupo(d["division"]),
                     "t2": _fmt_int(t2),
                     "t1": _fmt_int(t1),
                     "t0": _fmt_int(t0),
@@ -486,7 +492,7 @@ class Analizer(Stage):
 
             if imss_divisiones:
                 top = imss_divisiones[0]
-                ctx["ec_grupo_ec_con_mas_empleos"] = top["division"]
+                ctx["ec_grupo_ec_con_mas_empleos"] = _norm_grupo(top["division"])
                 ctx["ec_num_trabajadores_grupo_mayor"] = _fmt_int(top["t0"])
                 ctx["ec_porcentaje_trabajadores_grupo_mayor"] = (
                     _pct(top["t0"] / mun_t0 * 100) if mun_t0 else ND

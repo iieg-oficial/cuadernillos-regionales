@@ -6,7 +6,7 @@ def get_valor_produccion_agricola_anual(session: Session, cve_mun: int):
     stmt = text("""
         SELECT
             anio,
-            ROUND(SUM(valor_produccion)::numeric / 1000, 2) AS valor_miles
+            ROUND(SUM(valor_produccion)::numeric / 1000000, 2) AS valor_millones
         FROM public.stg_agricola
         WHERE entidad_id = 14
           AND municipio_id = :cve_mun
@@ -15,7 +15,7 @@ def get_valor_produccion_agricola_anual(session: Session, cve_mun: int):
         ORDER BY anio
     """)
     rows = session.execute(stmt, {"cve_mun": cve_mun}).fetchall()
-    return [{"anio": r.anio, "valor_miles": float(r.valor_miles)} for r in rows]
+    return [{"anio": r.anio, "valor_millones": float(r.valor_millones)} for r in rows]
 
 
 def get_valor_produccion_agricola_estatal(session: Session, anio: int):

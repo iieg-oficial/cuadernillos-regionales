@@ -16,7 +16,7 @@ def grafica_produccion(
 ):
     ultimos = datos[-N_ANIOS:]
     anios = [str(d["anio"]) for d in ultimos]
-    valores = [d["valor_miles"] for d in ultimos]
+    valores = [d["valor_millones"] for d in ultimos]
 
     colores = [COLOR_GRIS] * len(anios)
     colores[-1] = COLOR_SECCION
