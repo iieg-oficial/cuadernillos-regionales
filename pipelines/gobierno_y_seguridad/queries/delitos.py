@@ -4,9 +4,11 @@ from sqlalchemy.orm import Session
 
 def get_anios_disponibles(session: Session) -> list[int]:
     stmt = text("""
-        SELECT DISTINCT anio
+        SELECT anio
         FROM v_delitos_comparables_general
         WHERE clave_ent = '14'
+        GROUP BY anio
+        HAVING COUNT(DISTINCT mes) = 12
         ORDER BY anio DESC
         LIMIT 2
     """)
