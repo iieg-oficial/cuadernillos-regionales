@@ -66,18 +66,3 @@ def get_ingresos_municipales(
         }
         for row in rows
     ]
-
-
-def get_poblacion_municipal(session: Session) -> list[dict]:
-    stmt = text("""
-        SELECT p.municipio_id AS cve_mun, p.total
-        FROM poblacion p
-        JOIN fuentes f ON f.id = p.fuente_id
-        WHERE p.entidad_id = 14
-          AND p.localidad_id IS NULL
-          AND p.municipio_id > 0
-          AND f.fecha = (SELECT MAX(fecha) FROM fuentes)
-    """)
-    return [
-        {"cve_mun": row.cve_mun, "total": row.total} for row in session.execute(stmt)
-    ]

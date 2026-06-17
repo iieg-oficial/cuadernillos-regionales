@@ -14,10 +14,12 @@ from pipelines.gobierno_y_seguridad.queries.incidencia import (
 from pipelines.gobierno_y_seguridad.queries.ingresos import (
     get_anios_efipem,
     get_ingresos_municipales,
-    get_poblacion_municipal,
 )
 from pipelines.gobierno_y_seguridad.queries.participacion import (
     get_participacion_por_municipio,
+)
+from pipelines.gobierno_y_seguridad.queries.poblacion import (
+    get_poblacion_conapo,
 )
 
 
@@ -106,12 +108,13 @@ class Extract(Stage):
             Logger.warning("No se pudo conectar a la base de datos de efipem")
 
         try:
-            Logger.info("Gobierno y Seguridad: extrayendo población municipal")
-            settings_pob = DatabaseSettings.from_env("censo_poblacion")
+            Logger.info("Gobierno y Seguridad: extrayendo población CONAPO")
+            settings_pob = DatabaseSettings.from_env("conapo")
             with get_session(settings_pob) as session:
-                poblacion = get_poblacion_municipal(session)
+                anios_pob = [a for a in (anio_efipem, anio_anterior_efipem) if a]
+                poblacion = get_poblacion_conapo(session, anios_pob)
         except Exception:
-            Logger.warning("No se pudo conectar a la base de datos de censo_poblacion")
+            Logger.warning("No se pudo conectar a la base de datos de conapo")
 
         return {
             "anio_actual": anio_actual,

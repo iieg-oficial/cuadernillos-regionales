@@ -156,7 +156,7 @@ def _build_ingresos_por_municipio(ingresos_raw):
     for r in ingresos_raw:
         key = (r["cvegeo"], r["anio"])
         entry = data.setdefault(
-            key, {"total": 0, "propios": 0, "cve_mun": r["cve_mun"]}
+            key, {"total": 0, "propios": 0, "cve_mun": r["cve_mun"], "anio": r["anio"]}
         )
         if r["clasificador"] == "Tema":
             entry["total"] = r["valor"]
@@ -185,14 +185,14 @@ def _process_ingresos(
     if not ingresos_raw or not anio_efipem:
         return None
 
-    pob_map = {r["cve_mun"]: r["total"] for r in poblacion}
+    pob_map = {(r["cve_mun"], r["anio"]): r["total"] for r in poblacion}
     data = _build_ingresos_por_municipio(ingresos_raw)
 
     def pct_propios(v):
         return v["propios"] / v["total"] * 100 if v["total"] else None
 
     def per_capita(v):
-        pob = pob_map.get(v["cve_mun"])
+        pob = pob_map.get((v["cve_mun"], v["anio"]))
         return v["total"] / pob if pob else None
 
     rank_pct_act = _rank_metric(data, anio_efipem, pct_propios)
