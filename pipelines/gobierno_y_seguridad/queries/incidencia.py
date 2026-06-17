@@ -1,3 +1,5 @@
+from collections import defaultdict
+
 from sqlalchemy import text
 from sqlalchemy.orm import Session
 
@@ -16,83 +18,114 @@ MES_A_NUMERO = {
     "Diciembre": 12,
 }
 
+NUM_MESES = 12
+
+
+def get_ventana_ultimos_meses(
+    session: Session, num_meses: int = NUM_MESES
+) -> list[tuple]:
+    stmt = text("""
+        SELECT DISTINCT anio, mes
+        FROM v_delitos_comparables_general
+        WHERE clave_ent = '14'
+    """)
+    indices = [
+        row.anio * 12 + (MES_A_NUMERO[row.mes] - 1)
+        for row in session.execute(stmt)
+        if row.mes in MES_A_NUMERO
+    ]
+    if not indices:
+        return []
+    last_idx = max(indices)
+    start_idx = last_idx - (num_meses - 1)
+    return [(idx // 12, idx % 12 + 1) for idx in range(start_idx, last_idx + 1)]
+
 
 def get_carpetas_por_mes(
-    session: Session, cve_municipio: str, anio_anterior: int, anio_actual: int
+    session: Session, cve_municipio: str, ventana: list[tuple]
 ) -> list[dict]:
+    if not ventana:
+        return []
+    anios = tuple(sorted({anio for anio, _ in ventana}))
     stmt = text("""
         SELECT anio, mes, SUM(conteo) AS total
         FROM v_delitos_comparables_general
         WHERE cve_municipio = :cve_municipio
-          AND anio IN (:anio_anterior, :anio_actual)
+          AND anio IN :anios
         GROUP BY anio, mes
-        ORDER BY anio, mes
     """)
-    rows = session.execute(
-        stmt,
-        {
-            "cve_municipio": cve_municipio,
-            "anio_anterior": anio_anterior,
-            "anio_actual": anio_actual,
-        },
-    )
-    result = []
+    rows = session.execute(stmt, {"cve_municipio": cve_municipio, "anios": anios})
+    totales = {}
     for row in rows:
         mes_num = MES_A_NUMERO.get(row.mes)
         if mes_num:
-            result.append({"anio": row.anio, "mes": mes_num, "total": row.total})
-    result.sort(key=lambda r: (r["anio"], r["mes"]))
-    return result
+            totales[(row.anio, mes_num)] = row.total
+    return [
+        {"anio": anio, "mes": mes, "total": totales.get((anio, mes), 0)}
+        for anio, mes in ventana
+    ]
 
 
 def get_casos_por_bien_afectado(
-    session: Session, cve_municipio: str, anio_anterior: int, anio_actual: int
+    session: Session, cve_municipio: str, ventana: list[tuple]
 ) -> list[dict]:
+    if not ventana:
+        return []
+    anios = tuple(sorted({anio for anio, _ in ventana}))
+    window = set(ventana)
     stmt = text("""
-        SELECT bien_juridico_afectado, SUM(conteo) AS total
+        SELECT anio, mes, bien_juridico_afectado, SUM(conteo) AS total
         FROM v_delitos_comparables_general
         WHERE cve_municipio = :cve_municipio
-          AND anio IN (:anio_anterior, :anio_actual)
-        GROUP BY bien_juridico_afectado
-        ORDER BY total DESC
+          AND anio IN :anios
+        GROUP BY anio, mes, bien_juridico_afectado
     """)
-    rows = session.execute(
-        stmt,
-        {
-            "cve_municipio": cve_municipio,
-            "anio_anterior": anio_anterior,
-            "anio_actual": anio_actual,
-        },
+    rows = session.execute(stmt, {"cve_municipio": cve_municipio, "anios": anios})
+    agg = defaultdict(int)
+    for row in rows:
+        mes_num = MES_A_NUMERO.get(row.mes)
+        if mes_num and (row.anio, mes_num) in window:
+            agg[row.bien_juridico_afectado] += row.total
+    return sorted(
+        [{"bien_afectado": bien, "total": total} for bien, total in agg.items()],
+        key=lambda r: r["total"],
+        reverse=True,
     )
-    return [
-        {"bien_afectado": row.bien_juridico_afectado, "total": row.total}
-        for row in rows
-    ]
 
 
 def get_casos_por_delito(
     session: Session,
     cve_municipio: str,
     bien_afectado: str,
-    anio_anterior: int,
-    anio_actual: int,
+    ventana: list[tuple],
 ) -> list[dict]:
+    if not ventana:
+        return []
+    anios = tuple(sorted({anio for anio, _ in ventana}))
+    window = set(ventana)
     stmt = text("""
-        SELECT tipo_delito, SUM(conteo) AS total
+        SELECT anio, mes, tipo_delito, SUM(conteo) AS total
         FROM v_delitos_comparables_general
         WHERE cve_municipio = :cve_municipio
           AND bien_juridico_afectado = :bien_afectado
-          AND anio IN (:anio_anterior, :anio_actual)
-        GROUP BY tipo_delito
-        ORDER BY total DESC
+          AND anio IN :anios
+        GROUP BY anio, mes, tipo_delito
     """)
     rows = session.execute(
         stmt,
         {
             "cve_municipio": cve_municipio,
             "bien_afectado": bien_afectado,
-            "anio_anterior": anio_anterior,
-            "anio_actual": anio_actual,
+            "anios": anios,
         },
     )
-    return [{"delito": row.tipo_delito, "total": row.total} for row in rows]
+    agg = defaultdict(int)
+    for row in rows:
+        mes_num = MES_A_NUMERO.get(row.mes)
+        if mes_num and (row.anio, mes_num) in window:
+            agg[row.tipo_delito] += row.total
+    return sorted(
+        [{"delito": delito, "total": total} for delito, total in agg.items()],
+        key=lambda r: r["total"],
+        reverse=True,
+    )

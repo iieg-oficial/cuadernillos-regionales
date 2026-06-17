@@ -10,6 +10,7 @@ from pipelines.gobierno_y_seguridad.queries.incidencia import (
     get_carpetas_por_mes,
     get_casos_por_bien_afectado,
     get_casos_por_delito,
+    get_ventana_ultimos_meses,
 )
 from pipelines.gobierno_y_seguridad.queries.ingresos import (
     get_anios_efipem,
@@ -52,11 +53,12 @@ class Extract(Stage):
                 conteo_municipio_anio = get_conteo_por_municipio_anio(
                     session, anio_anterior, anio_actual
                 )
+                ventana_incidencia = get_ventana_ultimos_meses(session)
                 carpetas_por_mes = get_carpetas_por_mes(
-                    session, cve_municipio, anio_anterior, anio_actual
+                    session, cve_municipio, ventana_incidencia
                 )
                 casos_bien_afectado = get_casos_por_bien_afectado(
-                    session, cve_municipio, anio_anterior, anio_actual
+                    session, cve_municipio, ventana_incidencia
                 )
 
                 if casos_bien_afectado:
@@ -65,8 +67,7 @@ class Extract(Stage):
                         session,
                         cve_municipio,
                         principal_bien,
-                        anio_anterior,
-                        anio_actual,
+                        ventana_incidencia,
                     )
         except Exception:
             Logger.warning(
