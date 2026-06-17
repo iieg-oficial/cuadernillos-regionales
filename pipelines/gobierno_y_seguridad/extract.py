@@ -111,7 +111,18 @@ class Extract(Stage):
             Logger.info("Gobierno y Seguridad: extrayendo población CONAPO")
             settings_pob = DatabaseSettings.from_env("conapo")
             with get_session(settings_pob) as session:
-                anios_pob = [a for a in (anio_efipem, anio_anterior_efipem) if a]
+                anios_pob = sorted(
+                    {
+                        a
+                        for a in (
+                            anio_efipem,
+                            anio_anterior_efipem,
+                            anio_actual,
+                            anio_anterior,
+                        )
+                        if a
+                    }
+                )
                 poblacion = get_poblacion_conapo(session, anios_pob)
         except Exception:
             Logger.warning("No se pudo conectar a la base de datos de conapo")

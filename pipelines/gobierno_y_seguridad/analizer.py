@@ -396,7 +396,10 @@ class Analizer(Stage):
         cve_mun = int(self.municipio_id)
         mun_id = str(cve_mun)
 
-        munis = aggregate(conteo, anio_anterior, anio_actual)
+        poblacion = input_data.get("poblacion", [])
+        pob_map = {(r["cve_mun"], r["anio"]): r["total"] for r in poblacion}
+
+        munis = aggregate(conteo, anio_anterior, anio_actual, pob_map)
         rank(munis)
         region = filter_region(munis, mun_id)
 
@@ -452,7 +455,6 @@ class Analizer(Stage):
         ctx.update(participacion_ctx)
 
         ingresos_raw = input_data.get("ingresos_raw", [])
-        poblacion = input_data.get("poblacion", [])
         anio_efipem = input_data.get("anio_efipem")
         anio_anterior_efipem = input_data.get("anio_anterior_efipem")
 
