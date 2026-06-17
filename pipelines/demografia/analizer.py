@@ -412,7 +412,7 @@ class Analizer(Stage):
             ctx["de_grado_marginacion"] = ctx["de_grado_marginacion_municipio"]
             ctx["de_ranking_marginacion"] = ctx["de_ranking_marginacion_municipio"]
             ctx["de_marg_indice_2020"] = _fmt(
-                mun_marg_2020.get("indice_marginacion"), 4
+                mun_marg_2020.get("indice_marginacion"), 2
             )
             ctx["de_marg_grado_2020"] = _grado(mun_marg_2020.get("grado_marginacion"))
             ctx["de_marg_analfabeta_2020"] = _fmt(
@@ -468,7 +468,7 @@ class Analizer(Stage):
             )
             ctx["de_marg_pos_entidad_2020"] = ctx["de_ranking_marginacion_municipio"]
             ctx["de_marg_pos_nacional_2020"] = (
-                mun_marg_2020.get("lugar_contexto_nacional") or ND
+                _fmt_int(mun_marg_2020.get("lugar_contexto_nacional")) or ND
             )
         else:
             ctx["de_grado_marginacion_municipio"] = ND
@@ -499,7 +499,7 @@ class Analizer(Stage):
 
         if mun_marg_2015:
             ctx["de_marg_indice_2015"] = _fmt(
-                mun_marg_2015.get("indice_marginacion"), 4
+                mun_marg_2015.get("indice_marginacion"), 2
             )
             ctx["de_marg_grado_2015"] = _grado(mun_marg_2015.get("grado_marginacion"))
             ctx["de_marg_analfabeta_2015"] = _fmt(
@@ -531,7 +531,7 @@ class Analizer(Stage):
             )
             ctx["de_marg_pos_entidad_2015"] = _marg_ranking(cvegeo, marginacion_2015)
             ctx["de_marg_pos_nacional_2015"] = (
-                mun_marg_2015.get("lugar_contexto_nacional") or ND
+                _fmt_int(mun_marg_2015.get("lugar_contexto_nacional")) or ND
             )
             ctx["de_grado_marginacion_intercensal_mun"] = _grado(
                 mun_marg_2015.get("grado_marginacion")
@@ -558,7 +558,7 @@ class Analizer(Stage):
 
         if mun_marg_2010:
             ctx["de_marg_indice_2010"] = _fmt(
-                mun_marg_2010.get("indice_marginacion"), 4
+                mun_marg_2010.get("indice_marginacion"), 2
             )
             ctx["de_marg_grado_2010"] = _grado(mun_marg_2010.get("grado_marginacion"))
             ctx["de_marg_analfabeta_2010"] = _fmt(
@@ -590,7 +590,7 @@ class Analizer(Stage):
             )
             ctx["de_marg_pos_entidad_2010"] = _marg_ranking(cvegeo, marginacion_2010)
             ctx["de_marg_pos_nacional_2010"] = (
-                mun_marg_2010.get("lugar_contexto_nacional") or ND
+                _fmt_int(mun_marg_2010.get("lugar_contexto_nacional")) or ND
             )
             ctx["de_grado_marginacion_anterior"] = _grado(
                 mun_marg_2010.get("grado_marginacion")
@@ -628,7 +628,7 @@ class Analizer(Stage):
                 else ND
             )
             ctx["de_jal_marg_lugar_nacional"] = (
-                marginacion_estatal_2020.get("lugar_contexto_nacional") or ND
+                _fmt_int(marginacion_estatal_2020.get("lugar_contexto_nacional")) or ND
             )
             ctx["de_jal_marg_analfabeta"] = _fmt(
                 marginacion_estatal_2020.get("porc_pob15_analfabeta")
