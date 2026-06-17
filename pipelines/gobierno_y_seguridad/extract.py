@@ -60,15 +60,9 @@ class Extract(Stage):
                 casos_bien_afectado = get_casos_por_bien_afectado(
                     session, cve_municipio, ventana_incidencia
                 )
-
-                if casos_bien_afectado:
-                    principal_bien = casos_bien_afectado[0]["bien_afectado"]
-                    casos_por_delito = get_casos_por_delito(
-                        session,
-                        cve_municipio,
-                        principal_bien,
-                        ventana_incidencia,
-                    )
+                casos_por_delito = get_casos_por_delito(
+                    session, cve_municipio, ventana_incidencia
+                )
         except Exception:
             Logger.warning(
                 "No se pudo conectar a la base de datos de delitos_fuero_comun"

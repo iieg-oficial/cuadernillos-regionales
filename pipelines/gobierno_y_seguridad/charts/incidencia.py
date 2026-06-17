@@ -206,7 +206,6 @@ def grafica_bienes_juridicos(
 
 def grafica_principales_delitos(
     casos_por_delito,
-    bien_principal,
     municipio,
     output_path: Path,
 ):

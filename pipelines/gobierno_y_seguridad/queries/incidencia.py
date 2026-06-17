@@ -94,36 +94,26 @@ def get_casos_por_bien_afectado(
 
 
 def get_casos_por_delito(
-    session: Session,
-    cve_municipio: str,
-    bien_afectado: str,
-    ventana: list[tuple],
+    session: Session, cve_municipio: str, ventana: list[tuple]
 ) -> list[dict]:
     if not ventana:
         return []
     anios = tuple(sorted({anio for anio, _ in ventana}))
     window = set(ventana)
     stmt = text("""
-        SELECT anio, mes, tipo_delito, SUM(conteo) AS total
+        SELECT anio, mes, subtipo_delito, SUM(conteo) AS total
         FROM v_delitos_comparables_general
         WHERE cve_municipio = :cve_municipio
-          AND bien_juridico_afectado = :bien_afectado
           AND anio IN :anios
-        GROUP BY anio, mes, tipo_delito
+          AND subtipo_delito NOT ILIKE 'Otros%'
+        GROUP BY anio, mes, subtipo_delito
     """)
-    rows = session.execute(
-        stmt,
-        {
-            "cve_municipio": cve_municipio,
-            "bien_afectado": bien_afectado,
-            "anios": anios,
-        },
-    )
+    rows = session.execute(stmt, {"cve_municipio": cve_municipio, "anios": anios})
     agg = defaultdict(int)
     for row in rows:
         mes_num = MES_A_NUMERO.get(row.mes)
         if mes_num and (row.anio, mes_num) in window:
-            agg[row.tipo_delito] += row.total
+            agg[row.subtipo_delito] += row.total
     return sorted(
         [{"delito": delito, "total": total} for delito, total in agg.items()],
         key=lambda r: r["total"],

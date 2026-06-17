@@ -532,20 +532,18 @@ class Analizer(Stage):
                 )
             )
 
-        if casos_por_delito and casos_bien_afectado:
-            bien_principal = casos_bien_afectado[0]["bien_afectado"].lower()
+        if casos_por_delito:
             chart_path = CHARTS_DIR / mun_id_str / "gs_principales_delitos.png"
             grafica_principales_delitos(
                 casos_por_delito,
-                bien_principal,
                 nombre,
                 chart_path,
             )
             ctx["gs_grafica_carpetas_cinco_principales_delitos"] = _grafica_latex(
                 chart_path,
                 3,
-                "Cantidad de carpetas por los 5 subtipos de delitos "
-                f"que afectaron más a {bien_principal}, {periodo}",
+                "Cantidad de carpetas por los 5 principales subtipos de delitos, "
+                f"{periodo}",
                 fuente_sesnsp,
             )
         else:
