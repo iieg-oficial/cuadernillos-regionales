@@ -30,7 +30,11 @@
 
 El flujo de trabajo se resume en el siguiente diagrama:
 
-<img src="assets/workflow.svg" >
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/workflow-darkmode.svg">
+  <source media="(prefers-color-scheme: light)" srcset="assets/workflow.svg">
+  <img alt="Visión general del flujo de contribución" src="assets/workflow.svg">
+</picture>
 
 Esencialmente los pasos son los siguientes:
 
