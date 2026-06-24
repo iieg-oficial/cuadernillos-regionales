@@ -11,20 +11,16 @@ def get_vacb_por_subsector(session: Session, cve_mun: int, anio: int):
     if anio == 2024:
         stmt = text("""
             SELECT
-                SPLIT_PART(v.subsector, '.', 1) AS codigo,
-                ca.descripcion AS subsector,
-                SUM(v.valor_agregado_censal_bruto_mdp) AS vacb
-            FROM vw_economico_municipal_2024 v
-            JOIN cat_actividades_economicas ca
-                ON SPLIT_PART(v.subsector, '.', 1) = ca.codigo
-                AND ca.censo_id = (SELECT id FROM cat_censos WHERE anio = 2024)
-                AND ca.codigo_id = 3
-            WHERE v.cve_ent = 14
-              AND v.cve_mun = :cve_mun
-              AND v.estrato_id = 1
-              AND LENGTH(SPLIT_PART(v.subsector, '.', 1)) = 3
-              AND v.valor_agregado_censal_bruto_mdp IS NOT NULL
-            GROUP BY SPLIT_PART(v.subsector, '.', 1), ca.descripcion
+                actividad_codigo AS codigo,
+                actividad AS subsector,
+                SUM(valor_agregado_censal_bruto_mdp) AS vacb
+            FROM vw_economico_municipal_2024
+            WHERE cve_ent = 14
+              AND cve_mun = :cve_mun
+              AND estrato_id = 1
+              AND LENGTH(actividad_codigo) = 3
+              AND valor_agregado_censal_bruto_mdp IS NOT NULL
+            GROUP BY actividad_codigo, actividad
             ORDER BY vacb DESC NULLS LAST
         """)
     else:
@@ -57,13 +53,13 @@ def get_vacb_total(session: Session, cve_mun: int, anio: int):
 
     if anio == 2024:
         stmt = text("""
-            SELECT SUM(v.valor_agregado_censal_bruto_mdp) AS vacb_total
-            FROM vw_economico_municipal_2024 v
-            WHERE v.cve_ent = 14
-              AND v.cve_mun = :cve_mun
-              AND v.estrato_id = 1
-              AND LENGTH(SPLIT_PART(v.subsector, '.', 1)) = 3
-              AND v.valor_agregado_censal_bruto_mdp IS NOT NULL
+            SELECT SUM(valor_agregado_censal_bruto_mdp) AS vacb_total
+            FROM vw_economico_municipal_2024
+            WHERE cve_ent = 14
+              AND cve_mun = :cve_mun
+              AND estrato_id = 1
+              AND LENGTH(actividad_codigo) = 3
+              AND valor_agregado_censal_bruto_mdp IS NOT NULL
         """)
     else:
         stmt = text("""
