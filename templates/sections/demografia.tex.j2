@@ -1,190 +1,224 @@
 \clearpage
 \thispagestyle{empty}
 \AddToShipoutPictureBG*{%
-  \includegraphics[width=\paperwidth,height=\paperheight]{templates/assets/portada.png}%
+  \AtPageUpperLeft{\raisebox{-\height}{\includegraphics[width=\paperwidth]{<< assets_path >>portadilla.png}}}%
+  \AtPageLowerLeft{\includegraphics[width=\paperwidth]{<< assets_path >>footer_section.png}}%
 }
-\vspace*{5cm}
+\vspace*{\stretch{1}}
 \begin{center}
-  {\color{colorTexto}\bfseries\fontsize{23}{26}\selectfont Demografía y sociedad} \\[2.5em]
+  {\color{colorTexto}\bfseries\fontsize{30}{34}\selectfont Demografía y sociedad} \\[2.5em]
   {\color{colorTexto}\lexendsemibold
   \shortstack{
-    {\LARGE << de_municipio_nombre >>} \\[0.3cm]
-    {\LARGE Diagnóstico del municipio} \\[0.3cm]
-    {\LARGE Agosto 2026}
+    {\huge << de_municipio_nombre >>} \\[0.3cm]
+    {\huge Agosto 2026}
   }}
 \end{center}
+\vspace*{\stretch{2}}
 \clearpage
 
-\section{Demografía y Sociedad}
+\section{Demografía y sociedad}
 
-\subsection{Aspectos Demográficos}
+\subsection{Aspectos demográficos}
 
-Conforme a la información del Censo de Población y Vivienda que publicó INEGI,
+Conforme a la información del Censo de Población y Vivienda 2020 que publicó INEGI,
 el municipio de << de_municipio_nombre >> tenía una población de << de_poblacion_total_censo >>
-personas en << de_anio_censo >>, de las cuales el << de_porcentaje_hombres >> por ciento eran
-hombres y << de_porcentaje_mujeres >> por ciento mujeres.
+personas en << de_anio_censo >>, de las cuales el << de_porcentaje_hombres >> eran
+hombres y << de_porcentaje_mujeres >> mujeres.
 
 En comparación con la población que tenía << de_municipio_nombre >> en << de_anio_encuesta_intercensal >>,
 se observa una variación de << de_variacion_poblacion_quinquenio_anterior >> personas, que representa una
-variación relativa de << de_variacion_porcentual_poblacion_quinquenio_anterior >> por ciento en cinco años.
+variación relativa de << de_variacion_porcentual_poblacion_quinquenio_anterior >> en cinco años.
 
 En comparación con << de_anio_censo_anterior >>, la población municipal tuvo una variación de
 << de_variacion_poblacion_quinquenio >> personas, representando una variación de
-<< de_variacion_porcentual_poblacion_quinquenio >>\% de << de_anio_censo_anterior >> a << de_anio_censo >>.
+<< de_variacion_porcentual_poblacion_quinquenio >> \% de << de_anio_censo_anterior >> a << de_anio_censo >>.
 
-\begin{table}[H]
-\label{tabla_poblacion_total_sexo}
-\centering
-\caption{Población total por sexo y variaciones}
-\begin{threeparttable}
 \setlength{\tabcolsep}{3pt}
 \footnotesize
-\begin{tabularx}{\textwidth}{|>{\centering\arraybackslash}X
-                |>{\centering\arraybackslash}X
-                |>{\centering\arraybackslash}X
-                |>{\centering\arraybackslash}X
-                |>{\centering\arraybackslash}X
-                |>{\centering\arraybackslash}X|}
+\begin{longtable}{>{\raggedright\arraybackslash}m{\dimexpr0.16\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.14\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.14\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.14\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.21\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.21\linewidth - 2\tabcolsep\relax}}
+
+\caption{\textbf{Población total de << de_municipio_nombre >> y variación porcentual según sexo} \\
+<< de_anio_censo_anterior >>, << de_anio_encuesta_intercensal >> y << de_anio_censo >>}
+\label{cuadro_poblacion_total_sexo} \\
+
 \hline
 
-% Subtítulo
-\rowcolor{colorSeccion}
-\multicolumn{6}{|c|}{\color{white}<< de_municipio_nombre >>, << de_anio_censo_anterior >>, << de_anio_encuesta_intercensal >>, << de_anio_censo >>} \\
-\hline
-
-% Encabezado
 \rowcolor{gray!30}
- & << de_anio_censo_anterior >> & << de_anio_encuesta_intercensal >> & << de_anio_censo >> & \makecell{Variación \% \\ << de_anio_censo_anterior >>--<< de_anio_encuesta_intercensal >>} & \makecell{Variación \% \\ << de_anio_encuesta_intercensal >>--<< de_anio_censo >>} \\
+ & \thhl{0.14}{<< de_anio_censo_anterior >>} & \thhl{0.14}{<< de_anio_encuesta_intercensal >>} & \thhl{0.14}{<< de_anio_censo >>}
+ & \thhl{0.21}{Variación (\%)\newline << de_anio_censo_anterior >>--<< de_anio_encuesta_intercensal >>}
+ & \thhl{0.21}{Variación (\%)\newline << de_anio_encuesta_intercensal >>--<< de_anio_censo >>} \\
+\hline
+\endfirsthead
+
+\multicolumn{6}{l}{\small\textbf{(continuación)}} \\
+\hline
+\rowcolor{gray!30}
+ & \thhl{0.14}{<< de_anio_censo_anterior >>} & \thhl{0.14}{<< de_anio_encuesta_intercensal >>} & \thhl{0.14}{<< de_anio_censo >>}
+ & \thhl{0.21}{Variación (\%)\newline << de_anio_censo_anterior >>--<< de_anio_encuesta_intercensal >>}
+ & \thhl{0.21}{Variación (\%)\newline << de_anio_encuesta_intercensal >>--<< de_anio_censo >>} \\
+\hline
+\endhead
+
+\hline
+\multicolumn{6}{r}{\small\textbf{(continúa)}} \\
+\endfoot
+
+\hline
+\endlastfoot
+
+\rowcolor{filaResaltada}
+\thdr{Total} & \thdr{<< de_tabla_pob_total_2010 >>} & \thdr{<< de_tabla_pob_total_2015 >>} & \thdr{<< de_tabla_pob_total_2020 >>}
+& \thdr{<< de_tabla_pob_var_pct_total_2010_2015 >>} & \thdr{<< de_tabla_pob_var_pct_total_2015_2020 >>} \\
 \hline
 
-Mujeres & << de_tabla_pob_mujeres_2010 >> & << de_tabla_pob_mujeres_2015 >> & << de_tabla_pob_mujeres_2020 >> & << de_tabla_pob_var_pct_mujeres_2010_2015 >> & << de_tabla_pob_var_pct_mujeres_2015_2020 >> \\
+Mujeres & << de_tabla_pob_mujeres_2010 >> & << de_tabla_pob_mujeres_2015 >> & << de_tabla_pob_mujeres_2020 >>
+& << de_tabla_pob_var_pct_mujeres_2010_2015 >> & << de_tabla_pob_var_pct_mujeres_2015_2020 >> \\
 \hline
 
-Hombres & << de_tabla_pob_hombres_2010 >> & << de_tabla_pob_hombres_2015 >> & << de_tabla_pob_hombres_2020 >> & << de_tabla_pob_var_pct_hombres_2010_2015 >> & << de_tabla_pob_var_pct_hombres_2015_2020 >> \\
+Hombres & << de_tabla_pob_hombres_2010 >> & << de_tabla_pob_hombres_2015 >> & << de_tabla_pob_hombres_2020 >>
+& << de_tabla_pob_var_pct_hombres_2010_2015 >> & << de_tabla_pob_var_pct_hombres_2015_2020 >> \\
 \hline
 
-\rowcolor{orange!20}
-Total & << de_tabla_pob_total_2010 >> & << de_tabla_pob_total_2015 >> & << de_tabla_pob_total_2020 >> & << de_tabla_pob_var_pct_total_2010_2015 >> & << de_tabla_pob_var_pct_total_2015_2020 >> \\
-\hline
 
-\end{tabularx}
-\begin{tablenotes}
-\small
-\item Elaboración del IIEG, con datos de INEGI, Censo de Población y Vivienda << de_anio_censo >> y
-Encuesta Intercensal << de_anio_encuesta_intercensal >>.
-\end{tablenotes}
-\end{threeparttable}
-\end{table}
+\end{longtable}
+\normalsize
+\tablefooter{Fuente: & INEGI, Censo de Población y Vivienda, << de_anio_censo_anterior >> y << de_anio_censo >>.\\
+& INEGI, Encuesta Intercensal, << de_anio_encuesta_intercensal >>.}
+
+Las personas habitantes del municipio de << de_municipio_nombre >> representaron
+el << de_porcentaje_habitantes_region >> \% del total de la
+<< nombre_region >> en << de_anio_censo >> y el << de_porcentaje_habitantes_jalisco >> \%
+del total de la población del estado de Jalisco en ese mismo año.
+
 
 \newpage
 
 En << de_anio_censo >>, << de_municipio_nombre >> contaba con << de_numero_localidades >>
-localidades. La localidad de << de_loc_mas_poblada >> era la más poblada en el municipio, con
-<< de_loc_mas_poblada_habitantes >> personas, concentrando el << de_porcentaje_habitantes_loc_mas_poblada >>\%
+localidades. La localidad de << de_loc_mas_poblada >> era la más poblada en el municipio con
+<< de_loc_mas_poblada_habitantes >> personas, concentrando el << de_porcentaje_habitantes_loc_mas_poblada >>
 de la población del municipio.
 
-\begin{table}[H]
-\label{tabla_localidades_mas_pobladas}
-\centering
-\caption{Localidades más pobladas}
-\begin{threeparttable}
 \setlength{\tabcolsep}{3pt}
 \footnotesize
-\begin{tabularx}{\textwidth}{|>{\centering\arraybackslash}X
-                |>{\centering\arraybackslash}X
-                |>{\centering\arraybackslash}X
-                |>{\centering\arraybackslash}X
-                |>{\centering\arraybackslash}X
-                |>{\centering\arraybackslash}X|}
-\hline
+\begin{longtable}{>{\raggedright\arraybackslash}m{\dimexpr0.11\linewidth - 2\tabcolsep\relax}
+                  >{\raggedright\arraybackslash}m{\dimexpr0.19\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.16\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.16\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.19\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.19\linewidth - 2\tabcolsep\relax}}
 
-% Subtítulo
-\rowcolor{colorSeccion}
-\multicolumn{6}{|c|}{\color{white}<< de_municipio_nombre >>, Jalisco} \\
-\hline
+\caption{\textbf{Número de habitantes, distribución y variación porcentual en localidades de << de_municipio_nombre >>} \\
+<< de_anio_censo_anterior >> y << de_anio_censo >>}
+\label{cuadro_localidades_mas_pobladas} \\
 
-% Encabezado fila 1
+\hline
 \rowcolor{gray!30}
-Clave & \makecell{Municipio/ \\ Localidad} &
-\makecell{Población \\ << de_anio_censo_anterior >>} &
-\makecell{Población \\ << de_anio_censo >>} &
-\makecell{\% Distribución \\ << de_anio_censo >>} &
-\makecell{\% Variación \\ << de_anio_censo_anterior >>--<< de_anio_censo >>} \\
+\thh{0.11}{Clave} & \thh{0.19}{Municipio/\newline Localidad} &
+\thhl{0.16}{Población\newline << de_anio_censo_anterior >>} &
+\thhl{0.16}{Población\newline << de_anio_censo >>} &
+\thhl{0.19}{Distribución (\%)\newline << de_anio_censo >>} &
+\thhl{0.19}{Variación (\%) \newline << de_anio_censo_anterior >>--<< de_anio_censo >>} \\
 \hline
+\endfirsthead
 
-% FILAS
-\rowcolor{orange!20}
-<< de_clave_municipio >> & << de_municipio_nombre >> & << de_tabla_pob_total_2010 >> & << de_tabla_pob_total_2020 >> & 100.00 & << de_variacion_porcentual_poblacion_quinquenio >> \\
+\multicolumn{6}{l}{\small\textbf{(continuación)}} \\
+\hline
+\rowcolor{gray!30}
+\thh{0.11}{Clave} & \thh{0.19}{Municipio/\newline Localidad} &
+\thhl{0.16}{Población\newline << de_anio_censo_anterior >>} &
+\thhl{0.16}{Población\newline << de_anio_censo >>} &
+\thhl{0.19}{\% Distribución\newline << de_anio_censo >>} &
+\thhl{0.19}{\% Variación\newline << de_anio_censo_anterior >>--<< de_anio_censo >>} \\
+\hline
+\endhead
+
+\hline
+\multicolumn{6}{r}{\small\textbf{(continúa)}} \\
+\endfoot
+
+\hline
+\endlastfoot
+
+\rowcolor{filaResaltada}
+\thdl{<< de_clave_municipio >>} & \thdl{<< de_municipio_nombre >>} & \thdr{<< de_tabla_pob_total_2010 >>} & \thdr{<< de_tabla_pob_total_2020 >>} & \thdr{100.00} & \thdr{<< de_variacion_porcentual_poblacion_quinquenio >>} \\
 \hline
 <% for loc in de_localidades %>
 << loc.clave >> & << loc.nombre >> & << loc.total_2010 >> & << loc.total_2020 >> & << loc.pct_2020 >> & << loc.var_pct_2010_2020 >> \\
 \hline
 <% endfor %>
 
-\end{tabularx}
-\begin{tablenotes}
-\small
-\item Elaboración del IIEG, con datos de INEGI, Censo de Población y Vivienda << de_anio_censo_anterior >> y
-<< de_anio_censo >>.
-\end{tablenotes}
-\end{threeparttable}
-\end{table}
+\end{longtable}
+\normalsize
+\tablefooter{Nota: & Se presenta la información para las cinco localidades más pobladas de << de_municipio_nombre >>.\\
+Fuente: & INEGI. Censo de Población y Vivienda, << de_anio_censo_anterior >> y << de_anio_censo >>.}
 
 \newpage
 
 \subsection{Intensidad migratoria}
-El Índice de Intensidad Migratoria México-Estados-Unidos << de_anio_censo >>, que publicó el
-Consejo Nacional de Población (CONAPO), mide de manera sintética el fenómeno migratorio entre ambos países.
+
+El Índice de Intensidad Migratoria México-Estados Unidos << de_anio_censo >>, que publicó el
+Consejo Nacional de Población (CONAPO), mide de manera sintética el fenómeno migratorio
+entre ambos países.
 
 De acuerdo con este índice, Jalisco se clasificó con un grado << de_grado_intensidad_migratoria_jal >>
-de intensidad migratoria, ocupando el lugar << de_ranking_jal_migracion >> entre las entidades
-federativas con mayor intensidad migratoria en << de_anio_censo >>.
+de intensidad migratoria, ocupando el lugar << de_ranking_jal_migracion >> a nivel nacional en << de_anio_censo >>.
 
 Conforme a los datos procesados para la estimación del índice, en << de_anio_censo >> un
-<< de_porcentaje_viviendas_remesas_jal >>\% de viviendas de Jalisco recibían remesas, un
-<< de_porcentaje_emigrantes_jal >>\% de viviendas tenían emigrantes con destino a Estados Unidos
-residentes en Estados Unidos, un << de_porcentaje_migrantes_circulares_jal >>\% de viviendas tenían
-migrantes circulares y un << de_porcentaje_migrantes_retorno_jal >>\% de las viviendas contaban con
+<< de_porcentaje_viviendas_remesas_jal >> de viviendas de Jalisco recibían remesas, un
+<< de_porcentaje_emigrantes_jal >> de viviendas tenían emigrantes residentes en Estados Unidos, un << de_porcentaje_migrantes_circulares_jal >> de viviendas tenían
+migrantes circulares y un << de_porcentaje_migrantes_retorno_jal >> de las viviendas contaban con
 migrantes de retorno de Estados Unidos.
 
 En << de_anio_censo >> el municipio de << de_municipio_nombre >> tuvo un grado
 << de_grado_intensidad_migratoria_mun >> de intensidad migratoria y se ubicó en el lugar
-<< de_ranking_mun_migracion >> con mayor intensidad migratoria dentro de los municipios del estado
-de Jalisco. Durante este año, un << de_porcentaje_viviendas_remesas_mun >>\% de las viviendas
-del municipio recibieron remesas, en un << de_porcentaje_emigrantes_mun >>\% se reportaron emigrantes
-con destino a Estados Unidos residentes en Estados Unidos, en el << de_porcentaje_migrantes_circulares_mun >>\%
+<< de_ranking_mun_migracion >> en intensidad migratoria dentro de los municipios del estado
+de Jalisco. Durante ese año, un << de_porcentaje_viviendas_remesas_mun >> de las viviendas
+del municipio recibieron remesas, en un << de_porcentaje_emigrantes_mun >> se reportaron emigrantes residentes en Estados Unidos, en el << de_porcentaje_migrantes_circulares_mun >>\,\%
 de las viviendas se registraron migrantes circulares del quinquenio anterior (<< de_anio_encuesta_intercensal >>
---<< de_anio_censo >>) y el << de_porcentaje_migrantes_retorno_mun >>\% de las viviendas
-contaban con migrantes de retorno de Estados Unidos (ver tabla \ref{tabla_intensidad_migratoria_eua}).
+--<< de_anio_censo >>) y el << de_porcentaje_migrantes_retorno_mun >> de las viviendas
+contaban con migrantes de retorno de Estados Unidos (ver cuadro \ref{cuadro_intensidad_migratoria_eua}).
 
 En el cálculo del índice del año << de_anio_censo_anterior >>, << de_municipio_nombre >>
 tenía un grado << de_grado_intensidad_migratoria_anterior_mun >> de intensidad migratoria y ocupaba
-el lugar << de_ranking_anterior_mun_migracion >> con mayor grado dentro de los municipios del estado de Jalisco.
+el lugar << de_ranking_anterior_mun_migracion >> a nivel estatal.
 
 \newpage
 
-\begin{table}[H]
-\label{tabla_intensidad_migratoria_eua}
-\centering
-\caption{Índice de Intensidad Migratoria México-Estados Unidos}
-\begin{threeparttable}
 \setlength{\tabcolsep}{3pt}
 \footnotesize
-\begin{tabularx}{\textwidth}{|X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|}
-\hline
+\begin{longtable}{>{\raggedright\arraybackslash}m{\dimexpr0.68\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.16\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.16\linewidth - 2\tabcolsep\relax}}
 
-% Encabezado superior
-\rowcolor{colorSeccion}
-\multicolumn{3}{|c|}{\color{white}\textbf{<< de_municipio_nombre >>, << de_anio_censo_anterior >> y << de_anio_censo >>}} \\
-\hline
+\caption{\textbf{Grado de Intensidad Migratoria México - Estados Unidos en << de_municipio_nombre >>} \\
+<< de_anio_censo_anterior >> y << de_anio_censo >>}
+\label{cuadro_intensidad_migratoria_eua} \\
 
-% Subtítulo
-\rowcolor{gray!50}
-Índice y grado de intensidad migratoria e indicadores socioeconómicos & << de_anio_censo_anterior >> & << de_anio_censo >> \\
 \hline
+\rowcolor{gray!30}
+\thh{0.68}{Grado de intensidad migratoria e indicadores socioeconómicos} & \thhl{0.16}{<< de_anio_censo_anterior >>} & \thhl{0.16}{<< de_anio_censo >>} \\
+\hline
+\endfirsthead
 
-Índice de intensidad migratoria & << de_iim_mun_2010 >> & << de_iim_mun_2020 >> \\
+\multicolumn{3}{l}{\small\textbf{(continuación)}} \\
 \hline
+\rowcolor{gray!30}
+\thh{0.68}{Grado de intensidad migratoria e indicadores socioeconómicos} & \thhl{0.16}{<< de_anio_censo_anterior >>} & \thhl{0.16}{<< de_anio_censo >>} \\
+\hline
+\endhead
+
+\hline
+\multicolumn{3}{r}{\small\textbf{(continúa)}} \\
+\endfoot
+
+\hline
+\endlastfoot
+
 Grado de intensidad migratoria & << de_grado_intensidad_migratoria_anterior_mun >> & << de_grado_intensidad_migratoria_mun >> \\
 \hline
 Total de viviendas & << de_viv_totales_mun_2010 >> & << de_viv_totales_mun_2020 >> \\
@@ -202,15 +236,11 @@ Posición que ocupa el municipio en la entidad & << de_ranking_anterior_mun_migr
 Posición que ocupa el municipio a escala nacional & << de_ranking_nacional_mun_migracion_2010 >> & << de_ranking_nacional_mun_migracion >> \\
 \hline
 
-\end{tabularx}
-\begin{tablenotes}
-\small
-\item Elaboración del IIEG, con datos de INEGI, Censo de Población y Vivienda
-<< de_anio_censo_anterior >> y << de_anio_censo >>.
-\item *Nota: los indicadores hacen referencia al quinquenio << de_anio_encuesta_intercensal >>--<< de_anio_censo >>.
-\end{tablenotes}
-\end{threeparttable}
-\end{table}
+\end{longtable}
+\normalsize
+\tablefooter{Nota: & Los indicadores hacen referencia al quinquenio anterior referido a << de_anio_encuesta_intercensal_anterior >>--<< de_anio_censo_anterior >> y << de_anio_encuesta_intercensal >>--<< de_anio_censo >>.\\
+Fuente: & CONAPO. Índice de Intensidad Migratoria México-Estados Unidos, << de_anio_censo_anterior >> y << de_anio_censo >> (actualizada el 24 de noviembre de 2025).\footnotemark}
+\footnotetext{Algunas bases de datos utilizadas incluyen actualizaciones retroactivas por lo que parte de la información histórica fue sujeta a cambios.}
 
 \newpage
 << de_mapa_grado_intensidad_migratoria >>
@@ -220,7 +250,7 @@ Posición que ocupa el municipio a escala nacional & << de_ranking_nacional_mun_
 
 La metodología para medir el fenómeno de la pobreza fue desarrollada por el Consejo Nacional
 de Evaluación de la Política de Desarrollo Social (CONEVAL) y permite profundizar en el estudio
-de la pobreza considerando tanto los ingresos cómo las carencias sociales desde una óptica
+de la pobreza considerando tanto los ingresos como las carencias sociales desde una óptica
 de los derechos sociales.
 
 De acuerdo con esta concepción, una persona se considera en situación de pobreza multidimensional
@@ -231,210 +261,170 @@ seguridad social, calidad y espacios de la vivienda, servicios básicos en la vi
 acceso a la alimentación.
 
 Conforme a la medición de pobreza multidimensional de << de_anio_censo >>,
-el << de_porcentaje_pobreza >> por ciento de la población
+el << de_porcentaje_pobreza >> de la población
 de << de_municipio_nombre >> se encontraba en situación de pobreza,
 es decir, << de_poblacion_pobreza >> personas estaban en esa condición
-en el municipio. El << de_porcentaje_vulnerabilidad_carencias >> por ciento
+en el municipio. El << de_porcentaje_vulnerabilidad_carencias >>
 (<< de_poblacion_vulnerabilidad_carencias >> personas) de la población de
 << de_municipio_nombre >> era vulnerable
 por carencias sociales\footnote{Vulnerables por carencias sociales se refiere a
 la población que presenta una o más carencias sociales, pero cuyo ingreso es
 superior a la línea de bienestar.}, el << de_porcentaje_vulnerabilidad_ingresos >>
-por ciento era vulnerable por ingresos\footnote{Vulnerables por ingresos se refiere
+era vulnerable por ingresos\footnote{Vulnerables por ingresos se refiere
 a la población que no presenta carencias sociales y cuyo ingreso es inferior o igual
 a la línea de bienestar.} y << de_porcentaje_no_pobre_no_vulnerable >>
-por ciento era no pobre y no vulnerable\footnote{No pobre multidimensional y no
+era no pobre y no vulnerable\footnote{No pobre multidimensional y no
 vulnerable se refiere a la población cuyo ingreso es superior a la línea de bienestar
 y que no tiene carencia social alguna.}.
 
-En << de_anio_censo >>, el << de_porcentaje_pobreza_extrema >> por ciento de la
+En << de_anio_censo >>, el << de_porcentaje_pobreza_extrema >> de la
 población de << de_municipio_nombre >> se encontraba en pobreza extrema\footnote{Pobreza
 extrema se refiere a la población que tiene tres o más carencias sociales y su ingreso
 es inferior al valor de la línea de pobreza extrema por ingresos.};
-en contraste con el << de_porcentaje_pobreza_extrema_intercensal >> por ciento que se presentó
+en contraste con el << de_porcentaje_pobreza_extrema_intercensal >> que se presentó
 en << de_anio_encuesta_intercensal >>. En << de_anio_censo >> un
-<< de_porcentaje_pobreza_moderada >> por ciento de la
+<< de_porcentaje_pobreza_moderada >> de la
 población estaba en pobreza moderada, lo que equivale a << de_poblacion_pobreza_moderada >>
 personas, mientras que en << de_anio_encuesta_intercensal >> la proporción fue de
-<< de_porcentaje_pobreza_moderada_intercensal >> por ciento
+<< de_porcentaje_pobreza_moderada_intercensal >>
 (<< de_poblacion_pobreza_moderada_intercensal >> personas).
 
-En las tablas \ref{tabla_pobreza_multidimensional_1} y \ref{tabla_pobreza_multidimensional_2} se muestra
+En el cuadro \ref{cuadro_pobreza_multidimensional} se muestra
 el porcentaje y número de personas en situación de pobreza
 en << de_anio_encuesta_intercensal >> y << de_anio_censo >> en el municipio,
 así como la población vulnerable por carencias sociales, la vulnerable por ingresos y
 la no pobre y no vulnerable.
 
-\begin{table}[H]
-\label{tabla_pobreza_multidimensional_1}
-\centering
-\caption{Pobreza Multidimensional (Parte 1): Indicadores generales}
-\begin{threeparttable}
 \setlength{\tabcolsep}{3pt}
 \footnotesize
-\begin{tabularx}{\textwidth}{|>{\centering\arraybackslash}X
-                >{\centering\arraybackslash}X
-                >{\centering\arraybackslash}X
-                >{\centering\arraybackslash}X
-                >{\centering\arraybackslash}X
-                >{\centering\arraybackslash}X
-                >{\centering\arraybackslash}X|}
-\hline
+\begin{longtable}{>{\raggedright\arraybackslash}m{\dimexpr0.28\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.12\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.12\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.12\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.12\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.12\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.12\linewidth - 2\tabcolsep\relax}}
 
-% Subtítulo
-\rowcolor{colorSeccion}
-\multicolumn{7}{|c|}{\color{white}<< de_municipio_nombre >>, Jalisco} \\
-\hline
+\caption{\textbf{Indicadores de pobreza multidimensional en << de_municipio_nombre >>} \\ << de_anio_encuesta_intercensal >> y << de_anio_censo >>}
+\label{cuadro_pobreza_multidimensional} \\
 
-% Encabezado fila 1
+\hline
 \rowcolor{gray!30}
-\textbf{Indicadores de incidencia} &
-\multicolumn{2}{c}{\textbf{Porcentaje}} &
-\multicolumn{2}{c}{\textbf{Personas}} &
-\multicolumn{2}{c}{\textbf{Carencias promedio}} \\
+\thh{0.28}{Indicadores de incidencia} &
+\multicolumn{2}{>{\centering\arraybackslash}m{\dimexpr0.24\linewidth - 2\tabcolsep\relax}}{\cellcolor{gray!30}\textbf{Porcentaje}} &
+\multicolumn{2}{>{\centering\arraybackslash}m{\dimexpr0.24\linewidth - 2\tabcolsep\relax}}{\cellcolor{gray!30}\textbf{Personas}} &
+\multicolumn{2}{>{\centering\arraybackslash}m{\dimexpr0.24\linewidth - 2\tabcolsep\relax}}{\cellcolor{gray!30}\textbf{Carencias promedio}} \\
 \cline{2-7}
-
-% Encabezado fila 2
 \rowcolor{gray!30}
- & \textbf{<< de_anio_encuesta_intercensal >>} & \textbf{<< de_anio_censo >>} & \textbf{<< de_anio_encuesta_intercensal >>} & \textbf{<< de_anio_censo >>} & \textbf{<< de_anio_encuesta_intercensal >>} & \textbf{<< de_anio_censo >>} \\
+ & \thhl{0.12}{<< de_anio_encuesta_intercensal >>} & \thhl{0.12}{<< de_anio_censo >>} & \thhl{0.12}{<< de_anio_encuesta_intercensal >>} & \thhl{0.12}{<< de_anio_censo >>} & \thhl{0.12}{<< de_anio_encuesta_intercensal >>} & \thhl{0.12}{<< de_anio_censo >>} \\
 \hline
+\endfirsthead
 
-% FILAS
-\rowcolor{orange!20}
-\textbf{Pobreza multidimensional} & & & & & & \\
+\multicolumn{7}{l}{\small\textbf{(continuación)}} \\
+\hline
+\rowcolor{gray!30}
+\thh{0.28}{Indicadores de incidencia} &
+\multicolumn{2}{>{\centering\arraybackslash}m{\dimexpr0.24\linewidth - 2\tabcolsep\relax}}{\cellcolor{gray!30}\textbf{Porcentaje}} &
+\multicolumn{2}{>{\centering\arraybackslash}m{\dimexpr0.24\linewidth - 2\tabcolsep\relax}}{\cellcolor{gray!30}\textbf{Personas}} &
+\multicolumn{2}{>{\centering\arraybackslash}m{\dimexpr0.24\linewidth - 2\tabcolsep\relax}}{\cellcolor{gray!30}\textbf{Carencias promedio}} \\
+\cline{2-7}
+\rowcolor{gray!30}
+ & \thhl{0.12}{<< de_anio_encuesta_intercensal >>} & \thhl{0.12}{<< de_anio_censo >>} & \thhl{0.12}{<< de_anio_encuesta_intercensal >>} & \thhl{0.12}{<< de_anio_censo >>} & \thhl{0.12}{<< de_anio_encuesta_intercensal >>} & \thhl{0.12}{<< de_anio_censo >>} \\
+\hline
+\endhead
+
+\hline
+\multicolumn{7}{r}{\small\textbf{(continúa)}} \\
+\endfoot
+
+\hline
+\endlastfoot
+
+\rowcolor{filaResaltada}
+\thdr{Pobreza multidimensional} & & & & & & \\
 \hline
 
 Población en situación de pobreza multidimensional
-& & & & & & \\
+& << de_pobreza_pct_2015 >> & << de_pobreza_pct_2020 >> & << de_pobreza_prs_2015 >> & << de_pobreza_prs_2020 >> & << de_pobreza_prom_2015 >> & << de_pobreza_prom_2020 >> \\
 \hline
 
 Población en situación de pobreza multidimensional moderada
-& & & & & & \\
+& << de_pobreza_mod_pct_2015 >> & << de_pobreza_mod_pct_2020 >> & << de_pobreza_mod_prs_2015 >> & << de_pobreza_mod_prs_2020 >> & << de_pobreza_mod_prom_2015 >> & << de_pobreza_mod_prom_2020 >> \\
 \hline
 
 Población en situación de pobreza multidimensional extrema
-& & & & & & \\
+& << de_pobreza_ext_pct_2015 >> & << de_pobreza_ext_pct_2020 >> & << de_pobreza_ext_prs_2015 >> & << de_pobreza_ext_prs_2020 >> & << de_pobreza_ext_prom_2015 >> & << de_pobreza_ext_prom_2020 >> \\
 \hline
 
 Población vulnerable por carencias sociales
-& & & & & & \\
+& << de_vul_carencia_pct_2015 >> & << de_vul_carencia_pct_2020 >> & << de_vul_carencia_prs_2015 >> & << de_vul_carencia_prs_2020 >> & << de_vul_carencia_prom_2015 >> & << de_vul_carencia_prom_2020 >> \\
 \hline
 
 Población vulnerable por ingresos
-& & & & & & \\
+& << de_vul_ingreso_pct_2015 >> & << de_vul_ingreso_pct_2020 >> & << de_vul_ingreso_prs_2015 >> & << de_vul_ingreso_prs_2020 >> & {-}{-} & {-}{-} \\
 \hline
 
 Población no pobre multidimensional y no vulnerable
-& & & & & & \\
+& << de_no_pobre_pct_2015 >> & << de_no_pobre_pct_2020 >> & << de_no_pobre_prs_2015 >> & << de_no_pobre_prs_2020 >> & {-}{-} & {-}{-} \\
 \hline
 
-\rowcolor{orange!20}
-\textbf{Privación social} & & & & & & \\
+\rowcolor{filaResaltada}
+\thdr{Privación social} & & & & & & \\
 \hline
 
 Población con al menos una carencia social
-& & & & & & \\
+& << de_al_1_car_pct_2015 >> & << de_al_1_car_pct_2020 >> & << de_al_1_car_prs_2015 >> & << de_al_1_car_prs_2020 >> & << de_al_1_car_prom_2015 >> & << de_al_1_car_prom_2020 >> \\
 \hline
 
 Población con al menos tres carencias sociales
-& & & & & & \\
+& << de_tres_mas_car_pct_2015 >> & << de_tres_mas_car_pct_2020 >> & << de_tres_mas_car_prs_2015 >> & << de_tres_mas_car_prs_2020 >> & << de_tres_mas_car_prom_2015 >> & << de_tres_mas_car_prom_2020 >> \\
 \hline
 
-\end{tabularx}
-\begin{tablenotes}
-\small
-\item Elaboración del IIEG, con datos de INEGI, Censo de Población y Vivienda 2010 y
-2020.
-\item *Nota: los indicadores hacen referencia al quinquenio 2015--<< de_anio_censo >>.
-\end{tablenotes}
-\end{threeparttable}
-\end{table}
-
-\newpage
-
-\begin{table}[H]
-\label{tabla_pobreza_multidimensional_2}
-\centering
-\caption{Pobreza Multidimensional (Parte 2): Indicadores de carencias y bienestar}
-\begin{threeparttable}
-\setlength{\tabcolsep}{3pt}
-\footnotesize
-\begin{tabularx}{\textwidth}{|>{\centering\arraybackslash}X
-                >{\centering\arraybackslash}X
-                >{\centering\arraybackslash}X
-                >{\centering\arraybackslash}X
-                >{\centering\arraybackslash}X
-                >{\centering\arraybackslash}X
-                >{\centering\arraybackslash}X|}
-\hline
-
-% Subtítulo
-\rowcolor{colorSeccion}
-\multicolumn{7}{|c|}{\color{white}<< de_municipio_nombre >>, Jalisco} \\
-\hline
-
-% Encabezado fila 1
-\rowcolor{gray!30}
-\textbf{Indicadores de incidencia} &
-\multicolumn{2}{c}{\textbf{Porcentaje}} &
-\multicolumn{2}{c}{\textbf{Personas}} &
-\multicolumn{2}{c}{\textbf{Carencias promedio}} \\
-\cline{2-7}
-
-% Encabezado fila 2
-\rowcolor{gray!30}
- & \textbf{<< de_anio_encuesta_intercensal >>} & \textbf{<< de_anio_censo >>} & \textbf{<< de_anio_encuesta_intercensal >>} & \textbf{<< de_anio_censo >>} & \textbf{<< de_anio_encuesta_intercensal >>} & \textbf{<< de_anio_censo >>} \\
-\hline
-
-\rowcolor{orange!20}
-\textbf{Indicadores de carencia social} & & & & & & \\
+\rowcolor{filaResaltada}
+\thdr{Indicadores de carencia social} & & & & & & \\
 \hline
 
 Rezago educativo
-& & & & & & \\
+& << de_rez_edu_pct_2015 >> & << de_rez_edu_pct_2020 >> & << de_rez_edu_prs_2015 >> & << de_rez_edu_prs_2020 >> & << de_rez_edu_prom_2015 >> & << de_rez_edu_prom_2020 >> \\
 \hline
 
 Acceso a los servicios de salud
-& & & & & & \\
+& << de_car_salud_pct_2015 >> & << de_car_salud_pct_2020 >> & << de_car_salud_prs_2015 >> & << de_car_salud_prs_2020 >> & << de_car_salud_prom_2015 >> & << de_car_salud_prom_2020 >> \\
 \hline
 
 Acceso a la seguridad social
-& & & & & & \\
+& << de_car_seg_soc_pct_2015 >> & << de_car_seg_soc_pct_2020 >> & << de_car_seg_soc_prs_2015 >> & << de_car_seg_soc_prs_2020 >> & << de_car_seg_soc_prom_2015 >> & << de_car_seg_soc_prom_2020 >> \\
 \hline
 
 Calidad y espacios de la vivienda
-& & & & & & \\
+& << de_car_viv_pct_2015 >> & << de_car_viv_pct_2020 >> & << de_car_viv_prs_2015 >> & << de_car_viv_prs_2020 >> & << de_car_viv_prom_2015 >> & << de_car_viv_prom_2020 >> \\
 \hline
 
 Acceso a los servicios básicos en la vivienda
-& & & & & & \\
+& << de_car_sbv_pct_2015 >> & << de_car_sbv_pct_2020 >> & << de_car_sbv_prs_2015 >> & << de_car_sbv_prs_2020 >> & << de_car_sbv_prom_2015 >> & << de_car_sbv_prom_2020 >> \\
 \hline
 
 Acceso a la alimentación
-& & & & & & \\
+& << de_car_ali_pct_2015 >> & << de_car_ali_pct_2020 >> & << de_car_ali_prs_2015 >> & << de_car_ali_prs_2020 >> & << de_car_ali_prom_2015 >> & << de_car_ali_prom_2020 >> \\
 \hline
 
-\rowcolor{orange!20}
-\textbf{Bienestar} & & & & & & \\
+\rowcolor{filaResaltada}
+\thdr{Bienestar} & & & & & & \\
 \hline
 
 Población con un ingreso inferior a la línea de bienestar mínimo
-& & & & & & \\
+& << de_lpei_pct_2015 >> & << de_lpei_pct_2020 >> & << de_lpei_prs_2015 >> & << de_lpei_prs_2020 >> & << de_lpei_prom_2015 >> & << de_lpei_prom_2020 >> \\
 \hline
 
 Población con un ingreso inferior a la línea de bienestar
-& & & & & & \\
+& << de_lpi_pct_2015 >> & << de_lpi_pct_2020 >> & << de_lpi_prs_2015 >> & << de_lpi_prs_2020 >> & << de_lpi_prom_2015 >> & << de_lpi_prom_2020 >> \\
 \hline
 
-\end{tabularx}
-\begin{tablenotes}
-\small
-\item Elaboración del IIEG, con datos de INEGI, Censo de Población y Vivienda
-<< de_anio_censo_anterior >> y << de_anio_censo >>.
-\item *Nota: los indicadores hacen referencia al quinquenio << de_anio_encuesta_intercensal >>--<< de_anio_censo >>.
-\end{tablenotes}
-\end{threeparttable}
-\end{table}
+\end{longtable}
+\normalsize
+\renewcommand{\arraystretch}{1.5}
+\tablefooter{Fuente: & CONEVAL. Medición de pobreza a nivel municipal, << de_anio_encuesta_intercensal >> y << de_anio_censo >>.}
+
 
 \newpage
 << de_mapa_porcentaje_pobreza_multidimensional >>
@@ -444,7 +434,7 @@ Población con un ingreso inferior a la línea de bienestar
 
 El Consejo Nacional de Población  publica el Índice de Marginación como una medida resumen
 que permite diferenciar los estados y municipios del país según el impacto global de las
-carencias que padece la población considerando cuatro dimensiones estructurales: falta de
+carencias que padece la población, considerando cuatro dimensiones estructurales: falta de
 acceso a la educación, residencia en viviendas inadecuadas, percepción de ingresos monetarios
 insuficientes y las relacionadas con la residencia en localidades pequeñas. De acuerdo con
 las estimaciones de << de_anio_censo >> del Índice de Marginación, Jalisco
@@ -453,48 +443,53 @@ presentó un grado de marginación << de_grado_marginacion_jalisco >> en << de_a
 En << de_anio_censo >> el municipio de << de_municipio_nombre >> presentó
 un grado de marginación << de_grado_marginacion_municipio >>, colocándose en el
 lugar << de_ranking_marginacion_municipio >> dentro de los municipios de la entidad.
-En << de_anio_encuesta_intercensal >> su grado fue << de_grado_marginacion_intercensal_mun >>
-y ocupó el lugar << de_ranking_marginacion_intercensal_mun >>, mientras que en el año
-<< de_anio_censo_anterior >> su grado de marginación fue << de_grado_marginacion_anterior >>
-y ocupó el lugar << de_ranking_marginacion_censo_anterior >> a nivel estatal.
 
-La tabla \ref{tabla_marginacion_indicadores} presenta la evolución que ha tenido el municipio en
+El cuadro \ref{cuadro_marginacion_indicadores} presenta la evolución que ha tenido el municipio en
 las tres mediciones del índice de marginación, tanto en el valor general del índice como en los
 indicadores que lo componen.
 
-\begin{table}[H]
-\label{tabla_marginacion_indicadores}
-\centering
-\caption{Índice y grado de marginación e indicadores sociodemográficos}
-\begin{threeparttable}
 \setlength{\tabcolsep}{3pt}
 \footnotesize
-\begin{tabularx}{\textwidth}{|X
-                >{\centering\arraybackslash}X
-                >{\centering\arraybackslash}X
-                >{\centering\arraybackslash}X|}
-\hline
+\begin{longtable}{>{\raggedright\arraybackslash}m{\dimexpr0.58\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.14\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.14\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.14\linewidth - 2\tabcolsep\relax}}
 
-% Subtítulo
-\rowcolor{colorSeccion}
-\multicolumn{4}{|c|}{\color{white}<< de_municipio_nombre >>, Jalisco} \\
-\hline
+\caption{\textbf{Índice y grado de marginación e indicadores sociodemográficos en
+<< de_municipio_nombre >>} \\
+<< de_anio_censo_anterior >>, << de_anio_encuesta_intercensal >> y << de_anio_censo >>}
+\label{cuadro_marginacion_indicadores} \\
 
-% Encabezado
+\hline
 \rowcolor{gray!30}
- & \textbf{<< de_anio_censo_anterior >>} & \textbf{<< de_anio_encuesta_intercensal >>} & \textbf{<< de_anio_censo >>} \\
+ & \thhl{0.14}{<< de_anio_censo_anterior >>} & \thhl{0.14}{<< de_anio_encuesta_intercensal >>} & \thhl{0.14}{<< de_anio_censo >>} \\
+\hline
+\endfirsthead
+
+\multicolumn{4}{l}{\small\textbf{(continuación)}} \\
+\hline
+\rowcolor{gray!30}
+ & \thhl{0.14}{<< de_anio_censo_anterior >>} & \thhl{0.14}{<< de_anio_encuesta_intercensal >>} & \thhl{0.14}{<< de_anio_censo >>} \\
+\hline
+\endhead
+
+\hline
+\multicolumn{4}{r}{\small\textbf{(continúa)}} \\
+\endfoot
+
+\hline
+\endlastfoot
+
+\rowcolor{filaResaltada}
+\thdr{Índice de marginación} & \thdr{<< de_marg_indice_2010 >>} & \thdr{<< de_marg_indice_2015 >>} & \thdr{<< de_marg_indice_2020 >>} \\
 \hline
 
-\rowcolor{orange!20}
-Índice de marginación & << de_marg_indice_2010 >> & << de_marg_indice_2015 >> & << de_marg_indice_2020 >> \\
+\rowcolor{filaResaltada}
+\thdr{Posición del municipio en la entidad} & \thdr{<< de_marg_pos_entidad_2010 >>} & \thdr{<< de_marg_pos_entidad_2015 >>} & \thdr{<< de_marg_pos_entidad_2020 >>} \\
 \hline
 
-\rowcolor{orange!20}
-Posición del municipio en la entidad & << de_marg_pos_entidad_2010 >> & << de_marg_pos_entidad_2015 >> & << de_marg_pos_entidad_2020 >> \\
-\hline
-
-\rowcolor{orange!20}
-Posición del municipio a nivel nacional & << de_marg_pos_nacional_2010 >> & << de_marg_pos_nacional_2015 >> & << de_marg_pos_nacional_2020 >> \\
+\rowcolor{filaResaltada}
+\thdr{Posición del municipio a nivel nacional} & \thdr{<< de_marg_pos_nacional_2010 >>} & \thdr{<< de_marg_pos_nacional_2015 >>} & \thdr{<< de_marg_pos_nacional_2020 >>} \\
 \hline
 
 Grado de marginación & << de_marg_grado_2010 >> & << de_marg_grado_2015 >> & << de_marg_grado_2020 >> \\
@@ -527,94 +522,188 @@ Grado de marginación & << de_marg_grado_2010 >> & << de_marg_grado_2015 >> & <<
 \% de población ocupada con ingresos de hasta 2 salarios mínimos & << de_marg_hasta2salmin_2010 >> & << de_marg_hasta2salmin_2015 >> & << de_marg_hasta2salmin_2020 >> \\
 \hline
 
-\end{tabularx}
-\begin{tablenotes}
-\small
-\item Elaboración del IIEG con base en los Índices de marginación municipal,
-<< de_anio_censo_anterior >>, << de_anio_encuesta_intercensal >>
-y << de_anio_censo >>, CONAPO.
-\end{tablenotes}
-\end{threeparttable}
-\end{table}
+\end{longtable}
+\normalsize
+\tablefooter{Fuente: & CONAPO. Índices de marginación municipal,
+<< de_anio_censo_anterior >>, << de_anio_encuesta_intercensal >> y << de_anio_censo >>.}
 
 \newpage
 << de_mapa_indice_marginacion_municipio >>
 \newpage
 
-Las tablas \ref{tabla_indice_marginacion_localidades_1} y \ref{tabla_grado_marginacion_localidades_2}
-muestran los resultados del Índice de marginación de << de_anio_censo >> y sus indicadores
+El cuadro \ref{cuadro_grado_marginacion_localidades}
+muestra los resultados del Índice de marginación de << de_anio_censo >> y sus indicadores
 para las principales localidades del municipio.
 
-\begin{table}[H]
-\label{tabla_grado_marginacion_localidades}
-\centering
-\caption{Grado de marginación e indicadores sociodemográficos en localidades más pobladas en el municipio}
-\begin{threeparttable}
 \setlength{\tabcolsep}{3pt}
 \footnotesize
-\begin{tabularx}{\textwidth}{|>{\centering\arraybackslash}m{1.7cm}
-                |>{\centering\arraybackslash}m{2.0cm}
-                |>{\centering\arraybackslash}X
-                |>{\centering\arraybackslash}X
-                |>{\centering\arraybackslash}X
-                |>{\centering\arraybackslash}X
-                |>{\centering\arraybackslash}X
-                |>{\centering\arraybackslash}X
-                |>{\centering\arraybackslash}X
-                |>{\centering\arraybackslash}X
-                |>{\centering\arraybackslash}X|}
-\hline
+\begin{longtable}{>{\raggedright\arraybackslash}m{\dimexpr0.12\linewidth - 2\tabcolsep\relax}
+                  >{\raggedright\arraybackslash}m{\dimexpr0.24\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.08\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.14\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.14\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.14\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.14\linewidth - 2\tabcolsep\relax}}
 
-\rowcolor{colorSeccion}
-\multicolumn{11}{|c|}{\color{white}<< de_municipio_nombre >>, Jalisco} \\
-\hline
+\caption{\textbf{Grado de marginación e indicadores sociodemográficos en localidades de << de_municipio_nombre >>}\\
+<< de_anio_censo >> \hfill 1a. parte}
+\label{cuadro_grado_marginacion_localidades} \\
 
+\hline
 \rowcolor{gray!30}
-Clave &
-Nombre &
-Grado &
-\% pob. 15+ analfabeta &
-\% pob. 15+ sin educ. básica &
-\% viv. sin drenaje ni excusado &
-\% viv. sin energía eléctrica &
-\% viv. sin agua entubada &
-\% viv. piso de tierra &
-Prom. ocup. por cuarto &
-\% viv. sin refrigerador \\
+\thh{0.12}{\scriptsize Clave} &
+\thh{0.24}{\scriptsize Nombre} &
+\thhl{0.08}{\scriptsize Grado} &
+\thhl{0.14}{\scriptsize Porcentaje de población de 15 años o más analfabeta} &
+\thhl{0.14}{\scriptsize Porcentaje de población de 15 años o más sin educación básica} &
+\thhl{0.14}{\scriptsize Porcentaje de ocupantes en viviendas particulares habitadas sin drenaje ni excusado} &
+\thhl{0.14}{\scriptsize Porcentaje de ocupantes en viviendas particulares habitadas sin energía eléctrica} \\
+\hline
+\endfirsthead
+\multicolumn{7}{l}{\small\textbf{(continuación)}} \\
+\hline
+\rowcolor{gray!30}
+\thh{0.12}{\scriptsize Clave} &
+\thh{0.24}{\scriptsize Nombre} &
+\thhl{0.08}{\scriptsize Grado} &
+\thhl{0.14}{\scriptsize Porcentaje de población de 15 años o más analfabeta} &
+\thhl{0.14}{\scriptsize Porcentaje de población de 15 años o más sin educación básica} &
+\thhl{0.14}{\scriptsize Porcentaje de ocupantes en viviendas particulares habitadas sin drenaje ni excusado} &
+\thhl{0.14}{\scriptsize Porcentaje de ocupantes en viviendas particulares habitadas sin energía eléctrica} \\
+\hline
+\endhead
+
+\hline
+\multicolumn{7}{r}{\small\textbf{(continúa)}} \\
+\endfoot
+
+\hline
+\endlastfoot
+
+\rowcolor{filaResaltada}
+\thdr{<< de_clave_entidad >>} &
+\thdr{Jalisco} &
+\thdr{<< de_jal_marg_grado >>} &
+\thdr{<< de_jal_marg_analfabeta >>} &
+\thdr{<< de_jal_marg_sin_educ_bas >>} &
+\thdr{<< de_jal_marg_sin_drenaje >>} &
+\thdr{<< de_jal_marg_sin_energia >>} \\
 \hline
 
-\rowcolor{orange!20}
-<< de_clave_entidad >> & Jalisco & << de_jal_marg_grado >> & << de_jal_marg_analfabeta >> & << de_jal_marg_sin_educ_bas >> & << de_jal_marg_sin_drenaje >> & << de_jal_marg_sin_energia >> & << de_jal_marg_sin_agua >> & << de_jal_marg_piso_tierra >> & << de_jal_marg_hacinamiento >> & << de_jal_marg_sin_refrigerador >> \\
-\hline
-
-\rowcolor{orange!20}
-<< de_clave_municipio >> & << de_municipio_nombre >> & << de_marg_grado_2020 >> & << de_marg_analfabeta_2020 >> & << de_marg_sin_educ_bas_2020 >> & << de_marg_sin_drenaje_2020 >> & << de_marg_sin_energia_2020 >> & << de_marg_sin_agua_2020 >> & << de_marg_piso_tierra_2020 >> & << de_marg_hacinamiento_2020 >> & << de_marg_sin_refrigerador_2020 >> \\
+\rowcolor{filaResaltada}
+\thdr{<< de_clave_municipio >>} &
+\thdr{<< de_municipio_nombre >>} &
+\thdr{<< de_marg_grado_2020 >>} &
+\thdr{<< de_marg_analfabeta_pct_2020 >>} &
+\thdr{<< de_marg_sin_educ_bas_pct_2020 >>} &
+\thdr{<< de_marg_sin_drenaje_pct_2020 >>} &
+\thdr{<< de_marg_sin_energia_pct_2020 >>} \\
 \hline
 
 <% for loc in de_localidades_marginacion %>
-<< loc.clave >> & << loc.nombre >> & << loc.grado >> & << loc.analfabeta >> & << loc.sin_educ_bas >> & << loc.sin_drenaje >> & << loc.sin_energia >> & << loc.sin_agua >> & << loc.piso_tierra >> & << loc.hacinamiento >> & << loc.sin_refrigerador >> \\
+<< loc.clave >> &
+<< loc.nombre >> &
+<< loc.grado >> &
+<< loc.analfabeta >> &
+<< loc.sin_educ_bas >> &
+<< loc.sin_drenaje >> &
+<< loc.sin_energia >> \\
 \hline
 <% endfor %>
 
-\end{tabularx}
-\begin{tablenotes}
-\small
-\item Elaboración del IIEG con base en el Índice de marginación por localidad << de_anio_censo >>, CONAPO.
-<% if de_localidades_hay_datos_faltantes %>
-\item[{-}] Sin información disponible en el Índice de marginación por localidad << de_anio_censo >> de CONAPO.
-<% endif %>
-\end{tablenotes}
-\end{threeparttable}
-\end{table}
+\end{longtable}
+\normalsize
+\addtocounter{table}{-1}
 
 \newpage
+\setlength{\tabcolsep}{3pt}
+\footnotesize
+\begin{longtable}{>{\raggedright\arraybackslash}m{\dimexpr0.12\linewidth - 2\tabcolsep\relax}
+                  >{\raggedright\arraybackslash}m{\dimexpr0.24\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.08\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.14\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.14\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.14\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.14\linewidth - 2\tabcolsep\relax}}
 
-\subsection{Índices Sociodemográficos}
+\caption{\textbf{Grado de marginación e indicadores sociodemográficos en localidades de << de_municipio_nombre >>} \\
+<< de_anio_censo >> \hfill 2a. parte y última} \\
+
+\hline
+\rowcolor{gray!30}
+\thh{0.12}{\scriptsize Clave} &
+\thh{0.24}{\scriptsize Nombre} &
+\thhl{0.08}{\scriptsize Grado} &
+\thhl{0.14}{\scriptsize Porcentaje de ocupantes en viviendas particulares habitadas sin agua entubada} &
+\thhl{0.14}{\scriptsize Porcentaje de ocupantes en viviendas particulares habitadas con piso de tierra} &
+\thhl{0.14}{\scriptsize Porcentaje de ocupantes en viviendas particulares habitadas con hacinamiento} &
+\thhl{0.14}{\scriptsize Porcentaje de ocupantes en viviendas particulares habitadas sin refrigerador} \\
+\hline
+\endfirsthead
+
+\multicolumn{7}{l}{\small\textbf{(continuación)}} \\
+\hline
+\rowcolor{gray!30}
+\thh{0.12}{\scriptsize Clave} &
+\thh{0.24}{\scriptsize Nombre} &
+\thhl{0.08}{\scriptsize Grado} &
+\thhl{0.14}{\scriptsize Porcentaje de ocupantes en viviendas particulares habitadas sin agua entubada} &
+\thhl{0.14}{\scriptsize Porcentaje de ocupantes en viviendas particulares habitadas con piso de tierra} &
+\thhl{0.14}{\scriptsize Porcentaje de ocupantes en viviendas particulares habitadas con hacinamiento} &
+\thhl{0.14}{\scriptsize Porcentaje de ocupantes en viviendas particulares habitadas sin refrigerador} \\
+\hline
+\endhead
+
+\hline
+\multicolumn{7}{r}{\small\textbf{(continúa)}} \\
+\endfoot
+
+\hline
+\endlastfoot
+
+\rowcolor{filaResaltada}
+\thdr{<< de_clave_entidad >>} &
+\thdr{Jalisco} &
+\thdr{<< de_jal_marg_grado >>} &
+\thdr{<< de_jal_marg_sin_agua >>} &
+\thdr{<< de_jal_marg_piso_tierra >>} &
+\thdr{<< de_jal_marg_hacinamiento >>} &
+\thdr{<< de_jal_marg_sin_refrigerador >>} \\
+\hline
+
+\rowcolor{filaResaltada}
+\thdr{<< de_clave_municipio >>} &
+\thdr{<< de_municipio_nombre >>} &
+\thdr{<< de_marg_grado_2020 >>} &
+\thdr{<< de_marg_sin_agua_pct_2020 >>} &
+\thdr{<< de_marg_piso_tierra_pct_2020 >>} &
+\thdr{<< de_marg_hacinamiento_pct_2020 >>} &
+\thdr{<< de_marg_sin_refrigerador_2020 >>} \\
+\hline
+
+<% for loc in de_localidades_marginacion %>
+<< loc.clave >> &
+<< loc.nombre >> &
+<< loc.grado >> &
+<< loc.sin_agua >> &
+<< loc.piso_tierra >> &
+<< loc.hacinamiento >> &
+<< loc.sin_refrigerador >> \\
+\hline
+<% endfor %>
+
+\end{longtable}
+\normalsize
+\tablefooter{Nota: & Únicamente se presenta información para las localidades más pobladas del municipio.\\
+Fuente: & CONAPO. Índices de marginación por localidad << de_anio_censo >>.}
+\newpage
+
+\subsection{Índices sociodemográficos}
 
 El municipio de << de_municipio_nombre >> representó el << de_porcentaje_poblacion >>
-por ciento del total de la población estatal en << de_anio_censo >>. Con un grado
+del total de la población estatal en << de_anio_censo >>. Con un grado
 << de_grado_marginacion >> de marginación en << de_anio_censo >>, ocupó el lugar
-<< de_ranking_marginacion >> entre los municipios del estado más marginados.
+<< de_ranking_marginacion >> entre los municipios del estado.
 
 En cuanto a la pobreza multidimensional, el municipio se localizó en el lugar
 << de_ranking_pobreza_multidimensional >> a nivel estatal, y en porcentaje de población
@@ -622,60 +711,72 @@ en situación de pobreza extrema ocupó el lugar << de_ranking_pobreza_extrema >
 
 Finalmente, << de_municipio_nombre >> se clasificó con grado << de_grado_intensidad_migratoria >>
 de intensidad migratoria en << de_anio_censo >> y se posicionó en el lugar << de_ranking_migracion >>
-entre los municipios del estado con mayor valor en el índice.
+entre los municipios del estado.
 
-\begin{table}[H]
-\label{tabla_marginacion_pobreza_migracion}
-\centering
-\caption{Población total, Grado de Marginación, Pobreza multidimensional e Intensidad Migratoria}
 \setlength{\tabcolsep}{3pt}
 \footnotesize
-\begin{tabularx}{\textwidth}{|>{\centering\arraybackslash}X
-                |>{\centering\arraybackslash}X
-                |>{\centering\arraybackslash}X
-                |>{\centering\arraybackslash}X
-                |>{\centering\arraybackslash}X
-                |>{\centering\arraybackslash}X
-                |>{\centering\arraybackslash}X
-                |>{\centering\arraybackslash}X
-                |>{\centering\arraybackslash}X
-                |>{\centering\arraybackslash}X
-                |>{\centering\arraybackslash}X|}
-\hline
+\begin{longtable}{>{\raggedright\arraybackslash}m{\dimexpr0.07\linewidth - 2\tabcolsep\relax}
+                  >{\raggedright\arraybackslash}m{\dimexpr0.15\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.10\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.07\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.08\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.12\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.06\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.14\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.06\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.08\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.07\linewidth - 2\tabcolsep\relax}}
 
-% Subtítulo
-\rowcolor{colorSeccion}
-\multicolumn{11}{|c|}{\color{white}<< de_municipio_nombre >>, Jalisco} \\
-\hline
+\caption{\textbf{Población total, grado de marginación, pobreza multidimensional e intensidad migratoria
+en la  << nombre_region >>}\\
+<< de_anio_censo >>}
+\label{cuadro_marginacion_pobreza_migracion} \\
 
-% Encabezado fila 1
+\hline
 \rowcolor{gray!30}
-Clave & Municipio & \makecell{Pobla-\\ción} &
-\multicolumn{2}{c|}{\cellcolor{gray!30}Marginación} &
-\multicolumn{4}{c|}{\cellcolor{gray!30}Pobreza} &
-\multicolumn{2}{>{\centering\arraybackslash}m{2.4cm}|}{\cellcolor{gray!30}Intensidad Migratoria} \\
-\hline
-
-% Encabezado fila 2
+\thh{0.07}{\scriptsize Clave} & \thh{0.15}{\scriptsize Municipio} & \thhl{0.10}{\scriptsize Población} &
+\multicolumn{2}{>{\centering\arraybackslash}m{\dimexpr0.07\linewidth + 0.08\linewidth - 2\tabcolsep\relax}}{\cellcolor{gray!30}\scriptsize\textbf{Marginación}} &
+\multicolumn{4}{>{\centering\arraybackslash}m{\dimexpr0.12\linewidth + 0.06\linewidth + 0.14\linewidth + 0.06\linewidth - 2\tabcolsep\relax}}{\cellcolor{gray!30}\scriptsize\textbf{Pobreza multidimensional}} &
+\multicolumn{2}{>{\centering\arraybackslash}m{\dimexpr0.08\linewidth + 0.07\linewidth - 2\tabcolsep\relax}}{\cellcolor{gray!30}\scriptsize\textbf{Intensidad Migratoria}} \\
 \rowcolor{gray!30}
- & & & Grado & Lugar & \makecell{multi-\\dimensional} & Lugar & extrema & Lugar & Grado & Lugar \\
+ & & & \thhl{0.07}{\scriptsize Grado} & \thhl{0.08}{\scriptsize Lugar} & \thhl{0.12}{\scriptsize Pobreza~(\%)} & \thhl{0.06}{\scriptsize Lugar} & \thhl{0.14}{\scriptsize Pobreza\newline extrema~(\%)} & \thhl{0.06}{\scriptsize Lugar} & \thhl{0.08}{\scriptsize Grado} & \thhl{0.07}{\scriptsize Lugar} \\
+\hline
+\endfirsthead
+
+\multicolumn{11}{l}{\small\textbf{(continuación)}} \\
+\hline
+\rowcolor{gray!30}
+\thh{0.07}{\scriptsize Clave} & \thh{0.15}{\scriptsize Municipio} & \thhl{0.10}{\scriptsize Población} &
+\multicolumn{2}{>{\centering\arraybackslash}m{\dimexpr0.07\linewidth + 0.08\linewidth - 2\tabcolsep\relax}}{\cellcolor{gray!30}\scriptsize\textbf{Marginación}} &
+\multicolumn{4}{>{\centering\arraybackslash}m{\dimexpr0.12\linewidth + 0.06\linewidth + 0.14\linewidth + 0.06\linewidth - 2\tabcolsep\relax}}{\cellcolor{gray!30}\scriptsize\textbf{Pobreza multidimensional}} &
+\multicolumn{2}{>{\centering\arraybackslash}m{\dimexpr0.08\linewidth + 0.07\linewidth - 2\tabcolsep\relax}}{\cellcolor{gray!30}\scriptsize\textbf{Intensidad Migratoria}} \\
+\rowcolor{gray!30}
+ & & & \thhl{0.07}{\scriptsize Grado} & \thhl{0.08}{\scriptsize Lugar} & \thhl{0.12}{\scriptsize Pobreza~(\%)} & \thhl{0.06}{\scriptsize Lugar} & \thhl{0.14}{\scriptsize Pobreza\newline extrema~(\%)} & \thhl{0.06}{\scriptsize Lugar} & \thhl{0.08}{\scriptsize Grado} & \thhl{0.07}{\scriptsize Lugar} \\
+\hline
+\endhead
+
+\hline
+\multicolumn{11}{r}{\small\textbf{(continúa)}} \\
+\endfoot
+
+\hline
+\endlastfoot
+
+\rowcolor{filaResaltada}
+\thdr{<< de_clave_entidad >>} & \thdr{Jalisco} & \thdr{<< de_jal_poblacion_2020 >>} & \thdr{<< de_jal_marg_grado >>} & \thdr{<< de_jal_marg_lugar_nacional >>} & \thdr{<< de_pobreza_jal_pct >>} & \thdr{<< de_ranking_pobreza_jal >>} & \thdr{<< de_pobreza_jal_ext_pct >>} & \thdr{<< de_ranking_pobreza_ext_jal >>} & \thdr{<< de_jal_grado_migracion >>} & \thdr{<< de_jal_lugar_migracion >>} \\
 \hline
 
-\rowcolor{orange!20}
-<< de_clave_entidad >> & Jalisco & << de_jal_poblacion_2020 >> & << de_jal_marg_grado >> & << de_jal_marg_lugar_nacional >> & \ND & \ND & \ND & \ND & << de_jal_grado_migracion >> & << de_jal_lugar_migracion >> \\
-\hline
-
-\rowcolor{orange!20}
-<< de_clave_municipio >> & << de_municipio_nombre >> & << de_tabla_pob_total_2020 >> & << de_grado_marginacion >> & << de_ranking_marginacion >> & \ND & \ND & \ND & \ND & << de_grado_intensidad_migratoria >> & << de_ranking_migracion >> \\
+\rowcolor{filaResaltada}
+\thdr{<< de_clave_municipio >>} & \thdr{<< de_municipio_nombre >>} & \thdr{<< de_tabla_pob_total_2020 >>} & \thdr{<< de_grado_marginacion >>} & \thdr{<< de_ranking_marginacion >>} & \thdr{<< de_tabla_pobreza_pct >>} & \thdr{<< de_ranking_pobreza_multidimensional >>} & \thdr{<< de_tabla_pobreza_ext_pct >>} & \thdr{<< de_ranking_pobreza_extrema >>} & \thdr{<< de_grado_intensidad_migratoria >>} & \thdr{<< de_ranking_migracion >>} \\
 \hline
 
 <% for mun in de_region_municipios %>
-<< mun.clave >> & << mun.nombre >> & << mun.poblacion >> & << mun.grado_marginacion >> & << mun.lugar_marginacion >> & \ND & \ND & \ND & \ND & << mun.grado_migracion >> & << mun.lugar_migracion >> \\
+<< mun.clave >> & << mun.nombre >> & << mun.poblacion >> & << mun.grado_marginacion >> & << mun.lugar_marginacion >> & << mun.pobreza_pct >> & << mun.pobreza_lugar >> & << mun.pobreza_ext_pct >> & << mun.pobreza_ext_lugar >> & << mun.grado_migracion >> & << mun.lugar_migracion >> \\
 \hline
 <% endfor %>
 
-\end{tabularx}
-\par\vspace{4pt}\parbox{\textwidth}{\footnotesize
-Elaboración del IIEG, con datos de INEGI, Censo de Población y Vivienda << de_anio_censo_anterior >> y << de_anio_censo >>.\\
-*Nota: los indicadores hacen referencia al quinquenio << de_anio_encuesta_intercensal >>--<< de_anio_censo >>.}
-\end{table}
+\end{longtable}
+\normalsize
+\tablefooter{Fuente: & CONAPO. Índices de marginación << de_anio_censo >>; Índice de Intensidad Migratoria << de_anio_censo >>.\\
+& CONEVAL. Pobreza Multidimensional << de_anio_censo >>.\\
+& INEGI. Censo de Población y Vivienda << de_anio_censo >>.}

@@ -86,6 +86,35 @@ En \verb|<< gs_anio_actual >>| se registraron << gs_total_delitos >> delitos de 
 
 ### Tablas
 
+Todas las tablas del proyecto usan `longtable` — no `tabular`. Si tu `.tex` de Overleaf usa `\begin{tabular}`, cámbialo a `\begin{longtable}`.
+
+Las columnas se definen con proporciones de `\linewidth` que sumen 1.00, restando siempre `2\tabcolsep`:
+
+En Overleaf:
+
+```latex
+\begin{tabular}{|c|l|c|c|}
+```
+
+En el template:
+
+```latex
+\begin{longtable}{|>{\centering\arraybackslash}p{\dimexpr0.15\linewidth - 2\tabcolsep\relax}
+                  |>{\raggedright\arraybackslash}p{\dimexpr0.45\linewidth - 2\tabcolsep\relax}
+                  |>{\centering\arraybackslash}p{\dimexpr0.20\linewidth - 2\tabcolsep\relax}
+                  |>{\centering\arraybackslash}p{\dimexpr0.20\linewidth - 2\tabcolsep\relax}|}
+```
+
+La alineación dentro de cada columna la defines según el contenido:
+
+| Alineación | Comando | Cuándo usarla |
+|---|---|---|
+| Centrado | `\centering\arraybackslash` | Números, claves, porcentajes |
+| Izquierda | `\raggedright\arraybackslash` | Texto largo (nombres, etiquetas) |
+| Derecha | `\raggedleft\arraybackslash` | Montos, valores con decimales alineados |
+
+Las proporciones (0.15 + 0.45 + 0.20 + 0.20 = 1.00) las defines tú según el contenido.
+
 Las filas estáticas en Overleaf:
 
 ```latex
@@ -136,6 +165,6 @@ Donde `gs_grafica_delitos` es la ruta absoluta o relativa a la imagen generada, 
 
 Los paquetes ya incluidos en `base.tex.j2`:
 
-`inputenc`, `fontenc`, `babel`, `geometry`, `lmodern`, `xcolor`, `graphicx`, `float`, `booktabs`, `tabularx`, `multirow`, `makecell`, `colortbl`, `array`, `fancyhdr`, `hyperref`
+`fontspec`, `xcolor`, `graphicx`, `float`, `geometry`, `fancyhdr`, `setspace`, `siunitx`, `tikz`, `eso-pic`, `babel`, `adjustbox`, `array`, `makecell`, `booktabs`, `multirow`, `hyperref`, `etoc`, `varwidth`, `tabularx`, `longtable`, `caption`
 
 Si tu `.tex` de Overleaf usa algún paquete adicional, agrégalo en `base.tex.j2`.

@@ -1,0 +1,18 @@
+# Compiled output
+output/
+
+# Virtual environment
+.venv/
+
+
+# cache
+__pycache__/
+*.pyc
+.ruff_cache/
+
+
+# Large binary assets
+assets/maps/
+
+# Lock file (rarely useful for context)
+uv.lock

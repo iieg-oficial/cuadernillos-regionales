@@ -1,0 +1,6 @@
+ND = "\\ND"
+DASH = "{-}{-}"
+
+COLOR_SECCION = "#5C2472"
+COLOR_GRIS = "#B0B0B0"
+COLOR_TEXTO = "#465055"

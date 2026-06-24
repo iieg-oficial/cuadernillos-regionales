@@ -1,0 +1,1401 @@
+\clearpage
+\thispagestyle{empty}
+\AddToShipoutPictureBG*{%
+  \AtPageUpperLeft{\raisebox{-\height}{\includegraphics[width=\paperwidth]{<< assets_path >>portadilla.png}}}%
+  \AtPageLowerLeft{\includegraphics[width=\paperwidth]{<< assets_path >>footer_section.png}}%
+}
+\vspace*{\stretch{1}}
+\begin{center}
+  {\color{colorTexto}\bfseries\fontsize{30}{34}\selectfont \shortstack{Geografía\\[0.3cm] y \\[0.3cm] Medio Ambiente}} \\[2.5em]
+  {\color{colorTexto}\lexendsemibold
+  \shortstack{
+    {\huge << ge_municipio >>} \\[0.3cm]
+    {\huge Agosto 2026}
+  }}
+\end{center}
+\vspace*{\stretch{2}}
+\clearpage
+
+\newcounter{grafica}
+\newcounter{mapa}
+\newcommand{\graficatitulo}[1]{%
+  \refstepcounter{grafica}%
+  \noindent Gráfica \thegrafica\\
+  \textbf{#1}\par\vspace{4pt}}
+\newcommand{\mapatitulo}[1]{%
+  \refstepcounter{mapa}%
+  \noindent Mapa \themapa\\
+  \textbf{#1}\par\vspace{4pt}}
+\newcommand{\mapafuente}[1]{%
+  \par\vspace{-4pt}\noindent{\footnotesize
+  \renewcommand{\arraystretch}{1.0}%
+  \begin{tabular}[t]{@{}l@{\hspace{0.5em}}p{\dimexpr\linewidth - 4em\relax}@{}}#1\end{tabular}}}
+
+\section{Geografía y Medio Ambiente}
+
+\subsection{Información geoespacial}
+
+\subsubsection{Descripción general}
+
+El municipio de << ge_dg_nombre >> se localiza en la región << ge_dg_region >> del estado de Jalisco. Sus municipios colindantes son << ge_dg_colindantes >> (ver mapa~\ref{map:ge_base}). Tiene una extensión territorial de << ge_dg_area_km2 >> kilómetros cuadrados.
+
+Su cabecera municipal se localiza en las coordenadas << ge_dg_lat >> latitud norte y << ge_dg_lon >> longitud oeste, a una altura de << ge_dg_elev1 >> metros sobre el nivel del mar (msnm). El territorio municipal presenta altitudes entre << ge_dg_elevmin >> y << ge_dg_elevmax >> msnm, con predominio de pendientes << ge_dg_pendiente_predom >>.
+
+La mayor parte del municipio presenta un clima << ge_dg_clima_predom >>. La temperatura media anual es de << ge_dg_temp_media >>~°C, y la precipitación acumulada anual promedio es de << ge_dg_prec_acum >> mm.
+
+El viento dominante tiene una dirección proveniente del << ge_dg_viento_predom >> y una frecuencia anual de << ge_dg_viento_predom_fr >> \% en el municipio.
+
+El municipio está constituido predominantemente por la unidad geológica << ge_dg_geo_predom >>. Los suelos dominantes corresponden a << ge_dg_edaf_predom >> (ver tabla~\ref{tabla_ge_sintesis}).
+
+<% if ge_dg_viento_grafica_activa %>
+\begin{figure}[H]
+\graficatitulo{Vientos dominantes}
+\centering
+\includegraphics[width=0.5\textwidth]{<< ge_dg_viento_grafica >>}
+\end{figure}
+\par\vspace{-4pt}\parbox{\linewidth}{\footnotesize
+Fuente: IIEG, con base en Technical University of Denmark (DTU Wind) y el World Bank Group. Global Wind Atlas, 2026.}
+<% endif %>
+
+\newpage
+\setlength{\tabcolsep}{3pt}
+\footnotesize
+\begin{longtable}{>{\raggedright\arraybackslash}m{\dimexpr0.50\linewidth - 2\tabcolsep\relax}
+                  >{\raggedright\arraybackslash}m{\dimexpr0.50\linewidth - 2\tabcolsep\relax}}
+
+\caption{\textbf{Síntesis geoespacial del territorio de << ge_dg_nombre >>}}
+\label{tabla_ge_sintesis} \\
+
+\hline
+\rowcolor{gray!30}
+\thh{0.50}{Variable}  &  \textbf{Valor}  \\
+\hline
+\endfirsthead
+
+\multicolumn{2}{l}{\small\textbf{(continuación)}} \\
+\hline
+\rowcolor{gray!30}
+\thh{0.50}{Variable}  &  \textbf{Valor}  \\
+\hline
+\endhead
+
+\hline
+\multicolumn{2}{r}{\small\textbf{(continúa)}} \\
+\endfoot
+
+\hline
+\endlastfoot
+
+Región & << ge_dg_region >> \\
+\hline
+Superficie municipal (km$^2$) & << ge_dg_area_km2 >> \\
+\hline
+Cabecera municipal & << ge_dg_nombre_cabecera >> \\
+\hline
+Coordenadas de cabecera & << ge_dg_lat >>, << ge_dg_lon >> \\
+\hline
+Altitud de cabecera (msnm) & << ge_dg_elev1 >> \\
+\hline
+Rango altitudinal (msnm) & << ge_dg_elevmin >> -- << ge_dg_elevmax >> \\
+\hline
+Pendiente predominante & << ge_dg_pendiente_predom >> \\
+\hline
+Clima predominante & << ge_dg_clima_predom >> \\
+\hline
+Temperatura media anual (°C) & << ge_dg_temp_media >> \\
+\hline
+Precipitación acumulada anual (mm) & << ge_dg_prec_acum >> \\
+\hline
+Geología predominante & << ge_dg_geo_predom >> \\
+\hline
+Suelos dominantes & << ge_dg_edaf_predom >> \\
+\hline
+
+\end{longtable}
+\normalsize
+\par\vspace{-4pt}\parbox{\linewidth}{\footnotesize
+Fuente: IIEG, con base en información geoespacial municipal, 2026.}
+
+<% if ge_base_mapa_activo %>
+\clearpage
+\mapatitulo{Mapa base de << ge_municipio >>}
+\label{map:ge_base}
+<< ge_base_mapa >>
+\mapafuente{Fuente: & IIEG. Mapa General del Estado de Jalisco, 2012.\\
+ & INEGI. Conjunto nacional de información topográfica a escala 1:50\,000, 2025.\\
+ & INEGI. Marco Geoestadístico, 2025.\\
+ & INEGI. Conjunto de datos vectoriales de uso del suelo y vegetación Serie VII, 2018.}
+<% endif %>
+
+\subsection{Subsistema natural}
+
+\subsubsection{Geología}
+
+La unidad geológica predominante en el municipio es << ge_geo_dominante >>, con una cobertura de << ge_geo_dominante_pct >> \% de la superficie municipal.
+
+Le sigue la unidad << ge_geo_secundario >>, con << ge_geo_secundario_pct >> \%. El resto de las unidades geológicas representa en conjunto << ge_geo_demas_pct >> \% del territorio.
+
+<% if ge_geo_grafica_activa %>
+\begin{figure}[H]
+\graficatitulo{Geología de << ge_municipio >>}
+\centering
+\includegraphics[width=\textwidth]{<< ge_geo_grafica >>}
+\end{figure}
+\par\vspace{-4pt}\parbox{\linewidth}{\footnotesize
+Fuente: IIEG, con base en INEGI. Conjunto de datos vectoriales Geológicos serie I, 1988.}
+<% endif %>
+
+\newpage
+\setlength{\tabcolsep}{3pt}
+\footnotesize
+\begin{longtable}{>{\raggedright\arraybackslash}m{\dimexpr0.40\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}}
+
+\caption{\textbf{Geología de << ge_municipio >>}}
+\label{tabla_ge_geologia} \\
+
+\hline
+\rowcolor{gray!30}
+\thh{0.40}{Roca}  &  \textbf{Superficie (ha)}  &  \textbf{Porcentaje (\%)}  \\
+\hline
+\endfirsthead
+\multicolumn{3}{l}{\small\textbf{(continuación)}} \\
+\hline
+\rowcolor{gray!30}
+\thh{0.40}{Roca}  &  \textbf{Superficie (ha)}  &  \textbf{Porcentaje (\%)}  \\
+\hline
+\endhead
+\hline
+\multicolumn{3}{r}{\small\textbf{(continúa)}} \\
+\endfoot
+
+\hline
+\endlastfoot
+
+<% for fila in ge_geo_unidades_geologicas %>
+<< fila.roca >> & << fila.superficie_ha >> & << fila.porcentaje >> \\
+\hline
+<% endfor %>
+
+\end{longtable}
+\normalsize
+\par\vspace{-4pt}\parbox{\linewidth}{\footnotesize
+Fuente: IIEG, con base en INEGI. Conjunto de datos vectoriales Geológicos serie I, 1988.}
+
+<% if ge_geo_mapa_activo %>
+\clearpage
+\mapatitulo{Geología de << ge_municipio >>}
+<< ge_geo_mapa >>
+\mapafuente{Fuente: & INEGI. Conjunto de datos vectoriales geológicos serie I, 1988.\\
+ & IIEG. Mapa General del Estado de Jalisco, 2012.\\
+ & INEGI. Conjunto nacional de información topográfica a escala 1:50\,000, 2025.\\
+ & INEGI. Marco Geoestadístico, 2025.}
+<% endif %>
+
+\subsubsection{Edafología}
+
+Los suelos predominantes en el municipio corresponden a << ge_ed_dominante >>, con una cobertura de << ge_ed_dominante_pct >> \% del territorio.
+
+Le sigue la unidad << ge_ed_secundario >>, con << ge_ed_secundario_pct >> \%. El resto de los tipos de suelo representa en conjunto << ge_ed_demas_pct >> \% de la superficie municipal.
+
+<% if ge_ed_grafica_activa %>
+\begin{figure}[H]
+\graficatitulo{Edafología de << ge_municipio >>}
+\centering
+\includegraphics[width=\textwidth]{<< ge_ed_grafica >>}
+\end{figure}
+\par\vspace{-4pt}\parbox{\linewidth}{\footnotesize
+Fuente: IIEG, con base en INEGI. Carta edafológica escala 1:250 000 Serie III, 2025.}
+<% endif %>
+
+\newpage
+\setlength{\tabcolsep}{3pt}
+\footnotesize
+\begin{longtable}{>{\raggedright\arraybackslash}m{\dimexpr0.40\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}}
+
+\caption{\textbf{Edafología de << ge_municipio >>}}
+\label{tabla_ge_edafologia} \\
+
+\hline
+\rowcolor{gray!30}
+\thh{0.40}{Tipo de suelo}  &  \textbf{Superficie (ha)}  &  \textbf{Porcentaje (\%)}  \\
+\hline
+\endfirsthead
+\multicolumn{3}{l}{\small\textbf{(continuación)}} \\
+\hline
+\rowcolor{gray!30}
+\thh{0.40}{Tipo de suelo}  &  \textbf{Superficie (ha)}  &  \textbf{Porcentaje (\%)}  \\
+\hline
+\endhead
+\hline
+\multicolumn{3}{r}{\small\textbf{(continúa)}} \\
+\endfoot
+
+\hline
+\endlastfoot
+
+<% for fila in ge_ed_tipos_suelo %>
+<< fila.tipo_suelo >> & << fila.superficie_ha >> & << fila.porcentaje >> \\
+\hline
+<% endfor %>
+
+\end{longtable}
+\normalsize
+\par\vspace{-4pt}\parbox{\linewidth}{\footnotesize
+Fuente: IIEG, con base en INEGI. Carta edafológica escala 1:250 000 Serie III, 2025.}
+
+<% if ge_ed_mapa_activo %>
+\clearpage
+\mapatitulo{Edafología de << ge_municipio >>}
+<< ge_ed_mapa >>
+\mapafuente{Fuente: & INEGI. Carta edafológica escala 1:250\,000 Serie III, 2025.\\
+ & IIEG. Mapa General del Estado de Jalisco, 2012.\\
+ & INEGI. Conjunto nacional de información topográfica a escala 1:50\,000, 2025.\\
+ & INEGI. Marco Geoestadístico, 2025.}
+<% endif %>
+
+\subsubsection{Topografía y pendientes}
+
+La topografía del municipio presenta un predominio de pendientes del rango << ge_tp_dominante >>, las cuales abarcan << ge_tp_dominante_pct >> \% del territorio.
+
+El rango << ge_tp_secundario >> representa << ge_tp_secundario_pct >> \%. El resto de los rangos de pendiente equivale a << ge_tp_demas_pct >> \% del territorio.
+
+<% if ge_tp_grafica_activa %>
+\begin{figure}[H]
+\graficatitulo{Topografía y pendientes de << ge_municipio >>}
+\centering
+\includegraphics[width=\textwidth]{<< ge_tp_grafica >>}
+\end{figure}
+\mapafuente{Fuente: & IIEG, con base en INEGI. Conjunto nacional de información topográfica a escala 1:50\,000, 2025.\\
+ & INEGI. Continuo de Elevaciones Mexicano 4.0, 2025.}
+<% endif %>
+
+\newpage
+\setlength{\tabcolsep}{3pt}
+\footnotesize
+\begin{longtable}{>{\raggedright\arraybackslash}m{\dimexpr0.40\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}}
+
+\caption{\textbf{Topografía y pendientes de << ge_municipio >>}}
+\label{tabla_ge_pendientes} \\
+
+\hline
+\rowcolor{gray!30}
+\thh{0.40}{Rango de pendiente}  &  \textbf{Superficie (ha)}  &  \textbf{Porcentaje (\%)}  \\
+\hline
+\endfirsthead
+\multicolumn{3}{l}{\small\textbf{(continuación)}} \\
+\hline
+\rowcolor{gray!30}
+\thh{0.40}{Rango de pendiente}  &  \textbf{Superficie (ha)}  &  \textbf{Porcentaje (\%)}  \\
+\hline
+\endhead
+\hline
+\multicolumn{3}{r}{\small\textbf{(continúa)}} \\
+\endfoot
+
+\hline
+\endlastfoot
+
+<% for fila in ge_tp_pendientes %>
+<< fila.categoria >> & << fila.superficie_ha >> & << fila.porcentaje >> \\
+\hline
+<% endfor %>
+
+\end{longtable}
+\normalsize
+\mapafuente{Fuente: & IIEG, con base en INEGI. Conjunto nacional de información topográfica a escala 1:50\,000, 2025.\\
+ & INEGI. Continuo de Elevaciones Mexicano 4.0, 2025.}
+
+<% if ge_tp_mapa_activo %>
+\clearpage
+\mapatitulo{Pendientes de << ge_municipio >>}
+<< ge_tp_mapa >>
+\mapafuente{Fuente: & INEGI. Continuo de Elevaciones Mexicano 4.0, 2025.\\
+ & IIEG. Mapa General del Estado de Jalisco, 2012.\\
+ & INEGI. Conjunto nacional de información topográfica a escala 1:50\,000, 2025.\\
+ & INEGI. Marco Geoestadístico, 2025.}
+<% endif %>
+
+\subsubsection{Cuencas}
+
+El territorio municipal se ubica dentro de las cuencas << ge_cu_nombres_cuencas >>. Del total de la superficie municipal comprendida en ellas, << ge_cu_pct_con_disponibilidad >> \% presenta disponibilidad y << ge_cu_pct_sin_disponibilidad >> \% presenta déficit de disponibilidad de agua superficial.
+
+<% if ge_cu_grafica_activa %>
+\begin{figure}[H]
+\graficatitulo{Cuencas de << ge_municipio >>}
+\centering
+\includegraphics[width=\textwidth]{<< ge_cu_grafica >>}
+\end{figure}
+\par\vspace{-4pt}\parbox{\linewidth}{\footnotesize
+Fuente: IIEG, con base en CONAGUA. Disponibilidad en cuencas hidrológicas, 2023. CONAGUA. Ordenamiento de aguas superficial, 2023.}
+<% endif %>
+
+\newpage
+\setlength{\tabcolsep}{3pt}
+\footnotesize
+\begin{longtable}{>{\raggedright\arraybackslash}m{\dimexpr0.40\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}}
+
+\caption{\textbf{Cuencas de << ge_municipio >>}}
+\label{tabla_ge_cuencas} \\
+
+\hline
+\rowcolor{gray!30}
+\thh{0.40}{Estatus}  &  \textbf{Superficie (ha)}  &  \textbf{Porcentaje (\%)}  \\
+\hline
+\endfirsthead
+\multicolumn{3}{l}{\small\textbf{(continuación)}} \\
+\hline
+\rowcolor{gray!30}
+\thh{0.40}{Estatus}  &  \textbf{Superficie (ha)}  &  \textbf{Porcentaje (\%)}  \\
+\hline
+\endhead
+\hline
+\multicolumn{3}{r}{\small\textbf{(continúa)}} \\
+\endfoot
+
+\hline
+\endlastfoot
+
+Con disponibilidad & << ge_cu_sup_con_disponibilidad >> & << ge_cu_pct_con_disponibilidad >> \\
+\hline
+Sin disponibilidad & << ge_cu_sup_sin_disponibilidad >> & << ge_cu_pct_sin_disponibilidad >> \\
+\hline
+\rowcolor{gray!30}
+\thh{0.40}{Tipos de ordenamiento}  &  \textbf{Superficie (ha)}  &  \textbf{Porcentaje (\%)}  \\
+\hline
+Reserva & << ge_cu_sup_reserva >> & << ge_cu_pct_reserva >> \\
+\hline
+Veda & << ge_cu_sup_veda >> & << ge_cu_pct_veda >> \\
+\hline
+Veda y reglamento & << ge_cu_sup_veda_reglamento >> & << ge_cu_pct_veda_reglamento >> \\
+\hline
+Veda, reserva y reglamento & << ge_cu_sup_veda_reserva_reglamento >> & << ge_cu_pct_veda_reserva_reglamento >> \\
+\hline
+Cuenca sin ordenamiento superficial & << ge_cu_sup_sin_ordenamiento_superficial >> & << ge_cu_pct_sin_ordenamiento_superficial >> \\
+\hline
+
+\end{longtable}
+\normalsize
+\par\vspace{-4pt}\parbox{\linewidth}{\footnotesize
+Fuente: IIEG, con base en CONAGUA. Disponibilidad en cuencas hidrológicas, 2023. CONAGUA. Ordenamiento de aguas superficial, 2023.}
+
+<% if ge_cu_mapa_activo %>
+\clearpage
+\mapatitulo{Cuencas de << ge_municipio >>}
+<< ge_cu_mapa >>
+\mapafuente{Fuente: & CONAGUA. Disponibilidad en cuencas hidrológicas, 2023.\\
+ & CONAGUA. Ordenamiento de aguas superficial, 2023.\\
+ & IIEG. Mapa General del Estado de Jalisco, 2012.\\
+ & INEGI. Conjunto nacional de información topográfica a escala 1:50\,000, 2025.\\
+ & INEGI. Marco Geoestadístico, 2025.}
+<% endif %>
+
+\subsubsection{Acuíferos}
+
+El territorio está ubicado dentro de los acuíferos << ge_ac_nombres_acuiferos >>. Del total de la superficie municipal comprendida en ellas, << ge_ac_pct_sin_disponibilidad >> \% no tiene disponibilidad y << ge_ac_pct_con_disponibilidad >> \% cuenta con disponibilidad de agua subterránea.
+
+<% if ge_ac_grafica_activa %>
+\begin{figure}[H]
+\graficatitulo{Acuíferos de << ge_municipio >>}
+\centering
+\includegraphics[width=\textwidth]{<< ge_ac_grafica >>}
+\end{figure}
+\par\vspace{-4pt}\parbox{\linewidth}{\footnotesize
+Fuente: IIEG, con base en CONAGUA. Disponibilidad media anual de aguas subterráneas, 2024. CONAGUA. Condición de acuíferos, 2023.}
+<% endif %>
+
+\newpage
+\setlength{\tabcolsep}{3pt}
+\footnotesize
+\begin{longtable}{>{\raggedright\arraybackslash}m{\dimexpr0.40\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}}
+
+\caption{\textbf{Acuíferos de << ge_municipio >>}}
+\label{tabla_ge_acuiferos} \\
+
+\hline
+\rowcolor{gray!30}
+\thh{0.40}{Estatus}  &  \textbf{Superficie (ha)}  &  \textbf{Porcentaje (\%)}  \\
+\hline
+\endfirsthead
+\multicolumn{3}{l}{\small\textbf{(continuación)}} \\
+\hline
+\rowcolor{gray!30}
+\thh{0.40}{Estatus}  &  \textbf{Superficie (ha)}  &  \textbf{Porcentaje (\%)}  \\
+\hline
+\endhead
+\hline
+\multicolumn{3}{r}{\small\textbf{(continúa)}} \\
+\endfoot
+
+\hline
+\endlastfoot
+
+Con disponibilidad & << ge_ac_sup_con_disponibilidad >> & << ge_ac_pct_con_disponibilidad >> \\
+\hline
+Sin disponibilidad & << ge_ac_sup_sin_disponibilidad >> & << ge_ac_pct_sin_disponibilidad >> \\
+\hline
+No sobreexplotado & << ge_ac_sup_no_sobreexplotado >> & << ge_ac_pct_no_sobreexplotado >> \\
+\hline
+Sobreexplotado & << ge_ac_sup_sobreexplotado >> & << ge_ac_pct_sobreexplotado >> \\
+\hline
+
+\end{longtable}
+\normalsize
+\par\vspace{-4pt}\parbox{\linewidth}{\footnotesize
+Fuente: IIEG, con base en CONAGUA. Disponibilidad media anual de aguas subterráneas, 2024. CONAGUA. Condición de acuíferos, 2023.}
+
+<% if ge_ac_mapa_activo %>
+\clearpage
+\mapatitulo{Acuíferos de << ge_municipio >>}
+<< ge_ac_mapa >>
+\mapafuente{Fuente: & CONAGUA. Disponibilidad media anual de aguas subterráneas, 2024.\\
+ & CONAGUA. Condición de acuíferos, 2023.\\
+ & IIEG. Mapa General del Estado de Jalisco, 2012.\\
+ & INEGI. Conjunto nacional de información topográfica a escala 1:50\,000, 2025.\\
+ & INEGI. Marco Geoestadístico, 2025.}
+<% endif %>
+
+\subsubsection{Temperatura}
+
+La temperatura media mensual conforme a la normal climatológica de 1995 hasta 2025, indica que la media anual es de << ge_tm_media_anual >> °C. Los valores promedio más bajos se presentan en << ge_t_meses_menor_temp >>, con << ge_t_valores_menor_temp >> °C, mientras que las temperaturas promedio más altas se registran en << ge_t_meses_mayor_temp >>, con << ge_t_valores_mayor_temp >> °C.
+
+<% if ge_tm_grafica_activa %>
+\begin{figure}[H]
+\graficatitulo{Temperatura media mensual de << ge_municipio >>}
+\centering
+\includegraphics[width=\textwidth]{<< ge_tm_grafica >>}
+\end{figure}
+\par\vspace{-4pt}\parbox{\linewidth}{\footnotesize
+Fuente: IIEG, con base en SMN. Información Estadística Climatológica, 1995-2026.}
+<% endif %>
+
+\newpage
+\setlength{\tabcolsep}{3pt}
+\footnotesize
+\begin{longtable}{>{\raggedright\arraybackslash}m{\dimexpr0.25\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.25\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.25\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.25\linewidth - 2\tabcolsep\relax}}
+
+\caption{\textbf{Temperatura mensual y anual de << ge_municipio >>}}
+\label{tabla_ge_temperatura} \\
+
+\hline
+\rowcolor{gray!30}
+\thh{0.25}{Mes}  &  \textbf{Mínima (°C)}  &  \textbf{Máxima (°C)}  &  \textbf{Media (°C)}  \\
+\hline
+\endfirsthead
+\multicolumn{4}{l}{\small\textbf{(continuación)}} \\
+\hline
+\rowcolor{gray!30}
+\thh{0.25}{Mes}  &  \textbf{Mínima (°C)}  &  \textbf{Máxima (°C)}  &  \textbf{Media (°C)}  \\
+\hline
+\endhead
+\hline
+\multicolumn{4}{r}{\small\textbf{(continúa)}} \\
+\endfoot
+
+\hline
+\endlastfoot
+
+\rowcolor{filaResaltada}
+\thdr{Anual} & \thdr{<< ge_tm_min_anual >>} & \thdr{<< ge_tm_max_anual >>} & \thdr{<< ge_tm_media_anual >>} \\
+\hline
+Enero & << ge_tm_min_ene >> & << ge_tm_max_ene >> & << ge_tm_med_ene >> \\
+\hline
+Febrero & << ge_tm_min_feb >> & << ge_tm_max_feb >> & << ge_tm_med_feb >> \\
+\hline
+Marzo & << ge_tm_min_mar >> & << ge_tm_max_mar >> & << ge_tm_med_mar >> \\
+\hline
+Abril & << ge_tm_min_abr >> & << ge_tm_max_abr >> & << ge_tm_med_abr >> \\
+\hline
+Mayo & << ge_tm_min_may >> & << ge_tm_max_may >> & << ge_tm_med_may >> \\
+\hline
+Junio & << ge_tm_min_jun >> & << ge_tm_max_jun >> & << ge_tm_med_jun >> \\
+\hline
+Julio & << ge_tm_min_jul >> & << ge_tm_max_jul >> & << ge_tm_med_jul >> \\
+\hline
+Agosto & << ge_tm_min_ago >> & << ge_tm_max_ago >> & << ge_tm_med_ago >> \\
+\hline
+Septiembre & << ge_tm_min_sep >> & << ge_tm_max_sep >> & << ge_tm_med_sep >> \\
+\hline
+Octubre & << ge_tm_min_oct >> & << ge_tm_max_oct >> & << ge_tm_med_oct >> \\
+\hline
+Noviembre & << ge_tm_min_nov >> & << ge_tm_max_nov >> & << ge_tm_med_nov >> \\
+\hline
+Diciembre & << ge_tm_min_dic >> & << ge_tm_max_dic >> & << ge_tm_med_dic >> \\
+\hline
+
+\end{longtable}
+\normalsize
+\par\vspace{-4pt}\parbox{\linewidth}{\footnotesize
+Fuente: IIEG, con base en SMN. Información Estadística Climatológica, 1995-2026.}
+
+<% if ge_tm_mapa_activo %>
+\clearpage
+\mapatitulo{Temperatura media anual histórica de << ge_municipio >>}
+<< ge_tm_mapa >>
+\mapafuente{Fuente: & SMN. Información Estadística Climatológica, 1995-2026.\\
+ & IIEG. Mapa General del Estado de Jalisco, 2012.\\
+ & INEGI. Conjunto nacional de información topográfica a escala 1:50\,000, 2025.\\
+ & INEGI. Marco Geoestadístico, 2025.}
+<% endif %>
+
+\subsubsection{Precipitación}
+
+La precipitación media mensual conforme a la normal climatológica de 1995 hasta 2025, indica que la precipitación acumulada anual es de << ge_p_acumulada_anual >> mm. El mes de menor precipitación es << ge_p_mes_menos_lluvia >>, con una media de << ge_p_media_menos_lluvia >> mm, una mínima de << ge_p_min_menos_lluvia >> mm y una máxima de << ge_p_max_menos_lluvia >> mm. Por su parte, el mes de mayor precipitación es << ge_p_mes_mas_lluvia >>, con una media de << ge_p_media_mas_lluvia >> mm, una mínima de << ge_p_min_mas_lluvia >> mm y una máxima de << ge_p_max_mas_lluvia >> mm.
+
+<% if ge_pp_grafica_activa %>
+\begin{figure}[H]
+\graficatitulo{Precipitación mensual de << ge_municipio >>}
+\centering
+\includegraphics[width=\textwidth]{<< ge_pp_grafica >>}
+\end{figure}
+\par\vspace{-4pt}\parbox{\linewidth}{\footnotesize
+Fuente: IIEG, con base en SMN. Información Estadística Climatológica, 1995-2026.}
+<% endif %>
+
+\newpage
+\setlength{\tabcolsep}{3pt}
+\footnotesize
+\begin{longtable}{>{\raggedright\arraybackslash}m{\dimexpr0.25\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.25\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.25\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.25\linewidth - 2\tabcolsep\relax}}
+
+\caption{\textbf{Precipitación media mensual y acumulada de << ge_municipio >>}}
+\label{tabla_ge_precipitacion} \\
+
+\hline
+\rowcolor{gray!30}
+\thh{0.25}{Mes}  &  \textbf{Media (mm)}  &  \textbf{Mínima (mm)}  &  \textbf{Máxima (mm)}  \\
+\hline
+\endfirsthead
+\multicolumn{4}{l}{\small\textbf{(continuación)}} \\
+\hline
+\rowcolor{gray!30}
+\thh{0.25}{Mes}  &  \textbf{Media (mm)}  &  \textbf{Mínima (mm)}  &  \textbf{Máxima (mm)}  \\
+\hline
+\endhead
+\hline
+\multicolumn{4}{r}{\small\textbf{(continúa)}} \\
+\endfoot
+
+\hline
+\endlastfoot
+
+\rowcolor{filaResaltada}
+\thdr{Anual} & \thdr{<< ge_pp_media_anual >>} & \thdr{<< ge_pp_min_anual >>} & \thdr{<< ge_pp_max_anual >>} \\
+\hline
+Enero & << ge_pp_med_ene >> & << ge_pp_min_ene >> & << ge_pp_max_ene >> \\
+\hline
+Febrero & << ge_pp_med_feb >> & << ge_pp_min_feb >> & << ge_pp_max_feb >> \\
+\hline
+Marzo & << ge_pp_med_mar >> & << ge_pp_min_mar >> & << ge_pp_max_mar >> \\
+\hline
+Abril & << ge_pp_med_abr >> & << ge_pp_min_abr >> & << ge_pp_max_abr >> \\
+\hline
+Mayo & << ge_pp_med_may >> & << ge_pp_min_may >> & << ge_pp_max_may >> \\
+\hline
+Junio & << ge_pp_med_jun >> & << ge_pp_min_jun >> & << ge_pp_max_jun >> \\
+\hline
+Julio & << ge_pp_med_jul >> & << ge_pp_min_jul >> & << ge_pp_max_jul >> \\
+\hline
+Agosto & << ge_pp_med_ago >> & << ge_pp_min_ago >> & << ge_pp_max_ago >> \\
+\hline
+Septiembre & << ge_pp_med_sep >> & << ge_pp_min_sep >> & << ge_pp_max_sep >> \\
+\hline
+Octubre & << ge_pp_med_oct >> & << ge_pp_min_oct >> & << ge_pp_max_oct >> \\
+\hline
+Noviembre & << ge_pp_med_nov >> & << ge_pp_min_nov >> & << ge_pp_max_nov >> \\
+\hline
+Diciembre & << ge_pp_med_dic >> & << ge_pp_min_dic >> & << ge_pp_max_dic >> \\
+\hline
+
+\end{longtable}
+\normalsize
+\par\vspace{-4pt}\parbox{\linewidth}{\footnotesize
+Fuente: IIEG, con base en SMN. Información Estadística Climatológica, 1995-2026.}
+
+<% if ge_pp_mapa_activo %>
+\clearpage
+\mapatitulo{Precipitación histórica acumulada de << ge_municipio >>}
+<< ge_pp_mapa >>
+\mapafuente{Fuente: & SMN. Información Estadística Climatológica, 1995-2026.\\
+ & IIEG. Mapa General del Estado de Jalisco, 2012.\\
+ & INEGI. Conjunto nacional de información topográfica a escala 1:50\,000, 2025.\\
+ & INEGI. Marco Geoestadístico, 2025.}
+<% endif %>
+
+\subsubsection{Clima}
+
+El municipio presenta un clima predominante de tipo << ge_cl_tipo_predominante >>, que abarca << ge_cl_pct_predominante >> \% del territorio. En segundo lugar se presenta << ge_cl_secundario >> con << ge_cl_secundario_pct >> \%. Además se identifican variantes como << ge_cl_otros_nombres >>, que representan << ge_cl_otros_pct >> \%.
+
+<% if ge_cl_grafica_activa %>
+\begin{figure}[H]
+\graficatitulo{Clima de << ge_municipio >>}
+\centering
+\includegraphics[width=\textwidth]{<< ge_cl_grafica >>}
+\end{figure}
+\par\vspace{-4pt}\parbox{\linewidth}{\footnotesize
+Fuente: IIEG, con base en SMN. Información Estadística Climatológica, 1995-2026.}
+<% endif %>
+
+\newpage
+\setlength{\tabcolsep}{3pt}
+\footnotesize
+\begin{longtable}{>{\raggedright\arraybackslash}m{\dimexpr0.40\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}}
+
+\caption{\textbf{Clima de << ge_municipio >>}}
+\label{tabla_ge_clima} \\
+
+\hline
+\rowcolor{gray!30}
+\thh{0.40}{Clasificación climática}  &  \textbf{Superficie (ha)}  &  \textbf{Porcentaje (\%)}  \\
+\hline
+\endfirsthead
+\multicolumn{3}{l}{\small\textbf{(continuación)}} \\
+\hline
+\rowcolor{gray!30}
+\thh{0.40}{Clasificación climática}  &  \textbf{Superficie (ha)}  &  \textbf{Porcentaje (\%)}  \\
+\hline
+\endhead
+\hline
+\multicolumn{3}{r}{\small\textbf{(continúa)}} \\
+\endfoot
+
+\hline
+\endlastfoot
+
+<% for fila in ge_cl_clasificaciones %>
+<< fila.clasificacion_climatica >> & << fila.superficie_ha >> & << fila.porcentaje >> \\
+\hline
+<% endfor %>
+
+\end{longtable}
+\normalsize
+\par\vspace{-4pt}\parbox{\linewidth}{\footnotesize
+Fuente: IIEG, con base en SMN. Información Estadística Climatológica, 1995-2026.}
+
+<% if ge_cl_mapa_activo %>
+\clearpage
+\mapatitulo{Clima de << ge_municipio >>}
+<< ge_cl_mapa >>
+\mapafuente{Fuente: & SMN. Información Estadística Climatológica, 1995-2026.\\
+ & IIEG. Mapa General del Estado de Jalisco, 2012.\\
+ & INEGI. Conjunto nacional de información topográfica a escala 1:50\,000, 2025.\\
+ & INEGI. Marco Geoestadístico, 2025.}
+<% endif %>
+
+\subsubsection{Uso de suelo y vegetación}
+
+La cobertura de uso de suelo y vegetación predominante en el municipio es << ge_usv_dominante >>, con una participación de << ge_usv_dominante_pct >> \% de la superficie. Le sigue << ge_usv_secundario >>, con << ge_usv_secundario_pct >> \%. El resto de las coberturas representa en conjunto << ge_usv_demas_pct >> \% del territorio.
+
+<% if ge_usv_grafica_activa %>
+\begin{figure}[H]
+\graficatitulo{Uso de suelo y vegetación de << ge_municipio >>}
+\centering
+\includegraphics[width=\textwidth]{<< ge_usv_grafica >>}
+\end{figure}
+\par\vspace{-4pt}\parbox{\linewidth}{\footnotesize
+Fuente: IIEG, con base en INEGI. Conjunto de datos vectoriales de uso del suelo y vegetación Serie VII, 2018.}
+<% endif %>
+
+\newpage
+\setlength{\tabcolsep}{3pt}
+\footnotesize
+\begin{longtable}{>{\raggedright\arraybackslash}m{\dimexpr0.40\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}}
+
+\caption{\textbf{Uso de suelo y vegetación de << ge_municipio >>}}
+\label{tabla_ge_uso_suelo} \\
+
+\hline
+\rowcolor{gray!30}
+\thh{0.40}{Uso de suelo}  &  \textbf{Superficie (ha)}  &  \textbf{Porcentaje (\%)}  \\
+\hline
+\endfirsthead
+\multicolumn{3}{l}{\small\textbf{(continuación)}} \\
+\hline
+\rowcolor{gray!30}
+\thh{0.40}{Uso de suelo}  &  \textbf{Superficie (ha)}  &  \textbf{Porcentaje (\%)}  \\
+\hline
+\endhead
+\hline
+\multicolumn{3}{r}{\small\textbf{(continúa)}} \\
+\endfoot
+
+\hline
+\endlastfoot
+
+<% for fila in ge_usv_clasificacion %>
+<< fila.grupo >> & << fila.superficie_ha >> & << fila.porcentaje >> \\
+\hline
+<% endfor %>
+
+\end{longtable}
+\normalsize
+\par\vspace{-4pt}\parbox{\linewidth}{\footnotesize
+Fuente: IIEG, con base en INEGI. Conjunto de datos vectoriales de uso del suelo y vegetación Serie VII, 2018.}
+
+<% if ge_usv_mapa_activo %>
+\clearpage
+\mapatitulo{Uso de suelo y vegetación de << ge_municipio >>}
+<< ge_usv_mapa >>
+\mapafuente{Fuente: & INEGI. Conjunto de datos vectoriales de uso del suelo y vegetación Serie VII, 2018.\\
+ & IIEG. Mapa General del Estado de Jalisco, 2012.\\
+ & INEGI. Conjunto nacional de información topográfica a escala 1:50\,000, 2025.\\
+ & INEGI. Marco Geoestadístico, 2025.}
+<% endif %>
+
+\subsubsection{NDVI}
+
+El Índice de Vegetación de Diferencia Normalizada (NDVI) permite monitorear el estado de la vegetación.
+
+La categoría predominante es << ge_ndvi_dominante >>, con << ge_ndvi_dominante_pct >> \% de la superficie municipal. Le sigue << ge_ndvi_secundario >>, con << ge_ndvi_secundario_pct >> \%. El resto de las categorías representa << ge_ndvi_otros_pct >> \% del territorio.
+
+<% if ge_ndvi_grafica_activa %>
+\begin{figure}[H]
+\graficatitulo{NDVI de << ge_municipio >>}
+\centering
+\includegraphics[width=\textwidth]{<< ge_ndvi_grafica >>}
+\end{figure}
+\par\vspace{-4pt}\parbox{\linewidth}{\footnotesize
+Fuente: IIEG, con base en USGS. Landsat Collection 2 Level-2 Science Products, 2025.}
+<% endif %>
+
+\newpage
+\setlength{\tabcolsep}{3pt}
+\footnotesize
+\begin{longtable}{>{\raggedright\arraybackslash}m{\dimexpr0.40\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}}
+
+\caption{\textbf{NDVI de << ge_municipio >>}}
+\label{tabla_ge_ndvi} \\
+
+\hline
+\rowcolor{gray!30}
+\thh{0.40}{Categoría}  &  \textbf{Superficie (ha)}  &  \textbf{Porcentaje (\%)}  \\
+\hline
+\endfirsthead
+\multicolumn{3}{l}{\small\textbf{(continuación)}} \\
+\hline
+\rowcolor{gray!30}
+\thh{0.40}{Categoría}  &  \textbf{Superficie (ha)}  &  \textbf{Porcentaje (\%)}  \\
+\hline
+\endhead
+\hline
+\multicolumn{3}{r}{\small\textbf{(continúa)}} \\
+\endfoot
+
+\hline
+\endlastfoot
+
+<% for fila in ge_ndvi_categorias %>
+<< fila.categoria >> & << fila.superficie_ha_aj >> & << fila.porcentaje >> \\
+\hline
+<% endfor %>
+
+\end{longtable}
+\normalsize
+\par\vspace{-4pt}\parbox{\linewidth}{\footnotesize
+Fuente: IIEG, con base en USGS. Landsat Collection 2 Level-2 Science Products, 2025.}
+
+<% if ge_ndvi_mapa_activo %>
+\clearpage
+\mapatitulo{NDVI de << ge_municipio >>}
+<< ge_ndvi_mapa >>
+\mapafuente{Fuente: & USGS. Landsat Collection 2 Level-2 Science Products, 2025.\\
+ & IIEG. Mapa General del Estado de Jalisco, 2012.\\
+ & INEGI. Conjunto nacional de información topográfica a escala 1:50\,000, 2025.\\
+ & INEGI. Marco Geoestadístico, 2025.}
+<% endif %>
+
+\subsubsection{NDWI}
+
+El Índice de Agua de Diferencia Normalizada (NDWI) mide el contenido de humedad en la superficie.
+
+La categoría predominante es << ge_ndwi_dominante >>, con << ge_ndwi_dominante_pct >> \% de la superficie municipal. Le sigue << ge_ndwi_secundario >>, con << ge_ndwi_secundario_pct >> \%. El resto de las categorías representa << ge_ndwi_otros_pct >> \% del territorio.
+
+<% if ge_ndwi_grafica_activa %>
+\begin{figure}[H]
+\graficatitulo{NDWI de << ge_municipio >>}
+\centering
+\includegraphics[width=\textwidth]{<< ge_ndwi_grafica >>}
+\end{figure}
+\par\vspace{-4pt}\parbox{\linewidth}{\footnotesize
+Fuente: IIEG, con base en USGS. Landsat Collection 2 Level-2 Science Products, 2025.}
+<% endif %>
+
+\newpage
+\setlength{\tabcolsep}{3pt}
+\footnotesize
+\begin{longtable}{>{\raggedright\arraybackslash}m{\dimexpr0.40\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}}
+
+\caption{\textbf{NDWI de << ge_municipio >>}}
+\label{tabla_ge_ndwi} \\
+
+\hline
+\rowcolor{gray!30}
+\thh{0.40}{Categoría}  &  \textbf{Superficie (ha)}  &  \textbf{Porcentaje (\%)}  \\
+\hline
+\endfirsthead
+\multicolumn{3}{l}{\small\textbf{(continuación)}} \\
+\hline
+\rowcolor{gray!30}
+\thh{0.40}{Categoría}  &  \textbf{Superficie (ha)}  &  \textbf{Porcentaje (\%)}  \\
+\hline
+\endhead
+\hline
+\multicolumn{3}{r}{\small\textbf{(continúa)}} \\
+\endfoot
+
+\hline
+\endlastfoot
+
+<% for fila in ge_ndwi_categorias %>
+<< fila.categoria >> & << fila.superficie_ha_aj >> & << fila.porcentaje >> \\
+\hline
+<% endfor %>
+
+\end{longtable}
+\normalsize
+\par\vspace{-4pt}\parbox{\linewidth}{\footnotesize
+Fuente: IIEG, con base en USGS. Landsat Collection 2 Level-2 Science Products, 2025.}
+
+<% if ge_ndwi_mapa_activo %>
+\clearpage
+\mapatitulo{NDWI de << ge_municipio >>}
+<< ge_ndwi_mapa >>
+\mapafuente{Fuente: & USGS. Landsat Collection 2 Level-2 Science Products, 2025.\\
+ & IIEG. Mapa General del Estado de Jalisco, 2012.\\
+ & INEGI. Conjunto nacional de información topográfica a escala 1:50\,000, 2025.\\
+ & INEGI. Marco Geoestadístico, 2025.}
+<% endif %>
+
+\subsubsection{Áreas naturales protegidas y humedales}
+
+<< ge_anp_texto_automatico >>.
+
+\setlength{\tabcolsep}{3pt}
+\footnotesize
+\begin{longtable}{>{\raggedright\arraybackslash}m{\dimexpr0.20\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.20\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.20\linewidth - 2\tabcolsep\relax}
+                  >{\raggedright\arraybackslash}m{\dimexpr0.40\linewidth - 2\tabcolsep\relax}}
+
+\caption{\textbf{Áreas naturales protegidas y humedales de << ge_municipio >>}}
+\label{tabla_ge_anp} \\
+
+\hline
+\rowcolor{gray!30}
+\thh{0.20}{Categoría}  &  \textbf{Superficie (ha)}  &  \textbf{Porcentaje (\%)}  &  \thh{0.40}{Descripción}  \\
+\hline
+\endfirsthead
+\multicolumn{4}{l}{\small\textbf{(continuación)}} \\
+\hline
+\rowcolor{gray!30}
+\thh{0.20}{Categoría}  &  \textbf{Superficie (ha)}  &  \textbf{Porcentaje (\%)}  &  \thh{0.40}{Descripción}  \\
+\hline
+\endhead
+\hline
+\multicolumn{4}{r}{\small\textbf{(continúa)}} \\
+\endfoot
+
+\hline
+\endlastfoot
+
+<% for fila in ge_anp_categorias %>
+<< fila.categoria >> & << fila.superficie_ha >> & << fila.porcentaje >> & << fila.descripcion >> \\
+\hline
+<% endfor %>
+
+\end{longtable}
+\normalsize
+\par\vspace{-4pt}\parbox{\linewidth}{\footnotesize
+Fuente: IIEG, con base en CONANP. Áreas Naturales Protegidas, 2025. CONAGUA. Inventario Nacional de Humedales, 2021.}
+
+<% if ge_anp_mapa_activo %>
+\clearpage
+\mapatitulo{Áreas naturales protegidas y humedales de << ge_municipio >>}
+<< ge_anp_mapa >>
+\mapafuente{Fuente: & CONANP. Áreas Naturales Protegidas, 2025.\\
+ & CONAGUA. Inventario Nacional de Humedales, 2021.\\
+ & IIEG. Mapa General del Estado de Jalisco, 2012.\\
+ & INEGI. Conjunto nacional de información topográfica a escala 1:50\,000, 2025.\\
+ & INEGI. Marco Geoestadístico, 2025.}
+<% endif %>
+
+\subsubsection{Sequía}
+
+En 2025, la categoría << ge_s_dominante >> es la de mayor presencia, con << ge_s_dominante_pct >> \%, seguida por << ge_s_secundario >> con << ge_s_secundario_pct >> \%, mientras que el resto de categorías representa << ge_s_demas_pct >> \% del territorio.
+
+<% if ge_sequia_grafica_activa %>
+\begin{figure}[H]
+\graficatitulo{Índice de sequía de << ge_municipio >>}
+\centering
+\includegraphics[width=\textwidth]{<< ge_sequia_grafica >>}
+\end{figure}
+\par\vspace{-4pt}\parbox{\linewidth}{\footnotesize
+Fuente: IIEG, con base en USGS. Landsat Collection 2 Level-2 Science Products, 2025.}
+<% endif %>
+
+\newpage
+\setlength{\tabcolsep}{3pt}
+\footnotesize
+\begin{longtable}{>{\raggedright\arraybackslash}m{\dimexpr0.40\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}}
+
+\caption{\textbf{Índice de sequía de << ge_municipio >>}}
+\label{tabla_ge_sequia} \\
+
+\hline
+\rowcolor{gray!30}
+\thh{0.40}{Categoría}  &  \textbf{Superficie (ha)}  &  \textbf{Porcentaje (\%)}  \\
+\hline
+\endfirsthead
+\multicolumn{3}{l}{\small\textbf{(continuación)}} \\
+\hline
+\rowcolor{gray!30}
+\thh{0.40}{Categoría}  &  \textbf{Superficie (ha)}  &  \textbf{Porcentaje (\%)}  \\
+\hline
+\endhead
+\hline
+\multicolumn{3}{r}{\small\textbf{(continúa)}} \\
+\endfoot
+
+\hline
+\endlastfoot
+
+<% for fila in ge_ds_categorias %>
+<< fila.categoria >> & << fila.superficie_ha >> & << fila.porcentaje >> \\
+\hline
+<% endfor %>
+
+\end{longtable}
+\normalsize
+\par\vspace{-4pt}\parbox{\linewidth}{\footnotesize
+Fuente: IIEG, con base en USGS. Landsat Collection 2 Level-2 Science Products, 2025.}
+
+<% if ge_ds_mapa_activo %>
+\clearpage
+\mapatitulo{Índice de sequía de << ge_municipio >>}
+<< ge_ds_mapa >>
+\mapafuente{Fuente: & USGS. Landsat Collection 2 Level-2 Science Products, 2025.\\
+ & IIEG. Mapa General del Estado de Jalisco, 2012.\\
+ & INEGI. Conjunto nacional de información topográfica a escala 1:50\,000, 2025.\\
+ & INEGI. Marco Geoestadístico, 2025.}
+<% endif %>
+
+\subsubsection{Erosión potencial}
+
+En el municipio, predominan pérdidas potenciales de suelo de << ge_er_dominante_rango >> t/ha/año, clasificadas como << ge_er_dominante_tipo >> que representa el << ge_er_dominante_pct >> \% de la superficie municipal. En segundo lugar, las pérdidas potenciales de suelo de << ge_er_secundario_rango >> abarcan el << ge_er_secundario_pct >> \%. El resto de categorías representan el << ge_er_demas_pct >> \% del territorio.
+
+<% if ge_er_grafica_activa %>
+\begin{figure}[H]
+\graficatitulo{Erosión potencial de << ge_municipio >>}
+\centering
+\includegraphics[width=\textwidth]{<< ge_er_grafica >>}
+\end{figure}
+\par\vspace{-4pt}\parbox{\linewidth}{\footnotesize
+Fuente: IIEG, con base en SMN, INEGI. Carta edafológica Serie III y CEM 4.0.}
+<% endif %>
+
+\newpage
+\setlength{\tabcolsep}{3pt}
+\footnotesize
+\begin{longtable}{>{\raggedright\arraybackslash}m{\dimexpr0.40\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}}
+
+\caption{\textbf{Erosión potencial de << ge_municipio >>}}
+\label{tabla_ge_erosion_pot} \\
+
+\hline
+\rowcolor{gray!30}
+\thh{0.40}{Pérdida de suelo (t/ha/año)}  &  \textbf{Superficie (ha)}  &  \textbf{Porcentaje (\%)}  \\
+\hline
+\endfirsthead
+\multicolumn{3}{l}{\small\textbf{(continuación)}} \\
+\hline
+\rowcolor{gray!30}
+\thh{0.40}{Pérdida de suelo (t/ha/año)}  &  \textbf{Superficie (ha)}  &  \textbf{Porcentaje (\%)}  \\
+\hline
+\endhead
+\hline
+\multicolumn{3}{r}{\small\textbf{(continúa)}} \\
+\endfoot
+
+\hline
+\endlastfoot
+
+<% for fila in ge_er_categorias %>
+<< fila.categoria >> & << fila.superficie_ha >> & << fila.porcentaje >> \\
+\hline
+<% endfor %>
+
+\end{longtable}
+\normalsize
+\par\vspace{-4pt}\parbox{\linewidth}{\footnotesize
+Fuente: IIEG, con base en SMN, INEGI. Carta edafológica Serie III y CEM 4.0.}
+
+<% if ge_er_mapa_activo %>
+\clearpage
+\mapatitulo{Erosión potencial de << ge_municipio >>}
+<< ge_er_mapa >>
+\mapafuente{Fuente: & SMN. Información Estadística Climatológica, 1995-2026.\\
+ & INEGI. Carta edafológica escala 1:250\,000 Serie III, 2025.\\
+ & INEGI. Continuo de Elevaciones Mexicano 4.0, 2025.}
+<% endif %>
+
+\subsubsection{Erosión efectiva}
+
+En el municipio, predominan pérdidas de suelo de << ge_ee_dominante_rango >> t/ha/año, clasificadas como << ge_ee_dominante_tipo >> que representa << ge_ee_dominante_pct >> \% de la superficie municipal. En segundo lugar, las potenciales pérdidas de suelo de << ge_ee_secundario_rango >> abarcan el << ge_ee_secundario_pct >> \%. El resto de categorías representan el << ge_ee_demas_pct >> \% del territorio.
+
+<% if ge_ee_grafica_activa %>
+\begin{figure}[H]
+\graficatitulo{Erosión efectiva de << ge_municipio >>}
+\centering
+\includegraphics[width=\textwidth]{<< ge_ee_grafica >>}
+\end{figure}
+\par\vspace{-4pt}\parbox{\linewidth}{\footnotesize
+Fuente: IIEG, con base en SMN, INEGI. Carta edafológica Serie III, CEM 4.0 y USV Serie VII.}
+<% endif %>
+
+\newpage
+\setlength{\tabcolsep}{3pt}
+\footnotesize
+\begin{longtable}{>{\raggedright\arraybackslash}m{\dimexpr0.40\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}}
+
+\caption{\textbf{Erosión efectiva de << ge_municipio >>}}
+\label{tabla_ge_erosion_ef} \\
+
+\hline
+\rowcolor{gray!30}
+\thh{0.40}{Pérdida de suelo (t/ha/año)}  &  \textbf{Superficie (ha)}  &  \textbf{Porcentaje (\%)}  \\
+\hline
+\endfirsthead
+\multicolumn{3}{l}{\small\textbf{(continuación)}} \\
+\hline
+\rowcolor{gray!30}
+\thh{0.40}{Pérdida de suelo (t/ha/año)}  &  \textbf{Superficie (ha)}  &  \textbf{Porcentaje (\%)}  \\
+\hline
+\endhead
+\hline
+\multicolumn{3}{r}{\small\textbf{(continúa)}} \\
+\endfoot
+
+\hline
+\endlastfoot
+
+<% for fila in ge_ee_categorias %>
+<< fila.categoria >> & << fila.superficie_ha >> & << fila.porcentaje >> \\
+\hline
+<% endfor %>
+
+\end{longtable}
+\normalsize
+\par\vspace{-4pt}\parbox{\linewidth}{\footnotesize
+Fuente: IIEG, con base en SMN, INEGI. Carta edafológica Serie III, CEM 4.0 y USV Serie VII.}
+
+<% if ge_ee_mapa_activo %>
+\clearpage
+\mapatitulo{Erosión efectiva de << ge_municipio >>}
+<< ge_ee_mapa >>
+\mapafuente{Fuente: & SMN. Información Estadística Climatológica, 1995-2026.\\
+ & INEGI. Carta edafológica escala 1:250\,000 Serie III, 2025.\\
+ & INEGI. Continuo de Elevaciones Mexicano 4.0, 2025.\\
+ & INEGI. Conjunto de datos vectoriales de uso del suelo y vegetación Serie VII, 2018.}
+<% endif %>
+
+\subsection{Subsistema antrópico}
+
+\subsubsection{Índice Territorial Urbano-Rural}
+
+En el municipio predomina la categoría << ge_itur_dominante >>, con una cobertura de << ge_itur_dominante_pct >> \% del territorio. Le sigue la categoría << ge_itur_secundario >>, con << ge_itur_secundario_pct >> \%. El resto de las categorías representa << ge_itur_demas_pct >> \% del territorio.
+
+<% if ge_itur_grafica_activa %>
+\begin{figure}[H]
+\graficatitulo{Índice territorial urbano-rural de << ge_municipio >>}
+\centering
+\includegraphics[width=\textwidth]{<< ge_itur_grafica >>}
+\end{figure}
+\par\vspace{-4pt}\parbox{\linewidth}{\footnotesize
+Fuente: IIEG, con base en INEGI. Índice Territorial Urbano-Rural (ITUR), 2025.}
+<% endif %>
+
+\newpage
+\setlength{\tabcolsep}{3pt}
+\footnotesize
+\begin{longtable}{>{\raggedright\arraybackslash}m{\dimexpr0.40\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}}
+
+\caption{\textbf{Índice territorial urbano-rural de << ge_municipio >>}}
+\label{tabla_ge_itur} \\
+
+\hline
+\rowcolor{gray!30}
+\thh{0.40}{Clasificación}  &  \textbf{Superficie (ha)}  &  \textbf{Porcentaje (\%)}  \\
+\hline
+\endfirsthead
+\multicolumn{3}{l}{\small\textbf{(continuación)}} \\
+\hline
+\rowcolor{gray!30}
+\thh{0.40}{Clasificación}  &  \textbf{Superficie (ha)}  &  \textbf{Porcentaje (\%)}  \\
+\hline
+\endhead
+\hline
+\multicolumn{3}{r}{\small\textbf{(continúa)}} \\
+\endfoot
+
+\hline
+\endlastfoot
+
+<% for fila in ge_itur_clasificaciones %>
+<< fila.categoria >> & << fila.superficie_ha >> & << fila.porcentaje >> \\
+\hline
+<% endfor %>
+
+\end{longtable}
+\normalsize
+\par\vspace{-4pt}\parbox{\linewidth}{\footnotesize
+Fuente: IIEG, con base en INEGI. Índice Territorial Urbano-Rural (ITUR), 2025.}
+
+<% if ge_itur_mapa_activo %>
+\clearpage
+\mapatitulo{Índice Territorial Urbano-Rural de << ge_municipio >>}
+<< ge_itur_mapa >>
+\mapafuente{Fuente: & INEGI. Índice Territorial Urbano-Rural (ITUR), 2025.\\
+ & IIEG. Mapa General del Estado de Jalisco, 2012.\\
+ & INEGI. Conjunto nacional de información topográfica a escala 1:50\,000, 2025.\\
+ & INEGI. Marco Geoestadístico, 2025.}
+<% endif %>
+
+\subsubsection{Salud}
+
+De acuerdo con los registros de la Secretaría de Salud, en el municipio se identifican << ge_salud_total_puntos_muni >> unidades de servicio de salud, entre consultorios, hospitales, farmacias, laboratorios y unidades móviles. De las cuales << ge_salud_primer_pct >> \% son de primer nivel.
+
+\setlength{\tabcolsep}{3pt}
+\footnotesize
+\begin{longtable}{>{\raggedright\arraybackslash}m{\dimexpr0.45\linewidth - 2\tabcolsep\relax}
+                  >{\raggedright\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.25\linewidth - 2\tabcolsep\relax}}
+
+\caption{\textbf{Unidades de salud de << ge_municipio >>}}
+\label{tabla_ge_salud} \\
+
+\hline
+\rowcolor{gray!30}
+\thh{0.45}{Institución}  &  \textbf{Nivel de atención}  &  \textbf{Cantidad}  \\
+\hline
+\endfirsthead
+\multicolumn{3}{l}{\small\textbf{(continuación)}} \\
+\hline
+\rowcolor{gray!30}
+\thh{0.45}{Institución}  &  \textbf{Nivel de atención}  &  \textbf{Cantidad}  \\
+\hline
+\endhead
+\hline
+\multicolumn{3}{r}{\small\textbf{(continúa)}} \\
+\endfoot
+
+\hline
+\endlastfoot
+
+\rowcolor{filaResaltada}
+\thdr{Total} & & \thdr{<< ge_salud_total_unidades >>} \\
+\hline
+<% for fila in ge_salud_unidades %>
+<< fila.nombre_de_la_institucion >> & << fila.nivel_atencion >> & << fila.cantidad >> \\
+\hline
+<% endfor %>
+
+\end{longtable}
+\normalsize
+\par\vspace{-4pt}\parbox{\linewidth}{\footnotesize
+Fuente: IIEG, con base en Dirección General de Información en Salud. Clave Única de Establecimientos de Salud, 2025.}
+
+<% if ge_salud_mapa_activo %>
+\clearpage
+\mapatitulo{Unidades de salud de << ge_municipio >>}
+<< ge_salud_mapa >>
+\mapafuente{Fuente: & Dirección General de Información en Salud (DGIS). CLUES (Clave Única de Establecimientos de Salud), 2025.\\
+ & IIEG. Mapa General del Estado de Jalisco, 2012.\\
+ & INEGI. Conjunto nacional de información topográfica a escala 1:50\,000, 2025.\\
+ & INEGI. Marco Geoestadístico, 2025.}
+<% endif %>
+
+\subsubsection{Educación}
+
+De acuerdo con los registros del Sistema de Información y Gestión Educativa, en el municipio existen << ge_edu_total_escuelas_muni >> centros educativos distribuidos en distintos niveles y sectores.
+
+La oferta educativa se organiza en niveles de educación inicial, básica, media y superior, con presencia tanto de instituciones públicas como privadas.
+
+\setlength{\tabcolsep}{3pt}
+\footnotesize
+\begin{longtable}{>{\raggedright\arraybackslash}m{\dimexpr0.40\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}}
+
+\caption{\textbf{Centros educativos de << ge_municipio >>}}
+\label{tabla_ge_educacion} \\
+
+\hline
+\rowcolor{gray!30}
+\thh{0.40}{Nivel educativo}  &  \textbf{Sector público}  &  \textbf{Sector particular}  \\
+\hline
+\endfirsthead
+\multicolumn{3}{l}{\small\textbf{(continuación)}} \\
+\hline
+\rowcolor{gray!30}
+\thh{0.40}{Nivel educativo}  &  \textbf{Sector público}  &  \textbf{Sector particular}  \\
+\hline
+\endhead
+\hline
+\multicolumn{3}{r}{\small\textbf{(continúa)}} \\
+\endfoot
+
+\hline
+\endlastfoot
+
+<% for fila in ge_edu_centros %>
+<< fila.nivel_educativo >> & << fila.publico >> & << fila.particular >> \\
+\hline
+<% endfor %>
+
+\end{longtable}
+\normalsize
+\par\vspace{-4pt}\parbox{\linewidth}{\footnotesize
+Fuente: IIEG, con base en Sistema de Información y Gestión Educativa (SIGED). Consulta de escuelas, 2025.}
+
+<% if ge_edu_mapa_activo %>
+\clearpage
+\mapatitulo{Educación de << ge_municipio >>}
+<< ge_edu_mapa >>
+\mapafuente{Fuente: & Sistema de Información y Gestión Educativa (SIGED). Consulta de escuelas, 2025.\\
+ & IIEG. Mapa General del Estado de Jalisco, 2012.\\
+ & INEGI. Conjunto nacional de información topográfica a escala 1:50\,000, 2025.\\
+ & INEGI. Marco Geoestadístico, 2025.}
+<% endif %>
+
+\subsubsection{Espacios públicos}
+
+En el municipio existen << ge_ep_total_puntos_muni >> espacios. Predomina el tipo << ge_ep_dominante >>, que representa << ge_ep_dominante_pct >> \% del total. El resto de los espacios públicos representa << ge_ep_pct_otros >> \% del total.
+
+\setlength{\tabcolsep}{3pt}
+\footnotesize
+\begin{longtable}{>{\raggedright\arraybackslash}m{\dimexpr0.40\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}}
+
+\caption{\textbf{Espacios públicos de << ge_municipio >>}}
+\label{tabla_ge_espacios} \\
+
+\hline
+\rowcolor{gray!30}
+\thh{0.40}{Tipo}  &  \textbf{Cantidad}  &  \textbf{Porcentaje (\%)}  \\
+\hline
+\endfirsthead
+\multicolumn{3}{l}{\small\textbf{(continuación)}} \\
+\hline
+\rowcolor{gray!30}
+\thh{0.40}{Tipo}  &  \textbf{Cantidad}  &  \textbf{Porcentaje (\%)}  \\
+\hline
+\endhead
+\hline
+\multicolumn{3}{r}{\small\textbf{(continúa)}} \\
+\endfoot
+
+\hline
+\endlastfoot
+
+<% for fila in ge_ep_espacios %>
+<< fila.tipo >> & << fila.superficie_ha >> & << fila.porcentaje >> \\
+\hline
+<% endfor %>
+
+\end{longtable}
+\normalsize
+\par\vspace{-4pt}\parbox{\linewidth}{\footnotesize
+Fuente: IIEG, con base en INEGI. Marco Geoestadístico, 2025.}
+
+<% if ge_ep_mapa_activo %>
+\clearpage
+\mapatitulo{Espacios públicos de << ge_municipio >>}
+<< ge_ep_mapa >>
+\mapafuente{Fuente: & INEGI. Marco Geoestadístico, 2025.\\
+ & IIEG. Mapa General del Estado de Jalisco, 2012.\\
+ & INEGI. Conjunto nacional de información topográfica a escala 1:50\,000, 2025.}
+<% endif %>
+
+\subsubsection{Infraestructura energética}
+
+La infraestructura energética del municipio integra elementos estratégicos para el suministro y distribución de energía en el territorio.
+El municipio cuenta con << ge_ene_conteo_total_municipio >> subestación(es) eléctrica(s).
+<< ge_ene_linea_transm_l_texto >>
+
+Con respecto a unidades económicas, predomina el tipo de << ge_ie_dominante >>, con un valor de << ge_ie_dominante_valor >>, equivalente a << ge_ie_dominante_pct >> \% del total identificado. También se registran << ge_ie_tipos_secundarios >>, que complementan la red energética municipal.
+
+\setlength{\tabcolsep}{3pt}
+\footnotesize
+\begin{longtable}{>{\raggedright\arraybackslash}m{\dimexpr0.40\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}}
+
+\caption{\textbf{Infraestructura energética de << ge_municipio >>}}
+\label{tabla_ge_energia} \\
+
+\hline
+\rowcolor{gray!30}
+\thh{0.40}{Tipo de infraestructura}  &  \textbf{Valor}  &  \textbf{Porcentaje (\%)}  \\
+\hline
+\endfirsthead
+\multicolumn{3}{l}{\small\textbf{(continuación)}} \\
+\hline
+\rowcolor{gray!30}
+\thh{0.40}{Tipo de infraestructura}  &  \textbf{Valor}  &  \textbf{Porcentaje (\%)}  \\
+\hline
+\endhead
+\hline
+\multicolumn{3}{r}{\small\textbf{(continúa)}} \\
+\endfoot
+
+\hline
+\endlastfoot
+
+<% for fila in ge_ie_infraestructura %>
+<< fila.tipo_infraestructura >> & << fila.valor >> & << fila.porcentaje >> \\
+\hline
+<% endfor %>
+
+\end{longtable}
+\normalsize
+\par\vspace{-4pt}\parbox{\linewidth}{\footnotesize
+Fuente: IIEG, con base en INEGI. DENUE, 2025. INEGI. Topografía 1:50 000, 2025. SENER. Mapa de Hidrocarburos, 2025.}
+<% if ge_ie_mapa_activo %>
+\clearpage
+\mapatitulo{Infraestructura energética de << ge_municipio >>}
+<< ge_ie_mapa >>
+\mapafuente{Fuente: & INEGI. Directorio Estadístico Nacional de Unidades Económicas, 2025.\\
+ & INEGI. Conjunto nacional de información topográfica a escala 1:50\,000, 2025.\\
+ & SENER. Mapa de Hidrocarburos, 2025.}
+<% endif %>

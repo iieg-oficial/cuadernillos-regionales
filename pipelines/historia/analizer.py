@@ -1,8 +1,9 @@
 from pathlib import Path
 
+from core.constants import ND
 from core.pipelines.stage import Stage
+from core.utils.logger import Logger
 
-ND = "\\ND"
 MAPA_PLACEHOLDER = Path("templates/assets/mapa_placeholder.png")
 
 
@@ -29,14 +30,13 @@ def _normalize(text: str) -> str:
 def _mapa_latex(path: Path, nombre: str) -> str:
     return (
         "\\begin{figure}[H]\n"
+        "\\noindent Gráfica 1\\\\\n"
+        f"\\textbf{{Localización geográfica de {nombre}, Jalisco}}\\par\\vspace{{4pt}}\n"
         "\\centering\n"
-        f"\\textbf{{Figura 1. {nombre}, Jalisco.}}\\\\\n"
-        "Localización geográfica.\n\n"
         f"\\includegraphics[width=0.9\\textwidth]{{{path}}}\n"
-        "\\par\\vspace{4pt}\n"
-        "{\\footnotesize\\centering Elaboración del IIEG. "
-        "Mapa General del Estado de Jalisco, 2026.\\par}\n"
-        "\\end{figure}"
+        "\\end{figure}\n"
+        "\\par\\vspace{-4pt}\\parbox{\\linewidth}{\\footnotesize\n"
+        "Fuente: IIEG. Mapa General del Estado de Jalisco, 2026.}"
     )
 
 
@@ -45,11 +45,13 @@ class Analizer(Stage):
         self.municipio_id = municipio_id
 
     def execute(self, input_data: dict) -> dict:
+        Logger.info("Historia: procesando texto")
         toponimia = _normalize(input_data.get("toponimia") or "") or ND
         contexto = _normalize(input_data.get("contexto_historico") or "") or ND
         mapa_path = input_data.get("mapa_path") or MAPA_PLACEHOLDER
         nombre = input_data.get("municipio_nombre", "")
 
+        Logger.info("Historia: análisis completo")
         return {
             "hi_toponimia": toponimia,
             "hi_contexto_historico": contexto,

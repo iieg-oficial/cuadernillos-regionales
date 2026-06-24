@@ -6,11 +6,14 @@ from pydantic_settings import BaseSettings
 
 class AppSettings(BaseSettings):
     FONTS_PATH: str = Field(default="/usr/share/fonts/")
+    ASSETS_PATH: str = Field(default="templates/assets/")
 
     model_config = {"env_file": ".env/.env.app"}
 
 
 class DatabaseSettings(BaseSettings):
+    model_config = {"extra": "ignore"}
+
     DB_USER: str = Field(default="postgres")
     DB_PASSWORD: str = Field(default="postgres")
     DB_HOST: str = Field(default="localhost")
@@ -28,5 +31,22 @@ class DatabaseSettings(BaseSettings):
 
 class HistoriaSettings(BaseSettings):
     HISTORIA_MAPS_URL: str = Field(default="")
+    HISTORIA_MAPS_QUALITY: str = Field(default="full")
 
     model_config = {"env_file": ".env/.env.historia"}
+
+
+class GeografiaSettings(BaseSettings):
+    GEOGRAFIA_MAPS_FOLDER_URL: str = Field(default="")
+    GEOGRAFIA_MAPS_QUALITY: str = Field(default="full")
+
+    model_config = {"env_file": ".env/.env.geografia"}
+
+
+class DemografiaSettings(BaseSettings):
+    DEMOGRAFIA_MAPS_MIGRACION_URL: str = Field(default="")
+    DEMOGRAFIA_MAPS_POBREZA_URL: str = Field(default="")
+    DEMOGRAFIA_MAPS_MARGINACION_URL: str = Field(default="")
+    DEMOGRAFIA_MAPS_QUALITY: str = Field(default="full")
+
+    model_config = {"env_file": ".env/.env.demografia"}

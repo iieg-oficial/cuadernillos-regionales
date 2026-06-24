@@ -10,6 +10,7 @@ dependencies = [
     "jinja2",
     "rich",
     "gdown>=6.0.0",
+    "squarify>=0.4.4",
 ]
 
 [dependency-groups]

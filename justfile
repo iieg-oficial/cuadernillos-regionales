@@ -23,7 +23,7 @@ run-one clave:
 # abre un archivo específico
 [group("reports")]
 open-one clave:
-   open output/pdf/{{clave}}_cuadernillo/{{clave}}_cuadernillo.pdf
+   open "$(ls -t output/pdf/{{clave}}_*cuadernillo*/*.pdf | head -1)"
 
 # Revisa estilo y formato con ruff
 [group("format code")]

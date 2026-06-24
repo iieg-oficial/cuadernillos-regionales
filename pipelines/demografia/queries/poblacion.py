@@ -17,23 +17,14 @@ def get_totales_municipio(session: Session, cve_mun: int) -> dict[int, dict]:
     stmt = text("""
         SELECT
             f.fecha,
-            COALESCE(
-                MAX(CASE WHEN p.localidad_id IS NULL THEN p.total END),
-                SUM(CASE WHEN p.localidad_id IS NOT NULL THEN p.total END)
-            ) AS total,
-            COALESCE(
-                MAX(CASE WHEN p.localidad_id IS NULL THEN p.total_hombres END),
-                SUM(CASE WHEN p.localidad_id IS NOT NULL THEN p.total_hombres END)
-            ) AS total_hombres,
-            COALESCE(
-                MAX(CASE WHEN p.localidad_id IS NULL THEN p.total_mujeres END),
-                SUM(CASE WHEN p.localidad_id IS NOT NULL THEN p.total_mujeres END)
-            ) AS total_mujeres
+            p.total,
+            p.total_hombres,
+            p.total_mujeres
         FROM poblacion p
         JOIN fuentes f ON f.id = p.fuente_id
         WHERE p.municipio_id = :cve_mun
           AND p.entidad_id = 14
-        GROUP BY f.fecha
+          AND p.localidad_id IS NULL
     """)
     rows = session.execute(stmt, {"cve_mun": cve_mun}).fetchall()
     return {
@@ -48,22 +39,29 @@ def get_totales_municipio(session: Session, cve_mun: int) -> dict[int, dict]:
 
 def get_total_estatal(session: Session, anio: int) -> int | None:
     stmt = text("""
-        SELECT COALESCE(
-            (SELECT SUM(p.total)
-             FROM poblacion p
-             JOIN fuentes f ON f.id = p.fuente_id
-             WHERE p.entidad_id = 14
-               AND p.localidad_id IS NULL
-               AND f.fecha = :anio),
-            (SELECT SUM(p.total)
-             FROM poblacion p
-             JOIN fuentes f ON f.id = p.fuente_id
-             WHERE p.entidad_id = 14
-               AND p.localidad_id IS NOT NULL
-               AND f.fecha = :anio)
-        )
+        SELECT p.total
+        FROM poblacion p
+        JOIN fuentes f ON f.id = p.fuente_id
+        WHERE p.entidad_id = 14
+          AND p.localidad_id IS NULL
+          AND p.municipio_id = 0
+          AND f.fecha = :anio
     """)
     row = session.execute(stmt, {"anio": anio}).fetchone()
+    return row[0] if row else None
+
+
+def get_total_region(session: Session, cve_muns: list[int], anio: int) -> int | None:
+    stmt = text("""
+        SELECT SUM(p.total)
+        FROM poblacion p
+        JOIN fuentes f ON f.id = p.fuente_id
+        WHERE p.entidad_id = 14
+          AND p.localidad_id IS NULL
+          AND p.municipio_id = ANY(:cve_muns)
+          AND f.fecha = :anio
+    """)
+    row = session.execute(stmt, {"cve_muns": cve_muns, "anio": anio}).fetchone()
     return row[0] if row else None
 
 
