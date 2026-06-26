@@ -145,27 +145,29 @@ Base de datos: `censos_economicos`
 - [ ] `ec_vacb_total_actual`: VACB total del municipio en 2024
 - [ ] `ec_vacb_total_anterior`: VACB total del municipio en 2019
 
-```sql
--- VACB total 2024
-SELECT SUM(v.valor_agregado_censal_bruto_mdp) AS vacb_total
-FROM public.vw_economico_municipal_2024 v
-WHERE v.cve_ent = 14
-  AND v.cve_mun = {cve_mun}
-  AND v.estrato_id = 1
-  AND v.subsector IS NOT NULL
-  AND v.subsector != ''
-  AND v.valor_agregado_censal_bruto_mdp IS NOT NULL;
-```
+> Las vistas se nombran por el anio de referencia (`anio - 1`): el censo 2024
+> usa `vw_economico_municipal_2023` y el 2019 usa `vw_economico_municipal_2018`.
+> El total es el Gran sector, que en la vista corresponde al renglon con
+> `actividad_codigo IS NULL`.
 
 ```sql
--- VACB total 2019
-SELECT SUM(valor_agregado_censal_bruto_mdp) AS vacb_total
-FROM public.vw_economico_municipal_2019
+-- VACB total 2024 (referencia 2023)
+SELECT valor_agregado_censal_bruto_mdp AS vacb_total
+FROM public.vw_economico_municipal_2023
 WHERE cve_ent = 14
   AND cve_mun = {cve_mun}
   AND estrato_id = 1
-  AND LENGTH(actividad_codigo) = 3
-  AND valor_agregado_censal_bruto_mdp IS NOT NULL;
+  AND actividad_codigo IS NULL;
+```
+
+```sql
+-- VACB total 2019 (referencia 2018)
+SELECT valor_agregado_censal_bruto_mdp AS vacb_total
+FROM public.vw_economico_municipal_2018
+WHERE cve_ent = 14
+  AND cve_mun = {cve_mun}
+  AND estrato_id = 1
+  AND actividad_codigo IS NULL;
 ```
 
 - [ ] `ec_variacion_valor_agregado_censal`: variacion real del VACB entre ambos censos
@@ -180,23 +182,18 @@ WHERE cve_ent = 14
 - [ ] `ec_aportacion_principales_subsectores`: monto en pesos de los 3 principales subsectores
 
 ```sql
--- Top subsectores por VACB 2024
+-- Top subsectores por VACB 2024 (referencia 2023)
 SELECT
-    SPLIT_PART(v.subsector, '.', 1) AS codigo,
-    ca.descripcion AS subsector,
-    SUM(v.valor_agregado_censal_bruto_mdp) AS vacb
-FROM public.vw_economico_municipal_2024 v
-JOIN public.cat_actividades_economicas ca
-    ON SPLIT_PART(v.subsector, '.', 1) = ca.codigo
-    AND ca.censo_id = (SELECT id FROM public.cat_censos WHERE anio = 2024)
-    AND ca.codigo_id = 3
-WHERE v.cve_ent = 14
-  AND v.cve_mun = {cve_mun}
-  AND v.estrato_id = 1
-  AND v.subsector IS NOT NULL
-  AND v.subsector != ''
-  AND v.valor_agregado_censal_bruto_mdp IS NOT NULL
-GROUP BY SPLIT_PART(v.subsector, '.', 1), ca.descripcion
+    actividad_codigo AS codigo,
+    actividad AS subsector,
+    SUM(valor_agregado_censal_bruto_mdp) AS vacb
+FROM public.vw_economico_municipal_2023
+WHERE cve_ent = 14
+  AND cve_mun = {cve_mun}
+  AND estrato_id = 1
+  AND LENGTH(actividad_codigo) = 3
+  AND valor_agregado_censal_bruto_mdp IS NOT NULL
+GROUP BY actividad_codigo, actividad
 ORDER BY vacb DESC NULLS LAST;
 ```
 
@@ -211,12 +208,12 @@ ORDER BY vacb DESC NULLS LAST;
 > Se calcula comparando cada subsector entre 2024 y 2019 con el query anterior y el siguiente:
 
 ```sql
--- Subsectores por VACB 2019
+-- Subsectores por VACB 2019 (referencia 2018)
 SELECT
     actividad_codigo AS codigo,
     actividad AS subsector,
     SUM(valor_agregado_censal_bruto_mdp) AS vacb
-FROM public.vw_economico_municipal_2019
+FROM public.vw_economico_municipal_2018
 WHERE cve_ent = 14
   AND cve_mun = {cve_mun}
   AND estrato_id = 1
