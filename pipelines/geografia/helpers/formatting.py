@@ -2,6 +2,9 @@ import math
 import re
 
 from core.constants import ND
+from core.utils.helpers import latex_escape
+
+__all__ = ["latex_escape"]
 
 
 def fmt(value, decimals=2) -> str:
@@ -20,24 +23,6 @@ def fmt_pct(value) -> str:
     if value is None or (isinstance(value, float) and math.isnan(value)):
         return ND
     return f"{value:,.2f}".replace(",", r"\,") + r"\,\%"
-
-
-def latex_escape(value):
-    if value is None or (isinstance(value, float) and math.isnan(value)):
-        return ND
-    text = str(value)
-    replacements = {
-        "&": r"\&",
-        "%": r"\%",
-        "$": r"\$",
-        "#": r"\#",
-        "_": r"\_",
-        "{": r"\{",
-        "}": r"\}",
-        "~": r"\textasciitilde{}",
-        "^": r"\textasciicircum{}",
-    }
-    return "".join(replacements.get(ch, ch) for ch in text)
 
 
 def strip_percent_symbol(value):
