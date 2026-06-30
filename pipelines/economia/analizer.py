@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from core.constants import DASH, ND
+from core.constants import DASH, INCOMPLETE_AGRICOLA, INCOMPLETE_PECUARIA, ND
 from core.pipelines.stage import Stage
 from core.utils.logger import Logger
 from core.utils.municipalities import get_same_region, get_same_region_ids
@@ -596,47 +596,77 @@ class Analizer(Stage):
 
         municipio_nombre = input_data.get("municipio_nombre") or ""
 
-        if agricola_mun is not None:
-            ctx["ec_valor_produccion_agricola"] = _fmt(agricola_mun)
-        else:
-            ctx["ec_valor_produccion_agricola"] = ND
+        mun_int = int(municipio_id_str)
+        ctx["ec_agricola_activa"] = mun_int not in INCOMPLETE_AGRICOLA
+        ctx["ec_pecuaria_activa"] = mun_int not in INCOMPLETE_PECUARIA
+        ctx["ec_agropecuario_activa"] = (
+            ctx["ec_agricola_activa"] or ctx["ec_pecuaria_activa"]
+        )
 
-        if agricola_mun and agricola_est:
-            ctx["ec_porcentaje_respecto_al_estado_agricola"] = _pct(
-                agricola_mun / agricola_est * 100
+        if not ctx["ec_agropecuario_activa"]:
+            Logger.warning(
+                f"Economía: municipio {mun_int} sin datos agropecuarios, "
+                "ignorando sección Agricultura y ganadería"
             )
         else:
-            ctx["ec_porcentaje_respecto_al_estado_agricola"] = ND
+            if not ctx["ec_agricola_activa"]:
+                Logger.info(
+                    f"Economía: municipio {mun_int} sin datos agrícolas, "
+                    "ignorando producción agrícola de la sección"
+                )
+            if not ctx["ec_pecuaria_activa"]:
+                Logger.info(
+                    f"Economía: municipio {mun_int} sin datos pecuarios, "
+                    "ignorando producción pecuaria de la sección"
+                )
 
-        if len(agricola_anual) >= 2:
-            chart_path = CHARTS_DIR / municipio_id_str / "ec_agricultura.png"
-            grafica_produccion(agricola_anual, municipio_nombre, "agrícola", chart_path)
-            ctx["ec_grafica_agricultura"] = _grafica_latex(
-                chart_path, municipio_nombre, "agrícola", agricola_anual
-            )
-        else:
-            ctx["ec_grafica_agricultura"] = MAPA_PLACEHOLDER
+        if ctx["ec_agricola_activa"]:
+            if agricola_mun is not None:
+                ctx["ec_valor_produccion_agricola"] = _fmt(agricola_mun)
+            else:
+                ctx["ec_valor_produccion_agricola"] = ND
 
-        if ganadera_mun is not None:
-            ctx["ec_valor_produccion_ganado"] = _fmt(ganadera_mun)
-        else:
-            ctx["ec_valor_produccion_ganado"] = ND
+            if agricola_mun and agricola_est:
+                ctx["ec_porcentaje_respecto_al_estado_agricola"] = _pct(
+                    agricola_mun / agricola_est * 100
+                )
+            else:
+                ctx["ec_porcentaje_respecto_al_estado_agricola"] = ND
 
-        if ganadera_mun and ganadera_est:
-            ctx["ec_porcentaje_respecto_al_estado_ganado"] = _pct(
-                ganadera_mun / ganadera_est * 100
-            )
-        else:
-            ctx["ec_porcentaje_respecto_al_estado_ganado"] = ND
+            if len(agricola_anual) >= 2:
+                chart_path = CHARTS_DIR / municipio_id_str / "ec_agricultura.png"
+                grafica_produccion(
+                    agricola_anual, municipio_nombre, "agrícola", chart_path
+                )
+                ctx["ec_grafica_agricultura"] = _grafica_latex(
+                    chart_path, municipio_nombre, "agrícola", agricola_anual
+                )
+            else:
+                ctx["ec_grafica_agricultura"] = MAPA_PLACEHOLDER
 
-        if len(ganadera_anual) >= 2:
-            chart_path = CHARTS_DIR / municipio_id_str / "ec_ganaderia.png"
-            grafica_produccion(ganadera_anual, municipio_nombre, "pecuaria", chart_path)
-            ctx["ec_grafica_ganaderia"] = _grafica_latex(
-                chart_path, municipio_nombre, "pecuaria", ganadera_anual
-            )
-        else:
-            ctx["ec_grafica_ganaderia"] = MAPA_PLACEHOLDER
+        if ctx["ec_pecuaria_activa"]:
+            if ganadera_mun is not None:
+                ctx["ec_valor_produccion_ganado"] = _fmt(ganadera_mun)
+            else:
+                ctx["ec_valor_produccion_ganado"] = ND
+
+            if ganadera_mun and ganadera_est:
+                ctx["ec_porcentaje_respecto_al_estado_ganado"] = _pct(
+                    ganadera_mun / ganadera_est * 100
+                )
+            else:
+                ctx["ec_porcentaje_respecto_al_estado_ganado"] = ND
+
+            if len(ganadera_anual) >= 2:
+                chart_path = CHARTS_DIR / municipio_id_str / "ec_ganaderia.png"
+                grafica_produccion(
+                    ganadera_anual, municipio_nombre, "pecuaria", chart_path
+                )
+                ctx["ec_grafica_ganaderia"] = _grafica_latex(
+                    chart_path, municipio_nombre, "pecuaria", ganadera_anual
+                )
+            else:
+                ctx["ec_grafica_ganaderia"] = MAPA_PLACEHOLDER
 
         Logger.info("Economía: análisis completo")
         return ctx

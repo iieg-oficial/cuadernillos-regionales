@@ -1,6 +1,9 @@
 ND = "\\ND"
 DASH = "{-}{-}"
 
+INCOMPLETE_AGRICOLA: list[int] = [39, 125]
+INCOMPLETE_PECUARIA: list[int] = [39]
+
 COLOR_SECCION = "#5C2472"
 COLOR_GRIS = "#B0B0B0"
 COLOR_TEXTO = "#465055"
