@@ -630,9 +630,9 @@ class Analizer(Stage):
 
         if len(ganadera_anual) >= 2:
             chart_path = CHARTS_DIR / municipio_id_str / "ec_ganaderia.png"
-            grafica_produccion(ganadera_anual, municipio_nombre, "ganadera", chart_path)
+            grafica_produccion(ganadera_anual, municipio_nombre, "pecuaria", chart_path)
             ctx["ec_grafica_ganaderia"] = _grafica_latex(
-                chart_path, municipio_nombre, "ganadera", ganadera_anual, 2
+                chart_path, municipio_nombre, "pecuaria", ganadera_anual, 2
             )
         else:
             ctx["ec_grafica_ganaderia"] = MAPA_PLACEHOLDER
