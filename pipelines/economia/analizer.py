@@ -610,12 +610,12 @@ class Analizer(Stage):
             )
         else:
             if not ctx["ec_agricola_activa"]:
-                Logger.info(
+                Logger.warning(
                     f"Economía: municipio {mun_int} sin datos agrícolas, "
                     "ignorando producción agrícola de la sección"
                 )
             if not ctx["ec_pecuaria_activa"]:
-                Logger.info(
+                Logger.warning(
                     f"Economía: municipio {mun_int} sin datos pecuarios, "
                     "ignorando producción pecuaria de la sección"
                 )
