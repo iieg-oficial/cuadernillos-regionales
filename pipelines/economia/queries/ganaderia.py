@@ -6,7 +6,7 @@ def get_valor_produccion_ganadera_anual(session: Session, cve_mun: int):
     stmt = text("""
         SELECT
             anio,
-            ROUND(SUM(valor_produccion)::numeric / 1000000, 2) AS valor_millones
+            ROUND(SUM(valor_produccion)::numeric / 1000, 2) AS valor_millones
         FROM public.stg_ganadera
         WHERE entidad_id = 14
           AND municipio_id = :cve_mun
@@ -20,7 +20,7 @@ def get_valor_produccion_ganadera_anual(session: Session, cve_mun: int):
 
 def get_valor_produccion_ganadera_estatal(session: Session, anio: int):
     stmt = text("""
-        SELECT ROUND(SUM(valor_produccion)::numeric / 1000000, 2) AS valor_mdp
+        SELECT ROUND(SUM(valor_produccion)::numeric / 1000, 2) AS valor_mdp
         FROM public.stg_ganadera
         WHERE entidad_id = 14
           AND anio = :anio
@@ -32,7 +32,7 @@ def get_valor_produccion_ganadera_estatal(session: Session, anio: int):
 
 def get_valor_produccion_ganadera_municipal(session: Session, cve_mun: int, anio: int):
     stmt = text("""
-        SELECT ROUND(SUM(valor_produccion)::numeric / 1000000, 2) AS valor_mdp
+        SELECT ROUND(SUM(valor_produccion)::numeric / 1000, 2) AS valor_mdp
         FROM public.stg_ganadera
         WHERE entidad_id = 14
           AND municipio_id = :cve_mun
