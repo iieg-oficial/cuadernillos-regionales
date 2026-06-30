@@ -1,6 +1,10 @@
 import math
 
-from core.constants import ND
+from core.constants import DASH, ND
+
+
+def rows_have_na(rows):
+    return any(value == DASH for row in rows for value in row.values())
 
 
 def latex_escape(value):

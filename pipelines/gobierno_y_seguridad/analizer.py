@@ -2,6 +2,7 @@ from pathlib import Path
 
 from core.constants import DASH, INCOMPLETE_INGRESOS_PROPIOS, ND
 from core.pipelines.stage import Stage
+from core.utils.helpers import rows_have_na
 from core.utils.logger import Logger
 from core.utils.municipalities import get_same_region
 from pipelines.gobierno_y_seguridad.charts.incidencia import (
@@ -480,6 +481,8 @@ class Analizer(Stage):
             ctx["gs_anio_anterior_valor_ingreso_per_capita"] = ND
             ctx["gs_posicion_anio_anterior_ingreso_percapita"] = ND
             ctx["gs_tabla_ingresos"] = []
+
+        ctx["gs_tabla_ingresos_tiene_na"] = rows_have_na(ctx["gs_tabla_ingresos"])
 
         ctx["gs_ingresos_propios_activa"] = cve_mun not in INCOMPLETE_INGRESOS_PROPIOS
         if not ctx["gs_ingresos_propios_activa"]:

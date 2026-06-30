@@ -181,6 +181,7 @@ real pasando de << ec_aportacion_anterior_subsector_mayor_crecimiento >> millone
 \end{longtable}
 \normalsize
 \tablefooter{Nota: &La tabla solo presenta información para los subsectores que no están restringidos por principios de confidencialidad..\\
+<% if ec_tabla_vacb_tiene_na %>& NA: no aplica.\\<% endif %>
 Fuente: & IIEG con base en INEGI. Censos Económicos, << ec_anio_publicacion_ce_anterior >> y << ec_anio_publicacion_ce >>.\\
 & INEGI. Índice Nacional de Precios al Consumidor. Base segunda quincena julio 2018.\\
 & Los valores de << ec_anio_ce >> fueron deflactados a precios de << ec_anio_ce_anterior >> con base en el promedio anual del INPC.}
@@ -264,7 +265,8 @@ y << ec_anio_corte_imss >>}
 
 \end{longtable}
 \normalsize
-\tablefooter{Fuente: & IIEG con base en IMSS. Datos abiertos de Trabajadores Asegurados, << ec_dos_anios_atras_corte_imss >>,
+\tablefooter{<% if ec_tabla_imss_grupos_tiene_na %>Nota: & NA: no aplica.\\
+<% endif %>Fuente: & IIEG con base en IMSS. Datos abiertos de Trabajadores Asegurados, << ec_dos_anios_atras_corte_imss >>,
 << ec_anio_anterior_corte_imss >> y << ec_anio_corte_imss >>.}
 
 \newpage

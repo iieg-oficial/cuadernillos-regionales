@@ -2,6 +2,7 @@ from pathlib import Path
 
 from core.constants import DASH, INCOMPLETE_AGRICOLA, INCOMPLETE_PECUARIA, ND
 from core.pipelines.stage import Stage
+from core.utils.helpers import rows_have_na
 from core.utils.logger import Logger
 from core.utils.municipalities import get_same_region, get_same_region_ids
 from pipelines.economia.charts.produccion import grafica_produccion
@@ -434,6 +435,7 @@ class Analizer(Stage):
         ctx["ec_tabla_vacb"] = _build_vacb_table(
             vacb_actual, vacb_anterior, vacb_total_actual, factor_deflactacion
         )
+        ctx["ec_tabla_vacb_tiene_na"] = rows_have_na(ctx["ec_tabla_vacb"])
         ctx["ec_vacb_total_real"] = (
             _fmt(vacb_total_actual_real, 2)
             if vacb_total_actual_real is not None
@@ -495,6 +497,9 @@ class Analizer(Stage):
                 ctx["ec_total_var_nominal_imss"] = ND
 
             ctx["ec_tabla_imss_grupos"] = _build_imss_grupos(imss_divisiones, mun_t0)
+            ctx["ec_tabla_imss_grupos_tiene_na"] = rows_have_na(
+                ctx["ec_tabla_imss_grupos"]
+            )
 
             if imss_divisiones:
                 top = imss_divisiones[0]
@@ -573,6 +578,7 @@ class Analizer(Stage):
             ctx["ec_num_trabajadores_grupo_mayor"] = ND
             ctx["ec_porcentaje_trabajadores_grupo_mayor"] = ND
             ctx["ec_tabla_imss_grupos"] = []
+            ctx["ec_tabla_imss_grupos_tiene_na"] = False
             ctx["ec_posicion_municipio_region"] = ND
             ctx["ec_porcentaje_asegurados_region"] = ND
             ctx["ec_pct_asegurados_region_tabla"] = ND
