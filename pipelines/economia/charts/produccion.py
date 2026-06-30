@@ -23,7 +23,10 @@ def grafica_produccion(
 
     fig, ax = plt.subplots(figsize=(10, 5.5))
 
-    bars = ax.bar(anios, valores, color=colores, width=0.85, edgecolor="none")
+    posiciones = range(len(anios))
+    bars = ax.bar(posiciones, valores, color=colores, width=0.85, edgecolor="none")
+    ax.set_xticks(list(posiciones))
+    ax.set_xticklabels(anios)
 
     for bar, val in zip(bars, valores):
         ax.text(
