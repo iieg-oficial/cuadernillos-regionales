@@ -46,7 +46,7 @@ def _pct(value) -> str:
     return f"{value:,.2f}".replace(",", r"\,") + r"\,\%"
 
 
-def _grafica_latex(path, municipio, tipo, datos, num):
+def _grafica_latex(path, municipio, tipo, datos):
     n = min(6, len(datos))
     ultimos = datos[-n:]
     anio_ini = ultimos[0]["anio"]
@@ -57,7 +57,8 @@ def _grafica_latex(path, municipio, tipo, datos, num):
     )
     return (
         "\\begin{figure}[H]\n"
-        f"{{\\color{{colorTexto}}Gráfica {num}}}\\\\\n"
+        "\\refstepcounter{grafica}%\n"
+        "{\\color{colorTexto}Gráfica \\thegrafica}\\\\\n"
         f"{{\\color{{colorTexto}}\\textbf{{{titulo}}}}}\n"
         "\\vspace{0.3cm}\n\n"
         f"\\includegraphics[width=0.95\\textwidth]{{{path}}}\n"
@@ -611,7 +612,7 @@ class Analizer(Stage):
             chart_path = CHARTS_DIR / municipio_id_str / "ec_agricultura.png"
             grafica_produccion(agricola_anual, municipio_nombre, "agrícola", chart_path)
             ctx["ec_grafica_agricultura"] = _grafica_latex(
-                chart_path, municipio_nombre, "agrícola", agricola_anual, 1
+                chart_path, municipio_nombre, "agrícola", agricola_anual
             )
         else:
             ctx["ec_grafica_agricultura"] = MAPA_PLACEHOLDER
@@ -632,7 +633,7 @@ class Analizer(Stage):
             chart_path = CHARTS_DIR / municipio_id_str / "ec_ganaderia.png"
             grafica_produccion(ganadera_anual, municipio_nombre, "pecuaria", chart_path)
             ctx["ec_grafica_ganaderia"] = _grafica_latex(
-                chart_path, municipio_nombre, "pecuaria", ganadera_anual, 2
+                chart_path, municipio_nombre, "pecuaria", ganadera_anual
             )
         else:
             ctx["ec_grafica_ganaderia"] = MAPA_PLACEHOLDER

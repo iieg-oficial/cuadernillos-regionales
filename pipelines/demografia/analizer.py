@@ -10,9 +10,9 @@ MAPA_PLACEHOLDER = Path("templates/assets/mapa_placeholder.png")
 
 def _mapa_latex(path: Path, caption: str, fuentes: list[str] | None = None) -> str:
     bloque = (
+        f"\\mapatitulo{{{caption}}}\n"
         "\\begin{figure}[H]\n"
         "\\centering\n"
-        f"\\caption{{\\textbf{{{caption}}}}}\n"
         f"\\includegraphics[width=0.85\\textwidth]{{{path}}}\n"
         "\\end{figure}"
     )

@@ -9,7 +9,7 @@ MAPA_PLACEHOLDER = Path("templates/assets/mapa_placeholder.png")
 
 def _normalize(text: str) -> str:
     text = text.replace("\x0c", " ")
-    lines = [l.strip() for l in text.splitlines()]
+    lines = [line.strip() for line in text.splitlines()]
     paragraphs = []
     buf = []
     for i, line in enumerate(lines):
@@ -30,10 +30,12 @@ def _normalize(text: str) -> str:
 def _mapa_latex(path: Path, nombre: str) -> str:
     return (
         "\\begin{figure}[H]\n"
-        "\\noindent Gráfica 1\\\\\n"
-        f"\\textbf{{Localización geográfica de {nombre}, Jalisco}}\\par\\vspace{{4pt}}\n"
+        "\\refstepcounter{mapa}%\n"
+        "\\noindent Mapa \\themapa\\\\\n"
+        f"\\textbf{{Localización geográfica de {nombre}, Jalisco}}"
+        "\\par\\vspace{4pt}\n"
         "\\centering\n"
-        f"\\includegraphics[width=0.9\\textwidth]{{{path}}}\n"
+        f"\\includegraphics[width=0.85\\textwidth]{{{path}}}\n"
         "\\end{figure}\n"
         "\\par\\vspace{-4pt}\\parbox{\\linewidth}{\\footnotesize\n"
         "Fuente: IIEG. Mapa General del Estado de Jalisco, 2026.}"
