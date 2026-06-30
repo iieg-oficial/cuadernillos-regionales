@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from core.constants import DASH, ND
+from core.constants import DASH, INCOMPLETE_INGRESOS_PROPIOS, ND
 from core.pipelines.stage import Stage
 from core.utils.logger import Logger
 from core.utils.municipalities import get_same_region
@@ -480,6 +480,13 @@ class Analizer(Stage):
             ctx["gs_anio_anterior_valor_ingreso_per_capita"] = ND
             ctx["gs_posicion_anio_anterior_ingreso_percapita"] = ND
             ctx["gs_tabla_ingresos"] = []
+
+        ctx["gs_ingresos_propios_activa"] = cve_mun not in INCOMPLETE_INGRESOS_PROPIOS
+        if not ctx["gs_ingresos_propios_activa"]:
+            Logger.warning(
+                f"Gobierno y Seguridad: municipio {cve_mun} sin datos de ingresos "
+                "propios, ignorando subsección de ingresos propios"
+            )
 
         incidencia_ctx = _process_incidencia(
             carpetas_por_mes, casos_bien_afectado, casos_por_delito

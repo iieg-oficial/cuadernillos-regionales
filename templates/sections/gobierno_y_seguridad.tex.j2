@@ -20,7 +20,9 @@ El análisis del desarrollo institucional en el ámbito municipal requiere del u
 
 \begin{enumerate}
     \item \textbf{\textcolor{primary}{Porcentaje de participación ciudadana en elecciones.}} Este indicador refleja el nivel de involucramiento de la población en los procesos democráticos a través del voto. La participación electoral constituye una medida esencial de legitimidad institucional y un elemento clave para valorar la fortaleza de los mecanismos de representación política a nivel municipal.
+<% if gs_ingresos_propios_activa %>
     \item \textbf{\textcolor{primary}{Porcentaje de ingresos propios e ingresos per cápita.}} La capacidad de los gobiernos municipales para generar ingresos propios es un componente central de su autonomía financiera y de su sostenibilidad fiscal. El análisis de este indicador, complementado con el cálculo de ingresos per cápita, permite identificar diferencias en el esfuerzo recaudatorio y en la disponibilidad de recursos para la provisión de bienes y servicios públicos.
+<% endif %>
     \item \textbf{\textcolor{primary}{Delitos del fuero común.}} La incidencia delictiva constituye un factor determinante en la evaluación del entorno institucional, ya que la seguridad pública incide directamente en la calidad de vida de la población y en la confianza hacia las instituciones. El seguimiento de los delitos del fuero común a nivel municipal ofrece un acercamiento a los retos de gobernabilidad y a las condiciones de orden público.
 \end{enumerate}
 La fuente de consulta de cada indicador se encuentra citada explícitamente en cada tabla. Su consideración conjunta permite disponer de un marco de análisis sólido y comparable para examinar la dimensión institucional del desarrollo municipal. A través de ellos es posible identificar fortalezas y limitaciones en la participación democrática, la capacidad financiera y la seguridad, tres aspectos que resultan fundamentales para comprender la solidez institucional y el desempeño de los gobiernos locales.
@@ -101,6 +103,7 @@ mientras que en << gs_antepenultimo_anio_eleccion >> fue del
 \tablefooter{Fuente: & IEPC. Resultados del Proceso Electoral Local << gs_antepenultimo_anio_eleccion >>,
 << gs_penultimo_anio_eleccion >> y << gs_anio_elecciones >>.}
 
+<% if gs_ingresos_propios_activa %>
 \newpage
 
 \subsection{Porcentaje de ingresos propios per cápita}
@@ -194,6 +197,7 @@ Fuente: & IIEG con base en   INEGI. Estadística de Finanzas Públicas Estatales
 << gs_anio_anterior_efipem >> y << gs_anio_efipem >>.\\
 & \phantom{IIEG con base en} CONAPO. Reconstrucción y proyecciones de la población de los municipios  \\  &  \phantom{IIEG con base en} de México 1990-2040
 (actualizada en mayo de 2024).}
+<% endif %>
 
 \newpage
 
