@@ -36,6 +36,7 @@ DETAIL_TOPICS = [
     "educacion_nivel",
     "espacios_publicos",
     "denue_energia",
+    "subestacion",
     "linea_transm_l",
 ]
 

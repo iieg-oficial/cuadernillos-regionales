@@ -70,3 +70,18 @@ def sentence_case(value):
         return text
     text = re.sub(r"\s+", " ", text.lower())
     return text[:1].upper() + text[1:]
+
+
+def narrative_lower(value):
+    if value is None:
+        return value
+    if isinstance(value, float) and math.isnan(value):
+        return value
+    text = str(value).strip()
+    if not text or text.upper() == "ND":
+        return text
+    if text.isupper() and len(text) <= 8:
+        return text
+    if "(" in text and ")" in text and " " not in text:
+        return text
+    return text.lower()
