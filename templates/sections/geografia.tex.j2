@@ -24,13 +24,13 @@
 
 El municipio de << ge_dg_nombre >> se localiza en la región << ge_dg_region >> del estado de Jalisco. Sus municipios colindantes son << ge_dg_colindantes >> (ver mapa~\ref{map:ge_base}). Tiene una extensión territorial de << ge_dg_area_km2 >> kilómetros cuadrados.
 
-Su cabecera municipal se localiza en las coordenadas << ge_dg_lat >> latitud norte y << ge_dg_lon >> longitud oeste, a una altura de << ge_dg_elev1 >> metros sobre el nivel del mar (msnm). El territorio municipal presenta altitudes entre << ge_dg_elevmin >> y << ge_dg_elevmax >> msnm, con predominio de pendientes << ge_dg_pendiente_predom >>.
+Su cabecera municipal se localiza en las coordenadas << ge_dg_lat >> latitud norte y << ge_dg_lon >> longitud oeste, a una altura de << ge_dg_elev1 >> metros sobre el nivel del mar (msnm). El territorio municipal presenta altitudes entre << ge_dg_elevmin >> y << ge_dg_elevmax >> msnm, con predominio de pendientes << ge_dg_pendiente_predom_texto >>.
 
 La mayor parte del municipio presenta un clima << ge_dg_clima_predom >>. La temperatura media anual es de << ge_dg_temp_media >>~°C, y la precipitación acumulada anual promedio es de << ge_dg_prec_acum >> mm.
 
 El viento dominante tiene una dirección proveniente del << ge_dg_viento_predom >> y una frecuencia anual de << ge_dg_viento_predom_fr >> \% en el municipio.
 
-El municipio está constituido predominantemente por la unidad geológica << ge_dg_geo_predom >>. Los suelos dominantes corresponden a << ge_dg_edaf_predom >> (ver tabla~\ref{tabla_ge_sintesis}).
+El municipio está constituido predominantemente por la unidad geológica << ge_dg_geo_predom_texto >>. Los suelos dominantes corresponden a << ge_dg_edaf_predom_texto >> (ver tabla~\ref{tabla_ge_sintesis}).
 
 <% if ge_dg_viento_grafica_activa %>
 \begin{figure}[H]
@@ -116,9 +116,9 @@ Fuente: IIEG, con base en información geoespacial municipal, 2026.}
 
 \subsubsection{Geología}
 
-La unidad geológica predominante en el municipio es << ge_geo_dominante >>, con una cobertura de << ge_geo_dominante_pct >> \% de la superficie municipal.
+La unidad geológica predominante en el municipio es << ge_geo_dominante_texto >>, con una cobertura de << ge_geo_dominante_pct >> \% de la superficie municipal.
 
-Le sigue la unidad << ge_geo_secundario >>, con << ge_geo_secundario_pct >> \%. El resto de las unidades geológicas representa en conjunto << ge_geo_demas_pct >> \% del territorio.
+Le sigue la unidad << ge_geo_secundario_texto >>, con << ge_geo_secundario_pct >> \%. El resto de las unidades geológicas representa en conjunto << ge_geo_demas_pct >> \% del territorio.
 
 <% if ge_geo_grafica_activa %>
 \begin{figure}[H]
@@ -180,9 +180,9 @@ Fuente: IIEG, con base en INEGI. Conjunto de datos vectoriales Geológicos serie
 
 \subsubsection{Edafología}
 
-Los suelos predominantes en el municipio corresponden a << ge_ed_dominante >>, con una cobertura de << ge_ed_dominante_pct >> \% del territorio.
+Los suelos predominantes en el municipio corresponden a << ge_ed_dominante_texto >>, con una cobertura de << ge_ed_dominante_pct >> \% del territorio.
 
-Le sigue la unidad << ge_ed_secundario >>, con << ge_ed_secundario_pct >> \%. El resto de los tipos de suelo representa en conjunto << ge_ed_demas_pct >> \% de la superficie municipal.
+Le sigue la unidad << ge_ed_secundario_texto >>, con << ge_ed_secundario_pct >> \%. El resto de los tipos de suelo representa en conjunto << ge_ed_demas_pct >> \% de la superficie municipal.
 
 <% if ge_ed_grafica_activa %>
 \begin{figure}[H]
@@ -244,9 +244,9 @@ Fuente: IIEG, con base en INEGI. Carta edafológica escala 1:250 000 Serie III, 
 
 \subsubsection{Topografía y pendientes}
 
-La topografía del municipio presenta un predominio de pendientes del rango << ge_tp_dominante >>, las cuales abarcan << ge_tp_dominante_pct >> \% del territorio.
+La topografía del municipio presenta un predominio de pendientes del rango << ge_tp_dominante_texto >>, las cuales abarcan << ge_tp_dominante_pct >> \% del territorio.
 
-El rango << ge_tp_secundario >> representa << ge_tp_secundario_pct >> \%. El resto de los rangos de pendiente equivale a << ge_tp_demas_pct >> \% del territorio.
+El rango << ge_tp_secundario_texto >> representa << ge_tp_secundario_pct >> \%. El resto de los rangos de pendiente equivale a << ge_tp_demas_pct >> \% del territorio.
 
 <% if ge_tp_grafica_activa %>
 \begin{figure}[H]
@@ -685,7 +685,7 @@ Fuente: IIEG, con base en SMN. Información Estadística Climatológica, 1995-20
 
 \subsubsection{Uso de suelo y vegetación}
 
-La cobertura de uso de suelo y vegetación predominante en el municipio es << ge_usv_dominante >>, con una participación de << ge_usv_dominante_pct >> \% de la superficie. Le sigue << ge_usv_secundario >>, con << ge_usv_secundario_pct >> \%. El resto de las coberturas representa en conjunto << ge_usv_demas_pct >> \% del territorio.
+La cobertura de uso de suelo y vegetación predominante en el municipio es << ge_usv_dominante_texto >>, con una participación de << ge_usv_dominante_pct >> \% de la superficie. Le sigue << ge_usv_secundario_texto >>, con << ge_usv_secundario_pct >> \%. El resto de las coberturas representa en conjunto << ge_usv_demas_pct >> \% del territorio.
 
 <% if ge_usv_grafica_activa %>
 \begin{figure}[H]
@@ -749,7 +749,7 @@ Fuente: IIEG, con base en INEGI. Conjunto de datos vectoriales de uso del suelo 
 
 El Índice de Vegetación de Diferencia Normalizada (NDVI) permite monitorear el estado de la vegetación.
 
-La categoría predominante es << ge_ndvi_dominante >>, con << ge_ndvi_dominante_pct >> \% de la superficie municipal. Le sigue << ge_ndvi_secundario >>, con << ge_ndvi_secundario_pct >> \%. El resto de las categorías representa << ge_ndvi_otros_pct >> \% del territorio.
+La categoría predominante es << ge_ndvi_dominante_texto >>, con << ge_ndvi_dominante_pct >> \% de la superficie municipal. Le sigue << ge_ndvi_secundario_texto >>, con << ge_ndvi_secundario_pct >> \%. El resto de las categorías representa << ge_ndvi_otros_pct >> \% del territorio.
 
 <% if ge_ndvi_grafica_activa %>
 \begin{figure}[H]
@@ -813,7 +813,7 @@ Fuente: IIEG, con base en USGS. Landsat Collection 2 Level-2 Science Products, 2
 
 El Índice de Agua de Diferencia Normalizada (NDWI) mide el contenido de humedad en la superficie.
 
-La categoría predominante es << ge_ndwi_dominante >>, con << ge_ndwi_dominante_pct >> \% de la superficie municipal. Le sigue << ge_ndwi_secundario >>, con << ge_ndwi_secundario_pct >> \%. El resto de las categorías representa << ge_ndwi_otros_pct >> \% del territorio.
+La categoría predominante es << ge_ndwi_dominante_texto >>, con << ge_ndwi_dominante_pct >> \% de la superficie municipal. Le sigue << ge_ndwi_secundario_texto >>, con << ge_ndwi_secundario_pct >> \%. El resto de las categorías representa << ge_ndwi_otros_pct >> \% del territorio.
 
 <% if ge_ndwi_grafica_activa %>
 \begin{figure}[H]
@@ -928,7 +928,7 @@ Fuente: IIEG, con base en CONANP. Áreas Naturales Protegidas, 2025. CONAGUA. In
 
 \subsubsection{Sequía}
 
-En 2025, la categoría << ge_s_dominante >> es la de mayor presencia, con << ge_s_dominante_pct >> \%, seguida por << ge_s_secundario >> con << ge_s_secundario_pct >> \%, mientras que el resto de categorías representa << ge_s_demas_pct >> \% del territorio.
+En 2025, la categoría << ge_s_dominante_texto >> es la de mayor presencia, con << ge_s_dominante_pct >> \%, seguida por << ge_s_secundario_texto >> con << ge_s_secundario_pct >> \%, mientras que el resto de categorías representa << ge_s_demas_pct >> \% del territorio.
 
 <% if ge_sequia_grafica_activa %>
 \begin{figure}[H]
@@ -990,7 +990,7 @@ Fuente: IIEG, con base en USGS. Landsat Collection 2 Level-2 Science Products, 2
 
 \subsubsection{Erosión potencial}
 
-En el municipio, predominan pérdidas potenciales de suelo de << ge_er_dominante_rango >> t/ha/año, clasificadas como << ge_er_dominante_tipo >> que representa el << ge_er_dominante_pct >> \% de la superficie municipal. En segundo lugar, las pérdidas potenciales de suelo de << ge_er_secundario_rango >> abarcan el << ge_er_secundario_pct >> \%. El resto de categorías representan el << ge_er_demas_pct >> \% del territorio.
+En el municipio predominan pérdidas potenciales de suelo de << ge_er_dominante_rango >> t/ha/año, clasificadas como << ge_er_dominante_tipo >> que representa el << ge_er_dominante_pct >> \% de la superficie municipal. En segundo lugar, las pérdidas potenciales de suelo de << ge_er_secundario_rango >> abarcan el << ge_er_secundario_pct >> \%. El resto de categorías representan el << ge_er_demas_pct >> \% del territorio.
 
 <% if ge_er_grafica_activa %>
 \begin{figure}[H]
@@ -1051,7 +1051,7 @@ Fuente: IIEG, con base en SMN, INEGI. Carta edafológica Serie III y CEM 4.0.}
 
 \subsubsection{Erosión efectiva}
 
-En el municipio, predominan pérdidas de suelo de << ge_ee_dominante_rango >> t/ha/año, clasificadas como << ge_ee_dominante_tipo >> que representa << ge_ee_dominante_pct >> \% de la superficie municipal. En segundo lugar, las potenciales pérdidas de suelo de << ge_ee_secundario_rango >> abarcan el << ge_ee_secundario_pct >> \%. El resto de categorías representan el << ge_ee_demas_pct >> \% del territorio.
+En el municipio predominan pérdidas de suelo de << ge_ee_dominante_rango >> t/ha/año, clasificadas como << ge_ee_dominante_tipo >> que representa << ge_ee_dominante_pct >> \% de la superficie municipal. En segundo lugar, las potenciales pérdidas de suelo de << ge_ee_secundario_rango >> abarcan el << ge_ee_secundario_pct >> \%. El resto de categorías representan el << ge_ee_demas_pct >> \% del territorio.
 
 <% if ge_ee_grafica_activa %>
 \begin{figure}[H]
@@ -1115,7 +1115,7 @@ Fuente: IIEG, con base en SMN, INEGI. Carta edafológica Serie III, CEM 4.0 y US
 
 \subsubsection{Índice Territorial Urbano-Rural}
 
-En el municipio predomina la categoría << ge_itur_dominante >>, con una cobertura de << ge_itur_dominante_pct >> \% del territorio. Le sigue la categoría << ge_itur_secundario >>, con << ge_itur_secundario_pct >> \%. El resto de las categorías representa << ge_itur_demas_pct >> \% del territorio.
+En el municipio predomina la categoría << ge_itur_dominante_texto >>, con una cobertura de << ge_itur_dominante_pct >> \% del territorio. Le sigue la categoría << ge_itur_secundario_texto >>, con << ge_itur_secundario_pct >> \%. El resto de las categorías representa << ge_itur_demas_pct >> \% del territorio.
 
 <% if ge_itur_grafica_activa %>
 \begin{figure}[H]
@@ -1284,7 +1284,7 @@ Fuente: IIEG, con base en Sistema de Información y Gestión Educativa (SIGED). 
 
 \subsubsection{Espacios públicos}
 
-En el municipio existen << ge_ep_total_puntos_muni >> espacios. Predomina el tipo << ge_ep_dominante >>, que representa << ge_ep_dominante_pct >> \% del total. El resto de los espacios públicos representa << ge_ep_pct_otros >> \% del total.
+<< ge_ep_resumen_texto >>
 
 \setlength{\tabcolsep}{3pt}
 \footnotesize
@@ -1335,10 +1335,10 @@ Fuente: IIEG, con base en INEGI. Marco Geoestadístico, 2025.}
 \subsubsection{Infraestructura energética}
 
 La infraestructura energética del municipio integra elementos estratégicos para el suministro y distribución de energía en el territorio.
-El municipio cuenta con << ge_ene_conteo_total_municipio >> subestación(es) eléctrica(s).
+<< ge_ene_subestaciones_texto >>
 << ge_ene_linea_transm_l_texto >>
 
-Con respecto a unidades económicas, predomina el tipo de << ge_ie_dominante >>, con un valor de << ge_ie_dominante_valor >>, equivalente a << ge_ie_dominante_pct >> \% del total identificado. También se registran << ge_ie_tipos_secundarios >>, que complementan la red energética municipal.
+Con respecto a unidades económicas, predomina el tipo de << ge_ie_dominante_texto >>, con un valor de << ge_ie_dominante_valor >>, equivalente a << ge_ie_dominante_pct >> \% del total identificado. También se registran << ge_ie_tipos_secundarios >>, que complementan la red energética municipal.
 
 \setlength{\tabcolsep}{3pt}
 \footnotesize

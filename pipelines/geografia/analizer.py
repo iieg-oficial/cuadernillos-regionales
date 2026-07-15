@@ -14,7 +14,9 @@ from pipelines.geografia.charts.treemap import (
 )
 from pipelines.geografia.helpers.context import (
     build_anp_text,
+    build_espacios_publicos_text,
     build_linea_transmision_text,
+    build_subestaciones_text,
     climate_context,
     municipal_value,
 )
@@ -23,6 +25,7 @@ from pipelines.geografia.helpers.formatting import (
     fmt,
     fmt_int,
     latex_escape,
+    narrative_lower,
     strip_percent_symbol,
     to_number,
 )
@@ -51,9 +54,57 @@ SIMPLE_CHART_TOPICS = [
     ("erosion_efectiva", "rango_texto", "porcentaje", "orden_clase"),
 ]
 
+NARRATIVE_LOWER_KEYS = [
+    "ge_dg_pendiente_predom",
+    "ge_dg_geo_predom",
+    "ge_dg_edaf_predom",
+    "ge_geo_dominante",
+    "ge_geo_secundario",
+    "ge_ed_dominante",
+    "ge_ed_secundario",
+    "ge_tp_dominante",
+    "ge_tp_secundario",
+    "ge_usv_dominante",
+    "ge_usv_secundario",
+    "ge_ndvi_dominante",
+    "ge_ndvi_secundario",
+    "ge_ndwi_dominante",
+    "ge_ndwi_secundario",
+    "ge_s_dominante",
+    "ge_s_secundario",
+    "ge_itur_dominante",
+    "ge_itur_secundario",
+    "ge_ie_dominante",
+]
+
 
 def _chart_path(municipio_id, name):
     return CHARTS_DIR / municipio_id / f"ge_{name}.png"
+
+
+def _erosion_range_label(value):
+    text = str(value or "").strip()
+    return {
+        "0": "<= 0",
+        "0.0": "<= 0",
+        "Mayor a 0 y menor a 5": "0 - 5",
+        "0 a 5": "0 - 5",
+        "5 a 10": "5 - 10",
+        "10 a 25": "10 - 25",
+        "25 a 50": "25 - 50",
+        "50 a 100": "50 - 100",
+        "100 a 200": "100 - 200",
+        "Más de 200": "> 200",
+    }.get(text, text)
+
+
+def _erosion_chart_label(row):
+    rango = str(row.get("rango_texto") or "").strip()
+    categoria = str(row.get("categoria") or "").strip()
+    if categoria.lower() == "no susceptible" or rango in {"0", "0.0"}:
+        return "<= 0 No susceptible"
+    rango = _erosion_range_label(rango)
+    return f"{rango} {categoria}".strip()
 
 
 def _generate_simple_chart(detail_rows, topic_key, cat_col, val_col, sort_col, path):
@@ -61,7 +112,11 @@ def _generate_simple_chart(detail_rows, topic_key, cat_col, val_col, sort_col, p
         return False
     data = []
     for row in detail_rows:
-        cat = row.get(cat_col)
+        cat = (
+            _erosion_chart_label(row)
+            if topic_key.startswith("erosion_")
+            else row.get(cat_col)
+        )
         val = row.get(val_col)
         if cat and val is not None:
             try:
@@ -394,8 +449,10 @@ class Analizer(Stage):
             fmt_int(salud_total) if salud_total is not None else ND
         )
         ctx["ge_salud_total_unidades"] = ctx["ge_salud_total_puntos_muni"]
-        ctx["ge_ene_conteo_total_municipio"] = ctx.get(
-            "ge_ie_conteo_total_municipio", ND
+        subestaciones = detalle.get("subestacion", [])
+        subestaciones_total = municipal_value(subestaciones, "conteo_total_municipio")
+        ctx["ge_ene_conteo_total_municipio"] = (
+            fmt_int(subestaciones_total) if subestaciones_total is not None else ND
         )
         ctx["ge_ene_linea_transm_l_km"] = fmt(
             municipal_value(linea_t, "longitud_km_total_municipio")
@@ -407,9 +464,17 @@ class Analizer(Stage):
                 anp_ctx[k.removeprefix("ge_")] = v
         anp_ctx["municipio"] = municipio
         ctx["ge_anp_texto_automatico"] = build_anp_text(anp_ctx)
+        ctx["ge_ep_resumen_texto"] = build_espacios_publicos_text(
+            ctx.get("ge_ep_total_puntos_muni"), detalle.get("espacios_publicos", [])
+        )
+        ctx["ge_ene_subestaciones_texto"] = build_subestaciones_text(
+            subestaciones_total
+        )
         ctx["ge_ene_linea_transm_l_texto"] = build_linea_transmision_text(
             municipal_value(linea_t, "longitud_km_total_municipio")
         )
+        for key in NARRATIVE_LOWER_KEYS:
+            ctx[f"{key}_texto"] = narrative_lower(ctx.get(key, "ND"))
 
         Logger.info("Geografía: generando gráficas")
         for topic, cat_col, val_col, sort_col in SIMPLE_CHART_TOPICS:
