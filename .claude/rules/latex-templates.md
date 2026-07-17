@@ -140,7 +140,7 @@ Fuente: INSTITUCIÓN. Producto consultado, Año.}
 Para cuadros elaborados por el IIEG con datos de otra fuente:
 
 ```latex
-Fuente: IIEG con base en INSTITUCIÓN. Producto consultado, Año.
+Fuente: IIEG, con base en INSTITUCIÓN. Producto consultado, Año.
 ```
 
 ## Imágenes (mapas y gráficas)
