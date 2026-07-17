@@ -26,7 +26,7 @@ def get_ventana_ultimos_meses(
 ) -> list[tuple]:
     stmt = text("""
         SELECT DISTINCT anio, mes
-        FROM v_delitos_comparables_general
+        FROM vw_delitos_comparables_general
         WHERE clave_ent = '14'
     """)
     indices = [
@@ -49,7 +49,7 @@ def get_carpetas_por_mes(
     anios = tuple(sorted({anio for anio, _ in ventana}))
     stmt = text("""
         SELECT anio, mes, SUM(conteo) AS total
-        FROM v_delitos_comparables_general
+        FROM vw_delitos_comparables_general
         WHERE cve_municipio = :cve_municipio
           AND anio IN :anios
         GROUP BY anio, mes
@@ -75,7 +75,7 @@ def get_casos_por_bien_afectado(
     window = set(ventana)
     stmt = text("""
         SELECT anio, mes, bien_juridico_afectado, SUM(conteo) AS total
-        FROM v_delitos_comparables_general
+        FROM vw_delitos_comparables_general
         WHERE cve_municipio = :cve_municipio
           AND anio IN :anios
         GROUP BY anio, mes, bien_juridico_afectado
@@ -102,7 +102,7 @@ def get_casos_por_delito(
     window = set(ventana)
     stmt = text("""
         SELECT anio, mes, subtipo_delito, SUM(conteo) AS total
-        FROM v_delitos_comparables_general
+        FROM vw_delitos_comparables_general
         WHERE cve_municipio = :cve_municipio
           AND anio IN :anios
           AND subtipo_delito NOT ILIKE 'Otros%'
