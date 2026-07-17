@@ -42,7 +42,7 @@ def grafica_carpetas_por_mes(
     valores = [r["total"] for r in datos]
     media = sum(valores) / len(valores)
 
-    fig, ax = plt.subplots(figsize=(12, 6))
+    fig, ax = plt.subplots(figsize=(15, 6))
 
     ax.plot(
         etiquetas,
@@ -249,7 +249,7 @@ def grafica_principales_delitos(
         wrapped.append("\n".join(lines))
 
     ax.set_xticks(range(len(top)))
-    ax.set_xticklabels(wrapped, fontsize=12, color=COLOR_TEXTO, fontweight="bold")
+    ax.set_xticklabels(wrapped, fontsize=12, color=COLOR_TEXTO)
     ax.set_xlabel(
         "Subtipos de delitos", fontsize=11, color=COLOR_TEXTO, fontweight="bold"
     )
@@ -263,10 +263,7 @@ def grafica_principales_delitos(
     ax.spines["right"].set_visible(False)
     ax.spines["left"].set_color(COLOR_TEXTO)
     ax.spines["bottom"].set_color(COLOR_TEXTO)
-    ax.tick_params(colors=COLOR_TEXTO)
-    for label in ax.get_yticklabels():
-        label.set_fontsize(12)
-        label.set_fontweight("bold")
+    ax.tick_params(colors=COLOR_TEXTO, labelsize=12)
 
     fig.tight_layout()
     output_path.parent.mkdir(parents=True, exist_ok=True)

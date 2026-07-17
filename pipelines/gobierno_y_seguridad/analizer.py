@@ -57,14 +57,14 @@ def _grafica_placeholder(caption: str) -> str:
     )
 
 
-def _grafica_latex(path, titulo, fuente):
+def _grafica_latex(path, titulo, fuente, ancho="0.95"):
     return (
         "\\begin{figure}[H]\n"
         "\\refstepcounter{grafica}%\n"
         "{\\color{colorTexto}Gráfica \\thegrafica}\\\\\n"
         f"{{\\color{{colorTexto}}\\textbf{{{titulo}}}}}\n"
         "\\vspace{0.3cm}\n\n"
-        f"\\includegraphics[width=0.95\\textwidth]{{{path}}}\n\n"
+        f"\\includegraphics[width={ancho}\\textwidth]{{{path}}}\n\n"
         f"{{\\footnotesize {fuente}}}\n"
         "\\end{figure}"
     )
@@ -521,6 +521,7 @@ class Analizer(Stage):
                 chart_path,
                 f"Cantidad de carpetas de investigación por mes, {periodo_and_mun}",
                 fuente_sesnsp,
+                ancho="1.0",
             )
         else:
             ctx["gs_grafica_carpetas_de_investigacion_por_mes"] = _grafica_placeholder(
