@@ -48,9 +48,9 @@ def grafica_carpetas_por_mes(
         etiquetas,
         valores,
         color=COLOR_SECCION,
-        linewidth=2.5,
+        linewidth=2.7,
         marker="o",
-        markersize=7,
+        markersize=7.5,
         markerfacecolor="white",
         markeredgecolor=COLOR_SECCION,
         markeredgewidth=2,
@@ -64,7 +64,7 @@ def grafica_carpetas_por_mes(
             textcoords="offset points",
             xytext=(0, 12),
             ha="center",
-            fontsize=9,
+            fontsize=9.5,
             fontweight="bold",
             color=COLOR_TEXTO,
             bbox=dict(
@@ -89,7 +89,7 @@ def grafica_carpetas_por_mes(
         f"  {media_label}",
         ha="left",
         va="bottom",
-        fontsize=8,
+        fontsize=8.5,
         color=COLOR_GRIS,
         style="italic",
     )
@@ -110,8 +110,8 @@ def grafica_carpetas_por_mes(
     ax.tick_params(colors=COLOR_TEXTO)
     plt.xticks(rotation=0, ha="center")
     for label in (*ax.get_xticklabels(), *ax.get_yticklabels()):
-        label.set_fontsize(12)
-        label.set_fontweight("bold")
+        label.set_fontsize(11.5)
+        # label.set_fontweight("bold")
 
     fig.tight_layout()
     output_path.parent.mkdir(parents=True, exist_ok=True)
@@ -130,11 +130,11 @@ def grafica_bienes_juridicos(
     for r in casos_bien_afectado:
         pct = r["total"] / total * 100
         nombre = r["bien_afectado"]
-        if nombre.startswith("Otros bienes"):
-            nombre = "Otros bienes jurídicos"
+        if nombre.startswith("otros bienes"):
+            nombre = "otros bienes jurídicos"
         datos.append({"nombre": nombre, "pct": pct})
 
-    nombres = [d["nombre"] for d in datos]
+    nombres = [d["nombre"][:1].upper() + d["nombre"][1:] for d in datos]
     valores = [d["pct"] for d in datos]
     colores = COLORES_BIENES[: len(datos)]
 

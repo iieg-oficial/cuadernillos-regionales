@@ -320,6 +320,8 @@ def plot_proportional_blocks(categories, values, topic_key, output_path):
         c = _color_for(cat, colors, topic_key)
         rect = Rectangle((x, y), w, h, facecolor=c, edgecolor="none", linewidth=0)
         ax.add_patch(rect)
+        if val <= 0.2:
+            continue
         label = f"{val:.1f} %"
         text = ax.text(
             x + w / 2,

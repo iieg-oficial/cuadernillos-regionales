@@ -66,6 +66,10 @@ def get_carpetas_por_mes(
     ]
 
 
+def _normalizar_bien(nombre):
+    return str(nombre).strip().lower()
+
+
 def get_casos_por_bien_afectado(
     session: Session, cve_municipio: str, ventana: list[tuple]
 ) -> list[dict]:
@@ -85,7 +89,7 @@ def get_casos_por_bien_afectado(
     for row in rows:
         mes_num = MES_A_NUMERO.get(row.mes)
         if mes_num and (row.anio, mes_num) in window:
-            agg[row.bien_juridico_afectado] += row.total
+            agg[_normalizar_bien(row.bien_juridico_afectado)] += row.total
     return sorted(
         [{"bien_afectado": bien, "total": total} for bien, total in agg.items()],
         key=lambda r: r["total"],
