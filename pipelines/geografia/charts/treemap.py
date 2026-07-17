@@ -153,9 +153,9 @@ AXIS_COLOR = "#9CA3AF"
 TEXT_COLOR = "#111827"
 FIGSIZE_PROPORTION = (10.4, 3.75)
 TREEMAP_HEIGHT = 46
-TREEMAP_LABEL_MIN_FONT_SIZE = 2.8
+TREEMAP_LABEL_MIN_FONT_SIZE = 5.0
 TREEMAP_LABEL_MAX_FONT_SIZE = 15.0
-TREEMAP_LABEL_INNER_MARGIN = 0.90
+TREEMAP_LABEL_INNER_MARGIN = 0.82
 
 
 def _contrast_text_color(hex_color):
@@ -278,20 +278,21 @@ def _setup_style():
     )
 
 
-def _treemap_label_style(text, w, h):
-    if w <= 0 or h <= 0:
-        return TREEMAP_LABEL_MIN_FONT_SIZE
-    chars = max(len(text), 1)
-    usable_w = w * TREEMAP_LABEL_INNER_MARGIN
-    usable_h = h * TREEMAP_LABEL_INNER_MARGIN
-    size = min(
-        TREEMAP_LABEL_MAX_FONT_SIZE,
-        max(
-            TREEMAP_LABEL_MIN_FONT_SIZE,
-            min(usable_w / chars * 2.35, usable_h * 2.35),
-        ),
-    )
-    return size
+def _autofit_label(ax, renderer, text, w, h):
+    x0, y0 = ax.transData.transform((0, 0))
+    x1, y1 = ax.transData.transform((w, h))
+    rect_w = abs(x1 - x0) * TREEMAP_LABEL_INNER_MARGIN
+    rect_h = abs(y1 - y0) * TREEMAP_LABEL_INNER_MARGIN
+    if rect_w <= 0 or rect_h <= 0:
+        text.set_fontsize(TREEMAP_LABEL_MIN_FONT_SIZE)
+        return
+    size = rect_h / ax.get_figure().dpi * 72
+    text.set_fontsize(size)
+    bbox = text.get_window_extent(renderer)
+    if bbox.width > 0:
+        size = min(size, size * rect_w / bbox.width)
+    size = min(TREEMAP_LABEL_MAX_FONT_SIZE, max(TREEMAP_LABEL_MIN_FONT_SIZE, size))
+    text.set_fontsize(size)
 
 
 def _save(fig, path):
@@ -309,24 +310,25 @@ def plot_proportional_blocks(categories, values, topic_key, output_path):
     ax.set_xlim(0, 100)
     ax.set_ylim(-12, TREEMAP_HEIGHT + 2)
     ax.axis("off")
+    fig.canvas.draw()
+    renderer = fig.canvas.get_renderer()
 
     for (x, y, w, h), cat, val in zip(rects, categories, values):
         c = _color_for(cat, colors, topic_key)
         rect = Rectangle((x, y), w, h, facecolor=c, edgecolor="none", linewidth=0)
         ax.add_patch(rect)
         label = f"{val:.1f} %"
-        fontsize = _treemap_label_style(label, w, h)
         text = ax.text(
             x + w / 2,
             y + h / 2,
             label,
             ha="center",
             va="center",
-            fontsize=fontsize,
             fontweight="bold",
             color=_contrast_text_color(c),
             clip_on=True,
         )
+        _autofit_label(ax, renderer, text, w, h)
         text.set_clip_path(rect)
 
     handles = [
