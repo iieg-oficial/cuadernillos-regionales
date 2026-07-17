@@ -21,6 +21,21 @@ MESES_CORTOS = {
     12: "dic",
 }
 
+MESES_COMPLETOS = {
+    1: "enero",
+    2: "febrero",
+    3: "marzo",
+    4: "abril",
+    5: "mayo",
+    6: "junio",
+    7: "julio",
+    8: "agosto",
+    9: "septiembre",
+    10: "octubre",
+    11: "noviembre",
+    12: "diciembre",
+}
+
 COLORES_BIENES = [
     "#5C2472",
     "#7A4A8A",
@@ -38,11 +53,11 @@ def grafica_carpetas_por_mes(
     output_path: Path,
 ):
     datos = sorted(carpetas_por_mes, key=lambda r: (r["anio"], r["mes"]))
-    etiquetas = [f"{MESES_CORTOS[r['mes']]}-{r['anio']}" for r in datos]
+    etiquetas = [f"{MESES_COMPLETOS[r['mes']]}\n{r['anio']}" for r in datos]
     valores = [r["total"] for r in datos]
     media = sum(valores) / len(valores)
 
-    fig, ax = plt.subplots(figsize=(10, 5))
+    fig, ax = plt.subplots(figsize=(12, 6))
 
     ax.plot(
         etiquetas,
@@ -94,7 +109,7 @@ def grafica_carpetas_por_mes(
         style="italic",
     )
 
-    ax.set_ylabel("Carpetas", fontsize=11, color=COLOR_TEXTO)
+    ax.set_ylabel("Carpetas", fontsize=11, color=COLOR_TEXTO, fontweight="bold")
     ax.yaxis.set_major_formatter(
         ticker.FuncFormatter(lambda x, _: f"{x:,.0f}".replace(",", " "))
     )
@@ -108,7 +123,9 @@ def grafica_carpetas_por_mes(
     ax.spines["left"].set_color(COLOR_TEXTO)
     ax.spines["bottom"].set_color(COLOR_TEXTO)
     ax.tick_params(colors=COLOR_TEXTO, labelsize=9)
-    plt.xticks(rotation=45, ha="right")
+    plt.xticks(rotation=0, ha="center")
+    for label in (*ax.get_xticklabels(), *ax.get_yticklabels()):
+        label.set_fontweight("bold")
 
     fig.tight_layout()
     output_path.parent.mkdir(parents=True, exist_ok=True)
@@ -246,9 +263,11 @@ def grafica_principales_delitos(
         wrapped.append("\n".join(lines))
 
     ax.set_xticks(range(len(top)))
-    ax.set_xticklabels(wrapped, fontsize=9, color=COLOR_TEXTO)
-    ax.set_xlabel("Subtipos de delitos", fontsize=11, color=COLOR_TEXTO)
-    ax.set_ylabel("Carpetas", fontsize=11, color=COLOR_TEXTO)
+    ax.set_xticklabels(wrapped, fontsize=9, color=COLOR_TEXTO, fontweight="bold")
+    ax.set_xlabel(
+        "Subtipos de delitos", fontsize=11, color=COLOR_TEXTO, fontweight="bold"
+    )
+    ax.set_ylabel("Carpetas", fontsize=11, color=COLOR_TEXTO, fontweight="bold")
     ax.yaxis.set_major_formatter(
         ticker.FuncFormatter(lambda x, _: f"{x:,.0f}".replace(",", " "))
     )
@@ -259,6 +278,8 @@ def grafica_principales_delitos(
     ax.spines["left"].set_color(COLOR_TEXTO)
     ax.spines["bottom"].set_color(COLOR_TEXTO)
     ax.tick_params(colors=COLOR_TEXTO)
+    for label in ax.get_yticklabels():
+        label.set_fontweight("bold")
 
     fig.tight_layout()
     output_path.parent.mkdir(parents=True, exist_ok=True)
