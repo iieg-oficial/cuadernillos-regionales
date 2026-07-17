@@ -6,21 +6,6 @@ import squarify
 
 from core.constants import COLOR_GRIS, COLOR_SECCION, COLOR_TEXTO
 
-MESES_CORTOS = {
-    1: "ene",
-    2: "feb",
-    3: "mar",
-    4: "abr",
-    5: "may",
-    6: "jun",
-    7: "jul",
-    8: "ago",
-    9: "sep",
-    10: "oct",
-    11: "nov",
-    12: "dic",
-}
-
 MESES_COMPLETOS = {
     1: "enero",
     2: "febrero",
