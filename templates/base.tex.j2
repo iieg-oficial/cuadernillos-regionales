@@ -99,12 +99,12 @@
 \newcounter{mapa}
 \newcommand{\graficatitulo}[1]{%
   \refstepcounter{grafica}%
-  \noindent Gráfica \thegrafica\\
-  \textbf{#1}\par\vspace{4pt}}
+  \noindent{\color{colorTexto}Gráfica \thegrafica\\
+  \textbf{#1}}\par\vspace{4pt}}
 \newcommand{\mapatitulo}[1]{%
   \refstepcounter{mapa}%
-  \noindent Mapa \themapa\\
-  \textbf{#1}\par\vspace{4pt}}
+  \noindent{\color{colorTexto}Mapa \themapa\\
+  \textbf{#1}}\par\vspace{4pt}}
 \newcommand{\mapafuente}[1]{%
   \par\vspace{-4pt}\noindent{\footnotesize
   \renewcommand{\arraystretch}{1.0}%
