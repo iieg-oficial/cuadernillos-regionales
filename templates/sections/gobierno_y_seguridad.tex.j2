@@ -143,16 +143,16 @@ lugar << gs_posicion_anio_anterior_ingreso_percapita >>.
 \hline
 \rowcolor{gray!30}
 & &
-\multicolumn{2}{>{\centering\arraybackslash}m{\dimexpr0.20\linewidth - 2\tabcolsep\relax}}{\cellcolor{gray!30}\textbf{\scriptsize Ingresos propios (\%) << gs_anio_anterior_efipem >>}} &
-\multicolumn{2}{>{\centering\arraybackslash}m{\dimexpr0.20\linewidth - 2\tabcolsep\relax}}{\cellcolor{gray!30}\textbf{\scriptsize Ingresos propios (\%) << gs_anio_efipem >>}} &
+\multicolumn{2}{>{\centering\arraybackslash}m{\dimexpr0.20\linewidth - 2\tabcolsep\relax}}{\cellcolor{gray!30}\textbf{\scriptsize Ingresos propios << gs_anio_anterior_efipem >>}} &
+\multicolumn{2}{>{\centering\arraybackslash}m{\dimexpr0.20\linewidth - 2\tabcolsep\relax}}{\cellcolor{gray!30}\textbf{\scriptsize Ingresos propios << gs_anio_efipem >>}} &
 \multicolumn{2}{>{\centering\arraybackslash}m{\dimexpr0.20\linewidth - 2\tabcolsep\relax}}{\cellcolor{gray!30}\textbf{\scriptsize Ingresos per cápita << gs_anio_anterior_efipem >>}} &
 \multicolumn{2}{>{\centering\arraybackslash}m{\dimexpr0.20\linewidth - 2\tabcolsep\relax}}{\cellcolor{gray!30}\textbf{\scriptsize Ingresos per cápita << gs_anio_efipem >>}} \\
 \rowcolor{gray!30}
 \thh{0.08}{\scriptsize Clave} & \thh{0.12}{\scriptsize Municipio} &
 \thhl{0.12}{\scriptsize Porcentaje} & \thhl{0.08}{\scriptsize Lugar} &
 \thhl{0.12}{\scriptsize Porcentaje} & \thhl{0.08}{\scriptsize Lugar} &
-\thhl{0.12}{\scriptsize Porcentaje} & \thhl{0.08}{\scriptsize Lugar} &
-\thhl{0.12}{\scriptsize Porcentaje} & \thhl{0.08}{\scriptsize Lugar} \\
+\thhl{0.12}{\scriptsize Pesos} & \thhl{0.08}{\scriptsize Lugar} &
+\thhl{0.12}{\scriptsize Pesos} & \thhl{0.08}{\scriptsize Lugar} \\
 \hline
 \endfirsthead
 
@@ -194,7 +194,7 @@ lugar << gs_posicion_anio_anterior_ingreso_percapita >>.
 \tablefooter{
 Nota: & El porcentaje se refiere al porcentaje que representan los ingresos propios respecto a los ingresos totales del municipio. \\
 <% if gs_tabla_ingresos_tiene_na %>ND: & No disponible.\\<% endif %>
-Fuente: & IIEG con base en   INEGI. Estadística de Finanzas Públicas Estatales y Municipales,
+Fuente: & IIEG, con base en   INEGI. Estadística de Finanzas Públicas Estatales y Municipales,
 << gs_anio_anterior_efipem >> y << gs_anio_efipem >>.\\
 & \phantom{IIEG con base en} CONAPO. Reconstrucción y proyecciones de la población de los municipios  \\  &  \phantom{IIEG con base en} de México 1990-2040
 (actualizada en mayo de 2024).}
@@ -277,7 +277,7 @@ lugar\footnote{El primer lugar es el municipio con mayor decremento en la tasa.}
 
 \end{longtable}
 \normalsize
-\tablefooter{Fuente:  IIEG con base en & SESNSP. Base de Delitos del Fuero Común,
+\tablefooter{Fuente:  IIEG, con base en & SESNSP. Base de Delitos del Fuero Común,
 << gs_anio_anterior_acumulado_seguridad >> y << gs_anio_acumulado_seguridad >>.\\
 & CONAPO. Reconstrucción y proyecciones de la población de los municipios  \\ &  de
 México 1990-2040
