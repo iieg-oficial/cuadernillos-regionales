@@ -111,15 +111,18 @@ def plot_temperatura(long_rows, output_path):
             fontsize=8.5,
             color=TEXT_COLOR,
         )
-    ax.set_ylabel("°C", fontsize=10)
+    ax.set_ylabel("°C", fontsize=12, fontweight="bold")
     ax.set_xticks(x)
-    ax.set_xticklabels(MONTH_LABELS, fontsize=9)
+    ax.set_xticklabels(MONTH_LABELS, fontsize=12, fontweight="bold")
     ax.yaxis.grid(True, color=LIGHT_GRID, linewidth=0.8)
     ax.set_axisbelow(True)
     for spine in ["top", "right"]:
         ax.spines[spine].set_visible(False)
     ax.spines["left"].set_color(AXIS_COLOR)
     ax.spines["bottom"].set_color(AXIS_COLOR)
+    for label in ax.get_yticklabels():
+        label.set_fontsize(12)
+        label.set_fontweight("bold")
     fig.subplots_adjust(left=0.075, right=0.985, top=0.93, bottom=0.13)
     fig.patch.set_alpha(0)
     ax.patch.set_alpha(0)
@@ -142,9 +145,9 @@ def plot_precipitacion(long_rows, output_path):
     ax.bar(x - w, mins, color="#8F39B1", edgecolor="none", width=w, label="Mínimo")
     ax.bar(x, means, color="#FF8300", edgecolor="none", width=w, label="Media")
     ax.bar(x + w, maxs, color="#622484", edgecolor="none", width=w, label="Máximo")
-    ax.set_ylabel("mm", fontsize=10)
+    ax.set_ylabel("mm", fontsize=12, fontweight="bold")
     ax.set_xticks(x)
-    ax.set_xticklabels(MONTH_LABELS, fontsize=9)
+    ax.set_xticklabels(MONTH_LABELS, fontsize=12, fontweight="bold")
     handles, labels = ax.get_legend_handles_labels()
     ax.legend(
         handles,
@@ -161,6 +164,9 @@ def plot_precipitacion(long_rows, output_path):
         ax.spines[spine].set_visible(False)
     ax.spines["left"].set_color(AXIS_COLOR)
     ax.spines["bottom"].set_color(AXIS_COLOR)
+    for label in ax.get_yticklabels():
+        label.set_fontsize(12)
+        label.set_fontweight("bold")
     fig.subplots_adjust(left=0.075, right=0.985, top=0.94, bottom=0.18)
     fig.patch.set_alpha(0)
     ax.patch.set_alpha(0)
@@ -201,7 +207,7 @@ def plot_vientos(wind_data, output_path):
         alpha=0.95,
     )
     ax.set_xticks(np.deg2rad([0, 90, 180, 270]))
-    ax.set_xticklabels(["N", "E", "S", "O"], fontsize=11, fontweight="bold")
+    ax.set_xticklabels(["N", "E", "S", "O"], fontsize=12, fontweight="bold")
     radial_max = max(max_val * 1.12, 0.05)
     ax.set_ylim(0, radial_max)
     ax.set_yticks(np.linspace(radial_max / 4, radial_max, 4))

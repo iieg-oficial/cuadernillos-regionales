@@ -26,7 +26,7 @@ def grafica_produccion(
     posiciones = range(len(anios))
     bars = ax.bar(posiciones, valores, color=colores, width=0.85, edgecolor="none")
     ax.set_xticks(list(posiciones))
-    ax.set_xticklabels(anios)
+    ax.set_xticklabels(anios, fontsize=12, fontweight="bold")
 
     for bar, val in zip(bars, valores):
         ax.text(
@@ -40,8 +40,10 @@ def grafica_produccion(
             fontweight="bold",
         )
 
-    ax.set_xlabel("Año", fontsize=11, color=COLOR_TEXTO)
-    ax.set_ylabel("Valor de la producción", fontsize=11, color=COLOR_TEXTO)
+    ax.set_xlabel("Año", fontsize=12, color=COLOR_TEXTO, fontweight="bold")
+    ax.set_ylabel(
+        "Valor de la producción", fontsize=12, color=COLOR_TEXTO, fontweight="bold"
+    )
     ax.yaxis.set_major_formatter(
         ticker.FuncFormatter(lambda x, _: f"{x:,.0f}".replace(",", " "))
     )
@@ -52,6 +54,9 @@ def grafica_produccion(
     ax.spines["left"].set_color(COLOR_TEXTO)
     ax.spines["bottom"].set_color(COLOR_TEXTO)
     ax.tick_params(colors=COLOR_TEXTO)
+    for label in ax.get_yticklabels():
+        label.set_fontsize(12)
+        label.set_fontweight("bold")
 
     fig.tight_layout()
     output_path.parent.mkdir(parents=True, exist_ok=True)

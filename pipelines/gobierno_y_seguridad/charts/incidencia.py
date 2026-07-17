@@ -94,7 +94,7 @@ def grafica_carpetas_por_mes(
         style="italic",
     )
 
-    ax.set_ylabel("Carpetas", fontsize=11, color=COLOR_TEXTO, fontweight="bold")
+    ax.set_ylabel("Carpetas", fontsize=12, color=COLOR_TEXTO, fontweight="bold")
     ax.yaxis.set_major_formatter(
         ticker.FuncFormatter(lambda x, _: f"{x:,.0f}".replace(",", " "))
     )
@@ -107,9 +107,10 @@ def grafica_carpetas_por_mes(
     ax.spines["right"].set_visible(False)
     ax.spines["left"].set_color(COLOR_TEXTO)
     ax.spines["bottom"].set_color(COLOR_TEXTO)
-    ax.tick_params(colors=COLOR_TEXTO, labelsize=9)
+    ax.tick_params(colors=COLOR_TEXTO)
     plt.xticks(rotation=0, ha="center")
     for label in (*ax.get_xticklabels(), *ax.get_yticklabels()):
+        label.set_fontsize(12)
         label.set_fontweight("bold")
 
     fig.tight_layout()
@@ -248,7 +249,7 @@ def grafica_principales_delitos(
         wrapped.append("\n".join(lines))
 
     ax.set_xticks(range(len(top)))
-    ax.set_xticklabels(wrapped, fontsize=9, color=COLOR_TEXTO, fontweight="bold")
+    ax.set_xticklabels(wrapped, fontsize=12, color=COLOR_TEXTO, fontweight="bold")
     ax.set_xlabel(
         "Subtipos de delitos", fontsize=11, color=COLOR_TEXTO, fontweight="bold"
     )
@@ -264,6 +265,7 @@ def grafica_principales_delitos(
     ax.spines["bottom"].set_color(COLOR_TEXTO)
     ax.tick_params(colors=COLOR_TEXTO)
     for label in ax.get_yticklabels():
+        label.set_fontsize(12)
         label.set_fontweight("bold")
 
     fig.tight_layout()
