@@ -55,6 +55,32 @@ FOLDER_ALIASES = {
 
 EXTENSIONS = {".png", ".jpg", ".jpeg", ".pdf"}
 
+DEFAULT_MAP_WIDTH = 0.85
+
+MAP_WIDTHS = {
+    "base": 0.90,
+    "geo": 0.88,
+    "ed": 0.88,
+    "tp": 0.88,
+    "cu": 0.88,
+    "ac": 0.88,
+    "tm": 0.90,
+    "pp": 0.90,
+    "cl": 0.90,
+    "usv": 0.90,
+    "ndvi": 0.90,
+    "ndwi": 0.90,
+    "anp": 0.88,
+    "ds": 0.88,
+    "er": 0.90,
+    "ee": 0.90,
+    "itur": 0.90,
+    "salud": 0.87,
+    "edu": 0.90,
+    "ep": 0.90,
+    "ie": 0.90,
+}
+
 
 def _normalize(text):
     text = unicodedata.normalize("NFKD", str(text).strip().lower())
@@ -144,9 +170,9 @@ def find_map_for_topic(short, cve_geo, municipio):
     return None
 
 
-def map_includegraphics(path):
+def map_includegraphics(path, width=DEFAULT_MAP_WIDTH):
     posix = str(path).replace("\\", "/")
-    return f"\\includegraphics[width=0.85\\textwidth]{{\\detokenize{{{posix}}}}}"
+    return f"\\includegraphics[width={width}\\textwidth]{{\\detokenize{{{posix}}}}}"
 
 
 def resolve_maps(cve_geo, municipio):
@@ -157,7 +183,8 @@ def resolve_maps(cve_geo, municipio):
         if path:
             if draft:
                 path = get_draft_path(path, f"geografia/{cve_geo}", f"ge_{short}")
-            ctx[f"ge_{short}_mapa"] = map_includegraphics(path)
+            width = MAP_WIDTHS.get(short, DEFAULT_MAP_WIDTH)
+            ctx[f"ge_{short}_mapa"] = map_includegraphics(path, width)
             ctx[f"ge_{short}_mapa_activo"] = True
         else:
             ctx[f"ge_{short}_mapa"] = MAPA_PLACEHOLDER
