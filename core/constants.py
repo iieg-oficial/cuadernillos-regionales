@@ -1,5 +1,5 @@
 ND = "\\ND"
-DASH = "NA"
+DASH = "ND"
 
 INCOMPLETE_AGRICOLA: list[int] = [39, 125]
 INCOMPLETE_PECUARIA: list[int] = [39]
