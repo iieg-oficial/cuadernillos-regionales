@@ -127,7 +127,9 @@ def _top_sectores(sector_data, grand_total):
     return result
 
 
-def _build_vacb_table(vacb_actual, vacb_anterior, vacb_total_actual, factor):
+def _build_vacb_table(
+    vacb_actual, vacb_anterior, vacb_total_actual, vacb_total_anterior, factor
+):
     anterior_by_codigo = {r["codigo"]: r["vacb"] for r in vacb_anterior}
 
     top_actual = vacb_actual[:9]
@@ -154,16 +156,25 @@ def _build_vacb_table(vacb_actual, vacb_anterior, vacb_total_actual, factor):
         )
 
     if len(vacb_actual) > 9:
-        otros_act = sum(r["vacb"] for r in vacb_actual[9:] if r["vacb"])
-        otros_act_real = otros_act * factor if factor else None
-        top9_codigos = {x["codigo"] for x in vacb_actual[:9]}
-        otros_ant = sum(
-            r["vacb"]
-            for r in vacb_anterior
-            if r["codigo"] not in top9_codigos and r["vacb"]
+        top9_actual = sum(r["vacb"] for r in top_actual if r["vacb"])
+        top9_anterior = sum(
+            anterior_by_codigo.get(r["codigo"]) or 0 for r in top_actual
+        )
+        otros_act = (
+            vacb_total_actual - top9_actual if vacb_total_actual is not None else None
+        )
+        otros_act_real = (
+            otros_act * factor if (otros_act is not None and factor) else None
+        )
+        otros_ant = (
+            vacb_total_anterior - top9_anterior
+            if vacb_total_anterior is not None
+            else None
         )
         pct_otros = (
-            _fmt(otros_act / vacb_total_actual * 100) if vacb_total_actual else ND
+            _fmt(otros_act / vacb_total_actual * 100)
+            if (vacb_total_actual and otros_act is not None)
+            else ND
         )
         if otros_ant and otros_act_real:
             var_otros = _fmt((otros_act_real - otros_ant) / otros_ant * 100)
@@ -433,7 +444,11 @@ class Analizer(Stage):
             ctx["ec_variacion_porcentual_aportacion_subsector_mayor_crecimiento"] = ND
 
         ctx["ec_tabla_vacb"] = _build_vacb_table(
-            vacb_actual, vacb_anterior, vacb_total_actual, factor_deflactacion
+            vacb_actual,
+            vacb_anterior,
+            vacb_total_actual,
+            vacb_total_anterior,
+            factor_deflactacion,
         )
         ctx["ec_tabla_vacb_tiene_na"] = rows_have_na(ctx["ec_tabla_vacb"])
         ctx["ec_vacb_total_real"] = (
