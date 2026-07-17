@@ -42,7 +42,7 @@ def grafica_carpetas_por_mes(
     valores = [r["total"] for r in datos]
     media = sum(valores) / len(valores)
 
-    fig, ax = plt.subplots(figsize=(15, 6))
+    fig, ax = plt.subplots(figsize=(14, 4.6))
 
     ax.plot(
         etiquetas,
@@ -99,8 +99,8 @@ def grafica_carpetas_por_mes(
         ticker.FuncFormatter(lambda x, _: f"{x:,.0f}".replace(",", " "))
     )
 
-    y_min = min(valores) * 0.9
-    y_max = max(valores) * 1.12
+    y_min = min(valores) * 0.965
+    y_max = max(valores) * 1.06
     ax.set_ylim(y_min, y_max)
 
     ax.spines["top"].set_visible(False)
