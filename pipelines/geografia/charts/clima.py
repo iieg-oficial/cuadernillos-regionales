@@ -6,9 +6,11 @@ os.environ.setdefault("MPLCONFIGDIR", "/tmp/matplotlib")
 import matplotlib.pyplot as plt
 import numpy as np
 
+from core.constants import COLOR_TEXTO
+
 DPI = 300
 AXIS_COLOR = "#9CA3AF"
-TEXT_COLOR = "#111827"
+TEXT_COLOR = COLOR_TEXTO
 LIGHT_GRID = "#E5E7EB"
 MONTH_LABELS = [
     "Ene",

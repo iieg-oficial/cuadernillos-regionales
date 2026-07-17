@@ -6,6 +6,7 @@ os.environ.setdefault("MPLCONFIGDIR", "/tmp/matplotlib")
 import matplotlib.pyplot as plt
 from matplotlib.patches import Patch, Rectangle
 
+from core.constants import COLOR_TEXTO
 from pipelines.geografia.charts.palettes import (
     has_topic_palette,
     normalize_category_key,
@@ -150,7 +151,7 @@ EXPLICIT_COLOR_MAPS = {
 }
 
 AXIS_COLOR = "#9CA3AF"
-TEXT_COLOR = "#111827"
+TEXT_COLOR = COLOR_TEXTO
 FIGSIZE_PROPORTION = (10.4, 3.75)
 TREEMAP_HEIGHT = 46
 TREEMAP_LABEL_MIN_FONT_SIZE = 5.0
@@ -238,6 +239,8 @@ def _get_legend_ncol(topic_key, n):
         return min(8 if n <= 16 else 9, n)
     if topic_key.startswith("erosion_"):
         return 4 if n >= 7 else min(4, n)
+    if topic_key == "acuiferos":
+        return n
     return min(max(1, math.ceil(n / 2)), 6)
 
 
