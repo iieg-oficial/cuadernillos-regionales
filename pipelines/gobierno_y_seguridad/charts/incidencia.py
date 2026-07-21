@@ -5,6 +5,7 @@ import matplotlib.ticker as ticker
 import squarify
 
 from core.constants import COLOR_GRIS, COLOR_SECCION, COLOR_TEXTO
+from core.utils.charts import setup_chart_style
 
 MESES_COMPLETOS = {
     1: "enero",
@@ -37,6 +38,8 @@ def grafica_carpetas_por_mes(
     municipio,
     output_path: Path,
 ):
+    setup_chart_style()
+
     datos = sorted(carpetas_por_mes, key=lambda r: (r["anio"], r["mes"]))
     etiquetas = [f"{MESES_COMPLETOS[r['mes']]}\n{r['anio']}" for r in datos]
     valores = [r["total"] for r in datos]
@@ -125,6 +128,8 @@ def grafica_bienes_juridicos(
     municipio,
     output_path: Path,
 ):
+    setup_chart_style()
+
     total = sum(r["total"] for r in casos_bien_afectado)
     datos = []
     for r in casos_bien_afectado:
@@ -212,6 +217,8 @@ def grafica_principales_delitos(
     municipio,
     output_path: Path,
 ):
+    setup_chart_style()
+
     top = casos_por_delito[:5]
     nombres = [r["delito"] for r in top]
     valores = [r["total"] for r in top]

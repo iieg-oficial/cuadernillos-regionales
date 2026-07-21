@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
 
 from core.constants import COLOR_GRIS, COLOR_SECCION, COLOR_TEXTO
+from core.utils.charts import setup_chart_style
 
 N_ANIOS = 6
 
@@ -14,6 +15,8 @@ def grafica_produccion(
     tipo: str,
     output_path: Path,
 ):
+    setup_chart_style()
+
     ultimos = datos[-N_ANIOS:]
     anios = [str(d["anio"]) for d in ultimos]
     valores = [d["valor_millones"] for d in ultimos]

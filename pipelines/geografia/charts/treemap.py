@@ -1,12 +1,10 @@
 import math
-import os
-
-os.environ.setdefault("MPLCONFIGDIR", "/tmp/matplotlib")
 
 import matplotlib.pyplot as plt
 from matplotlib.patches import Patch, Rectangle
 
 from core.constants import COLOR_TEXTO
+from core.utils.charts import setup_chart_style
 from pipelines.geografia.charts.palettes import (
     has_topic_palette,
     normalize_category_key,
@@ -15,8 +13,6 @@ from pipelines.geografia.charts.palettes import (
 )
 
 DPI = 300
-FONT_FAMILY = "Lexend"
-FALLBACK_FONT = "DejaVu Sans"
 
 COLOR_PALETTE = {
     "orange": "#FF8300",
@@ -260,25 +256,7 @@ def _reorder_legend(handles, labels, ncol):
 
 
 def _setup_style():
-    from matplotlib import font_manager as fm
-
-    try:
-        fm.findfont(FONT_FAMILY, fallback_to_default=False)
-        plt.rcParams["font.family"] = FONT_FAMILY
-    except ValueError:
-        plt.rcParams["font.family"] = FALLBACK_FONT
-
-    plt.rcParams.update(
-        {
-            "axes.edgecolor": AXIS_COLOR,
-            "axes.labelcolor": TEXT_COLOR,
-            "xtick.color": TEXT_COLOR,
-            "ytick.color": TEXT_COLOR,
-            "text.color": TEXT_COLOR,
-            "figure.dpi": 120,
-            "savefig.dpi": DPI,
-        }
-    )
+    setup_chart_style(**{"figure.dpi": 120})
 
 
 def _autofit_label(ax, renderer, text, w, h):

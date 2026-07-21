@@ -1,12 +1,10 @@
-import os
 from pathlib import Path
-
-os.environ.setdefault("MPLCONFIGDIR", "/tmp/matplotlib")
 
 import matplotlib.pyplot as plt
 import numpy as np
 
 from core.constants import COLOR_TEXTO
+from core.utils.charts import setup_chart_style
 
 DPI = 300
 AXIS_COLOR = "#9CA3AF"
@@ -43,23 +41,7 @@ MONTH_ORDER = [
 
 
 def _setup_style():
-    from matplotlib import font_manager as fm
-
-    try:
-        fm.findfont("Lexend", fallback_to_default=False)
-        plt.rcParams["font.family"] = "Lexend"
-    except ValueError:
-        plt.rcParams["font.family"] = "DejaVu Sans"
-    plt.rcParams.update(
-        {
-            "axes.edgecolor": AXIS_COLOR,
-            "axes.labelcolor": TEXT_COLOR,
-            "xtick.color": TEXT_COLOR,
-            "ytick.color": TEXT_COLOR,
-            "text.color": TEXT_COLOR,
-            "savefig.dpi": DPI,
-        }
-    )
+    setup_chart_style()
 
 
 def _save(fig, path):
