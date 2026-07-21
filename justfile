@@ -36,3 +36,8 @@ lint:
 fix:
     uv run ruff check --fix .
     uv run ruff format .
+
+# Ejecuta la suite de pruebas
+[group("test")]
+test:
+    uv run pytest
