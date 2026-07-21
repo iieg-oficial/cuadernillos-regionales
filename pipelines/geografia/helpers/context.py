@@ -86,6 +86,140 @@ def build_anp_text(ctx):
     return " ".join(parts).rstrip(".")
 
 
+SENTINELS = {"sin_dato", "sin dato", "nd", "n/d", "na", "n/a", "null", "none"}
+
+
+def is_sentinel(value):
+    text = str(value or "").replace("\\", "").strip()
+    return not text or text.lower() in SENTINELS or text == ND
+
+
+def join_names(names):
+    if not names:
+        return ""
+    if len(names) == 1:
+        return names[0]
+    return f"{', '.join(names[:-1])} y {names[-1]}"
+
+
+def split_names(value):
+    items = []
+    current = []
+    depth = 0
+    for char in str(value or ""):
+        if char == "(":
+            depth += 1
+        elif char == ")":
+            depth = max(0, depth - 1)
+        if char == "," and depth == 0:
+            items.append("".join(current))
+            current = []
+            continue
+        current.append(char)
+    items.append("".join(current))
+
+    return [item for item in (raw.strip() for raw in items) if not is_sentinel(item)]
+
+
+def build_energia_text(dominante, valor, pct, secundarios):
+    tipo = str(dominante or "").strip()
+    if is_sentinel(tipo):
+        return (
+            "No se dispone de información sobre unidades económicas "
+            "relacionadas con energía para el municipio."
+        )
+
+    frase = (
+        f"Con respecto a unidades económicas relacionadas con energías, "
+        f"predomina el tipo de {tipo}, con un valor de {valor}, equivalente a "
+        f"{pct} \\% del total identificado."
+    )
+
+    otros = split_names(secundarios)
+    if not otros:
+        return frase
+
+    return (
+        f"{frase} También se registran {join_names(otros)}, "
+        f"que complementan la red energética municipal."
+    )
+
+
+def build_clima_text(
+    predominante, pct_predominante, secundario, pct_secundario, otros_nombres, pct_otros
+):
+    tipo = str(predominante or "").strip()
+    if is_sentinel(tipo):
+        return (
+            "No se dispone de información sobre los tipos de clima "
+            "presentes en el municipio."
+        )
+
+    partes = [
+        f"El municipio presenta un clima predominante de tipo {tipo}, "
+        f"que abarca {pct_predominante} \\% del territorio."
+    ]
+
+    segundo = str(secundario or "").strip()
+    if not is_sentinel(segundo):
+        partes.append(
+            f"En segundo lugar se presenta {segundo} con {pct_secundario} \\%."
+        )
+
+    otros = split_names(otros_nombres)
+    if otros:
+        partes.append(
+            f"Además se identifican variantes como {join_names(otros)}, "
+            f"que representan {pct_otros} \\%."
+        )
+
+    return " ".join(partes)
+
+
+def build_acuiferos_text(nombres, pct_con, pct_sin):
+    items = split_names(nombres)
+    if not items:
+        return (
+            "No se dispone de información sobre los acuíferos "
+            "que abarcan el territorio municipal."
+        )
+
+    if len(items) == 1:
+        ubicacion = f"El territorio está ubicado dentro del acuífero {items[0]}."
+    else:
+        ubicacion = (
+            f"El territorio está ubicado dentro de los acuíferos: {join_names(items)}."
+        )
+
+    con = to_number(strip_percent_symbol(pct_con))
+    sin = to_number(strip_percent_symbol(pct_sin))
+
+    if con is None or sin is None:
+        return ubicacion
+
+    if con <= 0:
+        disponibilidad = (
+            "La totalidad de la superficie municipal comprendida en ellos "
+            "no cuenta con disponibilidad de agua subterránea."
+        )
+    elif sin <= 0:
+        disponibilidad = (
+            "La totalidad de la superficie municipal comprendida en ellos "
+            "cuenta con disponibilidad de agua subterránea."
+        )
+    else:
+        disponibilidad = (
+            f"Del total de la superficie municipal comprendida en ellos, "
+            f"{fmt(sin)} \\% no tiene disponibilidad y {fmt(con)} \\% "
+            f"cuenta con disponibilidad de agua subterránea."
+        )
+
+    if len(items) == 1:
+        disponibilidad = disponibilidad.replace("en ellos", "en él")
+
+    return f"{ubicacion} {disponibilidad}"
+
+
 def build_linea_transmision_text(value):
     number = to_number(value)
     if number is None:

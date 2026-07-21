@@ -13,7 +13,10 @@ from pipelines.geografia.charts.treemap import (
     plot_stacked_pair,
 )
 from pipelines.geografia.helpers.context import (
+    build_acuiferos_text,
     build_anp_text,
+    build_clima_text,
+    build_energia_text,
     build_espacios_publicos_text,
     build_linea_transmision_text,
     build_subestaciones_text,
@@ -441,6 +444,11 @@ class Analizer(Stage):
         ctx["ge_ac_pct_no_sobreexplotado"] = pct_sum(
             ac_cond, ["no explotado", "no sobreexplotado"]
         )
+        ctx["ge_ac_texto"] = build_acuiferos_text(
+            ctx.get("ge_ac_nombres_acuiferos"),
+            ctx["ge_ac_pct_con_disponibilidad"],
+            ctx["ge_ac_pct_sin_disponibilidad"],
+        )
 
         salud_total = to_number(
             texto.get("salud_nivel_atencion", {}).get("salud_total_puntos_muni")
@@ -475,6 +483,21 @@ class Analizer(Stage):
         )
         for key in NARRATIVE_LOWER_KEYS:
             ctx[f"{key}_texto"] = narrative_lower(ctx.get(key, "ND"))
+
+        ctx["ge_ie_texto"] = build_energia_text(
+            ctx.get("ge_ie_dominante_texto"),
+            ctx.get("ge_ie_dominante_valor", ND),
+            ctx.get("ge_ie_dominante_pct", ND),
+            ctx.get("ge_ie_tipos_secundarios"),
+        )
+        ctx["ge_cl_texto"] = build_clima_text(
+            ctx.get("ge_cl_tipo_predominante"),
+            ctx.get("ge_cl_pct_predominante", ND),
+            ctx.get("ge_cl_secundario"),
+            ctx.get("ge_cl_secundario_pct", ND),
+            ctx.get("ge_cl_otros_nombres"),
+            ctx.get("ge_cl_otros_pct", ND),
+        )
 
         Logger.info("Geografía: generando gráficas")
         for topic, cat_col, val_col, sort_col in SIMPLE_CHART_TOPICS:
