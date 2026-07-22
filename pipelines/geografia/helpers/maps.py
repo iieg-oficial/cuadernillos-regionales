@@ -55,31 +55,7 @@ FOLDER_ALIASES = {
 
 EXTENSIONS = {".png", ".jpg", ".jpeg", ".pdf"}
 
-DEFAULT_MAP_WIDTH = 0.85
-
-MAP_WIDTHS = {
-    "base": 0.90,
-    "geo": 0.88,
-    "ed": 0.88,
-    "tp": 0.88,
-    "cu": 0.88,
-    "ac": 0.88,
-    "tm": 0.90,
-    "pp": 0.90,
-    "cl": 0.90,
-    "usv": 0.90,
-    "ndvi": 0.90,
-    "ndwi": 0.90,
-    "anp": 0.88,
-    "ds": 0.88,
-    "er": 0.90,
-    "ee": 0.90,
-    "itur": 0.90,
-    "salud": 0.87,
-    "edu": 0.90,
-    "ep": 0.90,
-    "ie": 0.90,
-}
+DEFAULT_MAP_WIDTH = 1.0
 
 
 def _normalize(text):
@@ -183,8 +159,7 @@ def resolve_maps(cve_geo, municipio):
         if path:
             if draft:
                 path = get_draft_path(path, f"geografia/{cve_geo}", f"ge_{short}")
-            width = MAP_WIDTHS.get(short, DEFAULT_MAP_WIDTH)
-            ctx[f"ge_{short}_mapa"] = map_includegraphics(path, width)
+            ctx[f"ge_{short}_mapa"] = map_includegraphics(path)
             ctx[f"ge_{short}_mapa_activo"] = True
         else:
             ctx[f"ge_{short}_mapa"] = MAPA_PLACEHOLDER

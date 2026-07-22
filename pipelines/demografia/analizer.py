@@ -14,14 +14,15 @@ def _mapa_latex(path: Path, caption: str, fuentes: list[str] | None = None) -> s
         f"\\mapatitulo{{{caption}}}\n"
         "\\begin{figure}[H]\n"
         "\\centering\n"
-        f"\\includegraphics[width=0.85\\textwidth]{{{path}}}\n"
+        f"\\includegraphics[width=\\textwidth]{{{path}}}\n"
         "\\end{figure}"
     )
     if fuentes:
         lineas = [f"Fuente: & {fuentes[0]}\\\\"]
         lineas += [f"& {f}\\\\" for f in fuentes[1:]]
         cuerpo = "\n".join(lineas).rstrip("\\")
-        bloque += f"\n\\tablefooter{{{cuerpo}}}"
+        comentado = "\n".join(f"%{linea}" for linea in cuerpo.splitlines())
+        bloque += f"\n%\\tablefooter{{\n{comentado}\n%}}"
     return bloque
 
 
