@@ -1,3 +1,4 @@
+import re
 from pathlib import Path
 
 from core.constants import ND
@@ -6,8 +7,25 @@ from core.utils.logger import Logger
 
 MAPA_PLACEHOLDER = Path("templates/assets/mapa_placeholder.png")
 
+BARE_URL = re.compile(r"(?<!\{)\bhttps?://[^\s<>{}]+")
+URL_TRAILING = ".,;:)]}"
+
+
+def _url_to_latex(match: re.Match) -> str:
+    url = match.group(0)
+    trailing = ""
+    while url and url[-1] in URL_TRAILING:
+        trailing = url[-1] + trailing
+        url = url[:-1]
+    return rf"\url{{{url}}}{trailing}"
+
+
+def _linkify(text: str) -> str:
+    return BARE_URL.sub(_url_to_latex, text)
+
 
 def _normalize(text: str) -> str:
+    text = _linkify(text)
     text = text.replace("\x0c", " ")
     lines = [line.strip() for line in text.splitlines()]
     paragraphs = []
