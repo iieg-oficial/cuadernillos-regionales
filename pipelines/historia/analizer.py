@@ -53,7 +53,7 @@ def _mapa_latex(path: Path, nombre: str) -> str:
         f"\\textbf{{Localización geográfica de {nombre}, Jalisco}}"
         "\\par\\vspace{4pt}\n"
         "\\centering\n"
-        f"\\includegraphics[width=0.85\\textwidth]{{{path}}}\n"
+        f"\\includegraphics[width=\\textwidth]{{{path}}}\n"
         "\\end{figure}\n"
         "\\par\\vspace{-4pt}\\parbox{\\linewidth}{\\footnotesize\n"
         "Fuente: IIEG. Mapa General del Estado de Jalisco, 2026.}"

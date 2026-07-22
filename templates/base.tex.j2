@@ -110,14 +110,10 @@
   \refstepcounter{grafica}%
   \noindent{\color{colorTexto}Gráfica \thegrafica\\
   \textbf{#1}}\par\vspace{4pt}}
-% El pie de los mapas queda oculto: la imagen ya incluye titulo y fuente.
-% El contador se conserva para no romper \label/\ref{map:...}.
-% Para restaurarlo, descomentar las dos lineas marcadas.
 \newcommand{\mapatitulo}[1]{%
   \refstepcounter{mapa}%
-%  \noindent{\color{colorTexto}Mapa \themapa\\
-%  \textbf{#1}}\par\vspace{4pt}%
-}
+  \noindent{\color{colorTexto}Mapa \themapa\\
+  \textbf{#1}}\par\vspace{4pt}}
 \newcommand{\mapafuente}[1]{%
   \par\vspace{-4pt}\noindent{\footnotesize
   \renewcommand{\arraystretch}{1.0}%
