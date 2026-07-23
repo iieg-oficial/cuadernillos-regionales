@@ -9,12 +9,17 @@ from core.utils.municipalities import get_same_region
 MAPA_PLACEHOLDER = Path("templates/assets/mapa_placeholder.png")
 
 
-def _mapa_latex(path: Path, caption: str, fuentes: list[str] | None = None) -> str:
+def _mapa_latex(
+    path: Path,
+    caption: str,
+    fuentes: list[str] | None = None,
+    ancho: str = "0.95\\textwidth",
+) -> str:
     bloque = (
         f"\\mapatitulo{{{caption}}}\n"
         "\\begin{figure}[H]\n"
         "\\centering\n"
-        f"\\includegraphics[width=\\textwidth]{{{path}}}\n"
+        f"\\includegraphics[width={ancho}]{{{path}}}\n"
         "\\end{figure}"
     )
     if fuentes:

@@ -65,7 +65,7 @@ def _grafica_latex(path, titulo, fuente, ancho="0.95"):
         f"{{\\color{{colorTexto}}\\textbf{{{titulo}}}}}\n"
         "\\vspace{0.3cm}\n\n"
         f"\\includegraphics[width={ancho}\\textwidth]{{{path}}}\n\n"
-        f"{{\\footnotesize {fuente}}}\n"
+        f"{{\\color{{colorTexto}}\\footnotesize {fuente}}}\n"
         "\\end{figure}"
     )
 
