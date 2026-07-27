@@ -6,6 +6,10 @@ from core.utils.helpers import rows_have_na
 from core.utils.logger import Logger
 from core.utils.municipalities import get_same_region, get_same_region_ids
 from pipelines.economia.charts.produccion import grafica_produccion
+from pipelines.economia.helpers.vacb import (
+    build_mayor_crecimiento_text,
+    build_subsectores_text,
+)
 
 MAPA_PLACEHOLDER = (
     "\\includegraphics[width=\\textwidth]{templates/assets/mapa_placeholder.png}"
@@ -382,26 +386,25 @@ class Analizer(Stage):
             ctx["ec_variacion_valor_agregado_censal"] = ND
             ctx["ec_variacion_vacb_total"] = ND
 
-        top3_vacb = vacb_actual[:3] if len(vacb_actual) >= 3 else vacb_actual
-        ctx["ec_subsector_primer_lugar"] = (
-            top3_vacb[0]["subsector"].lower() if len(top3_vacb) > 0 else ND
-        )
-        ctx["ec_subsector_segundo_lugar"] = (
-            top3_vacb[1]["subsector"].lower() if len(top3_vacb) > 1 else ND
-        )
-        ctx["ec_subsector_tercer_lugar"] = (
-            top3_vacb[2]["subsector"].lower() if len(top3_vacb) > 2 else ND
-        )
+        top3_vacb = vacb_actual[:3]
 
-        if len(top3_vacb) >= 3 and vacb_total_actual:
+        if top3_vacb and vacb_total_actual:
             suma_top3 = sum(r["vacb"] for r in top3_vacb if r["vacb"])
-            ctx["ec_porcentaje_aportacion_principales_subsectores"] = _pct(
-                suma_top3 / vacb_total_actual * 100
-            )
-            ctx["ec_aportacion_principales_subsectores"] = _fmt(suma_top3, 2)
+            pct_principales = _pct(suma_top3 / vacb_total_actual * 100)
+            aportacion_principales = _fmt(suma_top3, 2)
         else:
-            ctx["ec_porcentaje_aportacion_principales_subsectores"] = ND
-            ctx["ec_aportacion_principales_subsectores"] = ND
+            pct_principales = ND
+            aportacion_principales = ND
+
+        ctx["ec_porcentaje_aportacion_principales_subsectores"] = pct_principales
+        ctx["ec_aportacion_principales_subsectores"] = aportacion_principales
+        ctx["ec_texto_subsectores_vacb"] = build_subsectores_text(
+            [r["subsector"].lower() for r in top3_vacb],
+            ctx["ec_municipio_nombre"],
+            ctx["ec_anio_ce"],
+            pct_principales,
+            aportacion_principales,
+        )
 
         anterior_by_codigo2 = {r["codigo"]: r["vacb"] for r in vacb_anterior}
         mayor_crecimiento = None
@@ -442,6 +445,15 @@ class Analizer(Stage):
             ctx["ec_aportacion_anterior_subsector_mayor_crecimiento"] = ND
             ctx["ec_aportacion_subsector_mayor_crecimiento"] = ND
             ctx["ec_variacion_porcentual_aportacion_subsector_mayor_crecimiento"] = ND
+
+        ctx["ec_texto_mayor_crecimiento_vacb"] = build_mayor_crecimiento_text(
+            ctx["ec_subsector_mayor_crecimiento"] if mayor_crecimiento else None,
+            ctx["ec_aportacion_anterior_subsector_mayor_crecimiento"],
+            ctx["ec_aportacion_subsector_mayor_crecimiento"],
+            ctx["ec_variacion_porcentual_aportacion_subsector_mayor_crecimiento"],
+            ctx["ec_anio_ce_anterior"],
+            ctx["ec_anio_ce"],
+        )
 
         ctx["ec_tabla_vacb"] = _build_vacb_table(
             vacb_actual,
