@@ -1,6 +1,6 @@
 import pytest
 
-from pipelines.historia.analizer import _linkify
+from pipelines.historia.analizer import _curly_quotes, _linkify
 
 
 def test_bare_url_is_wrapped():
@@ -44,3 +44,29 @@ def test_underscores_in_url_are_preserved():
     texto = _linkify("ver https://x.mx/a_b_c")
 
     assert texto == r"ver \url{https://x.mx/a_b_c}"
+
+
+def test_straight_quotes_become_curly():
+    texto = _curly_quotes('Jalisco, "Atenguillo”, información')
+
+    assert texto == "Jalisco, “Atenguillo”, información"
+    assert '"' not in texto
+
+
+@pytest.mark.parametrize(
+    "entrada,esperado",
+    [
+        ('El "Río" pasa.', "El “Río” pasa."),
+        ('"Inicio" del texto', "“Inicio” del texto"),
+        ('("entre paréntesis")', "(“entre paréntesis”)"),
+        ('mide 5" de largo', "mide 5” de largo"),
+    ],
+)
+def test_quote_direction_depends_on_previous_character(entrada, esperado):
+    assert _curly_quotes(entrada) == esperado
+
+
+def test_existing_curly_quotes_are_untouched():
+    original = "ya tiene “comillas” correctas"
+
+    assert _curly_quotes(original) == original

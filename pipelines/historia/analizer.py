@@ -24,7 +24,23 @@ def _linkify(text: str) -> str:
     return BARE_URL.sub(_url_to_latex, text)
 
 
+QUOTE_OPENERS = " \t\n([{¿¡—–-"
+
+
+def _curly_quotes(text: str) -> str:
+    salida = []
+    for pos, char in enumerate(text):
+        if char != '"':
+            salida.append(char)
+            continue
+        anterior = text[pos - 1] if pos else ""
+        abre = not anterior or anterior in QUOTE_OPENERS
+        salida.append("“" if abre else "”")
+    return "".join(salida)
+
+
 def _normalize(text: str) -> str:
+    text = _curly_quotes(text)
     text = _linkify(text)
     text = text.replace("\x0c", " ")
     lines = [line.strip() for line in text.splitlines()]
