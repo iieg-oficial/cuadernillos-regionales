@@ -1,4 +1,7 @@
 
+# Muestra representativa: metropolitanos, costa, sierra, altos y municipios pequeños
+SAMPLE := "1 12 17 32 56 67 97 98 101 120"
+
 default:
     just --list --unsorted
 
@@ -19,6 +22,16 @@ run:
 [group("reports")]
 run-one clave:
     uv run python main.py --municipio {{clave}}
+
+# Genera los cuadernillos de una muestra representativa de municipios
+[group("reports")]
+run-sample:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    for clave in {{ SAMPLE }}; do
+        echo "==> $clave"
+        uv run python main.py --municipio "$clave"
+    done
 
 # abre un archivo específico
 [group("reports")]
