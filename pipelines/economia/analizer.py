@@ -396,6 +396,19 @@ class Analizer(Stage):
             pct_principales = ND
             aportacion_principales = ND
 
+        if not top3_vacb:
+            Logger.warning(
+                f"Economía: municipio {municipio_id_str} sin desglose de VACB por "
+                "subsector, usando redacción de confidencialidad"
+            )
+        elif len(top3_vacb) < 3:
+            Logger.warning(
+                f"Economía: municipio {municipio_id_str} con solo "
+                f"{len(top3_vacb)} subsector(es) de VACB, usando redacción reducida"
+            )
+        else:
+            Logger.info("Economía: VACB con redacción completa de tres subsectores")
+
         ctx["ec_porcentaje_aportacion_principales_subsectores"] = pct_principales
         ctx["ec_aportacion_principales_subsectores"] = aportacion_principales
         ctx["ec_texto_subsectores_vacb"] = build_subsectores_text(
@@ -445,6 +458,12 @@ class Analizer(Stage):
             ctx["ec_aportacion_anterior_subsector_mayor_crecimiento"] = ND
             ctx["ec_aportacion_subsector_mayor_crecimiento"] = ND
             ctx["ec_variacion_porcentual_aportacion_subsector_mayor_crecimiento"] = ND
+
+        if not mayor_crecimiento:
+            Logger.warning(
+                f"Economía: municipio {municipio_id_str} sin subsector comparable "
+                "entre censos, omitiendo la frase de mayor crecimiento del VACB"
+            )
 
         ctx["ec_texto_mayor_crecimiento_vacb"] = build_mayor_crecimiento_text(
             ctx["ec_subsector_mayor_crecimiento"] if mayor_crecimiento else None,
