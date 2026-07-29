@@ -61,6 +61,25 @@ INTEGER_KEYS = {
     "ge_edu_total_escuelas_muni",
 }
 
+TABLE_LABELS = {
+    "ge_geo_unidades_geologicas": "Geología",
+    "ge_ed_tipos_suelo": "Edafología",
+    "ge_tp_pendientes": "Pendientes",
+    "ge_cl_clasificaciones": "Clima",
+    "ge_usv_clasificacion": "Uso de suelo y vegetación",
+    "ge_ndvi_categorias": "NDVI",
+    "ge_ndwi_categorias": "NDWI",
+    "ge_anp_categorias": "Áreas naturales protegidas y humedales",
+    "ge_ds_categorias": "Índice de sequía",
+    "ge_er_categorias": "Erosión potencial",
+    "ge_ee_categorias": "Erosión efectiva",
+    "ge_itur_clasificaciones": "Índice Territorial Urbano-Rural",
+    "ge_salud_unidades": "Unidades de salud",
+    "ge_edu_centros": "Educación",
+    "ge_ep_espacios": "Espacios públicos",
+    "ge_ie_infraestructura": "Infraestructura energética",
+}
+
 NARRATIVE_LOWER_KEYS = [
     "ge_dg_pendiente_predom",
     "ge_dg_geo_predom",
@@ -408,6 +427,13 @@ class Analizer(Stage):
                 "porcentaje": "porcentaje",
             },
         )
+
+        for key, label in TABLE_LABELS.items():
+            if not ctx.get(key):
+                Logger.warning(
+                    f"Geografía: municipio {municipio} sin datos de {label}, "
+                    "tabla omitida"
+                )
 
         cu_clasificac = detalle.get("cuencas_clasificac", [])
         cu_categ = detalle.get("cuencas_categ", [])

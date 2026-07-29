@@ -131,6 +131,7 @@ Fuente: IIEG, con base en INEGI. Conjunto de datos vectoriales Geológicos serie
 <% endif %>
 
 \newpage
+<% if ge_geo_unidades_geologicas %>
 \setlength{\tabcolsep}{3pt}
 \footnotesize
 \begin{longtable}{>{\raggedright\arraybackslash}m{\dimexpr0.40\linewidth - 2\tabcolsep\relax}
@@ -167,6 +168,7 @@ Fuente: IIEG, con base en INEGI. Conjunto de datos vectoriales Geológicos serie
 \normalsize
 \par\vspace{-4pt}\parbox{\linewidth}{\footnotesize
 Fuente: IIEG, con base en INEGI. Conjunto de datos vectoriales Geológicos serie I, 1988.}
+<% endif %>
 
 <% if ge_geo_mapa_activo %>
 \clearpage
@@ -195,6 +197,7 @@ Fuente: IIEG, con base en INEGI. Carta edafológica escala 1:250 000 Serie III, 
 <% endif %>
 
 \newpage
+<% if ge_ed_tipos_suelo %>
 \setlength{\tabcolsep}{3pt}
 \footnotesize
 \begin{longtable}{>{\raggedright\arraybackslash}m{\dimexpr0.40\linewidth - 2\tabcolsep\relax}
@@ -231,6 +234,7 @@ Fuente: IIEG, con base en INEGI. Carta edafológica escala 1:250 000 Serie III, 
 \normalsize
 \par\vspace{-4pt}\parbox{\linewidth}{\footnotesize
 Fuente: IIEG, con base en INEGI. Carta edafológica escala 1:250 000 Serie III, 2025.}
+<% endif %>
 
 <% if ge_ed_mapa_activo %>
 \clearpage
@@ -259,6 +263,7 @@ El rango << ge_tp_secundario_texto >> representa << ge_tp_secundario_pct >> \%. 
 <% endif %>
 
 \newpage
+<% if ge_tp_pendientes %>
 \setlength{\tabcolsep}{3pt}
 \footnotesize
 \begin{longtable}{>{\raggedright\arraybackslash}m{\dimexpr0.40\linewidth - 2\tabcolsep\relax}
@@ -295,6 +300,7 @@ El rango << ge_tp_secundario_texto >> representa << ge_tp_secundario_pct >> \%. 
 \normalsize
 \mapafuente{Fuente: & IIEG, con base en INEGI. Conjunto nacional de información topográfica a escala 1:50\,000, 2025.\\
  & INEGI. Continuo de Elevaciones Mexicano 4.0, 2025.}
+<% endif %>
 
 <% if ge_tp_mapa_activo %>
 \clearpage
@@ -636,6 +642,7 @@ Fuente: IIEG, con base en SMN. Información Estadística Climatológica, 1995-20
 <% endif %>
 
 \newpage
+<% if ge_cl_clasificaciones %>
 \setlength{\tabcolsep}{3pt}
 \footnotesize
 \begin{longtable}{>{\raggedright\arraybackslash}m{\dimexpr0.40\linewidth - 2\tabcolsep\relax}
@@ -672,6 +679,7 @@ Fuente: IIEG, con base en SMN. Información Estadística Climatológica, 1995-20
 \normalsize
 \par\vspace{-4pt}\parbox{\linewidth}{\footnotesize
 Fuente: IIEG, con base en SMN. Información Estadística Climatológica, 1995-2026.}
+<% endif %>
 
 <% if ge_cl_mapa_activo %>
 \clearpage
@@ -698,6 +706,7 @@ Fuente: IIEG, con base en INEGI. Conjunto de datos vectoriales de uso del suelo 
 <% endif %>
 
 \newpage
+<% if ge_usv_clasificacion %>
 \setlength{\tabcolsep}{3pt}
 \footnotesize
 \begin{longtable}{>{\raggedright\arraybackslash}m{\dimexpr0.40\linewidth - 2\tabcolsep\relax}
@@ -734,6 +743,7 @@ Fuente: IIEG, con base en INEGI. Conjunto de datos vectoriales de uso del suelo 
 \normalsize
 \par\vspace{-4pt}\parbox{\linewidth}{\footnotesize
 Fuente: IIEG, con base en INEGI. Conjunto de datos vectoriales de uso del suelo y vegetación Serie VII, 2018.}
+<% endif %>
 
 <% if ge_usv_mapa_activo %>
 \clearpage
@@ -762,6 +772,7 @@ Fuente: IIEG, con base en USGS. Landsat Collection 2 Level-2 Science Products, 2
 <% endif %>
 
 \newpage
+<% if ge_ndvi_categorias %>
 \setlength{\tabcolsep}{3pt}
 \footnotesize
 \begin{longtable}{>{\raggedright\arraybackslash}m{\dimexpr0.40\linewidth - 2\tabcolsep\relax}
@@ -798,6 +809,7 @@ Fuente: IIEG, con base en USGS. Landsat Collection 2 Level-2 Science Products, 2
 \normalsize
 \par\vspace{-4pt}\parbox{\linewidth}{\footnotesize
 Fuente: IIEG, con base en USGS. Landsat Collection 2 Level-2 Science Products, 2025.}
+<% endif %>
 
 <% if ge_ndvi_mapa_activo %>
 \clearpage
@@ -826,6 +838,7 @@ Fuente: IIEG, con base en USGS. Landsat Collection 2 Level-2 Science Products, 2
 <% endif %>
 
 \newpage
+<% if ge_ndwi_categorias %>
 \setlength{\tabcolsep}{3pt}
 \footnotesize
 \begin{longtable}{>{\raggedright\arraybackslash}m{\dimexpr0.40\linewidth - 2\tabcolsep\relax}
@@ -862,6 +875,7 @@ Fuente: IIEG, con base en USGS. Landsat Collection 2 Level-2 Science Products, 2
 \normalsize
 \par\vspace{-4pt}\parbox{\linewidth}{\footnotesize
 Fuente: IIEG, con base en USGS. Landsat Collection 2 Level-2 Science Products, 2025.}
+<% endif %>
 
 <% if ge_ndwi_mapa_activo %>
 \clearpage
@@ -877,6 +891,7 @@ Fuente: IIEG, con base en USGS. Landsat Collection 2 Level-2 Science Products, 2
 
 << ge_anp_texto_automatico >>.
 
+<% if ge_anp_categorias %>
 \setlength{\tabcolsep}{3pt}
 \footnotesize
 \begin{longtable}{>{\raggedright\arraybackslash}m{\dimexpr0.20\linewidth - 2\tabcolsep\relax}
@@ -914,6 +929,7 @@ Fuente: IIEG, con base en USGS. Landsat Collection 2 Level-2 Science Products, 2
 \normalsize
 \par\vspace{-4pt}\parbox{\linewidth}{\footnotesize
 Fuente: IIEG, con base en CONANP. Áreas Naturales Protegidas, 2025. CONAGUA. Inventario Nacional de Humedales, 2021.}
+<% endif %>
 
 <% if ge_anp_mapa_activo %>
 \clearpage
@@ -941,6 +957,7 @@ Fuente: IIEG, con base en USGS. Landsat Collection 2 Level-2 Science Products, 2
 <% endif %>
 
 \newpage
+<% if ge_ds_categorias %>
 \setlength{\tabcolsep}{3pt}
 \footnotesize
 \begin{longtable}{>{\raggedright\arraybackslash}m{\dimexpr0.40\linewidth - 2\tabcolsep\relax}
@@ -977,6 +994,7 @@ Fuente: IIEG, con base en USGS. Landsat Collection 2 Level-2 Science Products, 2
 \normalsize
 \par\vspace{-4pt}\parbox{\linewidth}{\footnotesize
 Fuente: IIEG, con base en USGS. Landsat Collection 2 Level-2 Science Products, 2025.}
+<% endif %>
 
 <% if ge_ds_mapa_activo %>
 \clearpage
@@ -1003,6 +1021,7 @@ Fuente: IIEG, con base en SMN, INEGI. Carta edafológica Serie III y CEM 4.0.}
 <% endif %>
 
 \newpage
+<% if ge_er_categorias %>
 \setlength{\tabcolsep}{3pt}
 \footnotesize
 \begin{longtable}{>{\raggedright\arraybackslash}m{\dimexpr0.40\linewidth - 2\tabcolsep\relax}
@@ -1039,6 +1058,7 @@ Fuente: IIEG, con base en SMN, INEGI. Carta edafológica Serie III y CEM 4.0.}
 \normalsize
 \par\vspace{-4pt}\parbox{\linewidth}{\footnotesize
 Fuente: IIEG, con base en SMN, INEGI. Carta edafológica Serie III y CEM 4.0.}
+<% endif %>
 
 <% if ge_er_mapa_activo %>
 \clearpage
@@ -1064,6 +1084,7 @@ Fuente: IIEG, con base en SMN, INEGI. Carta edafológica Serie III, CEM 4.0 y US
 <% endif %>
 
 \newpage
+<% if ge_ee_categorias %>
 \setlength{\tabcolsep}{3pt}
 \footnotesize
 \begin{longtable}{>{\raggedright\arraybackslash}m{\dimexpr0.40\linewidth - 2\tabcolsep\relax}
@@ -1100,6 +1121,7 @@ Fuente: IIEG, con base en SMN, INEGI. Carta edafológica Serie III, CEM 4.0 y US
 \normalsize
 \par\vspace{-4pt}\parbox{\linewidth}{\footnotesize
 Fuente: IIEG, con base en SMN, INEGI. Carta edafológica Serie III, CEM 4.0 y USV Serie VII.}
+<% endif %>
 
 <% if ge_ee_mapa_activo %>
 \clearpage
@@ -1128,6 +1150,7 @@ Fuente: IIEG, con base en INEGI. Índice Territorial Urbano-Rural (ITUR), 2025.}
 <% endif %>
 
 \newpage
+<% if ge_itur_clasificaciones %>
 \setlength{\tabcolsep}{3pt}
 \footnotesize
 \begin{longtable}{>{\raggedright\arraybackslash}m{\dimexpr0.40\linewidth - 2\tabcolsep\relax}
@@ -1164,6 +1187,7 @@ Fuente: IIEG, con base en INEGI. Índice Territorial Urbano-Rural (ITUR), 2025.}
 \normalsize
 \par\vspace{-4pt}\parbox{\linewidth}{\footnotesize
 Fuente: IIEG, con base en INEGI. Índice Territorial Urbano-Rural (ITUR), 2025.}
+<% endif %>
 
 <% if ge_itur_mapa_activo %>
 \clearpage
@@ -1179,6 +1203,7 @@ Fuente: IIEG, con base en INEGI. Índice Territorial Urbano-Rural (ITUR), 2025.}
 
 De acuerdo con los registros de la Secretaría de Salud, en el municipio se identifican << ge_salud_total_puntos_muni >> unidades de servicio de salud, entre consultorios, hospitales, farmacias, laboratorios y unidades móviles. De las cuales << ge_salud_primer_pct >> \% son de primer nivel.
 
+<% if ge_salud_unidades %>
 \setlength{\tabcolsep}{3pt}
 \footnotesize
 \begin{longtable}{>{\raggedright\arraybackslash}m{\dimexpr0.45\linewidth - 2\tabcolsep\relax}
@@ -1218,6 +1243,7 @@ De acuerdo con los registros de la Secretaría de Salud, en el municipio se iden
 \normalsize
 \par\vspace{-4pt}\parbox{\linewidth}{\footnotesize
 Fuente: IIEG, con base en Dirección General de Información en Salud. Clave Única de Establecimientos de Salud, 2025.}
+<% endif %>
 
 <% if ge_salud_mapa_activo %>
 \clearpage
@@ -1236,6 +1262,7 @@ De acuerdo con los registros del Sistema de Información y Gestión Educativa, e
 
 La oferta educativa se organiza en niveles de educación inicial, básica, media y superior, con presencia tanto de instituciones públicas como privadas.
 
+<% if ge_edu_centros %>
 \setlength{\tabcolsep}{3pt}
 \footnotesize
 \begin{longtable}{>{\raggedright\arraybackslash}m{\dimexpr0.40\linewidth - 2\tabcolsep\relax}
@@ -1272,6 +1299,7 @@ La oferta educativa se organiza en niveles de educación inicial, básica, media
 \normalsize
 \par\vspace{-4pt}\parbox{\linewidth}{\footnotesize
 Fuente: IIEG, con base en Sistema de Información y Gestión Educativa (SIGED). Consulta de escuelas, 2025.}
+<% endif %>
 
 <% if ge_edu_mapa_activo %>
 \clearpage
@@ -1287,6 +1315,7 @@ Fuente: IIEG, con base en Sistema de Información y Gestión Educativa (SIGED). 
 
 << ge_ep_resumen_texto >>
 
+<% if ge_ep_espacios %>
 \setlength{\tabcolsep}{3pt}
 \footnotesize
 \begin{longtable}{>{\raggedright\arraybackslash}m{\dimexpr0.40\linewidth - 2\tabcolsep\relax}
@@ -1323,6 +1352,7 @@ Fuente: IIEG, con base en Sistema de Información y Gestión Educativa (SIGED). 
 \normalsize
 \par\vspace{-4pt}\parbox{\linewidth}{\footnotesize
 Fuente: IIEG, con base en INEGI. Marco Geoestadístico, 2025.}
+<% endif %>
 
 <% if ge_ep_mapa_activo %>
 \clearpage
@@ -1341,6 +1371,7 @@ La infraestructura energética del municipio integra elementos estratégicos par
 
 << ge_ie_texto >>
 
+<% if ge_ie_infraestructura %>
 \setlength{\tabcolsep}{3pt}
 \footnotesize
 \begin{longtable}{>{\raggedright\arraybackslash}m{\dimexpr0.40\linewidth - 2\tabcolsep\relax}
@@ -1377,6 +1408,7 @@ La infraestructura energética del municipio integra elementos estratégicos par
 \normalsize
 \par\vspace{-4pt}\parbox{\linewidth}{\footnotesize
 Fuente: IIEG, con base en INEGI. DENUE, 2025. INEGI. Topografía 1:50 000, 2025. SENER. Mapa de Hidrocarburos, 2025.}
+<% endif %>
 <% if ge_ie_mapa_activo %>
 \clearpage
 \mapatitulo{Infraestructura energética de << ge_municipio >>}
