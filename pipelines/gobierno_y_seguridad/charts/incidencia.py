@@ -45,18 +45,18 @@ def grafica_carpetas_por_mes(
     valores = [r["total"] for r in datos]
     media = sum(valores) / len(valores)
 
-    fig, ax = plt.subplots(figsize=(14, 4.6))
+    fig, ax = plt.subplots(figsize=(14, 6))
 
     ax.plot(
         etiquetas,
         valores,
         color=COLOR_SECCION,
-        linewidth=2.7,
+        linewidth=3,
         marker="o",
-        markersize=7.5,
+        markersize=9.5,
         markerfacecolor="white",
         markeredgecolor=COLOR_SECCION,
-        markeredgewidth=2,
+        markeredgewidth=2.5,
         zorder=3,
     )
 
@@ -67,14 +67,14 @@ def grafica_carpetas_por_mes(
             textcoords="offset points",
             xytext=(0, 12),
             ha="center",
-            fontsize=9.5,
+            fontsize=10.5,
             fontweight="bold",
             color=COLOR_TEXTO,
             bbox=dict(
                 boxstyle="round,pad=0.2",
                 facecolor="white",
                 edgecolor=COLOR_SECCION,
-                linewidth=0.8,
+                linewidth=1.2,
             ),
         )
 
@@ -83,7 +83,7 @@ def grafica_carpetas_por_mes(
         y=media,
         color=COLOR_GRIS,
         linestyle="--",
-        linewidth=1.2,
+        linewidth=1.5,
         zorder=1,
     )
     ax.text(
@@ -92,17 +92,18 @@ def grafica_carpetas_por_mes(
         f"  {media_label}",
         ha="left",
         va="bottom",
-        fontsize=8.5,
+        fontsize=9.5,
         color=COLOR_GRIS,
         style="italic",
     )
 
     ax.set_ylabel("Carpetas", fontsize=12, color=COLOR_TEXTO, fontweight="bold")
+    ax.yaxis.set_major_locator(ticker.MaxNLocator(integer=True))
     ax.yaxis.set_major_formatter(
         ticker.FuncFormatter(lambda x, _: f"{x:,.0f}".replace(",", " "))
     )
 
-    y_min = min(valores) * 0.965
+    y_min = -0.1
     y_max = max(valores) * 1.06
     ax.set_ylim(y_min, y_max)
 
@@ -110,6 +111,10 @@ def grafica_carpetas_por_mes(
     ax.spines["right"].set_visible(False)
     ax.spines["left"].set_color(COLOR_TEXTO)
     ax.spines["bottom"].set_color(COLOR_TEXTO)
+
+    ax.spines["left"].set_linewidth(1.5)
+    ax.spines["bottom"].set_linewidth(1.5)
+
     ax.tick_params(colors=COLOR_TEXTO)
     plt.xticks(rotation=0, ha="center")
     for label in (*ax.get_xticklabels(), *ax.get_yticklabels()):
