@@ -78,6 +78,12 @@ NARRATIVE_LOWER_KEYS = [
     "ge_itur_dominante",
     "ge_itur_secundario",
     "ge_ie_dominante",
+    "ge_er_dominante_rango",
+    "ge_er_dominante_tipo",
+    "ge_er_secundario_rango",
+    "ge_ee_dominante_rango",
+    "ge_ee_dominante_tipo",
+    "ge_ee_secundario_rango",
 ]
 
 
@@ -471,7 +477,7 @@ class Analizer(Stage):
             if k.startswith("ge_anp_") or k.startswith("ge_dg_"):
                 anp_ctx[k.removeprefix("ge_")] = v
         anp_ctx["municipio"] = municipio
-        ctx["ge_anp_texto_automatico"] = build_anp_text(anp_ctx)
+        ctx["ge_anp_texto_automatico"] = build_anp_text(anp_ctx).lower()
         ctx["ge_ep_resumen_texto"] = build_espacios_publicos_text(
             ctx.get("ge_ep_total_puntos_muni"), detalle.get("espacios_publicos", [])
         )
