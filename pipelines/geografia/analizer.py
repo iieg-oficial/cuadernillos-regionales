@@ -57,6 +57,10 @@ SIMPLE_CHART_TOPICS = [
     ("erosion_efectiva", "rango_texto", "porcentaje", "orden_clase"),
 ]
 
+INTEGER_KEYS = {
+    "ge_edu_total_escuelas_muni",
+}
+
 NARRATIVE_LOWER_KEYS = [
     "ge_dg_pendiente_predom",
     "ge_dg_geo_predom",
@@ -225,7 +229,10 @@ class Analizer(Stage):
             for key, val in data.items():
                 if key == "nombre":
                     continue
-                ctx[f"ge_{key}"] = _fmt_field(val)
+                ctx_key = f"ge_{key}"
+                ctx[ctx_key] = (
+                    fmt_int(val) if ctx_key in INTEGER_KEYS else _fmt_field(val)
+                )
 
         cl_texto = texto.get("clima_koppen", {})
         ctx["ge_dg_clima_predom"] = ctx.get(
@@ -477,7 +484,7 @@ class Analizer(Stage):
             if k.startswith("ge_anp_") or k.startswith("ge_dg_"):
                 anp_ctx[k.removeprefix("ge_")] = v
         anp_ctx["municipio"] = municipio
-        ctx["ge_anp_texto_automatico"] = build_anp_text(anp_ctx).lower()
+        ctx["ge_anp_texto_automatico"] = build_anp_text(anp_ctx)
         ctx["ge_ep_resumen_texto"] = build_espacios_publicos_text(
             ctx.get("ge_ep_total_puntos_muni"), detalle.get("espacios_publicos", [])
         )

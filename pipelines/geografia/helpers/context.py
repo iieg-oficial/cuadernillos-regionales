@@ -73,9 +73,9 @@ def build_anp_text(ctx):
     if has_humedales:
         pct_h_raw = ctx.get("anp_pct_humedales", ND)
         pct_h = strip_percent_symbol(pct_h_raw) if pct_h_raw != ND else ND
-        prefix = "Asimismo, " if has_anp else ""
+        prefix = "Asimismo," if has_anp else ""
         parts.append(
-            f"{prefix}Los humedales abarcan {pct_h} \\% del territorio municipal."
+            f"{prefix} los humedales abarcan {pct_h} \\% del territorio municipal."
         )
     elif not has_anp:
         parts = [
@@ -135,7 +135,7 @@ def build_energia_text(dominante, valor, pct, secundarios):
         f"{pct} \\% del total identificado."
     )
 
-    otros = split_names(secundarios)
+    otros = [narrative_lower(nombre) for nombre in split_names(secundarios)]
     if not otros:
         return frase
 

@@ -24,12 +24,12 @@ MESES_COMPLETOS = {
 
 COLORES_BIENES = [
     "#5C2472",
-    "#7A4A8A",
-    "#E88A2A",
     "#C75B12",
-    "#9B59B6",
+    "#7A4A8A",
+    "#487ba9",
+    "#E88A2A",
     "#D4A5E5",
-    "#E6772E",
+    "#3c4856",
 ]
 
 
@@ -103,7 +103,7 @@ def grafica_carpetas_por_mes(
         ticker.FuncFormatter(lambda x, _: f"{x:,.0f}".replace(",", " "))
     )
 
-    y_min = -0.1
+    y_min = -0.1 if min(valores) == 0 else min(valores) * 0.965
     y_max = max(valores) * 1.06
     ax.set_ylim(y_min, y_max)
 

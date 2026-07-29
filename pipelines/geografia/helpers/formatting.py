@@ -72,6 +72,9 @@ def sentence_case(value):
     return text[:1].upper() + text[1:]
 
 
+ABBREVIATION_RE = re.compile(r"\b[A-Z]\.(?:\s?[A-Z]\.)*")
+
+
 def narrative_lower(value):
     if value is None:
         return value
@@ -84,4 +87,11 @@ def narrative_lower(value):
         return text
     if "(" in text and ")" in text and " " not in text:
         return text
-    return text.lower()
+    parts = []
+    last_end = 0
+    for match in ABBREVIATION_RE.finditer(text):
+        parts.append(text[last_end : match.start()].lower())
+        parts.append(match.group(0))
+        last_end = match.end()
+    parts.append(text[last_end:].lower())
+    return "".join(parts)
