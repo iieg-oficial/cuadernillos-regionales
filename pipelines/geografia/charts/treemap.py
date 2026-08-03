@@ -300,7 +300,7 @@ def plot_proportional_blocks(categories, values, topic_key, output_path):
         ax.add_patch(rect)
         if val <= 0.2:
             continue
-        label = f"{val:.1f} %"
+        label = f"{val:.2f} %"
         text = ax.text(
             x + w / 2,
             y + h / 2,
@@ -371,7 +371,7 @@ def plot_stacked_pair(row_data, topic_key, output_path):
                 ax.text(
                     left + val / 2,
                     y,
-                    f"{val:.1f} %",
+                    f"{val:.2f} %",
                     ha="center",
                     va="center",
                     color=_contrast_text_color(c),

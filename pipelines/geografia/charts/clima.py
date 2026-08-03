@@ -89,7 +89,7 @@ def plot_temperatura(long_rows, output_path):
         ax.text(
             xp,
             val + 0.35,
-            f"{val:.1f}",
+            f"{val:.2f}",
             ha="center",
             va="bottom",
             fontsize=8.5,
@@ -207,7 +207,7 @@ def plot_vientos(wind_data, output_path):
         ax.text(
             angle,
             val * 0.78,
-            f"{val * 100:.0f} %",
+            f"{val * 100:.2f} %",
             ha="center",
             va="center",
             fontsize=fontsize,
