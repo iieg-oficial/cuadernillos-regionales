@@ -72,6 +72,15 @@ def sentence_case(value):
     return text[:1].upper() + text[1:]
 
 
+def pluralize_mayor_a(value):
+    if value is None:
+        return value
+    text = str(value).strip()
+    if not text or text.upper() == "ND":
+        return value
+    return re.sub(r"\bmayor a\b", "mayores a", text)
+
+
 ABBREVIATION_RE = re.compile(r"\b[A-Z]\.(?:\s?[A-Z]\.)*")
 
 
