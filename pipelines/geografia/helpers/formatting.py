@@ -72,13 +72,20 @@ def sentence_case(value):
     return text[:1].upper() + text[1:]
 
 
-def pluralize_mayor_a(value):
+COMPARATIVE_PLURALS = {"mayor": "mayores", "menor": "menores"}
+
+COMPARATIVE_RE = re.compile(r"\b(mayor|menor) a\b")
+
+
+def pluralize_comparatives(value):
     if value is None:
         return value
     text = str(value).strip()
     if not text or text.upper() == "ND":
         return value
-    return re.sub(r"\bmayor a\b", "mayores a", text)
+    return COMPARATIVE_RE.sub(
+        lambda match: f"{COMPARATIVE_PLURALS[match.group(1)]} a", text
+    )
 
 
 ABBREVIATION_RE = re.compile(r"\b[A-Z]\.(?:\s?[A-Z]\.)*")

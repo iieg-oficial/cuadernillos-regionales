@@ -29,7 +29,7 @@ from pipelines.geografia.helpers.formatting import (
     fmt_int,
     latex_escape,
     narrative_lower,
-    pluralize_mayor_a,
+    pluralize_comparatives,
     strip_percent_symbol,
     to_number,
 )
@@ -108,6 +108,14 @@ NARRATIVE_LOWER_KEYS = [
     "ge_ee_dominante_rango",
     "ge_ee_dominante_tipo",
     "ge_ee_secundario_rango",
+]
+
+PLURAL_SUBJECT_KEYS = [
+    "ge_dg_pendiente_predom_texto",
+    "ge_er_dominante_rango_texto",
+    "ge_er_secundario_rango_texto",
+    "ge_ee_dominante_rango_texto",
+    "ge_ee_secundario_rango_texto",
 ]
 
 
@@ -523,9 +531,8 @@ class Analizer(Stage):
         )
         for key in NARRATIVE_LOWER_KEYS:
             ctx[f"{key}_texto"] = narrative_lower(ctx.get(key, "ND"))
-        ctx["ge_dg_pendiente_predom_texto"] = pluralize_mayor_a(
-            ctx.get("ge_dg_pendiente_predom_texto")
-        )
+        for key in PLURAL_SUBJECT_KEYS:
+            ctx[key] = pluralize_comparatives(ctx.get(key))
 
         ctx["ge_ie_texto"] = build_energia_text(
             ctx.get("ge_ie_dominante_texto"),
