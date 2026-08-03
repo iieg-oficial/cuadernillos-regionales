@@ -54,7 +54,7 @@ def test_title_case_passes_through_missing_values(value):
         ),
         (ISSSTE_RAW, ISSSTE_LABEL),
         ("Petroleos Mexicanos", "Petróleos Mexicanos"),
-        ("Centros De Integracion Juvenil", "Centros de Integración Juvenil"),
+        ("Centros De Integracion Juvenil", "Centros de integración juvenil"),
         (
             "Sistema Nacional Para El Desarrollo Integral De La Familia",
             "Sistema Nacional para el Desarrollo Integral de la Familia",

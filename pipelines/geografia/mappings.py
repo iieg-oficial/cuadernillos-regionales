@@ -1,5 +1,5 @@
 HEALTH_INSTITUTION_NAMES = {
-    "centros de integracion juvenil": "Centros de Integración Juvenil",
+    "centros de integracion juvenil": "Centros de integración juvenil",
     "cruz roja mexicana": "Cruz Roja Mexicana",
     "instituto de ciencias forenses estatal": (
         "Instituto de Ciencias Forenses Estatal"
