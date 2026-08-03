@@ -65,8 +65,7 @@ def _mapa_latex(path: Path, nombre: str) -> str:
     return (
         "\\begin{figure}[H]\n"
         "\\refstepcounter{mapa}%\n"
-        "\\noindent Mapa \\themapa\\\\\n"
-        f"\\textbf{{Localización geográfica de {nombre}, Jalisco}}"
+        f"\\noindent Mapa \\themapa. Localización geográfica de {nombre}, Jalisco"
         "\\par\\vspace{4pt}\n"
         "\\centering\n"
         f"\\includegraphics[width=\\textwidth]{{{path}}}\n"
