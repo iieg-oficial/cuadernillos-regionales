@@ -1117,7 +1117,7 @@ En el municipio predomina la categoría << ge_itur_dominante_texto >>, con una c
 
 <% if ge_itur_grafica_activa %>
 \begin{figure}[H]
-\graficatitulo{Índice territorial urbano-rural de << ge_municipio >>}
+\graficatitulo{Índice Territorial Urbano-Rural de << ge_municipio >>}
 \centering
 \includegraphics[width=\textwidth]{<< ge_itur_grafica >>}
 \end{figure}
@@ -1132,7 +1132,7 @@ En el municipio predomina la categoría << ge_itur_dominante_texto >>, con una c
                   >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
                   >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}}
 
-\caption{\textbf{Índice territorial urbano-rural de << ge_municipio >>}}
+\caption{\textbf{Índice Territorial Urbano-Rural de << ge_municipio >>}}
 \label{tabla_ge_itur} \\
 
 \hline
@@ -1175,7 +1175,8 @@ En el municipio predomina la categoría << ge_itur_dominante_texto >>, con una c
 
 \subsubsection{Salud}
 
-De acuerdo con los registros de la Secretaría de Salud, en el municipio se identifican << ge_salud_total_puntos_muni >> unidades de servicio de salud, entre consultorios, hospitales, farmacias, laboratorios y unidades móviles. De las cuales << ge_salud_primer_pct >> \% son de primer nivel.
+De acuerdo con los registros de la Secretaría de Salud, en el municipio se identifican << ge_salud_total_puntos_muni >> unidades de servicio de salud. En el siguiente cuadro se presenta desglosada la información por institución o dependencia a la que
+pertenecen y el nivel de atención que brinda.
 
 <% if ge_salud_unidades %>
 \setlength{\tabcolsep}{3pt}
@@ -1215,7 +1216,8 @@ De acuerdo con los registros de la Secretaría de Salud, en el municipio se iden
 
 \end{longtable}
 \normalsize
-\tablefooter{Fuente: & IIEG, con base en Dirección General de Información en Salud. Clave Única de Establecimientos de Salud, 2025.}
+\tablefooter{Nota: & Por efectos de escala, simbolización y superposición cartográfica, los elementos visibles en el mapa de Unidades de salud de << ge_municipio >> pueden no corresponder con el total reportado en la tabla.\\
+Fuente: & IIEG, con base en Dirección General de Información en Salud. Clave Única de Establecimientos de Salud, 2025.}
 <% endif %>
 
 <% if ge_salud_mapa_activo %>
