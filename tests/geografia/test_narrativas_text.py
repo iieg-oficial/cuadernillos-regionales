@@ -37,7 +37,7 @@ def test_energia_with_secondary_types_lists_them_with_conjunction():
     )
 
     assert (
-        "También se registran Gas L. P. en cilindros y Distribución, "
+        "También se registran gas L. P. en cilindros y distribución, "
         "que complementan la red energética municipal." in texto
     )
 
@@ -46,7 +46,7 @@ def test_energia_filters_sentinel_from_list():
     texto = build_energia_text("gasolinera", "126.00", "75.90", "Gas natural, SIN_DATO")
 
     assert "SIN_DATO" not in texto
-    assert "También se registran Gas natural," in texto
+    assert "También se registran gas natural," in texto
 
 
 def test_energia_with_only_sentinel_omits_second_sentence():
@@ -141,4 +141,4 @@ def test_energia_filters_latex_escaped_sentinel():
     )
 
     assert "SIN" not in texto
-    assert "También se registran Gas natural vehicular y Gas L. P.," in texto
+    assert "También se registran gas natural vehicular y gas L. P.," in texto
