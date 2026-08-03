@@ -14,6 +14,7 @@ from pipelines.gobierno_y_seguridad.helpers.aggregate import aggregate
 from pipelines.gobierno_y_seguridad.helpers.incidencia import (
     build_bienes_juridicos_texto,
     build_carpetas_texto,
+    build_delitos_texto,
 )
 from pipelines.gobierno_y_seguridad.helpers.ranking import rank
 from pipelines.gobierno_y_seguridad.helpers.region import filter_region
@@ -393,23 +394,15 @@ def _process_incidencia(
             nombre, periodo_texto, casos_bien_afectado, _fmt
         )
 
-    if not casos_por_delito:
-        ctx["gs_principal_delito_con_mas_carpetas"] = ND
-        ctx["gs_total_carpetas_principal_delito"] = ND
-        ctx["gs_segundo_delito_con_mas_carpetas"] = ND
-        ctx["gs_total_carpetas_segundo_delito"] = ND
-        ctx["gs_tercer_delito_con_mas_carpetas"] = ND
-        ctx["gs_total_carpetas_tercer_delito"] = ND
-    else:
-        labels = ["principal", "segundo", "tercer"]
-        for i, label in enumerate(labels):
-            if i < len(casos_por_delito):
-                d = casos_por_delito[i]
-                ctx[f"gs_{label}_delito_con_mas_carpetas"] = d["delito"]
-                ctx[f"gs_total_carpetas_{label}_delito"] = _fmt_int(d["total"])
-            else:
-                ctx[f"gs_{label}_delito_con_mas_carpetas"] = ND
-                ctx[f"gs_total_carpetas_{label}_delito"] = ND
+    if len(casos_por_delito) < 3:
+        Logger.warning(
+            f"Gobierno y Seguridad: municipio {cve_mun} con solo "
+            f"{len(casos_por_delito)} subtipo(s) de delito con datos, "
+            "usando redacción reducida"
+        )
+    ctx["gs_texto_principales_delitos"] = build_delitos_texto(
+        casos_por_delito, _fmt_int
+    )
 
     return ctx
 
@@ -593,9 +586,11 @@ class Analizer(Stage):
                 fuente_sesnsp,
             )
         else:
-            ctx["gs_grafica_carpetas_cinco_principales_delitos"] = _grafica_placeholder(
-                f"Carpetas de investigación por los cinco principales delitos. {nombre}"
+            Logger.warning(
+                f"Gobierno y Seguridad: municipio {cve_mun} sin subtipos de "
+                "delito con datos, omitiendo la gráfica de principales delitos"
             )
+            ctx["gs_grafica_carpetas_cinco_principales_delitos"] = ""
 
         Logger.info("Gobierno y Seguridad: análisis completo")
         return ctx

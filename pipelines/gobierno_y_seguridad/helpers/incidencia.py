@@ -135,3 +135,37 @@ def build_bienes_juridicos_texto(municipio, periodo_texto, casos_bien_afectado, 
         f"jurídicos afectados fueron: {n1} ({p1}\\,\\%), {n2} ({p2}\\,\\%), "
         f"{n3} ({p3}\\,\\%)."
     )
+
+
+def build_delitos_texto(casos_por_delito, fmt_int):
+    if not casos_por_delito:
+        return (
+            "No se identificaron subtipos de delitos con carpetas de "
+            "investigación en el periodo analizado."
+        )
+
+    nombres_total = [(d["delito"], fmt_int(d["total"])) for d in casos_por_delito]
+
+    if len(nombres_total) == 1:
+        delito, total = nombres_total[0]
+        return (
+            "En el periodo de análisis en el municipio, el subtipo de "
+            f"delito con más carpetas de investigación fue: {delito}, "
+            f"con {total}."
+        )
+
+    if len(nombres_total) == 2:
+        (d1, t1), (d2, t2) = nombres_total
+        return (
+            "En el periodo de análisis en el municipio, los dos subtipos "
+            "de delitos con más carpetas de investigación fueron: "
+            f"{d1}, con {t1}; y {d2}, con {t2}."
+        )
+
+    (d1, t1), (d2, t2), (d3, t3) = nombres_total[:3]
+    return (
+        "En el periodo de análisis en el municipio, los subtipos de "
+        "delitos con más carpetas de investigación fueron: "
+        f"{d1}, con {t1}; en segundo puesto se encuentra {d2}, con {t2}; "
+        f"seguido de {d3}, con {t3}."
+    )

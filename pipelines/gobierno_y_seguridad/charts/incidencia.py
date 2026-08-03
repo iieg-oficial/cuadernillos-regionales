@@ -98,7 +98,11 @@ def grafica_carpetas_por_mes(
     )
 
     ax.set_ylabel("Carpetas", fontsize=12, color=COLOR_TEXTO, fontweight="bold")
-    ax.yaxis.set_major_locator(ticker.MaxNLocator(integer=True))
+    max_valor = int(max(valores))
+    if max_valor <= 10:
+        ax.set_yticks(range(0, max_valor + 1))
+    else:
+        ax.yaxis.set_major_locator(ticker.MaxNLocator(integer=True))
     ax.yaxis.set_major_formatter(
         ticker.FuncFormatter(lambda x, _: f"{x:,.0f}".replace(",", " "))
     )

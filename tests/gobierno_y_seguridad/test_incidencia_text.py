@@ -1,6 +1,7 @@
 from pipelines.gobierno_y_seguridad.helpers.incidencia import (
     build_bienes_juridicos_texto,
     build_carpetas_texto,
+    build_delitos_texto,
 )
 
 
@@ -182,3 +183,49 @@ def test_three_or_more_bienes_juridicos_keep_original_wording():
 
     assert "los tres principales bienes jurídicos afectados fueron" in texto
     assert "otros bienes" not in texto
+
+
+def test_no_delitos_states_none_were_identified():
+    texto = build_delitos_texto([], _fmt_int)
+
+    assert "No se identificaron subtipos de delitos" in texto
+
+
+def test_single_delito_uses_singular_wording():
+    casos = [{"delito": "Violencia familiar", "total": 1}]
+    texto = build_delitos_texto(casos, _fmt_int)
+
+    assert (
+        "el subtipo de delito con más carpetas de investigación fue: "
+        "Violencia familiar, con 1." in texto
+    )
+    assert "segundo puesto" not in texto
+    assert "\\ND" not in texto
+
+
+def test_two_delitos_use_pair_wording():
+    casos = [
+        {"delito": "Violencia familiar", "total": 5},
+        {"delito": "Robo a casa habitación", "total": 3},
+    ]
+    texto = build_delitos_texto(casos, _fmt_int)
+
+    assert (
+        "los dos subtipos de delitos con más carpetas de investigación fueron" in texto
+    )
+    assert "Violencia familiar, con 5; y Robo a casa habitación, con 3." in texto
+    assert "\\ND" not in texto
+
+
+def test_three_or_more_delitos_keep_original_wording():
+    casos = [
+        {"delito": "Violencia familiar", "total": 5},
+        {"delito": "Robo a casa habitación", "total": 3},
+        {"delito": "Amenazas", "total": 2},
+        {"delito": "Fraude", "total": 1},
+    ]
+    texto = build_delitos_texto(casos, _fmt_int)
+
+    assert "en segundo puesto se encuentra Robo a casa habitación, con 3" in texto
+    assert "seguido de Amenazas, con 2" in texto
+    assert "Fraude" not in texto
