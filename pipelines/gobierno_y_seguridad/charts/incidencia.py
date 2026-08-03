@@ -33,6 +33,14 @@ COLORES_BIENES = [
 ]
 
 
+def _set_integer_yticks(ax, valores):
+    max_valor = int(max(valores))
+    if max_valor <= 10:
+        ax.set_yticks(range(0, max_valor + 1))
+    else:
+        ax.yaxis.set_major_locator(ticker.MaxNLocator(integer=True))
+
+
 def grafica_carpetas_por_mes(
     carpetas_por_mes,
     municipio,
@@ -98,11 +106,7 @@ def grafica_carpetas_por_mes(
     )
 
     ax.set_ylabel("Carpetas", fontsize=12, color=COLOR_TEXTO, fontweight="bold")
-    max_valor = int(max(valores))
-    if max_valor <= 10:
-        ax.set_yticks(range(0, max_valor + 1))
-    else:
-        ax.yaxis.set_major_locator(ticker.MaxNLocator(integer=True))
+    _set_integer_yticks(ax, valores)
     ax.yaxis.set_major_formatter(
         ticker.FuncFormatter(lambda x, _: f"{x:,.0f}".replace(",", " "))
     )
@@ -270,6 +274,7 @@ def grafica_principales_delitos(
         "Subtipos de delitos", fontsize=11, color=COLOR_TEXTO, fontweight="bold"
     )
     ax.set_ylabel("Carpetas", fontsize=11, color=COLOR_TEXTO, fontweight="bold")
+    _set_integer_yticks(ax, valores)
     ax.yaxis.set_major_formatter(
         ticker.FuncFormatter(lambda x, _: f"{x:,.0f}".replace(",", " "))
     )
