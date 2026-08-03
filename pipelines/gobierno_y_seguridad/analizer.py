@@ -11,6 +11,10 @@ from pipelines.gobierno_y_seguridad.charts.incidencia import (
     grafica_principales_delitos,
 )
 from pipelines.gobierno_y_seguridad.helpers.aggregate import aggregate
+from pipelines.gobierno_y_seguridad.helpers.incidencia import (
+    build_bienes_juridicos_texto,
+    build_carpetas_texto,
+)
 from pipelines.gobierno_y_seguridad.helpers.ranking import rank
 from pipelines.gobierno_y_seguridad.helpers.region import filter_region
 
@@ -286,22 +290,27 @@ def _process_ingresos(
     return ctx
 
 
-def _process_incidencia(carpetas_por_mes, casos_bien_afectado, casos_por_delito):
+def _mes_label(row) -> str:
+    return f"{MESES.get(int(row['mes']), ND)} de {int(row['anio'])}"
+
+
+def _process_incidencia(
+    cve_mun, nombre, carpetas_por_mes, casos_bien_afectado, casos_por_delito
+):
     ctx = {}
 
     if not carpetas_por_mes:
-        ctx["gs_mes_inicio_periodo_incidencia_delictiva"] = ND
-        ctx["gs_anio_inicio_periodo_incidencia_delictiva"] = ND
-        ctx["gs_mes_fin_periodo_incidencia_delictiva"] = ND
-        ctx["gs_anio_fin_periodo_incidencia_delictiva"] = ND
-        ctx["gs_total_carpetas_abiertas"] = ND
-        ctx["gs_carpetas_aperturadas_primer_anio"] = ND
-        ctx["gs_carpetas_aperturadas_segundo_anio"] = ND
-        ctx["gs_mes_mas_casos"] = ND
-        ctx["gs_total_carpetas_mes_mas_casos"] = ND
-        ctx["gs_mes_menos_casos"] = ND
-        ctx["gs_total_carpetas_mes_menos_casos"] = ND
-        ctx["gs_promedio_carpetas_abiertas_por_mes"] = ND
+        Logger.warning(
+            f"Gobierno y Seguridad: municipio {cve_mun} sin carpetas de "
+            "investigación registradas, usando redacción sin periodo"
+        )
+        ctx["gs_texto_carpetas_investigacion"] = (
+            "No se registraron carpetas de investigación por delitos del "
+            "fuero común en el municipio."
+        )
+        ctx["gs_texto_bienes_juridicos_afectados"] = build_bienes_juridicos_texto(
+            nombre, "en el periodo analizado", [], _fmt
+        )
     else:
         years = sorted({int(r["anio"]) for r in carpetas_por_mes})
         anio_inicio = years[0]
@@ -312,55 +321,77 @@ def _process_incidencia(carpetas_por_mes, casos_bien_afectado, casos_por_delito)
         primer_mes = min(meses_inicio, key=lambda r: int(r["mes"]))
         ultimo_mes = max(meses_fin, key=lambda r: int(r["mes"]))
 
-        ctx["gs_mes_inicio_periodo_incidencia_delictiva"] = MESES.get(
-            int(primer_mes["mes"]), ND
-        )
-        ctx["gs_anio_inicio_periodo_incidencia_delictiva"] = anio_inicio
-        ctx["gs_mes_fin_periodo_incidencia_delictiva"] = MESES.get(
-            int(ultimo_mes["mes"]), ND
-        )
-        ctx["gs_anio_fin_periodo_incidencia_delictiva"] = anio_fin
+        mes_inicio = MESES.get(int(primer_mes["mes"]), ND)
+        mes_fin = MESES.get(int(ultimo_mes["mes"]), ND)
 
         total = sum(r["total"] for r in carpetas_por_mes)
-        ctx["gs_total_carpetas_abiertas"] = _fmt_int(total)
-
         total_primer = sum(r["total"] for r in meses_inicio)
         total_segundo = sum(r["total"] for r in meses_fin)
-        ctx["gs_carpetas_aperturadas_primer_anio"] = _fmt_int(total_primer)
-        ctx["gs_carpetas_aperturadas_segundo_anio"] = _fmt_int(total_segundo)
 
-        mes_max = max(carpetas_por_mes, key=lambda r: r["total"])
-        mes_min = min(carpetas_por_mes, key=lambda r: r["total"])
-        ctx["gs_mes_mas_casos"] = (
-            f"{MESES.get(int(mes_max['mes']), ND)} de {int(mes_max['anio'])}"
+        max_total = max(r["total"] for r in carpetas_por_mes)
+        min_total = min(r["total"] for r in carpetas_por_mes)
+        meses_max = [r for r in carpetas_por_mes if r["total"] == max_total]
+        meses_min = [r for r in carpetas_por_mes if r["total"] == min_total]
+        mes_mas_casos = _mes_label(meses_max[0]) if len(meses_max) == 1 else ND
+        mes_menos_casos = _mes_label(meses_min[0]) if len(meses_min) == 1 else ND
+
+        promedio = _fmt(total / len(carpetas_por_mes))
+
+        if total <= 1:
+            Logger.warning(
+                f"Gobierno y Seguridad: municipio {cve_mun} con {total} "
+                "carpeta(s) de investigación en el periodo, usando "
+                "redacción reducida"
+            )
+        elif max_total == min_total:
+            Logger.warning(
+                f"Gobierno y Seguridad: municipio {cve_mun} con la misma "
+                "cantidad de carpetas en todos los meses, omitiendo la "
+                "comparación de mes con más/menos casos"
+            )
+        else:
+            if len(meses_max) > 1:
+                Logger.warning(
+                    f"Gobierno y Seguridad: municipio {cve_mun} con "
+                    f"{len(meses_max)} meses empatados en la mayor cantidad "
+                    "de carpetas, usando redacción sin nombrar los meses"
+                )
+            if len(meses_min) > 1:
+                Logger.warning(
+                    f"Gobierno y Seguridad: municipio {cve_mun} con "
+                    f"{len(meses_min)} meses empatados en la menor cantidad "
+                    "de carpetas, usando redacción sin nombrar los meses"
+                )
+
+        ctx["gs_texto_carpetas_investigacion"] = build_carpetas_texto(
+            total,
+            mes_inicio,
+            anio_inicio,
+            mes_fin,
+            anio_fin,
+            total_primer,
+            total_segundo,
+            mes_mas_casos,
+            max_total,
+            len(meses_max),
+            mes_menos_casos,
+            min_total,
+            len(meses_min),
+            len(carpetas_por_mes),
+            promedio,
+            _fmt_int,
         )
-        ctx["gs_total_carpetas_mes_mas_casos"] = _fmt_int(mes_max["total"])
-        ctx["gs_mes_menos_casos"] = (
-            f"{MESES.get(int(mes_min['mes']), ND)} de {int(mes_min['anio'])}"
+
+        periodo_texto = f"de {mes_inicio} de {anio_inicio} a {mes_fin} de {anio_fin}"
+        if len(casos_bien_afectado) < 3:
+            Logger.warning(
+                f"Gobierno y Seguridad: municipio {cve_mun} con solo "
+                f"{len(casos_bien_afectado)} bien(es) jurídico(s) afectado(s) "
+                "con datos, usando redacción reducida"
+            )
+        ctx["gs_texto_bienes_juridicos_afectados"] = build_bienes_juridicos_texto(
+            nombre, periodo_texto, casos_bien_afectado, _fmt
         )
-        ctx["gs_total_carpetas_mes_menos_casos"] = _fmt_int(mes_min["total"])
-
-        promedio = total / len(carpetas_por_mes)
-        ctx["gs_promedio_carpetas_abiertas_por_mes"] = _fmt(promedio)
-
-    if not casos_bien_afectado:
-        ctx["gs_principal_bien_juridico_afectado"] = ND
-        ctx["gs_porcentaje_principal_bien_juridico_afectado"] = ND
-        ctx["gs_segundo_bien_juridico_afectado"] = ND
-        ctx["gs_porcentaje_segundo_bien_juridico_afectado"] = ND
-        ctx["gs_tercer_bien_juridico_afectado"] = ND
-        ctx["gs_porcentaje_tercer_bien_juridico_afectado"] = ND
-    else:
-        total_bienes = sum(r["total"] for r in casos_bien_afectado)
-        for i, prefix in enumerate(["principal", "segundo", "tercer"]):
-            if i < len(casos_bien_afectado):
-                bien = casos_bien_afectado[i]
-                pct = bien["total"] / total_bienes * 100 if total_bienes else 0
-                ctx[f"gs_{prefix}_bien_juridico_afectado"] = bien["bien_afectado"]
-                ctx[f"gs_porcentaje_{prefix}_bien_juridico_afectado"] = _fmt(pct)
-            else:
-                ctx[f"gs_{prefix}_bien_juridico_afectado"] = ND
-                ctx[f"gs_porcentaje_{prefix}_bien_juridico_afectado"] = ND
 
     if not casos_por_delito:
         ctx["gs_principal_delito_con_mas_carpetas"] = ND
@@ -491,12 +522,12 @@ class Analizer(Stage):
                 "propios, ignorando subsección de ingresos propios"
             )
 
+        mun_id_str = str(cve_mun)
+
         incidencia_ctx = _process_incidencia(
-            carpetas_por_mes, casos_bien_afectado, casos_por_delito
+            cve_mun, nombre, carpetas_por_mes, casos_bien_afectado, casos_por_delito
         )
         ctx.update(incidencia_ctx)
-
-        mun_id_str = str(cve_mun)
 
         if carpetas_por_mes:
             sorted_carp = sorted(carpetas_por_mes, key=lambda r: (r["anio"], r["mes"]))
@@ -529,7 +560,7 @@ class Analizer(Stage):
             )
             periodo = nombre
 
-        if casos_bien_afectado:
+        if len(casos_bien_afectado) >= 2:
             chart_path = CHARTS_DIR / mun_id_str / "gs_bienes_juridicos.png"
             grafica_bienes_juridicos(casos_bien_afectado, nombre, chart_path)
             ctx["gs_grafica_distribucion_porcentual_bienes_juridicos_afectados"] = (
@@ -541,11 +572,12 @@ class Analizer(Stage):
                 )
             )
         else:
-            ctx["gs_grafica_distribucion_porcentual_bienes_juridicos_afectados"] = (
-                _grafica_placeholder(
-                    f"Distribución porcentual de bienes jurídicos afectados. {nombre}"
-                )
+            Logger.warning(
+                f"Gobierno y Seguridad: municipio {cve_mun} con "
+                f"{len(casos_bien_afectado)} bien(es) jurídico(s) afectado(s), "
+                "omitiendo la gráfica de distribución porcentual"
             )
+            ctx["gs_grafica_distribucion_porcentual_bienes_juridicos_afectados"] = ""
 
         if casos_por_delito:
             chart_path = CHARTS_DIR / mun_id_str / "gs_principales_delitos.png"

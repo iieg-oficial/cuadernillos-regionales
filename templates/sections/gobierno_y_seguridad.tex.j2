@@ -285,32 +285,16 @@ México 1990-2040
 
 \newpage
 
-Durante el periodo de << gs_mes_inicio_periodo_incidencia_delictiva >>
-<< gs_anio_inicio_periodo_incidencia_delictiva >> a
-<< gs_mes_fin_periodo_incidencia_delictiva >> << gs_anio_fin_periodo_incidencia_delictiva >>,
-se abrieron un total de << gs_total_carpetas_abiertas >> carpetas de investigación, de las cuales
-<< gs_carpetas_aperturadas_primer_anio >> se aperturaron en los meses de
-<< gs_anio_inicio_periodo_incidencia_delictiva >>, mientras que en los meses de
-<< gs_anio_fin_periodo_incidencia_delictiva >> fueron
-<< gs_carpetas_aperturadas_segundo_anio >>. El mes con más casos, fue
-<< gs_mes_mas_casos >>, cuando se abrieron << gs_total_carpetas_mes_mas_casos >> carpetas.
-El mes con la menor cantidad de carpetas abiertas es << gs_mes_menos_casos >> con
-<< gs_total_carpetas_mes_menos_casos >>
-casos. El promedio de carpetas abiertas en los doce meses analizados en el municipio es de
-<< gs_promedio_carpetas_abiertas_por_mes >>.
+<< gs_texto_carpetas_investigacion >>
 
 << gs_grafica_carpetas_de_investigacion_por_mes >>
 
 
-En << gs_municipio_nombre >>, de << gs_mes_inicio_periodo_incidencia_delictiva >> de
-<< gs_anio_inicio_periodo_incidencia_delictiva >> a << gs_mes_fin_periodo_incidencia_delictiva >>
-de << gs_anio_fin_periodo_incidencia_delictiva >>, los tres principales bienes jurídicos afectados
-fueron: << gs_principal_bien_juridico_afectado >>
-(<< gs_porcentaje_principal_bien_juridico_afectado >>\%), << gs_segundo_bien_juridico_afectado >>
-(<< gs_porcentaje_segundo_bien_juridico_afectado >>\%), << gs_tercer_bien_juridico_afectado >>
-(<< gs_porcentaje_tercer_bien_juridico_afectado >>\%).
+<< gs_texto_bienes_juridicos_afectados >>
 
+<% if gs_grafica_distribucion_porcentual_bienes_juridicos_afectados %>
 << gs_grafica_distribucion_porcentual_bienes_juridicos_afectados >>
+<% endif %>
 
 \newpage
 
