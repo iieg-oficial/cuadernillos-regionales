@@ -289,7 +289,7 @@ def plot_proportional_blocks(categories, values, topic_key, output_path):
 
     fig, ax = plt.subplots(figsize=FIGSIZE_PROPORTION)
     ax.set_xlim(0, 100)
-    ax.set_ylim(-12, TREEMAP_HEIGHT + 2)
+    ax.set_ylim(0, TREEMAP_HEIGHT)
     ax.axis("off")
     fig.canvas.draw()
     renderer = fig.canvas.get_renderer()
@@ -325,8 +325,8 @@ def plot_proportional_blocks(categories, values, topic_key, output_path):
     ax.legend(
         handles=handles,
         labels=labels,
-        loc="lower center",
-        bbox_to_anchor=(0.5, -0.005),
+        loc="upper center",
+        bbox_to_anchor=(0.5, -0.02),
         ncol=ncol,
         frameon=False,
         fontsize=fontsize,
