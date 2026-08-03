@@ -101,7 +101,7 @@ Suelos dominantes & << ge_dg_edaf_predom >> \\
 
 <% if ge_base_mapa_activo %>
 \clearpage
-\mapatitulo{Mapa base de << ge_municipio >>}
+\mapatitulo[\mapbleed]{Mapa base de << ge_municipio >>}
 \label{map:ge_base}
 << ge_base_mapa >>
 %\mapafuente{Fuente: & IIEG. Mapa General del Estado de Jalisco, 2012.\\
@@ -168,7 +168,7 @@ Le sigue la unidad << ge_geo_secundario_texto >>, con << ge_geo_secundario_pct >
 
 <% if ge_geo_mapa_activo %>
 \clearpage
-\mapatitulo{Geología de << ge_municipio >>}
+\mapatitulo[\mapbleed]{Geología de << ge_municipio >>}
 << ge_geo_mapa >>
 %\mapafuente{Fuente: & INEGI. Conjunto de datos vectoriales geológicos serie I, 1988.\\
 % & IIEG. Mapa General del Estado de Jalisco, 2012.\\
@@ -232,7 +232,7 @@ Le sigue la unidad << ge_ed_secundario_texto >>, con << ge_ed_secundario_pct >> 
 
 <% if ge_ed_mapa_activo %>
 \clearpage
-\mapatitulo{Edafología de << ge_municipio >>}
+\mapatitulo[\mapbleed]{Edafología de << ge_municipio >>}
 << ge_ed_mapa >>
 %\mapafuente{Fuente: & INEGI. Carta edafológica escala 1:250\,000 Serie III, 2025.\\
 % & IIEG. Mapa General del Estado de Jalisco, 2012.\\
@@ -298,7 +298,7 @@ El rango << ge_tp_secundario_texto >> representa << ge_tp_secundario_pct >> \%. 
 
 <% if ge_tp_mapa_activo %>
 \clearpage
-\mapatitulo{Pendientes de << ge_municipio >>}
+\mapatitulo[\mapbleed]{Pendientes de << ge_municipio >>}
 << ge_tp_mapa >>
 %\mapafuente{Fuente: & INEGI. Continuo de Elevaciones Mexicano 4.0, 2025.\\
 % & IIEG. Mapa General del Estado de Jalisco, 2012.\\
@@ -373,7 +373,7 @@ Cuenca sin ordenamiento superficial & << ge_cu_sup_sin_ordenamiento_superficial 
 
 <% if ge_cu_mapa_activo %>
 \clearpage
-\mapatitulo{Cuencas de << ge_municipio >>}
+\mapatitulo[\mapbleed]{Cuencas de << ge_municipio >>}
 << ge_cu_mapa >>
 %\mapafuente{Fuente: & CONAGUA. Disponibilidad en cuencas hidrológicas, 2023.\\
 % & CONAGUA. Ordenamiento de aguas superficial, 2023.\\
@@ -440,7 +440,7 @@ Sobreexplotado & << ge_ac_sup_sobreexplotado >> & << ge_ac_pct_sobreexplotado >>
 
 <% if ge_ac_mapa_activo %>
 \clearpage
-\mapatitulo{Acuíferos de << ge_municipio >>}
+\mapatitulo[\mapbleed]{Acuíferos de << ge_municipio >>}
 << ge_ac_mapa >>
 %\mapafuente{Fuente: & CONAGUA. Disponibilidad media anual de aguas subterráneas, 2024.\\
 % & CONAGUA. Condición de acuíferos, 2023.\\
@@ -525,7 +525,7 @@ Diciembre & << ge_tm_min_dic >> & << ge_tm_max_dic >> & << ge_tm_med_dic >> \\
 
 <% if ge_tm_mapa_activo %>
 \clearpage
-\mapatitulo{Temperatura media anual histórica de << ge_municipio >>}
+\mapatitulo[\mapbleed]{Temperatura media anual histórica de << ge_municipio >>}
 << ge_tm_mapa >>
 %\mapafuente{Fuente: & SMN. Información Estadística Climatológica, 1995-2026.\\
 % & IIEG. Mapa General del Estado de Jalisco, 2012.\\
@@ -609,7 +609,7 @@ Diciembre & << ge_pp_med_dic >> & << ge_pp_min_dic >> & << ge_pp_max_dic >> \\
 
 <% if ge_pp_mapa_activo %>
 \clearpage
-\mapatitulo{Precipitación histórica acumulada de << ge_municipio >>}
+\mapatitulo[\mapbleed]{Precipitación histórica acumulada de << ge_municipio >>}
 << ge_pp_mapa >>
 %\mapafuente{Fuente: & SMN. Información Estadística Climatológica, 1995-2026.\\
 % & IIEG. Mapa General del Estado de Jalisco, 2012.\\
@@ -671,7 +671,7 @@ Diciembre & << ge_pp_med_dic >> & << ge_pp_min_dic >> & << ge_pp_max_dic >> \\
 
 <% if ge_cl_mapa_activo %>
 \clearpage
-\mapatitulo{Clima de << ge_municipio >>}
+\mapatitulo[\mapbleed]{Clima de << ge_municipio >>}
 << ge_cl_mapa >>
 %\mapafuente{Fuente: & SMN. Información Estadística Climatológica, 1995-2026.\\
 % & IIEG. Mapa General del Estado de Jalisco, 2012.\\
@@ -733,7 +733,7 @@ La cobertura de uso de suelo y vegetación predominante en el municipio es << ge
 
 <% if ge_usv_mapa_activo %>
 \clearpage
-\mapatitulo{Uso de suelo y vegetación de << ge_municipio >>}
+\mapatitulo[\mapbleed]{Uso de suelo y vegetación de << ge_municipio >>}
 << ge_usv_mapa >>
 %\mapafuente{Fuente: & INEGI. Conjunto de datos vectoriales de uso del suelo y vegetación Serie VII, 2018.\\
 % & IIEG. Mapa General del Estado de Jalisco, 2012.\\
@@ -797,7 +797,7 @@ La categoría predominante es << ge_ndvi_dominante_texto >>, con << ge_ndvi_domi
 
 <% if ge_ndvi_mapa_activo %>
 \clearpage
-\mapatitulo{NDVI de << ge_municipio >>}
+\mapatitulo[\mapbleed]{NDVI de << ge_municipio >>}
 << ge_ndvi_mapa >>
 %\mapafuente{Fuente: & USGS. Landsat Collection 2 Level-2 Science Products, 2025.\\
 % & IIEG. Mapa General del Estado de Jalisco, 2012.\\
@@ -861,7 +861,7 @@ La categoría predominante es << ge_ndwi_dominante_texto >>, con << ge_ndwi_domi
 
 <% if ge_ndwi_mapa_activo %>
 \clearpage
-\mapatitulo{NDWI de << ge_municipio >>}
+\mapatitulo[\mapbleed]{NDWI de << ge_municipio >>}
 << ge_ndwi_mapa >>
 %\mapafuente{Fuente: & USGS. Landsat Collection 2 Level-2 Science Products, 2025.\\
 % & IIEG. Mapa General del Estado de Jalisco, 2012.\\
@@ -915,7 +915,7 @@ La categoría predominante es << ge_ndwi_dominante_texto >>, con << ge_ndwi_domi
 
 <% if ge_anp_mapa_activo %>
 \clearpage
-\mapatitulo{Áreas naturales protegidas y humedales de << ge_municipio >>}
+\mapatitulo[\mapbleed]{Áreas naturales protegidas y humedales de << ge_municipio >>}
 << ge_anp_mapa >>
 %\mapafuente{Fuente: & CONANP. Áreas Naturales Protegidas, 2025.\\
 % & CONAGUA. Inventario Nacional de Humedales, 2021.\\
@@ -978,7 +978,7 @@ En 2025, la categoría << ge_s_dominante_texto >> es la de mayor presencia, con 
 
 <% if ge_ds_mapa_activo %>
 \clearpage
-\mapatitulo{Índice de sequía de << ge_municipio >>}
+\mapatitulo[\mapbleed]{Índice de sequía de << ge_municipio >>}
 << ge_ds_mapa >>
 %\mapafuente{Fuente: & USGS. Landsat Collection 2 Level-2 Science Products, 2025.\\
 % & IIEG. Mapa General del Estado de Jalisco, 2012.\\
@@ -1040,7 +1040,7 @@ En el municipio predominan pérdidas potenciales de suelo de << ge_er_dominante_
 
 <% if ge_er_mapa_activo %>
 \clearpage
-\mapatitulo{Erosión potencial de << ge_municipio >>}
+\mapatitulo[\mapbleed]{Erosión potencial de << ge_municipio >>}
 << ge_er_mapa >>
 %\mapafuente{Fuente: & SMN. Información Estadística Climatológica, 1995-2026.\\
 % & INEGI. Carta edafológica escala 1:250\,000 Serie III, 2025.\\
@@ -1101,7 +1101,7 @@ En el municipio predominan pérdidas de suelo de << ge_ee_dominante_rango_texto 
 
 <% if ge_ee_mapa_activo %>
 \clearpage
-\mapatitulo{Erosión efectiva de << ge_municipio >>}
+\mapatitulo[\mapbleed]{Erosión efectiva de << ge_municipio >>}
 << ge_ee_mapa >>
 %\mapafuente{Fuente: & SMN. Información Estadística Climatológica, 1995-2026.\\
 % & INEGI. Carta edafológica escala 1:250\,000 Serie III, 2025.\\
@@ -1165,7 +1165,7 @@ En el municipio predomina la categoría << ge_itur_dominante_texto >>, con una c
 
 <% if ge_itur_mapa_activo %>
 \clearpage
-\mapatitulo{Índice Territorial Urbano-Rural de << ge_municipio >>}
+\mapatitulo[\mapbleed]{Índice Territorial Urbano-Rural de << ge_municipio >>}
 << ge_itur_mapa >>
 %\mapafuente{Fuente: & INEGI. Índice Territorial Urbano-Rural (ITUR), 2025.\\
 % & IIEG. Mapa General del Estado de Jalisco, 2012.\\
@@ -1220,7 +1220,7 @@ De acuerdo con los registros de la Secretaría de Salud, en el municipio se iden
 
 <% if ge_salud_mapa_activo %>
 \clearpage
-\mapatitulo{Unidades de salud de << ge_municipio >>}
+\mapatitulo[\mapbleed]{Unidades de salud de << ge_municipio >>}
 << ge_salud_mapa >>
 %\mapafuente{Fuente: & Dirección General de Información en Salud (DGIS).\\
 % & CLUES (Clave Única de Establecimientos de Salud), 2025. \\
@@ -1275,7 +1275,7 @@ La oferta educativa se organiza en niveles de educación inicial, básica, media
 
 <% if ge_edu_mapa_activo %>
 \clearpage
-\mapatitulo{Educación de << ge_municipio >>}
+\mapatitulo[\mapbleed]{Educación de << ge_municipio >>}
 << ge_edu_mapa >>
 %\mapafuente{Fuente: & Sistema de Información y Gestión Educativa (SIGED). Consulta de escuelas, 2025.\\
 % & IIEG. Mapa General del Estado de Jalisco, 2012.\\
@@ -1327,7 +1327,7 @@ La oferta educativa se organiza en niveles de educación inicial, básica, media
 
 <% if ge_ep_mapa_activo %>
 \clearpage
-\mapatitulo{Espacios públicos de << ge_municipio >>}
+\mapatitulo[\mapbleed]{Espacios públicos de << ge_municipio >>}
 << ge_ep_mapa >>
 %\mapafuente{Fuente: & INEGI. Marco Geoestadístico, 2025.\\
 % & IIEG. Mapa General del Estado de Jalisco, 2012.\\
@@ -1383,7 +1383,7 @@ La infraestructura energética del municipio integra elementos estratégicos par
 <% endif %>
 <% if ge_ie_mapa_activo %>
 \clearpage
-\mapatitulo{Infraestructura energética de << ge_municipio >>}
+\mapatitulo[\mapbleed]{Infraestructura energética de << ge_municipio >>}
 << ge_ie_mapa >>
 %\mapafuente{Fuente: & INEGI. Directorio Estadístico Nacional de Unidades Económicas, 2025.\\
 % & INEGI. Conjunto nacional de información topográfica a escala 1:50\,000, 2025.\\

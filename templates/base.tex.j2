@@ -110,9 +110,11 @@
   \refstepcounter{grafica}%
   \noindent{\color{colorTexto}Gráfica \thegrafica\\
   \textbf{#1}}\par\vspace{4pt}}
-\newcommand{\mapatitulo}[1]{%
+\newlength{\mapbleed}
+\setlength{\mapbleed}{0.5cm}
+\newcommand{\mapatitulo}[2][0pt]{%
   \refstepcounter{mapa}%
-  \noindent{\color{colorTexto}Mapa \themapa. \textbf{#1}}\par
+  \noindent\hspace*{-#1}{\color{colorTexto}Mapa \themapa. \textbf{#2}}\par
   \vspace{-\parskip}\vspace{1pt}}
 \newcommand{\mapafuente}[1]{%
   \par\vspace{-4pt}\noindent{\footnotesize

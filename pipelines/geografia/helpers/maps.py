@@ -12,11 +12,9 @@ from core.utils.maps import get_draft_path
 
 MAPS_DIR = Path("assets/maps/geografia")
 
-MAP_BLEED_CM = 0.5
-
 MAPA_PLACEHOLDER = (
-    f"\\hspace*{{-{MAP_BLEED_CM}cm}}"
-    f"\\includegraphics[width=\\dimexpr\\textwidth + {2 * MAP_BLEED_CM}cm\\relax]"
+    "\\hspace*{-\\mapbleed}"
+    "\\includegraphics[width=\\dimexpr\\textwidth + 2\\mapbleed\\relax]"
     "{templates/assets/mapa_placeholder.png}"
 )
 
@@ -152,9 +150,9 @@ def find_map_for_topic(short, cve_geo, municipio):
 
 def map_includegraphics(path, width=DEFAULT_MAP_WIDTH):
     posix = str(path).replace("\\", "/")
-    img_width = f"\\dimexpr{width}\\textwidth + {2 * MAP_BLEED_CM}cm\\relax"
+    img_width = f"\\dimexpr{width}\\textwidth + 2\\mapbleed\\relax"
     return (
-        f"\\hspace*{{-{MAP_BLEED_CM}cm}}"
+        "\\hspace*{-\\mapbleed}"
         f"\\includegraphics[width={img_width}]{{\\detokenize{{{posix}}}}}"
     )
 
