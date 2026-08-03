@@ -101,7 +101,7 @@
 \newcommand{\tablefooter}[1]{%
   \vspace{-28pt}\noindent{\footnotesize
   \renewcommand{\arraystretch}{1.0}%
-  \begin{tabular}[t]{@{}l@{\hspace{0.5em}}p{\dimexpr\linewidth - 4em\relax}@{}}#1\end{tabular}%
+  \begin{tabularx}{\linewidth}[t]{@{}l@{\hspace{0.5em}}X@{}}#1\end{tabularx}%
   \renewcommand{\arraystretch}{1.5}}}
 
 \newcounter{grafica}
@@ -117,7 +117,7 @@
 \newcommand{\mapafuente}[1]{%
   \par\vspace{-4pt}\noindent{\footnotesize
   \renewcommand{\arraystretch}{1.0}%
-  \begin{tabular}[t]{@{}l@{\hspace{0.5em}}p{\dimexpr\linewidth - 4em\relax}@{}}#1\end{tabular}}}
+  \begin{tabularx}{\linewidth}[t]{@{}l@{\hspace{0.5em}}X@{}}#1\end{tabularx}}}
 
 \AtBeginDocument{
   \color{colorTexto}
