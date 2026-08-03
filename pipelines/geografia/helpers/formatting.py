@@ -72,6 +72,42 @@ def sentence_case(value):
     return text[:1].upper() + text[1:]
 
 
+TITLE_CASE_MINOR_WORDS = {
+    "a",
+    "al",
+    "con",
+    "de",
+    "del",
+    "e",
+    "el",
+    "en",
+    "la",
+    "las",
+    "lo",
+    "los",
+    "o",
+    "para",
+    "por",
+    "u",
+    "y",
+}
+
+
+def title_case_es(value):
+    if value is None:
+        return value
+    text = re.sub(r"\s+", " ", str(value).strip())
+    if not text or text.upper() == "ND":
+        return value
+    words = []
+    for index, word in enumerate(text.lower().split(" ")):
+        if index > 0 and word in TITLE_CASE_MINOR_WORDS:
+            words.append(word)
+        else:
+            words.append(word[:1].upper() + word[1:])
+    return " ".join(words)
+
+
 COMPARATIVE_PLURALS = {"mayor": "mayores", "menor": "menores"}
 
 COMPARATIVE_RE = re.compile(r"\b(mayor|menor) a\b")
