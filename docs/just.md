@@ -50,6 +50,22 @@ Genera el cuadernillo de un solo municipio, identificado por su clave. Útil dur
 just run-one 1
 ```
 
+### `just run-sample`
+
+Genera los cuadernillos de una muestra representativa de municipios (metropolitanos, costa, sierra, altos y municipios pequeños). Útil para probar cambios sin correr los 125 municipios completos.
+
+```bash
+just run-sample
+```
+
+### `just open-one <clave>`
+
+Abre el pdf específico del municipio.
+
+```bash
+just open-one 1
+```
+
 ### `just lint`
 
 Revisa el estilo y formato del código con `ruff` sin modificar ningún archivo. Equivalente a correr el pre-commit manualmente.
@@ -64,4 +80,12 @@ Corrige automáticamente los errores de estilo y formato detectados por `ruff`.
 
 ```bash
 just fix
+```
+
+### `just test`
+
+Ejecuta la suite de pruebas con `pytest`.
+
+```bash
+just test
 ```
