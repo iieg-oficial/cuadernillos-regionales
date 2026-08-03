@@ -148,12 +148,10 @@ def test_single_bien_juridico_uses_singular_wording():
         "Santa María del Oro", "de julio de 2025 a junio de 2026", casos, _fmt
     )
 
-    assert (
-        "el bien jurídico afectado con mayor incidencia fue: la familia (100.00\\,\\%)"
-        in texto
-    )
+    assert "el único bien jurídico afectado fue: la familia." in texto
     assert "los tres" not in texto
     assert "los dos" not in texto
+    assert "100.00" not in texto
 
 
 def test_two_bienes_juridicos_use_pair_wording():
@@ -196,7 +194,7 @@ def test_single_delito_uses_singular_wording():
     texto = build_delitos_texto(casos, _fmt_int)
 
     assert (
-        "el subtipo de delito con más carpetas de investigación fue: "
+        "el único subtipo de delito con carpetas de investigación fue: "
         "Violencia familiar, con 1." in texto
     )
     assert "segundo puesto" not in texto

@@ -116,10 +116,10 @@ def build_bienes_juridicos_texto(municipio, periodo_texto, casos_bien_afectado, 
     ]
 
     if len(nombres_pct) == 1:
-        nombre, pct = nombres_pct[0]
+        nombre, _ = nombres_pct[0]
         return (
-            f"En {municipio}, {periodo_texto}, el bien jurídico afectado con "
-            f"mayor incidencia fue: {nombre} ({pct}\\,\\%)."
+            f"En {municipio}, {periodo_texto}, el único bien jurídico "
+            f"afectado fue: {nombre}."
         )
 
     if len(nombres_pct) == 2:
@@ -149,8 +149,8 @@ def build_delitos_texto(casos_por_delito, fmt_int):
     if len(nombres_total) == 1:
         delito, total = nombres_total[0]
         return (
-            "En el periodo de análisis en el municipio, el subtipo de "
-            f"delito con más carpetas de investigación fue: {delito}, "
+            "En el periodo de análisis en el municipio, el único subtipo "
+            f"de delito con carpetas de investigación fue: {delito}, "
             f"con {total}."
         )
 
