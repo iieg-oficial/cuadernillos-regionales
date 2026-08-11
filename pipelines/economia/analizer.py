@@ -68,7 +68,7 @@ def _grafica_latex(path, municipio, tipo, datos):
         "\\vspace{0.3cm}\n\n"
         f"\\includegraphics[width=0.95\\textwidth]{{{path}}}\n"
         "\\end{figure}\n"
-        "\\vspace{-10pt}\\noindent{\\footnotesize Fuente: SAGARPA. "
+        "\\vspace{-10pt}\\noindent{\\footnotesize Fuente: SADER. "
         f"Datos abiertos de la DGSIAP, {anio_ini}--{anio_fin}.}}"
     )
 
