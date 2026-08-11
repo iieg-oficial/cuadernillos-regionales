@@ -1,9 +1,5 @@
 CITAS = {
-    "wind_atlas": (
-        "Technical University of Denmark (DTU Wind) y el World Bank Group. "
-        "Global Wind Atlas",
-        "2026",
-    ),
+    "wind_atlas": (r"DTU Wind \& GBM. Global Wind Atlas 4.0", "2026"),
     "geoespacial_municipal": ("información geoespacial municipal", "2026"),
     "geologia": ("INEGI. Conjunto de datos vectoriales Geológicos serie I", "1988"),
     "edafologia": (
@@ -20,7 +16,7 @@ CITAS = {
     "aguas_superficiales": ("CONAGUA. Ordenamiento de aguas superficial", "2023"),
     "acuiferos": (
         "CONAGUA. Disponibilidad media anual de aguas subterráneas",
-        "2024",
+        "2023",
     ),
     "condicion_acuiferos": ("CONAGUA. Condición de acuíferos", "2023"),
     "smn": ("SMN. Información Estadística Climatológica", "1995-2025"),
