@@ -91,7 +91,7 @@ def test_unique_max_and_min_months_are_named():
         in texto
     )
     assert (
-        "El mes con la menor cantidad de carpetas abiertas es enero de 2026, "
+        "El mes con la menor cantidad de carpetas abiertas fue enero de 2026, "
         "cuando se registraron 0 casos." in texto
     )
 

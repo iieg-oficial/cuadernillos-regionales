@@ -12,7 +12,7 @@ def _texto_extremo(
         etiqueta = (
             "más casos" if es_maximo else "la menor cantidad de carpetas abiertas"
         )
-        verbo = "fue" if es_maximo else "es"
+        verbo = "fue"
         verbo_accion = "abrieron" if es_maximo else "registraron"
         singular = "carpeta" if es_maximo else "caso"
         plural = "carpetas" if es_maximo else "casos"
@@ -132,8 +132,8 @@ def build_bienes_juridicos_texto(municipio, periodo_texto, casos_bien_afectado, 
     (n1, p1), (n2, p2), (n3, p3) = nombres_pct[:3]
     return (
         f"En {municipio}, {periodo_texto}, los tres principales bienes "
-        f"jurídicos afectados fueron: {n1} ({p1}\\,\\%), {n2} ({p2}\\,\\%), "
-        f"{n3} ({p3}\\,\\%)."
+        f"jurídicos afectados fueron: {n1} ({p1}\\,\\%), {n2} ({p2}\\,\\%) "
+        f"y {n3} ({p3}\\,\\%)."
     )
 
 
