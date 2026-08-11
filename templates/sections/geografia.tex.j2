@@ -34,11 +34,11 @@ El municipio está constituido predominantemente por la unidad geológica << ge_
 
 <% if ge_dg_viento_grafica_activa %>
 \begin{figure}[H]
-\graficatitulo{Vientos dominantes}
+\graficatitulo{Vientos dominantes de << ge_municipio >>, << ge_anio.wind >>}
 \centering
 \includegraphics[width=0.8\textwidth]{<< ge_dg_viento_grafica >>}
 \end{figure}
-\vspace{16pt}\tablefooter{Fuente: & IIEG, con base en Technical University of Denmark (DTU Wind) y el World Bank Group. Global Wind Atlas, 2026.}
+\vspace{16pt}\tablefooter{<< ge_fuente.wind >>}
 <% endif %>
 
 \newpage
@@ -47,7 +47,7 @@ El municipio está constituido predominantemente por la unidad geológica << ge_
 \begin{longtable}{>{\raggedright\arraybackslash}m{\dimexpr0.50\linewidth - 2\tabcolsep\relax}
                   >{\raggedright\arraybackslash}m{\dimexpr0.50\linewidth - 2\tabcolsep\relax}}
 
-\caption{\textbf{Síntesis geoespacial del territorio de << ge_dg_nombre >>}}
+\caption{\textbf{Síntesis geoespacial del territorio de << ge_dg_nombre >>, << ge_anio.sintesis >>}}
 \label{tabla_ge_sintesis} \\
 
 \hline
@@ -97,11 +97,11 @@ Suelos dominantes & << ge_dg_edaf_predom >> \\
 
 \end{longtable}
 \normalsize
-\tablefooter{Fuente: & IIEG, con base en información geoespacial municipal, 2026.}
+\tablefooter{<< ge_fuente.sintesis >>}
 
 <% if ge_base_mapa_activo %>
 \clearpage
-\mapatitulo[\mapbleed]{Mapa base de << ge_municipio >>}
+\mapatitulo[\mapbleed]{Mapa base de << ge_municipio >>, << ge_anio_mapa.base >>}
 \label{map:ge_base}
 << ge_base_mapa >>
 %\mapafuente{Fuente: & IIEG. Mapa General del Estado de Jalisco, 2012.\\
@@ -120,11 +120,11 @@ Le sigue la unidad << ge_geo_secundario_texto >>, con << ge_geo_secundario_pct >
 
 <% if ge_geo_grafica_activa %>
 \begin{figure}[H]
-\graficatitulo{Geología de << ge_municipio >>}
+\graficatitulo{Geología de << ge_municipio >>, << ge_anio.geologia >>}
 \centering
 \includegraphics[width=\textwidth]{<< ge_geo_grafica >>}
 \end{figure}
-\vspace{16pt}\tablefooter{Fuente: & IIEG, con base en INEGI. Conjunto de datos vectoriales Geológicos serie I, 1988.}
+\vspace{16pt}\tablefooter{<< ge_fuente.geologia >>}
 <% endif %>
 
 \newpage
@@ -135,7 +135,7 @@ Le sigue la unidad << ge_geo_secundario_texto >>, con << ge_geo_secundario_pct >
                   >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
                   >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}}
 
-\caption{\textbf{Geología de << ge_municipio >>}}
+\caption{\textbf{Geología de << ge_municipio >>, << ge_anio.geologia >>}}
 \label{tabla_ge_geologia} \\
 
 \hline
@@ -163,12 +163,12 @@ Le sigue la unidad << ge_geo_secundario_texto >>, con << ge_geo_secundario_pct >
 
 \end{longtable}
 \normalsize
-\tablefooter{Fuente: & IIEG, con base en INEGI. Conjunto de datos vectoriales Geológicos serie I, 1988.}
+\tablefooter{<< ge_fuente.geologia >>}
 <% endif %>
 
 <% if ge_geo_mapa_activo %>
 \clearpage
-\mapatitulo[\mapbleed]{Geología de << ge_municipio >>}
+\mapatitulo[\mapbleed]{Geología de << ge_municipio >>, << ge_anio_mapa.geologia >>}
 << ge_geo_mapa >>
 %\mapafuente{Fuente: & INEGI. Conjunto de datos vectoriales geológicos serie I, 1988.\\
 % & IIEG. Mapa General del Estado de Jalisco, 2012.\\
@@ -184,11 +184,11 @@ Le sigue la unidad << ge_ed_secundario_texto >>, con << ge_ed_secundario_pct >> 
 
 <% if ge_ed_grafica_activa %>
 \begin{figure}[H]
-\graficatitulo{Edafología de << ge_municipio >>}
+\graficatitulo{Edafología de << ge_municipio >>, << ge_anio.edafologia >>}
 \centering
 \includegraphics[width=\textwidth]{<< ge_ed_grafica >>}
 \end{figure}
-\vspace{16pt}\tablefooter{Fuente: & IIEG, con base en INEGI. Carta edafológica escala 1:250 000 Serie III, 2025.}
+\vspace{16pt}\tablefooter{<< ge_fuente.edafologia >>}
 <% endif %>
 
 \newpage
@@ -199,7 +199,7 @@ Le sigue la unidad << ge_ed_secundario_texto >>, con << ge_ed_secundario_pct >> 
                   >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
                   >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}}
 
-\caption{\textbf{Edafología de << ge_municipio >>}}
+\caption{\textbf{Edafología de << ge_municipio >>, << ge_anio.edafologia >>}}
 \label{tabla_ge_edafologia} \\
 
 \hline
@@ -227,12 +227,12 @@ Le sigue la unidad << ge_ed_secundario_texto >>, con << ge_ed_secundario_pct >> 
 
 \end{longtable}
 \normalsize
-\tablefooter{Fuente: & IIEG, con base en INEGI. Carta edafológica escala 1:250 000 Serie III, 2025.}
+\tablefooter{<< ge_fuente.edafologia >>}
 <% endif %>
 
 <% if ge_ed_mapa_activo %>
 \clearpage
-\mapatitulo[\mapbleed]{Edafología de << ge_municipio >>}
+\mapatitulo[\mapbleed]{Edafología de << ge_municipio >>, << ge_anio_mapa.edafologia >>}
 << ge_ed_mapa >>
 %\mapafuente{Fuente: & INEGI. Carta edafológica escala 1:250\,000 Serie III, 2025.\\
 % & IIEG. Mapa General del Estado de Jalisco, 2012.\\
@@ -248,12 +248,11 @@ El rango << ge_tp_secundario_texto >> representa << ge_tp_secundario_pct >> \%. 
 
 <% if ge_tp_grafica_activa %>
 \begin{figure}[H]
-\graficatitulo{Topografía y pendientes de << ge_municipio >>}
+\graficatitulo{Topografía y pendientes de << ge_municipio >>, << ge_anio.topografia >>}
 \centering
 \includegraphics[width=\textwidth]{<< ge_tp_grafica >>}
 \end{figure}
-\vspace{16pt}\tablefooter{Fuente: IIEG, con base en & INEGI. Conjunto nacional de información topográfica a escala 1:50\,000, 2025.\\
- & INEGI. Continuo de Elevaciones Mexicano 4.0, 2025.}
+\vspace{16pt}\tablefooter{<< ge_fuente.topografia >>}
 <% endif %>
 
 \newpage
@@ -264,7 +263,7 @@ El rango << ge_tp_secundario_texto >> representa << ge_tp_secundario_pct >> \%. 
                   >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
                   >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}}
 
-\caption{\textbf{Topografía y pendientes de << ge_municipio >>}}
+\caption{\textbf{Topografía y pendientes de << ge_municipio >>, << ge_anio.topografia >>}}
 \label{tabla_ge_pendientes} \\
 
 \hline
@@ -292,13 +291,12 @@ El rango << ge_tp_secundario_texto >> representa << ge_tp_secundario_pct >> \%. 
 
 \end{longtable}
 \normalsize
-\tablefooter{Fuente: IIEG, con base en & INEGI. Conjunto nacional de información topográfica a escala 1:50\,000, 2025.\\
- & INEGI. Continuo de Elevaciones Mexicano 4.0, 2025.}
+\tablefooter{<< ge_fuente.topografia >>}
 <% endif %>
 
 <% if ge_tp_mapa_activo %>
 \clearpage
-\mapatitulo[\mapbleed]{Pendientes de << ge_municipio >>}
+\mapatitulo[\mapbleed]{Pendientes de << ge_municipio >>, << ge_anio_mapa.pendientes >>}
 << ge_tp_mapa >>
 %\mapafuente{Fuente: & INEGI. Continuo de Elevaciones Mexicano 4.0, 2025.\\
 % & IIEG. Mapa General del Estado de Jalisco, 2012.\\
@@ -312,12 +310,11 @@ El territorio municipal se ubica dentro de las cuencas << ge_cu_nombres_cuencas 
 
 <% if ge_cu_grafica_activa %>
 \begin{figure}[H]
-\graficatitulo{Cuencas de << ge_municipio >>}
+\graficatitulo{Cuencas de << ge_municipio >>, << ge_anio.cuencas >>}
 \centering
 \includegraphics[width=\textwidth]{<< ge_cu_grafica >>}
 \end{figure}
-\vspace{16pt}\tablefooter{Fuente: IIEG, con base en & CONAGUA. Disponibilidad en cuencas hidrológicas, 2023.\\
- & CONAGUA. Ordenamiento de aguas superficial, 2023.}
+\vspace{16pt}\tablefooter{<< ge_fuente.cuencas >>}
 <% endif %>
 
 \newpage
@@ -327,7 +324,7 @@ El territorio municipal se ubica dentro de las cuencas << ge_cu_nombres_cuencas 
                   >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
                   >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}}
 
-\caption{\textbf{Cuencas de << ge_municipio >>}}
+\caption{\textbf{Cuencas de << ge_municipio >>, << ge_anio.cuencas >>}}
 \label{tabla_ge_cuencas} \\
 
 \hline
@@ -368,12 +365,11 @@ Cuenca sin ordenamiento superficial & << ge_cu_sup_sin_ordenamiento_superficial 
 
 \end{longtable}
 \normalsize
-\tablefooter{Fuente: IIEG, con base en & CONAGUA. Disponibilidad en cuencas hidrológicas, 2023.\\
- & CONAGUA. Ordenamiento de aguas superficial, 2023.}
+\tablefooter{<< ge_fuente.cuencas >>}
 
 <% if ge_cu_mapa_activo %>
 \clearpage
-\mapatitulo[\mapbleed]{Cuencas de << ge_municipio >>}
+\mapatitulo[\mapbleed]{Cuencas de << ge_municipio >>, << ge_anio_mapa.cuencas >>}
 << ge_cu_mapa >>
 %\mapafuente{Fuente: & CONAGUA. Disponibilidad en cuencas hidrológicas, 2023.\\
 % & CONAGUA. Ordenamiento de aguas superficial, 2023.\\
@@ -388,12 +384,11 @@ Cuenca sin ordenamiento superficial & << ge_cu_sup_sin_ordenamiento_superficial 
 
 <% if ge_ac_grafica_activa %>
 \begin{figure}[H]
-\graficatitulo{Acuíferos de << ge_municipio >>}
+\graficatitulo{Acuíferos de << ge_municipio >>, << ge_anio.acuiferos >>}
 \centering
 \includegraphics[width=\textwidth]{<< ge_ac_grafica >>}
 \end{figure}
-\vspace{16pt}\tablefooter{Fuente: IIEG, con base en & CONAGUA. Disponibilidad media anual de aguas subterráneas, 2024.\\
- & CONAGUA. Condición de acuíferos, 2023.}
+\vspace{16pt}\tablefooter{<< ge_fuente.acuiferos >>}
 <% endif %>
 
 \newpage
@@ -403,7 +398,7 @@ Cuenca sin ordenamiento superficial & << ge_cu_sup_sin_ordenamiento_superficial 
                   >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
                   >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}}
 
-\caption{\textbf{Acuíferos de << ge_municipio >>}}
+\caption{\textbf{Acuíferos de << ge_municipio >>, << ge_anio.acuiferos >>}}
 \label{tabla_ge_acuiferos} \\
 
 \hline
@@ -435,12 +430,11 @@ Sobreexplotado & << ge_ac_sup_sobreexplotado >> & << ge_ac_pct_sobreexplotado >>
 
 \end{longtable}
 \normalsize
-\tablefooter{Fuente: IIEG, con base en & CONAGUA. Disponibilidad media anual de aguas subterráneas, 2024.\\
- & CONAGUA. Condición de acuíferos, 2023.}
+\tablefooter{<< ge_fuente.acuiferos >>}
 
 <% if ge_ac_mapa_activo %>
 \clearpage
-\mapatitulo[\mapbleed]{Acuíferos de << ge_municipio >>}
+\mapatitulo[\mapbleed]{Acuíferos de << ge_municipio >>, << ge_anio_mapa.acuiferos >>}
 << ge_ac_mapa >>
 %\mapafuente{Fuente: & CONAGUA. Disponibilidad media anual de aguas subterráneas, 2024.\\
 % & CONAGUA. Condición de acuíferos, 2023.\\
@@ -455,11 +449,11 @@ La temperatura media mensual conforme a la normal climatológica de 1995 hasta 2
 
 <% if ge_tm_grafica_activa %>
 \begin{figure}[H]
-\graficatitulo{Temperatura media mensual de << ge_municipio >>}
+\graficatitulo{Temperatura media mensual de << ge_municipio >>, << ge_anio.temperatura >>}
 \centering
 \includegraphics[width=\textwidth]{<< ge_tm_grafica >>}
 \end{figure}
-\vspace{16pt}\tablefooter{Fuente: & IIEG, con base en SMN. Información Estadística Climatológica, 1995-2026.}
+\vspace{16pt}\tablefooter{<< ge_fuente.temperatura >>}
 <% endif %>
 
 \newpage
@@ -470,7 +464,7 @@ La temperatura media mensual conforme a la normal climatológica de 1995 hasta 2
                   >{\raggedleft\arraybackslash}m{\dimexpr0.25\linewidth - 2\tabcolsep\relax}
                   >{\raggedleft\arraybackslash}m{\dimexpr0.25\linewidth - 2\tabcolsep\relax}}
 
-\caption{\textbf{Temperatura mensual y anual de << ge_municipio >>}}
+\caption{\textbf{Temperatura mensual y anual de << ge_municipio >>, << ge_anio.temperatura >>}}
 \label{tabla_ge_temperatura} \\
 
 \hline
@@ -521,11 +515,11 @@ Diciembre & << ge_tm_min_dic >> & << ge_tm_max_dic >> & << ge_tm_med_dic >> \\
 
 \end{longtable}
 \normalsize
-\tablefooter{Fuente: & IIEG, con base en SMN. Información Estadística Climatológica, 1995-2026.}
+\tablefooter{<< ge_fuente.temperatura >>}
 
 <% if ge_tm_mapa_activo %>
 \clearpage
-\mapatitulo[\mapbleed]{Temperatura media anual histórica de << ge_municipio >>}
+\mapatitulo[\mapbleed]{Temperatura media anual histórica de << ge_municipio >>, << ge_anio_mapa.temperatura >>}
 << ge_tm_mapa >>
 %\mapafuente{Fuente: & SMN. Información Estadística Climatológica, 1995-2026.\\
 % & IIEG. Mapa General del Estado de Jalisco, 2012.\\
@@ -539,11 +533,11 @@ La precipitación media mensual conforme a la normal climatológica de 1995 hast
 
 <% if ge_pp_grafica_activa %>
 \begin{figure}[H]
-\graficatitulo{Precipitación mensual de << ge_municipio >>}
+\graficatitulo{Precipitación mensual de << ge_municipio >>, << ge_anio.precipitacion >>}
 \centering
 \includegraphics[width=\textwidth]{<< ge_pp_grafica >>}
 \end{figure}
-\vspace{16pt}\tablefooter{Fuente: & IIEG, con base en SMN. Información Estadística Climatológica, 1995-2026.}
+\vspace{16pt}\tablefooter{<< ge_fuente.precipitacion >>}
 <% endif %>
 
 \newpage
@@ -554,7 +548,7 @@ La precipitación media mensual conforme a la normal climatológica de 1995 hast
                   >{\raggedleft\arraybackslash}m{\dimexpr0.25\linewidth - 2\tabcolsep\relax}
                   >{\raggedleft\arraybackslash}m{\dimexpr0.25\linewidth - 2\tabcolsep\relax}}
 
-\caption{\textbf{Precipitación media mensual y acumulada de << ge_municipio >>}}
+\caption{\textbf{Precipitación media mensual y acumulada de << ge_municipio >>, << ge_anio.precipitacion >>}}
 \label{tabla_ge_precipitacion} \\
 
 \hline
@@ -605,11 +599,11 @@ Diciembre & << ge_pp_med_dic >> & << ge_pp_min_dic >> & << ge_pp_max_dic >> \\
 
 \end{longtable}
 \normalsize
-\tablefooter{Fuente: & IIEG, con base en SMN. Información Estadística Climatológica, 1995-2026.}
+\tablefooter{<< ge_fuente.precipitacion >>}
 
 <% if ge_pp_mapa_activo %>
 \clearpage
-\mapatitulo[\mapbleed]{Precipitación histórica acumulada de << ge_municipio >>}
+\mapatitulo[\mapbleed]{Precipitación histórica acumulada de << ge_municipio >>, << ge_anio_mapa.precipitacion >>}
 << ge_pp_mapa >>
 %\mapafuente{Fuente: & SMN. Información Estadística Climatológica, 1995-2026.\\
 % & IIEG. Mapa General del Estado de Jalisco, 2012.\\
@@ -623,11 +617,11 @@ Diciembre & << ge_pp_med_dic >> & << ge_pp_min_dic >> & << ge_pp_max_dic >> \\
 
 <% if ge_cl_grafica_activa %>
 \begin{figure}[H]
-\graficatitulo{Clima de << ge_municipio >>}
+\graficatitulo{Clima de << ge_municipio >>, << ge_anio.clima >>}
 \centering
 \includegraphics[width=\textwidth]{<< ge_cl_grafica >>}
 \end{figure}
-\vspace{16pt}\tablefooter{Fuente: & IIEG, con base en SMN. Información Estadística Climatológica, 1995-2026.}
+\vspace{16pt}\tablefooter{<< ge_fuente.clima >>}
 <% endif %>
 
 \newpage
@@ -638,7 +632,7 @@ Diciembre & << ge_pp_med_dic >> & << ge_pp_min_dic >> & << ge_pp_max_dic >> \\
                   >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
                   >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}}
 
-\caption{\textbf{Clima de << ge_municipio >>}}
+\caption{\textbf{Clima de << ge_municipio >>, << ge_anio.clima >>}}
 \label{tabla_ge_clima} \\
 
 \hline
@@ -666,12 +660,12 @@ Diciembre & << ge_pp_med_dic >> & << ge_pp_min_dic >> & << ge_pp_max_dic >> \\
 
 \end{longtable}
 \normalsize
-\tablefooter{Fuente: & IIEG, con base en SMN. Información Estadística Climatológica, 1995-2026.}
+\tablefooter{<< ge_fuente.clima >>}
 <% endif %>
 
 <% if ge_cl_mapa_activo %>
 \clearpage
-\mapatitulo[\mapbleed]{Clima de << ge_municipio >>}
+\mapatitulo[\mapbleed]{Clima de << ge_municipio >>, << ge_anio_mapa.clima >>}
 << ge_cl_mapa >>
 %\mapafuente{Fuente: & SMN. Información Estadística Climatológica, 1995-2026.\\
 % & IIEG. Mapa General del Estado de Jalisco, 2012.\\
@@ -685,11 +679,11 @@ La cobertura de uso de suelo y vegetación predominante en el municipio es << ge
 
 <% if ge_usv_grafica_activa %>
 \begin{figure}[H]
-\graficatitulo{Uso de suelo y vegetación de << ge_municipio >>}
+\graficatitulo{Uso de suelo y vegetación de << ge_municipio >>, << ge_anio.usv >>}
 \centering
 \includegraphics[width=\textwidth]{<< ge_usv_grafica >>}
 \end{figure}
-\vspace{16pt}\tablefooter{Fuente: & IIEG, con base en INEGI. Conjunto de datos vectoriales de uso del suelo y vegetación Serie VII, 2018.}
+\vspace{16pt}\tablefooter{<< ge_fuente.usv >>}
 <% endif %>
 
 \newpage
@@ -700,7 +694,7 @@ La cobertura de uso de suelo y vegetación predominante en el municipio es << ge
                   >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
                   >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}}
 
-\caption{\textbf{Uso de suelo y vegetación de << ge_municipio >>}}
+\caption{\textbf{Uso de suelo y vegetación de << ge_municipio >>, << ge_anio.usv >>}}
 \label{tabla_ge_uso_suelo} \\
 
 \hline
@@ -728,12 +722,12 @@ La cobertura de uso de suelo y vegetación predominante en el municipio es << ge
 
 \end{longtable}
 \normalsize
-\tablefooter{Fuente: & IIEG, con base en INEGI. Conjunto de datos vectoriales de uso del suelo y vegetación Serie VII, 2018.}
+\tablefooter{<< ge_fuente.usv >>}
 <% endif %>
 
 <% if ge_usv_mapa_activo %>
 \clearpage
-\mapatitulo[\mapbleed]{Uso de suelo y vegetación de << ge_municipio >>}
+\mapatitulo[\mapbleed]{Uso de suelo y vegetación de << ge_municipio >>, << ge_anio_mapa.usv >>}
 << ge_usv_mapa >>
 %\mapafuente{Fuente: & INEGI. Conjunto de datos vectoriales de uso del suelo y vegetación Serie VII, 2018.\\
 % & IIEG. Mapa General del Estado de Jalisco, 2012.\\
@@ -749,11 +743,11 @@ La categoría predominante es << ge_ndvi_dominante_texto >>, con << ge_ndvi_domi
 
 <% if ge_ndvi_grafica_activa %>
 \begin{figure}[H]
-\graficatitulo{NDVI de << ge_municipio >>}
+\graficatitulo{NDVI de << ge_municipio >>, << ge_anio.ndvi >>}
 \centering
 \includegraphics[width=\textwidth]{<< ge_ndvi_grafica >>}
 \end{figure}
-\vspace{16pt}\tablefooter{Fuente: & IIEG, con base en USGS. Landsat Collection 2 Level-2 Science Products, 2025.}
+\vspace{16pt}\tablefooter{<< ge_fuente.ndvi >>}
 <% endif %>
 
 \newpage
@@ -764,7 +758,7 @@ La categoría predominante es << ge_ndvi_dominante_texto >>, con << ge_ndvi_domi
                   >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
                   >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}}
 
-\caption{\textbf{NDVI de << ge_municipio >>}}
+\caption{\textbf{NDVI de << ge_municipio >>, << ge_anio.ndvi >>}}
 \label{tabla_ge_ndvi} \\
 
 \hline
@@ -792,12 +786,12 @@ La categoría predominante es << ge_ndvi_dominante_texto >>, con << ge_ndvi_domi
 
 \end{longtable}
 \normalsize
-\tablefooter{Fuente: & IIEG, con base en USGS. Landsat Collection 2 Level-2 Science Products, 2025.}
+\tablefooter{<< ge_fuente.ndvi >>}
 <% endif %>
 
 <% if ge_ndvi_mapa_activo %>
 \clearpage
-\mapatitulo[\mapbleed]{NDVI de << ge_municipio >>}
+\mapatitulo[\mapbleed]{NDVI de << ge_municipio >>, << ge_anio_mapa.ndvi >>}
 << ge_ndvi_mapa >>
 %\mapafuente{Fuente: & USGS. Landsat Collection 2 Level-2 Science Products, 2025.\\
 % & IIEG. Mapa General del Estado de Jalisco, 2012.\\
@@ -813,11 +807,11 @@ La categoría predominante es << ge_ndwi_dominante_texto >>, con << ge_ndwi_domi
 
 <% if ge_ndwi_grafica_activa %>
 \begin{figure}[H]
-\graficatitulo{NDWI de << ge_municipio >>}
+\graficatitulo{NDWI promedio de << ge_municipio >>, << ge_anio.ndwi >>}
 \centering
 \includegraphics[width=\textwidth]{<< ge_ndwi_grafica >>}
 \end{figure}
-\vspace{16pt}\tablefooter{Fuente: & IIEG, con base en USGS. Landsat Collection 2 Level-2 Science Products, 2025.}
+\vspace{16pt}\tablefooter{<< ge_fuente.ndwi >>}
 <% endif %>
 
 \newpage
@@ -828,7 +822,7 @@ La categoría predominante es << ge_ndwi_dominante_texto >>, con << ge_ndwi_domi
                   >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
                   >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}}
 
-\caption{\textbf{NDWI de << ge_municipio >>}}
+\caption{\textbf{NDWI promedio de << ge_municipio >>, << ge_anio.ndwi >>}}
 \label{tabla_ge_ndwi} \\
 
 \hline
@@ -856,12 +850,12 @@ La categoría predominante es << ge_ndwi_dominante_texto >>, con << ge_ndwi_domi
 
 \end{longtable}
 \normalsize
-\tablefooter{Fuente: & IIEG, con base en USGS. Landsat Collection 2 Level-2 Science Products, 2025.}
+\tablefooter{<< ge_fuente.ndwi >>}
 <% endif %>
 
 <% if ge_ndwi_mapa_activo %>
 \clearpage
-\mapatitulo[\mapbleed]{NDWI de << ge_municipio >>}
+\mapatitulo[\mapbleed]{NDWI promedio de << ge_municipio >>, << ge_anio_mapa.ndwi >>}
 << ge_ndwi_mapa >>
 %\mapafuente{Fuente: & USGS. Landsat Collection 2 Level-2 Science Products, 2025.\\
 % & IIEG. Mapa General del Estado de Jalisco, 2012.\\
@@ -881,7 +875,7 @@ La categoría predominante es << ge_ndwi_dominante_texto >>, con << ge_ndwi_domi
                   >{\raggedleft\arraybackslash}m{\dimexpr0.20\linewidth - 2\tabcolsep\relax}
                   >{\raggedright\arraybackslash}m{\dimexpr0.40\linewidth - 2\tabcolsep\relax}}
 
-\caption{\textbf{Áreas naturales protegidas y humedales de << ge_municipio >>}}
+\caption{\textbf{Áreas naturales protegidas y humedales de << ge_municipio >>, << ge_anio.anp >>}}
 \label{tabla_ge_anp} \\
 
 \hline
@@ -909,13 +903,12 @@ La categoría predominante es << ge_ndwi_dominante_texto >>, con << ge_ndwi_domi
 
 \end{longtable}
 \normalsize
-\tablefooter{Fuente: & IIEG, con base en CONANP. Áreas Naturales Protegidas, 2025.\\
- & CONAGUA. Inventario Nacional de Humedales, 2021.}
+\tablefooter{<< ge_fuente.anp >>}
 <% endif %>
 
 <% if ge_anp_mapa_activo %>
 \clearpage
-\mapatitulo[\mapbleed]{Áreas naturales protegidas y humedales de << ge_municipio >>}
+\mapatitulo[\mapbleed]{Áreas naturales protegidas y humedales de << ge_municipio >>, << ge_anio_mapa.anp >>}
 << ge_anp_mapa >>
 %\mapafuente{Fuente: & CONANP. Áreas Naturales Protegidas, 2025.\\
 % & CONAGUA. Inventario Nacional de Humedales, 2021.\\
@@ -930,11 +923,11 @@ En 2025, la categoría << ge_s_dominante_texto >> es la de mayor presencia, con 
 
 <% if ge_sequia_grafica_activa %>
 \begin{figure}[H]
-\graficatitulo{Índice de sequía de << ge_municipio >>}
+\graficatitulo{Índice promedio de sequía de << ge_municipio >>, << ge_anio.sequia >>}
 \centering
 \includegraphics[width=\textwidth]{<< ge_sequia_grafica >>}
 \end{figure}
-\vspace{16pt}\tablefooter{Fuente: & IIEG, con base en USGS. Landsat Collection 2 Level-2 Science Products, 2025.}
+\vspace{16pt}\tablefooter{<< ge_fuente.sequia >>}
 <% endif %>
 
 \newpage
@@ -945,7 +938,7 @@ En 2025, la categoría << ge_s_dominante_texto >> es la de mayor presencia, con 
                   >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
                   >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}}
 
-\caption{\textbf{Índice de sequía de << ge_municipio >>}}
+\caption{\textbf{Índice promedio de sequía de << ge_municipio >>, << ge_anio.sequia >>}}
 \label{tabla_ge_sequia} \\
 
 \hline
@@ -973,12 +966,12 @@ En 2025, la categoría << ge_s_dominante_texto >> es la de mayor presencia, con 
 
 \end{longtable}
 \normalsize
-\tablefooter{Fuente: & IIEG, con base en USGS. Landsat Collection 2 Level-2 Science Products, 2025.}
+\tablefooter{<< ge_fuente.sequia >>}
 <% endif %>
 
 <% if ge_ds_mapa_activo %>
 \clearpage
-\mapatitulo[\mapbleed]{Índice de sequía de << ge_municipio >>}
+\mapatitulo[\mapbleed]{Índice promedio de sequía de << ge_municipio >>, << ge_anio_mapa.sequia >>}
 << ge_ds_mapa >>
 %\mapafuente{Fuente: & USGS. Landsat Collection 2 Level-2 Science Products, 2025.\\
 % & IIEG. Mapa General del Estado de Jalisco, 2012.\\
@@ -992,11 +985,11 @@ En el municipio predominan pérdidas potenciales de suelo de << ge_er_dominante_
 
 <% if ge_er_grafica_activa %>
 \begin{figure}[H]
-\graficatitulo{Erosión potencial de << ge_municipio >>}
+\graficatitulo{Erosión potencial de << ge_municipio >>, << ge_anio.erosion_pot >>}
 \centering
 \includegraphics[width=\textwidth]{<< ge_er_grafica >>}
 \end{figure}
-\vspace{16pt}\tablefooter{Fuente: & IIEG, con base en SMN, INEGI. Carta edafológica Serie III y CEM 4.0.}
+\vspace{16pt}\tablefooter{<< ge_fuente.erosion_pot >>}
 <% endif %>
 
 \newpage
@@ -1007,7 +1000,7 @@ En el municipio predominan pérdidas potenciales de suelo de << ge_er_dominante_
                   >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
                   >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}}
 
-\caption{\textbf{Erosión potencial de << ge_municipio >>}}
+\caption{\textbf{Erosión potencial de << ge_municipio >>, << ge_anio.erosion_pot >>}}
 \label{tabla_ge_erosion_pot} \\
 
 \hline
@@ -1035,12 +1028,12 @@ En el municipio predominan pérdidas potenciales de suelo de << ge_er_dominante_
 
 \end{longtable}
 \normalsize
-\tablefooter{Fuente: & IIEG, con base en SMN, INEGI. Carta edafológica Serie III y CEM 4.0.}
+\tablefooter{<< ge_fuente.erosion_pot >>}
 <% endif %>
 
 <% if ge_er_mapa_activo %>
 \clearpage
-\mapatitulo[\mapbleed]{Erosión potencial de << ge_municipio >>}
+\mapatitulo[\mapbleed]{Erosión potencial de << ge_municipio >>, << ge_anio_mapa.erosion_pot >>}
 << ge_er_mapa >>
 %\mapafuente{Fuente: & SMN. Información Estadística Climatológica, 1995-2026.\\
 % & INEGI. Carta edafológica escala 1:250\,000 Serie III, 2025.\\
@@ -1053,11 +1046,11 @@ En el municipio predominan pérdidas de suelo de << ge_ee_dominante_rango_texto 
 
 <% if ge_ee_grafica_activa %>
 \begin{figure}[H]
-\graficatitulo{Erosión efectiva de << ge_municipio >>}
+\graficatitulo{Erosión efectiva de << ge_municipio >>, << ge_anio.erosion_efe >>}
 \centering
 \includegraphics[width=\textwidth]{<< ge_ee_grafica >>}
 \end{figure}
-\vspace{16pt}\tablefooter{Fuente: & IIEG, con base en SMN, INEGI. Carta edafológica Serie III, CEM 4.0 y USV Serie VII.}
+\vspace{16pt}\tablefooter{<< ge_fuente.erosion_efe >>}
 <% endif %>
 
 \newpage
@@ -1068,7 +1061,7 @@ En el municipio predominan pérdidas de suelo de << ge_ee_dominante_rango_texto 
                   >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
                   >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}}
 
-\caption{\textbf{Erosión efectiva de << ge_municipio >>}}
+\caption{\textbf{Erosión efectiva de << ge_municipio >>, << ge_anio.erosion_efe >>}}
 \label{tabla_ge_erosion_ef} \\
 
 \hline
@@ -1096,12 +1089,12 @@ En el municipio predominan pérdidas de suelo de << ge_ee_dominante_rango_texto 
 
 \end{longtable}
 \normalsize
-\tablefooter{Fuente: & IIEG, con base en SMN, INEGI. Carta edafológica Serie III, CEM 4.0 y USV Serie VII.}
+\tablefooter{<< ge_fuente.erosion_efe >>}
 <% endif %>
 
 <% if ge_ee_mapa_activo %>
 \clearpage
-\mapatitulo[\mapbleed]{Erosión efectiva de << ge_municipio >>}
+\mapatitulo[\mapbleed]{Erosión efectiva de << ge_municipio >>, << ge_anio_mapa.erosion_efe >>}
 << ge_ee_mapa >>
 %\mapafuente{Fuente: & SMN. Información Estadística Climatológica, 1995-2026.\\
 % & INEGI. Carta edafológica escala 1:250\,000 Serie III, 2025.\\
@@ -1117,11 +1110,11 @@ En el municipio predomina la categoría << ge_itur_dominante_texto >>, con una c
 
 <% if ge_itur_grafica_activa %>
 \begin{figure}[H]
-\graficatitulo{Índice Territorial Urbano-Rural de << ge_municipio >>}
+\graficatitulo{Índice Territorial Urbano-Rural de << ge_municipio >>, << ge_anio.itur >>}
 \centering
 \includegraphics[width=\textwidth]{<< ge_itur_grafica >>}
 \end{figure}
-\vspace{16pt}\tablefooter{Fuente: & IIEG, con base en INEGI. Índice Territorial Urbano-Rural (ITUR), 2025.}
+\vspace{16pt}\tablefooter{<< ge_fuente.itur >>}
 <% endif %>
 
 \newpage
@@ -1132,7 +1125,7 @@ En el municipio predomina la categoría << ge_itur_dominante_texto >>, con una c
                   >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
                   >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}}
 
-\caption{\textbf{Índice Territorial Urbano-Rural de << ge_municipio >>}}
+\caption{\textbf{Índice Territorial Urbano-Rural de << ge_municipio >>, << ge_anio.itur >>}}
 \label{tabla_ge_itur} \\
 
 \hline
@@ -1160,12 +1153,12 @@ En el municipio predomina la categoría << ge_itur_dominante_texto >>, con una c
 
 \end{longtable}
 \normalsize
-\tablefooter{Fuente: & IIEG, con base en INEGI. Índice Territorial Urbano-Rural (ITUR), 2025.}
+\tablefooter{<< ge_fuente.itur >>}
 <% endif %>
 
 <% if ge_itur_mapa_activo %>
 \clearpage
-\mapatitulo[\mapbleed]{Índice Territorial Urbano-Rural de << ge_municipio >>}
+\mapatitulo[\mapbleed]{Índice Territorial Urbano-Rural de << ge_municipio >>, << ge_anio_mapa.itur >>}
 << ge_itur_mapa >>
 %\mapafuente{Fuente: & INEGI. Índice Territorial Urbano-Rural (ITUR), 2025.\\
 % & IIEG. Mapa General del Estado de Jalisco, 2012.\\
@@ -1185,7 +1178,7 @@ pertenecen y el nivel de atención que brinda.
                   >{\raggedright\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
                   >{\raggedleft\arraybackslash}m{\dimexpr0.25\linewidth - 2\tabcolsep\relax}}
 
-\caption{\textbf{Unidades de salud de << ge_municipio >>}}
+\caption{\textbf{Unidades de salud de << ge_municipio >>, << ge_anio.salud >>}}
 \label{tabla_ge_salud} \\
 
 \hline
@@ -1217,12 +1210,12 @@ pertenecen y el nivel de atención que brinda.
 \end{longtable}
 \normalsize
 \tablefooter{Nota: & Por efectos de escala, simbolización y superposición cartográfica, los elementos visibles en el mapa de Unidades de salud de << ge_municipio >> pueden no corresponder con el total reportado en la tabla.\\
-Fuente: & IIEG, con base en Dirección General de Información en Salud. Clave Única de Establecimientos de Salud, 2025.}
+<< ge_fuente.salud >>}
 <% endif %>
 
 <% if ge_salud_mapa_activo %>
 \clearpage
-\mapatitulo[\mapbleed]{Unidades de salud de << ge_municipio >>}
+\mapatitulo[\mapbleed]{Unidades de salud de << ge_municipio >>, << ge_anio_mapa.salud >>}
 << ge_salud_mapa >>
 %\mapafuente{Fuente: & Dirección General de Información en Salud (DGIS).\\
 % & CLUES (Clave Única de Establecimientos de Salud), 2025. \\
@@ -1244,7 +1237,7 @@ La oferta educativa se organiza en niveles de educación inicial, básica, media
                   >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
                   >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}}
 
-\caption{\textbf{Centros educativos de << ge_municipio >>}}
+\caption{\textbf{Centros educativos de << ge_municipio >>, << ge_anio.educacion >>}}
 \label{tabla_ge_educacion} \\
 
 \hline
@@ -1272,12 +1265,12 @@ La oferta educativa se organiza en niveles de educación inicial, básica, media
 
 \end{longtable}
 \normalsize
-\tablefooter{Fuente: & IIEG, con base en Sistema de Información y Gestión Educativa (SIGED). Consulta de escuelas, 2025.}
+\tablefooter{<< ge_fuente.educacion >>}
 <% endif %>
 
 <% if ge_edu_mapa_activo %>
 \clearpage
-\mapatitulo[\mapbleed]{Educación de << ge_municipio >>}
+\mapatitulo[\mapbleed]{Educación de << ge_municipio >>, << ge_anio_mapa.educacion >>}
 << ge_edu_mapa >>
 %\mapafuente{Fuente: & Sistema de Información y Gestión Educativa (SIGED). Consulta de escuelas, 2025.\\
 % & IIEG. Mapa General del Estado de Jalisco, 2012.\\
@@ -1296,7 +1289,7 @@ La oferta educativa se organiza en niveles de educación inicial, básica, media
                   >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
                   >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}}
 
-\caption{\textbf{Espacios públicos de << ge_municipio >>}}
+\caption{\textbf{Espacios públicos de << ge_municipio >>, << ge_anio.espacios >>}}
 \label{tabla_ge_espacios} \\
 
 \hline
@@ -1324,12 +1317,12 @@ La oferta educativa se organiza en niveles de educación inicial, básica, media
 
 \end{longtable}
 \normalsize
-\tablefooter{Fuente: & IIEG, con base en INEGI. Marco Geoestadístico, 2025.}
+\tablefooter{<< ge_fuente.espacios >>}
 <% endif %>
 
 <% if ge_ep_mapa_activo %>
 \clearpage
-\mapatitulo[\mapbleed]{Espacios públicos de << ge_municipio >>}
+\mapatitulo[\mapbleed]{Espacios públicos de << ge_municipio >>, << ge_anio_mapa.espacios >>}
 << ge_ep_mapa >>
 %\mapafuente{Fuente: & INEGI. Marco Geoestadístico, 2025.\\
 % & IIEG. Mapa General del Estado de Jalisco, 2012.\\
@@ -1351,7 +1344,7 @@ La infraestructura energética del municipio integra elementos estratégicos par
                   >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
                   >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}}
 
-\caption{\textbf{Infraestructura energética de << ge_municipio >>}}
+\caption{\textbf{Infraestructura energética de << ge_municipio >>, << ge_anio.energia >>}}
 \label{tabla_ge_energia} \\
 
 \hline
@@ -1379,13 +1372,11 @@ La infraestructura energética del municipio integra elementos estratégicos par
 
 \end{longtable}
 \normalsize
-\tablefooter{Fuente: IIEG, con base en & INEGI. DENUE, 2025.\\
- & INEGI. Topografía 1:50\,000, 2025.\\
- & SENER. Mapa de Hidrocarburos, 2025.}
+\tablefooter{<< ge_fuente.energia >>}
 <% endif %>
 <% if ge_ie_mapa_activo %>
 \clearpage
-\mapatitulo[\mapbleed]{Infraestructura energética de << ge_municipio >>}
+\mapatitulo[\mapbleed]{Infraestructura energética de << ge_municipio >>, << ge_anio_mapa.energia >>}
 << ge_ie_mapa >>
 %\mapafuente{Fuente: & INEGI. Directorio Estadístico Nacional de Unidades Económicas, 2025.\\
 % & INEGI. Conjunto nacional de información topográfica a escala 1:50\,000, 2025.\\
