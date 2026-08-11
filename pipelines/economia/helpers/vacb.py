@@ -36,12 +36,12 @@ def build_subsectores_text(subsectores, municipio, anio, pct, aportacion):
     if ND in (pct, aportacion) or not pct or not aportacion:
         return f"{frase}."
 
-    verbo_generar = "generó el" if len(principales) == 1 else "generaron en conjunto el"
+    verbo_generar = "generó" if len(principales) == 1 else "generaron en conjunto"
 
     return (
-        f"{frase}, que {verbo_generar} {pct} o {aportacion} "
-        f"millones de pesos del total del valor agregado censal bruto registrado "
-        f"en {anio} en el municipio."
+        f"{frase}, que {verbo_generar} {aportacion} millones de pesos que "
+        f"representaron el {pct} del total del valor agregado censal bruto real "
+        f"registrado en el municipio en {anio}."
     )
 
 

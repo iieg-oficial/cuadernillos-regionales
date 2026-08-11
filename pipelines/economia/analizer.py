@@ -388,10 +388,12 @@ class Analizer(Stage):
 
         top3_vacb = vacb_actual[:3]
 
-        if top3_vacb and vacb_total_actual:
-            suma_top3 = sum(r["vacb"] for r in top3_vacb if r["vacb"])
-            pct_principales = _pct(suma_top3 / vacb_total_actual * 100)
-            aportacion_principales = _fmt(suma_top3, 2)
+        if top3_vacb and vacb_total_actual_real and factor_deflactacion:
+            suma_top3_real = sum(
+                r["vacb"] * factor_deflactacion for r in top3_vacb if r["vacb"]
+            )
+            pct_principales = _pct(suma_top3_real / vacb_total_actual_real * 100)
+            aportacion_principales = _fmt(suma_top3_real, 2)
         else:
             pct_principales = ND
             aportacion_principales = ND

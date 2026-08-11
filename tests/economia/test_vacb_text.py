@@ -26,7 +26,11 @@ def test_three_subsectores_keep_the_original_wording():
         "fueron el de comercio al por menor, el de industria alimentaria "
         "y el de servicios" in texto
     )
-    assert "generaron en conjunto el 75.00\\,\\% o 1 200.00 millones de pesos" in texto
+    assert (
+        "generaron en conjunto 1 200.00 millones de pesos que representaron "
+        "el 75.00\\,\\% del total del valor agregado censal bruto real "
+        "registrado en el municipio en 2024." in texto
+    )
 
 
 def test_more_than_three_subsectores_still_describe_only_the_top_three():
@@ -49,7 +53,10 @@ def test_one_subsector_uses_singular():
 
     assert "el subsector más importante" in texto
     assert "fue el de comercio" in texto
-    assert "generó el 100.00\\,\\% o 22.47 millones de pesos" in texto
+    assert (
+        "generó 22.47 millones de pesos que representaron "
+        "el 100.00\\,\\% del total del valor agregado censal bruto real" in texto
+    )
     assert "en conjunto" not in texto
 
 
