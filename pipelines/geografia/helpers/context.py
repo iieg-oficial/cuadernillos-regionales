@@ -1,5 +1,6 @@
 from core.constants import ND
 from pipelines.geografia.helpers.formatting import (
+    conjunction_before,
     first_value,
     fmt,
     fmt_int,
@@ -315,7 +316,8 @@ def build_espacios_publicos_text(municipio, total, rows):
     else:
         detalle = (
             f"Predomina el tipo {ranked[0][1]}, con {ranked[0][2]} \\% del total, "
-            f"seguido de {ranked[1][1]}, con {ranked[1][2]} \\%, y "
+            f"seguido de {ranked[1][1]}, con {ranked[1][2]} \\% "
+            f"{conjunction_before(ranked[2][1])} "
             f"{ranked[2][1]}, con {ranked[2][2]} \\%."
         )
         if len(ranked) > 3:

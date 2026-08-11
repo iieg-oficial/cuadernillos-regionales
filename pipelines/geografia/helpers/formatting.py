@@ -147,3 +147,14 @@ def narrative_lower(value):
         last_end = match.end()
     parts.append(text[last_end:].lower())
     return "".join(parts)
+
+
+def conjunction_before(word):
+    text = str(word or "").strip().lower()
+    if not text:
+        return "y"
+    if text.startswith(("hia", "hie")):
+        return "y"
+    if text.startswith(("i", "í", "hi")):
+        return "e"
+    return "y"
