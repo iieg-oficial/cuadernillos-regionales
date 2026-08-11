@@ -207,7 +207,7 @@ def plot_vientos(wind_data, output_path):
         ax.text(
             angle,
             val * 0.78,
-            f"{val * 100:.2f} %",
+            f"{val * 100:.0f} %",
             ha="center",
             va="center",
             fontsize=fontsize,
