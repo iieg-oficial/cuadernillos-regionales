@@ -62,6 +62,7 @@ SIMPLE_CHART_TOPICS = [
 
 INTEGER_KEYS = {
     "ge_edu_total_escuelas_muni",
+    "ge_ie_dominante_valor",
 }
 
 TABLE_LABELS = {
