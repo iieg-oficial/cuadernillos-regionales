@@ -14,6 +14,7 @@ from pipelines.geografia.charts.treemap import (
 )
 from pipelines.geografia.fuentes import build_fuentes_context
 from pipelines.geografia.helpers.context import (
+    append_unit,
     build_acuiferos_text,
     build_anp_text,
     build_clima_text,
@@ -311,6 +312,9 @@ class Analizer(Stage):
             if key != "municipio" and f"ge_{key}" not in ctx:
                 ctx[f"ge_{key}"] = _fmt_field(temp_resumen[key])
 
+        for key in ["ge_t_valores_menor_temp", "ge_t_valores_mayor_temp"]:
+            ctx[key] = append_unit(ctx.get(key), "°C")
+
         for key in prec_resumen:
             if key != "municipio" and f"ge_{key}" not in ctx:
                 ctx[f"ge_{key}"] = _fmt_field(prec_resumen[key])
@@ -523,7 +527,9 @@ class Analizer(Stage):
         anp_ctx["municipio"] = municipio
         ctx["ge_anp_texto_automatico"] = build_anp_text(anp_ctx)
         ctx["ge_ep_resumen_texto"] = build_espacios_publicos_text(
-            ctx.get("ge_ep_total_puntos_muni"), detalle.get("espacios_publicos", [])
+            municipio,
+            ctx.get("ge_ep_total_puntos_muni"),
+            detalle.get("espacios_publicos", []),
         )
         ctx["ge_ene_subestaciones_texto"] = build_subestaciones_text(
             subestaciones_total
@@ -543,6 +549,7 @@ class Analizer(Stage):
             ctx.get("ge_ie_tipos_secundarios"),
         )
         ctx["ge_cl_texto"] = build_clima_text(
+            municipio,
             ctx.get("ge_cl_tipo_predominante"),
             ctx.get("ge_cl_pct_predominante", ND),
             ctx.get("ge_cl_secundario"),

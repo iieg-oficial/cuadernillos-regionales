@@ -1,6 +1,10 @@
 import pytest
 
-from pipelines.geografia.helpers.context import build_acuiferos_text, join_names
+from pipelines.geografia.helpers.context import (
+    PREAMBULO_ACUIFEROS,
+    build_acuiferos_text,
+    join_names,
+)
 
 
 @pytest.mark.parametrize(
@@ -21,7 +25,7 @@ def test_multiple_acuiferos_use_colon_and_conjunction():
     )
 
     assert texto.startswith(
-        "El territorio está ubicado dentro de los acuíferos: "
+        f"{PREAMBULO_ACUIFEROS}el territorio está ubicado dentro de los acuíferos: "
         "Ameca, Arenal, Atemajac, Cuquío, San Isidro y Toluquilla."
     )
 
@@ -29,8 +33,10 @@ def test_multiple_acuiferos_use_colon_and_conjunction():
 def test_single_acuifero_uses_singular_without_colon():
     texto = build_acuiferos_text("Ameca", "40.00", "60.00")
 
-    assert texto.startswith("El territorio está ubicado dentro del acuífero Ameca.")
-    assert "los acuíferos" not in texto
+    assert texto.startswith(
+        f"{PREAMBULO_ACUIFEROS}el territorio está ubicado dentro del acuífero Ameca."
+    )
+    assert "dentro de los acuíferos" not in texto
     assert "en él" in texto
 
 
@@ -91,7 +97,8 @@ def test_unparseable_percentages_omit_availability_sentence():
     texto = build_acuiferos_text("Ameca, Arenal", None, None)
 
     assert texto == (
-        "El territorio está ubicado dentro de los acuíferos: Ameca y Arenal."
+        f"{PREAMBULO_ACUIFEROS}el territorio está ubicado dentro de los acuíferos: "
+        "Ameca y Arenal."
     )
 
 

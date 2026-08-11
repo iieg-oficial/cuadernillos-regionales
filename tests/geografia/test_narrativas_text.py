@@ -1,6 +1,7 @@
 import pytest
 
 from pipelines.geografia.helpers.context import (
+    PREAMBULO_SMN,
     build_clima_text,
     build_energia_text,
     is_sentinel,
@@ -67,7 +68,7 @@ def test_energia_without_dominant_type_returns_no_data_sentence(dominante):
 
 
 def test_clima_without_other_variants_omits_third_sentence():
-    texto = build_clima_text("(A)Ca(w0)", "98.11", "A(C)w0", "1.89", "", None)
+    texto = build_clima_text("Acatic", "(A)Ca(w0)", "98.11", "A(C)w0", "1.89", "", None)
 
     assert "En segundo lugar se presenta A(C)w0 con 1.89 \\%." in texto
     assert "Además se identifican variantes" not in texto
@@ -75,17 +76,18 @@ def test_clima_without_other_variants_omits_third_sentence():
 
 
 def test_clima_without_secondary_omits_second_sentence():
-    texto = build_clima_text("(A)Ca(w0)", "100.00", "", None, "", None)
+    texto = build_clima_text("Acatic", "(A)Ca(w0)", "100.00", "", None, "", None)
 
     assert texto == (
-        "El municipio presenta un clima predominante de tipo (A)Ca(w0), "
+        f"{PREAMBULO_SMN}el municipio de Acatic presenta un clima "
+        "predominante de tipo (A)Ca(w0), "
         "que abarca 100.00 \\% del territorio."
     )
 
 
 def test_clima_with_all_parts_keeps_three_sentences():
     texto = build_clima_text(
-        "(A)Ca(w0)", "70.00", "A(C)w0", "20.00", "BS1hw, Cwa", "10.00"
+        "Acatic", "(A)Ca(w0)", "70.00", "A(C)w0", "20.00", "BS1hw, Cwa", "10.00"
     )
 
     assert "En segundo lugar" in texto
@@ -95,7 +97,7 @@ def test_clima_with_all_parts_keeps_three_sentences():
 
 @pytest.mark.parametrize("predominante", [None, "", "SIN_DATO"])
 def test_clima_without_predominant_returns_no_data_sentence(predominante):
-    texto = build_clima_text(predominante, "100.00", "", None, "", None)
+    texto = build_clima_text("Acatic", predominante, "100.00", "", None, "", None)
 
     assert texto == (
         "No se dispone de información sobre los tipos de clima "
@@ -121,7 +123,9 @@ def test_clima_conjunction_does_not_corrupt_parenthetical_names():
         "Cb(w2) (Templado, con verano fresco, lluvias de verano y humedad alta)"
     )
 
-    texto = build_clima_text("(A)Ca(w0)", "70.00", "A(C)w0", "20.00", value, "10.00")
+    texto = build_clima_text(
+        "Acatic", "(A)Ca(w0)", "70.00", "A(C)w0", "20.00", value, "10.00"
+    )
 
     assert (
         "Cb(w2) (Templado, con verano fresco, lluvias de verano y humedad alta)"

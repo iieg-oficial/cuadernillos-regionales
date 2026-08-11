@@ -9,6 +9,33 @@ from pipelines.geografia.helpers.formatting import (
     to_number,
 )
 
+PREAMBULO_ACUIFEROS = (
+    "Con base en la información sobre disponibilidad media anual de aguas "
+    "subterráneas (CONAGUA, 2023) y condición de los acuíferos (CONAGUA, 2023), "
+)
+PREAMBULO_SMN = (
+    "Con base en la Información Estadística Climatológica del Servicio "
+    "Meteorológico Nacional para el periodo 1995-2025, "
+)
+PREAMBULO_ANP = (
+    "Con base en la información de Áreas Naturales Protegidas (CONANP, 2025) "
+    "y del Inventario Nacional de Humedales (CONAGUA, 2021), "
+)
+PREAMBULO_ESPACIOS = "Con base en el Marco Geoestadístico (INEGI, 2025), "
+
+UNIT_SEPARATOR = " y "
+
+
+def append_unit(value, unit):
+    text = str(value or "").strip()
+    if not text or text == ND:
+        return value
+    parts = [p.strip() for p in text.split(UNIT_SEPARATOR) if p.strip()]
+    if not parts:
+        return value
+    return UNIT_SEPARATOR.join(f"{p} {unit}" for p in parts)
+
+
 MONTHS = {
     "ENE": ("ene", "Enero"),
     "FEB": ("feb", "Febrero"),
@@ -60,7 +87,8 @@ def build_anp_text(ctx):
             else "áreas naturales protegidas"
         )
         parts = [
-            f"El municipio de {municipio} registra {count} {area_word}, "
+            f"{PREAMBULO_ANP}el municipio de {municipio} registra "
+            f"{count} {area_word}, "
             f"con una superficie de {superficie} hectáreas, equivalente a "
             f"{pct} \\% del territorio municipal."
         ]
@@ -146,7 +174,13 @@ def build_energia_text(dominante, valor, pct, secundarios):
 
 
 def build_clima_text(
-    predominante, pct_predominante, secundario, pct_secundario, otros_nombres, pct_otros
+    municipio,
+    predominante,
+    pct_predominante,
+    secundario,
+    pct_secundario,
+    otros_nombres,
+    pct_otros,
 ):
     tipo = str(predominante or "").strip()
     if is_sentinel(tipo):
@@ -156,8 +190,9 @@ def build_clima_text(
         )
 
     partes = [
-        f"El municipio presenta un clima predominante de tipo {tipo}, "
-        f"que abarca {pct_predominante} \\% del territorio."
+        f"{PREAMBULO_SMN}el municipio de {municipio} presenta un clima "
+        f"predominante de tipo {tipo}, que abarca "
+        f"{pct_predominante} \\% del territorio."
     ]
 
     segundo = str(secundario or "").strip()
@@ -185,10 +220,14 @@ def build_acuiferos_text(nombres, pct_con, pct_sin):
         )
 
     if len(items) == 1:
-        ubicacion = f"El territorio está ubicado dentro del acuífero {items[0]}."
+        ubicacion = (
+            f"{PREAMBULO_ACUIFEROS}el territorio está ubicado dentro "
+            f"del acuífero {items[0]}."
+        )
     else:
         ubicacion = (
-            f"El territorio está ubicado dentro de los acuíferos: {join_names(items)}."
+            f"{PREAMBULO_ACUIFEROS}el territorio está ubicado dentro de "
+            f"los acuíferos: {join_names(items)}."
         )
 
     con = to_number(strip_percent_symbol(pct_con))
@@ -232,12 +271,18 @@ def build_linea_transmision_text(value):
     return f"Existen {fmt(number)} kilómetros lineales de redes de alta tensión."
 
 
-def build_espacios_publicos_text(total, rows):
+def build_espacios_publicos_text(municipio, total, rows):
     number = to_number(total)
     if number == 1:
-        opening = "En el municipio se registra 1 espacio público."
+        opening = (
+            f"{PREAMBULO_ESPACIOS}en el municipio de {municipio} "
+            "se registra 1 espacio público."
+        )
     else:
-        opening = f"En el municipio se registran {fmt_int(number)} espacios públicos."
+        opening = (
+            f"{PREAMBULO_ESPACIOS}en el municipio de {municipio} se registran "
+            f"{fmt_int(number)} espacios públicos."
+        )
 
     ranked = []
     for row in rows or []:
