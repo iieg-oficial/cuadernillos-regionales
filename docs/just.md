@@ -42,6 +42,9 @@ Genera los cuadernillos PDF de los 125 municipios de Jalisco. Los archivos queda
 just run
 ```
 
+En la primera corrida descarga desde Google Drive los escudos municipales y los mapas que falten. Si
+ya están en disco no vuelve a descargarlos.
+
 ### `just run-one <clave>`
 
 Genera el cuadernillo de un solo municipio, identificado por su clave. Útil durante el desarrollo para probar sin procesar todos los municipios.
