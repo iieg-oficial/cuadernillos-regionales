@@ -28,7 +28,7 @@
 \usepackage{tabularx}
 \usepackage{longtable}
 \usepackage{caption}
-\DeclareCaptionFormat{tablaformat}{#1\newline#3}
+\DeclareCaptionFormat{tablaformat}{\color{colorTexto}#1\newline#3}
 \captionsetup[longtable]{format=tablaformat, justification=raggedright, singlelinecheck=false, skip=5pt, labelsep=none}
 \captionsetup[figure]{format=tablaformat, justification=raggedright, singlelinecheck=false, skip=5pt, labelsep=none}
 
@@ -125,7 +125,7 @@
   \noindent\hspace*{-#1}%
   \resizebox{\ifdim\width>\dimexpr\linewidth+#1+#1\relax
       \dimexpr\linewidth+#1+#1\relax\else\width\fi}{!}{%
-    {\color{colorTexto}Mapa \themapa. \textbf{#2}}}\par
+    {\color{colorTexto}Mapa \themapa. #2}}\par
   \vspace{-\parskip}\vspace{1pt}}
 \newcommand{\mapafuente}[1]{%
   \par\vspace{-4pt}\noindent{\footnotesize

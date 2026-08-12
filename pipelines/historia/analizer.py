@@ -64,9 +64,7 @@ def _normalize(text: str) -> str:
 def _mapa_latex(path: Path, nombre: str) -> str:
     return (
         "\\begin{figure}[H]\n"
-        "\\refstepcounter{mapa}%\n"
-        f"\\noindent Mapa \\themapa. Localización geográfica de {nombre}, Jalisco"
-        "\\par\\vspace{4pt}\n"
+        f"\\mapatitulo{{Localización geográfica de {nombre}, Jalisco}}\n"
         "\\centering\n"
         f"\\includegraphics[width=\\textwidth]{{{path}}}\n"
         "\\end{figure}\n"
