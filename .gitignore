@@ -1,10 +1,10 @@
 .env/
 output/
 assets/maps/
+assets/escudos_mun_jal_png_con_fondo/
 __pycache__/
 *.pyc
 .venv/
 .claude/settings.local.json
-assets/maps/
 
 docs/taiga/
