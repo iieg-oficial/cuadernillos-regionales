@@ -18,6 +18,13 @@ MAPA_PLACEHOLDER = (
     "{templates/assets/mapa_placeholder.png}"
 )
 
+MAP_BOX = (
+    "\\hspace*{{-\\mapbleed}}\\makebox[{width}][c]{{%\n"
+    "\\adjustbox{{max width={width},"
+    "max height=\\dimexpr\\textheight-\\mapheadroom\\relax}}{{%\n"
+    "\\includegraphics{{\\detokenize{{{path}}}}}}}}}"
+)
+
 TOPIC_FOLDERS = {
     "base": "mapa_base",
     "geo": "geologia",
@@ -151,10 +158,7 @@ def find_map_for_topic(short, cve_geo, municipio):
 def map_includegraphics(path, width=DEFAULT_MAP_WIDTH):
     posix = str(path).replace("\\", "/")
     img_width = f"\\dimexpr{width}\\textwidth + 2\\mapbleed\\relax"
-    return (
-        "\\hspace*{-\\mapbleed}"
-        f"\\includegraphics[width={img_width}]{{\\detokenize{{{posix}}}}}"
-    )
+    return MAP_BOX.format(width=img_width, path=posix)
 
 
 def resolve_maps(cve_geo, municipio):
