@@ -20,6 +20,7 @@ CITAS = {
     ),
     "condicion_acuiferos": ("CONAGUA. Condición de acuíferos", "2023"),
     "smn": ("SMN. Información Estadística Climatológica", "1995-2025"),
+    "smn_sintesis": ("SMN. Información Estadística Climatológica", "1995-2026"),
     "usv": (
         "INEGI. Conjunto de datos vectoriales de uso del suelo y vegetación Serie VII",
         "2018",
@@ -45,7 +46,14 @@ CITAS = {
 
 TEMAS = {
     "wind": ["wind_atlas"],
-    "sintesis": ["geoespacial_municipal"],
+    "sintesis": [
+        "mapa_jalisco",
+        "geologia",
+        "edafologia",
+        "topografia",
+        "cem",
+        "smn_sintesis",
+    ],
     "geologia": ["geologia"],
     "edafologia": ["edafologia"],
     "topografia": ["topografia", "cem"],
@@ -70,7 +78,7 @@ TEMAS = {
 
 ANIO_TITULO = {
     "wind": "wind_atlas",
-    "sintesis": "geoespacial_municipal",
+    "sintesis": "2026",
     "geologia": "geologia",
     "edafologia": "edafologia",
     "topografia": "topografia",
@@ -141,7 +149,7 @@ def _pie(claves):
 def build_fuentes_context():
     return {
         "ge_fuente": {tema: _pie(claves) for tema, claves in TEMAS.items()},
-        "ge_anio": {tema: CITAS[clave][1] for tema, clave in ANIO_TITULO.items()},
+        "ge_anio": {tema: _anio(clave) for tema, clave in ANIO_TITULO.items()},
         "ge_anio_mapa": {
             mapa: _anio(clave) for mapa, clave in ANIO_MAPA.items() if clave
         },

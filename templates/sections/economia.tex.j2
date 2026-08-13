@@ -8,12 +8,11 @@
 }
 \vspace*{\stretch{1}}
 \begin{center}
-  {\color{colorSeccion}\bfseries\fontsize{30}{34}\selectfont Economía} \\[2.5em]
-  {\color{colorTexto}\lexendsemibold
-  \shortstack{
-    {\huge << ec_municipio_nombre >>} \\[0.3cm]
-    {\huge Agosto 2026}
-  }}
+  {\color{colorSeccion}\garetextrabold\fontsize{36}{40}\selectfont Economía}\\[1.4cm]
+  {\color{colorTexto}\garetmedium\fontsize{14}{18}\selectfont
+   \addfontfeature{LetterSpace=22.0}\MakeUppercase{<< ec_municipio_nombre >>}}\\[3.6cm]
+  {\color{colorTexto}\garetextrabold\fontsize{16}{20}\selectfont
+   \addfontfeature{LetterSpace=22.0}AGOSTO 2026}
 \end{center}
 \vspace*{\stretch{2}}
 \clearpage
@@ -173,7 +172,7 @@ de << ec_anio_ce_anterior >> a << ec_anio_ce >>.
 \end{longtable}
 \normalsize
 \tablefooter{Nota: & El cuadro solo presenta información para los subsectores que no están restringidos por principios de confidencialidad.\\
-<% if ec_tabla_vacb_tiene_na %>& ND: & No disponible.\\<% endif %>
+<% if ec_tabla_vacb_tiene_na %>ND: & No disponible.\\<% endif %>
 Fuente: & IIEG, con base en INEGI. Censos Económicos, << ec_anio_publicacion_ce_anterior >> y << ec_anio_publicacion_ce >>.\\
 & INEGI. Índice Nacional de Precios al Consumidor. Base segunda quincena julio 2018.\\
 & Los valores de << ec_anio_ce >> fueron deflactados a precios de << ec_anio_ce_anterior >> con base en el promedio anual del INPC.}
@@ -341,7 +340,7 @@ de la producción agrícola de << ec_municipio_nombre >> en << ec_anio_corte_sag
 <% endif %>
 
 <% if ec_pecuaria_activa %>
-El valor de la producción pecuaria \footnote{La producción pecuaria comprende productos provenientes de ganado bovino, caprino, ovino y porcino, así como de abejas, aves.} en << ec_municipio_nombre >> en << ec_anio_corte_sagarpa >>
+El valor de la producción pecuaria \footnote{La producción pecuaria comprende productos provenientes de ganado bovino, caprino, ovino y porcino, así como de abejas y aves.} en << ec_municipio_nombre >> en << ec_anio_corte_sagarpa >>
 fue de << ec_valor_produccion_ganado >> millones de pesos, y representó el
 << ec_porcentaje_respecto_al_estado_ganado >> del total estatal.
 

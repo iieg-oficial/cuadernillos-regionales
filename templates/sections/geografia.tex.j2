@@ -8,12 +8,11 @@
 }
 \vspace*{\stretch{1}}
 \begin{center}
-  {\color{colorSeccion}\bfseries\fontsize{30}{34}\selectfont \shortstack{Geografía\\[0.3cm] y \\[0.3cm] medio ambiente}} \\[2.5em]
-  {\color{colorTexto}\lexendsemibold
-  \shortstack{
-    {\huge << ge_municipio >>} \\[0.3cm]
-    {\huge Agosto 2026}
-  }}
+  {\color{colorSeccion}\garetextrabold\fontsize{36}{40}\selectfont \shortstack{Geografía\\[0.3cm] y \\[0.3cm] medio ambiente}}\\[1.4cm]
+  {\color{colorTexto}\garetmedium\fontsize{14}{18}\selectfont
+   \addfontfeature{LetterSpace=22.0}\MakeUppercase{<< ge_municipio >>}}\\[3.6cm]
+  {\color{colorTexto}\garetextrabold\fontsize{16}{20}\selectfont
+   \addfontfeature{LetterSpace=22.0}AGOSTO 2026}
 \end{center}
 \vspace*{\stretch{2}}
 \clearpage
@@ -753,7 +752,7 @@ La categoría predominante es << ge_ndvi_dominante_texto >>, con << ge_ndvi_domi
 
 <% if ge_ndvi_grafica_activa %>
 \begin{figure}[H]
-\graficatitulo{NDVI de << ge_municipio >>, << ge_anio.ndvi >>}
+\graficatitulo{NDVI promedio de << ge_municipio >>, << ge_anio.ndvi >>}
 \centering
 \includegraphics[width=\textwidth]{<< ge_ndvi_grafica >>}
 \end{figure}
@@ -768,7 +767,7 @@ La categoría predominante es << ge_ndvi_dominante_texto >>, con << ge_ndvi_domi
                   >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
                   >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}}
 
-\caption{\textbf{NDVI de << ge_municipio >>} \\
+\caption{\textbf{NDVI promedio de << ge_municipio >>} \\
 << ge_anio.ndvi >>}
 \label{tabla_ge_ndvi} \\
 
@@ -802,7 +801,7 @@ La categoría predominante es << ge_ndvi_dominante_texto >>, con << ge_ndvi_domi
 
 <% if ge_ndvi_mapa_activo %>
 \clearpage
-\mapatitulo[\mapbleed]{NDVI de << ge_municipio >>, << ge_anio_mapa.ndvi >>}
+\mapatitulo[\mapbleed]{NDVI promedio de << ge_municipio >>, << ge_anio_mapa.ndvi >>}
 << ge_ndvi_mapa >>
 %\mapafuente{Fuente: & USGS. Landsat Collection 2 Level-2 Science Products, 2025.\\
 % & IIEG. Mapa General del Estado de Jalisco, 2012.\\
