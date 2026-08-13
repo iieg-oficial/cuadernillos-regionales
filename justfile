@@ -49,10 +49,20 @@ run-prod desde="":
         uv run python main.py --prod
     fi
 
+# Genera un rango de cuadernillos finales por clave, ambos extremos incluidos
+[group("prod")]
+run-prod-range desde hasta:
+    uv run python main.py --prod --desde {{desde}} --hasta {{hasta}}
+
 # Genera un solo cuadernillo final en output/pdf/prod
 [group("prod")]
 run-prod-one clave:
     uv run python main.py --prod --municipio {{clave}}
+
+# Abre un cuadernillo final de output/pdf/prod
+[group("prod")]
+prod-open-one clave:
+    open "$(ls -t output/pdf/prod/{{clave}}_*.pdf | head -1)"
 
 # Revisa estilo y formato con ruff
 [group("format code")]

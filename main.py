@@ -23,11 +23,30 @@ def run(municipio_id: str, pipeline: Pipeline, prod: bool = False) -> None:
         compile(tex_path)
 
 
+def _acotar(municipios: list[str], desde: str | None, hasta: str | None) -> list[str]:
+    for clave in (desde, hasta):
+        if clave and clave not in municipios:
+            raise SystemExit(f"Municipio '{clave}' no está en el catálogo")
+
+    inicio = municipios.index(desde) if desde else 0
+    fin = municipios.index(hasta) + 1 if hasta else len(municipios)
+    if inicio >= fin:
+        raise SystemExit(f"Rango vacío: '{desde}' va después de '{hasta}'")
+
+    acotado = municipios[inicio:fin]
+    if desde or hasta:
+        Logger.info(
+            f"Procesando {len(acotado)} municipios, de {acotado[0]} a {acotado[-1]}"
+        )
+    return acotado
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--municipio", type=str, default=None)
     parser.add_argument("--prod", action="store_true")
     parser.add_argument("--desde", type=str, default=None)
+    parser.add_argument("--hasta", type=str, default=None)
     args = parser.parse_args()
 
     pipeline = Pipeline(
@@ -45,13 +64,7 @@ def main() -> None:
         run(args.municipio, pipeline, args.prod)
         return
 
-    municipios = get_all_municipio_ids()
-    if args.desde:
-        if args.desde not in municipios:
-            raise SystemExit(f"Municipio '{args.desde}' no está en el catálogo")
-        municipios = municipios[municipios.index(args.desde) :]
-        Logger.info(f"Reanudando desde {args.desde} ({len(municipios)} pendientes)")
-
+    municipios = _acotar(get_all_municipio_ids(), args.desde, args.hasta)
     for municipio_id in municipios:
         run(municipio_id, pipeline, args.prod)
 

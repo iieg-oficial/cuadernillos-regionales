@@ -98,6 +98,25 @@ y las referencias ya resueltas antes de lanzar el lote completo.
 just run-prod-one 39
 ```
 
+### `just run-prod-range <desde> <hasta>`
+
+Genera un rango de cuadernillos finales por clave, con ambos extremos incluidos.
+
+```bash
+just run-prod-range 5 8   # procesa 5, 6, 7 y 8
+```
+
+Valida las dos claves antes de arrancar: si alguna no está en el catálogo, o si el rango queda
+invertido, corta de inmediato en vez de fallar a media corrida.
+
+### `just prod-open-one <clave>`
+
+Abre el cuadernillo final de un municipio desde `output/pdf/prod/`.
+
+```bash
+just prod-open-one 39
+```
+
 ### `just open-one <clave>`
 
 Abre el pdf específico del municipio.
