@@ -14,17 +14,17 @@ setup:
     pre-commit install --hook-type commit-msg
 
 # Genera los cuadernillos de todos los municipios
-[group("reports")]
+[group("dev")]
 run:
     uv run python main.py
 
 # Genera el cuadernillo de un municipio específico
-[group("reports")]
+[group("dev")]
 run-one clave:
     uv run python main.py --municipio {{clave}}
 
 # Genera los cuadernillos de una muestra representativa de municipios
-[group("reports")]
+[group("dev")]
 run-sample:
     #!/usr/bin/env bash
     set -euo pipefail
@@ -34,9 +34,25 @@ run-sample:
     done
 
 # abre un archivo específico
-[group("reports")]
+[group("dev")]
 open-one clave:
    open "$(ls -t output/pdf/{{clave}}_*cuadernillo*/*.pdf | head -1)"
+
+# Genera los cuadernillos finales en output/pdf/prod con dos pasadas de xelatex; reanuda desde una clave si se le pasa
+[group("prod")]
+run-prod desde="":
+    #!/usr/bin/env bash
+    set -euo pipefail
+    if [ -n "{{ desde }}" ]; then
+        uv run python main.py --prod --desde "{{ desde }}"
+    else
+        uv run python main.py --prod
+    fi
+
+# Genera un solo cuadernillo final en output/pdf/prod
+[group("prod")]
+run-prod-one clave:
+    uv run python main.py --prod --municipio {{clave}}
 
 # Revisa estilo y formato con ruff
 [group("format code")]

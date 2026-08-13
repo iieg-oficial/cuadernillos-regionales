@@ -33,7 +33,7 @@ def render(municipio_id: str, context: dict) -> Path:
     )
     template = env.get_template("reporte.tex.j2")
     nombre = _get_nombre_municipio(municipio_id)
-    slug = f"{municipio_id}_{nombre}_cuadernillo_2026"
+    slug = f"{municipio_id}_{nombre}_cuadernillo_municipal_2026"
     output_path = Path("output/tex") / slug / f"{slug}.tex"
     output_path.parent.mkdir(parents=True, exist_ok=True)
     app_settings = AppSettings()
