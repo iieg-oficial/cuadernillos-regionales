@@ -8,12 +8,11 @@
 }
 \vspace*{\stretch{1}}
 \begin{center}
-  {\color{colorSeccion}\bfseries\fontsize{30}{34}\selectfont Demografía y sociedad} \\[2.5em]
-  {\color{colorTexto}\lexendsemibold
-  \shortstack{
-    {\huge << de_municipio_nombre >>} \\[0.3cm]
-    {\huge Agosto 2026}
-  }}
+  {\color{colorSeccion}\garetextrabold\fontsize{36}{40}\selectfont Demografía y sociedad}\\[1.4cm]
+  {\color{colorTexto}\garetmedium\fontsize{14}{18}\selectfont
+   \addfontfeature{LetterSpace=22.0}\MakeUppercase{<< de_municipio_nombre >>}}\\[3.6cm]
+  {\color{colorTexto}\garetextrabold\fontsize{16}{20}\selectfont
+   \addfontfeature{LetterSpace=22.0}AGOSTO 2026}
 \end{center}
 \vspace*{\stretch{2}}
 \clearpage
@@ -362,11 +361,11 @@ Población vulnerable por carencias sociales
 \hline
 
 Población vulnerable por ingresos
-& << de_vul_ingreso_pct_2015 >> & << de_vul_ingreso_pct_2020 >> & << de_vul_ingreso_prs_2015 >> & << de_vul_ingreso_prs_2020 >> & {-}{-} & {-}{-} \\
+& << de_vul_ingreso_pct_2015 >> & << de_vul_ingreso_pct_2020 >> & << de_vul_ingreso_prs_2015 >> & << de_vul_ingreso_prs_2020 >> & ND & ND \\
 \hline
 
 Población no pobre multidimensional y no vulnerable
-& << de_no_pobre_pct_2015 >> & << de_no_pobre_pct_2020 >> & << de_no_pobre_prs_2015 >> & << de_no_pobre_prs_2020 >> & {-}{-} & {-}{-} \\
+& << de_no_pobre_pct_2015 >> & << de_no_pobre_pct_2020 >> & << de_no_pobre_prs_2015 >> & << de_no_pobre_prs_2020 >> & ND & ND \\
 \hline
 
 \rowcolor{filaResaltada}
@@ -424,7 +423,8 @@ Población con un ingreso inferior a la línea de bienestar
 \end{longtable}
 \normalsize
 \renewcommand{\arraystretch}{1.5}
-\tablefooter{Fuente: & CONEVAL. Medición de pobreza a nivel municipal, << de_anio_encuesta_intercensal >> y << de_anio_censo >>.}
+\tablefooter{ND: & No disponible.\\
+Fuente: & CONEVAL. Medición de pobreza a nivel municipal, << de_anio_encuesta_intercensal >> y << de_anio_censo >>.}
 
 
 \newpage
