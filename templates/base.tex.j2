@@ -125,13 +125,12 @@
 \newlength{\mapbleed}
 \setlength{\mapbleed}{0.9cm}
 \newlength{\mapheadroom}
-\setlength{\mapheadroom}{0.9cm}
+\setlength{\mapheadroom}{1.6cm}
 \newcommand{\mapatitulo}[2][0pt]{%
   \refstepcounter{mapa}%
   \noindent\hspace*{-#1}%
-  \resizebox{\ifdim\width>\dimexpr\linewidth+#1+#1\relax
-      \dimexpr\linewidth+#1+#1\relax\else\width\fi}{!}{%
-    {\color{colorTexto}Mapa \themapa. #2}}\par
+  \parbox{\dimexpr\linewidth+#1+#1\relax}{%
+    \color{colorTexto}\raggedright Mapa \themapa. #2}\par
   \vspace{-\parskip}\vspace{1pt}}
 \newcommand{\mapafuente}[1]{%
   \par\vspace{-4pt}\noindent{\footnotesize
