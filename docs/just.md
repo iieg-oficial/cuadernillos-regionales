@@ -26,6 +26,10 @@ sudo snap install just --classic
 
 ## Comandos
 
+Las recetas están agrupadas: `dev` para iterar durante el desarrollo y `prod` para generar los
+cuadernillos finales.
+
+
 ### `just setup`
 
 Instala las dependencias Python con `uv`, configura los git hooks de formato y convención de commits con `pre-commit`.
@@ -36,7 +40,11 @@ just setup
 
 ### `just run`
 
-Genera los cuadernillos PDF de los 125 municipios de Jalisco. Los archivos quedan en `output/pdf/`.
+Genera los cuadernillos PDF de los 125 municipios de Jalisco, en orden de clave. Cada uno queda en su
+propia carpeta bajo `output/pdf/`, junto con los archivos auxiliares de LaTeX.
+
+Corre xelatex una sola vez: es el modo rápido para iterar. En una corrida limpia el índice sale vacío
+y las referencias cruzadas sin resolver; para la versión final usa `just run-prod`.
 
 ```bash
 just run
@@ -59,6 +67,35 @@ Genera los cuadernillos de una muestra representativa de municipios (metropolita
 
 ```bash
 just run-sample
+```
+
+### `just run-prod [clave]`
+
+Genera los cuadernillos finales de los 125 municipios en `output/pdf/prod/`, todos en la misma
+carpeta y sin archivos auxiliares.
+
+```bash
+just run-prod
+```
+
+A diferencia de `just run`, corre xelatex **dos veces** por cuadernillo, que es lo que LaTeX necesita
+para resolver el índice y las referencias cruzadas. Los archivos auxiliares se escriben en un
+directorio temporal que se descarta al terminar.
+
+Acepta una clave opcional para reanudar el lote desde ese municipio, en orden de clave, útil si se
+interrumpió a la mitad:
+
+```bash
+just run-prod 39   # procesa del 39 al 125
+```
+
+### `just run-prod-one <clave>`
+
+Genera un solo cuadernillo final en `output/pdf/prod/`. Útil para revisar un municipio con el índice
+y las referencias ya resueltas antes de lanzar el lote completo.
+
+```bash
+just run-prod-one 39
 ```
 
 ### `just open-one <clave>`

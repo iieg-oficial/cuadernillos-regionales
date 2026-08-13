@@ -11,7 +11,7 @@ Este repositorio automatiza la generación de esos reportes: extrae datos de Pos
 - [just](https://just.systems/)
 - [pre-commit](https://pre-commit.com/)
 - TeX Live con `xelatex`
-- Fuente [Lexend](https://fonts.google.com/specimen/Lexend)
+- Fuentes Lexend y Garet (ver [Fuentes](#fuentes))
 
 ## Instalación
 
@@ -23,9 +23,28 @@ cd cuadernillos
 just setup
 ```
 
-### Fuente Lexend
+### Fuentes
 
-Los templates usan la fuente Lexend, incluidos los pesos Light, Medium, SemiBold, Bold y ExtraBold. Descárgala e instálala antes de compilar:
+El proyecto usa dos familias tipográficas:
+
+| Fuente | Dónde se usa | Cómo obtenerla |
+|---|---|---|
+| [Lexend](https://fonts.google.com/specimen/Lexend) | Todo el cuerpo del documento | Google Fonts |
+| Garet | Portadas: general y de cada sección | Licencia del IIEG; pídela al equipo de diseño |
+
+Ambas se cargan por ruta desde `FONTS_PATH`, no por nombre de sistema, así que basta con dejar los
+archivos ahí. De Garet hacen falta los pesos **Extra Bold** y **Medium**:
+
+```bash
+cp Garet-Extra-Bold.otf Garet-Medium.otf ~/.fonts/
+```
+
+Los nombres de archivo están escritos en `templates/base.tex.j2`; si tu copia de Garet los nombra
+distinto, ajústalos ahí.
+
+#### Instalar Lexend
+
+Descarga los pesos Light, Medium, SemiBold, Bold y ExtraBold:
 
 ```bash
 # Descarga los archivos TTF desde Google Fonts
@@ -64,7 +83,7 @@ En la primera corrida el pipeline descarga desde Google Drive lo que falte, y no
 
 | Recurso | Destino |
 |---|---|
-| Escudos municipales | `assets/escudos_mun_jal_png_con_fondo/` |
+| Escudos municipales | `assets/escudos_mun_jal/` |
 | Mapas de demografía | `assets/maps/demografia/` |
 | Mapas de geografía | `assets/maps/geografia/` |
 
@@ -74,7 +93,20 @@ Los tres directorios están en `.gitignore`: son insumos, no código.
 
 Ver [docs/just.md](docs/just.md) para la lista completa de comandos.
 
-Los PDFs se generan en `output/pdf/{clave}_{Nombre}_cuadernillo_2026/`, y los `.tex` intermedios en `output/tex/`.
+Hay dos modos de generación:
+
+| Modo | Comando | Salida | xelatex |
+|---|---|---|---|
+| Desarrollo | `just run`, `just run-one <clave>` | `output/pdf/{clave}_{Nombre}_cuadernillo_municipal_2026/` | una pasada |
+| Final | `just run-prod`, `just run-prod-one <clave>` | `output/pdf/prod/`, solo los PDFs | dos pasadas |
+
+El modo de desarrollo corre xelatex una sola vez y deja los archivos auxiliares junto al PDF: es más
+rápido para iterar, pero el índice y las referencias cruzadas quedan sin resolver en una corrida
+limpia. El modo final hace las dos pasadas que LaTeX necesita y escribe los auxiliares en un
+directorio temporal, de modo que en `output/pdf/prod/` solo quedan los PDFs.
+
+Los `.tex` intermedios quedan en `output/tex/`. No son portables por sí solos: referencian mapas,
+gráficas y escudos por ruta relativa a la raíz del repositorio, y las fuentes por ruta absoluta.
 
 ## Documentación
 
