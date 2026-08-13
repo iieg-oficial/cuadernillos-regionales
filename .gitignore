@@ -1,7 +1,7 @@
 .env/
 output/
 assets/maps/
-assets/escudos_mun_jal_png_con_fondo/
+assets/escudos_mun_jal/
 __pycache__/
 *.pyc
 .venv/
