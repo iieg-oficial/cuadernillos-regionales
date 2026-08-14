@@ -53,6 +53,10 @@ just run
 En la primera corrida descarga desde Google Drive los escudos municipales y los mapas que falten. Si
 ya están en disco no vuelve a descargarlos.
 
+De cada mapa se guarda una versión ligera en `output/maps/`, que se reutiliza entre corridas. Se
+regenera sola cuando el original es más reciente, así que al recibir mapas nuevos no hace falta
+borrar nada a mano.
+
 ### `just run-one <clave>`
 
 Genera el cuadernillo de un solo municipio, identificado por su clave. Útil durante el desarrollo para probar sin procesar todos los municipios.
@@ -72,7 +76,7 @@ just run-sample
 ### `just run-prod [clave]`
 
 Genera los cuadernillos finales de los 125 municipios en `output/pdf/prod/`, todos en la misma
-carpeta y sin archivos auxiliares.
+carpeta y sin archivos auxiliares. Los `.tex` quedan igual de planos en `output/tex/prod/`.
 
 ```bash
 just run-prod

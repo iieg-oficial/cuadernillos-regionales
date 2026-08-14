@@ -68,7 +68,7 @@ cp .env.example/.env.fiscalia.example .env/.env.fiscalia
 # ... repite para cada base de datos
 ```
 
-Cada base de datos tiene su propio archivo. Además de las credenciales, hay variables que configuran el documento:
+Cada base de datos tiene su propio archivo; ver [Bases de datos](docs/databases.md). Además de las credenciales, hay variables que configuran el documento:
 
 | Archivo | Variable | Para qué sirve |
 |---|---|---|
@@ -97,21 +97,30 @@ Hay dos modos de generación:
 
 | Modo | Comando | Salida | xelatex |
 |---|---|---|---|
-| Desarrollo | `just run`, `just run-one <clave>` | `output/pdf/{clave}_{Nombre}_cuadernillo_municipal_2026/` | una pasada |
-| Final | `just run-prod`, `just run-prod-one <clave>` | `output/pdf/prod/`, solo los PDFs | dos pasadas |
+| Desarrollo | `just run`, `just run-one <clave>` | `output/pdf/{clave}_{nombre}_cuadernillo_municipal_2026/` | una pasada |
+| Final | `just run-prod [clave]`, `just run-prod-range <desde> <hasta>`, `just run-prod-one <clave>` | `output/pdf/prod/` y `output/tex/prod/` | dos pasadas |
 
 El modo de desarrollo corre xelatex una sola vez y deja los archivos auxiliares junto al PDF: es más
 rápido para iterar, pero el índice y las referencias cruzadas quedan sin resolver en una corrida
 limpia. El modo final hace las dos pasadas que LaTeX necesita y escribe los auxiliares en un
 directorio temporal, de modo que en `output/pdf/prod/` solo quedan los PDFs.
 
-Los `.tex` intermedios quedan en `output/tex/`. No son portables por sí solos: referencian mapas,
-gráficas y escudos por ruta relativa a la raíz del repositorio, y las fuentes por ruta absoluta.
+En desarrollo cada cuadernillo deja su `.tex` en su propia carpeta bajo `output/tex/`; en modo final
+todos quedan planos en `output/tex/prod/`, sin archivos auxiliares.
+
+El nombre del archivo se arma con la clave y el municipio sin acentos y en minúsculas
+(`27_cuautitlan_de_garcia_barragan_cuadernillo_municipal_2026`), para que sea ASCII puro y no dé
+problemas al moverlo entre sistemas.
+
+Los `.tex` no son portables por sí solos: referencian mapas, gráficas y escudos por ruta relativa a la raíz del repositorio, y las fuentes por ruta absoluta.
 
 ## Documentación
 
 - [Convención de commits](docs/commit-conventions.md)
 - [Templates LaTeX](docs/latex-templates.md)
+- [Tablas](docs/tables.md)
+- [Mapas](docs/maps.md)
+- [Bases de datos](docs/databases.md)
 - [Comandos just](docs/just.md)
 
 Las reglas de estilo que aplican al contenido de los cuadernillos —formato de cifras y estructura de los templates— viven en `.claude/rules/`.

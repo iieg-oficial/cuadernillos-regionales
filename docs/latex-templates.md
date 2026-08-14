@@ -104,93 +104,14 @@ En << gs_anio_actual >> se registraron << gs_total_delitos >> delitos de fuero c
 
 ### Tablas
 
-Todas las tablas del proyecto usan `longtable` — no `tabular` ni `table`. Si tu `.tex` de Overleaf usa
-`\begin{tabular}`, cámbialo a `\begin{longtable}`.
+Las tablas tienen su propia referencia: **[docs/tables.md](tables.md)**, con la estructura de
+`longtable`, alineaciones, encabezados, pies, caption, tamaños de fuente y colores.
 
-Las columnas se definen con proporciones de `\linewidth` que sumen 1.00, restando siempre
-`2\tabcolsep`. **No se usan líneas verticales** (`|`) en ninguna tabla.
+Lo esencial: todas las tablas usan `longtable` —nunca `tabular` ni `table`—, sin líneas verticales,
+con columnas cuyas proporciones suman 1.00, encabezados con `\thh`/`\thhl` y pie con
+`\tablefooter`.
 
-En Overleaf:
-
-```latex
-\begin{tabular}{|c|l|c|c|}
-```
-
-En el template:
-
-```latex
-\begin{longtable}{>{\raggedright\arraybackslash}m{\dimexpr0.40\linewidth - 2\tabcolsep\relax}
-                  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
-                  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}}
-```
-
-La alineación depende del contenido:
-
-| Alineación | Comando | Cuándo usarla |
-|---|---|---|
-| Izquierda | `\raggedright\arraybackslash` | Texto largo: nombres, descripciones |
-| Derecha | `\raggedleft\arraybackslash` | Cifras, porcentajes, claves numéricas |
-| Centrado | `\centering\arraybackslash` | Valores cualitativos: grados, categorías |
-
-#### Encabezados
-
-Las celdas de encabezado usan los macros `\thh` (alineado a la izquierda) y `\thhl` (a la derecha),
-que reciben la proporción de la columna. **Todas las celdas de una misma fila de encabezado deben usar
-el mismo macro**: mezclarlos con `\textbf{}` a secas deja los títulos a distinta altura.
-
-```latex
-\hline
-\rowcolor{gray!30}
-\thh{0.40}{Tipo de suelo}  &  \thhl{0.30}{Superficie (ha)}  &  \thhl{0.30}{Porcentaje}  \\
-\hline
-```
-
-#### Pie de tabla
-
-El pie usa `\tablefooter`, que ya trae el espaciado para quedar a ras de la tabla. El orden es
-Nota → Fuente, y cada renglón se separa con `\\`:
-
-```latex
-\tablefooter{Nota: & Texto de la nota.\\
-Fuente: & IIEG, con base en INEGI. Producto consultado, 2025.}
-```
-
-Ese mismo macro se usa bajo las gráficas y los mapas, sin `\vspace` extra, para que todos los pies
-queden igual de pegados a su contenido.
-
-#### Filas
-
-Las filas estáticas en Overleaf:
-
-```latex
-117 & Cañadas de Obregón & 7  & 14 \\
-\hline
-48  & Jesús María         & 29 & 51 \\
-\hline
-```
-
-Se convierten en un loop:
-
-```latex
-<% for row in gs_tabla_delitos %>
-<< row.clave >> & << row.municipio >> & << row.valor >> & << row.lugar >> \\
-\hline
-<% endfor %>
-```
-
-Para resaltar una fila con condición:
-
-```latex
-<% for row in gs_tabla_delitos %>
-<% if row.es_objetivo %>\rowcolor{rowHighlight}<% endif %>
-<< row.clave >> & << row.municipio >> & << row.valor >> & << row.lugar >> \\
-\hline
-<% endfor %>
-```
-
-#### Valores faltantes
-
-Cuando un dato no existe se usa el macro `\ND`, nunca una celda vacía ni un guión.
+Si tu `.tex` de Overleaf trae `\begin{tabular}{|c|l|c|}`, ahí está cómo convertirlo.
 
 ### Imágenes
 
@@ -217,27 +138,17 @@ Se convierte en una figura con título numerado y pie:
 
 #### Mapas
 
-Los mapas no se insertan con `\includegraphics`: el analizer arma el bloque LaTeX completo y lo pasa
-como variable. El template solo pone el título y la variable:
+Los mapas tienen su propia referencia: **[docs/maps.md](maps.md)**, con el origen de los archivos, la
+resolución de nombres, la versión ligera, los límites de tamaño y el título.
+
+Lo esencial: el mapa **no** se inserta con `\includegraphics` en el template. El analizer arma el
+bloque completo y lo pasa como variable; el template solo pone el título y la variable:
 
 ```latex
 \clearpage
 \mapatitulo[\mapbleed]{Título del mapa de << ge_municipio >>, << ge_anio_mapa.tema >>}
 << ge_tema_mapa >>
 ```
-
-Dos longitudes de `base.tex.j2` gobiernan la geometría de todos los mapas:
-
-| Longitud | Para qué sirve |
-|---|---|
-| `\mapbleed` | Cuánto se extiende el mapa más allá del margen de texto, por cada lado |
-| `\mapheadroom` | Espacio que se le reserva al título sobre el mapa |
-
-El bloque que genera el analizer limita el mapa por ancho **y** por alto. Eso importa porque la
-proporción de los mapas varía por municipio: los alargados son más altos y, sin el límite de altura,
-no caben en la página junto a su título y se brincan a la siguiente.
-
-`\mapatitulo` encoge el título si no cabe en una línea, para que nunca robe altura al mapa.
 
 ## Paquetes LaTeX disponibles
 
