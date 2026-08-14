@@ -1,10 +1,37 @@
-# Cuadernillos Municipales
+<p align="center">
+  <img src="assets/banner.jpg" alt="Cuadernillos Municipales" width="100%">
+</p>
+
+<p align="center">
+  Reportes estadísticos automatizados para los 125 municipios de Jalisco.
+</p>
 
 Los Cuadernillos Municipales son reportes estadísticos que el IIEG (Instituto de Información Estadística y Geográfica de Jalisco) publica para cada uno de los 125 municipios del estado. Cada cuadernillo concentra indicadores clave de historia, geografía, demografía, economía, gobierno y seguridad, y sirve como referencia oficial para la toma de decisiones en el ámbito municipal.
 
 Este repositorio automatiza la generación de esos reportes: extrae datos de PostgreSQL, genera gráficas con matplotlib, renderiza templates Jinja2 LaTeX y compila con `xelatex`.
 
-## Requisitos
+## Preview
+
+<p align="center">
+  <img src="assets/preview.gif" alt="Recorrido por un cuadernillo municipal generado" width="100%">
+</p>
+
+## Documentación
+
+| Documento | Qué documenta |
+|---|---|
+| [Comandos just](docs/just.md) | Instalación de `just` y todas las recetas del `justfile`, agrupadas en preparación, desarrollo, producción y calidad |
+| [Bases de datos](docs/databases.md) | Qué base usa cada sección, el archivo `.env` que le corresponde, cómo se abre la conexión, dónde viven las consultas y cómo diagnosticar fallas |
+| [Templates LaTeX](docs/latex-templates.md) | Cómo pasar un documento de Overleaf a template Jinja2: delimitadores propios, convención de nombres de variables, paquetes disponibles, macros del proyecto y reglas de contenido |
+| [Tablas](docs/tables.md) | La estructura de `longtable` que usan todas las tablas: proporciones y alineación de columnas, encabezados, caption, pie, tamaños de fuente, colores y formato de cifras |
+| [Mapas](docs/maps.md) | Por qué los mapas no se insertan con `\includegraphics`, de dónde se descargan, la versión ligera para iterar, tamaño y posición, título, contador y pie |
+| [Convención de commits](docs/commit-conventions.md) | Formato de los mensajes de commit, tipos válidos que valida el hook y scopes sugeridos |
+
+Las reglas de estilo que aplican al contenido de los cuadernillos, formato de cifras y estructura de los templates viven en `.claude/rules/`.
+
+## Quick start
+
+### Requisitos
 
 - Python 3.12+
 - [uv](https://docs.astral.sh/uv/)
@@ -12,8 +39,9 @@ Este repositorio automatiza la generación de esos reportes: extrae datos de Pos
 - [pre-commit](https://pre-commit.com/)
 - TeX Live con `xelatex`
 - Fuentes Lexend y Garet (ver [Fuentes](#fuentes))
+- Acceso a las bases de datos del IIEG (ver [Bases de datos](docs/databases.md))
 
-## Instalación
+### Instalación
 
 Instala `just` siguiendo las instrucciones en [docs/just.md](docs/just.md), luego:
 
@@ -42,20 +70,15 @@ cp Garet-Extra-Bold.otf Garet-Medium.otf ~/.fonts/
 Los nombres de archivo están escritos en `templates/base.tex.j2`; si tu copia de Garet los nombra
 distinto, ajústalos ahí.
 
-#### Instalar Lexend
-
-Descarga los pesos Light, Medium, SemiBold, Bold y ExtraBold:
+Para Lexend, descarga los pesos Light, Medium, SemiBold, Bold y ExtraBold:
 
 ```bash
-# Descarga los archivos TTF desde Google Fonts
 wget -O /tmp/lexend.zip "https://fonts.google.com/download?family=Lexend"
 unzip /tmp/lexend.zip -d /tmp/lexend
 
-# Copia los TTF a tu directorio de fuentes de usuario
 mkdir -p ~/.fonts
 cp /tmp/lexend/static/*.ttf ~/.fonts/
 
-# Actualiza el caché de fuentes
 fc-cache -fv
 ```
 
@@ -89,7 +112,7 @@ En la primera corrida el pipeline descarga desde Google Drive lo que falte, y no
 
 Los tres directorios están en `.gitignore`: son insumos, no código.
 
-## Uso
+### Generar cuadernillos
 
 Ver [docs/just.md](docs/just.md) para la lista completa de comandos.
 
@@ -114,13 +137,27 @@ problemas al moverlo entre sistemas.
 
 Los `.tex` no son portables por sí solos: referencian mapas, gráficas y escudos por ruta relativa a la raíz del repositorio, y las fuentes por ruta absoluta.
 
-## Documentación
+## Contributing
 
-- [Convención de commits](docs/commit-conventions.md)
-- [Templates LaTeX](docs/latex-templates.md)
-- [Tablas](docs/tables.md)
-- [Mapas](docs/maps.md)
-- [Bases de datos](docs/databases.md)
-- [Comandos just](docs/just.md)
+Todo cambio en producción empieza con un issue. El flujo completo (issues, convención de commits,
+plantilla y reglas de los pull requests, board del proyecto y code review) está en
+[CONTRIBUTING.md](CONTRIBUTING.md).
 
-Las reglas de estilo que aplican al contenido de los cuadernillos, formato de cifras y estructura de los templates, viven en `.claude/rules/`.
+Antes de abrir un PR:
+
+```bash
+just lint
+just test
+```
+
+## License
+
+El repositorio tiene dos licencias, una para el código y otra para lo que el código produce:
+
+| Qué | Licencia |
+|---|---|
+| Código fuente (`core/`, `pipelines/`, `templates/`, `main.py`) | [MIT](LICENSE) |
+| Cuadernillos generados, catálogos de `assets/catalogs/` y documentación de `docs/` | [CC BY 4.0](LICENSE-DATA) |
+
+Quedan fuera de ambas: la fuente **Garet**, licenciada al IIEG y no redistribuible, y los escudos
+municipales y mapas que se descargan en tiempo de ejecución, sujetos a los términos de sus fuentes.
