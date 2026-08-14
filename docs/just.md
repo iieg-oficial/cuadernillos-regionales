@@ -6,7 +6,7 @@
 
 Versión requerida: **1.46.0**
 
-**Opción 1 — script oficial:**
+**Opción 1, script oficial:**
 
 ```bash
 curl --proto '=https' --tlsv1.2 -sSf https://just.systems/install.sh | bash -s -- --to ~/.local/bin --tag 1.46.0
@@ -18,7 +18,7 @@ Verifica que `~/.local/bin` esté en tu `PATH`. Si no, agrégalo a tu `~/.bashrc
 export PATH="$HOME/.local/bin:$PATH"
 ```
 
-**Opción 2 — snap:**
+**Opción 2, snap:**
 
 ```bash
 sudo snap install just --classic
@@ -26,9 +26,10 @@ sudo snap install just --classic
 
 ## Comandos
 
-Las recetas están agrupadas: `dev` para iterar durante el desarrollo y `prod` para generar los
-cuadernillos finales.
+Las recetas están agrupadas en tres grupos: `setup` para preparar el entorno, `dev` para iterar
+durante el desarrollo y `prod` para generar los cuadernillos finales.
 
+## Preparación
 
 ### `just setup`
 
@@ -37,6 +38,12 @@ Instala las dependencias Python con `uv`, configura los git hooks de formato y c
 ```bash
 just setup
 ```
+
+## Desarrollo
+
+Una sola pasada de xelatex, salida en `output/pdf/{clave}_{nombre}_cuadernillo_municipal_2026/` junto
+con los archivos auxiliares de LaTeX. Es el modo rápido para iterar; en una corrida limpia el índice
+sale vacío y las referencias cruzadas sin resolver.
 
 ### `just run`
 
@@ -73,6 +80,20 @@ Genera los cuadernillos de una muestra representativa de municipios (metropolita
 just run-sample
 ```
 
+### `just open-one <clave>`
+
+Abre el pdf específico del municipio.
+
+```bash
+just open-one 1
+```
+
+## Producción
+
+Dos pasadas de xelatex, que es lo que LaTeX necesita para resolver el índice y las referencias. Los
+PDFs quedan planos en `output/pdf/prod/` y los `.tex` en `output/tex/prod/`, sin archivos auxiliares:
+se escriben en un directorio temporal que se descarta al terminar.
+
 ### `just run-prod [clave]`
 
 Genera los cuadernillos finales de los 125 municipios en `output/pdf/prod/`, todos en la misma
@@ -93,15 +114,6 @@ interrumpió a la mitad:
 just run-prod 39   # procesa del 39 al 125
 ```
 
-### `just run-prod-one <clave>`
-
-Genera un solo cuadernillo final en `output/pdf/prod/`. Útil para revisar un municipio con el índice
-y las referencias ya resueltas antes de lanzar el lote completo.
-
-```bash
-just run-prod-one 39
-```
-
 ### `just run-prod-range <desde> <hasta>`
 
 Genera un rango de cuadernillos finales por clave, con ambos extremos incluidos.
@@ -113,6 +125,15 @@ just run-prod-range 5 8   # procesa 5, 6, 7 y 8
 Valida las dos claves antes de arrancar: si alguna no está en el catálogo, o si el rango queda
 invertido, corta de inmediato en vez de fallar a media corrida.
 
+### `just run-prod-one <clave>`
+
+Genera un solo cuadernillo final en `output/pdf/prod/`. Útil para revisar un municipio con el índice
+y las referencias ya resueltas antes de lanzar el lote completo.
+
+```bash
+just run-prod-one 39
+```
+
 ### `just prod-open-one <clave>`
 
 Abre el cuadernillo final de un municipio desde `output/pdf/prod/`.
@@ -121,13 +142,7 @@ Abre el cuadernillo final de un municipio desde `output/pdf/prod/`.
 just prod-open-one 39
 ```
 
-### `just open-one <clave>`
-
-Abre el pdf específico del municipio.
-
-```bash
-just open-one 1
-```
+## Calidad
 
 ### `just lint`
 
