@@ -2,25 +2,32 @@ from pathlib import Path
 
 from core.constants import DASH, ND
 from core.pipelines.stage import Stage
+from core.utils.helpers import rows_have_na
 from core.utils.logger import Logger
 from core.utils.municipalities import get_same_region
 
 MAPA_PLACEHOLDER = Path("templates/assets/mapa_placeholder.png")
 
 
-def _mapa_latex(path: Path, caption: str, fuentes: list[str] | None = None) -> str:
+def _mapa_latex(
+    path: Path,
+    caption: str,
+    fuentes: list[str] | None = None,
+    ancho: str = "0.95\\textwidth",
+) -> str:
     bloque = (
+        f"\\mapatitulo{{{caption}}}\n"
         "\\begin{figure}[H]\n"
         "\\centering\n"
-        f"\\caption{{\\textbf{{{caption}}}}}\n"
-        f"\\includegraphics[width=0.85\\textwidth]{{{path}}}\n"
+        f"\\includegraphics[width={ancho}]{{{path}}}\n"
         "\\end{figure}"
     )
     if fuentes:
         lineas = [f"Fuente: & {fuentes[0]}\\\\"]
         lineas += [f"& {f}\\\\" for f in fuentes[1:]]
         cuerpo = "\n".join(lineas).rstrip("\\")
-        bloque += f"\n\\tablefooter{{{cuerpo}}}"
+        comentado = "\n".join(f"%{linea}" for linea in cuerpo.splitlines())
+        bloque += f"\n%\\tablefooter{{\n{comentado}\n%}}"
     return bloque
 
 
@@ -243,6 +250,7 @@ class Analizer(Stage):
             }
             for loc in localidades_2020[:5]
         ]
+        ctx["de_localidades_tiene_na"] = rows_have_na(ctx["de_localidades"])
 
         jal_2020 = next(
             (e for e in iim_estados_2020 if e["entidad_id"] == JALISCO_ID), None
@@ -682,7 +690,8 @@ class Analizer(Stage):
         def _loc_val(marg, key, fn):
             if marg is None:
                 return DASH
-            return fn(marg.get(key))
+            value = marg.get(key)
+            return DASH if value is None else fn(value)
 
         top5_locs = localidades_2020[:5]
         hay_datos_faltantes = False
@@ -697,9 +706,7 @@ class Analizer(Stage):
                 {
                     "clave": cvegeo,
                     "nombre": loc["localidad"],
-                    "grado": DASH
-                    if sin_datos
-                    else _grado(marg.get("grado_marginacion")),
+                    "grado": _loc_val(marg, "grado_marginacion", lambda v: v.lower()),
                     "analfabeta": _loc_val(marg, "porc_pob15_analfabeta", _fmt),
                     "sin_educ_bas": _loc_val(marg, "porc_pob15_sin_educ_basica", _fmt),
                     "sin_drenaje": _loc_val(
@@ -715,6 +722,7 @@ class Analizer(Stage):
                 }
             )
         ctx["de_localidades_marginacion"] = locs_ctx
+        ctx["de_localidades_marginacion_tiene_na"] = rows_have_na(locs_ctx)
         ctx["de_localidades_hay_datos_faltantes"] = hay_datos_faltantes
 
         pobreza_2020 = input_data.get("pobreza_2020") or {}

@@ -20,13 +20,15 @@
 \usepackage{makecell}
 \usepackage{booktabs}
 \usepackage{multirow}
+\usepackage[bottom]{footmisc}
 \usepackage[hidelinks]{hyperref}
+\usepackage{xurl}
 \usepackage{etoc}
 \usepackage{varwidth} % must be loaded after array
 \usepackage{tabularx}
 \usepackage{longtable}
 \usepackage{caption}
-\DeclareCaptionFormat{tablaformat}{#1\newline#3}
+\DeclareCaptionFormat{tablaformat}{\color{colorTexto}#1\newline#3}
 \captionsetup[longtable]{format=tablaformat, justification=raggedright, singlelinecheck=false, skip=5pt, labelsep=none}
 \captionsetup[figure]{format=tablaformat, justification=raggedright, singlelinecheck=false, skip=5pt, labelsep=none}
 
@@ -72,6 +74,18 @@
 \newfontfamily\lexendsemibold[
   Path = << fonts_path >>
 ]{Lexend-SemiBold.ttf}
+\newfontfamily\lexendextrabold[
+  Path = << fonts_path >>
+]{Lexend-ExtraBold.ttf}
+\newfontfamily\lexendmedium[
+  Path = << fonts_path >>
+]{Lexend-Medium.ttf}
+\newfontfamily\garetextrabold[
+  Path = << fonts_path >>
+]{Garet-Extra-Bold.otf}
+\newfontfamily\garetmedium[
+  Path = << fonts_path >>
+]{Garet-Medium.otf}
 \definecolor{colorSeccion}{HTML}{5C2472}
 \definecolor{colorTexto}{HTML}{465055}
 \definecolor{headerGray}{HTML}{7A7A7A}
@@ -83,6 +97,14 @@
 \definecolor{primary}{HTML}{5C2472}
 \definecolor{accent}{HTML}{465055}
 
+\urlstyle{same}
+\hypersetup{
+  colorlinks=true,
+  urlcolor=colorSeccion,
+  linkcolor=colorTexto,
+  citecolor=colorTexto,
+}
+
 \newcommand{\ND}{\textcolor{red}{N/D}}
 \newcommand{\thdr}[1]{\textbf{\color{colorTexto}#1}}
 \newcommand{\thdl}[1]{\textbf{\color{colorTexto}#1}}
@@ -91,8 +113,29 @@
 \newcommand{\tablefooter}[1]{%
   \vspace{-28pt}\noindent{\footnotesize
   \renewcommand{\arraystretch}{1.0}%
-  \begin{tabular}[t]{@{}l@{\hspace{0.5em}}p{\dimexpr\linewidth - 4em\relax}@{}}#1\end{tabular}%
+  \begin{tabularx}{\linewidth}[t]{@{}l@{\hspace{0.5em}}X@{}}#1\end{tabularx}%
   \renewcommand{\arraystretch}{1.5}}}
+
+\newcounter{grafica}
+\newcounter{mapa}
+\newcommand{\graficatitulo}[1]{%
+  \refstepcounter{grafica}%
+  \noindent{\color{colorTexto}Gráfica \thegrafica\\
+  \textbf{#1}}\par\vspace{4pt}}
+\newlength{\mapbleed}
+\setlength{\mapbleed}{0.9cm}
+\newlength{\mapheadroom}
+\setlength{\mapheadroom}{1.6cm}
+\newcommand{\mapatitulo}[2][0pt]{%
+  \refstepcounter{mapa}%
+  \noindent\hspace*{-#1}%
+  \parbox{\dimexpr\linewidth+#1+#1\relax}{%
+    \color{colorTexto}\raggedright Mapa \themapa. #2}\par
+  \vspace{-\parskip}\vspace{1pt}}
+\newcommand{\mapafuente}[1]{%
+  \par\vspace{-4pt}\noindent{\footnotesize
+  \renewcommand{\arraystretch}{1.0}%
+  \begin{tabularx}{\linewidth}[t]{@{}l@{\hspace{0.5em}}X@{}}#1\end{tabularx}}}
 
 \AtBeginDocument{
   \color{colorTexto}
@@ -128,22 +171,22 @@
 \geometry{
   left=2.5cm,
   right=2.5cm,
-  top=3cm,
-  bottom=3cm,
+  top=2.4cm,
+  bottom=2.4cm,
   headheight=2cm,
-  headsep=1cm,
-  footskip=1.2cm
+  headsep=0.4cm,
+  footskip=1.8cm
 }
 
 \pagestyle{fancy}
 \fancyhf{}
 
-\fancyhead[L]{\includegraphics[height=1.7cm]{<< assets_path >>logo_header.png}}
+\fancyhead[L]{\includegraphics[height=1.25cm]{<< assets_path >>logo_header.png}}
 \fancyhead[R]{\color{colorTexto}\footnotesize Página \thepage}
-\fancyfoot[L]{\includegraphics[height=1.5cm]{<< assets_path >>logo_footer.png}}
+\fancyfoot[L]{\includegraphics[height=1.23cm]{<< assets_path >>logo_footer.png}}
 
 \setlength{\headheight}{2cm}
-\setlength{\headsep}{1cm}
+\setlength{\headsep}{0.4cm}
 \setlength{\footskip}{1.8cm}
 \renewcommand{\headrulewidth}{0pt}
 \renewcommand{\footrulewidth}{0pt}

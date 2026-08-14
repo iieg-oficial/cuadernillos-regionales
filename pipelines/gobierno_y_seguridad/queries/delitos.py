@@ -5,7 +5,7 @@ from sqlalchemy.orm import Session
 def get_anios_disponibles(session: Session) -> list[int]:
     stmt = text("""
         SELECT anio
-        FROM v_delitos_comparables_general
+        FROM vw_delitos_comparables_general
         WHERE clave_ent = '14'
         GROUP BY anio
         HAVING COUNT(DISTINCT mes) = 12
@@ -20,7 +20,7 @@ def get_conteo_por_municipio_anio(
 ) -> list[dict]:
     stmt = text("""
         SELECT cve_municipio, municipio, anio, SUM(conteo) AS total
-        FROM v_delitos_comparables_general
+        FROM vw_delitos_comparables_general
         WHERE clave_ent = '14'
           AND anio IN (:anio_anterior, :anio_actual)
         GROUP BY cve_municipio, municipio, anio

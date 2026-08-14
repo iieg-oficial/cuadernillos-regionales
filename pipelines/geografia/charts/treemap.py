@@ -1,16 +1,18 @@
 import math
-import os
-import re
-import unicodedata
-
-os.environ.setdefault("MPLCONFIGDIR", "/tmp/matplotlib")
 
 import matplotlib.pyplot as plt
 from matplotlib.patches import Patch, Rectangle
 
+from core.constants import COLOR_TEXTO
+from core.utils.charts import setup_chart_style
+from pipelines.geografia.charts.palettes import (
+    has_topic_palette,
+    normalize_category_key,
+    normalize_token,
+    resolve_topic_color,
+)
+
 DPI = 300
-FONT_FAMILY = "Lexend"
-FALLBACK_FONT = "DejaVu Sans"
 
 COLOR_PALETTE = {
     "orange": "#FF8300",
@@ -145,20 +147,12 @@ EXPLICIT_COLOR_MAPS = {
 }
 
 AXIS_COLOR = "#9CA3AF"
-TEXT_COLOR = "#111827"
+TEXT_COLOR = COLOR_TEXTO
 FIGSIZE_PROPORTION = (10.4, 3.75)
 TREEMAP_HEIGHT = 46
-TREEMAP_LABEL_AREA_MIN = 0.055
-TREEMAP_LABEL_WIDTH_MIN = 11
-TREEMAP_LABEL_HEIGHT_MIN = 7
-
-
-def _normalize_token(value):
-    text = str(value) if value is not None else ""
-    text = unicodedata.normalize("NFKD", text).encode("ascii", "ignore").decode("ascii")
-    text = text.strip().lower()
-    text = re.sub(r"[^a-z0-9]+", "_", text)
-    return text.strip("_")
+TREEMAP_LABEL_MIN_FONT_SIZE = 5.0
+TREEMAP_LABEL_MAX_FONT_SIZE = 15.0
+TREEMAP_LABEL_INNER_MARGIN = 0.82
 
 
 def _contrast_text_color(hex_color):
@@ -172,22 +166,28 @@ def _contrast_text_color(hex_color):
 
 def _build_color_lookup(topic_key, categories):
     explicit = EXPLICIT_COLOR_MAPS.get(topic_key, {})
+    has_palette = has_topic_palette(topic_key)
     palette = TOPIC_PALETTES.get(topic_key, PROPORTION_PALETTE)
     lookup = {}
     palette_idx = 0
     for cat in categories:
-        key = _normalize_token(cat)
-        if key in explicit:
+        key = normalize_category_key(topic_key, cat)
+        if not has_palette and key in explicit:
             lookup[key] = explicit[key]
-        else:
+        elif not has_palette:
             lookup[key] = palette[palette_idx % len(palette)]
+            palette_idx += 1
+        else:
+            fallback = explicit.get(key, palette[palette_idx % len(palette)])
+            lookup[key] = resolve_topic_color(topic_key, cat, fallback)
             palette_idx += 1
     lookup.setdefault("otros", COLOR_PALETTE["gray"])
     return lookup
 
 
-def _color_for(cat, lookup):
-    return lookup.get(_normalize_token(cat), PROPORTION_PALETTE[0])
+def _color_for(cat, lookup, topic_key=None):
+    key = normalize_category_key(topic_key, cat) if topic_key else normalize_token(cat)
+    return lookup.get(key, PROPORTION_PALETTE[0])
 
 
 def _split_rectangles(values, x, y, w, h):
@@ -224,31 +224,19 @@ def _split_rectangles(values, x, y, w, h):
     )
 
 
-def _balanced_ncol(n):
-    best = None
-    for c in (3, 4, 5):
-        if c >= n:
-            continue
-        nrows = math.ceil(n / c)
-        empties = nrows * c - n
-        sizes = [nrows] * (c - empties) + [nrows - 1] * empties
-        key = (max(sizes) - min(sizes), -min(sizes), -c)
-        if best is None or key < best[0]:
-            best = (key, c)
-    return best[1] if best else min(n, 5)
-
-
 def _get_legend_ncol(topic_key, n):
     if n <= 0:
         return 1
     if topic_key == "uso_suelo":
         return n if n <= 5 else 3 if n == 6 else 4
     if topic_key in {"edafologia", "geologia"}:
-        return n if n <= 5 else _balanced_ncol(n)
+        return n if n <= 5 else max(1, math.ceil(n / 2))
     if topic_key == "clima_koppen":
         return min(8 if n <= 16 else 9, n)
     if topic_key.startswith("erosion_"):
         return 4 if n >= 7 else min(4, n)
+    if topic_key == "acuiferos":
+        return n
     return min(max(1, math.ceil(n / 2)), 6)
 
 
@@ -268,25 +256,24 @@ def _reorder_legend(handles, labels, ncol):
 
 
 def _setup_style():
-    from matplotlib import font_manager as fm
+    setup_chart_style(**{"figure.dpi": 120})
 
-    try:
-        fm.findfont(FONT_FAMILY, fallback_to_default=False)
-        plt.rcParams["font.family"] = FONT_FAMILY
-    except ValueError:
-        plt.rcParams["font.family"] = FALLBACK_FONT
 
-    plt.rcParams.update(
-        {
-            "axes.edgecolor": AXIS_COLOR,
-            "axes.labelcolor": TEXT_COLOR,
-            "xtick.color": TEXT_COLOR,
-            "ytick.color": TEXT_COLOR,
-            "text.color": TEXT_COLOR,
-            "figure.dpi": 120,
-            "savefig.dpi": DPI,
-        }
-    )
+def _autofit_label(ax, renderer, text, w, h):
+    x0, y0 = ax.transData.transform((0, 0))
+    x1, y1 = ax.transData.transform((w, h))
+    rect_w = abs(x1 - x0) * TREEMAP_LABEL_INNER_MARGIN
+    rect_h = abs(y1 - y0) * TREEMAP_LABEL_INNER_MARGIN
+    if rect_w <= 0 or rect_h <= 0:
+        text.set_fontsize(TREEMAP_LABEL_MIN_FONT_SIZE)
+        return
+    size = rect_h / ax.get_figure().dpi * 72
+    text.set_fontsize(size)
+    bbox = text.get_window_extent(renderer)
+    if bbox.width > 0:
+        size = min(size, size * rect_w / bbox.width)
+    size = min(TREEMAP_LABEL_MAX_FONT_SIZE, max(TREEMAP_LABEL_MIN_FONT_SIZE, size))
+    text.set_fontsize(size)
 
 
 def _save(fig, path):
@@ -302,34 +289,33 @@ def plot_proportional_blocks(categories, values, topic_key, output_path):
 
     fig, ax = plt.subplots(figsize=FIGSIZE_PROPORTION)
     ax.set_xlim(0, 100)
-    ax.set_ylim(-12, TREEMAP_HEIGHT + 2)
+    ax.set_ylim(0, TREEMAP_HEIGHT)
     ax.axis("off")
+    fig.canvas.draw()
+    renderer = fig.canvas.get_renderer()
 
     for (x, y, w, h), cat, val in zip(rects, categories, values):
-        c = _color_for(cat, colors)
-        ax.add_patch(
-            Rectangle((x, y), w, h, facecolor=c, edgecolor="none", linewidth=0)
+        c = _color_for(cat, colors, topic_key)
+        rect = Rectangle((x, y), w, h, facecolor=c, edgecolor="none", linewidth=0)
+        ax.add_patch(rect)
+        if val <= 0.2:
+            continue
+        label = f"{val:.2f} %"
+        text = ax.text(
+            x + w / 2,
+            y + h / 2,
+            label,
+            ha="center",
+            va="center",
+            fontweight="bold",
+            color=_contrast_text_color(c),
+            clip_on=True,
         )
-        area_share = (w * h) / (100 * TREEMAP_HEIGHT)
-        big = (
-            area_share >= TREEMAP_LABEL_AREA_MIN
-            and w >= TREEMAP_LABEL_WIDTH_MIN
-            and h >= TREEMAP_LABEL_HEIGHT_MIN
-        )
-        if w >= 3.5 and h >= 4.0:
-            ax.text(
-                x + w / 2,
-                y + h / 2,
-                f"{val:.2f} %",
-                ha="center",
-                va="center",
-                fontsize=10 if big else 5.5,
-                fontweight="bold",
-                color=_contrast_text_color(c),
-            )
+        _autofit_label(ax, renderer, text, w, h)
+        text.set_clip_path(rect)
 
     handles = [
-        Patch(facecolor=_color_for(c, colors), edgecolor="none", label=c)
+        Patch(facecolor=_color_for(c, colors, topic_key), edgecolor="none", label=c)
         for c in categories
     ]
     labels = list(categories)
@@ -339,8 +325,8 @@ def plot_proportional_blocks(categories, values, topic_key, output_path):
     ax.legend(
         handles=handles,
         labels=labels,
-        loc="lower center",
-        bbox_to_anchor=(0.5, -0.005),
+        loc="upper center",
+        bbox_to_anchor=(0.5, -0.02),
         ncol=ncol,
         frameon=False,
         fontsize=fontsize,
@@ -370,7 +356,7 @@ def plot_stacked_pair(row_data, topic_key, output_path):
         for cat, val in vals.items():
             if val <= 0:
                 continue
-            c = _color_for(cat, colors)
+            c = _color_for(cat, colors, topic_key)
             ax.barh(
                 y,
                 val,
@@ -379,7 +365,7 @@ def plot_stacked_pair(row_data, topic_key, output_path):
                 edgecolor="none",
                 linewidth=0,
                 height=0.72,
-                label=cat if val >= 0.5 else "_nolegend_",
+                label=cat,
             )
             if val >= 6:
                 ax.text(
@@ -403,14 +389,13 @@ def plot_stacked_pair(row_data, topic_key, output_path):
         ax.legend(
             lh,
             ll,
-            loc="upper center",
-            bbox_to_anchor=(0.5, -0.06),
+            loc="lower center",
+            bbox_to_anchor=(0.5, -0.04),
             ncol=ncol,
             frameon=False,
             fontsize=8.2,
             handlelength=1.0,
             columnspacing=0.9,
-            labelspacing=0.7,
         )
     fig.patch.set_alpha(0)
     ax.patch.set_alpha(0)

@@ -1,3 +1,4 @@
+import re
 from pathlib import Path
 
 from core.constants import ND
@@ -6,10 +7,43 @@ from core.utils.logger import Logger
 
 MAPA_PLACEHOLDER = Path("templates/assets/mapa_placeholder.png")
 
+BARE_URL = re.compile(r"(?<!\{)\bhttps?://[^\s<>{}]+")
+URL_TRAILING = ".,;:)]}"
+
+
+def _url_to_latex(match: re.Match) -> str:
+    url = match.group(0)
+    trailing = ""
+    while url and url[-1] in URL_TRAILING:
+        trailing = url[-1] + trailing
+        url = url[:-1]
+    return rf"\url{{{url}}}{trailing}"
+
+
+def _linkify(text: str) -> str:
+    return BARE_URL.sub(_url_to_latex, text)
+
+
+QUOTE_OPENERS = " \t\n([{¿¡—–-"
+
+
+def _curly_quotes(text: str) -> str:
+    salida = []
+    for pos, char in enumerate(text):
+        if char != '"':
+            salida.append(char)
+            continue
+        anterior = text[pos - 1] if pos else ""
+        abre = not anterior or anterior in QUOTE_OPENERS
+        salida.append("“" if abre else "”")
+    return "".join(salida)
+
 
 def _normalize(text: str) -> str:
+    text = _curly_quotes(text)
+    text = _linkify(text)
     text = text.replace("\x0c", " ")
-    lines = [l.strip() for l in text.splitlines()]
+    lines = [line.strip() for line in text.splitlines()]
     paragraphs = []
     buf = []
     for i, line in enumerate(lines):
@@ -30,10 +64,9 @@ def _normalize(text: str) -> str:
 def _mapa_latex(path: Path, nombre: str) -> str:
     return (
         "\\begin{figure}[H]\n"
-        "\\noindent Gráfica 1\\\\\n"
-        f"\\textbf{{Localización geográfica de {nombre}, Jalisco}}\\par\\vspace{{4pt}}\n"
+        f"\\mapatitulo{{Localización geográfica de {nombre}, Jalisco}}\n"
         "\\centering\n"
-        f"\\includegraphics[width=0.9\\textwidth]{{{path}}}\n"
+        f"\\includegraphics[width=\\textwidth]{{{path}}}\n"
         "\\end{figure}\n"
         "\\par\\vspace{-4pt}\\parbox{\\linewidth}{\\footnotesize\n"
         "Fuente: IIEG. Mapa General del Estado de Jalisco, 2026.}"

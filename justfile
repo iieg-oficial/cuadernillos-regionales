@@ -1,4 +1,7 @@
 
+# Muestra representativa: metropolitanos, costa, sierra, altos y municipios pequeños
+SAMPLE := "1 12 17 32 56 67 97 98 101 120"
+
 default:
     just --list --unsorted
 
@@ -11,19 +14,55 @@ setup:
     pre-commit install --hook-type commit-msg
 
 # Genera los cuadernillos de todos los municipios
-[group("reports")]
+[group("dev")]
 run:
     uv run python main.py
 
 # Genera el cuadernillo de un municipio específico
-[group("reports")]
+[group("dev")]
 run-one clave:
     uv run python main.py --municipio {{clave}}
 
+# Genera los cuadernillos de una muestra representativa de municipios
+[group("dev")]
+run-sample:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    for clave in {{ SAMPLE }}; do
+        echo "==> $clave"
+        uv run python main.py --municipio "$clave"
+    done
+
 # abre un archivo específico
-[group("reports")]
+[group("dev")]
 open-one clave:
    open "$(ls -t output/pdf/{{clave}}_*cuadernillo*/*.pdf | head -1)"
+
+# Genera los cuadernillos finales en output/pdf/prod con dos pasadas de xelatex; reanuda desde una clave si se le pasa
+[group("prod")]
+run-prod desde="":
+    #!/usr/bin/env bash
+    set -euo pipefail
+    if [ -n "{{ desde }}" ]; then
+        uv run python main.py --prod --desde "{{ desde }}"
+    else
+        uv run python main.py --prod
+    fi
+
+# Genera un rango de cuadernillos finales por clave, ambos extremos incluidos
+[group("prod")]
+run-prod-range desde hasta:
+    uv run python main.py --prod --desde {{desde}} --hasta {{hasta}}
+
+# Genera un solo cuadernillo final en output/pdf/prod
+[group("prod")]
+run-prod-one clave:
+    uv run python main.py --prod --municipio {{clave}}
+
+# Abre un cuadernillo final de output/pdf/prod
+[group("prod")]
+prod-open-one clave:
+    open "$(ls -t output/pdf/prod/{{clave}}_*.pdf | head -1)"
 
 # Revisa estilo y formato con ruff
 [group("format code")]
@@ -36,3 +75,8 @@ lint:
 fix:
     uv run ruff check --fix .
     uv run ruff format .
+
+# Ejecuta la suite de pruebas
+[group("test")]
+test:
+    uv run pytest

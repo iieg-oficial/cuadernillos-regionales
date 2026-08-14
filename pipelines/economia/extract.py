@@ -26,15 +26,15 @@ from pipelines.economia.queries.ganaderia import (
     get_valor_produccion_ganadera_estatal,
     get_valor_produccion_ganadera_municipal,
 )
-from pipelines.economia.queries.inpc import get_inpc_promedio_anual
 from pipelines.economia.queries.imss import (
-    get_asegurados_estatal,
     get_asegurados_municipio,
     get_asegurados_por_division,
     get_asegurados_todos_municipios,
     get_fechas_comparacion,
     get_ultimo_corte,
+    sumar_asegurados_estatal,
 )
+from pipelines.economia.queries.inpc import get_inpc_promedio_anual
 
 ANIO_CE = 2024
 ANIO_CE_ANTERIOR = 2019
@@ -173,12 +173,14 @@ class Extract(Stage):
                     imss_asegurados_mun = get_asegurados_municipio(
                         session, cvegeo, t0, t1, t2
                     )
-                    imss_asegurados_estatal = get_asegurados_estatal(session, t0)
                     imss_por_division = get_asegurados_por_division(
                         session, cvegeo, t0, t1, t2
                     )
                     imss_todos_municipios = get_asegurados_todos_municipios(
                         session, t0, t1
+                    )
+                    imss_asegurados_estatal = sumar_asegurados_estatal(
+                        imss_todos_municipios
                     )
         except Exception:
             Logger.warning("Economía: no se pudo conectar a IMSS")

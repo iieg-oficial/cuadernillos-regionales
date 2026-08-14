@@ -7,6 +7,7 @@ from pydantic_settings import BaseSettings
 class AppSettings(BaseSettings):
     FONTS_PATH: str = Field(default="/usr/share/fonts/")
     ASSETS_PATH: str = Field(default="templates/assets/")
+    ESCUDOS_URL: str = Field(default="")
 
     model_config = {"env_file": ".env/.env.app"}
 

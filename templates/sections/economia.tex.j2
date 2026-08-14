@@ -1,22 +1,21 @@
 \clearpage
 \thispagestyle{empty}
+\phantomsection
+\addcontentsline{toc}{section}{Economía}
 \AddToShipoutPictureBG*{%
   \AtPageUpperLeft{\raisebox{-\height}{\includegraphics[width=\paperwidth]{<< assets_path >>portadilla.png}}}%
   \AtPageLowerLeft{\includegraphics[width=\paperwidth]{<< assets_path >>footer_section.png}}%
 }
 \vspace*{\stretch{1}}
 \begin{center}
-  {\color{colorTexto}\bfseries\fontsize{30}{34}\selectfont Economía} \\[2.5em]
-  {\color{colorTexto}\lexendsemibold
-  \shortstack{
-    {\huge << ec_municipio_nombre >>} \\[0.3cm]
-    {\huge Agosto 2026}
-  }}
+  {\color{colorSeccion}\garetextrabold\fontsize{36}{40}\selectfont Economía}\\[1.4cm]
+  {\color{colorTexto}\garetmedium\fontsize{14}{18}\selectfont
+   \addfontfeature{LetterSpace=22.0}\MakeUppercase{<< ec_municipio_nombre >>}}\\[3.6cm]
+  {\color{colorTexto}\garetextrabold\fontsize{16}{20}\selectfont
+   \addfontfeature{LetterSpace=22.0}AGOSTO 2026}
 \end{center}
 \vspace*{\stretch{2}}
 \clearpage
-
-\section{Economía}
 
 \subsection{Número de empresas}
 
@@ -47,7 +46,7 @@ sector de << ec_sector_tercer_unidades >> con el << ec_porcentaje_sector_tercer_
                   >{\raggedleft\arraybackslash}m{\dimexpr0.12\linewidth - 2\tabcolsep\relax}}
 
 \caption{\textbf{Cantidad de unidades económicas por sector y según composición en << ec_municipio_nombre >>} \\
-<< ec_anio_denue >>}
+<< ec_anio_pasado_denue >>}
 \label{tabla_denue} \\
 
 \hline
@@ -100,11 +99,11 @@ sector de << ec_sector_tercer_unidades >> con el << ec_porcentaje_sector_tercer_
 \end{longtable}
 \normalsize
 \vspace{-28pt}\noindent\parbox{\linewidth}{\footnotesize
-Fuente: INEGI. Directorio Estadístico Nacional de Unidades Económicas, << ec_anio_denue >>.}
+Fuente: INEGI. Directorio Estadístico Nacional de Unidades Económicas, << ec_anio_pasado_denue >>.}
 
 \subsection{Valor agregado censal bruto}
 
-El Valor Agregado Censal Bruto (VACB) es valor de la producción añadido durante el proceso de trabajo.
+El Valor Agregado Censal Bruto (VACB) es el valor de la producción añadido durante el proceso de trabajo.
 Se calcula restando el consumo intermedio (el dinero gastado en los bienes y servicios necesarios para operar) de la producción bruta total.
 
 Conforme a la información de los Censos económicos de << ec_anio_publicacion_ce_anterior >> y de
@@ -113,16 +112,8 @@ Conforme a la información de los Censos económicos de << ec_anio_publicacion_c
 un año anterior al año del censo.} que publicó el INEGI, el valor agregado censal bruto de
 << ec_municipio_nombre >> registró una variación real de << ec_variacion_valor_agregado_censal >>
 de << ec_anio_ce_anterior >> a << ec_anio_ce >>.
-En << ec_anio_ce >> los tres subsectores más importantes en la generación de valor agregado censal bruto
-en el municipio de << ec_municipio_nombre >> fueron el de << ec_subsector_primer_lugar >>,
-el de << ec_subsector_segundo_lugar >> y el de << ec_subsector_tercer_lugar >> que generaron en conjunto el
-<< ec_porcentaje_aportacion_principales_subsectores >> o << ec_aportacion_principales_subsectores >>
-millones de pesos del total del valor agregado censal bruto registrado en << ec_anio_ce >> en el municipio.
-El subsector de << ec_subsector_mayor_crecimiento >> fue el que registró el mayor crecimiento
-real pasando de << ec_aportacion_anterior_subsector_mayor_crecimiento >> millones de pesos en
-<< ec_anio_ce_anterior >> a << ec_aportacion_subsector_mayor_crecimiento >> millones de pesos en
-<< ec_anio_ce >>, representando una variación del
-<< ec_variacion_porcentual_aportacion_subsector_mayor_crecimiento >> durante dicho periodo.
+<< ec_texto_subsectores_vacb >>
+<< ec_texto_mayor_crecimiento_vacb >>
 
 \newpage
 
@@ -180,8 +171,9 @@ real pasando de << ec_aportacion_anterior_subsector_mayor_crecimiento >> millone
 
 \end{longtable}
 \normalsize
-\tablefooter{Nota: & El campo otros incluye subsectores con menor valor agregado censal bruto y/o subsectores agrupados por el principio de confidencialidad.\\
-Fuente: & IIEG con base en INEGI. Censos Económicos, << ec_anio_publicacion_ce_anterior >> y << ec_anio_publicacion_ce >>.\\
+\tablefooter{Nota: & El cuadro solo presenta información para los subsectores que no están restringidos por principios de confidencialidad.\\
+<% if ec_tabla_vacb_tiene_na %>ND: & No disponible.\\<% endif %>
+Fuente: & IIEG, con base en INEGI. Censos Económicos, << ec_anio_publicacion_ce_anterior >> y << ec_anio_publicacion_ce >>.\\
 & INEGI. Índice Nacional de Precios al Consumidor. Base segunda quincena julio 2018.\\
 & Los valores de << ec_anio_ce >> fueron deflactados a precios de << ec_anio_ce_anterior >> con base en el promedio anual del INPC.}
 
@@ -264,16 +256,17 @@ y << ec_anio_corte_imss >>}
 
 \end{longtable}
 \normalsize
-\tablefooter{Fuente: & IIEG con base en IMSS. Datos abiertos de Trabajadores Asegurados, << ec_dos_anios_atras_corte_imss >>,
+\tablefooter{<% if ec_tabla_imss_grupos_tiene_na %>ND: & No disponible.\\
+<% endif %>Fuente: & IIEG, con base en IMSS. Datos abiertos de Trabajadores Asegurados, << ec_dos_anios_atras_corte_imss >>,
 << ec_anio_anterior_corte_imss >> y << ec_anio_corte_imss >>.}
 
 \newpage
 
-\subsubsection*{Trabajadores asegurados por el IMSS en la << nombre_region >>}
+\subsubsection*{Trabajadores asegurados en el IMSS en la << nombre_region >>}
 
-En << ec_mes_corte_imss >> de << ec_anio_corte_imss >>, << ec_municipio_nombre >> se presenta como el
-<< ec_posicion_municipio_region >> municipio dentro de la región << nombre_region >> con mayor número
-de trabajadores, concentrando el << ec_porcentaje_asegurados_region >> del total.
+En << ec_mes_corte_imss >> de << ec_anio_corte_imss >>, << ec_municipio_nombre >> se presenta en el lugar
+<< ec_posicion_municipio_region >>  dentro de la << nombre_region >> en número de trabajadores asegurados, concentrando el
+<< ec_porcentaje_asegurados_region >> del total.
 
 \setlength{\tabcolsep}{3pt}
 \footnotesize
@@ -328,12 +321,14 @@ de trabajadores, concentrando el << ec_porcentaje_asegurados_region >> del total
 
 \end{longtable}
 \normalsize
-\tablefooter{Fuente: & IIEG con base en IMSS. Datos abiertos de Trabajadores Asegurados, << ec_anio_anterior_corte_imss >>
+\tablefooter{Fuente: & IIEG, con base en IMSS. Datos abiertos de Trabajadores Asegurados, << ec_anio_anterior_corte_imss >>
 y << ec_anio_corte_imss >>.}
 
 \newpage
+<% if ec_agropecuario_activa %>
 \subsection{Agricultura y ganadería}
 
+<% if ec_agricola_activa %>
 La información sobre producción agrícola que reporta la Secretaría de Agricultura y Desarrollo Rural a
 través de la Dirección General del Servicio de Información Agroalimentaria y Pesquera, señala que el valor
 de la producción agrícola de << ec_municipio_nombre >> en << ec_anio_corte_sagarpa >> fue de
@@ -342,10 +337,14 @@ de la producción agrícola de << ec_municipio_nombre >> en << ec_anio_corte_sag
 
 \vspace{0.3cm}
 << ec_grafica_agricultura >>
+<% endif %>
 
-El valor de la producción pecuaria \footnote{La producción pecuaria comprende productos provenientes de ganado bovino, caprino, ovino y porcino, así como de abejas, aves.} en << ec_municipio_nombre >> en << ec_anio_corte_sagarpa >>
+<% if ec_pecuaria_activa %>
+El valor de la producción pecuaria \footnote{La producción pecuaria comprende productos provenientes de ganado bovino, caprino, ovino y porcino, así como de abejas y aves.} en << ec_municipio_nombre >> en << ec_anio_corte_sagarpa >>
 fue de << ec_valor_produccion_ganado >> millones de pesos, y representó el
 << ec_porcentaje_respecto_al_estado_ganado >> del total estatal.
 
 \vspace{0.3cm}
 << ec_grafica_ganaderia >>
+<% endif %>
+<% endif %>

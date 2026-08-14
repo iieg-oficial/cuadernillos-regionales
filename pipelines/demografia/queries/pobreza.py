@@ -16,8 +16,10 @@ def get_pobreza_por_entidad(session: Session, anio: int) -> list[dict]:
     stmt = text("""
         SELECT
             LEFT(cve_mun, 2) AS cve_ent,
-            SUM(pobreza_personas)::float / NULLIF(SUM(poblacion), 0) * 100   AS pobreza_porcentaje,
-            SUM(pobreza_ext_personas)::float / NULLIF(SUM(poblacion), 0) * 100 AS pobreza_ext_porcentaje
+            SUM(pobreza_personas)::float
+                / NULLIF(SUM(poblacion), 0) * 100 AS pobreza_porcentaje,
+            SUM(pobreza_ext_personas)::float
+                / NULLIF(SUM(poblacion), 0) * 100 AS pobreza_ext_porcentaje
         FROM stg_pobreza_multidimensional_datos
         WHERE anio = :anio
           AND poblacion IS NOT NULL

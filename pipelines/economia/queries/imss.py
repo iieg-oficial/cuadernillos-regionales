@@ -11,7 +11,7 @@ def _end_of_month(year, month):
 
 
 def get_ultimo_corte(session: Session):
-    stmt = text("SELECT MAX(fecha_corte) AS fecha FROM vw_asg_imss")
+    stmt = text("SELECT MAX(fecha_corte) AS fecha FROM stg_asg_imss")
     row = session.execute(stmt).fetchone()
     return row.fecha if row else None
 
@@ -45,14 +45,8 @@ def get_asegurados_municipio(session: Session, cvegeo, t0, t1, t2):
     return {"t0": row.total_t0, "t1": row.total_t1, "t2": row.total_t2}
 
 
-def get_asegurados_estatal(session: Session, fecha):
-    stmt = text("""
-        SELECT COALESCE(SUM(asegurados), 0) AS total
-        FROM vw_asg_imss
-        WHERE fecha_corte = :fecha AND sector_economico_4 IS NOT NULL
-    """)
-    row = session.execute(stmt, {"fecha": fecha}).fetchone()
-    return row.total
+def sumar_asegurados_estatal(por_municipio, clave="t0"):
+    return sum(r[clave] for r in por_municipio)
 
 
 def get_asegurados_por_division(session: Session, cvegeo, t0, t1, t2):

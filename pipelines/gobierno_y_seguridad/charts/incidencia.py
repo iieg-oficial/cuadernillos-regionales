@@ -5,31 +5,40 @@ import matplotlib.ticker as ticker
 import squarify
 
 from core.constants import COLOR_GRIS, COLOR_SECCION, COLOR_TEXTO
+from core.utils.charts import setup_chart_style
 
-MESES_CORTOS = {
-    1: "ene",
-    2: "feb",
-    3: "mar",
-    4: "abr",
-    5: "may",
-    6: "jun",
-    7: "jul",
-    8: "ago",
-    9: "sep",
-    10: "oct",
-    11: "nov",
-    12: "dic",
+MESES_COMPLETOS = {
+    1: "enero",
+    2: "febrero",
+    3: "marzo",
+    4: "abril",
+    5: "mayo",
+    6: "junio",
+    7: "julio",
+    8: "agosto",
+    9: "septiembre",
+    10: "octubre",
+    11: "noviembre",
+    12: "diciembre",
 }
 
 COLORES_BIENES = [
     "#5C2472",
-    "#7A4A8A",
-    "#E88A2A",
     "#C75B12",
-    "#9B59B6",
+    "#7A4A8A",
+    "#487ba9",
+    "#E88A2A",
     "#D4A5E5",
-    "#E6772E",
+    "#3c4856",
 ]
+
+
+def _set_integer_yticks(ax, valores):
+    max_valor = int(max(valores))
+    if max_valor <= 10:
+        ax.set_yticks(range(0, max_valor + 1))
+    else:
+        ax.yaxis.set_major_locator(ticker.MaxNLocator(integer=True))
 
 
 def grafica_carpetas_por_mes(
@@ -37,23 +46,25 @@ def grafica_carpetas_por_mes(
     municipio,
     output_path: Path,
 ):
+    setup_chart_style()
+
     datos = sorted(carpetas_por_mes, key=lambda r: (r["anio"], r["mes"]))
-    etiquetas = [f"{MESES_CORTOS[r['mes']]}-{r['anio']}" for r in datos]
+    etiquetas = [f"{MESES_COMPLETOS[r['mes']]}\n{r['anio']}" for r in datos]
     valores = [r["total"] for r in datos]
     media = sum(valores) / len(valores)
 
-    fig, ax = plt.subplots(figsize=(10, 5))
+    fig, ax = plt.subplots(figsize=(14, 6))
 
     ax.plot(
         etiquetas,
         valores,
         color=COLOR_SECCION,
-        linewidth=2.5,
+        linewidth=3,
         marker="o",
-        markersize=7,
+        markersize=9.5,
         markerfacecolor="white",
         markeredgecolor=COLOR_SECCION,
-        markeredgewidth=2,
+        markeredgewidth=2.5,
         zorder=3,
     )
 
@@ -64,14 +75,14 @@ def grafica_carpetas_por_mes(
             textcoords="offset points",
             xytext=(0, 12),
             ha="center",
-            fontsize=9,
+            fontsize=10.5,
             fontweight="bold",
             color=COLOR_TEXTO,
             bbox=dict(
                 boxstyle="round,pad=0.2",
                 facecolor="white",
                 edgecolor=COLOR_SECCION,
-                linewidth=0.8,
+                linewidth=1.2,
             ),
         )
 
@@ -80,7 +91,7 @@ def grafica_carpetas_por_mes(
         y=media,
         color=COLOR_GRIS,
         linestyle="--",
-        linewidth=1.2,
+        linewidth=1.5,
         zorder=1,
     )
     ax.text(
@@ -89,26 +100,34 @@ def grafica_carpetas_por_mes(
         f"  {media_label}",
         ha="left",
         va="bottom",
-        fontsize=8,
+        fontsize=9.5,
         color=COLOR_GRIS,
         style="italic",
     )
 
-    ax.set_ylabel("Carpetas", fontsize=11, color=COLOR_TEXTO)
+    ax.set_ylabel("Carpetas", fontsize=12, color=COLOR_TEXTO, fontweight="bold")
+    _set_integer_yticks(ax, valores)
     ax.yaxis.set_major_formatter(
         ticker.FuncFormatter(lambda x, _: f"{x:,.0f}".replace(",", " "))
     )
 
-    y_min = min(valores) * 0.9
-    y_max = max(valores) * 1.12
+    y_min = -0.1 if min(valores) == 0 else min(valores) * 0.965
+    y_max = max(valores) * 1.06
     ax.set_ylim(y_min, y_max)
 
     ax.spines["top"].set_visible(False)
     ax.spines["right"].set_visible(False)
     ax.spines["left"].set_color(COLOR_TEXTO)
     ax.spines["bottom"].set_color(COLOR_TEXTO)
-    ax.tick_params(colors=COLOR_TEXTO, labelsize=9)
-    plt.xticks(rotation=45, ha="right")
+
+    ax.spines["left"].set_linewidth(1.5)
+    ax.spines["bottom"].set_linewidth(1.5)
+
+    ax.tick_params(colors=COLOR_TEXTO)
+    plt.xticks(rotation=0, ha="center")
+    for label in (*ax.get_xticklabels(), *ax.get_yticklabels()):
+        label.set_fontsize(11.5)
+        # label.set_fontweight("bold")
 
     fig.tight_layout()
     output_path.parent.mkdir(parents=True, exist_ok=True)
@@ -122,16 +141,18 @@ def grafica_bienes_juridicos(
     municipio,
     output_path: Path,
 ):
+    setup_chart_style()
+
     total = sum(r["total"] for r in casos_bien_afectado)
     datos = []
     for r in casos_bien_afectado:
         pct = r["total"] / total * 100
         nombre = r["bien_afectado"]
-        if nombre.startswith("Otros bienes"):
-            nombre = "Otros bienes jurídicos"
+        if nombre.startswith("otros bienes"):
+            nombre = "otros bienes jurídicos"
         datos.append({"nombre": nombre, "pct": pct})
 
-    nombres = [d["nombre"] for d in datos]
+    nombres = [d["nombre"][:1].upper() + d["nombre"][1:] for d in datos]
     valores = [d["pct"] for d in datos]
     colores = COLORES_BIENES[: len(datos)]
 
@@ -209,6 +230,8 @@ def grafica_principales_delitos(
     municipio,
     output_path: Path,
 ):
+    setup_chart_style()
+
     top = casos_por_delito[:5]
     nombres = [r["delito"] for r in top]
     valores = [r["total"] for r in top]
@@ -246,9 +269,12 @@ def grafica_principales_delitos(
         wrapped.append("\n".join(lines))
 
     ax.set_xticks(range(len(top)))
-    ax.set_xticklabels(wrapped, fontsize=9, color=COLOR_TEXTO)
-    ax.set_xlabel("Subtipos de delitos", fontsize=11, color=COLOR_TEXTO)
-    ax.set_ylabel("Carpetas", fontsize=11, color=COLOR_TEXTO)
+    ax.set_xticklabels(wrapped, fontsize=12, color=COLOR_TEXTO)
+    ax.set_xlabel(
+        "Subtipos de delitos", fontsize=11, color=COLOR_TEXTO, fontweight="bold"
+    )
+    ax.set_ylabel("Carpetas", fontsize=11, color=COLOR_TEXTO, fontweight="bold")
+    _set_integer_yticks(ax, valores)
     ax.yaxis.set_major_formatter(
         ticker.FuncFormatter(lambda x, _: f"{x:,.0f}".replace(",", " "))
     )
@@ -258,7 +284,7 @@ def grafica_principales_delitos(
     ax.spines["right"].set_visible(False)
     ax.spines["left"].set_color(COLOR_TEXTO)
     ax.spines["bottom"].set_color(COLOR_TEXTO)
-    ax.tick_params(colors=COLOR_TEXTO)
+    ax.tick_params(colors=COLOR_TEXTO, labelsize=12)
 
     fig.tight_layout()
     output_path.parent.mkdir(parents=True, exist_ok=True)

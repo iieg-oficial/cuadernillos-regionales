@@ -26,7 +26,7 @@ def get_ventana_ultimos_meses(
 ) -> list[tuple]:
     stmt = text("""
         SELECT DISTINCT anio, mes
-        FROM v_delitos_comparables_general
+        FROM vw_delitos_comparables_general
         WHERE clave_ent = '14'
     """)
     indices = [
@@ -49,7 +49,7 @@ def get_carpetas_por_mes(
     anios = tuple(sorted({anio for anio, _ in ventana}))
     stmt = text("""
         SELECT anio, mes, SUM(conteo) AS total
-        FROM v_delitos_comparables_general
+        FROM vw_delitos_comparables_general
         WHERE cve_municipio = :cve_municipio
           AND anio IN :anios
         GROUP BY anio, mes
@@ -66,6 +66,10 @@ def get_carpetas_por_mes(
     ]
 
 
+def _normalizar_bien(nombre):
+    return str(nombre).strip().lower()
+
+
 def get_casos_por_bien_afectado(
     session: Session, cve_municipio: str, ventana: list[tuple]
 ) -> list[dict]:
@@ -75,7 +79,7 @@ def get_casos_por_bien_afectado(
     window = set(ventana)
     stmt = text("""
         SELECT anio, mes, bien_juridico_afectado, SUM(conteo) AS total
-        FROM v_delitos_comparables_general
+        FROM vw_delitos_comparables_general
         WHERE cve_municipio = :cve_municipio
           AND anio IN :anios
         GROUP BY anio, mes, bien_juridico_afectado
@@ -85,7 +89,7 @@ def get_casos_por_bien_afectado(
     for row in rows:
         mes_num = MES_A_NUMERO.get(row.mes)
         if mes_num and (row.anio, mes_num) in window:
-            agg[row.bien_juridico_afectado] += row.total
+            agg[_normalizar_bien(row.bien_juridico_afectado)] += row.total
     return sorted(
         [{"bien_afectado": bien, "total": total} for bien, total in agg.items()],
         key=lambda r: r["total"],
@@ -102,7 +106,7 @@ def get_casos_por_delito(
     window = set(ventana)
     stmt = text("""
         SELECT anio, mes, subtipo_delito, SUM(conteo) AS total
-        FROM v_delitos_comparables_general
+        FROM vw_delitos_comparables_general
         WHERE cve_municipio = :cve_municipio
           AND anio IN :anios
           AND subtipo_delito NOT ILIKE 'Otros%'

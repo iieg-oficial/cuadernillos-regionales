@@ -9,12 +9,15 @@
 }
 \vspace*{5cm}
 \begin{center}
-  {\color{colorTexto}\fontsize{16}{30}\lexendsemibold
-  \shortstack{
-    {\Huge << de_municipio_nombre >>} \\[1.2cm]
-    {\LARGE Cudernillo municipal} \\[0.3cm]
-    {\LARGE Agosto 2026}
-  }}
+<% if escudo_path %>
+  \includegraphics[height=3.5cm]{<< escudo_path >>}\\[1.7cm]
+<% endif %>
+  {\color{colorSeccion}\garetextrabold\fontsize{36}{48}\selectfont
+   << de_municipio_nombre >>}\\[0.6cm]
+  {\color{colorTexto}\garetmedium\fontsize{14}{18}\selectfont
+   \addfontfeature{LetterSpace=22.0}CUADERNILLO MUNICIPAL}\\[2.2cm]
+  {\color{colorTexto}\garetextrabold\fontsize{16}{20}\selectfont
+   \addfontfeature{LetterSpace=22.0}AGOSTO 2026}
 \end{center}
 \clearpage
 
@@ -22,9 +25,9 @@
   \begingroup
   \setlength{\parskip}{0pt}%
   \setstretch{1.1}%
-  \noindent{\color{colorTexto}\bfseries\Huge << de_municipio_nombre >>}\par
+  \noindent{\color{colorSeccion}\bfseries\huge << de_municipio_nombre >>}\par
   \vspace{0.4cm}
-  \noindent{\color{colorTexto}\huge Cudernillo municipal}\par
+  \noindent{\color{colorTexto}\huge Cuadernillo municipal}\par
   \vspace{0.6cm}
   \noindent{\color{colorTexto}\LARGE Agosto 2026}\\[-4pt]
   \noindent\rule{\textwidth}{0.4pt}\par

@@ -37,3 +37,23 @@ def get_same_region_ids(municipio_id: str) -> list[str]:
 
 def get_all_regions() -> list[str]:
     return [region for entry in _load() for region in entry]
+
+
+def get_all_municipio_ids() -> list[str]:
+    ids = [
+        m["id"]
+        for entry in _load()
+        for municipios in entry.values()
+        for m in municipios
+    ]
+    return sorted(ids, key=int)
+
+
+def get_municipio_nombre(municipio_id) -> str:
+    clave = int(municipio_id)
+    for entry in _load():
+        for municipios in entry.values():
+            for municipio in municipios:
+                if int(municipio["id"]) == clave:
+                    return municipio["municipio"]
+    raise ValueError(f"Municipio '{municipio_id}' not found")

@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
 
 from core.constants import COLOR_GRIS, COLOR_SECCION, COLOR_TEXTO
+from core.utils.charts import setup_chart_style
 
 N_ANIOS = 6
 
@@ -14,6 +15,8 @@ def grafica_produccion(
     tipo: str,
     output_path: Path,
 ):
+    setup_chart_style()
+
     ultimos = datos[-N_ANIOS:]
     anios = [str(d["anio"]) for d in ultimos]
     valores = [d["valor_millones"] for d in ultimos]
@@ -23,7 +26,10 @@ def grafica_produccion(
 
     fig, ax = plt.subplots(figsize=(10, 5.5))
 
-    bars = ax.bar(anios, valores, color=colores, width=0.85, edgecolor="none")
+    posiciones = range(len(anios))
+    bars = ax.bar(posiciones, valores, color=colores, width=0.85, edgecolor="none")
+    ax.set_xticks(list(posiciones))
+    ax.set_xticklabels(anios, fontsize=12)
 
     for bar, val in zip(bars, valores):
         ax.text(
@@ -37,8 +43,10 @@ def grafica_produccion(
             fontweight="bold",
         )
 
-    ax.set_xlabel("Año", fontsize=11, color=COLOR_TEXTO)
-    ax.set_ylabel("Valor de la producción", fontsize=11, color=COLOR_TEXTO)
+    ax.set_xlabel("Año", fontsize=12, color=COLOR_TEXTO, fontweight="bold")
+    ax.set_ylabel(
+        "Valor de la producción", fontsize=12, color=COLOR_TEXTO, fontweight="bold"
+    )
     ax.yaxis.set_major_formatter(
         ticker.FuncFormatter(lambda x, _: f"{x:,.0f}".replace(",", " "))
     )
@@ -48,7 +56,7 @@ def grafica_produccion(
     ax.spines["right"].set_visible(False)
     ax.spines["left"].set_color(COLOR_TEXTO)
     ax.spines["bottom"].set_color(COLOR_TEXTO)
-    ax.tick_params(colors=COLOR_TEXTO)
+    ax.tick_params(colors=COLOR_TEXTO, labelsize=12)
 
     fig.tight_layout()
     output_path.parent.mkdir(parents=True, exist_ok=True)

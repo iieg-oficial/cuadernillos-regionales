@@ -1,10 +1,15 @@
 from pathlib import Path
 
-from core.constants import DASH, ND
+from core.constants import DASH, INCOMPLETE_AGRICOLA, INCOMPLETE_PECUARIA, ND
 from core.pipelines.stage import Stage
+from core.utils.helpers import rows_have_na
 from core.utils.logger import Logger
 from core.utils.municipalities import get_same_region, get_same_region_ids
 from pipelines.economia.charts.produccion import grafica_produccion
+from pipelines.economia.helpers.vacb import (
+    build_mayor_crecimiento_text,
+    build_subsectores_text,
+)
 
 MAPA_PLACEHOLDER = (
     "\\includegraphics[width=\\textwidth]{templates/assets/mapa_placeholder.png}"
@@ -46,7 +51,7 @@ def _pct(value) -> str:
     return f"{value:,.2f}".replace(",", r"\,") + r"\,\%"
 
 
-def _grafica_latex(path, municipio, tipo, datos, num):
+def _grafica_latex(path, municipio, tipo, datos):
     n = min(6, len(datos))
     ultimos = datos[-n:]
     anio_ini = ultimos[0]["anio"]
@@ -57,12 +62,13 @@ def _grafica_latex(path, municipio, tipo, datos, num):
     )
     return (
         "\\begin{figure}[H]\n"
-        f"{{\\color{{colorTexto}}Gráfica {num}}}\\\\\n"
+        "\\refstepcounter{grafica}%\n"
+        "{\\color{colorTexto}Gráfica \\thegrafica}\\\\\n"
         f"{{\\color{{colorTexto}}\\textbf{{{titulo}}}}}\n"
         "\\vspace{0.3cm}\n\n"
         f"\\includegraphics[width=0.95\\textwidth]{{{path}}}\n"
         "\\end{figure}\n"
-        "\\vspace{-10pt}\\noindent{\\footnotesize Fuente: SAGARPA. "
+        "\\vspace{-10pt}\\noindent{\\footnotesize Fuente: SADER. "
         f"Datos abiertos de la DGSIAP, {anio_ini}--{anio_fin}.}}"
     )
 
@@ -125,7 +131,9 @@ def _top_sectores(sector_data, grand_total):
     return result
 
 
-def _build_vacb_table(vacb_actual, vacb_anterior, vacb_total_actual, factor):
+def _build_vacb_table(
+    vacb_actual, vacb_anterior, vacb_total_actual, vacb_total_anterior, factor
+):
     anterior_by_codigo = {r["codigo"]: r["vacb"] for r in vacb_anterior}
 
     top_actual = vacb_actual[:9]
@@ -152,16 +160,25 @@ def _build_vacb_table(vacb_actual, vacb_anterior, vacb_total_actual, factor):
         )
 
     if len(vacb_actual) > 9:
-        otros_act = sum(r["vacb"] for r in vacb_actual[9:] if r["vacb"])
-        otros_act_real = otros_act * factor if factor else None
-        top9_codigos = {x["codigo"] for x in vacb_actual[:9]}
-        otros_ant = sum(
-            r["vacb"]
-            for r in vacb_anterior
-            if r["codigo"] not in top9_codigos and r["vacb"]
+        top9_actual = sum(r["vacb"] for r in top_actual if r["vacb"])
+        top9_anterior = sum(
+            anterior_by_codigo.get(r["codigo"]) or 0 for r in top_actual
+        )
+        otros_act = (
+            vacb_total_actual - top9_actual if vacb_total_actual is not None else None
+        )
+        otros_act_real = (
+            otros_act * factor if (otros_act is not None and factor) else None
+        )
+        otros_ant = (
+            vacb_total_anterior - top9_anterior
+            if vacb_total_anterior is not None
+            else None
         )
         pct_otros = (
-            _fmt(otros_act / vacb_total_actual * 100) if vacb_total_actual else ND
+            _fmt(otros_act / vacb_total_actual * 100)
+            if (vacb_total_actual and otros_act is not None)
+            else ND
         )
         if otros_ant and otros_act_real:
             var_otros = _fmt((otros_act_real - otros_ant) / otros_ant * 100)
@@ -369,26 +386,40 @@ class Analizer(Stage):
             ctx["ec_variacion_valor_agregado_censal"] = ND
             ctx["ec_variacion_vacb_total"] = ND
 
-        top3_vacb = vacb_actual[:3] if len(vacb_actual) >= 3 else vacb_actual
-        ctx["ec_subsector_primer_lugar"] = (
-            top3_vacb[0]["subsector"].lower() if len(top3_vacb) > 0 else ND
-        )
-        ctx["ec_subsector_segundo_lugar"] = (
-            top3_vacb[1]["subsector"].lower() if len(top3_vacb) > 1 else ND
-        )
-        ctx["ec_subsector_tercer_lugar"] = (
-            top3_vacb[2]["subsector"].lower() if len(top3_vacb) > 2 else ND
-        )
+        top3_vacb = vacb_actual[:3]
 
-        if len(top3_vacb) >= 3 and vacb_total_actual:
-            suma_top3 = sum(r["vacb"] for r in top3_vacb if r["vacb"])
-            ctx["ec_porcentaje_aportacion_principales_subsectores"] = _pct(
-                suma_top3 / vacb_total_actual * 100
+        if top3_vacb and vacb_total_actual_real and factor_deflactacion:
+            suma_top3_real = sum(
+                r["vacb"] * factor_deflactacion for r in top3_vacb if r["vacb"]
             )
-            ctx["ec_aportacion_principales_subsectores"] = _fmt(suma_top3, 2)
+            pct_principales = _pct(suma_top3_real / vacb_total_actual_real * 100)
+            aportacion_principales = _fmt(suma_top3_real, 2)
         else:
-            ctx["ec_porcentaje_aportacion_principales_subsectores"] = ND
-            ctx["ec_aportacion_principales_subsectores"] = ND
+            pct_principales = ND
+            aportacion_principales = ND
+
+        if not top3_vacb:
+            Logger.warning(
+                f"Economía: municipio {municipio_id_str} sin desglose de VACB por "
+                "subsector, usando redacción de confidencialidad"
+            )
+        elif len(top3_vacb) < 3:
+            Logger.warning(
+                f"Economía: municipio {municipio_id_str} con solo "
+                f"{len(top3_vacb)} subsector(es) de VACB, usando redacción reducida"
+            )
+        else:
+            Logger.info("Economía: VACB con redacción completa de tres subsectores")
+
+        ctx["ec_porcentaje_aportacion_principales_subsectores"] = pct_principales
+        ctx["ec_aportacion_principales_subsectores"] = aportacion_principales
+        ctx["ec_texto_subsectores_vacb"] = build_subsectores_text(
+            [r["subsector"].lower() for r in top3_vacb],
+            ctx["ec_municipio_nombre"],
+            ctx["ec_anio_ce"],
+            pct_principales,
+            aportacion_principales,
+        )
 
         anterior_by_codigo2 = {r["codigo"]: r["vacb"] for r in vacb_anterior}
         mayor_crecimiento = None
@@ -430,9 +461,29 @@ class Analizer(Stage):
             ctx["ec_aportacion_subsector_mayor_crecimiento"] = ND
             ctx["ec_variacion_porcentual_aportacion_subsector_mayor_crecimiento"] = ND
 
-        ctx["ec_tabla_vacb"] = _build_vacb_table(
-            vacb_actual, vacb_anterior, vacb_total_actual, factor_deflactacion
+        if not mayor_crecimiento:
+            Logger.warning(
+                f"Economía: municipio {municipio_id_str} sin subsector comparable "
+                "entre censos, omitiendo la frase de mayor crecimiento del VACB"
+            )
+
+        ctx["ec_texto_mayor_crecimiento_vacb"] = build_mayor_crecimiento_text(
+            ctx["ec_subsector_mayor_crecimiento"] if mayor_crecimiento else None,
+            ctx["ec_aportacion_anterior_subsector_mayor_crecimiento"],
+            ctx["ec_aportacion_subsector_mayor_crecimiento"],
+            ctx["ec_variacion_porcentual_aportacion_subsector_mayor_crecimiento"],
+            ctx["ec_anio_ce_anterior"],
+            ctx["ec_anio_ce"],
         )
+
+        ctx["ec_tabla_vacb"] = _build_vacb_table(
+            vacb_actual,
+            vacb_anterior,
+            vacb_total_actual,
+            vacb_total_anterior,
+            factor_deflactacion,
+        )
+        ctx["ec_tabla_vacb_tiene_na"] = rows_have_na(ctx["ec_tabla_vacb"])
         ctx["ec_vacb_total_real"] = (
             _fmt(vacb_total_actual_real, 2)
             if vacb_total_actual_real is not None
@@ -494,6 +545,9 @@ class Analizer(Stage):
                 ctx["ec_total_var_nominal_imss"] = ND
 
             ctx["ec_tabla_imss_grupos"] = _build_imss_grupos(imss_divisiones, mun_t0)
+            ctx["ec_tabla_imss_grupos_tiene_na"] = rows_have_na(
+                ctx["ec_tabla_imss_grupos"]
+            )
 
             if imss_divisiones:
                 top = imss_divisiones[0]
@@ -572,6 +626,7 @@ class Analizer(Stage):
             ctx["ec_num_trabajadores_grupo_mayor"] = ND
             ctx["ec_porcentaje_trabajadores_grupo_mayor"] = ND
             ctx["ec_tabla_imss_grupos"] = []
+            ctx["ec_tabla_imss_grupos_tiene_na"] = False
             ctx["ec_posicion_municipio_region"] = ND
             ctx["ec_porcentaje_asegurados_region"] = ND
             ctx["ec_pct_asegurados_region_tabla"] = ND
@@ -595,47 +650,77 @@ class Analizer(Stage):
 
         municipio_nombre = input_data.get("municipio_nombre") or ""
 
-        if agricola_mun is not None:
-            ctx["ec_valor_produccion_agricola"] = _fmt(agricola_mun)
-        else:
-            ctx["ec_valor_produccion_agricola"] = ND
+        mun_int = int(municipio_id_str)
+        ctx["ec_agricola_activa"] = mun_int not in INCOMPLETE_AGRICOLA
+        ctx["ec_pecuaria_activa"] = mun_int not in INCOMPLETE_PECUARIA
+        ctx["ec_agropecuario_activa"] = (
+            ctx["ec_agricola_activa"] or ctx["ec_pecuaria_activa"]
+        )
 
-        if agricola_mun and agricola_est:
-            ctx["ec_porcentaje_respecto_al_estado_agricola"] = _pct(
-                agricola_mun / agricola_est * 100
+        if not ctx["ec_agropecuario_activa"]:
+            Logger.warning(
+                f"Economía: municipio {mun_int} sin datos agropecuarios, "
+                "ignorando sección Agricultura y ganadería"
             )
         else:
-            ctx["ec_porcentaje_respecto_al_estado_agricola"] = ND
+            if not ctx["ec_agricola_activa"]:
+                Logger.warning(
+                    f"Economía: municipio {mun_int} sin datos agrícolas, "
+                    "ignorando producción agrícola de la sección"
+                )
+            if not ctx["ec_pecuaria_activa"]:
+                Logger.warning(
+                    f"Economía: municipio {mun_int} sin datos pecuarios, "
+                    "ignorando producción pecuaria de la sección"
+                )
 
-        if len(agricola_anual) >= 2:
-            chart_path = CHARTS_DIR / municipio_id_str / "ec_agricultura.png"
-            grafica_produccion(agricola_anual, municipio_nombre, "agrícola", chart_path)
-            ctx["ec_grafica_agricultura"] = _grafica_latex(
-                chart_path, municipio_nombre, "agrícola", agricola_anual, 1
-            )
-        else:
-            ctx["ec_grafica_agricultura"] = MAPA_PLACEHOLDER
+        if ctx["ec_agricola_activa"]:
+            if agricola_mun is not None:
+                ctx["ec_valor_produccion_agricola"] = _fmt(agricola_mun)
+            else:
+                ctx["ec_valor_produccion_agricola"] = ND
 
-        if ganadera_mun is not None:
-            ctx["ec_valor_produccion_ganado"] = _fmt(ganadera_mun)
-        else:
-            ctx["ec_valor_produccion_ganado"] = ND
+            if agricola_mun and agricola_est:
+                ctx["ec_porcentaje_respecto_al_estado_agricola"] = _pct(
+                    agricola_mun / agricola_est * 100
+                )
+            else:
+                ctx["ec_porcentaje_respecto_al_estado_agricola"] = ND
 
-        if ganadera_mun and ganadera_est:
-            ctx["ec_porcentaje_respecto_al_estado_ganado"] = _pct(
-                ganadera_mun / ganadera_est * 100
-            )
-        else:
-            ctx["ec_porcentaje_respecto_al_estado_ganado"] = ND
+            if len(agricola_anual) >= 2:
+                chart_path = CHARTS_DIR / municipio_id_str / "ec_agricultura.png"
+                grafica_produccion(
+                    agricola_anual, municipio_nombre, "agrícola", chart_path
+                )
+                ctx["ec_grafica_agricultura"] = _grafica_latex(
+                    chart_path, municipio_nombre, "agrícola", agricola_anual
+                )
+            else:
+                ctx["ec_grafica_agricultura"] = MAPA_PLACEHOLDER
 
-        if len(ganadera_anual) >= 2:
-            chart_path = CHARTS_DIR / municipio_id_str / "ec_ganaderia.png"
-            grafica_produccion(ganadera_anual, municipio_nombre, "ganadera", chart_path)
-            ctx["ec_grafica_ganaderia"] = _grafica_latex(
-                chart_path, municipio_nombre, "ganadera", ganadera_anual, 2
-            )
-        else:
-            ctx["ec_grafica_ganaderia"] = MAPA_PLACEHOLDER
+        if ctx["ec_pecuaria_activa"]:
+            if ganadera_mun is not None:
+                ctx["ec_valor_produccion_ganado"] = _fmt(ganadera_mun)
+            else:
+                ctx["ec_valor_produccion_ganado"] = ND
+
+            if ganadera_mun and ganadera_est:
+                ctx["ec_porcentaje_respecto_al_estado_ganado"] = _pct(
+                    ganadera_mun / ganadera_est * 100
+                )
+            else:
+                ctx["ec_porcentaje_respecto_al_estado_ganado"] = ND
+
+            if len(ganadera_anual) >= 2:
+                chart_path = CHARTS_DIR / municipio_id_str / "ec_ganaderia.png"
+                grafica_produccion(
+                    ganadera_anual, municipio_nombre, "pecuaria", chart_path
+                )
+                ctx["ec_grafica_ganaderia"] = _grafica_latex(
+                    chart_path, municipio_nombre, "pecuaria", ganadera_anual
+                )
+            else:
+                ctx["ec_grafica_ganaderia"] = MAPA_PLACEHOLDER
 
         Logger.info("Economía: análisis completo")
         return ctx

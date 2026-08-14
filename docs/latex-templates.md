@@ -6,33 +6,38 @@ Esta guía explica cómo convertir un archivo `.tex` de Overleaf en un template 
 
 Jinja2 usa `{{ }}` y `{% %}` por defecto, pero LaTeX también usa `{}` extensivamente. Para evitar conflictos, el renderer usa delimitadores distintos:
 
-| Propósito   | Apertura              | Cierre                |
-| ----------- | --------------------- | --------------------- |
-| Variables   | `\verb` `<<\|`        | `>>\|`             |
-| Bloques     | `\verb` `<%\|`        | `%>`                  |
-| Comentarios | `\verb` `<#\|`        | `#>`                  |## Convención de variables
+| Propósito   | Apertura | Cierre |
+| ----------- | -------- | ------ |
+| Variables   | `<<`     | `>>`   |
+| Bloques     | `<%`     | `%>`   |
+| Comentarios | `<#`     | `#>`   |
+
+## Convención de variables
 
 Todas las variables del template deben llevar un prefijo con las iniciales de la sección, seguido de guión bajo. Esto evita colisiones entre secciones cuando se fusionan los contextos.
 
 ```
-gs_   →  gobierno_y_seguridad
+hi_   →  historia
+ge_   →  geografia
 de_   →  demografia
 ec_   →  economia
+gs_   →  gobierno_y_seguridad
+dm_   →  directorio_municipal
 ```
 
 **Correcto:**
 
 ```latex
-\verb|<< gs_municipio_nombre >>|
-\verb|<< gs_region_nombre >>|
-\verb|<< gs_tabla_delitos >>|
+<< gs_municipio_nombre >>
+<< gs_region_nombre >>
+<< gs_tabla_delitos >>
 ```
 
 **Incorrecto:**
 
 ```latex
-\verb|<< municipio_nombre >>|
-\verb|<< tabla_delitos >>|
+<< municipio_nombre >>
+<< tabla_delitos >>
 ```
 
 ## Pasos
@@ -43,8 +48,7 @@ Crea `templates/sections/nombre_seccion.tex.j2` y pega el contenido de tu `.tex`
 
 ### 2. Identifica los valores dinámicos
 
-Busca todo lo que cambia por municipio: nombre, región, valores de tablas, rutas de imágenes, etc. Esos valores estáticos se reemplazan con variables usando `\verb|<< >>|
-`.
+Busca todo lo que cambia por municipio: nombre, región, valores de tablas, rutas de imágenes, etc. Esos valores estáticos se reemplazan con variables usando `<< >>`.
 
 ### 3. Registra el template en `reporte.tex.j2`
 
@@ -53,6 +57,20 @@ Agrega una línea `include` al final de `reporte.tex.j2`:
 ```latex
 <% include "sections/nombre_seccion.tex.j2" %>
 ```
+
+### 4. Abre con la portada de sección
+
+Las secciones no llevan `\section{}`: el nombre ya aparece en la portada. El template arranca con la
+portada y ahí mismo se ancla la entrada del índice:
+
+```latex
+\clearpage
+\thispagestyle{empty}
+\phantomsection
+\addcontentsline{toc}{section}{Nombre de la sección}
+```
+
+Dentro de la sección se usan `\subsection{}` y `\subsubsection{}` con normalidad.
 
 ---
 
@@ -63,13 +81,13 @@ Agrega una línea `include` al final de `reporte.tex.j2`:
 Un valor estático en Overleaf:
 
 ```latex
-\section{Acatic — Región Altos Sur}
+\subsection{Acatic, Región Altos Sur}
 ```
 
 Se convierte en:
 
 ```latex
-\section{\verb|<< gs_municipio_nombre >>| — \verb|<< gs_region_nombre >>|}
+\subsection{<< gs_municipio_nombre >>, << gs_region_nombre >>}
 ```
 
 Un valor numérico dentro de texto:
@@ -81,69 +99,23 @@ En 2024 se registraron 42 delitos de fuero común.
 Se convierte en:
 
 ```latex
-En \verb|<< gs_anio_actual >>| se registraron << gs_total_delitos >> delitos de fuero común.
+En << gs_anio_actual >> se registraron << gs_total_delitos >> delitos de fuero común.
 ```
 
 ### Tablas
 
-Todas las tablas del proyecto usan `longtable` — no `tabular`. Si tu `.tex` de Overleaf usa `\begin{tabular}`, cámbialo a `\begin{longtable}`.
+Las tablas tienen su propia referencia: **[docs/tables.md](tables.md)**, con la estructura de
+`longtable`, alineaciones, encabezados, pies, caption, tamaños de fuente y colores.
 
-Las columnas se definen con proporciones de `\linewidth` que sumen 1.00, restando siempre `2\tabcolsep`:
+Lo esencial: todas las tablas usan `longtable`, nunca `tabular` ni `table`, sin líneas verticales,
+con columnas cuyas proporciones suman 1.00, encabezados con `\thh`/`\thhl` y pie con
+`\tablefooter`.
 
-En Overleaf:
-
-```latex
-\begin{tabular}{|c|l|c|c|}
-```
-
-En el template:
-
-```latex
-\begin{longtable}{|>{\centering\arraybackslash}p{\dimexpr0.15\linewidth - 2\tabcolsep\relax}
-                  |>{\raggedright\arraybackslash}p{\dimexpr0.45\linewidth - 2\tabcolsep\relax}
-                  |>{\centering\arraybackslash}p{\dimexpr0.20\linewidth - 2\tabcolsep\relax}
-                  |>{\centering\arraybackslash}p{\dimexpr0.20\linewidth - 2\tabcolsep\relax}|}
-```
-
-La alineación dentro de cada columna la defines según el contenido:
-
-| Alineación | Comando | Cuándo usarla |
-|---|---|---|
-| Centrado | `\centering\arraybackslash` | Números, claves, porcentajes |
-| Izquierda | `\raggedright\arraybackslash` | Texto largo (nombres, etiquetas) |
-| Derecha | `\raggedleft\arraybackslash` | Montos, valores con decimales alineados |
-
-Las proporciones (0.15 + 0.45 + 0.20 + 0.20 = 1.00) las defines tú según el contenido.
-
-Las filas estáticas en Overleaf:
-
-```latex
-117 & Cañadas de Obregón & 7  & 14 \\
-\hline
-48  & Jesús María         & 29 & 51 \\
-\hline
-```
-
-Se convierten en un loop:
-
-```latex
-<% for row in gs_tabla_delitos %>
- row.clave &  row.municipio  & row.anio\_censo  & row.poblacion\_total \\
-\hline
-<% endfor %>
-```
-
-Para resaltar una fila con condición:
-
-```latex
-<% for row in gs_tabla_delitos %>
-<% if row.es_objetivo %>\rowcolor{rowHighlight}<% endif %>
-row.clave &  row.municipio  & row.anio\_censo  & row.poblacion\_total \\ \\
-\hline
-<% endfor %>
-```
+Si tu `.tex` de Overleaf trae `\begin{tabular}{|c|l|c|}`, ahí está cómo convertirlo.
 
 ### Imágenes
+
+#### Gráficas
 
 Una imagen estática en Overleaf:
 
@@ -151,20 +123,59 @@ Una imagen estática en Overleaf:
 \includegraphics[width=\textwidth]{mi_grafica.png}
 ```
 
-Se convierte en:
+Se convierte en una figura con título numerado y pie:
 
 ```latex
-\includegraphics[width=\textwidth]{\verb|<< gs_grafica_delitos >>|}
+\begin{figure}[H]
+\graficatitulo{Título de la gráfica de << ge_municipio >>, << ge_anio.tema >>}
+\centering
+\includegraphics[width=\textwidth]{<< ge_tema_grafica >>}
+\end{figure}
+\tablefooter{<< ge_fuente.tema >>}
 ```
 
-Donde `gs_grafica_delitos` es la ruta absoluta o relativa a la imagen generada, por ejemplo `output/charts/1_cuadernillo/delitos.png`.
+`\graficatitulo` lleva su propio contador, así que la numeración de gráficas es automática.
 
----
+#### Mapas
+
+Los mapas tienen su propia referencia: **[docs/maps.md](maps.md)**, con el origen de los archivos, la
+resolución de nombres, la versión ligera, los límites de tamaño y el título.
+
+Lo esencial: el mapa **no** se inserta con `\includegraphics` en el template. El analizer arma el
+bloque completo y lo pasa como variable; el template solo pone el título y la variable:
+
+```latex
+\clearpage
+\mapatitulo[\mapbleed]{Título del mapa de << ge_municipio >>, << ge_anio_mapa.tema >>}
+<< ge_tema_mapa >>
+```
 
 ## Paquetes LaTeX disponibles
 
 Los paquetes ya incluidos en `base.tex.j2`:
 
-`fontspec`, `xcolor`, `graphicx`, `float`, `geometry`, `fancyhdr`, `setspace`, `siunitx`, `tikz`, `eso-pic`, `babel`, `adjustbox`, `array`, `makecell`, `booktabs`, `multirow`, `hyperref`, `etoc`, `varwidth`, `tabularx`, `longtable`, `caption`
+`adjustbox`, `array`, `babel`, `booktabs`, `caption`, `eso-pic`, `etoc`, `etoolbox`, `fancyhdr`,
+`float`, `fontspec`, `footmisc`, `geometry`, `graphicx`, `hyperref`, `longtable`, `makecell`,
+`multirow`, `setspace`, `siunitx`, `tabularx`, `threeparttable`, `tikz`, `titlesec`, `varwidth`,
+`xcolor`, `xurl`
 
 Si tu `.tex` de Overleaf usa algún paquete adicional, agrégalo en `base.tex.j2`.
+
+## Macros propios
+
+Definidos en `base.tex.j2`:
+
+| Macro | Para qué sirve |
+|---|---|
+| `\ND` | Marca un dato no disponible |
+| `\thh`, `\thhl` | Celda de encabezado de tabla, alineada a la izquierda o a la derecha |
+| `\thdr`, `\thdl` | Celda de cuerpo resaltada |
+| `\tablefooter` | Pie de tabla, gráfica o mapa |
+| `\graficatitulo` | Título numerado de gráfica |
+| `\mapatitulo` | Título numerado de mapa |
+| `\mapafuente` | Pie de mapa con varias fuentes |
+
+## Reglas de contenido
+
+El formato de las cifras (decimales, separador de miles, unidades) y las reglas detalladas de tablas
+están en `.claude/rules/data-patterns.md` y `.claude/rules/latex-templates.md`.

@@ -4,40 +4,28 @@ from sqlalchemy.orm import Session
 ANIOS_VALIDOS = {2019, 2024}
 
 
+def _vista_municipal(anio: int) -> str:
+    return f"vw_economico_municipal_{anio - 1}"
+
+
 def get_vacb_por_subsector(session: Session, cve_mun: int, anio: int):
     if anio not in ANIOS_VALIDOS:
         return []
 
-    if anio == 2024:
-        stmt = text("""
-            SELECT
-                actividad_codigo AS codigo,
-                actividad AS subsector,
-                SUM(valor_agregado_censal_bruto_mdp) AS vacb
-            FROM vw_economico_municipal_2024
-            WHERE cve_ent = 14
-              AND cve_mun = :cve_mun
-              AND estrato_id = 1
-              AND LENGTH(actividad_codigo) = 3
-              AND valor_agregado_censal_bruto_mdp IS NOT NULL
-            GROUP BY actividad_codigo, actividad
-            ORDER BY vacb DESC NULLS LAST
-        """)
-    else:
-        stmt = text("""
-            SELECT
-                actividad_codigo AS codigo,
-                actividad AS subsector,
-                SUM(valor_agregado_censal_bruto_mdp) AS vacb
-            FROM vw_economico_municipal_2019
-            WHERE cve_ent = 14
-              AND cve_mun = :cve_mun
-              AND estrato_id = 1
-              AND LENGTH(actividad_codigo) = 3
-              AND valor_agregado_censal_bruto_mdp IS NOT NULL
-            GROUP BY actividad_codigo, actividad
-            ORDER BY vacb DESC NULLS LAST
-        """)
+    stmt = text(f"""
+        SELECT
+            actividad_codigo AS codigo,
+            actividad AS subsector,
+            SUM(valor_agregado_censal_bruto_mdp) AS vacb
+        FROM {_vista_municipal(anio)}
+        WHERE cve_ent = 14
+          AND cve_mun = :cve_mun
+          AND estrato_id = 1
+          AND LENGTH(actividad_codigo) = 3
+          AND valor_agregado_censal_bruto_mdp IS NOT NULL
+        GROUP BY actividad_codigo, actividad
+        ORDER BY vacb DESC NULLS LAST
+    """)
 
     rows = session.execute(stmt, {"cve_mun": cve_mun}).fetchall()
     return [
@@ -51,26 +39,14 @@ def get_vacb_total(session: Session, cve_mun: int, anio: int):
     if anio not in ANIOS_VALIDOS:
         return None
 
-    if anio == 2024:
-        stmt = text("""
-            SELECT SUM(valor_agregado_censal_bruto_mdp) AS vacb_total
-            FROM vw_economico_municipal_2024
-            WHERE cve_ent = 14
-              AND cve_mun = :cve_mun
-              AND estrato_id = 1
-              AND LENGTH(actividad_codigo) = 3
-              AND valor_agregado_censal_bruto_mdp IS NOT NULL
-        """)
-    else:
-        stmt = text("""
-            SELECT SUM(valor_agregado_censal_bruto_mdp) AS vacb_total
-            FROM vw_economico_municipal_2019
-            WHERE cve_ent = 14
-              AND cve_mun = :cve_mun
-              AND estrato_id = 1
-              AND LENGTH(actividad_codigo) = 3
-              AND valor_agregado_censal_bruto_mdp IS NOT NULL
-        """)
+    stmt = text(f"""
+        SELECT valor_agregado_censal_bruto_mdp AS vacb_total
+        FROM {_vista_municipal(anio)}
+        WHERE cve_ent = 14
+          AND cve_mun = :cve_mun
+          AND estrato_id = 1
+          AND actividad_codigo IS NULL
+    """)
 
     row = session.execute(stmt, {"cve_mun": cve_mun}).fetchone()
     return row.vacb_total if row and row.vacb_total is not None else None

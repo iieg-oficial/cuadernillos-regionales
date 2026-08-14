@@ -16,6 +16,7 @@ from core.utils.maps import get_draft_path
 
 CATALOG_PATH = Path("assets/catalogs/historia.json")
 MAPS_DIR = Path("assets/maps/historia")
+TOTAL_MUNICIPIOS = 125
 INDEX_URL = "https://iieg.gob.mx/ns/?page_id=21707"
 
 NEXT_SECTION_PATTERNS = [
@@ -151,19 +152,23 @@ def _build_catalog(pdf_links: dict[str, str], mun_ids: dict[str, str]) -> dict:
 
 def _download_maps() -> None:
     settings = HistoriaSettings()
+    if not settings.HISTORIA_MAPS_URL:
+        return
     MAPS_DIR.mkdir(parents=True, exist_ok=True)
     with tempfile.TemporaryDirectory() as tmp:
-        tmp_path = Path(tmp)
-        gdown.download_folder(url=settings.HISTORIA_MAPS_URL, output=tmp, quiet=True)
-        for zip_file in tmp_path.rglob("*.zip"):
-            with zipfile.ZipFile(zip_file) as zf:
-                for member in zf.infolist():
-                    filename = Path(member.filename).name
-                    if not filename:
-                        continue
-                    dest = MAPS_DIR / filename
-                    with zf.open(member) as src, dest.open("wb") as dst:
-                        dst.write(src.read())
+        zip_path = Path(tmp) / "ubicacion.zip"
+        gdown.download(url=settings.HISTORIA_MAPS_URL, output=str(zip_path), quiet=True)
+        with zipfile.ZipFile(zip_path) as zf:
+            for member in zf.infolist():
+                if member.is_dir():
+                    continue
+                filename = Path(member.filename).name
+                if not filename.endswith(".png"):
+                    continue
+                with zf.open(member) as src, (MAPS_DIR / filename).open("wb") as dst:
+                    dst.write(src.read())
+    n = len(list(MAPS_DIR.glob("ubicacion_*.png")))
+    Logger.info(f"Mapas de historia descargados ({n} archivos)")
 
 
 def _find_map(municipio_id: str) -> Path | None:
@@ -191,7 +196,7 @@ class Extract(Stage):
             with CATALOG_PATH.open("w", encoding="utf-8") as f:
                 json.dump(catalog, f, ensure_ascii=False, indent=2)
 
-        if not MAPS_DIR.exists() or not any(MAPS_DIR.iterdir()):
+        if len(list(MAPS_DIR.glob("ubicacion_*.png"))) < TOTAL_MUNICIPIOS:
             Logger.info("Historia: descargando mapas")
             _download_maps()
 

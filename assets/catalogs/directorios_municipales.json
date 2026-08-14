@@ -25,7 +25,7 @@
     "domicilio": "Portal de López Cotilla, #11, 45700, Acatlán de Juárez, Jalisco",
     "municipio": "Acatlán de Juarez",
     "presidente_municipio": "Jaime Enrique Velasco López",
-    "presidente_correo": "gobierno_ acatlan@hotmail.com",
+    "presidente_correo": "gobierno_acatlan@hotmail.com",
     "directorio_municipal_telefono": "387 688 0324",
     "directorio_municipal_partido": "Movimiento Ciudadano (MC)",
     "directorio_municipal_regidores": [
@@ -130,6 +130,27 @@
   },
   {
     "id": 7,
+    "domicilio": "Juárez, #12, Centro, 46560, San Juanito de Escobedo, Jalisco",
+    "municipio": "San Juanito de Escobedo",
+    "presidente_municipio": "José Adrián Rodríguez García",
+    "presidente_correo": "presidencia.sanjuanito@gmail.com",
+    "directorio_municipal_telefono": "386 754 0008",
+    "directorio_municipal_partido": "Coalición Sigamos Haciendo Historia en Jalisco",
+    "directorio_municipal_regidores": [
+      "Leticia Virginia Montes Damián",
+      "Armando Navarro Rivas",
+      "Selena Valenzuela Reyes",
+      "J Refugio Ruelas Ortega",
+      "María Elena Covarrubias Gómez",
+      "Crispina Contreras Martínez",
+      "Israel Reynoso Ruvalcaba",
+      "Jabal Jafet Cardona González",
+      "Cindy Dennis Rubio Tiznado"
+    ],
+    "directorio_municipal_sindico": "Carlos Alberto Palafox Pérez"
+  },
+  {
+    "id": 8,
     "domicilio": "Francisco Mora, #76, 47180, Arandas, Jalisco",
     "municipio": "Arandas",
     "presidente_municipio": "José Socorro Martínez Velazquez",
@@ -153,7 +174,28 @@
     "directorio_municipal_sindico": "Reina María Camarena Rodríguez"
   },
   {
-    "id": 8,
+    "id": 9,
+    "domicilio": "García Barragán, #99, Centro, 45350, El Arenal, Jalisco",
+    "municipio": "El Arenal",
+    "presidente_municipio": "Gildardo Partida Hermosillo",
+    "presidente_correo": "gobiernoelarenal2427@gmail.com",
+    "directorio_municipal_telefono": "374 748 0266",
+    "directorio_municipal_partido": "Movimiento Ciudadano (MC)",
+    "directorio_municipal_regidores": [
+      "Karla Leticia Jiménez Valdivia",
+      "María Gorreti García Jauregui",
+      "Isaac Cortés Rivera",
+      "Mayra Denisse González Blanco",
+      "Rigoberto Ocampo Vázquez",
+      "Roberto Sandoval Ruiz",
+      "Marisela Cid Rivera",
+      "Martín Robles Cortez",
+      "Edith Dalila López Mora"
+    ],
+    "directorio_municipal_sindico": "Joaquín González Lara"
+  },
+  {
+    "id": 10,
     "domicilio": "Av. Juárez, #14, Centro, 45790, Atemajac de Brizuela, Jalisco",
     "municipio": "Atemajac de Brizuela",
     "presidente_municipio": "Víctor Manuel Vázquez Beas",
@@ -174,7 +216,7 @@
     "directorio_municipal_sindico": "José Eduardo Martínez Bartolo"
   },
   {
-    "id": 9,
+    "id": 11,
     "domicilio": "Hidalgo, #4, Centro, Atengo, Jalisco",
     "municipio": "Atengo",
     "presidente_municipio": "Carlos Pelayo González",
@@ -195,7 +237,7 @@
     "directorio_municipal_sindico": "Martha Elena Cardenas Gómez"
   },
   {
-    "id": 10,
+    "id": 12,
     "domicilio": "Javier Mina, #8, Centro, 48100, Atenguillo, Jalisco",
     "municipio": "Atenguillo",
     "presidente_municipio": "Rosalio Villaseñor Álvarez",
@@ -216,7 +258,7 @@
     "directorio_municipal_sindico": "Eduardo Rubio Robles"
   },
   {
-    "id": 11,
+    "id": 13,
     "domicilio": "Juárez, #1, Centro, 47550, Atotonilco el Alto, Jalisco",
     "municipio": "Atotonilco el Alto",
     "presidente_municipio": "Martha Liliana Padilla Ramirez",
@@ -240,7 +282,7 @@
     "directorio_municipal_sindico": "Humbelina De Jesús Guzman Barba"
   },
   {
-    "id": 12,
+    "id": 14,
     "domicilio": "Independencia, #96, 49200, Atoyac, Jalisco",
     "municipio": "Atoyac",
     "presidente_municipio": "Juan Francisco Osorio De La Curz",
@@ -261,7 +303,7 @@
     "directorio_municipal_sindico": "Landy De Jesús Arechiga Zuñiga"
   },
   {
-    "id": 13,
+    "id": 15,
     "domicilio": "V. Carranza, #1, Centro, 48900, Autlán, Jalisco",
     "municipio": "Autlán de Navarro",
     "presidente_municipio": "Gustavo Salvador Robles Martínez",
@@ -285,7 +327,7 @@
     "directorio_municipal_sindico": "Nelly Yalitza López Mardueño"
   },
   {
-    "id": 14,
+    "id": 16,
     "domicilio": "Clemente Aguirre, #30, Zona Centro, 47930, Ayotlán, Jalisco",
     "municipio": "Ayotlán",
     "presidente_municipio": "Guillermo Rodríguez Escoto",
@@ -306,7 +348,7 @@
     "directorio_municipal_sindico": "José Juan González Aguilar"
   },
   {
-    "id": 15,
+    "id": 17,
     "domicilio": "Ramón Corona, #1, Centro, 48050, Ayutla, Jalisco",
     "municipio": "Ayutla",
     "presidente_municipio": "Oswaldo Antonio De La Cruz García",
@@ -327,7 +369,31 @@
     "directorio_municipal_sindico": "Christian Curiel Espinoza"
   },
   {
-    "id": 16,
+    "id": 18,
+    "domicilio": "Juárez, #100, Centro, 47910, La Barca, Jalisco",
+    "municipio": "La Barca",
+    "presidente_municipio": "Ricardo Hernández Becerra",
+    "presidente_correo": "presidencia@labarca.gob.mx",
+    "directorio_municipal_telefono": "393 759 5800",
+    "directorio_municipal_partido": "Coalición Fuerza y Corazón por Jalisco",
+    "directorio_municipal_regidores": [
+      "Ana Lilia Becerra Román",
+      "Héctor Salvador Oceguera Macias",
+      "Ana Sofía Pérez García",
+      "Raúl Roberto Ruedas Barajas",
+      "Juan Manuel Villanueva Mendoza",
+      "Ma. Guadalupe Silva Cerda",
+      "Sergio García Islas",
+      "Martín Josue Tejeda Martínez",
+      "Lourdes Aseneth Cortés Gutiérrez",
+      "Juan Francisco García Velez",
+      "Josefina Moreno Cerda",
+      "María Guadalupe Rojas García"
+    ],
+    "directorio_municipal_sindico": "Miriam Pérez Briseño"
+  },
+  {
+    "id": 19,
     "domicilio": "Palacio, #5, 46130, Bolaños, Jalisco",
     "municipio": "Bolaños",
     "presidente_municipio": "TRINO SANDOVAL GONZÁLEZ",
@@ -348,7 +414,7 @@
     "directorio_municipal_sindico": "Erica Salinas González"
   },
   {
-    "id": 17,
+    "id": 20,
     "domicilio": "Portal Hidalgo, #12, Centro, 48400, Cabo Corrientes, Jalisco",
     "municipio": "Cabo Corrientes",
     "presidente_municipio": "Joaquín Romero Bravo",
@@ -369,28 +435,7 @@
     "directorio_municipal_sindico": "Aleida Mayanin Díaz Rodríguez"
   },
   {
-    "id": 18,
-    "domicilio": "Hermosillo, #6, Nuevo Temacapulín, 47360, Cañadas de Obregón, Jalisco",
-    "municipio": "Cañadas de Obregón",
-    "presidente_municipio": "José Rodrigo Álvarez Padilla",
-    "presidente_correo": "ayuntamiento.canadas24.27@gmail.com",
-    "directorio_municipal_telefono": "431 403 0150",
-    "directorio_municipal_partido": "Movimiento Ciudadano (MC)",
-    "directorio_municipal_regidores": [
-      "Alberto Padilla Jiménez",
-      "Carolina García Muro",
-      "Hugo Pérez Gómez",
-      "Norma Rodríguez López",
-      "J. Guadalupe Agredano Ulloa",
-      "María Cruz Delgado Hernández",
-      "Pedro Ramirez Muñoz",
-      "María De La Luz Vallin González",
-      "Leoncio Jauregui Lujano"
-    ],
-    "directorio_municipal_sindico": "Verónica González Rojas"
-  },
-  {
-    "id": 19,
+    "id": 21,
     "domicilio": "Carranza Silva, #1, Centro, 48930, Casimiro Castillo, Jalisco",
     "municipio": "Casimiro Castillo",
     "presidente_municipio": "Gilberto Pérez Enriguez",
@@ -411,73 +456,7 @@
     "directorio_municipal_sindico": "Stefanie Hernández Pérez"
   },
   {
-    "id": 20,
-    "domicilio": "Av. Francisco I. Madero, #202, 45900, Chapala, Jalisco",
-    "municipio": "Chapala",
-    "presidente_municipio": "Alejandro De Jesús Aguirre Curiel",
-    "presidente_correo": "presidencia@chapala.gob.mx",
-    "directorio_municipal_telefono": "376 765 8000 Ext. 5107",
-    "directorio_municipal_partido": "Coalición Fuerza y Corazón por Jalisco",
-    "directorio_municipal_regidores": [
-      "María Eugenia Ochoa Real",
-      "José Manuel Gutiérrez Galvez",
-      "Rubén Salcedo Díaz",
-      "Andrea Patricia Marquez Pineda",
-      "Guillermo Heredia Marquez",
-      "Goreti Elizabeth González Sánchez",
-      "J. Jesús Álvarez Razo",
-      "Juan De Dios García Velasco",
-      "Brisa Jasmin Medina Flores",
-      "Celso Nava Aldana",
-      "Karla Montserrat García García",
-      "Yazmin Alejandra Ángel Orozco"
-    ],
-    "directorio_municipal_sindico": "Lilia Alvarado Macias"
-  },
-  {
-    "id": 21,
-    "domicilio": "Aldama, 46300, Chimaltitán, Jalisco",
-    "municipio": "Chimaltitán",
-    "presidente_municipio": "Silvino Yañez López",
-    "presidente_correo": "secretariachimaltitan@gmail.com",
-    "directorio_municipal_telefono": "437 952 5923",
-    "directorio_municipal_partido": "Movimiento Ciudadano (MC)",
-    "directorio_municipal_regidores": [
-      "María Adilenne Yañez Magallanes",
-      "Maclovio Lemus Lemus",
-      "Marisol Villegas Murillo",
-      "Juan Manuel Rivera Pallares",
-      "Kid Rey Del Hoyo Abrego",
-      "Ivenia Hermoso Escatel",
-      "Clemente Meza Ramos",
-      "Celia Esmeralda Madera Mercado",
-      "Marisela Arellano Bautista"
-    ],
-    "directorio_municipal_sindico": "Esmeralda Arellano Bautista"
-  },
-  {
     "id": 22,
-    "domicilio": "Portal Guerrero, #10, Centro, 48640, Chiquilistlán, Jalisco",
-    "municipio": "Chiquilistlán",
-    "presidente_municipio": "Alvaro González Alvarado",
-    "presidente_correo": "presidencia@chiquilistlan.gob.mx",
-    "directorio_municipal_telefono": "385 755 5149",
-    "directorio_municipal_partido": "Movimiento Ciudadano (MC)",
-    "directorio_municipal_regidores": [
-      "María Nava Gutiérrez",
-      "Martín Pérez Mateos",
-      "Emma Yaneth Martínez Baltazar",
-      "José Gabriel Martínez Aguilar",
-      "Teresa Campos Chávez",
-      "Nayeli Díaz Robles",
-      "Jesús Fernando González Magallanes",
-      "Karla Verónica Arreola",
-      "Juan Francisco Gonzales Martínez"
-    ],
-    "directorio_municipal_sindico": "Yedit Yulisa Sánchez Sánchez"
-  },
-  {
-    "id": 23,
     "domicilio": "Juárez, #57, Centro, 48970, Cihuatlán, Jalisco",
     "municipio": "Cihuatlán",
     "presidente_municipio": "Apolonio De Jesús Pelayo Flores",
@@ -496,6 +475,31 @@
       "Luz María Corona Huerta"
     ],
     "directorio_municipal_sindico": "Laura Maribel Soto Rodríguez"
+  },
+  {
+    "id": 23,
+    "domicilio": "Av. Cristóbal Colón, #62, Centro, 49000, Zapotlán el Grande, Jalisco",
+    "municipio": "Zapotlán el Grande",
+    "presidente_municipio": "Magali Casillas Contreras",
+    "presidente_correo": "presidencia@ciudadguzman.gob.mx",
+    "directorio_municipal_telefono": "341 575 2500 Ext. 135",
+    "directorio_municipal_partido": "Coalición Sigamos Haciendo Historia en Jalisco",
+    "directorio_municipal_regidores": [
+      "Adrián Briseño Esparza",
+      "Dunia Catalina Cruz Moreno",
+      "Hidania Romero Rodríguez",
+      "Yuliana Livier Vargas De La Torre",
+      "José Bertin Chávez Vargas",
+      "Marisol Mendoza Pinto",
+      "Ernesto Sánchez Sánchez",
+      "Óscar Murguia Torres",
+      "Bertha Silvia Gómez Ramos",
+      "Higinio Del Toro Pérez",
+      "María Olga García Ayala",
+      "Gustavo López Sandoval",
+      "Aurora Cecilia Araujó Álvarez"
+    ],
+    "directorio_municipal_sindico": "Miguel Marentes"
   },
   {
     "id": 24,
@@ -624,6 +628,72 @@
   },
   {
     "id": 30,
+    "domicilio": "Av. Francisco I. Madero, #202, 45900, Chapala, Jalisco",
+    "municipio": "Chapala",
+    "presidente_municipio": "Alejandro De Jesús Aguirre Curiel",
+    "presidente_correo": "presidencia@chapala.gob.mx",
+    "directorio_municipal_telefono": "376 765 8000 Ext. 5107",
+    "directorio_municipal_partido": "Coalición Fuerza y Corazón por Jalisco",
+    "directorio_municipal_regidores": [
+      "María Eugenia Ochoa Real",
+      "José Manuel Gutiérrez Galvez",
+      "Rubén Salcedo Díaz",
+      "Andrea Patricia Marquez Pineda",
+      "Guillermo Heredia Marquez",
+      "Goreti Elizabeth González Sánchez",
+      "J. Jesús Álvarez Razo",
+      "Juan De Dios García Velasco",
+      "Brisa Jasmin Medina Flores",
+      "Celso Nava Aldana",
+      "Karla Montserrat García García",
+      "Yazmin Alejandra Ángel Orozco"
+    ],
+    "directorio_municipal_sindico": "Lilia Alvarado Macias"
+  },
+  {
+    "id": 31,
+    "domicilio": "Aldama, 46300, Chimaltitán, Jalisco",
+    "municipio": "Chimaltitán",
+    "presidente_municipio": "Silvino Yañez López",
+    "presidente_correo": "secretariachimaltitan@gmail.com",
+    "directorio_municipal_telefono": "437 952 5923",
+    "directorio_municipal_partido": "Movimiento Ciudadano (MC)",
+    "directorio_municipal_regidores": [
+      "María Adilenne Yañez Magallanes",
+      "Maclovio Lemus Lemus",
+      "Marisol Villegas Murillo",
+      "Juan Manuel Rivera Pallares",
+      "Kid Rey Del Hoyo Abrego",
+      "Ivenia Hermoso Escatel",
+      "Clemente Meza Ramos",
+      "Celia Esmeralda Madera Mercado",
+      "Marisela Arellano Bautista"
+    ],
+    "directorio_municipal_sindico": "Esmeralda Arellano Bautista"
+  },
+  {
+    "id": 32,
+    "domicilio": "Portal Guerrero, #10, Centro, 48640, Chiquilistlán, Jalisco",
+    "municipio": "Chiquilistlán",
+    "presidente_municipio": "Alvaro González Alvarado",
+    "presidente_correo": "presidencia@chiquilistlan.gob.mx",
+    "directorio_municipal_telefono": "385 755 5149",
+    "directorio_municipal_partido": "Movimiento Ciudadano (MC)",
+    "directorio_municipal_regidores": [
+      "María Nava Gutiérrez",
+      "Martín Pérez Mateos",
+      "Emma Yaneth Martínez Baltazar",
+      "José Gabriel Martínez Aguilar",
+      "Teresa Campos Chávez",
+      "Nayeli Díaz Robles",
+      "Jesús Fernando González Magallanes",
+      "Karla Verónica Arreola",
+      "Juan Francisco Gonzales Martínez"
+    ],
+    "directorio_municipal_sindico": "Yedit Yulisa Sánchez Sánchez"
+  },
+  {
+    "id": 33,
     "domicilio": "Defensores, #48, Centro, Degollado, Jalisco",
     "municipio": "Degollado",
     "presidente_municipio": "Fernando Villaseñor Castro",
@@ -644,7 +714,7 @@
     "directorio_municipal_sindico": "Emily Michelle Ruiz Leon"
   },
   {
-    "id": 31,
+    "id": 34,
     "domicilio": "Juan M. Díaz, #3, Centro, 48680, Ejutla, Jalisco",
     "municipio": "Ejutla",
     "presidente_municipio": "Rosa Angélica Rivera González",
@@ -665,96 +735,7 @@
     "directorio_municipal_sindico": "José Luis Valle Pérez"
   },
   {
-    "id": 32,
-    "domicilio": "García Barragán, #99, Centro, 45350, El Arenal, Jalisco",
-    "municipio": "El Arenal",
-    "presidente_municipio": "Gildardo Partida Hermosillo",
-    "presidente_correo": "gobiernoelarenal2427@gmail.com",
-    "directorio_municipal_telefono": "374 748 0266",
-    "directorio_municipal_partido": "Movimiento Ciudadano (MC)",
-    "directorio_municipal_regidores": [
-      "Karla Leticia Jiménez Valdivia",
-      "María Gorreti García Jauregui",
-      "Isaac Cortés Rivera",
-      "Mayra Denisse González Blanco",
-      "Rigoberto Ocampo Vázquez",
-      "Roberto Sandoval Ruiz",
-      "Marisela Cid Rivera",
-      "Martín Robles Cortez",
-      "Edith Dalila López Mora"
-    ],
-    "directorio_municipal_sindico": "Joaquín González Lara"
-  },
-  {
-    "id": 33,
-    "domicilio": "Av. Obregón, #48, 48740, El Grullo, Jalisco",
-    "municipio": "El Grullo",
-    "presidente_municipio": "Milton Carlos Cardenas Osorio",
-    "presidente_correo": "presidencia@elgrullo.gob.mx",
-    "directorio_municipal_telefono": "321 387 4444",
-    "directorio_municipal_partido": "Movimiento Ciudadano (MC)",
-    "directorio_municipal_regidores": [
-      "Óscar Noé Figueroa Ruiz",
-      "Adriana González Guerrero",
-      "Nainn De Jesús Villalvazo Ramirez",
-      "Martha Alicia Leal Pérez",
-      "Ramón Murillo Jiménez",
-      "Eurise Jazmin González González",
-      "Giovana Villalvazo Palacios",
-      "Érika Lizbeth Murillo Covarrubias",
-      "Joel Octavio Puerto Covarrubias"
-    ],
-    "directorio_municipal_sindico": "Laura Patricia Vázquez Hernández"
-  },
-  {
-    "id": 34,
-    "domicilio": "Rodrigo Camacho, #1, Centro, 48700, El Limón, Jalisco",
-    "municipio": "El Limón",
-    "presidente_municipio": "Nelson González Figueroa",
-    "presidente_correo": "ellimon@jalisco.gob.mx",
-    "directorio_municipal_telefono": "321 373 0028",
-    "directorio_municipal_partido": "Coalición Sigamos Haciendo Historia en Jalisco",
-    "directorio_municipal_regidores": [
-      "Miguel Ángel Leon González",
-      "Beatriz Quiles Madera",
-      "Edgar López Díaz",
-      "Azucena Yeraldin Michel Ramirez",
-      "Genaro Miramontes González",
-      "Eric Rafael Camacho Zamora",
-      "Ma. Del Rosario González Chávez",
-      "Miriam Patricia Flores Santana",
-      "Cesar Iván Casillas Zamora"
-    ],
-    "directorio_municipal_sindico": "Barbara González Velazquez Propietaria M Candidatura Joven"
-  },
-  {
     "id": 35,
-    "domicilio": "Ramón Corona, #1, Centro, 45680, El Salto, Jalisco",
-    "municipio": "El Salto",
-    "presidente_municipio": "Ma. Elena Farias Villafan",
-    "presidente_correo": "nena.farias@elsalto.gob.mx",
-    "directorio_municipal_telefono": "33​3 284 1240 Ext. 132",
-    "directorio_municipal_partido": "Coalición Sigamos Haciendo Historia en Jalisco",
-    "directorio_municipal_regidores": [
-      "Arnold Everardo Tejeda Arellano",
-      "Laura Pamplona Flores",
-      "Nidia Mariana López Murillo",
-      "Ricardo Avila Valerio",
-      "Gabriela Sánchez Rodríguez",
-      "Adrián Guadalupe Flores Gutiérrez",
-      "Jasubileth Gómez Murillo",
-      "Sergio Hernández González",
-      "Nallely Raquel González Álvarez",
-      "Sonia Ochoa González",
-      "Asencion Gandarilla Rivera",
-      "Modesta Yessenia Ayala Contreras",
-      "Jorge Antonio Vidales Vargas",
-      "Minerva Becerra González"
-    ],
-    "directorio_municipal_sindico": "Gabriel Pérez Pérez"
-  },
-  {
-    "id": 36,
     "domicilio": "Constitución, s/n, Centro, 47270, Encarnación de Díaz, Jalisco",
     "municipio": "Encarnación de Díaz",
     "presidente_municipio": "Érika Adriana Cuevas Fuentes",
@@ -778,7 +759,7 @@
     "directorio_municipal_sindico": "Jorge Luis Galindo Delgadillo"
   },
   {
-    "id": 37,
+    "id": 36,
     "domicilio": "Antonio Escobedo, #320, Centro, 46500, Etzatlán, Jalisco",
     "municipio": "Etzatlán",
     "presidente_municipio": "Carlos Martínez Reyes",
@@ -799,28 +780,28 @@
     "directorio_municipal_sindico": "Francisco Javier Bernal Ochoa"
   },
   {
-    "id": 38,
-    "domicilio": "Leandro Valle, #5, Centro, 49120, Gómez Farías, Jalisco",
-    "municipio": "Gómez Farías",
-    "presidente_municipio": "Rosa María Delgadillo Martínez",
-    "presidente_correo": "presidencia@ayuntamientogomezfarias.gob.mx",
-    "directorio_municipal_telefono": "341 433 0090",
-    "directorio_municipal_partido": "Coalición Sigamos Haciendo Historia en Jalisco",
+    "id": 37,
+    "domicilio": "Av. Obregón, #48, 48740, El Grullo, Jalisco",
+    "municipio": "El Grullo",
+    "presidente_municipio": "Milton Carlos Cardenas Osorio",
+    "presidente_correo": "presidencia@elgrullo.gob.mx",
+    "directorio_municipal_telefono": "321 387 4444",
+    "directorio_municipal_partido": "Movimiento Ciudadano (MC)",
     "directorio_municipal_regidores": [
-      "Martín López Reyes",
-      "Evangelina Vargas Cervantes",
-      "Ricardo Gómez Gil",
-      "Walter Ari Herrera Morales",
-      "Andrea Medina Cano",
-      "Betsabe Del Rayo Rodríguez Jiménez",
-      "Nestor Emmanuel De La Cruz Macias",
-      "Érika Rodríguez Bernabe",
-      "Federico Gaspar Candelario"
+      "Óscar Noé Figueroa Ruiz",
+      "Adriana González Guerrero",
+      "Nainn De Jesús Villalvazo Ramirez",
+      "Martha Alicia Leal Pérez",
+      "Ramón Murillo Jiménez",
+      "Eurise Jazmin González González",
+      "Giovana Villalvazo Palacios",
+      "Érika Lizbeth Murillo Covarrubias",
+      "Joel Octavio Puerto Covarrubias"
     ],
-    "directorio_municipal_sindico": "Luz Margarita Chávez De La Cruz"
+    "directorio_municipal_sindico": "Laura Patricia Vázquez Hernández"
   },
   {
-    "id": 39,
+    "id": 38,
     "domicilio": "Vicente Guerrero, #11, 46800, Guachinango, Jalisco",
     "municipio": "Guachinango",
     "presidente_municipio": "Viridiana Rodríguez Topete",
@@ -841,7 +822,7 @@
     "directorio_municipal_sindico": "Guadalupe Topete Flores"
   },
   {
-    "id": 40,
+    "id": 39,
     "domicilio": "Av. Miguel Hidalgo y Costilla, #400, Zona Centro, 44100, Guadalajara, Jalisco",
     "municipio": "Guadalajara",
     "presidente_municipio": "Verónica Delgadillo García",
@@ -870,7 +851,7 @@
     "directorio_municipal_sindico": "Salvador De La Cruz Rodríguez Reyes"
   },
   {
-    "id": 41,
+    "id": 40,
     "domicilio": "Hidalgo, #23, 46440, Hostotipaquillo, Jalisco",
     "municipio": "Hostotipaquillo",
     "presidente_municipio": "Teresa De Jesús González Carmona",
@@ -891,7 +872,7 @@
     "directorio_municipal_sindico": "Eduardo Francisco Jiménez Vega"
   },
   {
-    "id": 42,
+    "id": 41,
     "domicilio": "Plaza Principal, #23, 46260, Huejúcar, Jalisco",
     "municipio": "Huejúcar",
     "presidente_municipio": "Hilda Díaz De Santiago",
@@ -912,7 +893,7 @@
     "directorio_municipal_sindico": "María Del Pilar Velazquez Meza"
   },
   {
-    "id": 43,
+    "id": 42,
     "domicilio": "Palacio Municipal, s/n, Centro, 46000, Huejuquilla el Alto, Jalisco",
     "municipio": "Huejuquilla el Alto",
     "presidente_municipio": "Miguel Pérez Graciano",
@@ -931,6 +912,27 @@
       "Juan Madera Martínez"
     ],
     "directorio_municipal_sindico": "Juliana Muñoz Acuña"
+  },
+  {
+    "id": 43,
+    "domicilio": "Benito Juárez, #15, Centro, 48850, La Huerta, Jalisco",
+    "municipio": "La Huerta",
+    "presidente_municipio": "Luis Arias Madrigal",
+    "presidente_correo": "presidencia@lahuerta.gob.mx",
+    "directorio_municipal_telefono": "357 384 0046",
+    "directorio_municipal_partido": "Coalición Fuerza y Corazón por Jalisco",
+    "directorio_municipal_regidores": [
+      "Alejandra Morfin Vega",
+      "José Guadalupe Chavarin Hernández",
+      "Grecia Delgadillo Murillo",
+      "Armando Orozco Vázquez",
+      "Alonso Isaias Tejeda Padilla",
+      "Francisco Javier Suarez Delgado",
+      "Selene Candelaria Moreno López",
+      "Xcarletthe Elizabeth Magaña Olmedo",
+      "Jesús Flores Sahagun"
+    ],
+    "directorio_municipal_sindico": "Maribel Capristo"
   },
   {
     "id": 44,
@@ -1128,72 +1130,6 @@
   },
   {
     "id": 53,
-    "domicilio": "Juárez, #100, Centro, 47910, La Barca, Jalisco",
-    "municipio": "La Barca",
-    "presidente_municipio": "Ricardo Hernández Becerra",
-    "presidente_correo": "presidencia@labarca.gob.mx",
-    "directorio_municipal_telefono": "393 759 5800",
-    "directorio_municipal_partido": "Coalición Fuerza y Corazón por Jalisco",
-    "directorio_municipal_regidores": [
-      "Ana Lilia Becerra Román",
-      "Héctor Salvador Oceguera Macias",
-      "Ana Sofía Pérez García",
-      "Raúl Roberto Ruedas Barajas",
-      "Juan Manuel Villanueva Mendoza",
-      "Ma. Guadalupe Silva Cerda",
-      "Sergio García Islas",
-      "Martín Josue Tejeda Martínez",
-      "Lourdes Aseneth Cortés Gutiérrez",
-      "Juan Francisco García Velez",
-      "Josefina Moreno Cerda",
-      "María Guadalupe Rojas García"
-    ],
-    "directorio_municipal_sindico": "Miriam Pérez Briseño"
-  },
-  {
-    "id": 54,
-    "domicilio": "Benito Juárez, #15, Centro, 48850, La Huerta, Jalisco",
-    "municipio": "La Huerta",
-    "presidente_municipio": "Luis Arias Madrigal",
-    "presidente_correo": "presidencia@lahuerta.gob.mx",
-    "directorio_municipal_telefono": "357 384 0046",
-    "directorio_municipal_partido": "Coalición Fuerza y Corazón por Jalisco",
-    "directorio_municipal_regidores": [
-      "Alejandra Morfin Vega",
-      "José Guadalupe Chavarin Hernández",
-      "Grecia Delgadillo Murillo",
-      "Armando Orozco Vázquez",
-      "Alonso Isaias Tejeda Padilla",
-      "Francisco Javier Suarez Delgado",
-      "Selene Candelaria Moreno López",
-      "Xcarletthe Elizabeth Magaña Olmedo",
-      "Jesús Flores Sahagun"
-    ],
-    "directorio_municipal_sindico": "Maribel Capristo"
-  },
-  {
-    "id": 55,
-    "domicilio": "Javier Mina, #101, 49460, La Manzanilla de la Paz, Jalisco",
-    "municipio": "La Manzanilla de la Paz",
-    "presidente_municipio": "Héctor Gonzalo Díaz Díaz",
-    "presidente_correo": "presidencia@manzanilladelapaz.gob.mx",
-    "directorio_municipal_telefono": "372 435 0101",
-    "directorio_municipal_partido": "Partido Verde Ecologista De México (PVEM)",
-    "directorio_municipal_regidores": [
-      "Analy Aguilar Espinoza",
-      "Ramón Villa González",
-      "María Guadalupe Plascencia Arreguin",
-      "Gustavo Cardenas Pantoja",
-      "José Guadalupe Sánchez Torres",
-      "Cintia Llamas",
-      "Miguel Ángel Maya Díaz",
-      "Alondra De Jesús Aguilar Cardenas",
-      "Luis Ángel Silva Martínez"
-    ],
-    "directorio_municipal_sindico": "Saharay Villanueva Aguilar"
-  },
-  {
-    "id": 56,
     "domicilio": "Juárez Esq. Francisco González León, s/n, Centro, Lagos de Moreno, Jalisco",
     "municipio": "Lagos de Moreno",
     "presidente_municipio": "Edgar Alfredo González Chávez",
@@ -1219,7 +1155,28 @@
     "directorio_municipal_sindico": "Adan Mendoza Medina"
   },
   {
-    "id": 57,
+    "id": 54,
+    "domicilio": "Rodrigo Camacho, #1, Centro, 48700, El Limón, Jalisco",
+    "municipio": "El Limón",
+    "presidente_municipio": "Nelson González Figueroa",
+    "presidente_correo": "ellimon@jalisco.gob.mx",
+    "directorio_municipal_telefono": "321 373 0028",
+    "directorio_municipal_partido": "Coalición Sigamos Haciendo Historia en Jalisco",
+    "directorio_municipal_regidores": [
+      "Miguel Ángel Leon González",
+      "Beatriz Quiles Madera",
+      "Edgar López Díaz",
+      "Azucena Yeraldin Michel Ramirez",
+      "Genaro Miramontes González",
+      "Eric Rafael Camacho Zamora",
+      "Ma. Del Rosario González Chávez",
+      "Miriam Patricia Flores Santana",
+      "Cesar Iván Casillas Zamora"
+    ],
+    "directorio_municipal_sindico": "Barbara González Velazquez Propietaria M Candidatura Joven"
+  },
+  {
+    "id": 55,
     "domicilio": "Miguel Hidalgo, #45, Centro, 46470, Magdalena, Jalisco",
     "municipio": "Magdalena",
     "presidente_municipio": "Marco Trejo Tellez Giron",
@@ -1238,6 +1195,46 @@
       "Cruz Andrés Villegas Escobedo"
     ],
     "directorio_municipal_sindico": "Celina Del Carmen Ponce López"
+  },
+  {
+    "id": 56,
+    "domicilio": "Morelos, #1, Centro, 63830, Santa María del Oro, Jalisco",
+    "municipio": "Santa María del Oro",
+    "presidente_municipio": "Aricela López López",
+    "presidente_correo": "santamariadeloro2024.2027@gmail.com",
+    "directorio_municipal_telefono": "354 544 8037",
+    "directorio_municipal_partido": "Coalición Fuerza y Corazón por Jalisco",
+    "directorio_municipal_regidores": [
+      "Mayra Barajas Aguilar",
+      "Jesús García Vargas",
+      "Irma Lorena Zepeda Cisneros",
+      "Merita Magaña Chávez",
+      "Eliazar Ochoa Oceguera",
+      "Ana María Torres García",
+      "Crispin Sandoval Farias"
+    ],
+    "directorio_municipal_sindico": "Pedro Alberto González Cisneros"
+  },
+  {
+    "id": 57,
+    "domicilio": "Javier Mina, #101, 49460, La Manzanilla de la Paz, Jalisco",
+    "municipio": "La Manzanilla de la Paz",
+    "presidente_municipio": "Héctor Gonzalo Díaz Díaz",
+    "presidente_correo": "presidencia@manzanilladelapaz.gob.mx",
+    "directorio_municipal_telefono": "372 435 0101",
+    "directorio_municipal_partido": "Partido Verde Ecologista De México (PVEM)",
+    "directorio_municipal_regidores": [
+      "Analy Aguilar Espinoza",
+      "Ramón Villa González",
+      "María Guadalupe Plascencia Arreguin",
+      "Gustavo Cardenas Pantoja",
+      "José Guadalupe Sánchez Torres",
+      "Cintia Llamas",
+      "Miguel Ángel Maya Díaz",
+      "Alondra De Jesús Aguilar Cardenas",
+      "Luis Ángel Silva Martínez"
+    ],
+    "directorio_municipal_sindico": "Saharay Villanueva Aguilar"
   },
   {
     "id": 58,
@@ -1464,6 +1461,26 @@
   },
   {
     "id": 68,
+    "domicilio": "Nicolás Bravo, #95, Centro, 48800, Villa Purificación, Jalisco",
+    "municipio": "Villa Purificacion",
+    "presidente_municipio": "J Gabriel Dominguez Preciado",
+    "presidente_correo": "presidencia@villapurificacion.gob.mx",
+    "directorio_municipal_telefono": "(357) 3750140",
+    "directorio_municipal_partido": "Coalición Fuerza y Corazón por Jalisco",
+    "directorio_municipal_regidores": [
+      "Nathaly Candelaria Cobian Díaz",
+      "Ma. Nelis Pelayo Rodríguez",
+      "Angélica María Hernández Díaz",
+      "Abel De Niz López",
+      "J Guadalupe Llamas Monroy",
+      "Ma De Jesús Covarrubias Gudiño",
+      "Jennifer Marleny Aguilar Campos",
+      "Luis Armando Olvera Rodríguez"
+    ],
+    "directorio_municipal_sindico": "Mariluz Pelayo García"
+  },
+  {
+    "id": 69,
     "domicilio": "Libertad, #42, Centro, 49570, Quitupan, Jalisco",
     "municipio": "Quitupan",
     "presidente_municipio": "José De Jesús Morales Barragan",
@@ -1484,7 +1501,33 @@
     "directorio_municipal_sindico": "Stephanie Monserrat Ochoa Álvarez"
   },
   {
-    "id": 69,
+    "id": 70,
+    "domicilio": "Ramón Corona, #1, Centro, 45680, El Salto, Jalisco",
+    "municipio": "El Salto",
+    "presidente_municipio": "Ma. Elena Farias Villafan",
+    "presidente_correo": "nena.farias@elsalto.gob.mx",
+    "directorio_municipal_telefono": "33​3 284 1240 Ext. 132",
+    "directorio_municipal_partido": "Coalición Sigamos Haciendo Historia en Jalisco",
+    "directorio_municipal_regidores": [
+      "Arnold Everardo Tejeda Arellano",
+      "Laura Pamplona Flores",
+      "Nidia Mariana López Murillo",
+      "Ricardo Avila Valerio",
+      "Gabriela Sánchez Rodríguez",
+      "Adrián Guadalupe Flores Gutiérrez",
+      "Jasubileth Gómez Murillo",
+      "Sergio Hernández González",
+      "Nallely Raquel González Álvarez",
+      "Sonia Ochoa González",
+      "Asencion Gandarilla Rivera",
+      "Modesta Yessenia Ayala Contreras",
+      "Jorge Antonio Vidales Vargas",
+      "Minerva Becerra González"
+    ],
+    "directorio_municipal_sindico": "Gabriel Pérez Pérez"
+  },
+  {
+    "id": 71,
     "domicilio": "Hidalgo, #5, Centro, 45250, San Cristóbal de la Barranca, Jalisco",
     "municipio": "San Cristóbal de la Barranca",
     "presidente_municipio": "Karina Guzman Cardona",
@@ -1505,7 +1548,7 @@
     "directorio_municipal_sindico": "Paulo Castro Sandoval"
   },
   {
-    "id": 70,
+    "id": 72,
     "domicilio": "Av. Allende, #102, 47590, San Diego de Alejandría, Jalisco",
     "municipio": "San Diego de Alejandría",
     "presidente_municipio": "José De Jesús Sánchez González",
@@ -1524,48 +1567,6 @@
       "Laura Ramirez Rojas"
     ],
     "directorio_municipal_sindico": "María Cruz Rojas Cabrera"
-  },
-  {
-    "id": 71,
-    "domicilio": "Manuel C. Michel, #13, Barrio de La Quinta, 49700, San Gabriel, Jalisco",
-    "municipio": "San Gabriel",
-    "presidente_municipio": "Alma Gabriela Rodríguez Benavides",
-    "presidente_correo": "presidencia@gobiernosangabriel.com",
-    "directorio_municipal_telefono": "343 427 0003",
-    "directorio_municipal_partido": "Coalición Fuerza y Corazón por Jalisco",
-    "directorio_municipal_regidores": [
-      "Óscar Ramirez Fregoso",
-      "María De Jesús Galindo Ramos",
-      "Nestor Hugo Aguilar Blanco",
-      "Arturo Pérez López",
-      "Gloria María Valencia Rocha",
-      "David Rafael Valencia García",
-      "Verónica Rodríguez Martínez",
-      "Fernando Daniel Nuñez Ramirez",
-      "Norma Fernanda Velarde Rodríguez"
-    ],
-    "directorio_municipal_sindico": "Yesenia De La Torre Hernández"
-  },
-  {
-    "id": 72,
-    "domicilio": "Juárez, #7, Cerro Gordo, 47190, San Ignacio Cerro Gordo, Jalisco",
-    "municipio": "San Ignacio Cerro Gordo",
-    "presidente_municipio": "Teresa Romo González",
-    "presidente_correo": "t.romo@sanignaciocg.gob.mx",
-    "directorio_municipal_telefono": "348 716 3000 Ext. 2002",
-    "directorio_municipal_partido": "Coalición Fuerza y Corazón por Jalisco",
-    "directorio_municipal_regidores": [
-      "María Lucila González Landeros",
-      "Emmanuel Orozco Hernández",
-      "Araceli Torres Torres",
-      "Andrés García Padilla",
-      "Ana Patricia Jiménez Martín",
-      "Raymundo Hernández Hernández",
-      "Rosalba Vázquez Orozco",
-      "Luis Rolando Morales Barba",
-      "Bioleta Orozco Hernández"
-    ],
-    "directorio_municipal_sindico": "Horacio Garza Guerra"
   },
   {
     "id": 73,
@@ -1593,27 +1594,6 @@
   },
   {
     "id": 74,
-    "domicilio": "Juárez, #12, Centro, 46560, San Juanito de Escobedo, Jalisco",
-    "municipio": "San Juanito de Escobedo",
-    "presidente_municipio": "José Adrián Rodríguez García",
-    "presidente_correo": "presidencia.sanjuanito@gmail.com",
-    "directorio_municipal_telefono": "386 754 0008",
-    "directorio_municipal_partido": "Coalición Sigamos Haciendo Historia en Jalisco",
-    "directorio_municipal_regidores": [
-      "Leticia Virginia Montes Damián",
-      "Armando Navarro Rivas",
-      "Selena Valenzuela Reyes",
-      "J Refugio Ruelas Ortega",
-      "María Elena Covarrubias Gómez",
-      "Crispina Contreras Martínez",
-      "Israel Reynoso Ruvalcaba",
-      "Jabal Jafet Cardona González",
-      "Cindy Dennis Rubio Tiznado"
-    ],
-    "directorio_municipal_sindico": "Carlos Alberto Palafox Pérez"
-  },
-  {
-    "id": 75,
     "domicilio": "Hidalgo Ote., #23, Centro, 47170, San Julián, Jalisco",
     "municipio": "San Julian",
     "presidente_municipio": "Cristian Martín Hernández García",
@@ -1634,7 +1614,7 @@
     "directorio_municipal_sindico": "Hezezel Ammizadai Martha Alvarado García"
   },
   {
-    "id": 76,
+    "id": 75,
     "domicilio": "Francisco Madero, #27, 46540, San Marcos, Jalisco",
     "municipio": "San Marcos",
     "presidente_municipio": "Laura Sarai Alcantar Hernández",
@@ -1655,7 +1635,7 @@
     "directorio_municipal_sindico": "Guillermo García Vega"
   },
   {
-    "id": 77,
+    "id": 76,
     "domicilio": "Hidalgo, #27, Centro, 46350, San Martín de Bolaños, Jalisco",
     "municipio": "San Martin de Bolaños",
     "presidente_municipio": "Concepción Magdaleno Zayas",
@@ -1675,7 +1655,7 @@
     "directorio_municipal_sindico": "Héctor Raúl Velazquez Carrillo"
   },
   {
-    "id": 78,
+    "id": 77,
     "domicilio": "Juárez, #12, Centro, 46770, San Martín Hidalgo, Jalisco",
     "municipio": "San Martin Hidalgo",
     "presidente_municipio": "Juana Ceballos Guzman",
@@ -1695,7 +1675,7 @@
     "directorio_municipal_sindico": "Alejandro Yassiel Grajeda Vázquez"
   },
   {
-    "id": 79,
+    "id": 78,
     "domicilio": "Portal Independencia, #4, Centro, 47140, San Miguel el Alto, Jalisco",
     "municipio": "San Miguel el Alto",
     "presidente_municipio": "Ma. Elva Loza Gama",
@@ -1715,35 +1695,28 @@
     "directorio_municipal_sindico": "Ma. Estela López Martín"
   },
   {
-    "id": 80,
-    "domicilio": "Independencia, #58, Centro, 45500, San Pedro Tlaquepaque, Jalisco",
-    "municipio": "San Pedro Tlaquepaque",
-    "presidente_municipio": "Laura Imelda Pérez Segura",
-    "presidente_correo": "lauraimelda.perez@tlaquepaque.gob.mx",
-    "directorio_municipal_telefono": "(331) 057 6000",
+    "id": 79,
+    "domicilio": "Leandro Valle, #5, Centro, 49120, Gómez Farías, Jalisco",
+    "municipio": "Gómez Farías",
+    "presidente_municipio": "Rosa María Delgadillo Martínez",
+    "presidente_correo": "presidencia@ayuntamientogomezfarias.gob.mx",
+    "directorio_municipal_telefono": "341 433 0090",
     "directorio_municipal_partido": "Coalición Sigamos Haciendo Historia en Jalisco",
     "directorio_municipal_regidores": [
-      "Angelina Jara Robles",
-      "Mario Arturo Martínez Sevilla",
-      "María Del Socorro Ortiz Zarate",
-      "Jonhattan Pérez Valadez",
-      "Alejandra Del Rocio Badillo López",
-      "Cristina Patricia Carrasco Acosta",
-      "Julio Oswaldo García Santana",
-      "Andrea Janette Ramirez García",
-      "Luis Eduardo Ramirez Pérez",
-      "Efrain Cortés Díaz",
-      "Regina Martínez González",
-      "Mirna Citlalli Amaya De Luna",
-      "Marco Antonio Fuentes Ontiveros",
-      "Norma Angélica Alatorre Blas",
-      "Cesar Arturo Reynoso Mercado",
-      "Laura Eliezer Alcantar Díaz"
+      "Martín López Reyes",
+      "Evangelina Vargas Cervantes",
+      "Ricardo Gómez Gil",
+      "Walter Ari Herrera Morales",
+      "Andrea Medina Cano",
+      "Betsabe Del Rayo Rodríguez Jiménez",
+      "Nestor Emmanuel De La Cruz Macias",
+      "Érika Rodríguez Bernabe",
+      "Federico Gaspar Candelario"
     ],
-    "directorio_municipal_sindico": "José De Jesús Ramirez Contreras"
+    "directorio_municipal_sindico": "Luz Margarita Chávez De La Cruz"
   },
   {
-    "id": 81,
+    "id": 80,
     "domicilio": "Juárez, #3, Centro, 46990, San Sebastián del Oeste, Jalisco",
     "municipio": "San Sebastián del Oeste",
     "presidente_municipio": "María Aurora Ponce Peña",
@@ -1763,7 +1736,7 @@
     "directorio_municipal_sindico": "Samuel López López"
   },
   {
-    "id": 82,
+    "id": 81,
     "domicilio": "A. Valdéz, #3, Centro, 46240, Santa María de los Ángeles, Jalisco",
     "municipio": "Santa María de los Ángeles",
     "presidente_municipio": "DINORA RONQUILLO DE LEON",
@@ -1784,26 +1757,7 @@
     "directorio_municipal_sindico": "Sergio Alonso Ruiz Renteria"
   },
   {
-    "id": 83,
-    "domicilio": "Morelos, #1, Centro, 63830, Santa María del Oro, Jalisco",
-    "municipio": "Santa María del Oro",
-    "presidente_municipio": "Aricela López López",
-    "presidente_correo": "santamariadeloro2024.2027@gmail.com",
-    "directorio_municipal_telefono": "354 544 8037",
-    "directorio_municipal_partido": "Coalición Fuerza y Corazón por Jalisco",
-    "directorio_municipal_regidores": [
-      "Mayra Barajas Aguilar",
-      "Jesús García Vargas",
-      "Irma Lorena Zepeda Cisneros",
-      "Merita Magaña Chávez",
-      "Eliazar Ochoa Oceguera",
-      "Ana María Torres García",
-      "Crispin Sandoval Farias"
-    ],
-    "directorio_municipal_sindico": "Pedro Alberto González Cisneros"
-  },
-  {
-    "id": 84,
+    "id": 82,
     "domicilio": "Mariano Escobedo, #52, Centro, 48050, Sayula, Jalisco",
     "municipio": "Sayula",
     "presidente_municipio": "Jazmin Carrion Calvario",
@@ -1823,7 +1777,7 @@
     "directorio_municipal_sindico": "Uriel Iván Pita Villa"
   },
   {
-    "id": 85,
+    "id": 83,
     "domicilio": "Simón Bolívar, #122, El Rosal, 45300, Tala, Jalisco",
     "municipio": "Tala",
     "presidente_municipio": "Juan Gerardo Ruiz Delgado",
@@ -1846,7 +1800,7 @@
     "directorio_municipal_sindico": "Martina Castillo Ramirez"
   },
   {
-    "id": 86,
+    "id": 84,
     "domicilio": "Independencia, #32, Centro, 48200, Talpa de Allende, Jalisco",
     "municipio": "Talpa de Allende",
     "presidente_municipio": "Patricia Sánchez Moro",
@@ -1867,7 +1821,7 @@
     "directorio_municipal_sindico": "Santiago Cardenas Cibrian"
   },
   {
-    "id": 87,
+    "id": 85,
     "domicilio": "Ramón Corona, #12, Sur, 49650, Tamazula de Gordiano, Jalisco",
     "municipio": "Tamazula de Gordiano",
     "presidente_municipio": "Laura Gabriela Jiménez Iñiguez",
@@ -1888,7 +1842,7 @@
     "directorio_municipal_sindico": "Estefania Castellanos Valencia"
   },
   {
-    "id": 88,
+    "id": 86,
     "domicilio": "Agustín Yáñez, #2, Centro, 49340, Tapalpa, Jalisco",
     "municipio": "Tapalpa",
     "presidente_municipio": "Antonio Morales Díaz",
@@ -1910,7 +1864,7 @@
     "directorio_municipal_sindico": "Francisco Javier Hernández López"
   },
   {
-    "id": 89,
+    "id": 87,
     "domicilio": "Portal Victoria, #9, Centro, 49900, Tecalitlán, Jalisco",
     "municipio": "Tecalitlán",
     "presidente_municipio": "Brenda Patricia Barriga López",
@@ -1930,27 +1884,7 @@
     "directorio_municipal_sindico": "Efrén Larios Moreno"
   },
   {
-    "id": 90,
-    "domicilio": "Hidalgo Norte, #2, Centro, 49230, Techaluta de Montenegro, Jalisco",
-    "municipio": "Techaluta de Montenegro",
-    "presidente_municipio": "Alfredo Sánchez Pulido",
-    "presidente_correo": "gobiernodetechaluta@gmail.com",
-    "directorio_municipal_telefono": "372 424 5139",
-    "directorio_municipal_partido": "PT",
-    "directorio_municipal_regidores": [
-      "Ariel Llamas Zepeda",
-      "María Dalia García Orozco",
-      "Hugo Abraham Cruz Cruz",
-      "Claudia Cecilia Jiménez Suarez",
-      "Sergio Velazquez Enriquez",
-      "Adriana Jiménez Marquez",
-      "Santiago Aguilar Garibay",
-      "Luz María Marquez Buenrostro"
-    ],
-    "directorio_municipal_sindico": "Mayra Alexandra Flores Ochoa"
-  },
-  {
-    "id": 91,
+    "id": 88,
     "domicilio": "Cristóbal de Ovejo, #37, Centro, 48540, Tecolotlán, Jalisco",
     "municipio": "Tecolotlán",
     "presidente_municipio": "José Preciado Soltero",
@@ -1970,7 +1904,27 @@
     "directorio_municipal_sindico": "Teresita Tachahui Gil Ruelas"
   },
   {
-    "id": 92,
+    "id": 89,
+    "domicilio": "Hidalgo Norte, #2, Centro, 49230, Techaluta de Montenegro, Jalisco",
+    "municipio": "Techaluta de Montenegro",
+    "presidente_municipio": "Alfredo Sánchez Pulido",
+    "presidente_correo": "gobiernodetechaluta@gmail.com",
+    "directorio_municipal_telefono": "372 424 5139",
+    "directorio_municipal_partido": "PT",
+    "directorio_municipal_regidores": [
+      "Ariel Llamas Zepeda",
+      "María Dalia García Orozco",
+      "Hugo Abraham Cruz Cruz",
+      "Claudia Cecilia Jiménez Suarez",
+      "Sergio Velazquez Enriquez",
+      "Adriana Jiménez Marquez",
+      "Santiago Aguilar Garibay",
+      "Luz María Marquez Buenrostro"
+    ],
+    "directorio_municipal_sindico": "Mayra Alexandra Flores Ochoa"
+  },
+  {
+    "id": 90,
     "domicilio": "Morelos, #4, Centro, 48570, Tenamaxtlán, Jalisco",
     "municipio": "Tenamaxtlán",
     "presidente_municipio": "José Manuel Cardenas Castillo",
@@ -1990,7 +1944,7 @@
     "directorio_municipal_sindico": "Luz María Ruelas Soltero"
   },
   {
-    "id": 93,
+    "id": 91,
     "domicilio": "Plaza Principal Oriente, #50, Centro, 47200, Teocaltiche, Jalisco",
     "municipio": "Teocaltiche",
     "presidente_municipio": "Silvia Margarita Villalobos Delgado",
@@ -2010,7 +1964,7 @@
     "directorio_municipal_sindico": "José Antonio Cajero Moran"
   },
   {
-    "id": 94,
+    "id": 92,
     "domicilio": "Álvaro Obregón, #16, Centro, 49250, Teocuitatlán de Corona, Jalisco",
     "municipio": "Teocuitatlán de Corona",
     "presidente_municipio": "Ricardo Sahagun Quiñonez",
@@ -2029,7 +1983,7 @@
     "directorio_municipal_sindico": "Alma Yanira Macias Sotelo"
   },
   {
-    "id": 95,
+    "id": 93,
     "domicilio": "Hidalgo, #45, Centro, 47600, Tepatitlán de Morelos, Jalisco",
     "municipio": "Tepatitlán de Morelos",
     "presidente_municipio": "Miguel Ángel Esquivias Esquivias",
@@ -2055,7 +2009,7 @@
     "directorio_municipal_sindico": "Marco Antonio Isaac González"
   },
   {
-    "id": 96,
+    "id": 94,
     "domicilio": "José Cuervo, #33, Centro, 46400, Tequila, Jalisco",
     "municipio": "Tequila",
     "presidente_municipio": "LORENA MARISOL RODRÍGUEZ RIVERA",
@@ -2075,7 +2029,7 @@
     "directorio_municipal_sindico": "Luz Bertha Cabrera Cortez"
   },
   {
-    "id": 97,
+    "id": 95,
     "domicilio": "16 de Septiembre, #10, Centro, 46760, Teuchitlán, Jalisco",
     "municipio": "Teuchitlán",
     "presidente_municipio": "JAIME ALBERTO RODRÍGUEZ BALLESTEROS",
@@ -2095,7 +2049,7 @@
     "directorio_municipal_sindico": "Ma. Guadalupe Chávez Reyes"
   },
   {
-    "id": 98,
+    "id": 96,
     "domicilio": "Independencia, #170, Centro, 49400, Tizapán el Alto, Jalisco",
     "municipio": "Tizapan el Alto",
     "presidente_municipio": "José Santiago Coronado Valencia",
@@ -2115,7 +2069,7 @@
     "directorio_municipal_sindico": "Jacqueline Maribel Santos Negrete"
   },
   {
-    "id": 99,
+    "id": 97,
     "domicilio": "Higuera, #70, Centro, 45650, Tlajomulco de Zúñiga, Jalisco",
     "municipio": "Tlajomulco de Zúñiga",
     "presidente_municipio": "Gerardo Quirino Velazquez Chávez",
@@ -2144,7 +2098,35 @@
     "directorio_municipal_sindico": "Thania Edith Morales Rodríguez"
   },
   {
-    "id": 100,
+    "id": 98,
+    "domicilio": "Independencia, #58, Centro, 45500, San Pedro Tlaquepaque, Jalisco",
+    "municipio": "San Pedro Tlaquepaque",
+    "presidente_municipio": "Laura Imelda Pérez Segura",
+    "presidente_correo": "lauraimelda.perez@tlaquepaque.gob.mx",
+    "directorio_municipal_telefono": "(331) 057 6000",
+    "directorio_municipal_partido": "Coalición Sigamos Haciendo Historia en Jalisco",
+    "directorio_municipal_regidores": [
+      "Angelina Jara Robles",
+      "Mario Arturo Martínez Sevilla",
+      "María Del Socorro Ortiz Zarate",
+      "Jonhattan Pérez Valadez",
+      "Alejandra Del Rocio Badillo López",
+      "Cristina Patricia Carrasco Acosta",
+      "Julio Oswaldo García Santana",
+      "Andrea Janette Ramirez García",
+      "Luis Eduardo Ramirez Pérez",
+      "Efrain Cortés Díaz",
+      "Regina Martínez González",
+      "Mirna Citlalli Amaya De Luna",
+      "Marco Antonio Fuentes Ontiveros",
+      "Norma Angélica Alatorre Blas",
+      "Cesar Arturo Reynoso Mercado",
+      "Laura Eliezer Alcantar Díaz"
+    ],
+    "directorio_municipal_sindico": "José De Jesús Ramirez Contreras"
+  },
+  {
+    "id": 99,
     "domicilio": "Benito Juárez, #3, Centro, 76600, Tolimán, Jalisco",
     "municipio": "Tolimán",
     "presidente_municipio": "Alma Mirella Siordia Romero",
@@ -2165,7 +2147,7 @@
     "directorio_municipal_sindico": "Elda Gama Solano"
   },
   {
-    "id": 101,
+    "id": 100,
     "domicilio": "Constitución, Centro, 48450, Tomatlán, Jalisco",
     "municipio": "Tomatlán",
     "presidente_municipio": "Daniel Ruiz Benavides",
@@ -2185,7 +2167,7 @@
     "directorio_municipal_sindico": "Hilda Yolanda Renteria Salazar"
   },
   {
-    "id": 102,
+    "id": 101,
     "domicilio": "Hidalgo, #21, Tonalá Centro, 45400, Tonalá, Jalisco",
     "municipio": "Tonalá",
     "presidente_municipio": "Sergio Armando Chávez Davalos",
@@ -2213,7 +2195,7 @@
     "directorio_municipal_sindico": "Verónica Yanira Sepulveda Velazquez"
   },
   {
-    "id": 103,
+    "id": 102,
     "domicilio": "Madero, #80, Centro, 48761, Tonaya, Jalisco",
     "municipio": "Tonaya",
     "presidente_municipio": "NOÉ GRAJEDA PALOS",
@@ -2234,7 +2216,7 @@
     "directorio_municipal_sindico": "Teresita Covarrubias Ramirez"
   },
   {
-    "id": 104,
+    "id": 103,
     "domicilio": "Juárez, s/n, Centro, 49840, Tonila, Jalisco",
     "municipio": "Tonila",
     "presidente_municipio": "Gladis Minerva Silva González",
@@ -2254,7 +2236,7 @@
     "directorio_municipal_sindico": "Edgar Guadalupe Hernández Cardenas"
   },
   {
-    "id": 105,
+    "id": 104,
     "domicilio": "Hidalgo, #29, Centro, 46170, Totatiche, Jalisco",
     "municipio": "Totatiche",
     "presidente_municipio": "Gema Livier Lara Gómez",
@@ -2274,7 +2256,7 @@
     "directorio_municipal_sindico": "Julián Gutiérrez Pérez"
   },
   {
-    "id": 106,
+    "id": 105,
     "domicilio": "Juárez, #111 Sur, Centro, 47730, Tototlán, Jalisco",
     "municipio": "Tototlán",
     "presidente_municipio": "Abel Vázquez Villalpando",
@@ -2294,7 +2276,7 @@
     "directorio_municipal_sindico": "María Estela Valadez Medel"
   },
   {
-    "id": 107,
+    "id": 106,
     "domicilio": "Hidalgo, #9, La Ermita, 48770, Tuxcacuesco, Jalisco",
     "municipio": "Tuxcacuesco",
     "presidente_municipio": "Ramón Reynaga Araiza",
@@ -2315,7 +2297,7 @@
     "directorio_municipal_sindico": "Sara Guadalupe Galicia García"
   },
   {
-    "id": 108,
+    "id": 107,
     "domicilio": "Álvaro Obregón, #16A, 49430, Tuxcueca, Jalisco",
     "municipio": "Tuxcueca",
     "presidente_municipio": "Juan Diego Fonseca Zepeda",
@@ -2335,7 +2317,7 @@
     "directorio_municipal_sindico": "Araceli Arana López"
   },
   {
-    "id": 109,
+    "id": 108,
     "domicilio": "Portal Hidalgo, #7, Centro, 49800, Tuxpan, Jalisco",
     "municipio": "Tuxpan",
     "presidente_municipio": "Claudia Gil Montes",
@@ -2355,7 +2337,7 @@
     "directorio_municipal_sindico": "Ery Constantino Sánchez Reyes"
   },
   {
-    "id": 110,
+    "id": 109,
     "domicilio": "Iturbide, #1, Centro, 47570, Unión de San Antonio, Jalisco",
     "municipio": "Unión de San Antonio",
     "presidente_municipio": "Ana Gabriela Hurtado Luna",
@@ -2376,7 +2358,7 @@
     "directorio_municipal_sindico": "Víctor Noé Lucio González"
   },
   {
-    "id": 111,
+    "id": 110,
     "domicilio": "Juárez, #56 Poniente, Centro, 48000, Unión de Tula, Jalisco",
     "municipio": "Unión de Tula",
     "presidente_municipio": "María Esther Torres Magaña",
@@ -2397,7 +2379,7 @@
     "directorio_municipal_sindico": "Quatemozin Quetzalcoatl Gómez Reynaga"
   },
   {
-    "id": 112,
+    "id": 111,
     "domicilio": "Reforma Sur, #2, 47380, Valle de Guadalupe, Jalisco",
     "municipio": "Valle de Guadalupe",
     "presidente_municipio": "Alvaro Ibarra Padilla",
@@ -2417,7 +2399,7 @@
     "directorio_municipal_sindico": "Ma Guadalupe Casillas González"
   },
   {
-    "id": 113,
+    "id": 112,
     "domicilio": "Portal Corona, #2, Centro, 49540, Valle de Juárez, Jalisco",
     "municipio": "Valle de Juarez",
     "presidente_municipio": "José Luis Rodríguez Barragan",
@@ -2435,6 +2417,27 @@
       "Ignacio Cisneros Contreras"
     ],
     "directorio_municipal_sindico": "Patricia Torres Martínez"
+  },
+  {
+    "id": 113,
+    "domicilio": "Manuel C. Michel, #13, Barrio de La Quinta, 49700, San Gabriel, Jalisco",
+    "municipio": "San Gabriel",
+    "presidente_municipio": "Alma Gabriela Rodríguez Benavides",
+    "presidente_correo": "presidencia@gobiernosangabriel.com",
+    "directorio_municipal_telefono": "343 427 0003",
+    "directorio_municipal_partido": "Coalición Fuerza y Corazón por Jalisco",
+    "directorio_municipal_regidores": [
+      "Óscar Ramirez Fregoso",
+      "María De Jesús Galindo Ramos",
+      "Nestor Hugo Aguilar Blanco",
+      "Arturo Pérez López",
+      "Gloria María Valencia Rocha",
+      "David Rafael Valencia García",
+      "Verónica Rodríguez Martínez",
+      "Fernando Daniel Nuñez Ramirez",
+      "Norma Fernanda Velarde Rodríguez"
+    ],
+    "directorio_municipal_sindico": "Yesenia De La Torre Hernández"
   },
   {
     "id": 114,
@@ -2498,23 +2501,24 @@
   },
   {
     "id": 117,
-    "domicilio": "Nicolás Bravo, #95, Centro, 48800, Villa Purificación, Jalisco",
-    "municipio": "Villa Purificacion",
-    "presidente_municipio": "J Gabriel Dominguez Preciado",
-    "presidente_correo": "presidencia@villapurificacion.gob.mx",
-    "directorio_municipal_telefono": "(357) 3750140",
-    "directorio_municipal_partido": "Coalición Fuerza y Corazón por Jalisco",
+    "domicilio": "Hermosillo, #6, Nuevo Temacapulín, 47360, Cañadas de Obregón, Jalisco",
+    "municipio": "Cañadas de Obregón",
+    "presidente_municipio": "José Rodrigo Álvarez Padilla",
+    "presidente_correo": "ayuntamiento.canadas24.27@gmail.com",
+    "directorio_municipal_telefono": "431 403 0150",
+    "directorio_municipal_partido": "Movimiento Ciudadano (MC)",
     "directorio_municipal_regidores": [
-      "Nathaly Candelaria Cobian Díaz",
-      "Ma. Nelis Pelayo Rodríguez",
-      "Angélica María Hernández Díaz",
-      "Abel De Niz López",
-      "J Guadalupe Llamas Monroy",
-      "Ma De Jesús Covarrubias Gudiño",
-      "Jennifer Marleny Aguilar Campos",
-      "Luis Armando Olvera Rodríguez"
+      "Alberto Padilla Jiménez",
+      "Carolina García Muro",
+      "Hugo Pérez Gómez",
+      "Norma Rodríguez López",
+      "J. Guadalupe Agredano Ulloa",
+      "María Cruz Delgado Hernández",
+      "Pedro Ramirez Muñoz",
+      "María De La Luz Vallin González",
+      "Leoncio Jauregui Lujano"
     ],
-    "directorio_municipal_sindico": "Mariluz Pelayo García"
+    "directorio_municipal_sindico": "Verónica González Rojas"
   },
   {
     "id": 118,
@@ -2646,31 +2650,6 @@
   },
   {
     "id": 124,
-    "domicilio": "Av. Cristóbal Colón, #62, Centro, 49000, Zapotlán el Grande, Jalisco",
-    "municipio": "Zapotlán el Grande",
-    "presidente_municipio": "Magali Casillas Contreras",
-    "presidente_correo": "presidencia@ciudadguzman.gob.mx",
-    "directorio_municipal_telefono": "341 575 2500 Ext. 135",
-    "directorio_municipal_partido": "Coalición Sigamos Haciendo Historia en Jalisco",
-    "directorio_municipal_regidores": [
-      "Adrián Briseño Esparza",
-      "Dunia Catalina Cruz Moreno",
-      "Hidania Romero Rodríguez",
-      "Yuliana Livier Vargas De La Torre",
-      "José Bertin Chávez Vargas",
-      "Marisol Mendoza Pinto",
-      "Ernesto Sánchez Sánchez",
-      "Óscar Murguia Torres",
-      "Bertha Silvia Gómez Ramos",
-      "Higinio Del Toro Pérez",
-      "María Olga García Ayala",
-      "Gustavo López Sandoval",
-      "Aurora Cecilia Araujó Álvarez"
-    ],
-    "directorio_municipal_sindico": "Miguel Marentes"
-  },
-  {
-    "id": 125,
     "domicilio": "Reforma, #2, Centro, 45430, Zapotlanejo, Jalisco",
     "municipio": "Zapotlanejo",
     "presidente_municipio": "Silvia Patricia Sánchez González",
@@ -2691,5 +2670,26 @@
       "Ma. Luiza Martínez Almaraz"
     ],
     "directorio_municipal_sindico": "Juan Ernesto Navarro Salcedo"
+  },
+  {
+    "id": 125,
+    "domicilio": "Juárez, #7, Cerro Gordo, 47190, San Ignacio Cerro Gordo, Jalisco",
+    "municipio": "San Ignacio Cerro Gordo",
+    "presidente_municipio": "Teresa Romo González",
+    "presidente_correo": "t.romo@sanignaciocg.gob.mx",
+    "directorio_municipal_telefono": "348 716 3000 Ext. 2002",
+    "directorio_municipal_partido": "Coalición Fuerza y Corazón por Jalisco",
+    "directorio_municipal_regidores": [
+      "María Lucila González Landeros",
+      "Emmanuel Orozco Hernández",
+      "Araceli Torres Torres",
+      "Andrés García Padilla",
+      "Ana Patricia Jiménez Martín",
+      "Raymundo Hernández Hernández",
+      "Rosalba Vázquez Orozco",
+      "Luis Rolando Morales Barba",
+      "Bioleta Orozco Hernández"
+    ],
+    "directorio_municipal_sindico": "Horacio Garza Guerra"
   }
 ]
