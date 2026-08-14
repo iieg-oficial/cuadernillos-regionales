@@ -8,9 +8,9 @@ Este proyecto usa [Conventional Commits](https://www.conventionalcommits.org/). 
 type(scope): description
 ```
 
-- **type** — obligatorio
-- **scope** — opcional, en minúsculas con guiones o guiones bajos
-- **description** — en minúsculas, sin punto final
+- **type**: obligatorio
+- **scope**: opcional, en minúsculas con guiones o guiones bajos
+- **description**: en minúsculas, sin punto final
 
 ## Tipos válidos
 
@@ -39,6 +39,6 @@ docs: add latex templates guide
 
 Usa el nombre del módulo o sección como scope:
 
-- `core` — infraestructura compartida
-- `gobierno_y_seguridad` — sección de gobierno y seguridad
-- `renderer`, `compiler`, `settings` — módulos específicos de core
+- `core`: infraestructura compartida
+- `gobierno_y_seguridad`: sección de gobierno y seguridad
+- `renderer`, `compiler`, `settings`: módulos específicos de core

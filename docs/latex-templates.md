@@ -81,13 +81,13 @@ Dentro de la sección se usan `\subsection{}` y `\subsubsection{}` con normalida
 Un valor estático en Overleaf:
 
 ```latex
-\subsection{Acatic — Región Altos Sur}
+\subsection{Acatic, Región Altos Sur}
 ```
 
 Se convierte en:
 
 ```latex
-\subsection{<< gs_municipio_nombre >> — << gs_region_nombre >>}
+\subsection{<< gs_municipio_nombre >>, << gs_region_nombre >>}
 ```
 
 Un valor numérico dentro de texto:
@@ -107,7 +107,7 @@ En << gs_anio_actual >> se registraron << gs_total_delitos >> delitos de fuero c
 Las tablas tienen su propia referencia: **[docs/tables.md](tables.md)**, con la estructura de
 `longtable`, alineaciones, encabezados, pies, caption, tamaños de fuente y colores.
 
-Lo esencial: todas las tablas usan `longtable` —nunca `tabular` ni `table`—, sin líneas verticales,
+Lo esencial: todas las tablas usan `longtable`, nunca `tabular` ni `table`, sin líneas verticales,
 con columnas cuyas proporciones suman 1.00, encabezados con `\thh`/`\thhl` y pie con
 `\tablefooter`.
 

@@ -63,7 +63,7 @@ Definido en `base.tex.j2` como `\textcolor{red}{N/D}`. Nunca usar celdas vacías
 
 - Las secciones NO usan `\section{}`: el nombre ya aparece en la portada de sección, que ancla su
   propia entrada del índice con `\phantomsection` + `\addcontentsline`.
-- Las subsecciones usan `\subsection{Nombre}` (sin numeración pero aparece en el índice). Las subsubsecciones usan `\subsubsection*{Nombre}` (sin numeración y sin aparecer en el índice). El color morado (`colorSeccion`) está definido globalmente en `base.tex.j2` — no sobreescribir en los templates.
+- Las subsecciones usan `\subsection{Nombre}` (sin numeración pero aparece en el índice). Las subsubsecciones usan `\subsubsection*{Nombre}` (sin numeración y sin aparecer en el índice). El color morado (`colorSeccion`) está definido globalmente en `base.tex.j2`; no sobreescribir en los templates.
 - Antes de tablas grandes o imágenes, agregar `\newpage` para evitar cortes.
 - Las portadas de sección usan `\clearpage`, `\thispagestyle{empty}` y `\AddToShipoutPictureBG*` con
   las imágenes `portadilla.png` y `footer_section.png`.

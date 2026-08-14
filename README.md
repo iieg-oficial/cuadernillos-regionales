@@ -123,4 +123,4 @@ Los `.tex` no son portables por sí solos: referencian mapas, gráficas y escudo
 - [Bases de datos](docs/databases.md)
 - [Comandos just](docs/just.md)
 
-Las reglas de estilo que aplican al contenido de los cuadernillos —formato de cifras y estructura de los templates— viven en `.claude/rules/`.
+Las reglas de estilo que aplican al contenido de los cuadernillos, formato de cifras y estructura de los templates, viven en `.claude/rules/`.

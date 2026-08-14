@@ -161,7 +161,7 @@ depende de los datos, se condiciona:
 <% if de_localidades_tiene_na %>ND: & No disponible.\\<% endif %>
 ```
 
-Cuando el ND está escrito fijo en el template —porque el indicador no tiene ese dato por definición—
+Cuando el ND está escrito fijo en el template, porque el indicador no tiene ese dato por definición,
 la llamada va sin condicional.
 
 ## Caption
@@ -201,7 +201,7 @@ Definidos en `templates/base.tex.j2`:
 
 | Nombre | Hex | Uso |
 |---|---|---|
-| `gray!30` | — | Fondo de la fila de encabezado |
+| `gray!30` | (color de LaTeX) | Fondo de la fila de encabezado |
 | `filaResaltada` | `#FFEACE` | Fila de agrupación dentro de la tabla |
 | `rowHighlight` | `#FFF3CD` | Fila resaltada por condición, como el municipio propio |
 | `colorTexto` | `#465055` | Texto y captions |

@@ -45,7 +45,7 @@ carpeta con un nombre nuevo, se agrega ahí en vez de renombrar los archivos.
 
 ### Cómo encuentra el archivo
 
-`_find_map` no exige un nombre exacto: normaliza el nombre del archivo —sin acentos, en minúsculas— y
+`_find_map` no exige un nombre exacto: normaliza el nombre del archivo (sin acentos, en minúsculas) y
 acepta que termine con la CVEGEO completa, con la clave de tres dígitos o con el nombre del municipio
 normalizado. Eso absorbe las variaciones entre entregas.
 
@@ -87,7 +87,7 @@ El bloque que genera el analizer limita el mapa **por ancho y por alto**:
 
 El límite de altura no es adorno: **la proporción de los mapas varía por municipio**. Los alargados
 son más altos y, sin ese tope, no caben junto a su título y se brincan a la página siguiente. Con
-Cuautitlán de García Barragán —relación alto/ancho de 1.2945 contra 1.2063 de Guadalajara— el mapa
+Cuautitlán de García Barragán, con relación alto/ancho de 1.2945 contra 1.2063 de Guadalajara, el mapa
 resultaba más alto que la caja de página completa: no cabía ni sin título.
 
 El `\makebox` centra el mapa sobre el ancho con sangrado, para que no se recorra cuando se encoge.
