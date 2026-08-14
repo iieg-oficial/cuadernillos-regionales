@@ -21,9 +21,15 @@ def _compress_map(src, dest):
         im.save(dest, "JPEG", quality=DRAFT_QUALITY, optimize=True)
 
 
+def _draft_al_dia(original, draft):
+    if not draft.exists():
+        return False
+    return draft.stat().st_mtime >= original.stat().st_mtime
+
+
 def get_draft_path(original, section, key):
     draft_path = DRAFT_DIR / section / f"{key}.jpg"
-    if draft_path.exists():
+    if _draft_al_dia(Path(original), draft_path):
         return draft_path
     _compress_map(original, draft_path)
     return draft_path
