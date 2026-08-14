@@ -16,7 +16,7 @@ from pipelines.historia.pipeline import Historia
 def run(municipio_id: str, pipeline: Pipeline, prod: bool = False) -> None:
     Logger.info(f"Processing municipio: {municipio_id}")
     context = pipeline.run(municipio_id)
-    tex_path = render(municipio_id, context)
+    tex_path = render(municipio_id, context, prod)
     if prod:
         compile_prod(tex_path)
     else:

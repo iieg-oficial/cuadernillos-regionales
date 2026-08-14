@@ -1,4 +1,5 @@
 import json
+import unicodedata
 from pathlib import Path
 
 from jinja2 import Environment, FileSystemLoader
@@ -6,6 +7,13 @@ from jinja2 import Environment, FileSystemLoader
 from core.settings import AppSettings
 from core.utils.escudos import ensure_escudos, escudo_path
 from core.utils.logger import Logger
+
+PROD_TEX_DIR = Path("output/tex/prod")
+
+
+def _sin_acentos(texto: str) -> str:
+    descompuesto = unicodedata.normalize("NFKD", texto)
+    return "".join(c for c in descompuesto if not unicodedata.combining(c))
 
 
 def _get_nombre_municipio(municipio_id: str) -> str:
@@ -16,11 +24,11 @@ def _get_nombre_municipio(municipio_id: str) -> str:
         for muns in region.values():
             for m in muns:
                 if str(m["id"]) == str(int(municipio_id)):
-                    return m["municipio"].replace(" ", "_")
+                    return _sin_acentos(m["municipio"]).lower().replace(" ", "_")
     return municipio_id
 
 
-def render(municipio_id: str, context: dict) -> Path:
+def render(municipio_id: str, context: dict, prod: bool = False) -> Path:
     Logger.info("Renderizando template LaTeX")
     env = Environment(
         loader=FileSystemLoader("templates"),
@@ -34,7 +42,10 @@ def render(municipio_id: str, context: dict) -> Path:
     template = env.get_template("reporte.tex.j2")
     nombre = _get_nombre_municipio(municipio_id)
     slug = f"{municipio_id}_{nombre}_cuadernillo_municipal_2026"
-    output_path = Path("output/tex") / slug / f"{slug}.tex"
+    if prod:
+        output_path = PROD_TEX_DIR / f"{slug}.tex"
+    else:
+        output_path = Path("output/tex") / slug / f"{slug}.tex"
     output_path.parent.mkdir(parents=True, exist_ok=True)
     app_settings = AppSettings()
     ensure_escudos()
