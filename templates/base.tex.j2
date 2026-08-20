@@ -27,6 +27,7 @@
 \usepackage{varwidth} % must be loaded after array
 \usepackage{tabularx}
 \usepackage{longtable}
+\usepackage{needspace}
 \usepackage{caption}
 \DeclareCaptionFormat{tablaformat}{\color{colorTexto}#1\newline#3}
 \captionsetup[longtable]{format=tablaformat, justification=raggedright, singlelinecheck=false, skip=5pt, labelsep=none}
@@ -115,6 +116,9 @@
   \renewcommand{\arraystretch}{1.0}%
   \begin{tabularx}{\linewidth}[t]{@{}l@{\hspace{0.5em}}X@{}}#1\end{tabularx}%
   \renewcommand{\arraystretch}{1.5}}}
+
+\newcommand{\tablafit}[1]{%
+  \Needspace*{\dimexpr #1\baselineskip * 7 / 5 + 6\baselineskip\relax}}
 
 \newcounter{grafica}
 \newcounter{mapa}

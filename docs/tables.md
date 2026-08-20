@@ -212,6 +212,32 @@ Definidos en `templates/base.tex.j2`:
 En las tablas solo se usan `gray!30` para el encabezado y `filaResaltada` para las filas de
 agrupación. Los demás existen para otros elementos del documento.
 
+## Saltos de página antes de una tabla
+
+Antes de una tabla grande se pone `\newpage`, para que no arranque al final de una página y quede
+partida en dos.
+
+Cuando conviene que la tabla quede en la misma página que su gráfica **siempre que quepa completa**,
+existe `\tablafit`, definido en `templates/base.tex.j2`:
+
+```latex
+\tablafit{<número de filas>}
+```
+
+Va en lugar del `\newpage`. Mide el espacio que queda en la página y solo salta si la tabla no cabe;
+si cabe, la deja a continuación. Se apoya en `\Needspace*` del paquete `needspace`.
+
+El argumento es el número de filas del cuerpo, contando las de encabezado intermedias. El analizer lo
+calcula y lo expone como una variable de contexto; el template solo la interpola.
+
+Una `longtable` no se puede medir de antemano, así que la altura es una estimación: `7/5` de
+`\baselineskip` por fila (altura real con `arraystretch` 1.5 en `\footnotesize`) más 6
+`\baselineskip` de caption, encabezado, reglas y `\tablefooter`.
+
+Al momento no se usa en ninguna tabla: se probó en cuencas y se prefirió el `\newpage`, porque con
+125 cuadernillos la tabla quedaría abajo en unos municipios y en página aparte en otros, según
+cuántas filas le tocaran. La consistencia entre cuadernillos pesa más que aprovechar el hueco.
+
 ## Valores no disponibles
 
 Cuando un dato no existe se usa el macro `\ND`, que rinde `N/D` en rojo. Nunca se dejan celdas
