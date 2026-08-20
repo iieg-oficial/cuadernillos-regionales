@@ -186,6 +186,33 @@ def _build_color_lookup(topic_key, categories):
     return lookup
 
 
+RESIDUAL_CATEGORY_KEYS = ("sin_clasificacion", "otros", "no_especificado")
+
+
+def _category_order_key(topic_key, cat, value):
+    key = normalize_category_key(topic_key, cat)
+    if key in RESIDUAL_CATEGORY_KEYS:
+        return (2, 0, 0.0)
+    explicit = list(EXPLICIT_COLOR_MAPS.get(topic_key, {}))
+    if key in explicit:
+        return (0, explicit.index(key), 0.0)
+    return (1, 0, -float(value))
+
+
+def _ordered_segments(topic_key, vals):
+    return sorted(
+        [(cat, val) for cat, val in vals.items() if val > 0],
+        key=lambda item: _category_order_key(topic_key, item[0], item[1]),
+    )
+
+
+def _stacked_legend_order(topic_key, row_data):
+    cats = []
+    for _, vals in reversed(row_data):
+        cats.extend([cat for cat, _ in _ordered_segments(topic_key, vals)])
+    return list(dict.fromkeys(cats))
+
+
 def _color_for(cat, lookup, topic_key=None):
     key = normalize_category_key(topic_key, cat) if topic_key else normalize_token(cat)
     return lookup.get(key, PROPORTION_PALETTE[0])
@@ -236,7 +263,7 @@ def _get_legend_ncol(topic_key, n):
         return min(8 if n <= 16 else 9, n)
     if topic_key.startswith("erosion_"):
         return 4 if n >= 7 else min(4, n)
-    if topic_key == "acuiferos":
+    if topic_key in {"acuiferos", "cuencas"}:
         return n
     return min(max(1, math.ceil(n / 2)), 6)
 
@@ -342,21 +369,18 @@ def plot_proportional_blocks(categories, values, topic_key, output_path):
 
 def plot_stacked_pair(row_data, topic_key, output_path):
     _setup_style()
-    all_cats = []
-    for _, vals in row_data:
-        all_cats.extend([c for c, v in vals.items() if v > 0])
-    colors = _build_color_lookup(topic_key, list(dict.fromkeys(all_cats)))
+    segments = [(label, _ordered_segments(topic_key, vals)) for label, vals in row_data]
+    legend_order = _stacked_legend_order(topic_key, row_data)
+    colors = _build_color_lookup(topic_key, legend_order)
 
     fig, ax = plt.subplots(figsize=(10.4, 2.85))
     ax.set_xlim(-22, 100)
     ax.set_ylim(-0.70, len(row_data) - 0.25)
     ax.axis("off")
 
-    for y, (label, vals) in enumerate(row_data):
+    for y, (label, vals) in enumerate(segments):
         left = 0.0
-        for cat, val in vals.items():
-            if val <= 0:
-                continue
+        for cat, val in vals:
             c = _color_for(cat, colors, topic_key)
             ax.barh(
                 y,
@@ -383,7 +407,8 @@ def plot_stacked_pair(row_data, topic_key, output_path):
         ax.text(-3.0, y, label, ha="right", va="center", fontsize=11, fontweight="bold")
 
     handles, labels = ax.get_legend_handles_labels()
-    unique = dict(zip(labels, handles))
+    found = dict(zip(labels, handles))
+    unique = {cat: found[cat] for cat in legend_order if cat in found}
     if unique:
         ncol = _get_legend_ncol(topic_key, len(unique))
         lh, ll = _reorder_legend(list(unique.values()), list(unique.keys()), ncol)
