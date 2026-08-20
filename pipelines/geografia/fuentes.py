@@ -77,7 +77,7 @@ TEMAS = {
 }
 
 ANIO_TITULO = {
-    "wind": "wind_atlas",
+    "wind": "datos climatológicos del período 2008--2017",
     "sintesis": "2026",
     "geologia": "geologia",
     "edafologia": "edafologia",
