@@ -51,7 +51,14 @@ def _pct(value) -> str:
     return f"{value:,.2f}".replace(",", r"\,") + r"\,\%"
 
 
-def _grafica_latex(path, municipio, tipo, datos):
+NOTA_PECUARIA = (
+    "Se presenta el valor total de la producción de carne en canal, leche, "
+    "huevo para plato, miel, cera y lana. No se contempla el valor de "
+    "producción de ganado en pie."
+)
+
+
+def _grafica_latex(path, municipio, tipo, datos, nota=None):
     n = min(6, len(datos))
     ultimos = datos[-n:]
     anio_ini = ultimos[0]["anio"]
@@ -68,7 +75,9 @@ def _grafica_latex(path, municipio, tipo, datos):
         "\\vspace{0.3cm}\n\n"
         f"\\includegraphics[width=0.95\\textwidth]{{{path}}}\n"
         "\\end{figure}\n"
-        "\\vspace{-10pt}\\noindent{\\footnotesize Fuente: SADER. "
+        "\\tablefooter{"
+        + (f"Nota: & {nota}\\\\\n" if nota else "")
+        + "Fuente: & SADER. "
         f"Datos abiertos de la DGSIAP, {anio_ini}--{anio_fin}.}}"
     )
 
@@ -717,7 +726,11 @@ class Analizer(Stage):
                     ganadera_anual, municipio_nombre, "pecuaria", chart_path
                 )
                 ctx["ec_grafica_ganaderia"] = _grafica_latex(
-                    chart_path, municipio_nombre, "pecuaria", ganadera_anual
+                    chart_path,
+                    municipio_nombre,
+                    "pecuaria",
+                    ganadera_anual,
+                    nota=NOTA_PECUARIA,
                 )
             else:
                 ctx["ec_grafica_ganaderia"] = MAPA_PLACEHOLDER
