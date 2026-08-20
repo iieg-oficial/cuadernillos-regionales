@@ -462,35 +462,29 @@ class Analizer(Stage):
         ac_cond = detalle.get("acuiferos_condicion", [])
         linea_t = detalle.get("linea_transm_l", [])
 
-        ctx["ge_cu_sup_con_disponibilidad"] = sup_sum(
-            cu_clasificac, ["con disponibilidad"]
-        )
         ctx["ge_cu_pct_con_disponibilidad"] = pct_sum(
             cu_clasificac, ["con disponibilidad"]
-        )
-        ctx["ge_cu_sup_sin_disponibilidad"] = sup_sum(
-            cu_clasificac, ["sin disponibilidad"]
         )
         ctx["ge_cu_pct_sin_disponibilidad"] = pct_sum(
             cu_clasificac, ["sin disponibilidad"]
         )
-        ctx["ge_cu_sup_reserva"] = sup_sum(cu_categ, ["reserva"])
-        ctx["ge_cu_pct_reserva"] = pct_sum(cu_categ, ["reserva"])
-        ctx["ge_cu_sup_veda"] = sup_sum(cu_categ, ["veda"])
-        ctx["ge_cu_pct_veda"] = pct_sum(cu_categ, ["veda"])
-        ctx["ge_cu_sup_veda_reglamento"] = sup_sum(cu_categ, ["veda y reglamento"])
-        ctx["ge_cu_pct_veda_reglamento"] = pct_sum(cu_categ, ["veda y reglamento"])
-        ctx["ge_cu_sup_veda_reserva_reglamento"] = sup_sum(
-            cu_categ, ["veda, reserva y reglamento"]
+        ctx["ge_cu_disponibilidad"] = rows_for(
+            cu_clasificac,
+            {
+                "categoria": "categoria",
+                "superficie_ha": "superficie_ha",
+                "porcentaje": "porcentaje",
+            },
+            transforms={"categoria": sentence_case},
         )
-        ctx["ge_cu_pct_veda_reserva_reglamento"] = pct_sum(
-            cu_categ, ["veda, reserva y reglamento"]
-        )
-        ctx["ge_cu_sup_sin_ordenamiento_superficial"] = sup_sum(
-            cu_categ, ["sin ordenamiento"]
-        )
-        ctx["ge_cu_pct_sin_ordenamiento_superficial"] = pct_sum(
-            cu_categ, ["sin ordenamiento"]
+        ctx["ge_cu_ordenamiento"] = rows_for(
+            cu_categ,
+            {
+                "categoria": "categoria",
+                "superficie_ha": "superficie_ha",
+                "porcentaje": "porcentaje",
+            },
+            transforms={"categoria": sentence_case},
         )
         ctx["ge_cu_disponibilidad_texto"] = build_cuencas_disponibilidad_text(
             ctx["ge_cu_pct_con_disponibilidad"],

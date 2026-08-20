@@ -349,23 +349,19 @@ Con base en la información sobre disponibilidad y ordenamiento de aguas superfi
 \hline
 \endlastfoot
 
-Con disponibilidad & << ge_cu_sup_con_disponibilidad >> & << ge_cu_pct_con_disponibilidad >> \\
+<% for fila in ge_cu_disponibilidad %>
+<< fila.categoria >> & << fila.superficie_ha >> & << fila.porcentaje >> \\
 \hline
-Sin disponibilidad & << ge_cu_sup_sin_disponibilidad >> & << ge_cu_pct_sin_disponibilidad >> \\
-\hline
+<% endfor %>
+<% if ge_cu_ordenamiento %>
 \rowcolor{gray!30}
 \thh{0.40}{Tipos de ordenamiento}  &  \thhl{0.30}{Superficie (ha)}  &  \thhl{0.30}{Porcentaje} \\
 \hline
-Reserva & << ge_cu_sup_reserva >> & << ge_cu_pct_reserva >> \\
+<% for fila in ge_cu_ordenamiento %>
+<< fila.categoria >> & << fila.superficie_ha >> & << fila.porcentaje >> \\
 \hline
-Veda & << ge_cu_sup_veda >> & << ge_cu_pct_veda >> \\
-\hline
-Veda y reglamento & << ge_cu_sup_veda_reglamento >> & << ge_cu_pct_veda_reglamento >> \\
-\hline
-Veda, reserva y reglamento & << ge_cu_sup_veda_reserva_reglamento >> & << ge_cu_pct_veda_reserva_reglamento >> \\
-\hline
-Cuenca sin ordenamiento superficial & << ge_cu_sup_sin_ordenamiento_superficial >> & << ge_cu_pct_sin_ordenamiento_superficial >> \\
-\hline
+<% endfor %>
+<% endif %>
 
 \end{longtable}
 \normalsize
