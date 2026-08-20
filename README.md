@@ -24,6 +24,7 @@ Este repositorio automatiza la generación de esos reportes: extrae datos de Pos
 | [Bases de datos](docs/databases.md) | Qué base usa cada sección, el archivo `.env` que le corresponde, cómo se abre la conexión, dónde viven las consultas y cómo diagnosticar fallas |
 | [Templates LaTeX](docs/latex-templates.md) | Cómo pasar un documento de Overleaf a template Jinja2: delimitadores propios, convención de nombres de variables, paquetes disponibles, macros del proyecto y reglas de contenido |
 | [Tablas](docs/tables.md) | La estructura de `longtable` que usan todas las tablas: proporciones y alineación de columnas, encabezados, caption, pie, tamaños de fuente, colores y formato de cifras |
+| [Gráficas](docs/charts.md) | Cómo se insertan las gráficas, el título numerado con `\graficatitulo`, el pie de dos columnas con `\tablefooter` y el orden de nota y fuente |
 | [Mapas](docs/maps.md) | Por qué los mapas no se insertan con `\includegraphics`, de dónde se descargan, la versión ligera para iterar, tamaño y posición, título, contador y pie |
 | [Convención de commits](docs/commit-conventions.md) | Formato de los mensajes de commit, tipos válidos que valida el hook y scopes sugeridos |
 
