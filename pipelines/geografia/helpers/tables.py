@@ -154,7 +154,7 @@ def education_rows_for(rows):
     return result
 
 
-def pct_sum(rows, contains, value_col="porcentaje"):
+def raw_sum(rows, contains, value_col="porcentaje"):
     terms = [t.lower() for t in contains]
     total = 0.0
     for row in rows:
@@ -163,7 +163,11 @@ def pct_sum(rows, contains, value_col="porcentaje"):
             val = to_number(row.get(value_col))
             if val is not None:
                 total += val
-    return fmt(total)
+    return total
+
+
+def pct_sum(rows, contains, value_col="porcentaje"):
+    return fmt(raw_sum(rows, contains, value_col))
 
 
 def sup_sum(rows, contains, value_col="superficie_ha"):

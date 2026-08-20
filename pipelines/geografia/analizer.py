@@ -40,11 +40,14 @@ from pipelines.geografia.helpers.tables import (
     education_rows_for,
     health_rows_for,
     pct_sum,
+    raw_sum,
     rows_for,
     sup_sum,
 )
 
 CHARTS_DIR = Path("output/charts")
+
+SIN_CLASIFICACION = ["sin clasificacion", "sin clasificación"]
 
 SIMPLE_CHART_TOPICS = [
     ("geologia", "categoria", "porcentaje", "orden_pct"),
@@ -499,10 +502,21 @@ class Analizer(Stage):
         ctx["ge_ac_pct_no_sobreexplotado"] = pct_sum(
             ac_cond, ["no explotado", "no sobreexplotado"]
         )
+        ctx["ge_ac_sit_sin_clasificacion_activa"] = (
+            raw_sum(ac_sit, SIN_CLASIFICACION) > 0
+        )
+        ctx["ge_ac_sup_sit_sin_clasificacion"] = sup_sum(ac_sit, SIN_CLASIFICACION)
+        ctx["ge_ac_pct_sit_sin_clasificacion"] = pct_sum(ac_sit, SIN_CLASIFICACION)
+        ctx["ge_ac_cond_sin_clasificacion_activa"] = (
+            raw_sum(ac_cond, SIN_CLASIFICACION) > 0
+        )
+        ctx["ge_ac_sup_cond_sin_clasificacion"] = sup_sum(ac_cond, SIN_CLASIFICACION)
+        ctx["ge_ac_pct_cond_sin_clasificacion"] = pct_sum(ac_cond, SIN_CLASIFICACION)
         ctx["ge_ac_texto"] = build_acuiferos_text(
             ctx.get("ge_ac_nombres_acuiferos"),
             ctx["ge_ac_pct_con_disponibilidad"],
             ctx["ge_ac_pct_sin_disponibilidad"],
+            ctx["ge_ac_pct_sit_sin_clasificacion"],
         )
 
         salud_total = to_number(

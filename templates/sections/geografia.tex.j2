@@ -428,10 +428,18 @@ Con disponibilidad & << ge_ac_sup_con_disponibilidad >> & << ge_ac_pct_con_dispo
 \hline
 Sin disponibilidad & << ge_ac_sup_sin_disponibilidad >> & << ge_ac_pct_sin_disponibilidad >> \\
 \hline
-No sobreexplotado & << ge_ac_sup_no_sobreexplotado >> & << ge_ac_pct_no_sobreexplotado >> \\
+<% if ge_ac_sit_sin_clasificacion_activa %>
+Sin clasificación & << ge_ac_sup_sit_sin_clasificacion >> & << ge_ac_pct_sit_sin_clasificacion >> \\
+\hline
+<% endif %>
+No explotado & << ge_ac_sup_no_sobreexplotado >> & << ge_ac_pct_no_sobreexplotado >> \\
 \hline
 Sobreexplotado & << ge_ac_sup_sobreexplotado >> & << ge_ac_pct_sobreexplotado >> \\
 \hline
+<% if ge_ac_cond_sin_clasificacion_activa %>
+Sin clasificación & << ge_ac_sup_cond_sin_clasificacion >> & << ge_ac_pct_cond_sin_clasificacion >> \\
+\hline
+<% endif %>
 
 \end{longtable}
 \normalsize
