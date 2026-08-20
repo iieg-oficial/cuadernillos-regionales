@@ -212,7 +212,7 @@ def build_clima_text(
     return " ".join(partes)
 
 
-def build_acuiferos_text(nombres, pct_con, pct_sin):
+def build_acuiferos_text(nombres, pct_con, pct_sin, pct_sin_clasificacion=None):
     items = split_names(nombres)
     if not items:
         return (
@@ -237,7 +237,34 @@ def build_acuiferos_text(nombres, pct_con, pct_sin):
     if con is None or sin is None:
         return ubicacion
 
-    if con <= 0:
+    sin_clasificar = to_number(strip_percent_symbol(pct_sin_clasificacion)) or 0.0
+
+    if sin_clasificar > 0:
+        if con <= 0 and sin <= 0:
+            disponibilidad = (
+                "La totalidad de la superficie municipal comprendida en ellos "
+                "no está clasificada."
+            )
+        elif con <= 0:
+            disponibilidad = (
+                f"De la superficie municipal comprendida en ellos, {fmt(sin)} \\% "
+                f"no cuenta con disponibilidad de agua subterránea y "
+                f"{fmt(sin_clasificar)} \\% no está clasificado."
+            )
+        elif sin <= 0:
+            disponibilidad = (
+                f"De la superficie municipal comprendida en ellos, {fmt(con)} \\% "
+                f"cuenta con disponibilidad de agua subterránea y "
+                f"{fmt(sin_clasificar)} \\% no está clasificado."
+            )
+        else:
+            disponibilidad = (
+                f"Del total de la superficie municipal comprendida en ellos, "
+                f"{fmt(sin)} \\% no tiene disponibilidad, {fmt(con)} \\% cuenta "
+                f"con disponibilidad de agua subterránea y "
+                f"{fmt(sin_clasificar)} \\% no está clasificado."
+            )
+    elif con <= 0:
         disponibilidad = (
             "La totalidad de la superficie municipal comprendida en ellos "
             "no cuenta con disponibilidad de agua subterránea."
