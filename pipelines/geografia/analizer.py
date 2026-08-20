@@ -18,6 +18,7 @@ from pipelines.geografia.helpers.context import (
     build_acuiferos_text,
     build_anp_text,
     build_clima_text,
+    build_cuencas_disponibilidad_text,
     build_energia_text,
     build_espacios_publicos_text,
     build_linea_transmision_text,
@@ -32,6 +33,7 @@ from pipelines.geografia.helpers.formatting import (
     latex_escape,
     narrative_lower,
     pluralize_comparatives,
+    sentence_case,
     strip_percent_symbol,
     to_number,
 )
@@ -193,7 +195,7 @@ def _generate_stacked_chart(
     def _aggregate(rows):
         result = {}
         for row in rows:
-            cat = str(row.get("categoria", ""))
+            cat = sentence_case(str(row.get("categoria", "")))
             val = row.get("porcentaje")
             if cat and val is not None:
                 try:
@@ -489,6 +491,10 @@ class Analizer(Stage):
         )
         ctx["ge_cu_pct_sin_ordenamiento_superficial"] = pct_sum(
             cu_categ, ["sin ordenamiento"]
+        )
+        ctx["ge_cu_disponibilidad_texto"] = build_cuencas_disponibilidad_text(
+            ctx["ge_cu_pct_con_disponibilidad"],
+            ctx["ge_cu_pct_sin_disponibilidad"],
         )
         ctx["ge_ac_sup_con_disponibilidad"] = sup_sum(ac_sit, ["con disponibilidad"])
         ctx["ge_ac_pct_con_disponibilidad"] = pct_sum(ac_sit, ["con disponibilidad"])
