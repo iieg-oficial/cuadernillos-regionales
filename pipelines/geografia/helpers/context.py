@@ -212,6 +212,32 @@ def build_clima_text(
     return " ".join(partes)
 
 
+def build_cuencas_disponibilidad_text(pct_con, pct_sin):
+    con = to_number(strip_percent_symbol(pct_con))
+    sin = to_number(strip_percent_symbol(pct_sin))
+
+    if con is None or sin is None:
+        return ""
+
+    preambulo = "Del total de la superficie municipal comprendida en ellas,"
+
+    if con <= 0 and sin <= 0:
+        return ""
+    if con <= 0:
+        return (
+            f"{preambulo} {fmt(sin)} \\% presenta déficit de disponibilidad "
+            f"de agua superficial."
+        )
+    if sin <= 0:
+        return (
+            f"{preambulo} {fmt(con)} \\% presenta disponibilidad de agua superficial."
+        )
+    return (
+        f"{preambulo} {fmt(con)} \\% presenta disponibilidad y {fmt(sin)} \\% "
+        f"presenta déficit de disponibilidad de agua superficial."
+    )
+
+
 def build_acuiferos_text(nombres, pct_con, pct_sin, pct_sin_clasificacion=None):
     items = split_names(nombres)
     if not items:
