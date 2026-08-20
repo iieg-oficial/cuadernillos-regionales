@@ -93,6 +93,7 @@ EXPLICIT_COLOR_MAPS = {
         "sin_disponibilidad": COLOR_PALETTE["purple_01"],
         "no_explotado": COLOR_PALETTE["purple_05"],
         "sobreexplotado": COLOR_PALETTE["orange"],
+        "sin_clasificacion": COLOR_PALETTE["gray"],
     },
     "sequia": {
         "sin_sequia": COLOR_PALETTE["purple_01"],
