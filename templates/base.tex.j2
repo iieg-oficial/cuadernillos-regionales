@@ -123,34 +123,17 @@
 \newcommand{\tablefooterrow}[2]{%
   \multicolumn{#1}{@{}p{\linewidth}@{}}{\tablefooterbody{#2}}\\}
 
-% longtable reserva la altura de \endfoot durante toda la tabla, pero NUNCA la de
-% \endlastfoot. Por eso una tabla que cabe justo se da por terminada sin pedir corte,
-% y es el \output normal de LaTeX el que despues parte la pagina para acomodar el pie,
-% con la rutina de salida de longtable ya cerrada: la tabla se parte sin marcas de
-% continuacion. Aqui se reserva tambien lo que el ultimo pie mide de mas, para que la
-% decision la tome longtable.
+% \LT@output ya sabe bajar el ultimo pie con marcas de continuacion si no cabe, pero
+% mide solo la ALTURA de \LT@lastfoot e ignora su profundidad. Con un pie de varias
+% lineas eso se queda corto y el pie termina solo en la pagina siguiente. Los dos
+% parches le suman \dp\LT@lastfoot a la comparacion.
 \makeatletter
-\newdimen\LT@ft@extra
-\apptocmd{\LT@start}{%
-  \global\LT@ft@extra\z@
-  \ifvoid\LT@lastfoot\else
-    \@tempdima\ht\LT@lastfoot
-    \advance\@tempdima\dp\LT@lastfoot
-    \advance\@tempdima-\ht\LT@foot
-    \ifdim\@tempdima>\z@
-      \global\LT@ft@extra\@tempdima
-      \global\advance\vsize-\@tempdima
-      \global\advance\@colroom-\@tempdima
-      \@tempdimb\pagegoal \advance\@tempdimb-\@tempdima \pagegoal\@tempdimb
-    \fi
-  \fi}{}{\PackageWarning{cuadernillos}{no se pudo parchar LT@start}}
-\apptocmd{\endlongtable}{%
-  \ifdim\LT@ft@extra>\z@
-    \global\advance\vsize\LT@ft@extra
-    \global\advance\@colroom\LT@ft@extra
-    \@tempdima\pagegoal \advance\@tempdima\LT@ft@extra \pagegoal\@tempdima
-    \global\LT@ft@extra\z@
-  \fi}{}{\PackageWarning{cuadernillos}{no se pudo parchar endlongtable}}
+\patchcmd{\LT@output}{\ifdim \ht\LT@lastfoot>\ht\LT@foot}
+  {\ifdim \dimexpr\ht\LT@lastfoot+\dp\LT@lastfoot\relax>\ht\LT@foot}
+  {}{\PackageWarning{cuadernillos}{no se pudo parchar LT@output (guarda)}}
+\patchcmd{\LT@output}{\advance\dimen@-\ht\LT@lastfoot}
+  {\advance\dimen@-\ht\LT@lastfoot\advance\dimen@-\dp\LT@lastfoot}
+  {}{\PackageWarning{cuadernillos}{no se pudo parchar LT@output (medida)}}
 \makeatother
 
 \newcommand{\tablafit}[1]{%
@@ -166,12 +149,33 @@
 \setlength{\mapbleed}{0.9cm}
 \newlength{\mapheadroom}
 \setlength{\mapheadroom}{1.6cm}
-\newcommand{\mapatitulo}[2][0pt]{%
+% \mapatitulo imprime el titulo en su lugar; \mapatitulo* solo lo guarda para que lo
+% dibuje \mapageo. Los mapas de geografia se escalan con \adjustbox y, cuando los limita
+% la altura, salen mas angostos que el recuadro con sangrado: si el titulo se imprimiera
+% por su cuenta quedaria alineado al recuadro y no al mapa.
+\makeatletter
+\newsavebox{\mapa@box}
+\newcommand{\mapa@titulo}{}
+\newcommand{\mapa@guardar}[1]{%
+  \refstepcounter{mapa}%
+  \gdef\mapa@titulo{Mapa \themapa. #1}}
+\newcommand{\mapa@imprimir}[2][0pt]{%
   \refstepcounter{mapa}%
   \noindent\hspace*{-#1}%
   \parbox{\dimexpr\linewidth+#1+#1\relax}{%
     \color{colorTexto}\raggedright Mapa \themapa. #2}\par
   \vspace{-\parskip}\vspace{1pt}}
+\newcommand{\mapatitulo}{\@ifstar\mapa@guardar\mapa@imprimir}
+\newcommand{\mapageo}[1]{%
+  \sbox\mapa@box{\adjustbox{max width=\dimexpr\textwidth+2\mapbleed\relax,
+    max height=\dimexpr\textheight-\mapheadroom\relax}{\includegraphics{#1}}}%
+  \noindent\hspace*{-\mapbleed}%
+  \makebox[\dimexpr\textwidth+2\mapbleed\relax][c]{%
+    \begin{minipage}{\wd\mapa@box}%
+      \noindent{\color{colorTexto}\raggedright\mapa@titulo}\par\vspace{1pt}%
+      \usebox\mapa@box
+    \end{minipage}}\par}
+\makeatother
 \newcommand{\mapafuente}[1]{%
   \par\vspace{-4pt}\noindent{\footnotesize
   \renewcommand{\arraystretch}{1.0}%
