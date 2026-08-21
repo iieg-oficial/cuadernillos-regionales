@@ -149,6 +149,12 @@
   {}{\PackageWarning{cuadernillos}{no se pudo parchar LT@output (resto)}}
 \makeatother
 
+% Manda el parrafo a la pagina siguiente si el, su grafica y su pie no caben juntos.
+% 0.52\textwidth es lo que mide una grafica a 0.95\textwidth con su proporcion habitual;
+% los 9 renglones cubren el parrafo, el titulo de la grafica y el pie.
+\newcommand{\graficafit}{%
+  \Needspace*{\dimexpr 0.52\textwidth + 9\baselineskip\relax}}
+
 \newcommand{\tablafit}[1]{%
   \Needspace*{\dimexpr #1\baselineskip * 7 / 5 + 6\baselineskip\relax}}
 
