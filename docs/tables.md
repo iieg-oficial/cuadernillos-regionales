@@ -283,15 +283,15 @@ continuación y sin encabezados**.
 Es el mismo enfoque de `threeparttablex`, que inserta sus notas con un `\multicolumn` dentro de la
 `longtable`.
 
-### La reserva de altura
+### El parche a `\LT@output`
 
-`\LT@start` reserva `\ht\LT@foot` de `\pagegoal` durante toda la tabla, pero **nunca**
-`\ht\LT@lastfoot`. Por eso una tabla que cabe justo termina sin pedir corte y el problema vuelve.
-`base.tex.j2` parcha `\LT@start` con `\apptocmd` para reservar también lo que el último pie mide de
-más, y parcha `\endlongtable` para devolver esa altura al terminar.
+La comprobación de `longtable` mide solo la **altura** de `\LT@lastfoot` e ignora su profundidad.
+Con un pie de varias líneas eso se queda corto: `longtable` cree que cabe, no baja nada, y el pie
+termina solo en la página siguiente. `base.tex.j2` parcha `\LT@output` con `\patchcmd` para sumarle
+`\dp\LT@lastfoot` a la comparación, en los dos puntos donde aparece.
 
-Cuesta una página por cuadernillo, más o menos: las páginas que ocupa una tabla pierden la altura de
-su pie.
+Es un parche de dos líneas y no cambia la paginación del resto: solo corrige el caso en que el pie
+no cabía y `longtable` no se daba cuenta.
 
 ### Lo que NO funciona
 
@@ -305,6 +305,9 @@ Anotado para no volver a intentarlo:
 - **Bajar `\LTchunksize`**: la documentación dice que los chunks no afectan el salto de página, y el
   valor debe ser al menos el número de filas de cada bloque de encabezado o pie. Con valores chicos
   falla con `Longtable head or foot not at start of table`.
+- **Reservar `\ht\LT@lastfoot` en `\LT@start`**, como hace `longtable` con `\ht\LT@foot`: cuenta dos
+  veces, porque `\LT@output` ya descuenta el último pie de `\pagegoal`. Arreglaba unas tablas y
+  rompía otras, y le costaba una página a cada cuadernillo.
 
 ### `\tablefooter` sigue existiendo
 
