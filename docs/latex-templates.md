@@ -176,7 +176,18 @@ Definidos en `base.tex.j2`:
 | `\mapatitulo` | Título numerado de mapa; la forma `*` lo guarda para `\mapabloque` |
 | `\mapageo`, `\mapafijo` | Bloque de mapa: título y mapa alineados |
 | `\mapafuente` | Pie de mapa con varias fuentes |
-| `\versioncuadernillo` | Versión y fecha del pie de página |
+| `\versionnumero`, `\versionfecha` | Versión y fecha del cuadernillo |
+| `\versioncuadernillo` | Las dos juntas, para el pie de página |
+
+## Bitácora de versiones
+
+`templates/bitacora.tex.j2` es la última página de contenido, antes de la contraportada. Lleva el
+título `Bitácora de versiones` con `\subsection*` (morado, sin entrada en el índice, porque no
+cuelga de ninguna sección) y una `longtable` de cuatro columnas: Versión, Fecha, Descripción del
+cambio y Página.
+
+Es la única tabla del cuadernillo **sin pie de fuente**: no hay fuente externa que citar, es un
+registro interno del documento.
 
 ## Encabezado y pie de página
 
@@ -189,8 +200,12 @@ Definidos en `base.tex.j2`:
 | Pie izquierda | `logo_footer.png` |
 | Pie derecha | `\versioncuadernillo` |
 
-`\versioncuadernillo` es la versión y fecha del cuadernillo (`v01 - 31/08/2026`). Se define una sola
-vez en `base.tex.j2`, junto al `\pagestyle`; para publicar una versión nueva se cambia ahí.
+`\versioncuadernillo` es la versión y fecha del cuadernillo (`v01 - 31/08/2026`), armada con
+`\versionnumero` y `\versionfecha`. Las tres se definen en `base.tex.j2`, junto al `\pagestyle`, y
+alimentan también el primer renglón de la bitácora de versiones.
+
+Para publicar una versión nueva: cambiar `\versionnumero` y `\versionfecha`, y agregar el renglón que
+corresponda en `templates/bitacora.tex.j2`.
 
 Las portadas, las portadillas de sección y la contraportada usan `\thispagestyle{empty}`, así que no
 llevan encabezado ni pie.
