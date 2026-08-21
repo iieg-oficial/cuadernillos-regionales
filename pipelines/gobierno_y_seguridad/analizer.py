@@ -561,7 +561,8 @@ class Analizer(Stage):
             ctx["gs_grafica_distribucion_porcentual_bienes_juridicos_afectados"] = (
                 _grafica_latex(
                     chart_path,
-                    "Distribución porcentual por bien jurídico "
+                    "Distribución porcentual de las carpetas de investigación "
+                    "por bien jurídico "
                     f"afectado, {periodo_and_mun}",
                     fuente_sesnsp,
                 )
