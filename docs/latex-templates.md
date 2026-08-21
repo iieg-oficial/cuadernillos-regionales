@@ -178,6 +178,7 @@ Definidos en `base.tex.j2`:
 | `\mapafuente` | Pie de mapa con varias fuentes |
 | `\versionnumero`, `\versionfecha` | Versión y fecha del cuadernillo |
 | `\versioncuadernillo` | Las dos juntas, para el pie de página |
+| `\versionetiqueta` | La píldora de versión de la portada |
 
 ## Bitácora de versiones
 
@@ -200,9 +201,18 @@ registro interno del documento.
 | Pie izquierda | `logo_footer.png` |
 | Pie derecha | `\versioncuadernillo` |
 
-`\versioncuadernillo` es la versión y fecha del cuadernillo (`v01 - 31/08/2026`), armada con
-`\versionnumero` y `\versionfecha`. Las tres se definen en `base.tex.j2`, junto al `\pagestyle`, y
-alimentan también el primer renglón de la bitácora de versiones.
+`\versionnumero` (`01`, sin la `v`) y `\versionfecha` son la fuente de verdad. De ahí salen las otras
+dos formas, definidas junto al `\pagestyle` en `base.tex.j2`:
+
+| Macro | Dónde aparece | Cómo se ve |
+|---|---|---|
+| `\versioncuadernillo` | Pie de cada página, a la derecha | `v01 - 31/08/2026` |
+| `\versionetiqueta` | Portada, bajo el mes | píldora gris con `Versión 01 \| Fecha de versión: 31/08/2026` |
+
+Y el primer renglón de la bitácora de versiones, que arma su `v01` con `v\versionnumero`.
+
+`\versionetiqueta` es un nodo de TikZ con esquinas redondeadas y fondo `colorEtiqueta`. El texto va
+en `\footnotesize`, el mismo tamaño que el paginado.
 
 Para publicar una versión nueva: cambiar `\versionnumero` y `\versionfecha`, y agregar el renglón que
 corresponda en `templates/bitacora.tex.j2`.
