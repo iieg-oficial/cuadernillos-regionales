@@ -135,6 +135,33 @@
   {\advance\dimen@-\ht\LT@lastfoot\advance\dimen@-\dp\LT@lastfoot}
   {}{\PackageWarning{cuadernillos}{no se pudo parchar LT@output (medida)}}
 
+% Y longtable reserva la altura de \endfoot durante toda la tabla, pero nunca la de
+% \endlastfoot. Sin eso la pagina se llena con el cuerpo y el pie se pasa solo a la
+% siguiente. Se reserva tambien lo que el ultimo pie mide de mas, y se devuelve al
+% cerrar la tabla. La rama final de \LT@output cuenta esa reserva dos veces a
+% proposito: asi expulsa la pagina y entra el \vsplit de arriba, que baja filas.
+\newdimen\LT@ft@extra
+\apptocmd{\LT@start}{%
+  \global\LT@ft@extra\z@
+  \ifvoid\LT@lastfoot\else
+    \@tempdima\ht\LT@lastfoot
+    \advance\@tempdima\dp\LT@lastfoot
+    \advance\@tempdima-\ht\LT@foot
+    \ifdim\@tempdima>\z@
+      \global\LT@ft@extra\@tempdima
+      \global\advance\vsize-\@tempdima
+      \global\advance\@colroom-\@tempdima
+      \@tempdimb\pagegoal \advance\@tempdimb-\@tempdima \pagegoal\@tempdimb
+    \fi
+  \fi}{}{\PackageWarning{cuadernillos}{no se pudo parchar LT@start}}
+\apptocmd{\endlongtable}{%
+  \ifdim\LT@ft@extra>\z@
+    \global\advance\vsize\LT@ft@extra
+    \global\advance\@colroom\LT@ft@extra
+    \@tempdima\pagegoal \advance\@tempdima\LT@ft@extra \pagegoal\@tempdima
+    \global\LT@ft@extra\z@
+  \fi}{}{\PackageWarning{cuadernillos}{no se pudo parchar endlongtable}}
+
 % Cuando decide que no cabe, longtable manda TODA la pagina con \LT@foot y abre la
 % siguiente con \LT@head y el pie: encabezado y pie solos, sin una sola fila. Con el
 % \vsplit se parte el material a la altura que si cabe, asi que las filas sobrantes
