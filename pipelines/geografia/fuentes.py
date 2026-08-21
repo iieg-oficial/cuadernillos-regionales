@@ -108,7 +108,7 @@ ANIO_MAPA = {
     "pendientes": "topografia",
     "cuencas": "cuencas",
     "acuiferos": "condicion_acuiferos",
-    "temperatura": "2025",
+    "temperatura": "smn",
     "precipitacion": "smn",
     "clima": "smn",
     "usv": "usv",
