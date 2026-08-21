@@ -211,8 +211,10 @@ dos formas, definidas junto al `\pagestyle` en `base.tex.j2`:
 
 Y el primer renglón de la bitácora de versiones, que arma su `v01` con `v\versionnumero`.
 
-`\versionetiqueta` es un nodo de TikZ con esquinas redondeadas y fondo `colorEtiqueta`. El texto va
-en `\footnotesize`, el mismo tamaño que el paginado.
+`\versionetiqueta` es un nodo de TikZ con esquinas redondeadas, fondo `colorEtiqueta` (`#F3F3F3`) y
+texto `colorEtiquetaTexto` (`#939393`) en `\footnotesize`, el mismo tamaño que el paginado. En la
+portada va con un `\vfill` antes y un `\vspace*{1.3cm}` después, que es el hueco que ocupa el logo de
+Jalisco del fondo: así queda pegada al logo y no colgando del mes.
 
 Para publicar una versión nueva: cambiar `\versionnumero` y `\versionfecha`, y agregar el renglón que
 corresponda en `templates/bitacora.tex.j2`.
