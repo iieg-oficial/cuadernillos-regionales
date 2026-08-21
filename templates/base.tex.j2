@@ -241,9 +241,13 @@
   footskip=1.8cm
 }
 
-% Version del cuadernillo. Aparece al pie de cada pagina, a la derecha; las portadas
-% usan \thispagestyle{empty} y no la llevan.
-\newcommand{\versioncuadernillo}{v01 - 31/08/2026}
+% Version del cuadernillo. Aparece al pie de cada pagina, a la derecha, y como primer
+% renglon de la bitacora de versiones; las portadas usan \thispagestyle{empty} y no la
+% llevan. Al publicar una version nueva se cambian estas dos lineas y se agrega el
+% renglon correspondiente en templates/bitacora.tex.j2.
+\newcommand{\versionnumero}{v01}
+\newcommand{\versionfecha}{31/08/2026}
+\newcommand{\versioncuadernillo}{\versionnumero{} - \versionfecha}
 
 \pagestyle{fancy}
 \fancyhf{}
