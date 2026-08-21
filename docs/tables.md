@@ -283,15 +283,37 @@ continuación y sin encabezados**.
 Es el mismo enfoque de `threeparttablex`, que inserta sus notas con un `\multicolumn` dentro de la
 `longtable`.
 
-### El parche a `\LT@output`
+### Los parches a `\LT@output`
 
-La comprobación de `longtable` mide solo la **altura** de `\LT@lastfoot` e ignora su profundidad.
-Con un pie de varias líneas eso se queda corto: `longtable` cree que cabe, no baja nada, y el pie
-termina solo en la página siguiente. `base.tex.j2` parcha `\LT@output` con `\patchcmd` para sumarle
-`\dp\LT@lastfoot` a la comparación, en los dos puntos donde aparece.
+Son dos, y hacen falta los dos.
 
-Es un parche de dos líneas y no cambia la paginación del resto: solo corrige el caso en que el pie
-no cabía y `longtable` no se daba cuenta.
+**Medir el pie completo.** La comprobación de `longtable` mide solo la **altura** de `\LT@lastfoot` e
+ignora su profundidad. Con un pie de varias líneas eso se queda corto: cree que cabe, no baja nada, y
+el pie termina solo en la página siguiente. Los parches le suman `\dp\LT@lastfoot` a la comparación,
+en los dos puntos donde aparece.
+
+**Bajar filas, no solo el pie.** Cuando decide que no cabe, `longtable` manda **toda** la página con
+`\LT@foot` y abre la siguiente con `\LT@head` y el pie:
+
+```tex
+\setbox\@cclv\vbox{\unvbox\z@\copy\LT@foot\vss}%
+\@makecol \@outputpage
+\setbox\z@\vbox{\box\LT@head}%
+```
+
+Eso deja una página con «(continuación)», los encabezados de columna y el pie, **sin una sola fila**.
+El parche mete un `\vsplit` para partir el material a la altura que sí cabe, y le pasa el resto a la
+página siguiente:
+
+```tex
+\splittopskip\z@ \setbox\tw@\vsplit\z@ to\dimen@
+\setbox\@cclv\vbox{\unvbox\tw@\copy\LT@foot\vss}%
+...
+\setbox\z@\vbox{\box\LT@head\unvbox\z@}%
+```
+
+`\dimen@` ya trae la altura disponible descontando el pie, así que el corte cae donde debe. Las filas
+que no caben bajan con el pie, con sus marcas de continuación y sus encabezados.
 
 ### Lo que NO funciona
 
