@@ -146,7 +146,7 @@ bloque completo y lo pasa como variable; el template solo pone el título y la v
 
 ```latex
 \clearpage
-\mapatitulo[\mapbleed]{Título del mapa de << ge_municipio >>, << ge_anio_mapa.tema >>}
+\mapatitulo*{Título del mapa de << ge_municipio >>, << ge_anio_mapa.tema >>}
 << ge_tema_mapa >>
 ```
 

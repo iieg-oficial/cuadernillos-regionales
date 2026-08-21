@@ -10,12 +10,13 @@ bloque LaTeX completo y lo pasa como variable de contexto:
 
 ```latex
 \clearpage
-\mapatitulo[\mapbleed]{Título del mapa de << ge_municipio >>, << ge_anio_mapa.tema >>}
+\mapatitulo*{Título del mapa de << ge_municipio >>, << ge_anio_mapa.tema >>}
 << ge_tema_mapa >>
 ```
 
-La variable trae el `\includegraphics` con sus límites de tamaño ya resueltos. El template solo pone
-el título y la variable.
+La variable trae la llamada a `\mapageo`, que resuelve tamaño y alineación. El título va con la
+forma estrellada: `\mapatitulo*` no imprime nada, solo guarda el texto para que lo dibuje `\mapageo`
+alineado con el mapa.
 
 ## De dónde salen
 
@@ -100,15 +101,18 @@ ser del `\sbox`: cuando al mapa lo limita la altura sale más angosto que el rec
 un título impreso por su cuenta quedaría alineado al recuadro y no al mapa. Midiéndolo primero, los
 dos arrancan en el mismo punto.
 
-Los mapas de demografía no usan sangrado y van a `0.95\textwidth`, con holgura vertical de sobra.
+Los mapas de demografía usan `\mapafijo[ancho]{ruta}`, que es el mismo `\mapabloque` sin sangrado y
+con ancho fijo (`0.95\textwidth` por omisión). También llevan el título dentro del bloque: al ir
+centrados a 0.95 del ancho, un título impreso aparte arrancaba en el margen, medio hueco a la
+izquierda del mapa.
 
 ## Título
 
-`\mapatitulo[sangrado]{texto}` lleva su propio contador, así que la numeración es automática. Lo usan
-historia, demografía y gobierno, cuyos mapas van a ancho fijo: imprime el título en su lugar.
+`\mapatitulo[sangrado]{texto}` lleva su propio contador, así que la numeración es automática. Lo usa
+historia, cuyo mapa ocupa el ancho completo del texto: imprime el título en su lugar.
 
 `\mapatitulo*{texto}` **no imprime nada**: solo avanza el contador y guarda el texto para que lo
-dibuje `\mapageo`. Es el que usa geografía, por lo del ancho variable. El `\refstepcounter` corre
+dibuje `\mapabloque` (`\mapageo` en geografía, `\mapafijo` en demografía). El `\refstepcounter` corre
 igual, así que un `\label` puesto justo después sigue capturando el número.
 
 El título **se parte en dos líneas** cuando no cabe; no se encoge. Por eso `\mapheadroom` reserva

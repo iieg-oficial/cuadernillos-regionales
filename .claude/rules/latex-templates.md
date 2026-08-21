@@ -43,7 +43,7 @@ Los mapas NO usan `\includegraphics`: el analizer arma el bloque y lo pasa como 
 
 ```latex
 \clearpage
-\mapatitulo[\mapbleed]{Título del mapa de << ge_municipio >>, << ge_anio_mapa.tema >>}
+\mapatitulo*{Título del mapa de << ge_municipio >>, << ge_anio_mapa.tema >>}
 << ge_tema_mapa >>
 ```
 
