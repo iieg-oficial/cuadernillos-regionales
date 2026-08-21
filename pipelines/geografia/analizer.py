@@ -30,6 +30,7 @@ from pipelines.geografia.helpers.formatting import (
     first_value,
     fmt,
     fmt_int,
+    fmt_no_cero,
     latex_escape,
     narrative_lower,
     pluralize_comparatives,
@@ -215,6 +216,21 @@ def _generate_stacked_chart(
         return False
 
 
+def _pct_desde_superficie(rows, area_km2):
+    area_ha = to_number(area_km2)
+    if not area_ha:
+        return rows
+    area_ha *= 100
+    ajustadas = []
+    for row in rows:
+        pct = to_number(row.get("porcentaje"))
+        sup = to_number(row.get("superficie_ha"))
+        if pct == 0 and sup:
+            row = {**row, "porcentaje": sup / area_ha * 100}
+        ajustadas.append(row)
+    return ajustadas
+
+
 def _fmt_field(val):
     if val is None:
         return ND
@@ -270,6 +286,10 @@ class Analizer(Stage):
                 ctx[ctx_key] = (
                     fmt_int(val) if ctx_key in INTEGER_KEYS else _fmt_field(val)
                 )
+
+        anp_texto = texto.get("anp_humedales_manglares", {})
+        if anp_texto.get("anp_pct_humedales") is not None:
+            ctx["ge_anp_pct_humedales"] = fmt_no_cero(anp_texto["anp_pct_humedales"])
 
         cl_texto = texto.get("clima_koppen", {})
         ctx["ge_dg_clima_predom"] = ctx.get(
@@ -385,13 +405,16 @@ class Analizer(Stage):
             order_col="orden_clase",
         )
         ctx["ge_anp_categorias"] = rows_for(
-            detalle.get("anp_humedales_manglares", []),
+            _pct_desde_superficie(
+                detalle.get("anp_humedales_manglares", []), dg.get("dg_area_km2")
+            ),
             {
                 "categoria": "categoria",
                 "superficie_ha": "superficie_ha",
                 "porcentaje": "porcentaje",
                 "descripcion": "cadena_texto",
             },
+            transforms={"porcentaje": fmt_no_cero},
         )
         ctx["ge_ds_categorias"] = rows_for(
             detalle.get("sequia", []),
