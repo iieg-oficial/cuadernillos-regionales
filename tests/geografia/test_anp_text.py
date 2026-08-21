@@ -4,7 +4,6 @@ ZAPOPAN = {
     "anp_nombre": "Zapopan",
     "anp_num_anp": "8",
     "anp_superficie_anp": "27\\,092.24",
-    "anp_pct_anp": "26.63",
     "anp_pct_humedales": "0.35",
 }
 

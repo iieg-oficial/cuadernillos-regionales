@@ -66,6 +66,13 @@ SIMPLE_CHART_TOPICS = [
     ("erosion_efectiva", "rango_texto", "porcentaje", "orden_clase"),
 ]
 
+# Claves de variables_texto que NO pasan al contexto: "nombre" choca entre temas y
+# "anp_pct_anp" dejo de usarse al quitar la superficie del parrafo de ANP.
+SKIP_TEXTO_KEYS = {
+    "nombre",
+    "anp_pct_anp",
+}
+
 INTEGER_KEYS = {
     "ge_edu_total_escuelas_muni",
     "ge_ie_dominante_valor",
@@ -280,7 +287,7 @@ class Analizer(Stage):
 
         for topic, data in texto.items():
             for key, val in data.items():
-                if key == "nombre":
+                if key in SKIP_TEXTO_KEYS:
                     continue
                 ctx_key = f"ge_{key}"
                 ctx[ctx_key] = (
