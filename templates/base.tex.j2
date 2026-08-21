@@ -166,15 +166,21 @@
     \color{colorTexto}\raggedright Mapa \themapa. #2}\par
   \vspace{-\parskip}\vspace{1pt}}
 \newcommand{\mapatitulo}{\@ifstar\mapa@guardar\mapa@imprimir}
-\newcommand{\mapageo}[1]{%
-  \sbox\mapa@box{\adjustbox{max width=\dimexpr\textwidth+2\mapbleed\relax,
-    max height=\dimexpr\textheight-\mapheadroom\relax}{\includegraphics{#1}}}%
-  \noindent\hspace*{-\mapbleed}%
-  \makebox[\dimexpr\textwidth+2\mapbleed\relax][c]{%
+% #1 ancho maximo de la imagen, #2 sangrado, #3 ruta. El titulo va en un minipage del
+% ancho REAL del mapa, medido con el \sbox: si al mapa lo limita la altura sale mas
+% angosto que su caja y un titulo impreso aparte quedaria alineado a la caja, no al mapa.
+\newcommand{\mapabloque}[3]{%
+  \sbox\mapa@box{\adjustbox{max width=#1,
+    max height=\dimexpr\textheight-\mapheadroom\relax}{\includegraphics{#3}}}%
+  \noindent\hspace*{-#2}%
+  \makebox[\dimexpr\linewidth+#2+#2\relax][c]{%
     \begin{minipage}{\wd\mapa@box}%
       \noindent{\color{colorTexto}\raggedright\mapa@titulo}\par\vspace{1pt}%
       \usebox\mapa@box
     \end{minipage}}\par}
+\newcommand{\mapageo}[1]{%
+  \mapabloque{\dimexpr\textwidth+2\mapbleed\relax}{\mapbleed}{#1}}
+\newcommand{\mapafijo}[2][0.95\textwidth]{\mapabloque{#1}{0pt}{#2}}
 \makeatother
 \newcommand{\mapafuente}[1]{%
   \par\vspace{-4pt}\noindent{\footnotesize

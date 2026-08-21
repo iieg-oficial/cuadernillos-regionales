@@ -17,12 +17,9 @@ def _mapa_latex(
     label: str | None = None,
 ) -> str:
     bloque = (
-        f"\\mapatitulo{{{caption}}}\n"
+        f"\\mapatitulo*{{{caption}}}\n"
         + (f"\\label{{{label}}}\n" if label else "")
-        + "\\begin{figure}[H]\n"
-        "\\centering\n"
-        f"\\includegraphics[width={ancho}]{{{path}}}\n"
-        "\\end{figure}"
+        + f"\\mapafijo[{ancho}]{{{path}}}"
     )
     if fuentes:
         lineas = [f"Fuente: & {fuentes[0]}\\\\"]
