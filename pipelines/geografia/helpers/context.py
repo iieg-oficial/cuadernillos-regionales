@@ -79,19 +79,13 @@ def build_anp_text(ctx):
 
     if has_anp:
         count = ctx.get("anp_num_anp", ND)
-        superficie = ctx.get("anp_superficie_anp", ND)
-        pct_raw = ctx.get("anp_pct_anp", ND)
-        pct = strip_percent_symbol(pct_raw) if pct_raw != ND else ND
         area_word = (
             "área natural protegida"
             if to_number(ctx.get("anp_num_anp")) == 1
             else "áreas naturales protegidas"
         )
         parts = [
-            f"{PREAMBULO_ANP}el municipio de {municipio} registra "
-            f"{count} {area_word}, "
-            f"con una superficie de {superficie} hectáreas, equivalente a "
-            f"{pct} \\% del territorio municipal."
+            f"{PREAMBULO_ANP}el municipio de {municipio} registra {count} {area_word}."
         ]
     else:
         parts = [
