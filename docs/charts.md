@@ -25,7 +25,7 @@ pasan como variable de contexto; el template solo interpola la variable.
 
 ## Pie de gráfica
 
-El pie usa **`\tablefooter`**, el mismo macro que las tablas. No se usa un bloque
+El pie usa **`\tablefooter`**, la versión suelta del pie de tabla (las tablas usan `\tablefooterrow`, dentro de la `longtable`). No se usa un bloque
 `\footnotesize` suelto ni se le antepone `\vspace`: el macro ya trae su espaciado negativo para
 quedar a ras de la imagen.
 
@@ -39,7 +39,7 @@ opcional.
 
 ### Es de dos columnas
 
-`\tablefooter` renderiza dentro de un `tabularx` de **dos** columnas: la etiqueta y el texto. Eso es
+El pie renderiza dentro de un `tabularx` de **dos** columnas: la etiqueta y el texto. Eso es
 lo que alinea «Nota:» con «Fuente:» y hace que el texto largo sangre bajo su primera línea en vez de
 volver al margen.
 

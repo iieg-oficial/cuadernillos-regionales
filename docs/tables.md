@@ -40,14 +40,16 @@ Nota preliminar opcional}
 \endfoot
 
 \hline
+\tablefooterrow{3}{Fuente: & IIEG, con base en INSTITUCIÓN. Producto consultado, 2025.}
 \endlastfoot
 
-Valor & Valor & Valor \\
+<% for fila in filas %>
+<< fila.a >> & << fila.b >> & << fila.c >> \\
 \hline
+<% endfor %>
 
 \end{longtable}
 \normalsize
-\tablefooter{Fuente: & IIEG, con base en INSTITUCIÓN. Producto consultado, 2025.}
 ```
 
 El encabezado se escribe **dos veces**: en `\endfirsthead` para la primera página y en `\endhead`
@@ -118,13 +120,20 @@ Nunca se escriben guiones manuales dentro de `\makecell`, como `\makecell{Pobla-
 
 ## Pie de tabla
 
-Se usa el macro `\tablefooter`, que ya trae el espaciado negativo para quedar a ras de la tabla. No se
-le antepone `\vspace`.
+En las **tablas** el pie va dentro de la `longtable`, en `\endlastfoot`, con `\tablefooterrow`. Ver
+[Cohesión entre la tabla y su pie](#cohesión-entre-la-tabla-y-su-pie).
 
 ```latex
-\tablefooter{Nota: & Texto de la nota.\\
+\tablefooterrow{3}{Nota: & Texto de la nota.\\
 ND: & No disponible.\\
 Fuente: & IIEG, con base en INEGI. Producto consultado, 2025.}
+```
+
+En **gráficas y mapas** va suelto, con `\tablefooter`, que ya trae el espaciado negativo para quedar
+a ras de la imagen. No se le antepone `\vspace`.
+
+```latex
+\tablefooter{Fuente: & IIEG, con base en INEGI. Producto consultado, 2025.}
 ```
 
 El orden es **Nota → Llamada → Símbolos → Fuente**. La fuente es obligatoria; el resto es opcional.
@@ -138,13 +147,13 @@ Fuente: & IIEG, con base en INSTITUCIÓN. Producto consultado, Año.
 Con varias fuentes, cada una en su renglón:
 
 ```latex
-\tablefooter{Fuente: IIEG, con base en & CONAGUA. Disponibilidad en cuencas hidrológicas, 2023.\\
+\tablefooterrow{3}{Fuente: IIEG, con base en & CONAGUA. Disponibilidad en cuencas hidrológicas, 2023.\\
  & CONAGUA. Ordenamiento de aguas superficial, 2023.}
 ```
 
 ### El pie es de dos columnas
 
-`\tablefooter` renderiza dentro de un `tabularx` de **dos** columnas: la etiqueta y el texto. Un `&`
+El pie renderiza dentro de un `tabularx` de **dos** columnas: la etiqueta y el texto. Un `&`
 de más manda el resto a una fila nueva y parte la línea a la mitad.
 
 ```latex
@@ -193,7 +202,7 @@ resto de los títulos van en gris.
 | `\small` | Marcas de «(continuación)» y «(continúa)» |
 | `\scriptsize` | Encabezados de tablas con muchas columnas, como las de economía |
 
-El pie hereda `\footnotesize` del propio macro `\tablefooter`.
+El pie hereda `\footnotesize` de su propio macro.
 
 ## Colores
 
@@ -232,11 +241,76 @@ calcula y lo expone como una variable de contexto; el template solo la interpola
 
 Una `longtable` no se puede medir de antemano, así que la altura es una estimación: `7/5` de
 `\baselineskip` por fila (altura real con `arraystretch` 1.5 en `\footnotesize`) más 6
-`\baselineskip` de caption, encabezado, reglas y `\tablefooter`.
+`\baselineskip` de caption, encabezado, reglas y pie.
 
 Al momento no se usa en ninguna tabla: se probó en cuencas y se prefirió el `\newpage`, porque con
 125 cuadernillos la tabla quedaría abajo en unos municipios y en página aparte en otros, según
 cuántas filas le tocaran. La consistencia entre cuadernillos pesa más que aprovechar el hueco.
+
+## Cohesión entre la tabla y su pie
+
+**El pie va dentro de la tabla**, como última fila de `\endlastfoot`, con `\tablefooterrow`:
+
+```latex
+\hline
+\tablefooterrow{<número de columnas>}{Fuente: & IIEG, con base en INEGI. Producto, 2025.}
+\endlastfoot
+```
+
+El primer argumento es el número de columnas, el mismo que llevan los `\multicolumn` de
+«(continuación)» y «(continúa)». El segundo es el contenido del pie, con las mismas dos columnas y el
+mismo orden Nota → Llamada → Símbolos → Fuente de siempre.
+
+Después de `\end{longtable}` ya no va nada.
+
+### Por qué dentro y no después
+
+`longtable` ya sabe resolver esto, pero solo si el pie está en `\endlastfoot`. En `\LT@output`:
+
+```tex
+\ifdim \ht\LT@lastfoot>\ht\LT@foot
+  \dimen@\pagegoal \advance\dimen@\ht\LT@foot \advance\dimen@-\ht\LT@lastfoot
+  \ifdim\dimen@<\ht\z@
+     ... cierra la página con \LT@foot y abre la siguiente con \LT@head
+```
+
+Si el último pie no cabe, cierra la página con «(continúa)» y abre la siguiente con «(continuación)»
+y los encabezados. Con el pie suelto después de `\end{longtable}`, `longtable` ni se entera: da la
+tabla por terminada, y es el `\output` normal de LaTeX el que después parte la página para acomodar
+el pie, ya sin la rutina de salida de `longtable`. Resultado: **la tabla se parte sin marcas de
+continuación y sin encabezados**.
+
+Es el mismo enfoque de `threeparttablex`, que inserta sus notas con un `\multicolumn` dentro de la
+`longtable`.
+
+### La reserva de altura
+
+`\LT@start` reserva `\ht\LT@foot` de `\pagegoal` durante toda la tabla, pero **nunca**
+`\ht\LT@lastfoot`. Por eso una tabla que cabe justo termina sin pedir corte y el problema vuelve.
+`base.tex.j2` parcha `\LT@start` con `\apptocmd` para reservar también lo que el último pie mide de
+más, y parcha `\endlongtable` para devolver esa altura al terminar.
+
+Cuesta una página por cuadernillo, más o menos: las páginas que ocupa una tabla pierden la altura de
+su pie.
+
+### Lo que NO funciona
+
+Anotado para no volver a intentarlo:
+
+- **Forzar el corte desde afuera** (`\nopagebreak`, penalties, parchar el `\penalty\z@` de
+  `\endlongtable`): mueve el corte, pero la tabla se sigue partiendo sin marcas.
+- **`\\*` en las últimas filas** para arrastrar dos filas en vez de una: prohíbe el corte justo
+  donde `longtable` lo quiere tomar, así que lo termina tomando el `\output` normal — otra vez sin
+  marcas. Además `\hline` mete un `\penalty-\@lowpenalty` entre sus dos reglas que anula al `\\*`.
+- **Bajar `\LTchunksize`**: la documentación dice que los chunks no afectan el salto de página, y el
+  valor debe ser al menos el número de filas de cada bloque de encabezado o pie. Con valores chicos
+  falla con `Longtable head or foot not at start of table`.
+
+### `\tablefooter` sigue existiendo
+
+Es la versión suelta, para los pies de **gráfica y de mapa**, que no están dentro de ninguna tabla.
+Trae el `\vspace{-28pt}` para quedar a ras de la imagen. Comparte cuerpo con `\tablefooterrow`
+(`\tablefooterbody`), así que se ven igual.
 
 ## Valores no disponibles
 

@@ -11,7 +11,7 @@ Antes de crear o modificar cualquier template, revisar el pipeline de demografí
 
 Ver [docs/tables.md](../../docs/tables.md). Ahí está todo: estructura de `longtable`, proporciones y
 alineaciones de columna, encabezados con `\thh`/`\thhl`, `\multicolumn`, `\makecell`, caption,
-pie con `\tablefooter`, tamaños de fuente y colores.
+pie con `\tablefooterrow` dentro de `\endlastfoot`, tamaños de fuente y colores.
 
 Reglas que no se negocian:
 
@@ -20,6 +20,7 @@ Reglas que no se negocian:
 - Las proporciones de columna suman exactamente 1.00
 - Cifras a la derecha, texto a la izquierda, valores cualitativos al centro
 - Todas las celdas de una fila de encabezado usan el mismo macro
+- El pie va dentro de la tabla, en `\endlastfoot`, con `\tablefooterrow`; nunca suelto después de `\end{longtable}`
 - El pie es de dos columnas: un `&` de más parte la línea
 - Orden del pie: Nota → Llamada → Símbolos → Fuente
 

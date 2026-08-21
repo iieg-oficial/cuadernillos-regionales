@@ -115,7 +115,7 @@ arranca en el margen de texto y no 0.9 cm a la izquierda como los de geografía.
 
 ## Pie de mapa
 
-Se usa el mismo macro que las tablas, `\tablefooter`, sin `\vspace` extra, para que quede a ras de la
+Se usa `\tablefooter`, la versión suelta del pie de tabla, sin `\vspace` extra, para que quede a ras de la
 imagen. Ver [docs/tables.md](tables.md#pie-de-tabla) para el orden y el formato.
 
 En geografía los pies de mapa están comentados en el template (`%\mapafuente{...}`) porque la fuente
