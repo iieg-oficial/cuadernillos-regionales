@@ -138,12 +138,13 @@ def _cita(clave):
     return f"{texto}, {anio}."
 
 
+SANGRIA_FUENTE = "\\phantom{IIEG, con base en }"
+
+
 def _pie(claves):
     citas = [_cita(clave) for clave in claves]
-    if len(citas) == 1:
-        return f"Fuente: & IIEG, con base en {citas[0]}"
-    cuerpo = "\\\\\n & ".join(citas)
-    return f"Fuente: IIEG, con base en & {cuerpo}"
+    cuerpo = f"\\\\\n & {SANGRIA_FUENTE}".join(citas)
+    return f"Fuente: & IIEG, con base en {cuerpo}"
 
 
 def build_fuentes_context():
