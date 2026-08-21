@@ -250,9 +250,15 @@
 % renglon de la bitacora de versiones; las portadas usan \thispagestyle{empty} y no la
 % llevan. Al publicar una version nueva se cambian estas dos lineas y se agrega el
 % renglon correspondiente en templates/bitacora.tex.j2.
-\newcommand{\versionnumero}{v01}
+\newcommand{\versionnumero}{01}
 \newcommand{\versionfecha}{31/08/2026}
-\newcommand{\versioncuadernillo}{\versionnumero{} - \versionfecha}
+\newcommand{\versioncuadernillo}{v\versionnumero{} - \versionfecha}
+% Etiqueta de version de la portada. Mismo tamano que el paginado (\footnotesize).
+\definecolor{colorEtiqueta}{HTML}{F0F0F0}
+\newcommand{\versionetiqueta}{%
+  \tikz[baseline]{\node[fill=colorEtiqueta,rounded corners=9pt,
+    inner xsep=14pt,inner ysep=7pt,text=colorTexto]
+    {\footnotesize\bfseries Versión \versionnumero{} \textbar{} Fecha de versión: \versionfecha};}}
 
 \pagestyle{fancy}
 \fancyhf{}
