@@ -85,6 +85,7 @@ sector de << ec_sector_tercer_unidades >> con el << ec_porcentaje_sector_tercer_
 \endfoot
 
 \hline
+\tablefooterrow{10}{Fuente: & INEGI. Directorio Estadístico Nacional de Unidades Económicas, << ec_anio_pasado_denue >>.}
 \endlastfoot
 
 \rowcolor{filaResaltada}
@@ -98,8 +99,6 @@ sector de << ec_sector_tercer_unidades >> con el << ec_porcentaje_sector_tercer_
 
 \end{longtable}
 \normalsize
-\vspace{-28pt}\noindent\parbox{\linewidth}{\footnotesize
-Fuente: INEGI. Directorio Estadístico Nacional de Unidades Económicas, << ec_anio_pasado_denue >>.}
 
 \subsection{Valor agregado censal bruto}
 
@@ -158,6 +157,11 @@ de << ec_anio_ce_anterior >> a << ec_anio_ce >>.
 \endfoot
 
 \hline
+\tablefooterrow{6}{Nota: & El cuadro solo presenta información para los subsectores que no están restringidos por principios de confidencialidad.\\
+<% if ec_tabla_vacb_tiene_na %>ND: & No disponible.\\<% endif %>
+Fuente: & IIEG, con base en INEGI. Censos Económicos, << ec_anio_publicacion_ce_anterior >> y << ec_anio_publicacion_ce >>.\\
+& INEGI. Índice Nacional de Precios al Consumidor. Base segunda quincena julio 2018.\\
+& Los valores de << ec_anio_ce >> fueron deflactados a precios de << ec_anio_ce_anterior >> con base en el promedio anual del INPC.}
 \endlastfoot
 
 \rowcolor{filaResaltada}
@@ -171,12 +175,6 @@ de << ec_anio_ce_anterior >> a << ec_anio_ce >>.
 
 \end{longtable}
 \normalsize
-\tablefooter{Nota: & El cuadro solo presenta información para los subsectores que no están restringidos por principios de confidencialidad.\\
-<% if ec_tabla_vacb_tiene_na %>ND: & No disponible.\\<% endif %>
-Fuente: & IIEG, con base en INEGI. Censos Económicos, << ec_anio_publicacion_ce_anterior >> y << ec_anio_publicacion_ce >>.\\
-& INEGI. Índice Nacional de Precios al Consumidor. Base segunda quincena julio 2018.\\
-& Los valores de << ec_anio_ce >> fueron deflactados a precios de << ec_anio_ce_anterior >> con base en el promedio anual del INPC.}
-
 \newpage
 
 \subsection{Empleo}
@@ -243,6 +241,9 @@ y << ec_anio_corte_imss >>}
 \endfoot
 
 \hline
+\tablefooterrow{7}{<% if ec_tabla_imss_grupos_tiene_na %>ND: & No disponible.\\
+<% endif %>Fuente: & IIEG, con base en IMSS. Datos abiertos de Trabajadores Asegurados, << ec_dos_anios_atras_corte_imss >>,
+<< ec_anio_anterior_corte_imss >> y << ec_anio_corte_imss >>.}
 \endlastfoot
 
 \rowcolor{filaResaltada}
@@ -256,10 +257,6 @@ y << ec_anio_corte_imss >>}
 
 \end{longtable}
 \normalsize
-\tablefooter{<% if ec_tabla_imss_grupos_tiene_na %>ND: & No disponible.\\
-<% endif %>Fuente: & IIEG, con base en IMSS. Datos abiertos de Trabajadores Asegurados, << ec_dos_anios_atras_corte_imss >>,
-<< ec_anio_anterior_corte_imss >> y << ec_anio_corte_imss >>.}
-
 \newpage
 
 \subsubsection*{Trabajadores asegurados en el IMSS en la << nombre_region >>}
@@ -309,6 +306,8 @@ En << ec_mes_corte_imss >> de << ec_anio_corte_imss >>, << ec_municipio_nombre >
 \endfoot
 
 \hline
+\tablefooterrow{6}{Fuente: & IIEG, con base en IMSS. Datos abiertos de Trabajadores Asegurados, << ec_anio_anterior_corte_imss >>
+y << ec_anio_corte_imss >>.}
 \endlastfoot
 
 \rowcolor{filaResaltada}
@@ -321,9 +320,6 @@ En << ec_mes_corte_imss >> de << ec_anio_corte_imss >>, << ec_municipio_nombre >
 
 \end{longtable}
 \normalsize
-\tablefooter{Fuente: & IIEG, con base en IMSS. Datos abiertos de Trabajadores Asegurados, << ec_anio_anterior_corte_imss >>
-y << ec_anio_corte_imss >>.}
-
 \newpage
 <% if ec_agropecuario_activa %>
 \subsection{Agricultura y ganadería}

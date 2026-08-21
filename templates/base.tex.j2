@@ -111,11 +111,47 @@
 \newcommand{\thdl}[1]{\textbf{\color{colorTexto}#1}}
 \newcommand{\thh}[2]{\multicolumn{1}{>{\raggedright\arraybackslash}m{\dimexpr#1\linewidth - 2\tabcolsep\relax}}{\cellcolor{gray!30}\vspace{5pt}\begin{varwidth}{\dimexpr#1\textwidth - 2\tabcolsep\relax}\bfseries #2\end{varwidth}\vspace{5pt}}}
 \newcommand{\thhl}[2]{\multicolumn{1}{>{\raggedleft\arraybackslash}m{\dimexpr#1\linewidth - 2\tabcolsep\relax}}{\cellcolor{gray!30}\vspace{5pt}\begin{varwidth}{\dimexpr#1\textwidth - 2\tabcolsep\relax}\raggedleft\bfseries #2\end{varwidth}\vspace{5pt}}}
-\newcommand{\tablefooter}[1]{%
-  \vspace{-28pt}\noindent{\footnotesize
+% El pie va DENTRO de la tabla, en \endlastfoot, para que longtable cuente su altura
+% al decidir donde parte. Asi el corte lo toma longtable durante la composicion y salen
+% (continua), (continuacion) y los encabezados; si el pie no cabe, baja con filas.
+% \tablefooter es la version suelta, para los pies de grafica y de mapa.
+\newcommand{\tablefooterbody}[1]{\noindent{\footnotesize
   \renewcommand{\arraystretch}{1.0}%
   \begin{tabularx}{\linewidth}[t]{@{}l@{\hspace{0.5em}}X@{}}#1\end{tabularx}%
   \renewcommand{\arraystretch}{1.5}}}
+\newcommand{\tablefooter}[1]{\vspace{-28pt}\tablefooterbody{#1}}
+\newcommand{\tablefooterrow}[2]{%
+  \multicolumn{#1}{@{}p{\linewidth}@{}}{\tablefooterbody{#2}}\\}
+
+% longtable reserva la altura de \endfoot durante toda la tabla, pero NUNCA la de
+% \endlastfoot. Por eso una tabla que cabe justo se da por terminada sin pedir corte,
+% y es el \output normal de LaTeX el que despues parte la pagina para acomodar el pie,
+% con la rutina de salida de longtable ya cerrada: la tabla se parte sin marcas de
+% continuacion. Aqui se reserva tambien lo que el ultimo pie mide de mas, para que la
+% decision la tome longtable.
+\makeatletter
+\newdimen\LT@ft@extra
+\apptocmd{\LT@start}{%
+  \global\LT@ft@extra\z@
+  \ifvoid\LT@lastfoot\else
+    \@tempdima\ht\LT@lastfoot
+    \advance\@tempdima\dp\LT@lastfoot
+    \advance\@tempdima-\ht\LT@foot
+    \ifdim\@tempdima>\z@
+      \global\LT@ft@extra\@tempdima
+      \global\advance\vsize-\@tempdima
+      \global\advance\@colroom-\@tempdima
+      \@tempdimb\pagegoal \advance\@tempdimb-\@tempdima \pagegoal\@tempdimb
+    \fi
+  \fi}{}{\PackageWarning{cuadernillos}{no se pudo parchar LT@start}}
+\apptocmd{\endlongtable}{%
+  \ifdim\LT@ft@extra>\z@
+    \global\advance\vsize\LT@ft@extra
+    \global\advance\@colroom\LT@ft@extra
+    \@tempdima\pagegoal \advance\@tempdima\LT@ft@extra \pagegoal\@tempdima
+    \global\LT@ft@extra\z@
+  \fi}{}{\PackageWarning{cuadernillos}{no se pudo parchar endlongtable}}
+\makeatother
 
 \newcommand{\tablafit}[1]{%
   \Needspace*{\dimexpr #1\baselineskip * 7 / 5 + 6\baselineskip\relax}}

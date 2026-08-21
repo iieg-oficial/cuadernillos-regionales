@@ -68,6 +68,7 @@ El municipio está constituido predominantemente por la unidad geológica << ge_
 \endfoot
 
 \hline
+\tablefooterrow{2}{<< ge_fuente.sintesis >>}
 \endlastfoot
 
 Región & << ge_dg_region >> \\
@@ -97,8 +98,6 @@ Suelos dominantes & << ge_dg_edaf_predom >> \\
 
 \end{longtable}
 \normalsize
-\tablefooter{<< ge_fuente.sintesis >>}
-
 <% if ge_base_mapa_activo %>
 \clearpage
 \mapatitulo[\mapbleed]{Mapa base de << ge_municipio >>, << ge_anio_mapa.base >>}
@@ -155,6 +154,7 @@ Le sigue la unidad << ge_geo_secundario_texto >>, con << ge_geo_secundario_pct >
 \endfoot
 
 \hline
+\tablefooterrow{3}{<< ge_fuente.geologia >>}
 \endlastfoot
 
 <% for fila in ge_geo_unidades_geologicas %>
@@ -164,7 +164,6 @@ Le sigue la unidad << ge_geo_secundario_texto >>, con << ge_geo_secundario_pct >
 
 \end{longtable}
 \normalsize
-\tablefooter{<< ge_fuente.geologia >>}
 <% endif %>
 
 <% if ge_geo_mapa_activo %>
@@ -220,6 +219,7 @@ Le sigue la unidad << ge_ed_secundario_texto >>, con << ge_ed_secundario_pct >> 
 \endfoot
 
 \hline
+\tablefooterrow{3}{<< ge_fuente.edafologia >>}
 \endlastfoot
 
 <% for fila in ge_ed_tipos_suelo %>
@@ -229,7 +229,6 @@ Le sigue la unidad << ge_ed_secundario_texto >>, con << ge_ed_secundario_pct >> 
 
 \end{longtable}
 \normalsize
-\tablefooter{<< ge_fuente.edafologia >>}
 <% endif %>
 
 <% if ge_ed_mapa_activo %>
@@ -285,6 +284,7 @@ El rango << ge_tp_secundario_texto >> representa << ge_tp_secundario_pct >> \%. 
 \endfoot
 
 \hline
+\tablefooterrow{3}{<< ge_fuente.topografia >>}
 \endlastfoot
 
 <% for fila in ge_tp_pendientes %>
@@ -294,7 +294,6 @@ El rango << ge_tp_secundario_texto >> representa << ge_tp_secundario_pct >> \%. 
 
 \end{longtable}
 \normalsize
-\tablefooter{<< ge_fuente.topografia >>}
 <% endif %>
 
 <% if ge_tp_mapa_activo %>
@@ -347,6 +346,7 @@ Con base en la información sobre disponibilidad y ordenamiento de aguas superfi
 \endfoot
 
 \hline
+\tablefooterrow{3}{<< ge_fuente.cuencas >>}
 \endlastfoot
 
 <% for fila in ge_cu_disponibilidad %>
@@ -365,8 +365,6 @@ Con base en la información sobre disponibilidad y ordenamiento de aguas superfi
 
 \end{longtable}
 \normalsize
-\tablefooter{<< ge_fuente.cuencas >>}
-
 <% if ge_cu_mapa_activo %>
 \clearpage
 \mapatitulo[\mapbleed]{Cuencas de << ge_municipio >>, << ge_anio_mapa.cuencas >>}
@@ -418,6 +416,7 @@ Con base en la información sobre disponibilidad y ordenamiento de aguas superfi
 \endfoot
 
 \hline
+\tablefooterrow{3}{<< ge_fuente.acuiferos >>}
 \endlastfoot
 
 Con disponibilidad & << ge_ac_sup_con_disponibilidad >> & << ge_ac_pct_con_disponibilidad >> \\
@@ -439,8 +438,6 @@ Sin clasificación & << ge_ac_sup_cond_sin_clasificacion >> & << ge_ac_pct_cond_
 
 \end{longtable}
 \normalsize
-\tablefooter{<< ge_fuente.acuiferos >>}
-
 <% if ge_ac_mapa_activo %>
 \clearpage
 \mapatitulo[\mapbleed]{Acuíferos de << ge_municipio >>, << ge_anio_mapa.acuiferos >>}
@@ -454,7 +451,7 @@ Sin clasificación & << ge_ac_sup_cond_sin_clasificacion >> & << ge_ac_pct_cond_
 
 \subsubsection{Temperatura}
 
-Con base en la Información Estadística Climatológica del Servicio Meteorológico Nacional para el periodo 1995-2025, la temperatura media mensual indica que la media anual es de << ge_tm_media_anual >> °C. Los valores promedio más bajos se presentan en << ge_t_meses_menor_temp >>, con << ge_t_valores_menor_temp >>, mientras que las temperaturas promedio más altas se registran en << ge_t_meses_mayor_temp >>, con << ge_t_valores_mayor_temp >>.
+Con base en la Información Estadística Climatológica del Servicio Meteorológico Nacional para el periodo 1995-2025, la temperatura media mensual indica que la media anual es de << ge_tm_media_anual >> °C. Los valores mínimos promedio más bajos se presentan en << ge_t_meses_menor_temp >>, con << ge_t_valores_menor_temp >>, mientras que las temperaturas máximaspromedio más altas se registran en << ge_t_meses_mayor_temp >>, con << ge_t_valores_mayor_temp >>.
 
 <% if ge_tm_grafica_activa %>
 \begin{figure}[H]
@@ -493,6 +490,7 @@ Con base en la Información Estadística Climatológica del Servicio Meteorológ
 \endfoot
 
 \hline
+\tablefooterrow{4}{<< ge_fuente.temperatura >>}
 \endlastfoot
 
 \rowcolor{filaResaltada}
@@ -525,8 +523,6 @@ Diciembre & << ge_tm_min_dic >> & << ge_tm_max_dic >> & << ge_tm_med_dic >> \\
 
 \end{longtable}
 \normalsize
-\tablefooter{<< ge_fuente.temperatura >>}
-
 <% if ge_tm_mapa_activo %>
 \clearpage
 \mapatitulo[\mapbleed]{Temperatura media anual histórica de << ge_municipio >>, << ge_anio_mapa.temperatura >>}
@@ -578,6 +574,7 @@ Con base en la Información Estadística Climatológica del Servicio Meteorológ
 \endfoot
 
 \hline
+\tablefooterrow{4}{<< ge_fuente.precipitacion >>}
 \endlastfoot
 
 \rowcolor{filaResaltada}
@@ -610,8 +607,6 @@ Diciembre & << ge_pp_med_dic >> & << ge_pp_min_dic >> & << ge_pp_max_dic >> \\
 
 \end{longtable}
 \normalsize
-\tablefooter{<< ge_fuente.precipitacion >>}
-
 <% if ge_pp_mapa_activo %>
 \clearpage
 \mapatitulo[\mapbleed]{Precipitación histórica acumulada de << ge_municipio >>, << ge_anio_mapa.precipitacion >>}
@@ -663,6 +658,7 @@ Diciembre & << ge_pp_med_dic >> & << ge_pp_min_dic >> & << ge_pp_max_dic >> \\
 \endfoot
 
 \hline
+\tablefooterrow{3}{<< ge_fuente.clima >>}
 \endlastfoot
 
 <% for fila in ge_cl_clasificaciones %>
@@ -672,7 +668,6 @@ Diciembre & << ge_pp_med_dic >> & << ge_pp_min_dic >> & << ge_pp_max_dic >> \\
 
 \end{longtable}
 \normalsize
-\tablefooter{<< ge_fuente.clima >>}
 <% endif %>
 
 <% if ge_cl_mapa_activo %>
@@ -726,6 +721,7 @@ Con base en el Conjunto de datos vectoriales de uso del suelo y vegetación Seri
 \endfoot
 
 \hline
+\tablefooterrow{3}{<< ge_fuente.usv >>}
 \endlastfoot
 
 <% for fila in ge_usv_clasificacion %>
@@ -735,7 +731,6 @@ Con base en el Conjunto de datos vectoriales de uso del suelo y vegetación Seri
 
 \end{longtable}
 \normalsize
-\tablefooter{<< ge_fuente.usv >>}
 <% endif %>
 
 <% if ge_usv_mapa_activo %>
@@ -791,6 +786,7 @@ La categoría predominante es << ge_ndvi_dominante_texto >>, con << ge_ndvi_domi
 \endfoot
 
 \hline
+\tablefooterrow{3}{<< ge_fuente.ndvi >>}
 \endlastfoot
 
 <% for fila in ge_ndvi_categorias %>
@@ -800,7 +796,6 @@ La categoría predominante es << ge_ndvi_dominante_texto >>, con << ge_ndvi_domi
 
 \end{longtable}
 \normalsize
-\tablefooter{<< ge_fuente.ndvi >>}
 <% endif %>
 
 <% if ge_ndvi_mapa_activo %>
@@ -856,6 +851,7 @@ La categoría predominante es << ge_ndwi_dominante_texto >>, con << ge_ndwi_domi
 \endfoot
 
 \hline
+\tablefooterrow{3}{<< ge_fuente.ndwi >>}
 \endlastfoot
 
 <% for fila in ge_ndwi_categorias %>
@@ -865,7 +861,6 @@ La categoría predominante es << ge_ndwi_dominante_texto >>, con << ge_ndwi_domi
 
 \end{longtable}
 \normalsize
-\tablefooter{<< ge_fuente.ndwi >>}
 <% endif %>
 
 <% if ge_ndwi_mapa_activo %>
@@ -910,6 +905,7 @@ La categoría predominante es << ge_ndwi_dominante_texto >>, con << ge_ndwi_domi
 \endfoot
 
 \hline
+\tablefooterrow{4}{<< ge_fuente.anp >>}
 \endlastfoot
 
 <% for fila in ge_anp_categorias %>
@@ -919,7 +915,6 @@ La categoría predominante es << ge_ndwi_dominante_texto >>, con << ge_ndwi_domi
 
 \end{longtable}
 \normalsize
-\tablefooter{<< ge_fuente.anp >>}
 <% endif %>
 
 <% if ge_anp_mapa_activo %>
@@ -974,6 +969,7 @@ Con base en imágenes Landsat Collection 2 Level-2 Science Products (USGS, 2025)
 \endfoot
 
 \hline
+\tablefooterrow{3}{<< ge_fuente.sequia >>}
 \endlastfoot
 
 <% for fila in ge_ds_categorias %>
@@ -983,7 +979,6 @@ Con base en imágenes Landsat Collection 2 Level-2 Science Products (USGS, 2025)
 
 \end{longtable}
 \normalsize
-\tablefooter{<< ge_fuente.sequia >>}
 <% endif %>
 
 <% if ge_ds_mapa_activo %>
@@ -1037,6 +1032,7 @@ Con base en información climatológica del periodo 1995-2025, la Carta edafoló
 \endfoot
 
 \hline
+\tablefooterrow{3}{<< ge_fuente.erosion_pot >>}
 \endlastfoot
 
 <% for fila in ge_er_categorias %>
@@ -1046,7 +1042,6 @@ Con base en información climatológica del periodo 1995-2025, la Carta edafoló
 
 \end{longtable}
 \normalsize
-\tablefooter{<< ge_fuente.erosion_pot >>}
 <% endif %>
 
 <% if ge_er_mapa_activo %>
@@ -1099,6 +1094,7 @@ Con base en información climatológica del periodo 1995-2025, la Carta edafoló
 \endfoot
 
 \hline
+\tablefooterrow{3}{<< ge_fuente.erosion_efe >>}
 \endlastfoot
 
 <% for fila in ge_ee_categorias %>
@@ -1108,7 +1104,6 @@ Con base en información climatológica del periodo 1995-2025, la Carta edafoló
 
 \end{longtable}
 \normalsize
-\tablefooter{<< ge_fuente.erosion_efe >>}
 <% endif %>
 
 <% if ge_ee_mapa_activo %>
@@ -1164,6 +1159,7 @@ Con base en el Índice Territorial Urbano-Rural (INEGI, 2025), en el municipio d
 \endfoot
 
 \hline
+\tablefooterrow{3}{<< ge_fuente.itur >>}
 \endlastfoot
 
 <% for fila in ge_itur_clasificaciones %>
@@ -1173,7 +1169,6 @@ Con base en el Índice Territorial Urbano-Rural (INEGI, 2025), en el municipio d
 
 \end{longtable}
 \normalsize
-\tablefooter{<< ge_fuente.itur >>}
 <% endif %>
 
 <% if ge_itur_mapa_activo %>
@@ -1218,6 +1213,8 @@ pertenecen y el nivel de atención que brinda.
 \endfoot
 
 \hline
+\tablefooterrow{3}{Nota: & Por efectos de escala, simbolización y superposición cartográfica, los elementos visibles en el mapa de Unidades de salud de << ge_municipio >> pueden no corresponder con el total reportado en el cuadro.\\
+<< ge_fuente.salud >>}
 \endlastfoot
 
 \rowcolor{filaResaltada}
@@ -1230,8 +1227,6 @@ pertenecen y el nivel de atención que brinda.
 
 \end{longtable}
 \normalsize
-\tablefooter{Nota: & Por efectos de escala, simbolización y superposición cartográfica, los elementos visibles en el mapa de Unidades de salud de << ge_municipio >> pueden no corresponder con el total reportado en el cuadro.\\
-<< ge_fuente.salud >>}
 <% endif %>
 
 <% if ge_salud_mapa_activo %>
@@ -1276,6 +1271,7 @@ De acuerdo con los registros del Sistema de Información y Gestión Educativa, e
 \endfoot
 
 \hline
+\tablefooterrow{3}{<< ge_fuente.educacion >>}
 \endlastfoot
 
 <% for fila in ge_edu_centros %>
@@ -1285,7 +1281,6 @@ De acuerdo con los registros del Sistema de Información y Gestión Educativa, e
 
 \end{longtable}
 \normalsize
-\tablefooter{<< ge_fuente.educacion >>}
 <% endif %>
 
 <% if ge_edu_mapa_activo %>
@@ -1329,6 +1324,8 @@ De acuerdo con los registros del Sistema de Información y Gestión Educativa, e
 \endfoot
 
 \hline
+\tablefooterrow{3}{Nota: & Por efectos de escala, simbolización y superposición cartográfica, los elementos visibles en el mapa de Espacios públicos de << ge_municipio >> pueden no corresponder con el total reportado en el cuadro.\\
+<< ge_fuente.espacios >>}
 \endlastfoot
 
 <% for fila in ge_ep_espacios %>
@@ -1338,8 +1335,6 @@ De acuerdo con los registros del Sistema de Información y Gestión Educativa, e
 
 \end{longtable}
 \normalsize
-\tablefooter{Nota: & Por efectos de escala, simbolización y superposición cartográfica, los elementos visibles en el mapa de Espacios públicos de << ge_municipio >> pueden no corresponder con el total reportado en el cuadro.\\
-<< ge_fuente.espacios >>}
 <% endif %>
 
 <% if ge_ep_mapa_activo %>
@@ -1386,6 +1381,7 @@ Con base en el Directorio Estadístico Nacional de Unidades Económicas y la inf
 \endfoot
 
 \hline
+\tablefooterrow{3}{<< ge_fuente.energia >>}
 \endlastfoot
 
 <% for fila in ge_ie_infraestructura %>
@@ -1395,7 +1391,6 @@ Con base en el Directorio Estadístico Nacional de Unidades Económicas y la inf
 
 \end{longtable}
 \normalsize
-\tablefooter{<< ge_fuente.energia >>}
 <% endif %>
 <% if ge_ie_mapa_activo %>
 \clearpage
