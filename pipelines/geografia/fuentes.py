@@ -33,7 +33,7 @@ CITAS = {
     "clues": (
         "Dirección General de Información en Salud. "
         "Clave Única de Establecimientos de Salud",
-        "2025",
+        "2026",
     ),
     "siged": (
         "Sistema de Información y Gestión Educativa (SIGED). Consulta de escuelas",
