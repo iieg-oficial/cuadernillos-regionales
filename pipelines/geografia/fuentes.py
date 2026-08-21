@@ -127,31 +127,47 @@ ANIO_MAPA = {
 }
 
 
-def _anio(clave):
+def _anio(clave, anios=None):
+    if anios and clave in anios:
+        return anios[clave]
     if clave in CITAS:
         return CITAS[clave][1]
     return clave
 
 
-def _cita(clave):
-    texto, anio = CITAS[clave]
-    return f"{texto}, {anio}."
+def _cita(clave, anios=None):
+    texto, _ = CITAS[clave]
+    return f"{texto}, {_anio(clave, anios)}."
 
 
 SANGRIA_FUENTE = "\\phantom{IIEG, con base en }"
 
 
-def _pie(claves):
-    citas = [_cita(clave) for clave in claves]
+def _pie(claves, anios=None):
+    citas = [_cita(clave, anios) for clave in claves]
     cuerpo = f"\\\\\n & {SANGRIA_FUENTE}".join(citas)
     return f"Fuente: & IIEG, con base en {cuerpo}"
 
 
-def build_fuentes_context():
+def build_fuentes_context(anios=None):
     return {
-        "ge_fuente": {tema: _pie(claves) for tema, claves in TEMAS.items()},
-        "ge_anio": {tema: _anio(clave) for tema, clave in ANIO_TITULO.items()},
+        "ge_fuente": {tema: _pie(claves, anios) for tema, claves in TEMAS.items()},
+        "ge_anio": {tema: _anio(clave, anios) for tema, clave in ANIO_TITULO.items()},
         "ge_anio_mapa": {
-            mapa: _anio(clave) for mapa, clave in ANIO_MAPA.items() if clave
+            mapa: _anio(clave, anios) for mapa, clave in ANIO_MAPA.items() if clave
         },
     }
+
+
+ANIO_EN_DATOS = {"salud_nivel_atencion": "clues"}
+
+
+def anios_desde_datos(detalle):
+    anios = {}
+    for topic, clave in ANIO_EN_DATOS.items():
+        for fila in detalle.get(topic) or []:
+            valor = fila.get("anio")
+            if valor is not None:
+                anios[clave] = str(int(valor))
+                break
+    return anios

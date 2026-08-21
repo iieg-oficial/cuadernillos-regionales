@@ -12,7 +12,7 @@ from pipelines.geografia.charts.treemap import (
     plot_proportional_blocks,
     plot_stacked_pair,
 )
-from pipelines.geografia.fuentes import build_fuentes_context
+from pipelines.geografia.fuentes import anios_desde_datos, build_fuentes_context
 from pipelines.geografia.helpers.context import (
     append_unit,
     build_acuiferos_text,
@@ -266,7 +266,7 @@ class Analizer(Stage):
 
         ctx = {}
 
-        ctx.update(build_fuentes_context())
+        ctx.update(build_fuentes_context(anios_desde_datos(detalle)))
         ctx["ge_municipio"] = latex_escape(municipio)
         ctx["ge_fecha_documento"] = "Abril 2026"
 
