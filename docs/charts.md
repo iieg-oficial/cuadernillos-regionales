@@ -90,3 +90,20 @@ El estilo de matplotlib es compartido y vive en `core/utils/charts.py`. Las pale
 En las gráficas apiladas el orden de los segmentos sigue el mapa explícito de colores del tema, y las
 categorías residuales (`sin clasificación`, `otros`) van siempre al final. La leyenda sigue el orden
 de aparición: de arriba hacia abajo, cada fila de izquierda a derecha.
+
+## Que el texto no se separe de su gráfica
+
+Cuando el párrafo que introduce una gráfica cae al final de una página, la gráfica se va a la
+siguiente y cuesta leerlas juntas. `\graficafit`, definido en `templates/base.tex.j2`, va **antes**
+del párrafo y baja el bloque completo solo si no cabe:
+
+```latex
+\graficafit
+El valor de la producción pecuaria ... << ec_grafica_ganaderia >>
+```
+
+Se apoya en `\Needspace*` del paquete `needspace`, y reserva `0.52\textwidth` —lo que mide una
+gráfica a `0.95\textwidth` con la proporción habitual— más 9 renglones para el párrafo, el título de
+la gráfica y el pie.
+
+No es un `\newpage`: si el bloque cabe donde está, no hace nada. Por eso no cuesta páginas de más.
