@@ -20,7 +20,6 @@ CITAS = {
     ),
     "condicion_acuiferos": ("CONAGUA. Condición de acuíferos", "2023"),
     "smn": ("SMN. Información Estadística Climatológica", "1995-2025"),
-    "smn_sintesis": ("SMN. Información Estadística Climatológica", "1995-2026"),
     "usv": (
         "INEGI. Conjunto de datos vectoriales de uso del suelo y vegetación Serie VII",
         "2018",
@@ -52,7 +51,7 @@ TEMAS = {
         "edafologia",
         "topografia",
         "cem",
-        "smn_sintesis",
+        "smn",
     ],
     "geologia": ["geologia"],
     "edafologia": ["edafologia"],
