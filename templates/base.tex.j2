@@ -134,6 +134,19 @@
 \patchcmd{\LT@output}{\advance\dimen@-\ht\LT@lastfoot}
   {\advance\dimen@-\ht\LT@lastfoot\advance\dimen@-\dp\LT@lastfoot}
   {}{\PackageWarning{cuadernillos}{no se pudo parchar LT@output (medida)}}
+
+% Cuando decide que no cabe, longtable manda TODA la pagina con \LT@foot y abre la
+% siguiente con \LT@head y el pie: encabezado y pie solos, sin una sola fila. Con el
+% \vsplit se parte el material a la altura que si cabe, asi que las filas sobrantes
+% bajan con el pie en vez de dejar la pagina vacia.
+\patchcmd{\LT@output}{\setbox\@cclv\vbox{\unvbox\z@\copy\LT@foot\vss}}
+  {\splittopskip\z@\vbadness\@M\vfuzz\maxdimen
+   \setbox\tw@\vsplit\z@ to\dimen@
+   \setbox\@cclv\vbox{\unvbox\tw@\copy\LT@foot\vss}}
+  {}{\PackageWarning{cuadernillos}{no se pudo parchar LT@output (vsplit)}}
+\patchcmd{\LT@output}{\setbox\z@\vbox{\box\LT@head}}
+  {\setbox\z@\vbox{\box\LT@head\unvbox\z@}}
+  {}{\PackageWarning{cuadernillos}{no se pudo parchar LT@output (resto)}}
 \makeatother
 
 \newcommand{\tablafit}[1]{%
