@@ -115,8 +115,19 @@ vecinas de una sola línea y deja un hueco visible. En una fila donde varias cel
 conviven, no se mezclan alturas: se da ancho suficiente para que el texto quepa en una línea, o se
 usa `p{}` para que haga wrapping solo.
 
-Nunca se escriben guiones manuales dentro de `\makecell`, como `\makecell{Pobla-\\ción}`. En columnas
-`p{}` o `m{}` LaTeX hifena solo.
+Nunca se escriben guiones manuales dentro de `\makecell`, como `\makecell{Pobla-\\ción}`: eso es un
+corte fijo, que queda mal en cuanto cambia el ancho.
+
+Cuando una palabra larga de encabezado no cabe y `\thh`/`\thhl` no la divide sola —el `varwidth` que
+llevan dentro compone a ancho natural—, se marca el punto de división con `\-`, que es una división
+**opcional**: LaTeX la usa solo si hace falta.
+
+```latex
+\thhl{0.12}{Distribu\-ción (\%)}
+```
+
+Así el Cuadro 30 la parte en «Distribu- / ción» porque su columna es angosta, y el Cuadro 32 la deja
+entera porque la suya es más ancha, sin tocar las proporciones de ninguno.
 
 ## Pie de tabla
 
