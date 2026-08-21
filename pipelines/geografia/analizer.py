@@ -542,6 +542,11 @@ class Analizer(Stage):
         )
         ctx["ge_ac_sup_cond_sin_clasificacion"] = sup_sum(ac_cond, SIN_CLASIFICACION)
         ctx["ge_ac_pct_cond_sin_clasificacion"] = pct_sum(ac_cond, SIN_CLASIFICACION)
+        ctx["ge_ac_tabla_filas"] = (
+            4
+            + int(ctx["ge_ac_sit_sin_clasificacion_activa"])
+            + int(ctx["ge_ac_cond_sin_clasificacion_activa"])
+        )
         ctx["ge_ac_texto"] = build_acuiferos_text(
             ctx.get("ge_ac_nombres_acuiferos"),
             ctx["ge_ac_pct_con_disponibilidad"],
