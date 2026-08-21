@@ -243,9 +243,13 @@ Una `longtable` no se puede medir de antemano, así que la altura es una estimac
 `\baselineskip` por fila (altura real con `arraystretch` 1.5 en `\footnotesize`) más 6
 `\baselineskip` de caption, encabezado, reglas y pie.
 
-Al momento no se usa en ninguna tabla: se probó en cuencas y se prefirió el `\newpage`, porque con
-125 cuadernillos la tabla quedaría abajo en unos municipios y en página aparte en otros, según
-cuántas filas le tocaran. La consistencia entre cuadernillos pesa más que aprovechar el hueco.
+Lo usa el Cuadro 6 (Acuíferos), que tiene entre 4 y 6 filas según cuántas categorías «Sin
+clasificación» traiga el municipio: cabe casi siempre bajo su gráfica, y el `\newpage` fijo dejaba
+media página en blanco. El analizer expone el conteo como `ge_ac_tabla_filas`.
+
+En cuencas se probó y se prefirió el `\newpage`: esa tabla tiene muchas más filas y quedaría abajo en
+unos municipios y en página aparte en otros, según cuántas le tocaran. Ahí la consistencia entre
+cuadernillos pesa más que aprovechar el hueco.
 
 ## Cohesión entre la tabla y su pie
 
