@@ -298,17 +298,23 @@ continuación y sin encabezados**.
 Es el mismo enfoque de `threeparttablex`, que inserta sus notas con un `\multicolumn` dentro de la
 `longtable`.
 
-### Los parches a `\LT@output`
+### Los parches a `longtable`
 
-Son dos, y hacen falta los dos.
+Son tres y hacen falta los tres. `\LT@output` tiene **dos ramas**, y cada una falla distinto.
 
-**Medir el pie completo.** La comprobación de `longtable` mide solo la **altura** de `\LT@lastfoot` e
-ignora su profundidad. Con un pie de varias líneas eso se queda corto: cree que cabe, no baja nada, y
-el pie termina solo en la página siguiente. Los parches le suman `\dp\LT@lastfoot` a la comparación,
-en los dos puntos donde aparece.
+**1. Reservar el último pie.** `\LT@start` descuenta `\ht\LT@foot` de `\pagegoal` durante toda la
+tabla, pero **nunca** `\ht\LT@lastfoot`, que es más alto. Sin eso la página se dimensiona para el pie
+de continuación: se llena con el cuerpo, corre la **rama normal** de `\LT@output` —la que emite
+«(continúa)»— y el último pie se pasa solo a la página siguiente, debajo del encabezado. El parche
+reserva también la diferencia y la devuelve en `\endlongtable`.
 
-**Bajar filas, no solo el pie.** Cuando decide que no cabe, `longtable` manda **toda** la página con
-`\LT@foot` y abre la siguiente con `\LT@head` y el pie:
+**2. Medir el pie completo.** La **rama final** mide solo la **altura** de `\LT@lastfoot` e ignora su
+profundidad. Con un pie de varias líneas se queda corta: cree que cabe, no baja nada, y el pie
+termina solo. Los parches le suman `\dp\LT@lastfoot` a la comparación, en los dos puntos donde
+aparece.
+
+**3. Bajar filas, no solo el pie.** Cuando la rama final decide que no cabe, manda **toda** la página
+con `\LT@foot` y abre la siguiente con `\LT@head` y el pie:
 
 ```tex
 \setbox\@cclv\vbox{\unvbox\z@\copy\LT@foot\vss}%
@@ -316,19 +322,17 @@ en los dos puntos donde aparece.
 \setbox\z@\vbox{\box\LT@head}%
 ```
 
-Eso deja una página con «(continuación)», los encabezados de columna y el pie, **sin una sola fila**.
-El parche mete un `\vsplit` para partir el material a la altura que sí cabe, y le pasa el resto a la
-página siguiente:
+Eso deja una página con «(continuación)», los encabezados y el pie, **sin una sola fila**. El parche
+mete un `\vsplit` que parte el material a la altura que sí cabe y le pasa el resto a la página
+siguiente.
 
-```tex
-\splittopskip\z@ \setbox\tw@\vsplit\z@ to\dimen@
-\setbox\@cclv\vbox{\unvbox\tw@\copy\LT@foot\vss}%
-...
-\setbox\z@\vbox{\box\LT@head\unvbox\z@}%
-```
+> **No «arreglar» el doble conteo.** La rama final compara contra `\pagegoal`, que ya trae la reserva
+> del punto 1 descontada, así que la cuenta dos veces. Es a propósito: así expulsa la página y entra
+> el `\vsplit`, que baja filas con el pie. Compensarlo devuelve el pie huérfano.
 
-`\dimen@` ya trae la altura disponible descontando el pie, así que el corte cae donde debe. Las filas
-que no caben bajan con el pie, con sus marcas de continuación y sus encabezados.
+El costo de la reserva es que todas las páginas que ocupa una tabla se encogen por la altura de su
+último pie: alrededor de una página más por cuadernillo, y a veces un hueco visible antes del
+«(continúa)».
 
 ### Lo que NO funciona
 
