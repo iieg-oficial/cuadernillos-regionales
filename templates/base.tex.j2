@@ -254,10 +254,11 @@
 \newcommand{\versionfecha}{31/08/2026}
 \newcommand{\versioncuadernillo}{v\versionnumero{} - \versionfecha}
 % Etiqueta de version de la portada. Mismo tamano que el paginado (\footnotesize).
-\definecolor{colorEtiqueta}{HTML}{F0F0F0}
+\definecolor{colorEtiqueta}{HTML}{F3F3F3}
+\definecolor{colorEtiquetaTexto}{HTML}{939393}
 \newcommand{\versionetiqueta}{%
   \tikz[baseline]{\node[fill=colorEtiqueta,rounded corners=9pt,
-    inner xsep=14pt,inner ysep=7pt,text=colorTexto]
+    inner xsep=14pt,inner ysep=7pt,text=colorEtiquetaTexto]
     {\footnotesize\bfseries Versión \versionnumero{} \textbar{} Fecha de versión: \versionfecha};}}
 
 \pagestyle{fancy}
