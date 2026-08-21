@@ -228,12 +228,17 @@
   footskip=1.8cm
 }
 
+% Version del cuadernillo. Aparece al pie de cada pagina, a la derecha; las portadas
+% usan \thispagestyle{empty} y no la llevan.
+\newcommand{\versioncuadernillo}{v01 - 31/08/2026}
+
 \pagestyle{fancy}
 \fancyhf{}
 
 \fancyhead[L]{\includegraphics[height=1.25cm]{<< assets_path >>logo_header.png}}
 \fancyhead[R]{\color{colorTexto}\footnotesize Página \thepage}
 \fancyfoot[L]{\includegraphics[height=1.23cm]{<< assets_path >>logo_footer.png}}
+\fancyfoot[R]{\color{colorTexto}\footnotesize\versioncuadernillo}
 
 \setlength{\headheight}{2cm}
 \setlength{\headsep}{0.4cm}
