@@ -200,10 +200,15 @@
   \renewcommand{\arraystretch}{1.0}%
   \begin{tabularx}{\linewidth}[t]{@{}l@{\hspace{0.5em}}X@{}}#1\end{tabularx}}}
 
-\AtBeginDocument{
-  \color{colorTexto}
-}
+% colorTexto es el color por omision de TODO el documento. No basta con un \color
+% suelto: el color no sobrevive el salto de pagina, asi que un parrafo partido en dos
+% seguia en negro en la pagina siguiente. Hay que cambiar el color POR OMISION, que es
+% el que restituye \normalcolor (salidas de pagina, notas al pie, celdas, minipages).
 \makeatletter
+\AtBeginDocument{%
+  \color{colorTexto}%
+  \global\let\default@color\current@color
+}
 \renewcommand{\@makefnmark}{\hbox{\textsuperscript{\color{colorTexto}\@thefnmark}}}
 \renewcommand{\@makefntext}[1]{%
   \noindent\hb@xt@1.8em{\hss\color{colorTexto}\@makefnmark}~\color{colorTexto}#1}
