@@ -170,10 +170,30 @@ Definidos en `base.tex.j2`:
 | `\ND` | Marca un dato no disponible |
 | `\thh`, `\thhl` | Celda de encabezado de tabla, alineada a la izquierda o a la derecha |
 | `\thdr`, `\thdl` | Celda de cuerpo resaltada |
-| `\tablefooter` | Pie de tabla, gráfica o mapa |
+| `\tablefooter` | Pie suelto de gráfica o mapa |
+| `\tablefooterrow` | Pie de tabla, dentro de `\endlastfoot` |
 | `\graficatitulo` | Título numerado de gráfica |
-| `\mapatitulo` | Título numerado de mapa |
+| `\mapatitulo` | Título numerado de mapa; la forma `*` lo guarda para `\mapabloque` |
+| `\mapageo`, `\mapafijo` | Bloque de mapa: título y mapa alineados |
 | `\mapafuente` | Pie de mapa con varias fuentes |
+| `\versioncuadernillo` | Versión y fecha del pie de página |
+
+## Encabezado y pie de página
+
+`base.tex.j2` define el `\pagestyle{fancy}` que llevan todas las páginas:
+
+| Posición | Contenido |
+|---|---|
+| Encabezado izquierda | `logo_header.png` |
+| Encabezado derecha | `Página \thepage` |
+| Pie izquierda | `logo_footer.png` |
+| Pie derecha | `\versioncuadernillo` |
+
+`\versioncuadernillo` es la versión y fecha del cuadernillo (`v01 - 31/08/2026`). Se define una sola
+vez en `base.tex.j2`, junto al `\pagestyle`; para publicar una versión nueva se cambia ahí.
+
+Las portadas, las portadillas de sección y la contraportada usan `\thispagestyle{empty}`, así que no
+llevan encabezado ni pie.
 
 ## Reglas de contenido
 
