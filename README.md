@@ -132,10 +132,13 @@ directorio temporal, de modo que en `output/pdf/prod/` solo quedan los PDFs.
 En desarrollo cada cuadernillo deja su `.tex` en su propia carpeta bajo `output/tex/`.
 
 En modo final, `output/tex/prod/{slug}/` es un **paquete autocontenido**: el `.tex`, las tipografías,
-los mapas, las gráficas y los logos que usa, con las rutas relativas a esa carpeta. Se comprime, se
-sube a Overleaf y compila sin tocar nada; trae un `latexmkrc` que ya deja seleccionado XeLaTeX y un
-`LEEME.md` con los pasos. Es también lo que se compila localmente, así que si el PDF sale aquí, sale
-allá.
+los mapas, las gráficas y los logos que usa, con las rutas relativas a esa carpeta. Junto a ella queda
+`{slug}.zip`, con esos mismos archivos en la raíz del comprimido, listo para
+**New Project → Upload Project** en Overleaf. Ahí hay que cambiar el compilador a **XeLaTeX**:
+Overleaf lo elige desde su menú y no lee el `latexmkrc` ni el `% !TEX program` del `.tex`. El
+`LEEME.md` que va dentro lo explica.
+
+La carpeta es también lo que se compila localmente, así que si el PDF sale aquí, sale allá.
 
 El nombre del archivo se arma con la clave y el municipio sin acentos y en minúsculas
 (`27_cuautitlan_de_garcia_barragan_cuadernillo_municipal_2026`), para que sea ASCII puro y no dé
