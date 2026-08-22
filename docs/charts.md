@@ -107,3 +107,29 @@ gráfica a `0.95\textwidth` con la proporción habitual— más 9 renglones para
 la gráfica y el pie.
 
 No es un `\newpage`: si el bloque cabe donde está, no hace nada. Por eso no cuesta páginas de más.
+
+## Colores de las gráficas apiladas
+
+`EXPLICIT_COLOR_MAPS`, en `pipelines/geografia/charts/treemap.py`, fija el color **y el orden** de
+cada categoría por tema. Los temas que no aparecen ahí caen a `PROPORTION_PALETTE`, que es una sola
+rampa de morados: sirve cuando las categorías son una escala (más y menos de algo), pero deja
+ilegible una gráfica de categorías que no se ordenan entre sí.
+
+Cuencas era el caso: sus siete categorías salían en siete tonos del mismo morado. Ahora tiene mapa
+propio, con la misma idea que acuíferos —morado para lo que sí, naranja para lo que no, gris para el
+residual— y un color por categoría:
+
+```python
+"cuencas": {
+    "con_disponibilidad": COLOR_PALETTE["purple_09"],
+    "sin_disponibilidad": COLOR_PALETTE["purple_01"],
+    "veda": COLOR_PALETTE["purple_05"],
+    "veda_y_reglamento": COLOR_PALETTE["orange"],
+    "veda_reserva_y_reglamento": COLOR_PALETTE["purple_13"],
+    "reserva": COLOR_PALETTE["peach_06"],
+    "sin_ordenamiento": COLOR_PALETTE["gray"],
+},
+```
+
+El orden del diccionario es el orden de los segmentos y el de la leyenda, así que conviene escribirlo
+con sentido: de más a menos regulado, y el residual al final.
