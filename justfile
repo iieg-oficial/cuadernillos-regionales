@@ -66,7 +66,7 @@ prod-open-one clave:
 
 # Borra mapas y gráficas para volver a descargarlos o regenerarlos; pide confirmación
 [group("clean")]
-data:
+clean-data:
     #!/usr/bin/env bash
     set -euo pipefail
     dirs=(assets/maps output/maps output/charts)
