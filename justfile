@@ -64,6 +64,31 @@ prod-run-one clave:
 prod-open-one clave:
     open "$(ls -t output/pdf/prod/{{clave}}_*.pdf | head -1)"
 
+# Borra mapas y gráficas para volver a descargarlos o regenerarlos; pide confirmación
+[group("mantenimiento")]
+limpiar-mapas-y-graficas:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    dirs=(assets/maps output/maps output/charts)
+    echo "Se va a borrar:"
+    for d in "${dirs[@]}"; do
+        if [ -d "$d" ]; then
+            printf '  %-16s %s\n' "$d" "$(du -sh "$d" | cut -f1)"
+        else
+            printf '  %-16s (no existe)\n' "$d"
+        fi
+    done
+    echo
+    echo "assets/maps se vuelve a bajar de Drive en la siguiente corrida;"
+    echo "output/maps y output/charts se regeneran solos."
+    read -r -p "Escribe 'borrar' para confirmar: " respuesta
+    if [ "$respuesta" != "borrar" ]; then
+        echo "Cancelado, no se borró nada."
+        exit 0
+    fi
+    rm -rf "${dirs[@]}"
+    echo "Listo."
+
 # Revisa estilo y formato con ruff
 [group("format code")]
 lint:
