@@ -129,8 +129,13 @@ rápido para iterar, pero el índice y las referencias cruzadas quedan sin resol
 limpia. El modo final hace las dos pasadas que LaTeX necesita y escribe los auxiliares en un
 directorio temporal, de modo que en `output/pdf/prod/` solo quedan los PDFs.
 
-En desarrollo cada cuadernillo deja su `.tex` en su propia carpeta bajo `output/tex/`; en modo final
-todos quedan planos en `output/tex/prod/`, sin archivos auxiliares.
+En desarrollo cada cuadernillo deja su `.tex` en su propia carpeta bajo `output/tex/`.
+
+En modo final, `output/tex/prod/{slug}/` es un **paquete autocontenido**: el `.tex`, las tipografías,
+los mapas, las gráficas y los logos que usa, con las rutas relativas a esa carpeta. Se comprime, se
+sube a Overleaf y compila sin tocar nada; trae un `latexmkrc` que ya deja seleccionado XeLaTeX y un
+`LEEME.md` con los pasos. Es también lo que se compila localmente, así que si el PDF sale aquí, sale
+allá.
 
 El nombre del archivo se arma con la clave y el municipio sin acentos y en minúsculas
 (`27_cuautitlan_de_garcia_barragan_cuadernillo_municipal_2026`), para que sea ASCII puro y no dé
