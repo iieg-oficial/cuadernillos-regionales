@@ -3,19 +3,23 @@ import subprocess
 import tempfile
 from pathlib import Path
 
+from core.bundle import build
 from core.utils.logger import Logger
 
 PROD_DIR = Path("output/pdf/prod")
 
 
-def _run_xelatex(tex_path: Path, output_dir: Path) -> subprocess.CompletedProcess:
+def _run_xelatex(
+    tex_path: Path, output_dir: Path, cwd: Path | None = None
+) -> subprocess.CompletedProcess:
+    nombre = tex_path.name if cwd else str(tex_path)
     cmd = [
         "xelatex",
         "-interaction=nonstopmode",
-        f"-output-directory={output_dir}",
-        str(tex_path),
+        f"-output-directory={output_dir.resolve()}",
+        nombre,
     ]
-    return subprocess.run(cmd, capture_output=True, text=True)
+    return subprocess.run(cmd, capture_output=True, text=True, cwd=cwd)
 
 
 def _check(result, tex_path: Path, pdf_path: Path) -> None:
@@ -46,10 +50,11 @@ def compile_prod(tex_path: Path) -> Path:
     pdf_path = PROD_DIR / tex_path.with_suffix(".pdf").name
 
     Logger.info(f"Compilando PDF final con xelatex, dos pasadas ({tex_path.name})")
+    bundle = build(tex_path)
     with tempfile.TemporaryDirectory() as tmp:
         tmp_dir = Path(tmp)
-        _run_xelatex(tex_path, tmp_dir)
-        result = _run_xelatex(tex_path, tmp_dir)
+        _run_xelatex(tex_path, tmp_dir, cwd=bundle)
+        result = _run_xelatex(tex_path, tmp_dir, cwd=bundle)
 
         tmp_pdf = tmp_dir / tex_path.with_suffix(".pdf").name
         _check(result, tex_path, tmp_pdf)
