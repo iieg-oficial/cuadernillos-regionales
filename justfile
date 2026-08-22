@@ -40,7 +40,7 @@ open-one clave:
 
 # Genera los cuadernillos finales en output/pdf/prod con dos pasadas de xelatex; reanuda desde una clave si se le pasa
 [group("prod")]
-run-prod desde="":
+prod-run desde="":
     #!/usr/bin/env bash
     set -euo pipefail
     if [ -n "{{ desde }}" ]; then
@@ -51,12 +51,12 @@ run-prod desde="":
 
 # Genera un rango de cuadernillos finales por clave, ambos extremos incluidos
 [group("prod")]
-run-prod-range desde hasta:
+prod-run-range desde hasta:
     uv run python main.py --prod --desde {{desde}} --hasta {{hasta}}
 
 # Genera un solo cuadernillo final en output/pdf/prod
 [group("prod")]
-run-prod-one clave:
+prod-run-one clave:
     uv run python main.py --prod --municipio {{clave}}
 
 # Abre un cuadernillo final de output/pdf/prod
