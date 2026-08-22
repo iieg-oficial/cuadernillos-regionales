@@ -541,6 +541,10 @@ class Analizer(Stage):
             fuente_sesnsp = (
                 f"Fuente: SESNSP. Incidencia delictiva del fuero común {periodo}."
             )
+            fuente_sesnsp_iieg = (
+                "Fuente: IIEG, con base en SESNSP. "
+                f"Incidencia delictiva del fuero común {periodo}."
+            )
             chart_path = CHARTS_DIR / mun_id_str / "gs_carpetas_mes.png"
             grafica_carpetas_por_mes(carpetas_por_mes, nombre, chart_path)
             ctx["gs_grafica_carpetas_de_investigacion_por_mes"] = _grafica_latex(
@@ -564,7 +568,7 @@ class Analizer(Stage):
                     "Distribución porcentual de las carpetas de investigación "
                     "por bien jurídico "
                     f"afectado, {periodo_and_mun}",
-                    fuente_sesnsp,
+                    fuente_sesnsp_iieg,
                 )
             )
         else:
