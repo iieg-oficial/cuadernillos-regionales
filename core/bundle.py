@@ -23,23 +23,21 @@ Cuadernillo municipal listo para compilar.
 
 **Hay que cambiar el compilador a XeLaTeX. Es el paso que no se puede saltar.**
 
-1. En Overleaf: **New Project -> Upload Project** y sube `{slug}.zip`,
-   que está junto a esta carpeta y ya trae todo.
-   Súbelo como proyecto nuevo, no arrastres la carpeta a uno existente: ahí queda
-   un `main.tex` de plantilla y Overleaf compila ese en vez de este.
+1. En Overleaf: **New Project -> Upload Project** y sube `{slug}.zip`, el
+   comprimido donde viene este archivo. Súbelo como proyecto nuevo, no arrastres su
+   contenido a uno existente: ahí queda un `main.tex` de plantilla y Overleaf compila
+   ese en vez de este.
 2. **Menu -> Compiler -> XeLaTeX**, y vuelve a compilar.
-
-Overleaf compila con pdfLaTeX por omisión y elige el motor desde ese menú:
-**ignora** tanto el `latexmkrc` que viene aquí como el comentario `% !TEX program`
-de la primera línea del `.tex`. Si no lo cambias, falla con:
-
-    Fatal Package fontspec Error: The fontspec package requires either XeTeX or LuaTeX.
-
-El documento usa `fontspec` para las tipografías Lexend y Garet, y `fontspec` solo
-corre en XeLaTeX o LuaLaTeX.
-
 3. El archivo principal es `{slug}.tex`. Si Overleaf abre otro, cámbialo en
    **Menu -> Main document**.
+
+:warning: **Warning:** Overleaf compila con pdfLaTeX por omisión y elige el motor desde
+ese menú: **ignora** tanto el `latexmkrc` que viene aquí como el comentario
+`% !TEX program` de la primera línea del `.tex`. Si no lo cambias, falla con
+`Fatal Package fontspec Error: The fontspec package requires either XeTeX or LuaTeX.`
+
+:memo: **Note:** el documento usa `fontspec` para las tipografías Lexend y Garet, y
+`fontspec` solo corre en XeLaTeX o LuaLaTeX.
 
 ## Local
 
