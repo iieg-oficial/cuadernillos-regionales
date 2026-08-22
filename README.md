@@ -122,7 +122,7 @@ Hay dos modos de generación:
 | Modo | Comando | Salida | xelatex |
 |---|---|---|---|
 | Desarrollo | `just run`, `just run-one <clave>` | `output/pdf/{clave}_{nombre}_cuadernillo_municipal_2026/` | una pasada |
-| Final | `just run-prod [clave]`, `just run-prod-range <desde> <hasta>`, `just run-prod-one <clave>` | `output/pdf/prod/` y `output/tex/prod/` | dos pasadas |
+| Final | `just prod-run [clave]`, `just prod-run-range <desde> <hasta>`, `just prod-run-one <clave>` | `output/pdf/prod/` y `output/tex/prod/` | dos pasadas |
 
 El modo de desarrollo corre xelatex una sola vez y deja los archivos auxiliares junto al PDF: es más
 rápido para iterar, pero el índice y las referencias cruzadas quedan sin resolver en una corrida
