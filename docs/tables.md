@@ -92,11 +92,22 @@ proporción de su columna:
 `\textbf{}` a secas deja los títulos a distinta altura: `\thh` envuelve su contenido en un `varwidth`
 con espaciado propio, así que esa celda queda más alta y las demás se centran más abajo.
 
-Para forzar un salto de línea dentro de un encabezado se usa `\newline`:
+Para forzar un salto de línea dentro de un encabezado:
+
+- En `\thh` (izquierda), `\newline`.
+- En `\thhl` (derecha), **`\linebreak`**.
 
 ```latex
-\thhl{0.21}{Variación (\%)\newline 2015--2020}
+\thh{0.19}{Municipio/\newline Localidad}
+\thhl{0.21}{Variación (\%)\linebreak 2015--2020}
 ```
+
+`\newline` termina la línea con un `\hfil`, que en un encabezado alineado a la derecha compite con
+el `\raggedleft` y **centra ese renglón**. Se ve como un «( %)» flotando a media columna mientras el
+resto del encabezado va pegado a la derecha. `\linebreak` corta sin ese relleno.
+
+Medido en el Cuadro 30: con `\newline` el renglón del «( %)» quedaba a 62 px del borde derecho
+mientras los otros dos estaban a 8; con `\linebreak`, los tres a 8.
 
 ### `\multicolumn`
 
