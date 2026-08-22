@@ -1,11 +1,15 @@
 import re
 import shutil
+import zipfile
 from pathlib import Path
 
 from core.settings import AppSettings
 from core.utils.logger import Logger
 
 FONTS_DIR = "fonts"
+
+# Sobras de una compilacion previa dentro del paquete: no van al zip.
+AUXILIARES = {".aux", ".log", ".out", ".toc", ".pdf", ".gz", ".fls", ".fdb_latexmk"}
 
 # Para latexmk. Overleaf NO lo usa para elegir el motor: ahi el compilador sale del
 # menu del proyecto y hay que ponerlo en XeLaTeX a mano, como dice el LEEME.
@@ -19,11 +23,11 @@ Cuadernillo municipal listo para compilar.
 
 **Hay que cambiar el compilador a XeLaTeX. Es el paso que no se puede saltar.**
 
-1. Comprime esta carpeta en un `.zip`.
-2. En Overleaf: **New Project -> Upload Project** y sube el `.zip`.
+1. En Overleaf: **New Project -> Upload Project** y sube `{slug}.zip`,
+   que está junto a esta carpeta y ya trae todo.
    Súbelo como proyecto nuevo, no arrastres la carpeta a uno existente: ahí queda
    un `main.tex` de plantilla y Overleaf compila ese en vez de este.
-3. **Menu -> Compiler -> XeLaTeX**, y vuelve a compilar.
+2. **Menu -> Compiler -> XeLaTeX**, y vuelve a compilar.
 
 Overleaf compila con pdfLaTeX por omisión y elige el motor desde ese menú:
 **ignora** tanto el `latexmkrc` que viene aquí como el comentario `% !TEX program`
@@ -34,7 +38,7 @@ de la primera línea del `.tex`. Si no lo cambias, falla con:
 El documento usa `fontspec` para las tipografías Lexend y Garet, y `fontspec` solo
 corre en XeLaTeX o LuaLaTeX.
 
-4. El archivo principal es `{slug}.tex`. Si Overleaf abre otro, cámbialo en
+3. El archivo principal es `{slug}.tex`. Si Overleaf abre otro, cámbialo en
    **Menu -> Main document**.
 
 ## Local
@@ -104,6 +108,17 @@ def _copy_fonts(tex: str, destino: Path) -> tuple[int, list[str]]:
     return copiados, faltantes
 
 
+def _zip(destino: Path) -> Path:
+    zip_path = destino.with_suffix(".zip")
+    zip_path.unlink(missing_ok=True)
+    with zipfile.ZipFile(zip_path, "w", zipfile.ZIP_DEFLATED) as z:
+        for archivo in sorted(destino.rglob("*")):
+            if not archivo.is_file() or archivo.suffix in AUXILIARES:
+                continue
+            z.write(archivo, archivo.relative_to(destino))
+    return zip_path
+
+
 def build(tex_path: Path) -> Path:
     destino = tex_path.parent
     tex = tex_path.read_text()
@@ -117,7 +132,10 @@ def build(tex_path: Path) -> Path:
     for falta in sin_grafico + sin_fuente:
         Logger.warning(f"Falta en el paquete de {destino.name}: {falta}")
 
+    zip_path = _zip(destino)
+    mb = zip_path.stat().st_size / 1024 / 1024
     Logger.info(
-        f"Paquete listo en {destino}: {graficos} imágenes y {fuentes} tipografías"
+        f"Paquete listo: {graficos} imágenes y {fuentes} tipografías "
+        f"en {destino} y en {zip_path.name} ({mb:.0f} MB)"
     )
     return destino
