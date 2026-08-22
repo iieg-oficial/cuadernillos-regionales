@@ -65,8 +65,8 @@ prod-open-one clave:
     open "$(ls -t output/pdf/prod/{{clave}}_*.pdf | head -1)"
 
 # Borra mapas y gráficas para volver a descargarlos o regenerarlos; pide confirmación
-[group("mantenimiento")]
-limpiar-mapas-y-graficas:
+[group("clean")]
+data:
     #!/usr/bin/env bash
     set -euo pipefail
     dirs=(assets/maps output/maps output/charts)
