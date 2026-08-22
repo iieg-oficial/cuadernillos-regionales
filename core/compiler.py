@@ -3,7 +3,7 @@ import subprocess
 import tempfile
 from pathlib import Path
 
-from core.bundle import build
+from core.bundle import build, pack
 from core.utils.logger import Logger
 
 PROD_DIR = Path("output/pdf/prod")
@@ -59,6 +59,8 @@ def compile_prod(tex_path: Path) -> Path:
         tmp_pdf = tmp_dir / tex_path.with_suffix(".pdf").name
         _check(result, tex_path, tmp_pdf)
         shutil.copy2(tmp_pdf, pdf_path)
+
+    pack(bundle)
 
     Logger.info(f"PDF generated: {pdf_path}")
     return pdf_path

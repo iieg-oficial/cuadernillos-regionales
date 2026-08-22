@@ -108,7 +108,7 @@ def _copy_fonts(tex: str, destino: Path) -> tuple[int, list[str]]:
     return copiados, faltantes
 
 
-def _zip(destino: Path) -> Path:
+def pack(destino: Path) -> Path:
     zip_path = destino.with_suffix(".zip")
     zip_path.unlink(missing_ok=True)
     with zipfile.ZipFile(zip_path, "w", zipfile.ZIP_DEFLATED) as z:
@@ -116,6 +116,9 @@ def _zip(destino: Path) -> Path:
             if not archivo.is_file() or archivo.suffix in AUXILIARES:
                 continue
             z.write(archivo, archivo.relative_to(destino))
+    shutil.rmtree(destino)
+    mb = zip_path.stat().st_size / 1024 / 1024
+    Logger.info(f"Paquete comprimido: {zip_path} ({mb:.0f} MB)")
     return zip_path
 
 
@@ -132,10 +135,7 @@ def build(tex_path: Path) -> Path:
     for falta in sin_grafico + sin_fuente:
         Logger.warning(f"Falta en el paquete de {destino.name}: {falta}")
 
-    zip_path = _zip(destino)
-    mb = zip_path.stat().st_size / 1024 / 1024
     Logger.info(
-        f"Paquete listo: {graficos} imágenes y {fuentes} tipografías "
-        f"en {destino} y en {zip_path.name} ({mb:.0f} MB)"
+        f"Paquete armado en {destino}: {graficos} imágenes y {fuentes} tipografías"
     )
     return destino
