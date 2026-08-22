@@ -126,8 +126,31 @@ llevan dentro compone a ancho natural—, se marca el punto de división con `\-
 \thhl{0.12}{Distribu\-ción (\%)}
 ```
 
-Así el Cuadro 30 la parte en «Distribu- / ción» porque su columna es angosta, y el Cuadro 32 la deja
-entera porque la suya es más ancha, sin tocar las proporciones de ninguno.
+Lo usa el Cuadro 31, cuya columna es de 0.11: la parte en «Distribu- / ción». El 32, de 0.16, la deja
+entera. Es un recurso para cuando **no** hay espacio que repartir; si lo hay, conviene medir y
+rebalancear, como se hizo con el Cuadro 30.
+
+### Medir antes de repartir anchos
+
+Para saber cuánto necesita de verdad cada columna se mide con `\settowidth` lo que **no puede
+partirse**: la palabra más larga de cada encabezado y la cifra más ancha de los 125 municipios (las
+cifras nunca se parten). El ancho útil de una columna es `proporción × \linewidth - 2\tabcolsep`,
+con `\linewidth` = 472.03 pt y `\tabcolsep` = 3 pt.
+
+Medido así, el Cuadro 30 pedía:
+
+| Columna | Lo más ancho | Ancho | Proporción mínima |
+|---|---|---|---|
+| Subsector | `Subsector` | 45.44 pt | 0.11 |
+| 2018 | `129 909.85` | 46.20 pt | 0.12 |
+| 2023 nominal | `225 574.63` | 45.65 pt | 0.11 |
+| 2023 real | `174 485.78` | 46.47 pt | 0.12 |
+| Distribución | `Distribución` | 55.78 pt | 0.14 |
+| Variación | `2018--2023` | 48.06 pt | 0.12 |
+
+Las columnas de cifras estaban en 0.13 sin necesitarlo, así que pasó de
+`0.35 / 0.13 / 0.13 / 0.13 / 0.12 / 0.14` a `0.37 / 0.12 / 0.12 / 0.12 / 0.14 / 0.13`: «Distribución»
+cabe entera, «Subsector» gana espacio y los avisos de `Overfull \hbox` no cambian.
 
 ## Pie de tabla
 
