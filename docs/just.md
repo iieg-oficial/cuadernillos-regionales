@@ -91,14 +91,14 @@ just open-one 1
 ## Producción
 
 Dos pasadas de xelatex, que es lo que LaTeX necesita para resolver el índice y las referencias. Los
-PDFs quedan planos en `output/pdf/prod/` y cada `.tex` en su paquete `output/tex/prod/{slug}/`,
-listo para subir a Overleaf:
+PDFs quedan planos en `output/pdf/prod/` y cada cuadernillo deja su paquete
+`output/tex/prod/{slug}.zip`, listo para subir a Overleaf:
 se escriben en un directorio temporal que se descarta al terminar.
 
 ### `just prod-run [clave]`
 
 Genera los cuadernillos finales de los 125 municipios en `output/pdf/prod/`, todos en la misma
-carpeta y sin archivos auxiliares. Cada `.tex` queda en su paquete bajo `output/tex/prod/`.
+carpeta y sin archivos auxiliares. Cada cuadernillo deja su `.zip` en `output/tex/prod/`.
 
 ```bash
 just prod-run
@@ -168,3 +168,16 @@ Ejecuta la suite de pruebas con `pytest`.
 ```bash
 just test
 ```
+
+### `just limpiar-mapas-y-graficas`
+
+Borra `assets/maps/`, `output/maps/` y `output/charts/`, para volver a bajar los mapas de Drive o
+regenerar las gráficas desde cero.
+
+```bash
+just limpiar-mapas-y-graficas
+```
+
+Muestra cuánto ocupa cada carpeta y pide escribir `borrar` para confirmar; cualquier otra cosa
+cancela sin tocar nada. Son unos 17 GB, y `assets/maps/` se vuelve a descargar en la siguiente
+corrida, así que conviene tener la conexión a mano.
