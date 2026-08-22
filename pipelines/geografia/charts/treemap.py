@@ -88,6 +88,15 @@ TOPIC_PALETTES = {
 }
 
 EXPLICIT_COLOR_MAPS = {
+    "cuencas": {
+        "con_disponibilidad": COLOR_PALETTE["purple_09"],
+        "sin_disponibilidad": COLOR_PALETTE["purple_01"],
+        "veda": COLOR_PALETTE["purple_05"],
+        "veda_y_reglamento": COLOR_PALETTE["orange"],
+        "veda_reserva_y_reglamento": COLOR_PALETTE["purple_13"],
+        "reserva": COLOR_PALETTE["peach_06"],
+        "sin_ordenamiento": COLOR_PALETTE["gray"],
+    },
     "acuiferos": {
         "con_disponibilidad": COLOR_PALETTE["purple_09"],
         "sin_disponibilidad": COLOR_PALETTE["purple_01"],

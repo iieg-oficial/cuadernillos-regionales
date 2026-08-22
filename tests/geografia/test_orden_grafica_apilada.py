@@ -1,4 +1,8 @@
-from pipelines.geografia.charts.treemap import _ordered_segments, _stacked_legend_order
+from pipelines.geografia.charts.treemap import (
+    EXPLICIT_COLOR_MAPS,
+    _ordered_segments,
+    _stacked_legend_order,
+)
 
 SITUACION = {
     "Sin Disponibilidad": 60.19,
@@ -25,9 +29,25 @@ def test_las_categorias_en_cero_se_descartan():
 
 
 def test_sin_mapa_explicito_ordena_por_valor_descendente():
-    vals = {"Veda": 10.0, "Reserva": 80.0, "Sin ordenamiento": 10.0}
+    vals = {"Bosque": 10.0, "Agricultura": 80.0, "Pastizal": 30.0}
+    orden = [cat for cat, _ in _ordered_segments("uso_suelo", vals)]
+    assert orden == ["Agricultura", "Pastizal", "Bosque"]
+
+
+def test_cuencas_sigue_el_orden_del_mapa_de_colores():
+    vals = {
+        "Sin ordenamiento": 40.0,
+        "Veda": 10.0,
+        "Reserva": 30.0,
+        "Veda y reglamento": 20.0,
+    }
     orden = [cat for cat, _ in _ordered_segments("cuencas", vals)]
-    assert orden[0] == "Reserva"
+    assert orden == ["Veda", "Veda y reglamento", "Reserva", "Sin ordenamiento"]
+
+
+def test_cada_categoria_de_cuencas_tiene_color_propio():
+    colores = EXPLICIT_COLOR_MAPS["cuencas"]
+    assert len(set(colores.values())) == len(colores)
 
 
 def test_la_leyenda_sigue_el_orden_de_aparicion_de_arriba_hacia_abajo():
