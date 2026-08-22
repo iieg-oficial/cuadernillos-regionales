@@ -7,8 +7,8 @@ from core.utils.logger import Logger
 
 FONTS_DIR = "fonts"
 
-# Overleaf compila con pdfLaTeX por omision y este documento necesita XeLaTeX por
-# fontspec. El latexmkrc se lo dice sin que nadie tenga que tocar la configuracion.
+# Para latexmk. Overleaf NO lo usa para elegir el motor: ahi el compilador sale del
+# menu del proyecto y hay que ponerlo en XeLaTeX a mano, como dice el LEEME.
 LATEXMKRC = "$pdf_mode = 5;\n"
 
 LEEME = """# {slug}
@@ -17,12 +17,25 @@ Cuadernillo municipal listo para compilar.
 
 ## Overleaf
 
-1. Comprime esta carpeta en un .zip.
-2. New Project -> Upload Project y sube el .zip.
-3. El archivo principal es `{slug}.tex`.
+**Hay que cambiar el compilador a XeLaTeX. Es el paso que no se puede saltar.**
 
-El `latexmkrc` ya deja seleccionado XeLaTeX, que es el que necesita el documento por las
-tipografias. Si Overleaf no lo tomara: Menu -> Compiler -> XeLaTeX.
+1. Comprime esta carpeta en un `.zip`.
+2. En Overleaf: **New Project -> Upload Project** y sube el `.zip`.
+   Súbelo como proyecto nuevo, no arrastres la carpeta a uno existente: ahí queda
+   un `main.tex` de plantilla y Overleaf compila ese en vez de este.
+3. **Menu -> Compiler -> XeLaTeX**, y vuelve a compilar.
+
+Overleaf compila con pdfLaTeX por omisión y elige el motor desde ese menú:
+**ignora** tanto el `latexmkrc` que viene aquí como el comentario `% !TEX program`
+de la primera línea del `.tex`. Si no lo cambias, falla con:
+
+    Fatal Package fontspec Error: The fontspec package requires either XeTeX or LuaTeX.
+
+El documento usa `fontspec` para las tipografías Lexend y Garet, y `fontspec` solo
+corre en XeLaTeX o LuaLaTeX.
+
+4. El archivo principal es `{slug}.tex`. Si Overleaf abre otro, cámbialo en
+   **Menu -> Main document**.
 
 ## Local
 
@@ -30,7 +43,7 @@ tipografias. Si Overleaf no lo tomara: Menu -> Compiler -> XeLaTeX.
     xelatex {slug}.tex
 
 Dos pasadas: la primera resuelve el indice y las referencias a mapas, la segunda
-las escribe.
+las escribe. Con `latexmk` basta una llamada; el `latexmkrc` ya selecciona XeLaTeX.
 
 ## Que hay aqui
 
