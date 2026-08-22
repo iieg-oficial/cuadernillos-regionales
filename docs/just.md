@@ -169,13 +169,13 @@ Ejecuta la suite de pruebas con `pytest`.
 just test
 ```
 
-### `just limpiar-mapas-y-graficas`
+### `just data`
 
 Borra `assets/maps/`, `output/maps/` y `output/charts/`, para volver a bajar los mapas de Drive o
 regenerar las gráficas desde cero.
 
 ```bash
-just limpiar-mapas-y-graficas
+just data
 ```
 
 Muestra cuánto ocupa cada carpeta y pide escribir `borrar` para confirmar; cualquier otra cosa
