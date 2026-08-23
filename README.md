@@ -27,8 +27,11 @@ Este repositorio automatiza la generación de esos reportes: extrae datos de Pos
 | [Gráficas](docs/charts.md) | Cómo se insertan las gráficas, el título numerado con `\graficatitulo`, el pie de dos columnas con `\tablefooter` y el orden de nota y fuente |
 | [Mapas](docs/maps.md) | Por qué los mapas no se insertan con `\includegraphics`, de dónde se descargan, la versión ligera para iterar, tamaño y posición, título, contador y pie |
 | [Convención de commits](docs/commit-conventions.md) | Formato de los mensajes de commit, tipos válidos que valida el hook y scopes sugeridos |
+| [Reglas de los templates](docs/template-rules.md) | Lo que no se negocia al escribir un template: solo `longtable`, dónde va el pie, cómo se insertan mapas y gráficas, `\ND` para datos faltantes y estructura de página |
+| [Formato de las cifras](docs/data-patterns.md) | NOM-008-SE-2021: dos decimales, separador de miles, unidades y porcentajes, y dónde se aplica el formato |
 
-Las reglas de estilo que aplican al contenido de los cuadernillos, formato de cifras y estructura de los templates viven en `.claude/rules/`.
+Toda la documentación vive en `docs/`. No hay configuración de asistentes en el repositorio: las
+reglas están escritas para que las siga cualquiera, persona o herramienta.
 
 ## Quick start
 

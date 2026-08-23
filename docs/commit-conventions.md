@@ -2,6 +2,12 @@
 
 Este proyecto usa [Conventional Commits](https://www.conventionalcommits.org/). Los mensajes son validados automáticamente por el hook `commit-msg` al hacer commit.
 
+## Reglas
+
+- Los mensajes se escriben **en inglés**.
+- El autor es siempre el usuario que commitea; no se agregan coautores.
+- Nunca se añade `Co-Authored-By` al mensaje.
+
 ## Formato
 
 ```

@@ -225,4 +225,4 @@ llevan encabezado ni pie.
 ## Reglas de contenido
 
 El formato de las cifras (decimales, separador de miles, unidades) y las reglas detalladas de tablas
-están en `.claude/rules/data-patterns.md` y `.claude/rules/latex-templates.md`.
+están en [docs/data-patterns.md](data-patterns.md) y [docs/template-rules.md](template-rules.md).

@@ -9,7 +9,7 @@ Antes de crear o modificar cualquier template, revisar el pipeline de demografí
 
 ## Tablas
 
-Ver [docs/tables.md](../../docs/tables.md). Ahí está todo: estructura de `longtable`, proporciones y
+Ver [docs/tables.md](tables.md). Ahí está todo: estructura de `longtable`, proporciones y
 alineaciones de columna, encabezados con `\thh`/`\thhl`, `\multicolumn`, `\makecell`, caption,
 pie con `\tablefooterrow` dentro de `\endlastfoot`, tamaños de fuente y colores.
 
@@ -26,7 +26,7 @@ Reglas que no se negocian:
 
 ## Imágenes (mapas y gráficas)
 
-Los mapas tienen su propia referencia: [docs/maps.md](../../docs/maps.md).
+Los mapas tienen su propia referencia: [docs/maps.md](maps.md).
 
 Las gráficas se insertan como figura con título numerado y pie:
 
@@ -71,4 +71,4 @@ Definido en `base.tex.j2` como `\textcolor{red}{N/D}`. Nunca usar celdas vacías
 
 ## Colores disponibles
 
-Ver [docs/tables.md](../../docs/tables.md#colores).
+Ver [docs/tables.md](tables.md#colores).

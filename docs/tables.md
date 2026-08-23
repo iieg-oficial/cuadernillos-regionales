@@ -401,7 +401,7 @@ Para el «no disponible» tabular que va acompañado de su llamada al pie se usa
 ## Formato de las cifras
 
 Decimales, separador de miles, unidades y porcentajes siguen la NOM-008-SE-2021 y están documentados
-aparte, en `.claude/rules/data-patterns.md`. En resumen:
+aparte, en [docs/data-patterns.md](data-patterns.md). En resumen:
 
 - Dos decimales exactos en los valores; no en claves, años ni rankings
 - Separador de miles con espacio fino: `1\,500`
