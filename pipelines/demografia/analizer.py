@@ -14,13 +14,12 @@ def _mapa_latex(
     caption: str,
     fuentes: list[str] | None = None,
     ancho: str = "0.95\\textwidth",
+    label: str | None = None,
 ) -> str:
     bloque = (
-        f"\\mapatitulo{{{caption}}}\n"
-        "\\begin{figure}[H]\n"
-        "\\centering\n"
-        f"\\includegraphics[width={ancho}]{{{path}}}\n"
-        "\\end{figure}"
+        f"\\mapatitulo*{{{caption}}}\n"
+        + (f"\\label{{{label}}}\n" if label else "")
+        + f"\\mapafijo[{ancho}]{{{path}}}"
     )
     if fuentes:
         lineas = [f"Fuente: & {fuentes[0]}\\\\"]
@@ -1108,6 +1107,7 @@ class Analizer(Stage):
                 "CONEVAL. Medición de la pobreza a nivel municipal, 2020.",
                 *FUENTES_MAPA_BASE,
             ],
+            label="mapa_pobreza_multidimensional",
         )
 
         total_estatal = input_data.get("total_estatal_2020")

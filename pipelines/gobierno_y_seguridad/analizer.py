@@ -539,6 +539,9 @@ class Analizer(Stage):
             periodo_and_mun = f"en el municipio de {nombre} {periodo}"
 
             fuente_sesnsp = (
+                f"Fuente: SESNSP. Incidencia delictiva del fuero común {periodo}."
+            )
+            fuente_sesnsp_iieg = (
                 "Fuente: IIEG, con base en SESNSP. "
                 f"Incidencia delictiva del fuero común {periodo}."
             )
@@ -562,9 +565,10 @@ class Analizer(Stage):
             ctx["gs_grafica_distribucion_porcentual_bienes_juridicos_afectados"] = (
                 _grafica_latex(
                     chart_path,
-                    "Distribución porcentual por bien jurídico "
+                    "Distribución porcentual de las carpetas de investigación "
+                    "por bien jurídico "
                     f"afectado, {periodo_and_mun}",
-                    fuente_sesnsp,
+                    fuente_sesnsp_iieg,
                 )
             )
         else:

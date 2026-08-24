@@ -13,6 +13,14 @@ def fmt(value, decimals=2) -> str:
     return f"{round(value, decimals):,.{decimals}f}".replace(",", r"\,")
 
 
+def fmt_no_cero(value, decimals=2, max_decimals=3) -> str:
+    if value is None or (isinstance(value, float) and math.isnan(value)):
+        return fmt(value, decimals)
+    if value != 0 and round(value, decimals) == 0:
+        return fmt(value, max_decimals)
+    return fmt(value, decimals)
+
+
 def fmt_int(value) -> str:
     if value is None or (isinstance(value, float) and math.isnan(value)):
         return "0"

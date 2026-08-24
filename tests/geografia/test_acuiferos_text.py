@@ -106,3 +106,48 @@ def test_names_are_trimmed_and_empty_segments_dropped():
     texto = build_acuiferos_text("  Ameca ,  , Arenal  ", "40.00", "60.00")
 
     assert "los acuíferos: Ameca y Arenal." in texto
+
+
+def test_sin_clasificacion_reemplaza_totalidad_sin_disponibilidad():
+    texto = build_acuiferos_text(
+        "Ciénega de Chapala, Tizapán", "0.00", "83.68", "16.32"
+    )
+    assert "La totalidad" not in texto
+    assert "83.68 \\% no cuenta con disponibilidad de agua subterránea" in texto
+    assert "16.32 \\% no está clasificado" in texto
+
+
+def test_sin_clasificacion_reemplaza_totalidad_con_disponibilidad():
+    texto = build_acuiferos_text("Ameca, Arenal", "99.74", "0.00", "0.26")
+    assert "La totalidad" not in texto
+    assert "99.74 \\% cuenta con disponibilidad de agua subterránea" in texto
+    assert "0.26 \\% no está clasificado" in texto
+
+
+def test_sin_clasificacion_se_agrega_al_desglose_completo():
+    texto = build_acuiferos_text("Ameca, Arenal", "18.50", "60.19", "21.31")
+    assert "60.19 \\% no tiene disponibilidad" in texto
+    assert "18.50 \\% cuenta con disponibilidad de agua subterránea" in texto
+    assert "21.31 \\% no está clasificado" in texto
+
+
+def test_sin_clasificacion_en_cero_conserva_la_redaccion_previa():
+    texto = build_acuiferos_text("Ameca, Arenal", "0.00", "100.00", "0.00")
+    assert (
+        "La totalidad de la superficie municipal comprendida en ellos "
+        "no cuenta con disponibilidad de agua subterránea." in texto
+    )
+
+
+def test_sin_clasificacion_ausente_conserva_la_redaccion_previa():
+    texto = build_acuiferos_text("Ameca, Arenal", "0.00", "100.00")
+    assert (
+        "La totalidad de la superficie municipal comprendida en ellos "
+        "no cuenta con disponibilidad de agua subterránea." in texto
+    )
+
+
+def test_sin_clasificacion_con_un_solo_acuifero_usa_singular():
+    texto = build_acuiferos_text("Tizapán", "0.00", "83.68", "16.32")
+    assert "comprendida en él" in texto
+    assert "en ellos" not in texto

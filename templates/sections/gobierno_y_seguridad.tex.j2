@@ -75,9 +75,9 @@ mientras que en << gs_antepenultimo_anio_eleccion >> fue del
 \hline
 \rowcolor{gray!30}
 \thh{0.08}{\scriptsize Clave} & \thh{0.14}{\scriptsize Municipio} &
-\thhl{0.18}{\scriptsize Participación (\%)} & \thhl{0.08}{\scriptsize Lugar\newline estatal} &
-\thhl{0.18}{\scriptsize Participación (\%)} & \thhl{0.08}{\scriptsize Lugar\newline estatal} &
-\thhl{0.18}{\scriptsize Participación (\%)} & \thhl{0.08}{\scriptsize Lugar\newline estatal} \\
+\thhl{0.18}{\scriptsize Participación (\%)} & \thhl{0.08}{\scriptsize Lugar\linebreak estatal} &
+\thhl{0.18}{\scriptsize Participación (\%)} & \thhl{0.08}{\scriptsize Lugar\linebreak estatal} &
+\thhl{0.18}{\scriptsize Participación (\%)} & \thhl{0.08}{\scriptsize Lugar\linebreak estatal} \\
 \hline
 \endhead
 
@@ -86,6 +86,9 @@ mientras que en << gs_antepenultimo_anio_eleccion >> fue del
 \endfoot
 
 \hline
+\tablefooterrow{8}{Nota: & El lugar se refiere a la posición que ocupa el municipio a nivel estatal.\\
+Fuente: & IEPC. Resultados del Proceso Electoral Local << gs_antepenultimo_anio_eleccion >>,
+<< gs_penultimo_anio_eleccion >> y << gs_anio_elecciones >>.}
 \endlastfoot
 
 <% for row in gs_tabla_participacion %>
@@ -103,15 +106,12 @@ mientras que en << gs_antepenultimo_anio_eleccion >> fue del
 
 \end{longtable}
 \normalsize
-\tablefooter{Fuente: & IEPC. Resultados del Proceso Electoral Local << gs_antepenultimo_anio_eleccion >>,
-<< gs_penultimo_anio_eleccion >> y << gs_anio_elecciones >>.}
-
 <% if gs_ingresos_propios_activa %>
 \newpage
 
 \subsection{Porcentaje de ingresos propios e ingresos per cápita}
 
-\noindent En << gs_anio_efipem >>, << gs_municipio_nombre >> registró un porcentaje de
+\noindent En << gs_anio_efipem >>, << gs_municipio_nombre >> registró un porcentaje\footnote{El porcentaje refleja la relación entre los ingresos propios y los ingresos totales del municipio. Los ingresos per cápita se calculan respecto al total de ingresos del municipio.} de
 ingresos propios respecto a su total de ingresos de << gs_porcentaje_ingresos_propios_respecto_total >>\%,
 que lo colocó en el lugar << gs_posicion_nivel_estado_ingresos_per_capita_porcentaje >> a nivel
 estatal con mayor porcentaje de ingresos propios. Durante
@@ -120,10 +120,10 @@ estatal con mayor porcentaje de ingresos propios. Durante
 << gs_anio_anterior_posicion_nivel_estado_ingresos_per_capita >>.
 
 Los ingresos per cápita en << gs_anio_efipem >> tuvieron un valor de
-<< gs_valor_ingresos_per_capita >> de pesos, ubicando a << gs_municipio_nombre >> en el lugar
+<< gs_valor_ingresos_per_capita >> pesos, ubicando a << gs_municipio_nombre >> en el lugar
 << gs_posicion_estatal_ingreso_per_capita >>. Los ingresos per cápita en
 << gs_anio_anterior_ingreso_per_capita >> tuvieron un valor de
-<< gs_anio_anterior_valor_ingreso_per_capita >> de pesos y con esta cifra el municipio ocupó el
+<< gs_anio_anterior_valor_ingreso_per_capita >> pesos y con esta cifra el municipio ocupó el
 lugar << gs_posicion_anio_anterior_ingreso_percapita >>.
 
 \setlength{\tabcolsep}{3pt}
@@ -175,6 +175,15 @@ lugar << gs_posicion_anio_anterior_ingreso_percapita >>.
 \endfoot
 
 \hline
+\tablefooterrow{10}{
+Nota: & El lugar se refiere a la posición que ocupa el municipio a nivel estatal.\\
+& El porcentaje refleja la relación entre los ingresos propios y los ingresos totales del municipio.\\
+& Los ingresos per cápita se calculan respecto al total de ingresos del municipio.\\
+<% if gs_tabla_ingresos_tiene_na %>ND: & No disponible.\\<% endif %>
+Fuente: & IIEG, con base en   INEGI. Estadística de Finanzas Públicas Estatales y Municipales,
+<< gs_anio_anterior_efipem >> y << gs_anio_efipem >>.\\
+& \phantom{IIEG con base en} CONAPO. Reconstrucción y proyecciones de la población de los municipios  \\  &  \phantom{IIEG con base en} de México 1990-2040
+(actualizada en mayo de 2024).}
 \endlastfoot
 
 <% for row in gs_tabla_ingresos %>
@@ -194,13 +203,6 @@ lugar << gs_posicion_anio_anterior_ingreso_percapita >>.
 
 \end{longtable}
 \normalsize
-\tablefooter{
-Nota: & El porcentaje refleja la relación entre los ingresos propios y los ingresos totales del municipio. \\
-<% if gs_tabla_ingresos_tiene_na %>ND: & No disponible.\\<% endif %>
-Fuente: & IIEG, con base en   INEGI. Estadística de Finanzas Públicas Estatales y Municipales,
-<< gs_anio_anterior_efipem >> y << gs_anio_efipem >>.\\
-& \phantom{IIEG con base en} CONAPO. Reconstrucción y proyecciones de la población de los municipios  \\  &  \phantom{IIEG con base en} de México 1990-2040
-(actualizada en mayo de 2024).}
 <% endif %>
 
 \newpage
@@ -208,10 +210,10 @@ Fuente: & IIEG, con base en   INEGI. Estadística de Finanzas Públicas Estatale
 \subsection{Delitos del fuero común}
 
 En cuestión de seguridad, en << gs_anio_acumulado_seguridad >> el municipio registró
-una tasa de << gs_tasa_delitos >> delitos por cada cien mil habitantes, ubicándose en
+una tasa de << gs_tasa_delitos >> por carpetas de investigación por delitos del fuero común por cada cien mil habitantes, ubicándose en
 el lugar << gs_posicion_estado_delitos >> a nivel estatal, donde el municipio con menor tasa ocupa el primer lugar.
 En << gs_anio_anterior_acumulado_seguridad >> el municipio tenía una
-tasa de << gs_tasa_delitos_anio_anterior >> delitos por cada cien mil habitantes y se
+tasa de << gs_tasa_delitos_anio_anterior >> carpetas de investigación por cada cien mil habitantes y se
 encontraba en el lugar << gs_posicion_estatal_delitos_anio_anterior >>.
 
 De << gs_anio_pasado_seguridad >> a << gs_anio_seguridad >> el municipio presentó
@@ -230,15 +232,15 @@ lugar\footnote{El primer lugar es el municipio con mayor decremento en la tasa.}
                   >{\raggedleft\arraybackslash}m{\dimexpr0.13\linewidth - 2\tabcolsep\relax}
                   >{\raggedleft\arraybackslash}m{\dimexpr0.13\linewidth - 2\tabcolsep\relax}}
 
-\caption{\textbf{Tasa de delitos del fuero común por cada 100\,000 habitantes por municipio en la << nombre_region >>} \\
+\caption{\textbf{Tasa de carpetas de investigación de delitos del fuero común por cada 100\,000 habitantes por municipio en la << nombre_region >>} \\
 << gs_anio_anterior_acumulado_seguridad >> y << gs_anio_acumulado_seguridad >>}
 \label{cuadro_delitos_fuero_comun} \\
 
 \hline
 \rowcolor{gray!30}
 & &
-\multicolumn{2}{>{\centering\arraybackslash}m{\dimexpr0.26\linewidth - 2\tabcolsep\relax}}{\cellcolor{gray!30}\textbf{Delitos << gs_anio_anterior_acumulado_seguridad >>}} &
-\multicolumn{2}{>{\centering\arraybackslash}m{\dimexpr0.26\linewidth - 2\tabcolsep\relax}}{\cellcolor{gray!30}\textbf{Delitos << gs_anio_acumulado_seguridad >>}} &
+\multicolumn{2}{>{\centering\arraybackslash}m{\dimexpr0.26\linewidth - 2\tabcolsep\relax}}{\cellcolor{gray!30}\textbf{<< gs_anio_anterior_acumulado_seguridad >>}} &
+\multicolumn{2}{>{\centering\arraybackslash}m{\dimexpr0.26\linewidth - 2\tabcolsep\relax}}{\cellcolor{gray!30}\textbf{<< gs_anio_acumulado_seguridad >>}} &
 \multicolumn{2}{>{\centering\arraybackslash}m{\dimexpr0.26\linewidth - 2\tabcolsep\relax}}{\cellcolor{gray!30}\textbf{Variación de la tasa}} \\
 \rowcolor{gray!30}
 \thh{0.08}{Clave} & \thh{0.14}{Municipio} &
@@ -263,6 +265,11 @@ lugar\footnote{El primer lugar es el municipio con mayor decremento en la tasa.}
 \endfoot
 
 \hline
+\tablefooterrow{8}{Fuente:  IIEG, con base en & SESNSP. Base de Delitos del Fuero Común,
+<< gs_anio_anterior_acumulado_seguridad >> y << gs_anio_acumulado_seguridad >>.\\
+& CONAPO. Reconstrucción y proyecciones de la población de los municipios  \\ &  de
+México 1990-2040
+(actualizada en mayo de 2024).}
 \endlastfoot
 
 <% for row in gs_tabla_delitos %>
@@ -280,12 +287,6 @@ lugar\footnote{El primer lugar es el municipio con mayor decremento en la tasa.}
 
 \end{longtable}
 \normalsize
-\tablefooter{Fuente:  IIEG, con base en & SESNSP. Base de Delitos del Fuero Común,
-<< gs_anio_anterior_acumulado_seguridad >> y << gs_anio_acumulado_seguridad >>.\\
-& CONAPO. Reconstrucción y proyecciones de la población de los municipios  \\ &  de
-México 1990-2040
-(actualizada en mayo de 2024).}
-
 \newpage
 
 << gs_texto_carpetas_investigacion >>

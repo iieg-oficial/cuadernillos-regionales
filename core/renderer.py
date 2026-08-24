@@ -9,6 +9,7 @@ from core.utils.escudos import ensure_escudos, escudo_path
 from core.utils.logger import Logger
 
 PROD_TEX_DIR = Path("output/tex/prod")
+BUNDLE_FONTS_DIR = "fonts"
 
 
 def _sin_acentos(texto: str) -> str:
@@ -43,7 +44,7 @@ def render(municipio_id: str, context: dict, prod: bool = False) -> Path:
     nombre = _get_nombre_municipio(municipio_id)
     slug = f"{municipio_id}_{nombre}_cuadernillo_municipal_2026"
     if prod:
-        output_path = PROD_TEX_DIR / f"{slug}.tex"
+        output_path = PROD_TEX_DIR / slug / f"{slug}.tex"
     else:
         output_path = Path("output/tex") / slug / f"{slug}.tex"
     output_path.parent.mkdir(parents=True, exist_ok=True)
@@ -52,7 +53,7 @@ def render(municipio_id: str, context: dict, prod: bool = False) -> Path:
     escudo = escudo_path(municipio_id)
     output_path.write_text(
         template.render(
-            fonts_path=app_settings.FONTS_PATH,
+            fonts_path=f"{BUNDLE_FONTS_DIR}/" if prod else app_settings.FONTS_PATH,
             assets_path=app_settings.ASSETS_PATH,
             escudo_path=str(escudo) if escudo else None,
             **context,

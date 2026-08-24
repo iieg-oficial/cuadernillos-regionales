@@ -27,6 +27,7 @@
 \usepackage{varwidth} % must be loaded after array
 \usepackage{tabularx}
 \usepackage{longtable}
+\usepackage{needspace}
 \usepackage{caption}
 \DeclareCaptionFormat{tablaformat}{\color{colorTexto}#1\newline#3}
 \captionsetup[longtable]{format=tablaformat, justification=raggedright, singlelinecheck=false, skip=5pt, labelsep=none}
@@ -110,11 +111,79 @@
 \newcommand{\thdl}[1]{\textbf{\color{colorTexto}#1}}
 \newcommand{\thh}[2]{\multicolumn{1}{>{\raggedright\arraybackslash}m{\dimexpr#1\linewidth - 2\tabcolsep\relax}}{\cellcolor{gray!30}\vspace{5pt}\begin{varwidth}{\dimexpr#1\textwidth - 2\tabcolsep\relax}\bfseries #2\end{varwidth}\vspace{5pt}}}
 \newcommand{\thhl}[2]{\multicolumn{1}{>{\raggedleft\arraybackslash}m{\dimexpr#1\linewidth - 2\tabcolsep\relax}}{\cellcolor{gray!30}\vspace{5pt}\begin{varwidth}{\dimexpr#1\textwidth - 2\tabcolsep\relax}\raggedleft\bfseries #2\end{varwidth}\vspace{5pt}}}
-\newcommand{\tablefooter}[1]{%
-  \vspace{-28pt}\noindent{\footnotesize
+% El pie va DENTRO de la tabla, en \endlastfoot, para que longtable cuente su altura
+% al decidir donde parte. Asi el corte lo toma longtable durante la composicion y salen
+% (continua), (continuacion) y los encabezados; si el pie no cabe, baja con filas.
+% \tablefooter es la version suelta, para los pies de grafica y de mapa.
+\newcommand{\tablefooterbody}[1]{\noindent{\footnotesize
   \renewcommand{\arraystretch}{1.0}%
   \begin{tabularx}{\linewidth}[t]{@{}l@{\hspace{0.5em}}X@{}}#1\end{tabularx}%
   \renewcommand{\arraystretch}{1.5}}}
+\newcommand{\tablefooter}[1]{\vspace{-28pt}\tablefooterbody{#1}}
+\newcommand{\tablefooterrow}[2]{%
+  \multicolumn{#1}{@{}p{\linewidth}@{}}{\tablefooterbody{#2}}\\}
+
+% \LT@output ya sabe bajar el ultimo pie con marcas de continuacion si no cabe, pero
+% mide solo la ALTURA de \LT@lastfoot e ignora su profundidad. Con un pie de varias
+% lineas eso se queda corto y el pie termina solo en la pagina siguiente. Los dos
+% parches le suman \dp\LT@lastfoot a la comparacion.
+\makeatletter
+\patchcmd{\LT@output}{\ifdim \ht\LT@lastfoot>\ht\LT@foot}
+  {\ifdim \dimexpr\ht\LT@lastfoot+\dp\LT@lastfoot\relax>\ht\LT@foot}
+  {}{\PackageWarning{cuadernillos}{no se pudo parchar LT@output (guarda)}}
+\patchcmd{\LT@output}{\advance\dimen@-\ht\LT@lastfoot}
+  {\advance\dimen@-\ht\LT@lastfoot\advance\dimen@-\dp\LT@lastfoot}
+  {}{\PackageWarning{cuadernillos}{no se pudo parchar LT@output (medida)}}
+
+% Y longtable reserva la altura de \endfoot durante toda la tabla, pero nunca la de
+% \endlastfoot. Sin eso la pagina se llena con el cuerpo y el pie se pasa solo a la
+% siguiente. Se reserva tambien lo que el ultimo pie mide de mas, y se devuelve al
+% cerrar la tabla. La rama final de \LT@output cuenta esa reserva dos veces a
+% proposito: asi expulsa la pagina y entra el \vsplit de arriba, que baja filas.
+\newdimen\LT@ft@extra
+\apptocmd{\LT@start}{%
+  \global\LT@ft@extra\z@
+  \ifvoid\LT@lastfoot\else
+    \@tempdima\ht\LT@lastfoot
+    \advance\@tempdima\dp\LT@lastfoot
+    \advance\@tempdima-\ht\LT@foot
+    \ifdim\@tempdima>\z@
+      \global\LT@ft@extra\@tempdima
+      \global\advance\vsize-\@tempdima
+      \global\advance\@colroom-\@tempdima
+      \@tempdimb\pagegoal \advance\@tempdimb-\@tempdima \pagegoal\@tempdimb
+    \fi
+  \fi}{}{\PackageWarning{cuadernillos}{no se pudo parchar LT@start}}
+\apptocmd{\endlongtable}{%
+  \ifdim\LT@ft@extra>\z@
+    \global\advance\vsize\LT@ft@extra
+    \global\advance\@colroom\LT@ft@extra
+    \@tempdima\pagegoal \advance\@tempdima\LT@ft@extra \pagegoal\@tempdima
+    \global\LT@ft@extra\z@
+  \fi}{}{\PackageWarning{cuadernillos}{no se pudo parchar endlongtable}}
+
+% Cuando decide que no cabe, longtable manda TODA la pagina con \LT@foot y abre la
+% siguiente con \LT@head y el pie: encabezado y pie solos, sin una sola fila. Con el
+% \vsplit se parte el material a la altura que si cabe, asi que las filas sobrantes
+% bajan con el pie en vez de dejar la pagina vacia.
+\patchcmd{\LT@output}{\setbox\@cclv\vbox{\unvbox\z@\copy\LT@foot\vss}}
+  {\splittopskip\z@\vbadness\@M\vfuzz\maxdimen
+   \setbox\tw@\vsplit\z@ to\dimen@
+   \setbox\@cclv\vbox{\unvbox\tw@\copy\LT@foot\vss}}
+  {}{\PackageWarning{cuadernillos}{no se pudo parchar LT@output (vsplit)}}
+\patchcmd{\LT@output}{\setbox\z@\vbox{\box\LT@head}}
+  {\setbox\z@\vbox{\box\LT@head\unvbox\z@}}
+  {}{\PackageWarning{cuadernillos}{no se pudo parchar LT@output (resto)}}
+\makeatother
+
+% Manda el parrafo a la pagina siguiente si el, su grafica y su pie no caben juntos.
+% 0.52\textwidth es lo que mide una grafica a 0.95\textwidth con su proporcion habitual;
+% los 9 renglones cubren el parrafo, el titulo de la grafica y el pie.
+\newcommand{\graficafit}{%
+  \Needspace*{\dimexpr 0.52\textwidth + 9\baselineskip\relax}}
+
+\newcommand{\tablafit}[1]{%
+  \Needspace*{\dimexpr #1\baselineskip * 7 / 5 + 6\baselineskip\relax}}
 
 \newcounter{grafica}
 \newcounter{mapa}
@@ -126,21 +195,53 @@
 \setlength{\mapbleed}{0.9cm}
 \newlength{\mapheadroom}
 \setlength{\mapheadroom}{1.6cm}
-\newcommand{\mapatitulo}[2][0pt]{%
+% \mapatitulo imprime el titulo en su lugar; \mapatitulo* solo lo guarda para que lo
+% dibuje \mapageo. Los mapas de geografia se escalan con \adjustbox y, cuando los limita
+% la altura, salen mas angostos que el recuadro con sangrado: si el titulo se imprimiera
+% por su cuenta quedaria alineado al recuadro y no al mapa.
+\makeatletter
+\newsavebox{\mapa@box}
+\newcommand{\mapa@titulo}{}
+\newcommand{\mapa@guardar}[1]{%
+  \refstepcounter{mapa}%
+  \gdef\mapa@titulo{Mapa \themapa. #1}}
+\newcommand{\mapa@imprimir}[2][0pt]{%
   \refstepcounter{mapa}%
   \noindent\hspace*{-#1}%
   \parbox{\dimexpr\linewidth+#1+#1\relax}{%
     \color{colorTexto}\raggedright Mapa \themapa. #2}\par
   \vspace{-\parskip}\vspace{1pt}}
+\newcommand{\mapatitulo}{\@ifstar\mapa@guardar\mapa@imprimir}
+% #1 ancho maximo de la imagen, #2 sangrado, #3 ruta. El titulo va en un minipage del
+% ancho REAL del mapa, medido con el \sbox: si al mapa lo limita la altura sale mas
+% angosto que su caja y un titulo impreso aparte quedaria alineado a la caja, no al mapa.
+\newcommand{\mapabloque}[3]{%
+  \sbox\mapa@box{\adjustbox{max width=#1,
+    max height=\dimexpr\textheight-\mapheadroom\relax}{\includegraphics{#3}}}%
+  \noindent\hspace*{-#2}%
+  \makebox[\dimexpr\linewidth+#2+#2\relax][c]{%
+    \begin{minipage}{\wd\mapa@box}%
+      \noindent{\color{colorTexto}\raggedright\mapa@titulo}\par\vspace{1pt}%
+      \usebox\mapa@box
+    \end{minipage}}\par}
+\newcommand{\mapageo}[1]{%
+  \mapabloque{\dimexpr\textwidth+2\mapbleed\relax}{\mapbleed}{#1}}
+\newcommand{\mapafijo}[2][0.95\textwidth]{\mapabloque{#1}{0pt}{#2}}
+\makeatother
 \newcommand{\mapafuente}[1]{%
   \par\vspace{-4pt}\noindent{\footnotesize
   \renewcommand{\arraystretch}{1.0}%
   \begin{tabularx}{\linewidth}[t]{@{}l@{\hspace{0.5em}}X@{}}#1\end{tabularx}}}
 
-\AtBeginDocument{
-  \color{colorTexto}
-}
+% colorTexto es el color por omision de TODO el documento. No basta con un \color
+% suelto: el color no sobrevive el salto de pagina, asi que un parrafo partido en dos
+% seguia en negro en la pagina siguiente. Hay que cambiar el color POR OMISION, que es
+% el que restituye \normalcolor (salidas de pagina, notas al pie, celdas, minipages).
 \makeatletter
+\AtBeginDocument{%
+  \color{colorTexto}%
+  \global\let\default@color\current@color
+}
 \renewcommand{\@makefnmark}{\hbox{\textsuperscript{\color{colorTexto}\@thefnmark}}}
 \renewcommand{\@makefntext}[1]{%
   \noindent\hb@xt@1.8em{\hss\color{colorTexto}\@makefnmark}~\color{colorTexto}#1}
@@ -178,12 +279,28 @@
   footskip=1.8cm
 }
 
+% Version del cuadernillo. Aparece al pie de cada pagina, a la derecha, y como primer
+% renglon de la bitacora de versiones; las portadas usan \thispagestyle{empty} y no la
+% llevan. Al publicar una version nueva se cambian estas dos lineas y se agrega el
+% renglon correspondiente en templates/bitacora.tex.j2.
+\newcommand{\versionnumero}{01}
+\newcommand{\versionfecha}{31/08/2026}
+\newcommand{\versioncuadernillo}{v\versionnumero{} - \versionfecha}
+% Etiqueta de version de la portada. Mismo tamano que el paginado (\footnotesize).
+\definecolor{colorEtiqueta}{HTML}{F3F3F3}
+\definecolor{colorEtiquetaTexto}{HTML}{939393}
+\newcommand{\versionetiqueta}{%
+  \tikz[baseline]{\node[fill=colorEtiqueta,rounded corners=9pt,
+    inner xsep=14pt,inner ysep=7pt,text=colorEtiquetaTexto]
+    {\footnotesize\bfseries Versión \versionnumero{} \textbar{} Fecha de versión: \versionfecha};}}
+
 \pagestyle{fancy}
 \fancyhf{}
 
 \fancyhead[L]{\includegraphics[height=1.25cm]{<< assets_path >>logo_header.png}}
 \fancyhead[R]{\color{colorTexto}\footnotesize Página \thepage}
 \fancyfoot[L]{\includegraphics[height=1.23cm]{<< assets_path >>logo_footer.png}}
+\fancyfoot[R]{\color{colorTexto}\footnotesize\versioncuadernillo}
 
 \setlength{\headheight}{2cm}
 \setlength{\headsep}{0.4cm}

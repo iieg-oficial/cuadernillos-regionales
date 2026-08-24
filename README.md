@@ -24,10 +24,14 @@ Este repositorio automatiza la generación de esos reportes: extrae datos de Pos
 | [Bases de datos](docs/databases.md) | Qué base usa cada sección, el archivo `.env` que le corresponde, cómo se abre la conexión, dónde viven las consultas y cómo diagnosticar fallas |
 | [Templates LaTeX](docs/latex-templates.md) | Cómo pasar un documento de Overleaf a template Jinja2: delimitadores propios, convención de nombres de variables, paquetes disponibles, macros del proyecto y reglas de contenido |
 | [Tablas](docs/tables.md) | La estructura de `longtable` que usan todas las tablas: proporciones y alineación de columnas, encabezados, caption, pie, tamaños de fuente, colores y formato de cifras |
+| [Gráficas](docs/charts.md) | Cómo se insertan las gráficas, el título numerado con `\graficatitulo`, el pie de dos columnas con `\tablefooter` y el orden de nota y fuente |
 | [Mapas](docs/maps.md) | Por qué los mapas no se insertan con `\includegraphics`, de dónde se descargan, la versión ligera para iterar, tamaño y posición, título, contador y pie |
 | [Convención de commits](docs/commit-conventions.md) | Formato de los mensajes de commit, tipos válidos que valida el hook y scopes sugeridos |
+| [Reglas de los templates](docs/template-rules.md) | Lo que no se negocia al escribir un template: solo `longtable`, dónde va el pie, cómo se insertan mapas y gráficas, `\ND` para datos faltantes y estructura de página |
+| [Formato de las cifras](docs/data-patterns.md) | NOM-008-SE-2021: dos decimales, separador de miles, unidades y porcentajes, y dónde se aplica el formato |
 
-Las reglas de estilo que aplican al contenido de los cuadernillos, formato de cifras y estructura de los templates viven en `.claude/rules/`.
+Toda la documentación vive en `docs/`. No hay configuración de asistentes en el repositorio: las
+reglas están escritas para que las siga cualquiera, persona o herramienta.
 
 ## Quick start
 
@@ -121,15 +125,24 @@ Hay dos modos de generación:
 | Modo | Comando | Salida | xelatex |
 |---|---|---|---|
 | Desarrollo | `just run`, `just run-one <clave>` | `output/pdf/{clave}_{nombre}_cuadernillo_municipal_2026/` | una pasada |
-| Final | `just run-prod [clave]`, `just run-prod-range <desde> <hasta>`, `just run-prod-one <clave>` | `output/pdf/prod/` y `output/tex/prod/` | dos pasadas |
+| Final | `just prod-run [clave]`, `just prod-run-range <desde> <hasta>`, `just prod-run-one <clave>` | `output/pdf/prod/` y `output/tex/prod/` | dos pasadas |
 
 El modo de desarrollo corre xelatex una sola vez y deja los archivos auxiliares junto al PDF: es más
 rápido para iterar, pero el índice y las referencias cruzadas quedan sin resolver en una corrida
 limpia. El modo final hace las dos pasadas que LaTeX necesita y escribe los auxiliares en un
 directorio temporal, de modo que en `output/pdf/prod/` solo quedan los PDFs.
 
-En desarrollo cada cuadernillo deja su `.tex` en su propia carpeta bajo `output/tex/`; en modo final
-todos quedan planos en `output/tex/prod/`, sin archivos auxiliares.
+En desarrollo cada cuadernillo deja su `.tex` en su propia carpeta bajo `output/tex/`.
+
+En modo final, `output/tex/prod/` deja un solo archivo por municipio: **`{slug}.zip`**, un paquete
+autocontenido con el `.tex`, las tipografías, los mapas, las gráficas y los logos que usa, con las
+rutas relativas a la raíz del comprimido. Va listo para **New Project → Upload Project** en Overleaf.
+
+Ahí hay que cambiar el compilador a **XeLaTeX**: Overleaf lo elige desde su menú y no lee el
+`latexmkrc` ni el `% !TEX program` del `.tex`. El `LEEME.md` que va dentro lo explica.
+
+El paquete se arma en una carpeta, se compila desde dentro de ella —el mismo contexto que tendrá
+Overleaf, así que si el PDF sale aquí, sale allá— y al terminar la carpeta se comprime y se borra.
 
 El nombre del archivo se arma con la clave y el municipio sin acentos y en minúsculas
 (`27_cuautitlan_de_garcia_barragan_cuadernillo_municipal_2026`), para que sea ASCII puro y no dé

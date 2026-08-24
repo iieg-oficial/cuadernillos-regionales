@@ -12,12 +12,13 @@ from pipelines.geografia.charts.treemap import (
     plot_proportional_blocks,
     plot_stacked_pair,
 )
-from pipelines.geografia.fuentes import build_fuentes_context
+from pipelines.geografia.fuentes import anios_desde_datos, build_fuentes_context
 from pipelines.geografia.helpers.context import (
     append_unit,
     build_acuiferos_text,
     build_anp_text,
     build_clima_text,
+    build_cuencas_disponibilidad_text,
     build_energia_text,
     build_espacios_publicos_text,
     build_linea_transmision_text,
@@ -29,9 +30,11 @@ from pipelines.geografia.helpers.formatting import (
     first_value,
     fmt,
     fmt_int,
+    fmt_no_cero,
     latex_escape,
     narrative_lower,
     pluralize_comparatives,
+    sentence_case,
     strip_percent_symbol,
     to_number,
 )
@@ -40,11 +43,14 @@ from pipelines.geografia.helpers.tables import (
     education_rows_for,
     health_rows_for,
     pct_sum,
+    raw_sum,
     rows_for,
     sup_sum,
 )
 
 CHARTS_DIR = Path("output/charts")
+
+SIN_CLASIFICACION = ["sin clasificacion", "sin clasificación"]
 
 SIMPLE_CHART_TOPICS = [
     ("geologia", "categoria", "porcentaje", "orden_pct"),
@@ -59,6 +65,13 @@ SIMPLE_CHART_TOPICS = [
     ("erosion_potencial", "rango_texto", "porcentaje", "orden_clase"),
     ("erosion_efectiva", "rango_texto", "porcentaje", "orden_clase"),
 ]
+
+# Claves de variables_texto que NO pasan al contexto: "nombre" choca entre temas y
+# "anp_pct_anp" dejo de usarse al quitar la superficie del parrafo de ANP.
+SKIP_TEXTO_KEYS = {
+    "nombre",
+    "anp_pct_anp",
+}
 
 INTEGER_KEYS = {
     "ge_edu_total_escuelas_muni",
@@ -190,7 +203,7 @@ def _generate_stacked_chart(
     def _aggregate(rows):
         result = {}
         for row in rows:
-            cat = str(row.get("categoria", ""))
+            cat = sentence_case(str(row.get("categoria", "")))
             val = row.get("porcentaje")
             if cat and val is not None:
                 try:
@@ -208,6 +221,21 @@ def _generate_stacked_chart(
         return True
     except Exception:
         return False
+
+
+def _pct_desde_superficie(rows, area_km2):
+    area_ha = to_number(area_km2)
+    if not area_ha:
+        return rows
+    area_ha *= 100
+    ajustadas = []
+    for row in rows:
+        pct = to_number(row.get("porcentaje"))
+        sup = to_number(row.get("superficie_ha"))
+        if pct == 0 and sup:
+            row = {**row, "porcentaje": sup / area_ha * 100}
+        ajustadas.append(row)
+    return ajustadas
 
 
 def _fmt_field(val):
@@ -238,7 +266,7 @@ class Analizer(Stage):
 
         ctx = {}
 
-        ctx.update(build_fuentes_context())
+        ctx.update(build_fuentes_context(anios_desde_datos(detalle)))
         ctx["ge_municipio"] = latex_escape(municipio)
         ctx["ge_fecha_documento"] = "Abril 2026"
 
@@ -259,12 +287,16 @@ class Analizer(Stage):
 
         for topic, data in texto.items():
             for key, val in data.items():
-                if key == "nombre":
+                if key in SKIP_TEXTO_KEYS:
                     continue
                 ctx_key = f"ge_{key}"
                 ctx[ctx_key] = (
                     fmt_int(val) if ctx_key in INTEGER_KEYS else _fmt_field(val)
                 )
+
+        anp_texto = texto.get("anp_humedales_manglares", {})
+        if anp_texto.get("anp_pct_humedales") is not None:
+            ctx["ge_anp_pct_humedales"] = fmt_no_cero(anp_texto["anp_pct_humedales"])
 
         cl_texto = texto.get("clima_koppen", {})
         ctx["ge_dg_clima_predom"] = ctx.get(
@@ -380,13 +412,16 @@ class Analizer(Stage):
             order_col="orden_clase",
         )
         ctx["ge_anp_categorias"] = rows_for(
-            detalle.get("anp_humedales_manglares", []),
+            _pct_desde_superficie(
+                detalle.get("anp_humedales_manglares", []), dg.get("dg_area_km2")
+            ),
             {
                 "categoria": "categoria",
                 "superficie_ha": "superficie_ha",
                 "porcentaje": "porcentaje",
                 "descripcion": "cadena_texto",
             },
+            transforms={"porcentaje": fmt_no_cero},
         )
         ctx["ge_ds_categorias"] = rows_for(
             detalle.get("sequia", []),
@@ -457,35 +492,33 @@ class Analizer(Stage):
         ac_cond = detalle.get("acuiferos_condicion", [])
         linea_t = detalle.get("linea_transm_l", [])
 
-        ctx["ge_cu_sup_con_disponibilidad"] = sup_sum(
-            cu_clasificac, ["con disponibilidad"]
-        )
         ctx["ge_cu_pct_con_disponibilidad"] = pct_sum(
             cu_clasificac, ["con disponibilidad"]
-        )
-        ctx["ge_cu_sup_sin_disponibilidad"] = sup_sum(
-            cu_clasificac, ["sin disponibilidad"]
         )
         ctx["ge_cu_pct_sin_disponibilidad"] = pct_sum(
             cu_clasificac, ["sin disponibilidad"]
         )
-        ctx["ge_cu_sup_reserva"] = sup_sum(cu_categ, ["reserva"])
-        ctx["ge_cu_pct_reserva"] = pct_sum(cu_categ, ["reserva"])
-        ctx["ge_cu_sup_veda"] = sup_sum(cu_categ, ["veda"])
-        ctx["ge_cu_pct_veda"] = pct_sum(cu_categ, ["veda"])
-        ctx["ge_cu_sup_veda_reglamento"] = sup_sum(cu_categ, ["veda y reglamento"])
-        ctx["ge_cu_pct_veda_reglamento"] = pct_sum(cu_categ, ["veda y reglamento"])
-        ctx["ge_cu_sup_veda_reserva_reglamento"] = sup_sum(
-            cu_categ, ["veda, reserva y reglamento"]
+        ctx["ge_cu_disponibilidad"] = rows_for(
+            cu_clasificac,
+            {
+                "categoria": "categoria",
+                "superficie_ha": "superficie_ha",
+                "porcentaje": "porcentaje",
+            },
+            transforms={"categoria": sentence_case},
         )
-        ctx["ge_cu_pct_veda_reserva_reglamento"] = pct_sum(
-            cu_categ, ["veda, reserva y reglamento"]
+        ctx["ge_cu_ordenamiento"] = rows_for(
+            cu_categ,
+            {
+                "categoria": "categoria",
+                "superficie_ha": "superficie_ha",
+                "porcentaje": "porcentaje",
+            },
+            transforms={"categoria": sentence_case},
         )
-        ctx["ge_cu_sup_sin_ordenamiento_superficial"] = sup_sum(
-            cu_categ, ["sin ordenamiento"]
-        )
-        ctx["ge_cu_pct_sin_ordenamiento_superficial"] = pct_sum(
-            cu_categ, ["sin ordenamiento"]
+        ctx["ge_cu_disponibilidad_texto"] = build_cuencas_disponibilidad_text(
+            ctx["ge_cu_pct_con_disponibilidad"],
+            ctx["ge_cu_pct_sin_disponibilidad"],
         )
         ctx["ge_ac_sup_con_disponibilidad"] = sup_sum(ac_sit, ["con disponibilidad"])
         ctx["ge_ac_pct_con_disponibilidad"] = pct_sum(ac_sit, ["con disponibilidad"])
@@ -499,10 +532,26 @@ class Analizer(Stage):
         ctx["ge_ac_pct_no_sobreexplotado"] = pct_sum(
             ac_cond, ["no explotado", "no sobreexplotado"]
         )
+        ctx["ge_ac_sit_sin_clasificacion_activa"] = (
+            raw_sum(ac_sit, SIN_CLASIFICACION) > 0
+        )
+        ctx["ge_ac_sup_sit_sin_clasificacion"] = sup_sum(ac_sit, SIN_CLASIFICACION)
+        ctx["ge_ac_pct_sit_sin_clasificacion"] = pct_sum(ac_sit, SIN_CLASIFICACION)
+        ctx["ge_ac_cond_sin_clasificacion_activa"] = (
+            raw_sum(ac_cond, SIN_CLASIFICACION) > 0
+        )
+        ctx["ge_ac_sup_cond_sin_clasificacion"] = sup_sum(ac_cond, SIN_CLASIFICACION)
+        ctx["ge_ac_pct_cond_sin_clasificacion"] = pct_sum(ac_cond, SIN_CLASIFICACION)
+        ctx["ge_ac_tabla_filas"] = (
+            4
+            + int(ctx["ge_ac_sit_sin_clasificacion_activa"])
+            + int(ctx["ge_ac_cond_sin_clasificacion_activa"])
+        )
         ctx["ge_ac_texto"] = build_acuiferos_text(
             ctx.get("ge_ac_nombres_acuiferos"),
             ctx["ge_ac_pct_con_disponibilidad"],
             ctx["ge_ac_pct_sin_disponibilidad"],
+            ctx["ge_ac_pct_sit_sin_clasificacion"],
         )
 
         salud_total = to_number(

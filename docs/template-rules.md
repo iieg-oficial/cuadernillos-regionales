@@ -9,9 +9,9 @@ Antes de crear o modificar cualquier template, revisar el pipeline de demografí
 
 ## Tablas
 
-Ver [docs/tables.md](../../docs/tables.md). Ahí está todo: estructura de `longtable`, proporciones y
+Ver [docs/tables.md](tables.md). Ahí está todo: estructura de `longtable`, proporciones y
 alineaciones de columna, encabezados con `\thh`/`\thhl`, `\multicolumn`, `\makecell`, caption,
-pie con `\tablefooter`, tamaños de fuente y colores.
+pie con `\tablefooterrow` dentro de `\endlastfoot`, tamaños de fuente y colores.
 
 Reglas que no se negocian:
 
@@ -20,12 +20,13 @@ Reglas que no se negocian:
 - Las proporciones de columna suman exactamente 1.00
 - Cifras a la derecha, texto a la izquierda, valores cualitativos al centro
 - Todas las celdas de una fila de encabezado usan el mismo macro
+- El pie va dentro de la tabla, en `\endlastfoot`, con `\tablefooterrow`; nunca suelto después de `\end{longtable}`
 - El pie es de dos columnas: un `&` de más parte la línea
 - Orden del pie: Nota → Llamada → Símbolos → Fuente
 
 ## Imágenes (mapas y gráficas)
 
-Los mapas tienen su propia referencia: [docs/maps.md](../../docs/maps.md).
+Los mapas tienen su propia referencia: [docs/maps.md](maps.md).
 
 Las gráficas se insertan como figura con título numerado y pie:
 
@@ -42,7 +43,7 @@ Los mapas NO usan `\includegraphics`: el analizer arma el bloque y lo pasa como 
 
 ```latex
 \clearpage
-\mapatitulo[\mapbleed]{Título del mapa de << ge_municipio >>, << ge_anio_mapa.tema >>}
+\mapatitulo*{Título del mapa de << ge_municipio >>, << ge_anio_mapa.tema >>}
 << ge_tema_mapa >>
 ```
 
@@ -70,4 +71,4 @@ Definido en `base.tex.j2` como `\textcolor{red}{N/D}`. Nunca usar celdas vacías
 
 ## Colores disponibles
 
-Ver [docs/tables.md](../../docs/tables.md#colores).
+Ver [docs/tables.md](tables.md#colores).

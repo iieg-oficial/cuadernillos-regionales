@@ -85,6 +85,7 @@ sector de << ec_sector_tercer_unidades >> con el << ec_porcentaje_sector_tercer_
 \endfoot
 
 \hline
+\tablefooterrow{10}{Fuente: & INEGI. Directorio Estadístico Nacional de Unidades Económicas, << ec_mes_denue_numero_empresas >> << ec_anio_denue >>.}
 \endlastfoot
 
 \rowcolor{filaResaltada}
@@ -98,9 +99,8 @@ sector de << ec_sector_tercer_unidades >> con el << ec_porcentaje_sector_tercer_
 
 \end{longtable}
 \normalsize
-\vspace{-28pt}\noindent\parbox{\linewidth}{\footnotesize
-Fuente: INEGI. Directorio Estadístico Nacional de Unidades Económicas, << ec_anio_pasado_denue >>.}
 
+\newpage
 \subsection{Valor agregado censal bruto}
 
 El Valor Agregado Censal Bruto (VACB) es el valor de la producción añadido durante el proceso de trabajo.
@@ -119,12 +119,12 @@ de << ec_anio_ce_anterior >> a << ec_anio_ce >>.
 
 \setlength{\tabcolsep}{3pt}
 \footnotesize
-\begin{longtable}{>{\raggedright\arraybackslash}m{\dimexpr0.35\linewidth - 2\tabcolsep\relax}
-                  >{\raggedleft\arraybackslash}m{\dimexpr0.13\linewidth - 2\tabcolsep\relax}
-                  >{\raggedleft\arraybackslash}m{\dimexpr0.13\linewidth - 2\tabcolsep\relax}
-                  >{\raggedleft\arraybackslash}m{\dimexpr0.13\linewidth - 2\tabcolsep\relax}
+\begin{longtable}{>{\raggedright\arraybackslash}m{\dimexpr0.37\linewidth - 2\tabcolsep\relax}
                   >{\raggedleft\arraybackslash}m{\dimexpr0.12\linewidth - 2\tabcolsep\relax}
-                  >{\raggedleft\arraybackslash}m{\dimexpr0.14\linewidth - 2\tabcolsep\relax}}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.12\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.12\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.14\linewidth - 2\tabcolsep\relax}
+                  >{\raggedleft\arraybackslash}m{\dimexpr0.13\linewidth - 2\tabcolsep\relax}}
 
 \caption{\textbf{Subsectores con mayor valor agregado censal bruto (VACB) en << ec_municipio_nombre >>} \\
 << ec_anio_ce_anterior >> y << ec_anio_ce >>}
@@ -132,24 +132,24 @@ de << ec_anio_ce_anterior >> a << ec_anio_ce >>.
 
 \hline
 \rowcolor{gray!30}
-\thh{0.35}{Subsector} &
-\thhl{0.13}{<< ec_anio_ce_anterior >> (millones de pesos)} &
-\thhl{0.13}{<< ec_anio_ce >> nominal (millones de pesos)} &
-\thhl{0.13}{<< ec_anio_ce >> real (millones de pesos)} &
-\thhl{0.12}{Part. (\%)\newline << ec_anio_ce >>} &
-\thhl{0.14}{Var. real (\%)\newline << ec_anio_ce_anterior >>--<< ec_anio_ce >>} \\
+\thh{0.37}{Subsector} &
+\thhl{0.12}{<< ec_anio_ce_anterior >> (millones de pesos)} &
+\thhl{0.12}{<< ec_anio_ce >> nominal (millones de pesos)} &
+\thhl{0.12}{<< ec_anio_ce >> real (millones de pesos)} &
+\thhl{0.14}{Distribución (\%)\linebreak << ec_anio_ce >>} &
+\thhl{0.13}{Variación real (\%)\linebreak << ec_anio_ce_anterior >>--<< ec_anio_ce >>} \\
 \hline
 \endfirsthead
 
 \multicolumn{6}{l}{\small\textbf{(continuación)}} \\
 \hline
 \rowcolor{gray!30}
-\thh{0.35}{Subsector} &
-\thhl{0.13}{<< ec_anio_ce_anterior >> (millones de pesos)} &
-\thhl{0.13}{<< ec_anio_ce >> nominal (millones de pesos)} &
-\thhl{0.13}{<< ec_anio_ce >> real (millones de pesos)} &
-\thhl{0.12}{Part. (\%)\newline << ec_anio_ce >>} &
-\thhl{0.14}{Var. real (\%)\newline << ec_anio_ce_anterior >>--<< ec_anio_ce >>} \\
+\thh{0.37}{Subsector} &
+\thhl{0.12}{<< ec_anio_ce_anterior >> (millones de pesos)} &
+\thhl{0.12}{<< ec_anio_ce >> nominal (millones de pesos)} &
+\thhl{0.12}{<< ec_anio_ce >> real (millones de pesos)} &
+\thhl{0.14}{Distribución (\%)\linebreak << ec_anio_ce >>} &
+\thhl{0.13}{Variación real (\%)\linebreak << ec_anio_ce_anterior >>--<< ec_anio_ce >>} \\
 \hline
 \endhead
 
@@ -158,6 +158,11 @@ de << ec_anio_ce_anterior >> a << ec_anio_ce >>.
 \endfoot
 
 \hline
+\tablefooterrow{6}{Nota: & El cuadro solo presenta información para los subsectores que no están restringidos por principios de confidencialidad.\\
+<% if ec_tabla_vacb_tiene_na %>ND: & No disponible.\\<% endif %>
+Fuente: & IIEG, con base en INEGI. Censos Económicos, << ec_anio_publicacion_ce_anterior >> y << ec_anio_publicacion_ce >>.\\
+& INEGI. Índice Nacional de Precios al Consumidor. Base segunda quincena julio 2018.\\
+& Los valores de << ec_anio_ce >> fueron deflactados a precios de << ec_anio_ce_anterior >> con base en el promedio anual del INPC.}
 \endlastfoot
 
 \rowcolor{filaResaltada}
@@ -171,12 +176,6 @@ de << ec_anio_ce_anterior >> a << ec_anio_ce >>.
 
 \end{longtable}
 \normalsize
-\tablefooter{Nota: & El cuadro solo presenta información para los subsectores que no están restringidos por principios de confidencialidad.\\
-<% if ec_tabla_vacb_tiene_na %>ND: & No disponible.\\<% endif %>
-Fuente: & IIEG, con base en INEGI. Censos Económicos, << ec_anio_publicacion_ce_anterior >> y << ec_anio_publicacion_ce >>.\\
-& INEGI. Índice Nacional de Precios al Consumidor. Base segunda quincena julio 2018.\\
-& Los valores de << ec_anio_ce >> fueron deflactados a precios de << ec_anio_ce_anterior >> con base en el promedio anual del INPC.}
-
 \newpage
 
 \subsection{Empleo}
@@ -196,8 +195,9 @@ en comparación con el número de trabajadores que se tenían registrados al mes
 El grupo económico que más empleos presentó dentro del municipio de << ec_municipio_nombre >>
 fue el de << ec_grupo_ec_con_mas_empleos >>, ya que a << ec_mes_corte_imss >> de
 << ec_anio_corte_imss >> registró un total de << ec_num_trabajadores_grupo_mayor >> trabajadores,
-concentrando el << ec_porcentaje_trabajadores_grupo_mayor >> del total de asegurados en el municipio.
+concentrando el << ec_porcentaje_trabajadores_grupo_mayor >> del total de los trabajadores asegurados en el municipio.
 
+\newpage
 \setlength{\tabcolsep}{3pt}
 \footnotesize
 \begin{longtable}{>{\raggedright\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
@@ -216,12 +216,12 @@ y << ec_anio_corte_imss >>}
 \hline
 \rowcolor{gray!30}
 \thh{0.30}{Grupo económico} &
-\thhl{0.10}{<< ec_mes_corte_imss|capitalize >>\newline << ec_dos_anios_atras_corte_imss >>} &
-\thhl{0.10}{<< ec_mes_corte_imss|capitalize >>\newline << ec_anio_anterior_corte_imss >>} &
-\thhl{0.10}{<< ec_mes_corte_imss|capitalize >>\newline << ec_anio_corte_imss >>} &
-\thhl{0.11}{Part. (\%)} &
-\thhl{0.15}{Var. nominal << ec_anio_anterior_corte_imss >>--<< ec_anio_corte_imss >>} &
-\thhl{0.14}{Var. (\%) << ec_anio_anterior_corte_imss >>--<< ec_anio_corte_imss >>} \\
+\thhl{0.10}{<< ec_mes_corte_imss|capitalize >>\linebreak << ec_dos_anios_atras_corte_imss >>} &
+\thhl{0.10}{<< ec_mes_corte_imss|capitalize >>\linebreak << ec_anio_anterior_corte_imss >>} &
+\thhl{0.10}{<< ec_mes_corte_imss|capitalize >>\linebreak << ec_anio_corte_imss >>} &
+\thhl{0.11}{Distribu\-ción (\%)} &
+\thhl{0.15}{Variación nominal << ec_anio_anterior_corte_imss >>--<< ec_anio_corte_imss >>} &
+\thhl{0.14}{Variación (\%) << ec_anio_anterior_corte_imss >>--<< ec_anio_corte_imss >>} \\
 \hline
 \endfirsthead
 
@@ -229,12 +229,12 @@ y << ec_anio_corte_imss >>}
 \hline
 \rowcolor{gray!30}
 \thh{0.30}{Grupo económico} &
-\thhl{0.10}{<< ec_mes_corte_imss|capitalize >>\newline << ec_dos_anios_atras_corte_imss >>} &
-\thhl{0.10}{<< ec_mes_corte_imss|capitalize >>\newline << ec_anio_anterior_corte_imss >>} &
-\thhl{0.10}{<< ec_mes_corte_imss|capitalize >>\newline << ec_anio_corte_imss >>} &
-\thhl{0.11}{Part. (\%)} &
-\thhl{0.15}{Var. nominal << ec_anio_anterior_corte_imss >>--<< ec_anio_corte_imss >>} &
-\thhl{0.14}{Var. (\%) << ec_anio_anterior_corte_imss >>--<< ec_anio_corte_imss >>} \\
+\thhl{0.10}{<< ec_mes_corte_imss|capitalize >>\linebreak << ec_dos_anios_atras_corte_imss >>} &
+\thhl{0.10}{<< ec_mes_corte_imss|capitalize >>\linebreak << ec_anio_anterior_corte_imss >>} &
+\thhl{0.10}{<< ec_mes_corte_imss|capitalize >>\linebreak << ec_anio_corte_imss >>} &
+\thhl{0.11}{Distribu\-ción (\%)} &
+\thhl{0.15}{Variación nominal << ec_anio_anterior_corte_imss >>--<< ec_anio_corte_imss >>} &
+\thhl{0.14}{Variación (\%) << ec_anio_anterior_corte_imss >>--<< ec_anio_corte_imss >>} \\
 \hline
 \endhead
 
@@ -243,6 +243,9 @@ y << ec_anio_corte_imss >>}
 \endfoot
 
 \hline
+\tablefooterrow{7}{<% if ec_tabla_imss_grupos_tiene_na %>ND: & No disponible.\\
+<% endif %>Fuente: & IIEG, con base en IMSS. Datos abiertos de Trabajadores Asegurados, << ec_dos_anios_atras_corte_imss >>,
+<< ec_anio_anterior_corte_imss >> y << ec_anio_corte_imss >>.}
 \endlastfoot
 
 \rowcolor{filaResaltada}
@@ -256,10 +259,6 @@ y << ec_anio_corte_imss >>}
 
 \end{longtable}
 \normalsize
-\tablefooter{<% if ec_tabla_imss_grupos_tiene_na %>ND: & No disponible.\\
-<% endif %>Fuente: & IIEG, con base en IMSS. Datos abiertos de Trabajadores Asegurados, << ec_dos_anios_atras_corte_imss >>,
-<< ec_anio_anterior_corte_imss >> y << ec_anio_corte_imss >>.}
-
 \newpage
 
 \subsubsection*{Trabajadores asegurados en el IMSS en la << nombre_region >>}
@@ -284,11 +283,11 @@ En << ec_mes_corte_imss >> de << ec_anio_corte_imss >>, << ec_municipio_nombre >
 \hline
 \rowcolor{gray!30}
 \thh{0.28}{Municipio} &
-\thhl{0.12}{<< ec_mes_corte_imss|capitalize >>\newline << ec_anio_anterior_corte_imss >>} &
-\thhl{0.12}{<< ec_mes_corte_imss|capitalize >>\newline << ec_anio_corte_imss >>} &
-\thhl{0.16}{Part. (\%)\newline << ec_mes_corte_imss|capitalize >> << ec_anio_corte_imss >>} &
-\thhl{0.16}{Var. nominal << ec_anio_anterior_corte_imss >>--<< ec_anio_corte_imss >>} &
-\thhl{0.16}{Var. (\%) << ec_anio_anterior_corte_imss >>--<< ec_anio_corte_imss >>} \\
+\thhl{0.12}{<< ec_mes_corte_imss|capitalize >>\linebreak << ec_anio_anterior_corte_imss >>} &
+\thhl{0.12}{<< ec_mes_corte_imss|capitalize >>\linebreak << ec_anio_corte_imss >>} &
+\thhl{0.16}{Distribu\-ción (\%)\linebreak << ec_mes_corte_imss|capitalize >> << ec_anio_corte_imss >>} &
+\thhl{0.16}{Variación nominal << ec_anio_anterior_corte_imss >>--<< ec_anio_corte_imss >>} &
+\thhl{0.16}{Variación (\%) << ec_anio_anterior_corte_imss >>--<< ec_anio_corte_imss >>} \\
 \hline
 \endfirsthead
 
@@ -296,11 +295,11 @@ En << ec_mes_corte_imss >> de << ec_anio_corte_imss >>, << ec_municipio_nombre >
 \hline
 \rowcolor{gray!30}
 \thh{0.28}{Municipio} &
-\thhl{0.12}{<< ec_mes_corte_imss|capitalize >>\newline << ec_anio_anterior_corte_imss >>} &
-\thhl{0.12}{<< ec_mes_corte_imss|capitalize >>\newline << ec_anio_corte_imss >>} &
-\thhl{0.16}{Part. (\%)\newline << ec_mes_corte_imss|capitalize >> << ec_anio_corte_imss >>} &
-\thhl{0.16}{Var. nominal << ec_anio_anterior_corte_imss >>--<< ec_anio_corte_imss >>} &
-\thhl{0.16}{Var. (\%) << ec_anio_anterior_corte_imss >>--<< ec_anio_corte_imss >>} \\
+\thhl{0.12}{<< ec_mes_corte_imss|capitalize >>\linebreak << ec_anio_anterior_corte_imss >>} &
+\thhl{0.12}{<< ec_mes_corte_imss|capitalize >>\linebreak << ec_anio_corte_imss >>} &
+\thhl{0.16}{Distribu\-ción (\%)\linebreak << ec_mes_corte_imss|capitalize >> << ec_anio_corte_imss >>} &
+\thhl{0.16}{Variación nominal << ec_anio_anterior_corte_imss >>--<< ec_anio_corte_imss >>} &
+\thhl{0.16}{Variación (\%) << ec_anio_anterior_corte_imss >>--<< ec_anio_corte_imss >>} \\
 \hline
 \endhead
 
@@ -309,6 +308,8 @@ En << ec_mes_corte_imss >> de << ec_anio_corte_imss >>, << ec_municipio_nombre >
 \endfoot
 
 \hline
+\tablefooterrow{6}{Fuente: & IIEG, con base en IMSS. Datos abiertos de Trabajadores Asegurados, << ec_anio_anterior_corte_imss >>
+y << ec_anio_corte_imss >>.}
 \endlastfoot
 
 \rowcolor{filaResaltada}
@@ -321,9 +322,6 @@ En << ec_mes_corte_imss >> de << ec_anio_corte_imss >>, << ec_municipio_nombre >
 
 \end{longtable}
 \normalsize
-\tablefooter{Fuente: & IIEG, con base en IMSS. Datos abiertos de Trabajadores Asegurados, << ec_anio_anterior_corte_imss >>
-y << ec_anio_corte_imss >>.}
-
 \newpage
 <% if ec_agropecuario_activa %>
 \subsection{Agricultura y ganadería}
@@ -340,7 +338,8 @@ de la producción agrícola de << ec_municipio_nombre >> en << ec_anio_corte_sag
 <% endif %>
 
 <% if ec_pecuaria_activa %>
-El valor de la producción pecuaria \footnote{La producción pecuaria comprende productos provenientes de ganado bovino, caprino, ovino y porcino, así como de abejas y aves.} en << ec_municipio_nombre >> en << ec_anio_corte_sagarpa >>
+\graficafit
+El valor de la producción pecuaria\footnote{La producción pecuaria comprende productos provenientes de ganado bovino, caprino, ovino y porcino, así como de abejas y aves.} en << ec_municipio_nombre >> en << ec_anio_corte_sagarpa >>
 fue de << ec_valor_produccion_ganado >> millones de pesos, y representó el
 << ec_porcentaje_respecto_al_estado_ganado >> del total estatal.
 

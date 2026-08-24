@@ -5,6 +5,6 @@ assets/escudos_mun_jal/
 __pycache__/
 *.pyc
 .venv/
-.claude/settings.local.json
+.claude/
 
 docs/taiga/

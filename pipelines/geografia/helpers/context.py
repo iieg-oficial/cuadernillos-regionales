@@ -79,19 +79,13 @@ def build_anp_text(ctx):
 
     if has_anp:
         count = ctx.get("anp_num_anp", ND)
-        superficie = ctx.get("anp_superficie_anp", ND)
-        pct_raw = ctx.get("anp_pct_anp", ND)
-        pct = strip_percent_symbol(pct_raw) if pct_raw != ND else ND
         area_word = (
             "área natural protegida"
             if to_number(ctx.get("anp_num_anp")) == 1
             else "áreas naturales protegidas"
         )
         parts = [
-            f"{PREAMBULO_ANP}el municipio de {municipio} registra "
-            f"{count} {area_word}, "
-            f"con una superficie de {superficie} hectáreas, equivalente a "
-            f"{pct} \\% del territorio municipal."
+            f"{PREAMBULO_ANP}el municipio de {municipio} registra {count} {area_word}."
         ]
     else:
         parts = [
@@ -102,10 +96,8 @@ def build_anp_text(ctx):
     if has_humedales:
         pct_h_raw = ctx.get("anp_pct_humedales", ND)
         pct_h = strip_percent_symbol(pct_h_raw) if pct_h_raw != ND else ND
-        prefix = "Asimismo," if has_anp else ""
-        parts.append(
-            f"{prefix} los humedales abarcan {pct_h} \\% del territorio municipal."
-        )
+        frase = f"los humedales abarcan {pct_h} \\% del territorio municipal."
+        parts.append(f"Asimismo, {frase}" if has_anp else frase.capitalize())
     elif not has_anp:
         parts = [
             "El municipio no registra áreas naturales protegidas ni humedales "
@@ -212,7 +204,33 @@ def build_clima_text(
     return " ".join(partes)
 
 
-def build_acuiferos_text(nombres, pct_con, pct_sin):
+def build_cuencas_disponibilidad_text(pct_con, pct_sin):
+    con = to_number(strip_percent_symbol(pct_con))
+    sin = to_number(strip_percent_symbol(pct_sin))
+
+    if con is None or sin is None:
+        return ""
+
+    preambulo = "Del total de la superficie municipal comprendida en ellas,"
+
+    if con <= 0 and sin <= 0:
+        return ""
+    if con <= 0:
+        return (
+            f"{preambulo} {fmt(sin)} \\% presenta déficit de disponibilidad "
+            f"de agua superficial."
+        )
+    if sin <= 0:
+        return (
+            f"{preambulo} {fmt(con)} \\% presenta disponibilidad de agua superficial."
+        )
+    return (
+        f"{preambulo} {fmt(con)} \\% presenta disponibilidad y {fmt(sin)} \\% "
+        f"presenta déficit de disponibilidad de agua superficial."
+    )
+
+
+def build_acuiferos_text(nombres, pct_con, pct_sin, pct_sin_clasificacion=None):
     items = split_names(nombres)
     if not items:
         return (
@@ -237,7 +255,34 @@ def build_acuiferos_text(nombres, pct_con, pct_sin):
     if con is None or sin is None:
         return ubicacion
 
-    if con <= 0:
+    sin_clasificar = to_number(strip_percent_symbol(pct_sin_clasificacion)) or 0.0
+
+    if sin_clasificar > 0:
+        if con <= 0 and sin <= 0:
+            disponibilidad = (
+                "La totalidad de la superficie municipal comprendida en ellos "
+                "no está clasificada."
+            )
+        elif con <= 0:
+            disponibilidad = (
+                f"De la superficie municipal comprendida en ellos, {fmt(sin)} \\% "
+                f"no cuenta con disponibilidad de agua subterránea y "
+                f"{fmt(sin_clasificar)} \\% no está clasificado."
+            )
+        elif sin <= 0:
+            disponibilidad = (
+                f"De la superficie municipal comprendida en ellos, {fmt(con)} \\% "
+                f"cuenta con disponibilidad de agua subterránea y "
+                f"{fmt(sin_clasificar)} \\% no está clasificado."
+            )
+        else:
+            disponibilidad = (
+                f"Del total de la superficie municipal comprendida en ellos, "
+                f"{fmt(sin)} \\% no tiene disponibilidad, {fmt(con)} \\% cuenta "
+                f"con disponibilidad de agua subterránea y "
+                f"{fmt(sin_clasificar)} \\% no está clasificado."
+            )
+    elif con <= 0:
         disponibilidad = (
             "La totalidad de la superficie municipal comprendida en ellos "
             "no cuenta con disponibilidad de agua subterránea."

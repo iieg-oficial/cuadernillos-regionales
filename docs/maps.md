@@ -10,12 +10,13 @@ bloque LaTeX completo y lo pasa como variable de contexto:
 
 ```latex
 \clearpage
-\mapatitulo[\mapbleed]{Título del mapa de << ge_municipio >>, << ge_anio_mapa.tema >>}
+\mapatitulo*{Título del mapa de << ge_municipio >>, << ge_anio_mapa.tema >>}
 << ge_tema_mapa >>
 ```
 
-La variable trae el `\includegraphics` con sus límites de tamaño ya resueltos. El template solo pone
-el título y la variable.
+La variable trae la llamada a `\mapageo`, que resuelve tamaño y alineación. El título va con la
+forma estrellada: `\mapatitulo*` no imprime nada, solo guarda el texto para que lo dibuje `\mapageo`
+alineado con el mapa.
 
 ## De dónde salen
 
@@ -77,12 +78,15 @@ Dos longitudes de `templates/base.tex.j2` gobiernan la geometría:
 | `\mapbleed` | 0.9 cm | Cuánto se extiende el mapa más allá del margen de texto, por lado |
 | `\mapheadroom` | 1.6 cm | Espacio reservado para el título sobre el mapa |
 
-El bloque que genera el analizer limita el mapa **por ancho y por alto**:
+El analizer solo emite `\mapageo{<ruta>}`. El macro, en `templates/base.tex.j2`, limita el mapa
+**por ancho y por alto**:
 
 ```latex
-\hspace*{-\mapbleed}\makebox[<ancho>][c]{%
-\adjustbox{max width=<ancho>,max height=\dimexpr\textheight-\mapheadroom\relax}{%
-\includegraphics{...}}}
+\sbox\mapa@box{\adjustbox{max width=\dimexpr\textwidth+2\mapbleed\relax,
+  max height=\dimexpr\textheight-\mapheadroom\relax}{\includegraphics{#1}}}%
+\noindent\hspace*{-\mapbleed}%
+\makebox[\dimexpr\textwidth+2\mapbleed\relax][c]{%
+  \begin{minipage}{\wd\mapa@box}\mapa@titulo\par\usebox\mapa@box\end{minipage}}
 ```
 
 El límite de altura no es adorno: **la proporción de los mapas varía por municipio**. Los alargados
@@ -92,11 +96,24 @@ resultaba más alto que la caja de página completa: no cabía ni sin título.
 
 El `\makebox` centra el mapa sobre el ancho con sangrado, para que no se recorra cuando se encoge.
 
-Los mapas de demografía no usan sangrado y van a `0.95\textwidth`, con holgura vertical de sobra.
+**El título va dentro del mismo bloque**, en un `minipage` del ancho real del mapa. Es la razón de
+ser del `\sbox`: cuando al mapa lo limita la altura sale más angosto que el recuadro con sangrado, y
+un título impreso por su cuenta quedaría alineado al recuadro y no al mapa. Midiéndolo primero, los
+dos arrancan en el mismo punto.
+
+Los mapas de demografía usan `\mapafijo[ancho]{ruta}`, que es el mismo `\mapabloque` sin sangrado y
+con ancho fijo (`0.95\textwidth` por omisión). También llevan el título dentro del bloque: al ir
+centrados a 0.95 del ancho, un título impreso aparte arrancaba en el margen, medio hueco a la
+izquierda del mapa.
 
 ## Título
 
-`\mapatitulo[sangrado]{texto}` lleva su propio contador, así que la numeración es automática.
+`\mapatitulo[sangrado]{texto}` lleva su propio contador, así que la numeración es automática. Lo usa
+historia, cuyo mapa ocupa el ancho completo del texto: imprime el título en su lugar.
+
+`\mapatitulo*{texto}` **no imprime nada**: solo avanza el contador y guarda el texto para que lo
+dibuje `\mapabloque` (`\mapageo` en geografía, `\mapafijo` en demografía). El `\refstepcounter` corre
+igual, así que un `\label` puesto justo después sigue capturando el número.
 
 El título **se parte en dos líneas** cuando no cabe; no se encoge. Por eso `\mapheadroom` reserva
 altura para dos renglones. Antes se encogía con `\resizebox`, lo que dejaba los títulos largos de
@@ -115,7 +132,7 @@ arranca en el margen de texto y no 0.9 cm a la izquierda como los de geografía.
 
 ## Pie de mapa
 
-Se usa el mismo macro que las tablas, `\tablefooter`, sin `\vspace` extra, para que quede a ras de la
+Se usa `\tablefooter`, la versión suelta del pie de tabla, sin `\vspace` extra, para que quede a ras de la
 imagen. Ver [docs/tables.md](tables.md#pie-de-tabla) para el orden y el formato.
 
 En geografía los pies de mapa están comentados en el template (`%\mapafuente{...}`) porque la fuente

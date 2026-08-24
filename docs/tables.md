@@ -40,14 +40,16 @@ Nota preliminar opcional}
 \endfoot
 
 \hline
+\tablefooterrow{3}{Fuente: & IIEG, con base en INSTITUCIÓN. Producto consultado, 2025.}
 \endlastfoot
 
-Valor & Valor & Valor \\
+<% for fila in filas %>
+<< fila.a >> & << fila.b >> & << fila.c >> \\
 \hline
+<% endfor %>
 
 \end{longtable}
 \normalsize
-\tablefooter{Fuente: & IIEG, con base en INSTITUCIÓN. Producto consultado, 2025.}
 ```
 
 El encabezado se escribe **dos veces**: en `\endfirsthead` para la primera página y en `\endhead`
@@ -90,11 +92,22 @@ proporción de su columna:
 `\textbf{}` a secas deja los títulos a distinta altura: `\thh` envuelve su contenido en un `varwidth`
 con espaciado propio, así que esa celda queda más alta y las demás se centran más abajo.
 
-Para forzar un salto de línea dentro de un encabezado se usa `\newline`:
+Para forzar un salto de línea dentro de un encabezado:
+
+- En `\thh` (izquierda), `\newline`.
+- En `\thhl` (derecha), **`\linebreak`**.
 
 ```latex
-\thhl{0.21}{Variación (\%)\newline 2015--2020}
+\thh{0.19}{Municipio/\newline Localidad}
+\thhl{0.21}{Variación (\%)\linebreak 2015--2020}
 ```
+
+`\newline` termina la línea con un `\hfil`, que en un encabezado alineado a la derecha compite con
+el `\raggedleft` y **centra ese renglón**. Se ve como un «( %)» flotando a media columna mientras el
+resto del encabezado va pegado a la derecha. `\linebreak` corta sin ese relleno.
+
+Medido en el Cuadro 30: con `\newline` el renglón del «( %)» quedaba a 62 px del borde derecho
+mientras los otros dos estaban a 8; con `\linebreak`, los tres a 8.
 
 ### `\multicolumn`
 
@@ -113,18 +126,59 @@ vecinas de una sola línea y deja un hueco visible. En una fila donde varias cel
 conviven, no se mezclan alturas: se da ancho suficiente para que el texto quepa en una línea, o se
 usa `p{}` para que haga wrapping solo.
 
-Nunca se escriben guiones manuales dentro de `\makecell`, como `\makecell{Pobla-\\ción}`. En columnas
-`p{}` o `m{}` LaTeX hifena solo.
+Nunca se escriben guiones manuales dentro de `\makecell`, como `\makecell{Pobla-\\ción}`: eso es un
+corte fijo, que queda mal en cuanto cambia el ancho.
+
+Cuando una palabra larga de encabezado no cabe y `\thh`/`\thhl` no la divide sola —el `varwidth` que
+llevan dentro compone a ancho natural—, se marca el punto de división con `\-`, que es una división
+**opcional**: LaTeX la usa solo si hace falta.
+
+```latex
+\thhl{0.12}{Distribu\-ción (\%)}
+```
+
+Lo usa el Cuadro 31, cuya columna es de 0.11: la parte en «Distribu- / ción». El 32, de 0.16, la deja
+entera. Es un recurso para cuando **no** hay espacio que repartir; si lo hay, conviene medir y
+rebalancear, como se hizo con el Cuadro 30.
+
+### Medir antes de repartir anchos
+
+Para saber cuánto necesita de verdad cada columna se mide con `\settowidth` lo que **no puede
+partirse**: la palabra más larga de cada encabezado y la cifra más ancha de los 125 municipios (las
+cifras nunca se parten). El ancho útil de una columna es `proporción × \linewidth - 2\tabcolsep`,
+con `\linewidth` = 472.03 pt y `\tabcolsep` = 3 pt.
+
+Medido así, el Cuadro 30 pedía:
+
+| Columna | Lo más ancho | Ancho | Proporción mínima |
+|---|---|---|---|
+| Subsector | `Subsector` | 45.44 pt | 0.11 |
+| 2018 | `129 909.85` | 46.20 pt | 0.12 |
+| 2023 nominal | `225 574.63` | 45.65 pt | 0.11 |
+| 2023 real | `174 485.78` | 46.47 pt | 0.12 |
+| Distribución | `Distribución` | 55.78 pt | 0.14 |
+| Variación | `2018--2023` | 48.06 pt | 0.12 |
+
+Las columnas de cifras estaban en 0.13 sin necesitarlo, así que pasó de
+`0.35 / 0.13 / 0.13 / 0.13 / 0.12 / 0.14` a `0.37 / 0.12 / 0.12 / 0.12 / 0.14 / 0.13`: «Distribución»
+cabe entera, «Subsector» gana espacio y los avisos de `Overfull \hbox` no cambian.
 
 ## Pie de tabla
 
-Se usa el macro `\tablefooter`, que ya trae el espaciado negativo para quedar a ras de la tabla. No se
-le antepone `\vspace`.
+En las **tablas** el pie va dentro de la `longtable`, en `\endlastfoot`, con `\tablefooterrow`. Ver
+[Cohesión entre la tabla y su pie](#cohesión-entre-la-tabla-y-su-pie).
 
 ```latex
-\tablefooter{Nota: & Texto de la nota.\\
+\tablefooterrow{3}{Nota: & Texto de la nota.\\
 ND: & No disponible.\\
 Fuente: & IIEG, con base en INEGI. Producto consultado, 2025.}
+```
+
+En **gráficas y mapas** va suelto, con `\tablefooter`, que ya trae el espaciado negativo para quedar
+a ras de la imagen. No se le antepone `\vspace`.
+
+```latex
+\tablefooter{Fuente: & IIEG, con base en INEGI. Producto consultado, 2025.}
 ```
 
 El orden es **Nota → Llamada → Símbolos → Fuente**. La fuente es obligatoria; el resto es opcional.
@@ -138,13 +192,13 @@ Fuente: & IIEG, con base en INSTITUCIÓN. Producto consultado, Año.
 Con varias fuentes, cada una en su renglón:
 
 ```latex
-\tablefooter{Fuente: IIEG, con base en & CONAGUA. Disponibilidad en cuencas hidrológicas, 2023.\\
+\tablefooterrow{3}{Fuente: IIEG, con base en & CONAGUA. Disponibilidad en cuencas hidrológicas, 2023.\\
  & CONAGUA. Ordenamiento de aguas superficial, 2023.}
 ```
 
 ### El pie es de dos columnas
 
-`\tablefooter` renderiza dentro de un `tabularx` de **dos** columnas: la etiqueta y el texto. Un `&`
+El pie renderiza dentro de un `tabularx` de **dos** columnas: la etiqueta y el texto. Un `&`
 de más manda el resto a una fila nueva y parte la línea a la mitad.
 
 ```latex
@@ -193,7 +247,7 @@ resto de los títulos van en gris.
 | `\small` | Marcas de «(continuación)» y «(continúa)» |
 | `\scriptsize` | Encabezados de tablas con muchas columnas, como las de economía |
 
-El pie hereda `\footnotesize` del propio macro `\tablefooter`.
+El pie hereda `\footnotesize` de su propio macro.
 
 ## Colores
 
@@ -212,6 +266,130 @@ Definidos en `templates/base.tex.j2`:
 En las tablas solo se usan `gray!30` para el encabezado y `filaResaltada` para las filas de
 agrupación. Los demás existen para otros elementos del documento.
 
+## Saltos de página antes de una tabla
+
+Antes de una tabla grande se pone `\newpage`, para que no arranque al final de una página y quede
+partida en dos.
+
+Cuando conviene que la tabla quede en la misma página que su gráfica **siempre que quepa completa**,
+existe `\tablafit`, definido en `templates/base.tex.j2`:
+
+```latex
+\tablafit{<número de filas>}
+```
+
+Va en lugar del `\newpage`. Mide el espacio que queda en la página y solo salta si la tabla no cabe;
+si cabe, la deja a continuación. Se apoya en `\Needspace*` del paquete `needspace`.
+
+El argumento es el número de filas del cuerpo, contando las de encabezado intermedias. El analizer lo
+calcula y lo expone como una variable de contexto; el template solo la interpola.
+
+Una `longtable` no se puede medir de antemano, así que la altura es una estimación: `7/5` de
+`\baselineskip` por fila (altura real con `arraystretch` 1.5 en `\footnotesize`) más 6
+`\baselineskip` de caption, encabezado, reglas y pie.
+
+Lo usa el Cuadro 6 (Acuíferos), que tiene entre 4 y 6 filas según cuántas categorías «Sin
+clasificación» traiga el municipio: cabe casi siempre bajo su gráfica, y el `\newpage` fijo dejaba
+media página en blanco. El analizer expone el conteo como `ge_ac_tabla_filas`.
+
+En cuencas se probó y se prefirió el `\newpage`: esa tabla tiene muchas más filas y quedaría abajo en
+unos municipios y en página aparte en otros, según cuántas le tocaran. Ahí la consistencia entre
+cuadernillos pesa más que aprovechar el hueco.
+
+## Cohesión entre la tabla y su pie
+
+**El pie va dentro de la tabla**, como última fila de `\endlastfoot`, con `\tablefooterrow`:
+
+```latex
+\hline
+\tablefooterrow{<número de columnas>}{Fuente: & IIEG, con base en INEGI. Producto, 2025.}
+\endlastfoot
+```
+
+El primer argumento es el número de columnas, el mismo que llevan los `\multicolumn` de
+«(continuación)» y «(continúa)». El segundo es el contenido del pie, con las mismas dos columnas y el
+mismo orden Nota → Llamada → Símbolos → Fuente de siempre.
+
+Después de `\end{longtable}` ya no va nada.
+
+### Por qué dentro y no después
+
+`longtable` ya sabe resolver esto, pero solo si el pie está en `\endlastfoot`. En `\LT@output`:
+
+```tex
+\ifdim \ht\LT@lastfoot>\ht\LT@foot
+  \dimen@\pagegoal \advance\dimen@\ht\LT@foot \advance\dimen@-\ht\LT@lastfoot
+  \ifdim\dimen@<\ht\z@
+     ... cierra la página con \LT@foot y abre la siguiente con \LT@head
+```
+
+Si el último pie no cabe, cierra la página con «(continúa)» y abre la siguiente con «(continuación)»
+y los encabezados. Con el pie suelto después de `\end{longtable}`, `longtable` ni se entera: da la
+tabla por terminada, y es el `\output` normal de LaTeX el que después parte la página para acomodar
+el pie, ya sin la rutina de salida de `longtable`. Resultado: **la tabla se parte sin marcas de
+continuación y sin encabezados**.
+
+Es el mismo enfoque de `threeparttablex`, que inserta sus notas con un `\multicolumn` dentro de la
+`longtable`.
+
+### Los parches a `longtable`
+
+Son tres y hacen falta los tres. `\LT@output` tiene **dos ramas**, y cada una falla distinto.
+
+**1. Reservar el último pie.** `\LT@start` descuenta `\ht\LT@foot` de `\pagegoal` durante toda la
+tabla, pero **nunca** `\ht\LT@lastfoot`, que es más alto. Sin eso la página se dimensiona para el pie
+de continuación: se llena con el cuerpo, corre la **rama normal** de `\LT@output` —la que emite
+«(continúa)»— y el último pie se pasa solo a la página siguiente, debajo del encabezado. El parche
+reserva también la diferencia y la devuelve en `\endlongtable`.
+
+**2. Medir el pie completo.** La **rama final** mide solo la **altura** de `\LT@lastfoot` e ignora su
+profundidad. Con un pie de varias líneas se queda corta: cree que cabe, no baja nada, y el pie
+termina solo. Los parches le suman `\dp\LT@lastfoot` a la comparación, en los dos puntos donde
+aparece.
+
+**3. Bajar filas, no solo el pie.** Cuando la rama final decide que no cabe, manda **toda** la página
+con `\LT@foot` y abre la siguiente con `\LT@head` y el pie:
+
+```tex
+\setbox\@cclv\vbox{\unvbox\z@\copy\LT@foot\vss}%
+\@makecol \@outputpage
+\setbox\z@\vbox{\box\LT@head}%
+```
+
+Eso deja una página con «(continuación)», los encabezados y el pie, **sin una sola fila**. El parche
+mete un `\vsplit` que parte el material a la altura que sí cabe y le pasa el resto a la página
+siguiente.
+
+> **No «arreglar» el doble conteo.** La rama final compara contra `\pagegoal`, que ya trae la reserva
+> del punto 1 descontada, así que la cuenta dos veces. Es a propósito: así expulsa la página y entra
+> el `\vsplit`, que baja filas con el pie. Compensarlo devuelve el pie huérfano.
+
+El costo de la reserva es que todas las páginas que ocupa una tabla se encogen por la altura de su
+último pie: alrededor de una página más por cuadernillo, y a veces un hueco visible antes del
+«(continúa)».
+
+### Lo que NO funciona
+
+Anotado para no volver a intentarlo:
+
+- **Forzar el corte desde afuera** (`\nopagebreak`, penalties, parchar el `\penalty\z@` de
+  `\endlongtable`): mueve el corte, pero la tabla se sigue partiendo sin marcas.
+- **`\\*` en las últimas filas** para arrastrar dos filas en vez de una: prohíbe el corte justo
+  donde `longtable` lo quiere tomar, así que lo termina tomando el `\output` normal — otra vez sin
+  marcas. Además `\hline` mete un `\penalty-\@lowpenalty` entre sus dos reglas que anula al `\\*`.
+- **Bajar `\LTchunksize`**: la documentación dice que los chunks no afectan el salto de página, y el
+  valor debe ser al menos el número de filas de cada bloque de encabezado o pie. Con valores chicos
+  falla con `Longtable head or foot not at start of table`.
+- **Reservar `\ht\LT@lastfoot` en `\LT@start`**, como hace `longtable` con `\ht\LT@foot`: cuenta dos
+  veces, porque `\LT@output` ya descuenta el último pie de `\pagegoal`. Arreglaba unas tablas y
+  rompía otras, y le costaba una página a cada cuadernillo.
+
+### `\tablefooter` sigue existiendo
+
+Es la versión suelta, para los pies de **gráfica y de mapa**, que no están dentro de ninguna tabla.
+Trae el `\vspace{-28pt}` para quedar a ras de la imagen. Comparte cuerpo con `\tablefooterrow`
+(`\tablefooterbody`), así que se ven igual.
+
 ## Valores no disponibles
 
 Cuando un dato no existe se usa el macro `\ND`, que rinde `N/D` en rojo. Nunca se dejan celdas
@@ -223,7 +401,7 @@ Para el «no disponible» tabular que va acompañado de su llamada al pie se usa
 ## Formato de las cifras
 
 Decimales, separador de miles, unidades y porcentajes siguen la NOM-008-SE-2021 y están documentados
-aparte, en `.claude/rules/data-patterns.md`. En resumen:
+aparte, en [docs/data-patterns.md](data-patterns.md). En resumen:
 
 - Dos decimales exactos en los valores; no en claves, años ni rankings
 - Separador de miles con espacio fino: `1\,500`

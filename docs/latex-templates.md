@@ -146,7 +146,7 @@ bloque completo y lo pasa como variable; el template solo pone el título y la v
 
 ```latex
 \clearpage
-\mapatitulo[\mapbleed]{Título del mapa de << ge_municipio >>, << ge_anio_mapa.tema >>}
+\mapatitulo*{Título del mapa de << ge_municipio >>, << ge_anio_mapa.tema >>}
 << ge_tema_mapa >>
 ```
 
@@ -170,12 +170,59 @@ Definidos en `base.tex.j2`:
 | `\ND` | Marca un dato no disponible |
 | `\thh`, `\thhl` | Celda de encabezado de tabla, alineada a la izquierda o a la derecha |
 | `\thdr`, `\thdl` | Celda de cuerpo resaltada |
-| `\tablefooter` | Pie de tabla, gráfica o mapa |
+| `\tablefooter` | Pie suelto de gráfica o mapa |
+| `\tablefooterrow` | Pie de tabla, dentro de `\endlastfoot` |
 | `\graficatitulo` | Título numerado de gráfica |
-| `\mapatitulo` | Título numerado de mapa |
+| `\mapatitulo` | Título numerado de mapa; la forma `*` lo guarda para `\mapabloque` |
+| `\mapageo`, `\mapafijo` | Bloque de mapa: título y mapa alineados |
 | `\mapafuente` | Pie de mapa con varias fuentes |
+| `\versionnumero`, `\versionfecha` | Versión y fecha del cuadernillo |
+| `\versioncuadernillo` | Las dos juntas, para el pie de página |
+| `\versionetiqueta` | La píldora de versión de la portada |
+
+## Bitácora de versiones
+
+`templates/bitacora.tex.j2` es la última página de contenido, antes de la contraportada. Lleva el
+título `Bitácora de versiones` con `\subsection*` (morado, sin entrada en el índice, porque no
+cuelga de ninguna sección) y una `longtable` de cuatro columnas: Versión, Fecha, Descripción del
+cambio y Página.
+
+Es la única tabla del cuadernillo **sin pie de fuente**: no hay fuente externa que citar, es un
+registro interno del documento.
+
+## Encabezado y pie de página
+
+`base.tex.j2` define el `\pagestyle{fancy}` que llevan todas las páginas:
+
+| Posición | Contenido |
+|---|---|
+| Encabezado izquierda | `logo_header.png` |
+| Encabezado derecha | `Página \thepage` |
+| Pie izquierda | `logo_footer.png` |
+| Pie derecha | `\versioncuadernillo` |
+
+`\versionnumero` (`01`, sin la `v`) y `\versionfecha` son la fuente de verdad. De ahí salen las otras
+dos formas, definidas junto al `\pagestyle` en `base.tex.j2`:
+
+| Macro | Dónde aparece | Cómo se ve |
+|---|---|---|
+| `\versioncuadernillo` | Pie de cada página, a la derecha | `v01 - 31/08/2026` |
+| `\versionetiqueta` | Portada, bajo el mes | píldora gris con `Versión 01 \| Fecha de versión: 31/08/2026` |
+
+Y el primer renglón de la bitácora de versiones, que arma su `v01` con `v\versionnumero`.
+
+`\versionetiqueta` es un nodo de TikZ con esquinas redondeadas, fondo `colorEtiqueta` (`#F3F3F3`) y
+texto `colorEtiquetaTexto` (`#939393`) en `\footnotesize`, el mismo tamaño que el paginado. En la
+portada va con un `\vfill` antes y un `\vspace*{1.45cm}` después, que es el hueco que ocupa el logo de
+Jalisco del fondo: así queda pegada al logo y no colgando del mes.
+
+Para publicar una versión nueva: cambiar `\versionnumero` y `\versionfecha`, y agregar el renglón que
+corresponda en `templates/bitacora.tex.j2`.
+
+Las portadas, las portadillas de sección y la contraportada usan `\thispagestyle{empty}`, así que no
+llevan encabezado ni pie.
 
 ## Reglas de contenido
 
 El formato de las cifras (decimales, separador de miles, unidades) y las reglas detalladas de tablas
-están en `.claude/rules/data-patterns.md` y `.claude/rules/latex-templates.md`.
+están en [docs/data-patterns.md](data-patterns.md) y [docs/template-rules.md](template-rules.md).

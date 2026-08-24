@@ -12,18 +12,9 @@ from core.utils.maps import get_draft_path
 
 MAPS_DIR = Path("assets/maps/geografia")
 
-MAPA_PLACEHOLDER = (
-    "\\hspace*{-\\mapbleed}"
-    "\\includegraphics[width=\\dimexpr\\textwidth + 2\\mapbleed\\relax]"
-    "{templates/assets/mapa_placeholder.png}"
-)
+MAPA_PLACEHOLDER = "\\mapageo{templates/assets/mapa_placeholder.png}"
 
-MAP_BOX = (
-    "\\hspace*{{-\\mapbleed}}\\makebox[{width}][c]{{%\n"
-    "\\adjustbox{{max width={width},"
-    "max height=\\dimexpr\\textheight-\\mapheadroom\\relax}}{{%\n"
-    "\\includegraphics{{\\detokenize{{{path}}}}}}}}}"
-)
+MAP_BOX = "\\mapageo{{\\detokenize{{{path}}}}}"
 
 TOPIC_FOLDERS = {
     "base": "mapa_base",
@@ -63,8 +54,6 @@ FOLDER_ALIASES = {
 }
 
 EXTENSIONS = {".png", ".jpg", ".jpeg", ".pdf"}
-
-DEFAULT_MAP_WIDTH = 1.0
 
 
 def _normalize(text):
@@ -155,10 +144,9 @@ def find_map_for_topic(short, cve_geo, municipio):
     return None
 
 
-def map_includegraphics(path, width=DEFAULT_MAP_WIDTH):
+def map_includegraphics(path):
     posix = str(path).replace("\\", "/")
-    img_width = f"\\dimexpr{width}\\textwidth + 2\\mapbleed\\relax"
-    return MAP_BOX.format(width=img_width, path=posix)
+    return MAP_BOX.format(path=posix)
 
 
 def resolve_maps(cve_geo, municipio):
