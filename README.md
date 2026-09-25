@@ -1,19 +1,19 @@
 <p align="center">
-  <img src="assets/banner.jpg" alt="Cuadernillos Municipales" width="100%">
+  <img src="assets/banner.jpg" alt="Cuadernillos regionales" width="100%">
 </p>
 
 <p align="center">
-  Reportes estadísticos automatizados para los 125 municipios de Jalisco.
+  Reportes estadísticos automatizados para las 12 regiones de Jalisco.
 </p>
 
-Los Cuadernillos Municipales son reportes estadísticos que el IIEG (Instituto de Información Estadística y Geográfica de Jalisco) publica para cada uno de los 125 municipios del estado. Cada cuadernillo concentra indicadores clave de historia, geografía, demografía, economía, gobierno y seguridad, y sirve como referencia oficial para la toma de decisiones en el ámbito municipal.
+Los Cuadernillos regionales son reportes estadísticos que el IIEG (Instituto de Información Estadística y Geográfica de Jalisco) publica para cada uno de las 12 regiones del estado. Cada cuadernillo concentra indicadores clave de geografía, demografía, economía, gobierno y seguridad, y sirve como referencia oficial para la toma de decisiones en el ámbito regional.
 
 Este repositorio automatiza la generación de esos reportes: extrae datos de PostgreSQL, genera gráficas con matplotlib, renderiza templates Jinja2 LaTeX y compila con `xelatex`.
 
 ## Preview
 
 <p align="center">
-  <img src="assets/preview.gif" alt="Recorrido por un cuadernillo municipal generado" width="100%">
+  <img src="assets/preview.gif" alt="Recorrido por un cuadernillo regional generado" width="100%">
 </p>
 
 ## Documentación
@@ -100,7 +100,6 @@ Cada base de datos tiene su propio archivo; ver [Bases de datos](docs/databases.
 | Archivo | Variable | Para qué sirve |
 |---|---|---|
 | `.env/.env.app` | `FONTS_PATH` | Ruta donde quedó instalada la fuente Lexend (por ejemplo `~/.fonts/`) |
-| `.env/.env.app` | `ESCUDOS_URL` | ZIP de Drive con los escudos municipales |
 | `.env/.env.demografia` | `DEMOGRAFIA_MAPS_*_URL` | Carpetas de Drive con los mapas de demografía |
 | `.env/.env.geografia` | `GEOGRAFIA_MAPS_FOLDER_URL` | Carpeta de Drive con los mapas de geografía |
 
@@ -110,7 +109,6 @@ En la primera corrida el pipeline descarga desde Google Drive lo que falte, y no
 
 | Recurso | Destino |
 |---|---|
-| Escudos municipales | `assets/escudos_mun_jal/` |
 | Mapas de demografía | `assets/maps/demografia/` |
 | Mapas de geografía | `assets/maps/geografia/` |
 
@@ -124,7 +122,7 @@ Hay dos modos de generación:
 
 | Modo | Comando | Salida | xelatex |
 |---|---|---|---|
-| Desarrollo | `just run`, `just run-one <clave>` | `output/pdf/{clave}_{nombre}_cuadernillo_municipal_2026/` | una pasada |
+| Desarrollo | `just run`, `just run-one <clave>` | `output/pdf/{clave}_{nombre}_cuadernillo_regional_2026/` | una pasada |
 | Final | `just prod-run [clave]`, `just prod-run-range <desde> <hasta>`, `just prod-run-one <clave>` | `output/pdf/prod/` y `output/tex/prod/` | dos pasadas |
 
 El modo de desarrollo corre xelatex una sola vez y deja los archivos auxiliares junto al PDF: es más
@@ -134,7 +132,7 @@ directorio temporal, de modo que en `output/pdf/prod/` solo quedan los PDFs.
 
 En desarrollo cada cuadernillo deja su `.tex` en su propia carpeta bajo `output/tex/`.
 
-En modo final, `output/tex/prod/` deja un solo archivo por municipio: **`{slug}.zip`**, un paquete
+En modo final, `output/tex/prod/` deja un solo archivo por región: **`{slug}.zip`**, un paquete
 autocontenido con el `.tex`, las tipografías, los mapas, las gráficas y los logos que usa, con las
 rutas relativas a la raíz del comprimido. Va listo para **New Project → Upload Project** en Overleaf.
 
@@ -144,8 +142,8 @@ Ahí hay que cambiar el compilador a **XeLaTeX**: Overleaf lo elige desde su men
 El paquete se arma en una carpeta, se compila desde dentro de ella —el mismo contexto que tendrá
 Overleaf, así que si el PDF sale aquí, sale allá— y al terminar la carpeta se comprime y se borra.
 
-El nombre del archivo se arma con la clave y el municipio sin acentos y en minúsculas
-(`27_cuautitlan_de_garcia_barragan_cuadernillo_municipal_2026`), para que sea ASCII puro y no dé
+El nombre del archivo se arma con la clave y la región sin acentos y en minúsculas
+(`08_norte_cuadernillo_regional_2026`), para que sea ASCII puro y no dé
 problemas al moverlo entre sistemas.
 
 Los `.tex` no son portables por sí solos: referencian mapas, gráficas y escudos por ruta relativa a la raíz del repositorio, y las fuentes por ruta absoluta.
@@ -172,5 +170,5 @@ El repositorio tiene dos licencias, una para el código y otra para lo que el c�
 | Código fuente (`core/`, `pipelines/`, `templates/`, `main.py`) | [MIT](LICENSE) |
 | Cuadernillos generados, catálogos de `assets/catalogs/` y documentación de `docs/` | [CC BY 4.0](LICENSE-DATA) |
 
-Quedan fuera de ambas: la fuente **Garet**, licenciada al IIEG y no redistribuible, y los escudos
-municipales y mapas que se descargan en tiempo de ejecución, sujetos a los términos de sus fuentes.
+Quedan fuera de ambas: la fuente **Garet**, licenciada al IIEG y no redistribuible,
+y mapas que se descargan en tiempo de ejecución, sujetos a los términos de sus fuentes.
