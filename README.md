@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/banner.jpg" alt="Cuadernillos regionales" width="100%">
+  <img src="assets/banner-cuadernillos-regionales.jpg" alt="Cuadernillos regionales" width="100%">
 </p>
 
 <p align="center">
