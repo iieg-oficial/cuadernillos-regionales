@@ -1,5 +1,5 @@
 
-# Muestra representativa: metropolitanos, costa, sierra, altos y municipios pequeños
+# Muestra representativa: metropolitanos, costa, sierra, altos y regiones
 SAMPLE := "1 12 17 32 56 67 97 98 101 120"
 
 default:
@@ -13,24 +13,24 @@ setup:
     pre-commit install
     pre-commit install --hook-type commit-msg
 
-# Genera los cuadernillos de todos los municipios
+# Genera los cuadernillos de todas las regiones
 [group("dev")]
 run:
     uv run python main.py
 
-# Genera el cuadernillo de un municipio específico
+# Genera el cuadernillo de una región específica
 [group("dev")]
 run-one clave:
-    uv run python main.py --municipio {{clave}}
+    uv run python main.py --region {{clave}}
 
-# Genera los cuadernillos de una muestra representativa de municipios
+# Genera los cuadernillos de una muestra representativa
 [group("dev")]
 run-sample:
     #!/usr/bin/env bash
     set -euo pipefail
     for clave in {{ SAMPLE }}; do
         echo "==> $clave"
-        uv run python main.py --municipio "$clave"
+        uv run python main.py --region "$clave"
     done
 
 # abre un archivo específico
@@ -57,7 +57,7 @@ prod-run-range desde hasta:
 # Genera un solo cuadernillo final en output/pdf/prod
 [group("prod")]
 prod-run-one clave:
-    uv run python main.py --prod --municipio {{clave}}
+    uv run python main.py --prod --region {{clave}}
 
 # Abre un cuadernillo final de output/pdf/prod
 [group("prod")]

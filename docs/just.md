@@ -41,13 +41,13 @@ just setup
 
 ## Desarrollo
 
-Una sola pasada de xelatex, salida en `output/pdf/{clave}_{nombre}_cuadernillo_municipal_2026/` junto
+Una sola pasada de xelatex, salida en `output/pdf/{clave}_{nombre}_cuadernillo_regional_2026/` junto
 con los archivos auxiliares de LaTeX. Es el modo rápido para iterar; en una corrida limpia el índice
 sale vacío y las referencias cruzadas sin resolver.
 
 ### `just run`
 
-Genera los cuadernillos PDF de los 125 municipios de Jalisco, en orden de clave. Cada uno queda en su
+Genera los cuadernillos PDF de las 12 regiones de Jalisco, en orden de clave. Cada uno queda en su
 propia carpeta bajo `output/pdf/`, junto con los archivos auxiliares de LaTeX.
 
 Corre xelatex una sola vez: es el modo rápido para iterar. En una corrida limpia el índice sale vacío
@@ -57,7 +57,7 @@ y las referencias cruzadas sin resolver; para la versión final usa `just prod-r
 just run
 ```
 
-En la primera corrida descarga desde Google Drive los escudos municipales y los mapas que falten. Si
+En la primera corrida descarga desde Google Drive los escudos y los mapas que falten. Si
 ya están en disco no vuelve a descargarlos.
 
 De cada mapa se guarda una versión ligera en `output/maps/`, que se reutiliza entre corridas. Se
@@ -66,15 +66,15 @@ borrar nada a mano.
 
 ### `just run-one <clave>`
 
-Genera el cuadernillo de un solo municipio, identificado por su clave. Útil durante el desarrollo para probar sin procesar todos los municipios.
+Genera el cuadernillo de una sola región, identificada por su clave. Útil durante el desarrollo para probar sin procesar todas las regiones.
 
 ```bash
-just run-one 1
+just run-one 8
 ```
 
 ### `just run-sample`
 
-Genera los cuadernillos de una muestra representativa de municipios (metropolitanos, costa, sierra, altos y municipios pequeños). Útil para probar cambios sin correr los 125 municipios completos.
+Genera los cuadernillos de una muestra representativa de regiones. Útil para probar cambios sin correr las 12 regiones completas.
 
 ```bash
 just run-sample
@@ -82,10 +82,10 @@ just run-sample
 
 ### `just open-one <clave>`
 
-Abre el pdf específico del municipio.
+Abre el pdf específico de la región.
 
 ```bash
-just open-one 1
+just open-one 8
 ```
 
 ## Producción
@@ -97,7 +97,7 @@ se escriben en un directorio temporal que se descarta al terminar.
 
 ### `just prod-run [clave]`
 
-Genera los cuadernillos finales de los 125 municipios en `output/pdf/prod/`, todos en la misma
+Genera los cuadernillos finales de las 12 regiones en `output/pdf/prod/`, todos en la misma
 carpeta y sin archivos auxiliares. Cada cuadernillo deja su `.zip` en `output/tex/prod/`.
 
 ```bash
@@ -108,11 +108,11 @@ A diferencia de `just run`, corre xelatex **dos veces** por cuadernillo, que es 
 para resolver el índice y las referencias cruzadas. Los archivos auxiliares se escriben en un
 directorio temporal que se descarta al terminar.
 
-Acepta una clave opcional para reanudar el lote desde ese municipio, en orden de clave, útil si se
+Acepta una clave opcional para reanudar el lote desde esa región, en orden de clave, útil si se
 interrumpió a la mitad:
 
 ```bash
-just prod-run 39   # procesa del 39 al 125
+just prod-run 8   # procesa de la 8 a la 12
 ```
 
 ### `just prod-run-range <desde> <hasta>`
@@ -128,19 +128,19 @@ invertido, corta de inmediato en vez de fallar a media corrida.
 
 ### `just prod-run-one <clave>`
 
-Genera un solo cuadernillo final en `output/pdf/prod/`. Útil para revisar un municipio con el índice
+Genera un solo cuadernillo final en `output/pdf/prod/`. Útil para revisar una región con el índice
 y las referencias ya resueltas antes de lanzar el lote completo.
 
 ```bash
-just prod-run-one 39
+just prod-run-one 8
 ```
 
 ### `just prod-open-one <clave>`
 
-Abre el cuadernillo final de un municipio desde `output/pdf/prod/`.
+Abre el cuadernillo final de una región desde `output/pdf/prod/`.
 
 ```bash
-just prod-open-one 39
+just prod-open-one 8
 ```
 
 ## Calidad

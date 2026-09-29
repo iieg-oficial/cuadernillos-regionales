@@ -49,7 +49,7 @@ El host de cada base se define en su propio `.env`, así que puede apuntar a don
 tocar código. En principio todas pueden vivir en el servidor; algunas apuntaron a `localhost` en su
 momento porque aún no estaban publicadas ahí.
 
-Ten presente que una corrida de los 125 municipios consulta cada base 125 veces: no hay caché de
+Ten presente que una corrida de las 12 regiones consulta cada base 12 veces: no hay caché de
 resultados, así que el tiempo total depende de dónde estén y de la latencia hacia ellas.
 
 ## Conexión

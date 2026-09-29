@@ -43,7 +43,7 @@ def _acotar(municipios: list[str], desde: str | None, hasta: str | None) -> list
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--municipio", type=str, default=None)
+    parser.add_argument("--region", type=str, default=None)
     parser.add_argument("--prod", action="store_true")
     parser.add_argument("--desde", type=str, default=None)
     parser.add_argument("--hasta", type=str, default=None)
@@ -60,8 +60,8 @@ def main() -> None:
         ]
     )
 
-    if args.municipio:
-        run(args.municipio, pipeline, args.prod)
+    if args.region:
+        run(args.region, pipeline, args.prod)
         return
 
     municipios = _acotar(get_all_municipio_ids(), args.desde, args.hasta)
