@@ -1,7 +1,9 @@
 from abc import ABC, abstractmethod
 
+from core.utils.regions import Region
+
 
 class Section(ABC):
     @abstractmethod
-    def run(self, municipio_id: str) -> dict:
+    def run(self, region: Region) -> dict:
         pass

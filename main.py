@@ -4,7 +4,7 @@ from core.compiler import compile, compile_prod
 from core.pipelines.pipeline import Pipeline
 from core.renderer import render
 from core.utils.logger import Logger
-from core.utils.municipalities import get_all_municipio_ids
+from core.utils.regions import get_all_region_claves, normalize_clave
 from pipelines.demografia.pipeline import Demografia
 from pipelines.directorio_municipal.pipeline import DirectorioMunicipal
 from pipelines.economia.pipeline import Economia
@@ -13,30 +13,39 @@ from pipelines.gobierno_y_seguridad.pipeline import GobiernoYSeguridad
 from pipelines.historia.pipeline import Historia
 
 
-def run(municipio_id: str, pipeline: Pipeline, prod: bool = False) -> None:
-    Logger.info(f"Processing municipio: {municipio_id}")
-    context = pipeline.run(municipio_id)
-    tex_path = render(municipio_id, context, prod)
+def run(clave: str, pipeline: Pipeline, prod: bool = False) -> None:
+    Logger.info(f"Processing region: {clave}")
+    context = pipeline.run(clave)
+    tex_path = render(clave, context, prod)
     if prod:
         compile_prod(tex_path)
     else:
         compile(tex_path)
 
 
-def _acotar(municipios: list[str], desde: str | None, hasta: str | None) -> list[str]:
-    for clave in (desde, hasta):
-        if clave and clave not in municipios:
-            raise SystemExit(f"Municipio '{clave}' no está en el catálogo")
+def _normalizar_o_salir(valor: str | None) -> str | None:
+    if not valor:
+        return None
+    try:
+        return normalize_clave(valor)
+    except ValueError:
+        raise SystemExit(f"Región '{valor}' no está en el catálogo") from None
 
-    inicio = municipios.index(desde) if desde else 0
-    fin = municipios.index(hasta) + 1 if hasta else len(municipios)
+
+def _acotar(claves: list[str], desde: str | None, hasta: str | None) -> list[str]:
+    for clave in (desde, hasta):
+        if clave and clave not in claves:
+            raise SystemExit(f"Región '{clave}' no está en el catálogo")
+
+    inicio = claves.index(desde) if desde else 0
+    fin = claves.index(hasta) + 1 if hasta else len(claves)
     if inicio >= fin:
         raise SystemExit(f"Rango vacío: '{desde}' va después de '{hasta}'")
 
-    acotado = municipios[inicio:fin]
+    acotado = claves[inicio:fin]
     if desde or hasta:
         Logger.info(
-            f"Procesando {len(acotado)} municipios, de {acotado[0]} a {acotado[-1]}"
+            f"Procesando {len(acotado)} regiones, de {acotado[0]} a {acotado[-1]}"
         )
     return acotado
 
@@ -61,12 +70,16 @@ def main() -> None:
     )
 
     if args.region:
-        run(args.region, pipeline, args.prod)
+        run(_normalizar_o_salir(args.region), pipeline, args.prod)
         return
 
-    municipios = _acotar(get_all_municipio_ids(), args.desde, args.hasta)
-    for municipio_id in municipios:
-        run(municipio_id, pipeline, args.prod)
+    claves = _acotar(
+        get_all_region_claves(),
+        _normalizar_o_salir(args.desde),
+        _normalizar_o_salir(args.hasta),
+    )
+    for clave in claves:
+        run(clave, pipeline, args.prod)
 
 
 if __name__ == "__main__":
