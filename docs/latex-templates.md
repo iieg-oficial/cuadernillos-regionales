@@ -48,7 +48,7 @@ Crea `templates/sections/nombre_seccion.tex.j2` y pega el contenido de tu `.tex`
 
 ### 2. Identifica los valores dinámicos
 
-Busca todo lo que cambia por municipio: nombre, región, valores de tablas, rutas de imágenes, etc. Esos valores estáticos se reemplazan con variables usando `<< >>`.
+Busca todo lo que cambia por región: nombre, valores de tablas, rutas de imágenes, etc. Esos valores estáticos se reemplazan con variables usando `<< >>`.
 
 ### 3. Registra el template en `reporte.tex.j2`
 

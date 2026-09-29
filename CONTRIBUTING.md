@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🤝 Guía de Contribución - Cuadernillos Municipales
+# 🤝 Guía de Contribución - Cuadernillos Regionales
 
 <img src="https://img.shields.io/badge/IIEG-Jalisco-5C2D91?style=for-the-badge" alt="IIEG"/>
 <img src="https://img.shields.io/badge/Contribuciones-Bienvenidas-f97316?style=for-the-badge&logo=github" alt="Contribuciones"/>
@@ -114,7 +114,7 @@ Usamos **Conventional Commits** con scope específico al proyecto (`feat(demogra
 
 ```markdown
 ### Código
-- [ ] El pipeline corre con `just run-one <municipio_id>` sin errores
+- [ ] El pipeline corre con `just run-one <clave>` sin errores
 - [ ] El PDF generado compila con `pdflatex`
 - [ ] Cada sección implementa el contrato `Section` (`Extract` + `Analizer`)
 - [ ] Los keys del context dict NO colisionan entre secciones
@@ -146,7 +146,7 @@ Contexto del issue que resuelve. Closes #<número>
 
 ## Cómo probar
 1. `uv sync`
-2. `just run-one <municipio_id>`
+2. `just run-one <clave>`
 3. Revisar el PDF en `output/pdf/`
 
 ## Screenshots / PDF (opcional)
@@ -253,6 +253,6 @@ El board de GitHub Projects organiza el trabajo en columnas:
 
 <div align="center">
 
-<sub>Guía de contribución - Cuadernillos Municipales - IIEG Jalisco</sub>
+<sub>Guía de contribución - Cuadernillos Regionales - IIEG Jalisco</sub>
 
 </div>
