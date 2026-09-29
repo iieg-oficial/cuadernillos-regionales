@@ -13,6 +13,8 @@ from core.pipelines.stage import Stage
 from core.settings import HistoriaSettings
 from core.utils.logger import Logger
 from core.utils.maps import get_draft_path
+from core.utils.municipalities import get_municipio_nombre
+from core.utils.regions import get_all_regions
 
 CATALOG_PATH = Path("assets/catalogs/historia.json")
 MAPS_DIR = Path("assets/maps/historia")
@@ -109,27 +111,18 @@ def _extract_historia_from_pdf(url: str) -> str:
 
 
 def _load_municipios() -> dict[str, str]:
-    regions_path = Path("assets/catalogs/regions.json")
-    with regions_path.open() as f:
-        data = json.load(f)
-    mun_ids = {}
-    for region in data:
-        for muns in region.values():
-            for m in muns:
-                mun_ids[m["municipio"]] = str(m["id"]).zfill(3)
-    return mun_ids
+    return {
+        m["municipio"]: str(m["id"]).zfill(3)
+        for region in get_all_regions()
+        for m in region.municipios
+    }
 
 
 def _get_nombre(municipio_id: str) -> str:
-    regions_path = Path("assets/catalogs/regions.json")
-    with regions_path.open() as f:
-        data = json.load(f)
-    for region in data:
-        for muns in region.values():
-            for m in muns:
-                if str(m["id"]).zfill(3) == municipio_id:
-                    return m["municipio"]
-    return ""
+    try:
+        return get_municipio_nombre(str(int(municipio_id)))
+    except ValueError:
+        return ""
 
 
 def _build_catalog(pdf_links: dict[str, str], mun_ids: dict[str, str]) -> dict:

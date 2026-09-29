@@ -1,10 +1,8 @@
-import json
-from pathlib import Path
-
 from core.db import get_session
 from core.pipelines.stage import Stage
 from core.settings import DatabaseSettings
 from core.utils.logger import Logger
+from core.utils.municipalities import get_municipio_nombre
 from pipelines.economia.queries.agropecuario import (
     get_ultimo_anio_agricola,
     get_valor_produccion_agricola_anual,
@@ -39,18 +37,12 @@ from pipelines.economia.queries.inpc import get_inpc_promedio_anual
 ANIO_CE = 2024
 ANIO_CE_ANTERIOR = 2019
 
-REGIONS_PATH = Path("assets/catalogs/regions.json")
-
 
 def _get_nombre_municipio(cve_mun: int) -> str:
-    with REGIONS_PATH.open() as f:
-        data = json.load(f)
-    for region in data:
-        for muns in region.values():
-            for m in muns:
-                if str(m["id"]) == str(cve_mun):
-                    return m["municipio"]
-    return str(cve_mun)
+    try:
+        return get_municipio_nombre(str(cve_mun))
+    except ValueError:
+        return str(cve_mun)
 
 
 class Extract(Stage):
