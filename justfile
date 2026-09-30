@@ -1,6 +1,6 @@
 
-# Muestra representativa: metropolitanos, costa, sierra, altos y regiones
-SAMPLE := "1 12 17 32 56 67 97 98 101 120"
+# Muestra representativa: metropolitana, costa, norte, sur y valles
+SAMPLE := "1 5 8 10 12"
 
 default:
     just --list --unsorted

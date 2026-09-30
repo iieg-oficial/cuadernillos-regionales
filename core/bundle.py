@@ -17,7 +17,7 @@ LATEXMKRC = "$pdf_mode = 5;\n"
 
 LEEME = """# {slug}
 
-Cuadernillo municipal listo para compilar.
+Cuadernillo regional listo para compilar.
 
 ## Overleaf
 
@@ -54,7 +54,7 @@ las escribe. Con `latexmk` basta una llamada; el `latexmkrc` ya selecciona XeLaT
 - `templates/assets/` portadas, logos y portadillas de seccion
 - `assets/maps/`, `output/maps/` mapas
 - `output/charts/` graficas
-- `assets/escudos_mun_jal/` escudo del municipio
+- `assets/escudos_mun_jal/` escudo de la portada
 
 Las rutas son relativas a esta carpeta: si se mueve un archivo de lugar, hay que
 ajustar el `.tex`.

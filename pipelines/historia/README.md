@@ -8,7 +8,7 @@ Cubre la toponimia y el contexto histórico del municipio, acompañados de un ma
 |---|---|---|
 | PDFs del IIEG (`iieg.gob.mx`) | Documentos PDF por municipio descargados desde el índice en línea del IIEG; el texto se extrae con `pdftotext` | `toponimia`, `contexto_historico` |
 | Google Drive (carpeta de mapas) | Imágenes PNG de localización geográfica descargadas vía `gdown` desde la URL configurada en `.env.historia` | `mapa_path` |
-| `assets/catalogs/regions.json` | Catálogo local con IDs y nombres de municipios | `municipio_nombre` |
+| `assets/catalogs/regiones.json` | Catálogo local con IDs y nombres de municipios | `municipio_nombre` |
 
 ## Notas
 

@@ -1,5 +1,3 @@
-import json
-import unicodedata
 from pathlib import Path
 
 from jinja2 import Environment, FileSystemLoader
@@ -7,29 +5,13 @@ from jinja2 import Environment, FileSystemLoader
 from core.settings import AppSettings
 from core.utils.escudos import ensure_escudos, escudo_path
 from core.utils.logger import Logger
+from core.utils.regions import get_region_by_clave, get_region_slug
 
 PROD_TEX_DIR = Path("output/tex/prod")
 BUNDLE_FONTS_DIR = "fonts"
 
 
-def _sin_acentos(texto: str) -> str:
-    descompuesto = unicodedata.normalize("NFKD", texto)
-    return "".join(c for c in descompuesto if not unicodedata.combining(c))
-
-
-def _get_nombre_municipio(municipio_id: str) -> str:
-    regions_path = Path("assets/catalogs/regions.json")
-    with regions_path.open() as f:
-        data = json.load(f)
-    for region in data:
-        for muns in region.values():
-            for m in muns:
-                if str(m["id"]) == str(int(municipio_id)):
-                    return _sin_acentos(m["municipio"]).lower().replace(" ", "_")
-    return municipio_id
-
-
-def render(municipio_id: str, context: dict, prod: bool = False) -> Path:
+def render(clave_region: str, context: dict, prod: bool = False) -> Path:
     Logger.info("Renderizando template LaTeX")
     env = Environment(
         loader=FileSystemLoader("templates"),
@@ -41,8 +23,8 @@ def render(municipio_id: str, context: dict, prod: bool = False) -> Path:
         comment_end_string="#>",
     )
     template = env.get_template("reporte.tex.j2")
-    nombre = _get_nombre_municipio(municipio_id)
-    slug = f"{municipio_id}_{nombre}_cuadernillo_municipal_2026"
+    region = get_region_by_clave(clave_region)
+    slug = f"{get_region_slug(region.clave)}_cuadernillo_regional_2026"
     if prod:
         output_path = PROD_TEX_DIR / slug / f"{slug}.tex"
     else:
@@ -50,7 +32,7 @@ def render(municipio_id: str, context: dict, prod: bool = False) -> Path:
     output_path.parent.mkdir(parents=True, exist_ok=True)
     app_settings = AppSettings()
     ensure_escudos()
-    escudo = escudo_path(municipio_id)
+    escudo = escudo_path(region.representante)
     output_path.write_text(
         template.render(
             fonts_path=f"{BUNDLE_FONTS_DIR}/" if prod else app_settings.FONTS_PATH,

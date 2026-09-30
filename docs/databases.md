@@ -117,7 +117,7 @@ equivocado:
 |---|---|
 | Textos de historia y toponimia | `assets/catalogs/historia.json` |
 | Directorio municipal | `assets/catalogs/directorios_municipales.json` |
-| Regiones y claves de municipio | `assets/catalogs/regions.json` |
+| Claves de región y municipios | `assets/catalogs/regiones.json` |
 | Años y citas de las fuentes | `pipelines/geografia/fuentes.py` |
 | Mapas | `assets/maps/`, descargados de Drive |
 | Escudos | `assets/escudos_mun_jal/`, descargado de Drive |
