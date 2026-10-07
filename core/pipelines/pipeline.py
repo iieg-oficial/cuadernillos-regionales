@@ -8,10 +8,9 @@ class Pipeline:
 
     def run(self, region_clave: str) -> dict:
         region = get_region_by_clave(region_clave)
-        nombre = region.nombre
         context = {
             "clave_region": region.clave,
-            "nombre_region": nombre[0].lower() + nombre[1:],
+            "nombre_region": region.nombre,
         }
         for section in self.sections:
             context |= section.run(region)
