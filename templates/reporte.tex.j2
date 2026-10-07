@@ -13,9 +13,9 @@
   \includegraphics[height=3.5cm]{<< escudo_path >>}\\[1.7cm]
 <% endif %>
   {\color{colorSeccion}\garetextrabold\fontsize{36}{48}\selectfont
-   << de_municipio_nombre >>}\\[0.6cm]
+   Región << nombre_region >>}\\[0.6cm]
   {\color{colorTexto}\garetmedium\fontsize{14}{18}\selectfont
-   \addfontfeature{LetterSpace=22.0}CUADERNILLO MUNICIPAL}\\[2.2cm]
+   \addfontfeature{LetterSpace=22.0}CUADERNILLO REGIONAL}\\[2.2cm]
   {\color{colorTexto}\garetextrabold\fontsize{16}{20}\selectfont
    \addfontfeature{LetterSpace=22.0}AGOSTO 2026}
 \end{center}
@@ -31,9 +31,9 @@
   \begingroup
   \setlength{\parskip}{0pt}%
   \setstretch{1.1}%
-  \noindent{\color{colorSeccion}\bfseries\huge << de_municipio_nombre >>}\par
+  \noindent{\color{colorSeccion}\bfseries\huge Región << nombre_region >>}\par
   \vspace{0.4cm}
-  \noindent{\color{colorTexto}\huge Cuadernillo municipal}\par
+  \noindent{\color{colorTexto}\huge Cuadernillo regional}\par
   \vspace{0.6cm}
   \noindent{\color{colorTexto}\LARGE Agosto 2026}\\[-4pt]
   \noindent\rule{\textwidth}{0.4pt}\par
@@ -42,7 +42,6 @@
 \tableofcontents
 \newpage
 
-<% include "sections/historia.tex.j2" %>
 <% include "sections/geografia.tex.j2" %>
 <% include "sections/demografia.tex.j2" %>
 <% include "sections/economia.tex.j2" %>

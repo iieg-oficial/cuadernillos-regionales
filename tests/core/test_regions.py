@@ -43,7 +43,7 @@ def test_clave_invalida():
 
 def test_region_por_clave():
     region = get_region_by_clave("8")
-    assert region.nombre == "Región Norte"
+    assert region.nombre == "Norte"
     assert region.clave == "08"
 
 
@@ -54,5 +54,5 @@ def test_slugs():
 
 
 def test_compatibilidad_municipios():
-    assert get_region("39") == "Región Centro"
+    assert get_region("39") == "Centro"
     assert get_municipio_nombre("39") == "Guadalajara"

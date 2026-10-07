@@ -7,17 +7,20 @@ from core.utils.logger import Logger
 class Analizer(Stage):
     def execute(self, input_data: dict) -> dict:
         Logger.info("Directorio Municipal: procesando datos")
-        r = input_data
-
-        return {
-            "dm_municipio": latex_escape(r.get("municipio") or ND),
-            "dm_presidente": latex_escape(r.get("presidente_municipio") or ND),
-            "dm_correo": latex_escape(r.get("presidente_correo") or ND),
-            "dm_domicilio": latex_escape(r.get("domicilio") or ND),
-            "dm_telefono": latex_escape(r.get("directorio_municipal_telefono") or ND),
-            "dm_sindico": latex_escape(r.get("directorio_municipal_sindico") or ND),
-            "dm_regidores": [
-                latex_escape(x) for x in (r.get("directorio_municipal_regidores") or [])
-            ],
-            "dm_partido": latex_escape(r.get("directorio_municipal_partido") or ND),
-        }
+        dm_municipios = []
+        for record in input_data["municipios"]:
+            dm_municipios.append(
+                {
+                    "municipio": latex_escape(record["municipio"] or ND),
+                    "presidente": latex_escape(record["presidente"] or ND),
+                    "correo": latex_escape(record["correo"] or ND),
+                    "domicilio": latex_escape(record["domicilio"] or ND),
+                    "telefono": latex_escape(record["telefono"] or ND),
+                    "sindico": latex_escape(record["sindico"] or ND),
+                    "regidores": [
+                        latex_escape(regidor) for regidor in record["regidores"]
+                    ],
+                    "partido": latex_escape(record["partido"] or ND),
+                }
+            )
+        return {"dm_municipios": dm_municipios}

@@ -81,6 +81,5 @@ def _sin_acentos(texto: str) -> str:
 
 def get_region_slug(clave: str) -> str:
     region = get_region_by_clave(clave)
-    nombre = region.nombre.removeprefix("Región ")
-    nombre = _sin_acentos(nombre).lower().replace(" ", "_")
+    nombre = _sin_acentos(region.nombre).lower().replace(" ", "_")
     return f"{region.clave}_{nombre}"

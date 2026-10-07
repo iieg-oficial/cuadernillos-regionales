@@ -4,6 +4,7 @@ from pathlib import Path
 import pytest
 
 from core.utils.municipalities import get_municipio_nombre
+from core.utils.regions import get_all_regions, get_region_by_clave
 from pipelines.directorio_municipal.extract import CATALOG_PATH, Extract, _normalize
 
 TOTAL_MUNICIPIOS = 125
@@ -15,29 +16,44 @@ def catalogo():
 
 
 @pytest.mark.parametrize(
-    "municipio_id,esperado",
+    "region_clave,municipio_esperado",
     [
-        ("1", "Acatic"),
-        ("12", "Atenguillo"),
-        ("39", "Guadalajara"),
-        ("107", "Tuxcueca"),
-        ("120", "Zapopan"),
-        ("125", "San Ignacio Cerro Gordo"),
+        ("03", "Acatic"),
+        ("05", "Atenguillo"),
+        ("01", "Guadalajara"),
+        ("11", "Tuxcueca"),
+        ("01", "Zapopan"),
+        ("03", "San Ignacio Cerro Gordo"),
     ],
 )
-def test_extract_returns_the_requested_municipio(municipio_id, esperado):
-    record = Extract().execute(municipio_id)
+def test_extract_incluye_municipio_de_la_region(region_clave, municipio_esperado):
+    region = get_region_by_clave(region_clave)
+    resultado = Extract().execute(region)
 
-    assert _normalize(record["municipio"]) == _normalize(esperado)
+    nombres = [m["municipio"] for m in resultado["municipios"]]
+    assert municipio_esperado in nombres
 
 
 def test_every_municipio_resolves_to_itself():
-    for clave in range(1, TOTAL_MUNICIPIOS + 1):
-        nombre = get_municipio_nombre(clave)
-        record = Extract().execute(str(clave))
-        assert _normalize(record["municipio"]) == _normalize(nombre), (
-            f"clave {clave}: se esperaba {nombre}, llegó {record['municipio']}"
-        )
+    for region in get_all_regions():
+        resultado = Extract().execute(region)
+        nombres = [m["municipio"] for m in resultado["municipios"]]
+        assert len(resultado["municipios"]) == len(region.municipios)
+        for m in region.municipios:
+            assert m["municipio"] in nombres, (region.clave, m["municipio"])
+        assert nombres == sorted(nombres)
+        campos = {
+            "municipio",
+            "presidente",
+            "correo",
+            "domicilio",
+            "telefono",
+            "sindico",
+            "regidores",
+            "partido",
+        }
+        for m in resultado["municipios"]:
+            assert campos.issubset(m.keys())
 
 
 def test_catalog_ids_match_the_project_keys(catalogo):
@@ -55,8 +71,3 @@ def test_catalog_has_one_record_per_municipio(catalogo):
 
     assert len(claves) == TOTAL_MUNICIPIOS
     assert sorted(claves) == list(range(1, TOTAL_MUNICIPIOS + 1))
-
-
-def test_unknown_municipio_raises():
-    with pytest.raises(ValueError):
-        Extract().execute("999")
