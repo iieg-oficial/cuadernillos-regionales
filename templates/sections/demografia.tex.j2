@@ -10,7 +10,7 @@
 \begin{center}
   {\color{colorSeccion}\garetextrabold\fontsize{36}{40}\selectfont Demografía y sociedad}\\[1.4cm]
   {\color{colorTexto}\garetmedium\fontsize{14}{18}\selectfont
-   \addfontfeature{LetterSpace=22.0}\MakeUppercase{<< de_municipio_nombre >>}}\\[3.6cm]
+   \addfontfeature{LetterSpace=22.0}\MakeUppercase{Región << nombre_region >>}}\\[3.6cm]
   {\color{colorTexto}\garetextrabold\fontsize{16}{20}\selectfont
    \addfontfeature{LetterSpace=22.0}AGOSTO 2026}
 \end{center}
@@ -20,11 +20,11 @@
 \subsection{Aspectos demográficos}
 
 Conforme a la información del Censo de Población y Vivienda 2020 que publicó INEGI,
-el municipio de << de_municipio_nombre >> tenía una población de << de_poblacion_total_censo >>
+la región << nombre_region >> tenía una población de << de_poblacion_total_censo >>
 personas en << de_anio_censo >>, de las cuales el << de_porcentaje_hombres >> eran
 hombres y << de_porcentaje_mujeres >> mujeres.
 
-En comparación con la población que tenía << de_municipio_nombre >> en << de_anio_encuesta_intercensal >>,
+En comparación con la población que tenía la región << nombre_region >> en << de_anio_encuesta_intercensal >>,
 se observa una variación de << de_variacion_poblacion_quinquenio_anterior >> personas, que representa una
 variación relativa de << de_variacion_porcentual_poblacion_quinquenio_anterior >> en cinco años.
 
@@ -41,7 +41,7 @@ En comparación con << de_anio_censo_anterior >>, la población municipal tuvo u
                   >{\raggedleft\arraybackslash}m{\dimexpr0.21\linewidth - 2\tabcolsep\relax}
                   >{\raggedleft\arraybackslash}m{\dimexpr0.21\linewidth - 2\tabcolsep\relax}}
 
-\caption{\textbf{Población total de << de_municipio_nombre >> y variación porcentual según sexo} \\
+\caption{\textbf{Población total de la región << nombre_region >> y variación porcentual según sexo} \\
 << de_anio_censo_anterior >>, << de_anio_encuesta_intercensal >> y << de_anio_censo >>}
 \label{cuadro_poblacion_total_sexo} \\
 
@@ -88,7 +88,7 @@ Hombres & << de_tabla_pob_hombres_2010 >> & << de_tabla_pob_hombres_2015 >> & <<
 
 \end{longtable}
 \normalsize
-Las personas habitantes del municipio de << de_municipio_nombre >> representaron
+Las personas habitantes de la región << nombre_region >> representaron
 el << de_porcentaje_habitantes_region >> \% del total de la región
 << nombre_region >> en << de_anio_censo >> y el << de_porcentaje_habitantes_jalisco >> \%
 del total de la población del estado de Jalisco en ese mismo año.
@@ -96,7 +96,7 @@ del total de la población del estado de Jalisco en ese mismo año.
 
 \newpage
 
-En << de_anio_censo >>, << de_municipio_nombre >> contaba con << de_numero_localidades >>
+En << de_anio_censo >>, la región << nombre_region >> contaba con << de_numero_localidades >>
 localidades. La localidad de << de_loc_mas_poblada >> era la más poblada en el municipio con
 << de_loc_mas_poblada_habitantes >> personas, concentrando el << de_porcentaje_habitantes_loc_mas_poblada >>
 de la población del municipio.
@@ -110,7 +110,7 @@ de la población del municipio.
                   >{\raggedleft\arraybackslash}m{\dimexpr0.19\linewidth - 2\tabcolsep\relax}
                   >{\raggedleft\arraybackslash}m{\dimexpr0.19\linewidth - 2\tabcolsep\relax}}
 
-\caption{\textbf{Número de habitantes, distribución y variación porcentual en localidades de << de_municipio_nombre >>} \\
+\caption{\textbf{Número de habitantes, distribución y variación porcentual en localidades de la región << nombre_region >>} \\
 << de_anio_censo_anterior >> y << de_anio_censo >>}
 \label{cuadro_localidades_mas_pobladas} \\
 
@@ -140,13 +140,13 @@ de la población del municipio.
 \endfoot
 
 \hline
-\tablefooterrow{6}{Nota: & Se presenta la información para las cinco localidades más pobladas de << de_municipio_nombre >>.\\
+\tablefooterrow{6}{Nota: & Se presenta la información para las cinco localidades más pobladas de la región << nombre_region >>.\\
 <% if de_localidades_tiene_na %> ND: & No disponible.\\<% endif %>
 Fuente: & INEGI. Censo de Población y Vivienda, << de_anio_censo_anterior >> y << de_anio_censo >>.}
 \endlastfoot
 
 \rowcolor{filaResaltada}
-\thdl{<< de_clave_municipio >>} & \thdl{<< de_municipio_nombre >>} & \thdr{<< de_tabla_pob_total_2010 >>} & \thdr{<< de_tabla_pob_total_2020 >>} & \thdr{100.00} & \thdr{<< de_variacion_porcentual_poblacion_quinquenio >>} \\
+\thdl{<< de_clave_municipio >>} & \thdl{Región << nombre_region >>} & \thdr{<< de_tabla_pob_total_2010 >>} & \thdr{<< de_tabla_pob_total_2020 >>} & \thdr{100.00} & \thdr{<< de_variacion_porcentual_poblacion_quinquenio >>} \\
 \hline
 <% for loc in de_localidades %>
 << loc.clave >> & << loc.nombre >> & << loc.total_2010 >> & << loc.total_2020 >> & << loc.pct_2020 >> & << loc.var_pct_2010_2020 >> \\
@@ -172,7 +172,7 @@ Conforme a los datos procesados para la estimación del índice, en << de_anio_c
 migrantes circulares y un << de_porcentaje_migrantes_retorno_jal >> de las viviendas contaban con
 migrantes de retorno de Estados Unidos.
 
-En << de_anio_censo >> el municipio de << de_municipio_nombre >> tuvo un grado
+En << de_anio_censo >> la región << nombre_region >> tuvo un grado
 << de_grado_intensidad_migratoria_mun >> de intensidad migratoria y se ubicó en el lugar
 << de_ranking_mun_migracion >> en intensidad migratoria dentro de los municipios del estado
 de Jalisco. Durante ese año, un << de_porcentaje_viviendas_remesas_mun >> de las viviendas
@@ -181,7 +181,7 @@ de las viviendas se registraron migrantes circulares del quinquenio anterior (<<
 --<< de_anio_censo >>) y el << de_porcentaje_migrantes_retorno_mun >> de las viviendas
 contaban con migrantes de retorno de Estados Unidos (ver cuadro \ref{cuadro_intensidad_migratoria_eua}).
 
-En el cálculo del índice del año << de_anio_censo_anterior >>, << de_municipio_nombre >>
+En el cálculo del índice del año << de_anio_censo_anterior >>, la región << nombre_region >>
 tenía un grado << de_grado_intensidad_migratoria_anterior_mun >> de intensidad migratoria y ocupaba
 el lugar << de_ranking_anterior_mun_migracion >> a nivel estatal.
 
@@ -193,7 +193,7 @@ el lugar << de_ranking_anterior_mun_migracion >> a nivel estatal.
                   >{\raggedleft\arraybackslash}m{\dimexpr0.16\linewidth - 2\tabcolsep\relax}
                   >{\raggedleft\arraybackslash}m{\dimexpr0.16\linewidth - 2\tabcolsep\relax}}
 
-\caption{\textbf{Grado de Intensidad Migratoria México - Estados Unidos en << de_municipio_nombre >>} \\
+\caption{\textbf{Grado de Intensidad Migratoria México - Estados Unidos en la región << nombre_region >>} \\
 << de_anio_censo_anterior >> y << de_anio_censo >>}
 \label{cuadro_intensidad_migratoria_eua} \\
 
@@ -260,9 +260,9 @@ acceso a la alimentación.
 
 Conforme a la medición de pobreza multidimensional de << de_anio_censo >>,
 el << de_porcentaje_pobreza >> de la población
-de << de_municipio_nombre >> se encontraba en situación de pobreza.
+de la región << nombre_region >> se encontraba en situación de pobreza.
 El << de_porcentaje_vulnerabilidad_carencias >> de la población de
-<< de_municipio_nombre >> era vulnerable
+La región << nombre_region >> era vulnerable
 por carencias sociales\footnote{Vulnerables por carencias sociales se refiere a
 la población que presenta una o más carencias sociales, pero cuyo ingreso es
 superior a la línea de bienestar.}, el << de_porcentaje_vulnerabilidad_ingresos >>
@@ -274,7 +274,7 @@ vulnerable se refiere a la población cuyo ingreso es superior a la línea de bi
 y que no tiene carencia social alguna.}.
 
 En << de_anio_censo >>, el << de_porcentaje_pobreza_extrema >> de la
-población de << de_municipio_nombre >> se encontraba en pobreza extrema\footnote{Pobreza
+población de la región << nombre_region >> se encontraba en pobreza extrema\footnote{Pobreza
 extrema se refiere a la población que tiene tres o más carencias sociales y su ingreso
 es inferior al valor de la línea de pobreza extrema por ingresos.};
 en contraste con el << de_porcentaje_pobreza_extrema_intercensal >> que se presentó
@@ -300,7 +300,7 @@ la no pobre y no vulnerable.
                   >{\raggedleft\arraybackslash}m{\dimexpr0.12\linewidth - 2\tabcolsep\relax}
                   >{\raggedleft\arraybackslash}m{\dimexpr0.12\linewidth - 2\tabcolsep\relax}}
 
-\caption{\textbf{Indicadores de pobreza multidimensional en << de_municipio_nombre >>} \\ << de_anio_encuesta_intercensal >> y << de_anio_censo >>}
+\caption{\textbf{Indicadores de pobreza multidimensional en la región << nombre_region >>} \\ << de_anio_encuesta_intercensal >> y << de_anio_censo >>}
 \label{cuadro_pobreza_multidimensional} \\
 
 \hline
@@ -435,7 +435,7 @@ insuficientes y las relacionadas con la residencia en localidades pequeñas. De 
 las estimaciones de << de_anio_censo >> del Índice de Marginación, Jalisco
 presentó un grado de marginación << de_grado_marginacion_jalisco >> en << de_anio_censo >>.
 
-En << de_anio_censo >> el municipio de << de_municipio_nombre >> presentó
+En << de_anio_censo >> la región << nombre_region >> presentó
 un grado de marginación << de_grado_marginacion_municipio >>, colocándose en el
 lugar << de_ranking_marginacion_municipio >> dentro de los municipios de la entidad.
 
@@ -451,7 +451,7 @@ indicadores que lo componen.
                   >{\raggedleft\arraybackslash}m{\dimexpr0.14\linewidth - 2\tabcolsep\relax}}
 
 \caption{\textbf{Grado de marginación e indicadores sociodemográficos en
-<< de_municipio_nombre >>} \\
+La región << nombre_region >>} \\
 << de_anio_censo_anterior >>, << de_anio_encuesta_intercensal >> y << de_anio_censo >>}
 \label{cuadro_marginacion_indicadores} \\
 
@@ -536,7 +536,7 @@ para las principales localidades del municipio.
                   >{\raggedleft\arraybackslash}m{\dimexpr0.14\linewidth - 2\tabcolsep\relax}
                   >{\raggedleft\arraybackslash}m{\dimexpr0.14\linewidth - 2\tabcolsep\relax}}
 
-\caption{\textbf{Grado de marginación e indicadores sociodemográficos en localidades de << de_municipio_nombre >>}\\
+\caption{\textbf{Grado de marginación e indicadores sociodemográficos en localidades de la región << nombre_region >>}\\
 << de_anio_censo >> \hfill 1a. parte}
 \label{cuadro_grado_marginacion_localidades} \\
 
@@ -583,7 +583,7 @@ para las principales localidades del municipio.
 
 \rowcolor{filaResaltada}
 \thdr{<< de_clave_municipio >>} &
-\thdr{<< de_municipio_nombre >>} &
+\thdr{Región << nombre_region >>} &
 \thdr{<< de_marg_grado_2020 >>} &
 \thdr{<< de_marg_analfabeta_pct_2020 >>} &
 \thdr{<< de_marg_sin_educ_bas_pct_2020 >>} &
@@ -617,7 +617,7 @@ para las principales localidades del municipio.
                   >{\raggedleft\arraybackslash}m{\dimexpr0.14\linewidth - 2\tabcolsep\relax}
                   >{\raggedleft\arraybackslash}m{\dimexpr0.14\linewidth - 2\tabcolsep\relax}}
 
-\caption{\textbf{Grado de marginación e indicadores sociodemográficos en localidades de << de_municipio_nombre >>} \\
+\caption{\textbf{Grado de marginación e indicadores sociodemográficos en localidades de la región << nombre_region >>} \\
 << de_anio_censo >> \hfill 2a. parte y última} \\
 
 \hline
@@ -667,7 +667,7 @@ Fuente: & CONAPO. Índices de marginación por localidad << de_anio_censo >>.}
 
 \rowcolor{filaResaltada}
 \thdr{<< de_clave_municipio >>} &
-\thdr{<< de_municipio_nombre >>} &
+\thdr{Región << nombre_region >>} &
 \thdr{<< de_marg_grado_2020 >>} &
 \thdr{<< de_marg_sin_agua_pct_2020 >>} &
 \thdr{<< de_marg_piso_tierra_pct_2020 >>} &
@@ -692,7 +692,7 @@ Fuente: & CONAPO. Índices de marginación por localidad << de_anio_censo >>.}
 
 \subsection{Índices sociodemográficos}
 
-El municipio de << de_municipio_nombre >> representó el << de_porcentaje_poblacion >>
+La región << nombre_region >> representó el << de_porcentaje_poblacion >>
 del total de la población estatal en << de_anio_censo >>. Con un grado
 << de_grado_marginacion >> de marginación en << de_anio_censo >>, ocupó el lugar
 << de_ranking_marginacion >> entre los municipios del estado.
@@ -701,7 +701,7 @@ En cuanto a la pobreza multidimensional, el municipio se localizó en el lugar
 << de_ranking_pobreza_multidimensional >> a nivel estatal, y en porcentaje de población
 en situación de pobreza extrema ocupó el lugar << de_ranking_pobreza_extrema >>.
 
-Finalmente, << de_municipio_nombre >> se clasificó con grado << de_grado_intensidad_migratoria >>
+Finalmente, la región << nombre_region >> se clasificó con grado << de_grado_intensidad_migratoria >>
 de intensidad migratoria en << de_anio_censo >> y se posicionó en el lugar << de_ranking_migracion >>
 entre los municipios del estado.
 
@@ -763,7 +763,7 @@ Fuente: & CONAPO. Índices de marginación << de_anio_censo >>; Índice de Inten
 \hline
 
 \rowcolor{filaResaltada}
-\thdr{<< de_clave_municipio >>} & \thdr{<< de_municipio_nombre >>} & \thdr{<< de_tabla_pob_total_2020 >>} & \thdr{<< de_grado_marginacion >>} & \thdr{<< de_ranking_marginacion >>} & \thdr{<< de_tabla_pobreza_pct >>} & \thdr{<< de_ranking_pobreza_multidimensional >>} & \thdr{<< de_tabla_pobreza_ext_pct >>} & \thdr{<< de_ranking_pobreza_extrema >>} & \thdr{<< de_grado_intensidad_migratoria >>} & \thdr{<< de_ranking_migracion >>} \\
+\thdr{<< de_clave_municipio >>} & \thdr{Región << nombre_region >>} & \thdr{<< de_tabla_pob_total_2020 >>} & \thdr{<< de_grado_marginacion >>} & \thdr{<< de_ranking_marginacion >>} & \thdr{<< de_tabla_pobreza_pct >>} & \thdr{<< de_ranking_pobreza_multidimensional >>} & \thdr{<< de_tabla_pobreza_ext_pct >>} & \thdr{<< de_ranking_pobreza_extrema >>} & \thdr{<< de_grado_intensidad_migratoria >>} & \thdr{<< de_ranking_migracion >>} \\
 \hline
 
 <% for mun in de_region_municipios %>
