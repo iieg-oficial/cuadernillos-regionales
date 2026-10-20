@@ -21,15 +21,17 @@
 
 \subsubsection{Descripción general}
 
-El municipio de << ge_dg_nombre >> se localiza en la región << ge_dg_region >> del estado de Jalisco. Sus municipios colindantes son << ge_dg_colindantes >> (ver mapa~\ref{map:ge_base}). Tiene una extensión territorial de << ge_dg_area_km2 >> kilómetros cuadrados.
+La región << nombre_region >> se localiza en << ge_dg_ubicacion_general >> del estado de Jalisco y está integrada por << ge_dg_numero_municipios >> municipios: << ge_dg_municipios_integrantes >>. En conjunto, ocupa una superficie de << ge_dg_superficie_region_km2 >> kilómetros cuadrados, equivalente al << ge_dg_porcentaje_superficie_estatal >> \% del territorio estatal.
 
-Su cabecera municipal se localiza en las coordenadas << ge_dg_lat >> latitud norte y << ge_dg_lon >> longitud oeste, a una altura de << ge_dg_elev1 >> metros sobre el nivel del mar (msnm). El territorio municipal presenta altitudes entre << ge_dg_elevmin >> y << ge_dg_elevmax >> msnm, con predominio de pendientes << ge_dg_pendiente_predom_texto >>.
+Por su extensión, << ge_dg_municipio_mayor_superficie >> es el municipio de mayor superficie de la región, con << ge_dg_superficie_municipio_mayor_km2 >> km$^2$, mientras que << ge_dg_municipio_menor_superficie >> es el de menor extensión, con << ge_dg_superficie_municipio_menor_km2 >> km$^2$.
 
-La mayor parte del municipio presenta un clima << ge_dg_clima_predom >>. La temperatura media anual es de << ge_dg_temp_media >>~°C, y la precipitación acumulada anual promedio es de << ge_dg_prec_acum >> mm.
+El territorio regional presenta altitudes entre << ge_dg_altitud_minima_region >> y << ge_dg_altitud_maxima_region >> metros sobre el nivel del mar (msnm). El punto de menor elevación se localiza en el municipio de << ge_dg_municipio_altitud_minima >>, en las coordenadas << ge_dg_altitud_minima_lat >>, << ge_dg_altitud_minima_lon >>. El punto de mayor elevación se encuentra en << ge_dg_municipio_altitud_maxima >>, en << ge_dg_altitud_maxima_lat >>, << ge_dg_altitud_maxima_lon >>.
 
-El viento dominante tiene una dirección proveniente del << ge_dg_viento_predom >> y una frecuencia anual del << ge_dg_viento_predom_fr >> \% en el municipio.
+Al considerar la elevación media de cada municipio, << ge_dg_municipio_altitud_media_mayor >> presenta el valor más alto de la región, con << ge_dg_altitud_media_mayor >> msnm, mientras que << ge_dg_municipio_altitud_media_menor >> registra el menor, con << ge_dg_altitud_media_menor >> msnm. En cuanto al relieve, el rango de pendiente con mayor presencia es << ge_tp_dominante >>, que abarca << ge_tp_dominante_pct >> \% de la superficie regional.
 
-El municipio está constituido predominantemente por la unidad geológica << ge_dg_geo_predom_texto >>. Los suelos dominantes corresponden a << ge_dg_edaf_predom_texto >> (ver cuadro~\ref{tabla_ge_sintesis}).
+El clima predominante es << ge_cl_tipo_predominante >>, presente en el << ge_cl_pct_predominante >> \% del territorio. La temperatura media anual es de << ge_tm_media_anual >> °C y la precipitación acumulada anual promedio es de << ge_p_acumulada_anual >> mm. El viento dominante proviene de << ge_dg_viento_predom >>, con una frecuencia del << ge_dg_viento_predom_fr >> \%.
+
+La unidad geológica con mayor presencia es << ge_geo_dominante >>, que ocupa el << ge_geo_dominante_pct >> \% de la superficie regional. El tipo de suelo predominante es << ge_ed_dominante >>, con una cobertura del << ge_ed_dominante_pct >> \%.
 
 <% if ge_dg_viento_grafica_activa %>
 \begin{figure}[H]
@@ -43,61 +45,73 @@ El municipio está constituido predominantemente por la unidad geológica << ge_
 \newpage
 \setlength{\tabcolsep}{3pt}
 \footnotesize
-\begin{longtable}{>{\raggedright\arraybackslash}m{\dimexpr0.50\linewidth - 2\tabcolsep\relax}
-                  >{\raggedright\arraybackslash}m{\dimexpr0.50\linewidth - 2\tabcolsep\relax}}
-
-\caption{\textbf{Síntesis geoespacial del territorio de << ge_dg_nombre >>} \\
-<< ge_anio.sintesis >>}
+\begin{longtable}{
+  >{\raggedright\arraybackslash}m{\dimexpr0.50\linewidth - 2\tabcolsep\relax}
+  >{\raggedright\arraybackslash}m{\dimexpr0.50\linewidth - 2\tabcolsep\relax}
+}
+\caption{\textbf{Síntesis geoespacial del territorio de la región << nombre_region >>} \\ << ge_anio.sintesis >>}
 \label{tabla_ge_sintesis} \\
-
 \hline
 \rowcolor{gray!30}
-\thh{0.50}{Variable}  &  \thh{0.50}{Valor} \\
+\thh{0.50}{Variable} & \thh{0.50}{Valor regional} \\
 \hline
 \endfirsthead
-
 \multicolumn{2}{l}{\small\textbf{(continuación)}} \\
 \hline
 \rowcolor{gray!30}
-\thh{0.50}{Variable}  &  \thh{0.50}{Valor} \\
+\thh{0.50}{Variable} & \thh{0.50}{Valor regional} \\
 \hline
 \endhead
-
 \hline
 \multicolumn{2}{r}{\small\textbf{(continúa)}} \\
 \endfoot
-
 \hline
-\tablefooterrow{2}{<< ge_fuente.sintesis >>}
+\tablefooterrow{2}{Fuente: & IIEG, con base en IIEG. Mapa General del Estado de Jalisco, 2012. INEGI. Conjunto de datos vectoriales Geológicos serie I, 1988. INEGI. Carta edafológica escala 1:250 000 Serie III, 2025. INEGI. Conjunto nacional de información topográfica a escala 1:50 000, 2025. INEGI. Continuo de Elevaciones Mexicano 4.0, 2025. SMN. Información Estadística Climatológica, 1995-2025.}
 \endlastfoot
 
-Región & << ge_dg_region >> \\
+Región & << nombre_region >> \\
 \hline
-Superficie municipal (km$^2$) & << ge_dg_area_km2 >> \\
+Número de municipios & << ge_dg_numero_municipios >> \\
 \hline
-Cabecera municipal & << ge_dg_nombre_cabecera >> \\
+Superficie regional (km$^2$) & << ge_dg_superficie_region_km2 >> \\
 \hline
-Coordenadas de cabecera & << ge_dg_lat >>, << ge_dg_lon >> \\
+Participación en la superficie estatal (\%) & << ge_dg_porcentaje_superficie_estatal >> \\
 \hline
-Altitud de cabecera (msnm) & << ge_dg_elev1 >> \\
+Municipio de mayor superficie & << ge_dg_municipio_mayor_superficie >> \\
 \hline
-Rango altitudinal (msnm) & << ge_dg_elevmin >> -- << ge_dg_elevmax >> \\
+Municipio de menor superficie & << ge_dg_municipio_menor_superficie >> \\
 \hline
-Pendiente predominante & << ge_dg_pendiente_predom >> \\
+Altitud mínima regional (msnm) & << ge_dg_altitud_minima_region >> \\
 \hline
-Clima predominante & << ge_dg_clima_predom >> \\
+Localización del punto de menor elevación & << ge_dg_municipio_altitud_minima >> — << ge_dg_altitud_minima_lat >>, << ge_dg_altitud_minima_lon >> \\
 \hline
-Temperatura media anual (°C) & << ge_dg_temp_media >> \\
+Altitud máxima regional (msnm) & << ge_dg_altitud_maxima_region >> \\
 \hline
-Precipitación acumulada anual (mm) & << ge_dg_prec_acum >> \\
+Localización del punto de mayor elevación & << ge_dg_municipio_altitud_maxima >> — << ge_dg_altitud_maxima_lat >>, << ge_dg_altitud_maxima_lon >> \\
 \hline
-Geología predominante & << ge_dg_geo_predom >> \\
+Mayor altitud media municipal (msnm) & << ge_dg_municipio_altitud_media_mayor >> — << ge_dg_altitud_media_mayor >> \\
 \hline
-Suelos dominantes & << ge_dg_edaf_predom >> \\
+Menor altitud media municipal (msnm) & << ge_dg_municipio_altitud_media_menor >> — << ge_dg_altitud_media_menor >> \\
+\hline
+Pendiente predominante & << ge_tp_dominante >> \\
+\hline
+Clima predominante & << ge_cl_tipo_predominante >> \\
+\hline
+Temperatura media anual (°C) & << ge_tm_media_anual >> \\
+\hline
+Precipitación acumulada anual (mm) & << ge_p_acumulada_anual >> \\
+\hline
+Viento dominante & << ge_dg_viento_predom >> \\
+\hline
+Geología predominante & << ge_geo_dominante >> \\
+\hline
+Suelo dominante & << ge_ed_dominante >> \\
 \hline
 
 \end{longtable}
 \normalsize
+
+
 <% if ge_base_mapa_activo %>
 \clearpage
 \mapatitulo*{Mapa base de la región << nombre_region >>, << ge_anio_mapa.base >>}
@@ -109,13 +123,14 @@ Suelos dominantes & << ge_dg_edaf_predom >> \\
 % & INEGI. Conjunto de datos vectoriales de uso del suelo y vegetación Serie VII, 2018.}
 <% endif %>
 
+
 \subsection{Subsistema natural}
 
 \subsubsection{Geología}
 
-Con base en el Conjunto de datos vectoriales Geológicos serie I (INEGI, 1988), la unidad geológica predominante en el municipio es << ge_geo_dominante_texto >>, con una cobertura de << ge_geo_dominante_pct >> \% de la superficie municipal.
+Con base en el Conjunto de datos vectoriales Geológicos serie I (INEGI, 1988), la unidad geológica con mayor presencia en la región << nombre_region >> es << ge_geo_dominante >>, que ocupa el << ge_geo_dominante_pct >> \% de la superficie regional; a escala estatal, esta misma unidad representa el << ge_geo_pct_unidad_predominante_estado >> \%. La segunda unidad con mayor presencia es << ge_geo_secundario >>, con << ge_geo_secundario_pct >> \% del territorio regional.
 
-Le sigue la unidad << ge_geo_secundario_texto >>, con << ge_geo_secundario_pct >> \%. El resto de las unidades geológicas representa en conjunto << ge_geo_demas_pct >> \% del territorio.
+La diversidad de unidades geológicas varía entre los municipios de la región << nombre_region >>. Para caracterizarla, se utiliza el índice de Shannon normalizado (de 0 a 1), calculado a partir de la proporción de la superficie municipal ocupada por cada unidad geológica. << ge_geo_municipio_diversidad_mayor >> presenta el valor más alto del índice (<< ge_geo_municipio_diversidad_mayor_indice >>), mientras que << ge_geo_municipio_diversidad_menor >> registra el menor valor, (<< ge_geo_municipio_diversidad_menor_indice >>).
 
 <% if ge_geo_grafica_activa %>
 \begin{figure}[H]
@@ -126,35 +141,33 @@ Le sigue la unidad << ge_geo_secundario_texto >>, con << ge_geo_secundario_pct >
 \tablefooter{<< ge_fuente.geologia >>}
 <% endif %>
 
-\newpage
 <% if ge_geo_unidades_geologicas %>
+\newpage
 \setlength{\tabcolsep}{3pt}
 \footnotesize
-\begin{longtable}{>{\raggedright\arraybackslash}m{\dimexpr0.40\linewidth - 2\tabcolsep\relax}
-                  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
-                  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}}
-
-\caption{\textbf{Geología de la región << nombre_region >>} \\
-<< ge_anio.geologia >>}
+\begin{longtable}{
+  >{\raggedright\arraybackslash}m{\dimexpr0.40\linewidth - 2\tabcolsep\relax}
+  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
+  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
+}
+\caption{\textbf{Geología de la región << nombre_region >>} \\ << ge_anio.geologia >>}
 \label{tabla_ge_geologia} \\
-
 \hline
 \rowcolor{gray!30}
-\thh{0.40}{Roca}  &  \thhl{0.30}{Superficie (ha)}  &  \thhl{0.30}{Distribución (\%)} \\
+\thh{0.40}{Unidad geológica} & \thhl{0.30}{Superficie (ha)} & \thhl{0.30}{Porcentaje (\%)} \\
 \hline
 \endfirsthead
 \multicolumn{3}{l}{\small\textbf{(continuación)}} \\
 \hline
 \rowcolor{gray!30}
-\thh{0.40}{Roca}  &  \thhl{0.30}{Superficie (ha)}  &  \thhl{0.30}{Distribución (\%)} \\
+\thh{0.40}{Unidad geológica} & \thhl{0.30}{Superficie (ha)} & \thhl{0.30}{Porcentaje (\%)} \\
 \hline
 \endhead
 \hline
 \multicolumn{3}{r}{\small\textbf{(continúa)}} \\
 \endfoot
-
 \hline
-\tablefooterrow{3}{<< ge_fuente.geologia >>}
+\tablefooterrow{3}{Fuente: & IIEG, con base en INEGI. Conjunto de datos vectoriales Geológicos serie I, 1988.}
 \endlastfoot
 
 <% for fila in ge_geo_unidades_geologicas %>
@@ -164,6 +177,47 @@ Le sigue la unidad << ge_geo_secundario_texto >>, con << ge_geo_secundario_pct >
 
 \end{longtable}
 \normalsize
+
+<% endif %>
+
+<% if ge_geo_municipios %>
+\newpage
+\setlength{\tabcolsep}{3pt}
+\footnotesize
+\begin{longtable}{
+  >{\raggedright\arraybackslash}m{\dimexpr0.25\linewidth - 2\tabcolsep\relax}
+  >{\raggedright\arraybackslash}m{\dimexpr0.25\linewidth - 2\tabcolsep\relax}
+  >{\raggedleft\arraybackslash}m{\dimexpr0.25\linewidth - 2\tabcolsep\relax}
+  >{\raggedleft\arraybackslash}m{\dimexpr0.25\linewidth - 2\tabcolsep\relax}
+}
+\caption{\textbf{Unidad predominante y diversidad geológica de los municipios de la región << nombre_region >>} \\ << ge_anio.geologia >>}
+\label{tabla_ge_geo_municipios} \\
+\hline
+\rowcolor{gray!30}
+\thh{0.25}{Municipio} & \thh{0.25}{Unidad geológica predominante} & \thhl{0.25}{Superficie municipal (\%)} & \thhl{0.25}{Índice de Shannon normalizado (0–1)} \\
+\hline
+\endfirsthead
+\multicolumn{4}{l}{\small\textbf{(continuación)}} \\
+\hline
+\rowcolor{gray!30}
+\thh{0.25}{Municipio} & \thh{0.25}{Unidad geológica predominante} & \thhl{0.25}{Superficie municipal (\%)} & \thhl{0.25}{Índice de Shannon normalizado (0–1)} \\
+\hline
+\endhead
+\hline
+\multicolumn{4}{r}{\small\textbf{(continúa)}} \\
+\endfoot
+\hline
+\tablefooterrow{4}{Fuente: & IIEG, con base en INEGI. Conjunto de datos vectoriales Geológicos serie I, 1988.}
+\endlastfoot
+
+<% for fila in ge_geo_municipios %>
+<< fila.municipio >> & << fila.unidad_predominante >> & << fila.porcentaje_predominante >> & << fila.indice_shannon >> \\
+\hline
+<% endfor %>
+
+\end{longtable}
+\normalsize
+
 <% endif %>
 
 <% if ge_geo_mapa_activo %>
@@ -178,9 +232,9 @@ Le sigue la unidad << ge_geo_secundario_texto >>, con << ge_geo_secundario_pct >
 
 \subsubsection{Edafología}
 
-Con base en la Carta edafológica escala 1:250\,000 Serie III (INEGI, 2025), los suelos predominantes en el municipio corresponden a << ge_ed_dominante_texto >>, con una cobertura de << ge_ed_dominante_pct >> \% del territorio.
+Con base en la Carta edafológica escala 1:250 000 Serie III (INEGI, 2025), el tipo de suelo con mayor presencia en la región << nombre_region >> es << ge_ed_dominante >>, que cubre el << ge_ed_dominante_pct >> \% del territorio; a escala estatal, este mismo tipo de suelo representa el << ge_ed_pct_suelo_predominante_estado >> \%. Le sigue << ge_ed_secundario >>, con el << ge_ed_secundario_pct >> \% de la superficie regional.
 
-Le sigue la unidad << ge_ed_secundario_texto >>, con << ge_ed_secundario_pct >> \%. El resto de los tipos de suelo representa en conjunto << ge_ed_demas_pct >> \% de la superficie municipal.
+La diversidad de tipos de suelo varía entre los municipios de la región << nombre_region >>. Para caracterizarla, se utiliza el índice de Shannon normalizado (de 0 a 1), calculado a partir de la proporción de la superficie municipal ocupada por cada tipo de suelo. << ge_ed_municipio_diversidad_mayor >> presenta el valor más alto del índice (<< ge_ed_municipio_diversidad_mayor_indice >>), mientras que << ge_ed_municipio_diversidad_menor >> registra el menor valor, (<< ge_ed_municipio_diversidad_menor_indice >>).
 
 <% if ge_ed_grafica_activa %>
 \begin{figure}[H]
@@ -191,35 +245,33 @@ Le sigue la unidad << ge_ed_secundario_texto >>, con << ge_ed_secundario_pct >> 
 \tablefooter{<< ge_fuente.edafologia >>}
 <% endif %>
 
-\newpage
 <% if ge_ed_tipos_suelo %>
+\newpage
 \setlength{\tabcolsep}{3pt}
 \footnotesize
-\begin{longtable}{>{\raggedright\arraybackslash}m{\dimexpr0.40\linewidth - 2\tabcolsep\relax}
-                  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
-                  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}}
-
-\caption{\textbf{Edafología de la región << nombre_region >>} \\
-<< ge_anio.edafologia >>}
+\begin{longtable}{
+  >{\raggedright\arraybackslash}m{\dimexpr0.40\linewidth - 2\tabcolsep\relax}
+  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
+  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
+}
+\caption{\textbf{Edafología de la región << nombre_region >>} \\ << ge_anio.edafologia >>}
 \label{tabla_ge_edafologia} \\
-
 \hline
 \rowcolor{gray!30}
-\thh{0.40}{Tipo de suelo}  &  \thhl{0.30}{Superficie (ha)}  &  \thhl{0.30}{Porcentaje} \\
+\thh{0.40}{Tipo de suelo} & \thhl{0.30}{Superficie (ha)} & \thhl{0.30}{Porcentaje (\%)} \\
 \hline
 \endfirsthead
 \multicolumn{3}{l}{\small\textbf{(continuación)}} \\
 \hline
 \rowcolor{gray!30}
-\thh{0.40}{Tipo de suelo}  &  \thhl{0.30}{Superficie (ha)}  &  \thhl{0.30}{Porcentaje} \\
+\thh{0.40}{Tipo de suelo} & \thhl{0.30}{Superficie (ha)} & \thhl{0.30}{Porcentaje (\%)} \\
 \hline
 \endhead
 \hline
 \multicolumn{3}{r}{\small\textbf{(continúa)}} \\
 \endfoot
-
 \hline
-\tablefooterrow{3}{<< ge_fuente.edafologia >>}
+\tablefooterrow{3}{Fuente: & IIEG, con base en INEGI. Carta edafológica escala 1:250 000 Serie III, 2025.}
 \endlastfoot
 
 <% for fila in ge_ed_tipos_suelo %>
@@ -229,6 +281,47 @@ Le sigue la unidad << ge_ed_secundario_texto >>, con << ge_ed_secundario_pct >> 
 
 \end{longtable}
 \normalsize
+
+<% endif %>
+
+<% if ge_ed_municipios %>
+\newpage
+\setlength{\tabcolsep}{3pt}
+\footnotesize
+\begin{longtable}{
+  >{\raggedright\arraybackslash}m{\dimexpr0.25\linewidth - 2\tabcolsep\relax}
+  >{\raggedright\arraybackslash}m{\dimexpr0.25\linewidth - 2\tabcolsep\relax}
+  >{\raggedleft\arraybackslash}m{\dimexpr0.25\linewidth - 2\tabcolsep\relax}
+  >{\raggedleft\arraybackslash}m{\dimexpr0.25\linewidth - 2\tabcolsep\relax}
+}
+\caption{\textbf{Tipo de suelo predominante y diversidad edafológica de los municipios de la región << nombre_region >>} \\ << ge_anio.edafologia >>}
+\label{tabla_ge_ed_municipios} \\
+\hline
+\rowcolor{gray!30}
+\thh{0.25}{Municipio} & \thh{0.25}{Tipo de suelo predominante} & \thhl{0.25}{Superficie municipal (\%)} & \thhl{0.25}{Índice de Shannon normalizado (0–1)} \\
+\hline
+\endfirsthead
+\multicolumn{4}{l}{\small\textbf{(continuación)}} \\
+\hline
+\rowcolor{gray!30}
+\thh{0.25}{Municipio} & \thh{0.25}{Tipo de suelo predominante} & \thhl{0.25}{Superficie municipal (\%)} & \thhl{0.25}{Índice de Shannon normalizado (0–1)} \\
+\hline
+\endhead
+\hline
+\multicolumn{4}{r}{\small\textbf{(continúa)}} \\
+\endfoot
+\hline
+\tablefooterrow{4}{Fuente: & IIEG, con base en INEGI. Carta edafológica escala 1:250 000 Serie III, 2025.}
+\endlastfoot
+
+<% for fila in ge_ed_municipios %>
+<< fila.municipio >> & << fila.suelo_predominante >> & << fila.porcentaje_predominante >> & << fila.indice_shannon >> \\
+\hline
+<% endfor %>
+
+\end{longtable}
+\normalsize
+
 <% endif %>
 
 <% if ge_ed_mapa_activo %>
@@ -243,9 +336,9 @@ Le sigue la unidad << ge_ed_secundario_texto >>, con << ge_ed_secundario_pct >> 
 
 \subsubsection{Topografía y pendientes}
 
-Con base en el Conjunto Nacional de Información Topográfica a escala 1:50\,000 y el Continuo de Elevaciones Mexicano 4.0 (INEGI, 2025), la topografía del municipio presenta un predominio de pendientes del rango << ge_tp_dominante_texto >>, las cuales abarcan << ge_tp_dominante_pct >> \% del territorio.
+Con base en el Conjunto Nacional de Información Topográfica a escala 1:50 000 y el Continuo de Elevaciones Mexicano 4.0 (INEGI, 2025), en la región << nombre_region >> predomina el rango de pendiente << ge_tp_dominante >>, que comprende << ge_tp_dominante_pct >> \% de la superficie regional. Le sigue el rango << ge_tp_secundario >>, con << ge_tp_secundario_pct >> \%. Las pendientes superiores a 30 \% ocupan el << ge_tp_pct_mayor_30_region >> \% de la superficie regional. En el conjunto del estado de Jalisco, este tipo de pendiente comprende el << ge_tp_pct_mayor_30_estado >> \% de su territorio. De acuerdo con este indicador, la región ocupa la << ge_tp_lugar_estatal_pendiente_fuerte_texto >> posición entre las doce regiones de Jalisco, ordenadas de mayor a menor proporción de superficie con pendientes superiores a 30 \%.
 
-El rango << ge_tp_secundario_texto >> representa << ge_tp_secundario_pct >> \%. El resto de los rangos de pendiente equivale a << ge_tp_demas_pct >> \% del territorio.
+El relieve presenta diferencias entre los municipios de la región << nombre_region >>. << ge_tp_municipio_mayor_pendiente_fuerte >> registra la mayor proporción de superficie municipal con pendientes superiores a 30 \%, que representan el << ge_tp_porcentaje_mayor_pendiente_fuerte >> \% de su territorio. En contraste, << ge_tp_municipio_menor_pendiente_fuerte >> presenta la menor proporción de terrenos con estas pendientes, con el << ge_tp_porcentaje_menor_pendiente_fuerte >> \% de su superficie. Por otra parte, << ge_tp_municipio_mayor_pendiente_suave >> registra la mayor proporción de terrenos con pendientes de hasta 5 \%, equivalentes al << ge_tp_porcentaje_mayor_pendiente_suave >> \% de su territorio.
 
 <% if ge_tp_grafica_activa %>
 \begin{figure}[H]
@@ -256,35 +349,33 @@ El rango << ge_tp_secundario_texto >> representa << ge_tp_secundario_pct >> \%. 
 \tablefooter{<< ge_fuente.topografia >>}
 <% endif %>
 
-\newpage
 <% if ge_tp_pendientes %>
+\newpage
 \setlength{\tabcolsep}{3pt}
 \footnotesize
-\begin{longtable}{>{\raggedright\arraybackslash}m{\dimexpr0.40\linewidth - 2\tabcolsep\relax}
-                  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
-                  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}}
-
-\caption{\textbf{Topografía y pendientes de la región << nombre_region >>} \\
-<< ge_anio.topografia >>}
+\begin{longtable}{
+  >{\raggedright\arraybackslash}m{\dimexpr0.40\linewidth - 2\tabcolsep\relax}
+  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
+  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
+}
+\caption{\textbf{Topografía y pendientes de la región << nombre_region >>} \\ << ge_anio.topografia >>}
 \label{tabla_ge_pendientes} \\
-
 \hline
 \rowcolor{gray!30}
-\thh{0.40}{Rango de pendiente}  &  \thhl{0.30}{Superficie (ha)}  &  \thhl{0.30}{Porcentaje} \\
+\thh{0.40}{Rango de pendiente} & \thhl{0.30}{Superficie (ha)} & \thhl{0.30}{Porcentaje (\%)} \\
 \hline
 \endfirsthead
 \multicolumn{3}{l}{\small\textbf{(continuación)}} \\
 \hline
 \rowcolor{gray!30}
-\thh{0.40}{Rango de pendiente}  &  \thhl{0.30}{Superficie (ha)}  &  \thhl{0.30}{Porcentaje} \\
+\thh{0.40}{Rango de pendiente} & \thhl{0.30}{Superficie (ha)} & \thhl{0.30}{Porcentaje (\%)} \\
 \hline
 \endhead
 \hline
 \multicolumn{3}{r}{\small\textbf{(continúa)}} \\
 \endfoot
-
 \hline
-\tablefooterrow{3}{<< ge_fuente.topografia >>}
+\tablefooterrow{3}{Fuente: & IIEG, con base en INEGI. Conjunto nacional de información topográfica a escala 1:50 000, 2025. INEGI. Continuo de Elevaciones Mexicano 4.0, 2025.}
 \endlastfoot
 
 <% for fila in ge_tp_pendientes %>
@@ -294,6 +385,46 @@ El rango << ge_tp_secundario_texto >> representa << ge_tp_secundario_pct >> \%. 
 
 \end{longtable}
 \normalsize
+
+<% endif %>
+
+<% if ge_tp_municipios %>
+\newpage
+\setlength{\tabcolsep}{3pt}
+\footnotesize
+\begin{longtable}{
+  >{\raggedright\arraybackslash}m{\dimexpr0.40\linewidth - 2\tabcolsep\relax}
+  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
+  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
+}
+\caption{\textbf{Topografía y pendientes de los municipios de la región << nombre_region >>} \\ << ge_anio.topografia >>}
+\label{tabla_ge_tp_municipios} \\
+\hline
+\rowcolor{gray!30}
+\thh{0.40}{Municipio} & \thhl{0.30}{Pendiente $\leq$ 5 \%} & \thhl{0.30}{Pendiente > 30 \%} \\
+\hline
+\endfirsthead
+\multicolumn{3}{l}{\small\textbf{(continuación)}} \\
+\hline
+\rowcolor{gray!30}
+\thh{0.40}{Municipio} & \thhl{0.30}{Pendiente $\leq$ 5 \%} & \thhl{0.30}{Pendiente > 30 \%} \\
+\hline
+\endhead
+\hline
+\multicolumn{3}{r}{\small\textbf{(continúa)}} \\
+\endfoot
+\hline
+\tablefooterrow{3}{Fuente: & IIEG, con base en INEGI. Conjunto nacional de información topográfica a escala 1:50 000, 2025. INEGI. Continuo de Elevaciones Mexicano 4.0, 2025.}
+\endlastfoot
+
+<% for fila in ge_tp_municipios %>
+<< fila.municipio >> & << fila.pendiente_hasta_5_pct >> & << fila.pendiente_mayor_30_pct >> \\
+\hline
+<% endfor %>
+
+\end{longtable}
+\normalsize
+
 <% endif %>
 
 <% if ge_tp_mapa_activo %>
@@ -308,7 +439,11 @@ El rango << ge_tp_secundario_texto >> representa << ge_tp_secundario_pct >> \%. 
 
 \subsubsection{Cuencas}
 
-Con base en la información sobre disponibilidad y ordenamiento de aguas superficiales (CONAGUA, 2023), el territorio municipal se ubica dentro de las cuencas << ge_cu_nombres_cuencas >>. << ge_cu_disponibilidad_texto >>
+Con base en la información sobre disponibilidad y ordenamiento de aguas superficiales (CONAGUA, 2023), el territorio de la región << nombre_region >> se encuentra comprendido en las cuencas << ge_cu_nombres_cuencas >>. De la superficie regional, el << ge_cu_pct_con_disponibilidad >> \% presenta disponibilidad de agua superficial y el << ge_cu_pct_sin_disponibilidad >> \% se encuentra sin disponibilidad.
+
+Por municipio, << ge_cu_municipio_mayor_disponibilidad >> presenta la mayor proporción de superficie clasificada con disponibilidad de agua superficial, con el << ge_cu_pct_municipio_mayor_disponibilidad >> \% de su territorio. En contraste, << ge_cu_municipio_menor_disponibilidad >> presenta la menor proporción, con el << ge_cu_pct_municipio_menor_disponibilidad >> \% de su superficie.
+
+En cuanto al ordenamiento de las aguas superficiales, predomina << ge_cu_ordenamiento_predominante >>, que abarca el << ge_cu_pct_ordenamiento_predominante >> \% del territorio regional.
 
 <% if ge_cu_grafica_activa %>
 \begin{figure}[H]
@@ -319,52 +454,84 @@ Con base en la información sobre disponibilidad y ordenamiento de aguas superfi
 \tablefooter{<< ge_fuente.cuencas >>}
 <% endif %>
 
+<% if ge_cu_disponibilidad %>
 \newpage
 \setlength{\tabcolsep}{3pt}
 \footnotesize
-\begin{longtable}{>{\raggedright\arraybackslash}m{\dimexpr0.40\linewidth - 2\tabcolsep\relax}
-                  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
-                  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}}
-
-\caption{\textbf{Cuencas de la región << nombre_region >>} \\
-<< ge_anio.cuencas >>}
+\begin{longtable}{
+  >{\raggedright\arraybackslash}m{\dimexpr0.40\linewidth - 2\tabcolsep\relax}
+  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
+  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
+}
+\caption{\textbf{Disponibilidad de aguas superficiales en cuencas hidrológicas de la región << nombre_region >>} \\ << ge_anio.cuencas >>}
 \label{tabla_ge_cuencas} \\
-
 \hline
 \rowcolor{gray!30}
-\thh{0.40}{Estatus}  &  \thhl{0.30}{Superficie (ha)}  &  \thhl{0.30}{Porcentaje} \\
+\thh{0.40}{Estatus} & \thhl{0.30}{Superficie (ha)} & \thhl{0.30}{Porcentaje (\%)} \\
 \hline
 \endfirsthead
 \multicolumn{3}{l}{\small\textbf{(continuación)}} \\
 \hline
 \rowcolor{gray!30}
-\thh{0.40}{Estatus}  &  \thhl{0.30}{Superficie (ha)}  &  \thhl{0.30}{Porcentaje} \\
+\thh{0.40}{Estatus} & \thhl{0.30}{Superficie (ha)} & \thhl{0.30}{Porcentaje (\%)} \\
 \hline
 \endhead
 \hline
 \multicolumn{3}{r}{\small\textbf{(continúa)}} \\
 \endfoot
-
 \hline
-\tablefooterrow{3}{<< ge_fuente.cuencas >>}
+\tablefooterrow{3}{Fuente: & IIEG, con base en CONAGUA. Disponibilidad en cuencas hidrológicas, 2023.}
 \endlastfoot
 
 <% for fila in ge_cu_disponibilidad %>
 << fila.categoria >> & << fila.superficie_ha >> & << fila.porcentaje >> \\
 \hline
 <% endfor %>
+
+\end{longtable}
+\normalsize
+
+<% endif %>
+
 <% if ge_cu_ordenamiento %>
-\rowcolor{gray!30}
-\thh{0.40}{Tipos de ordenamiento}  &  \thhl{0.30}{Superficie (ha)}  &  \thhl{0.30}{Porcentaje} \\
+\newpage
+\setlength{\tabcolsep}{3pt}
+\footnotesize
+\begin{longtable}{
+  >{\raggedright\arraybackslash}m{\dimexpr0.40\linewidth - 2\tabcolsep\relax}
+  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
+  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
+}
+\caption{\textbf{Ordenamientos de aguas superficiales en cuencas hidrológicas de la región << nombre_region >>} \\ << ge_anio.cuencas >>}
+\label{tabla_ge_cu_ordenamiento} \\
 \hline
+\rowcolor{gray!30}
+\thh{0.40}{Tipo de ordenamiento} & \thhl{0.30}{Superficie (ha)} & \thhl{0.30}{Porcentaje (\%)} \\
+\hline
+\endfirsthead
+\multicolumn{3}{l}{\small\textbf{(continuación)}} \\
+\hline
+\rowcolor{gray!30}
+\thh{0.40}{Tipo de ordenamiento} & \thhl{0.30}{Superficie (ha)} & \thhl{0.30}{Porcentaje (\%)} \\
+\hline
+\endhead
+\hline
+\multicolumn{3}{r}{\small\textbf{(continúa)}} \\
+\endfoot
+\hline
+\tablefooterrow{3}{Fuente: & IIEG, con base en CONAGUA. Ordenamientos de aguas superficiales, 2023.}
+\endlastfoot
+
 <% for fila in ge_cu_ordenamiento %>
 << fila.categoria >> & << fila.superficie_ha >> & << fila.porcentaje >> \\
 \hline
 <% endfor %>
-<% endif %>
 
 \end{longtable}
 \normalsize
+
+<% endif %>
+
 <% if ge_cu_mapa_activo %>
 \clearpage
 \mapatitulo*{Cuencas de la región << nombre_region >>, << ge_anio_mapa.cuencas >>}
@@ -378,7 +545,11 @@ Con base en la información sobre disponibilidad y ordenamiento de aguas superfi
 
 \subsubsection{Acuíferos}
 
-<< ge_ac_texto >>
+Con base en la información sobre disponibilidad media anual de aguas subterráneas y condición de los acuíferos (CONAGUA, 2023), la región << nombre_region >> se ubica sobre los acuíferos << ge_ac_nombres_acuiferos >>. Del territorio regional, el << ge_ac_pct_con_disponibilidad >> \% corresponde a acuíferos con disponibilidad y el  << ge_ac_pct_sin_disponibilidad >> \% a acuíferos sin disponibilidad.
+
+Respecto a su condición, el << ge_ac_pct_sobreexplotado >> \% de la superficie regional se encuentra sobre acuíferos sobreexplotados y el << ge_ac_pct_no_sobreexplotado >> \% sobre acuíferos no sobreexplotados.
+
+<< ge_ac_municipio_mayor_sobreexplotacion >> registra la mayor proporción de territorio sobre acuíferos sobreexplotados, con el << ge_ac_pct_municipio_mayor_sobreexplotacion >> \%, mientras que en << ge_ac_municipio_menor_sobreexplotacion >> esta proporción es la menor de la región, con << ge_ac_pct_municipio_menor_sobreexplotacion >> \% en esta condición. A escala estatal, los acuíferos sobreexplotados abarcan el << ge_ac_pct_sobreexplotado_estado >> \% del territorio, frente al << ge_ac_pct_sobreexplotado >> \% en la región.
 
 <% if ge_ac_grafica_activa %>
 \begin{figure}[H]
@@ -389,55 +560,80 @@ Con base en la información sobre disponibilidad y ordenamiento de aguas superfi
 \tablefooter{<< ge_fuente.acuiferos >>}
 <% endif %>
 
-\tablafit{<< ge_ac_tabla_filas >>}
+\newpage
 \setlength{\tabcolsep}{3pt}
 \footnotesize
-\begin{longtable}{>{\raggedright\arraybackslash}m{\dimexpr0.40\linewidth - 2\tabcolsep\relax}
-                  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
-                  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}}
-
-\caption{\textbf{Acuíferos de la región << nombre_region >>} \\
-<< ge_anio.acuiferos >>}
+\begin{longtable}{
+  >{\raggedright\arraybackslash}m{\dimexpr0.40\linewidth - 2\tabcolsep\relax}
+  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
+  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
+}
+\caption{\textbf{Disponibilidad de aguas subterráneas en acuíferos de la región << nombre_region >>} \\ << ge_anio.acuiferos >>}
 \label{tabla_ge_acuiferos} \\
-
 \hline
 \rowcolor{gray!30}
-\thh{0.40}{Estatus}  &  \thhl{0.30}{Superficie (ha)}  &  \thhl{0.30}{Porcentaje} \\
+\thh{0.40}{Disponibilidad} & \thhl{0.30}{Superficie (ha)} & \thhl{0.30}{Porcentaje (\%)} \\
 \hline
 \endfirsthead
 \multicolumn{3}{l}{\small\textbf{(continuación)}} \\
 \hline
 \rowcolor{gray!30}
-\thh{0.40}{Estatus}  &  \thhl{0.30}{Superficie (ha)}  &  \thhl{0.30}{Porcentaje} \\
+\thh{0.40}{Disponibilidad} & \thhl{0.30}{Superficie (ha)} & \thhl{0.30}{Porcentaje (\%)} \\
 \hline
 \endhead
 \hline
 \multicolumn{3}{r}{\small\textbf{(continúa)}} \\
 \endfoot
-
 \hline
-\tablefooterrow{3}{<< ge_fuente.acuiferos >>}
+\tablefooterrow{3}{Fuente: & IIEG, con base en CONAGUA. Disponibilidad media anual de aguas subterráneas, 2023.}
 \endlastfoot
 
 Con disponibilidad & << ge_ac_sup_con_disponibilidad >> & << ge_ac_pct_con_disponibilidad >> \\
 \hline
 Sin disponibilidad & << ge_ac_sup_sin_disponibilidad >> & << ge_ac_pct_sin_disponibilidad >> \\
 \hline
-<% if ge_ac_sit_sin_clasificacion_activa %>
-Sin clasificación & << ge_ac_sup_sit_sin_clasificacion >> & << ge_ac_pct_sit_sin_clasificacion >> \\
-\hline
-<% endif %>
-No explotado & << ge_ac_sup_no_sobreexplotado >> & << ge_ac_pct_no_sobreexplotado >> \\
-\hline
-Sobreexplotado & << ge_ac_sup_sobreexplotado >> & << ge_ac_pct_sobreexplotado >> \\
-\hline
-<% if ge_ac_cond_sin_clasificacion_activa %>
-Sin clasificación & << ge_ac_sup_cond_sin_clasificacion >> & << ge_ac_pct_cond_sin_clasificacion >> \\
-\hline
-<% endif %>
 
 \end{longtable}
 \normalsize
+
+
+\newpage
+\setlength{\tabcolsep}{3pt}
+\footnotesize
+\begin{longtable}{
+  >{\raggedright\arraybackslash}m{\dimexpr0.40\linewidth - 2\tabcolsep\relax}
+  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
+  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
+}
+\caption{\textbf{Condición de los acuíferos de la región << nombre_region >>} \\ << ge_anio.acuiferos >>}
+\label{tabla_ge_ac_condicion} \\
+\hline
+\rowcolor{gray!30}
+\thh{0.40}{Condición} & \thhl{0.30}{Superficie (ha)} & \thhl{0.30}{Porcentaje (\%)} \\
+\hline
+\endfirsthead
+\multicolumn{3}{l}{\small\textbf{(continuación)}} \\
+\hline
+\rowcolor{gray!30}
+\thh{0.40}{Condición} & \thhl{0.30}{Superficie (ha)} & \thhl{0.30}{Porcentaje (\%)} \\
+\hline
+\endhead
+\hline
+\multicolumn{3}{r}{\small\textbf{(continúa)}} \\
+\endfoot
+\hline
+\tablefooterrow{3}{Fuente: & IIEG, con base en CONAGUA. Condición de acuíferos, 2023.}
+\endlastfoot
+
+No sobreexplotado & << ge_ac_sup_no_sobreexplotado >> & << ge_ac_pct_no_sobreexplotado >> \\
+\hline
+Sobreexplotado & << ge_ac_sup_sobreexplotado >> & << ge_ac_pct_sobreexplotado >> \\
+\hline
+
+\end{longtable}
+\normalsize
+
+
 <% if ge_ac_mapa_activo %>
 \clearpage
 \mapatitulo*{Acuíferos de la región << nombre_region >>, << ge_anio_mapa.acuiferos >>}
@@ -451,7 +647,9 @@ Sin clasificación & << ge_ac_sup_cond_sin_clasificacion >> & << ge_ac_pct_cond_
 
 \subsubsection{Temperatura}
 
-Con base en la Información Estadística Climatológica del Servicio Meteorológico Nacional para el periodo 1995-2025, la temperatura media mensual indica que la media anual es de << ge_tm_media_anual >> °C. Los valores mínimos promedio más bajos se presentan en << ge_t_meses_menor_temp >>, con << ge_t_valores_menor_temp >>, mientras que las temperaturas máximas promedio más altas se registran en << ge_t_meses_mayor_temp >>, con << ge_t_valores_mayor_temp >>.
+Con base en la Información Estadística Climatológica del Servicio Meteorológico Nacional (SMN) para el período 1995-2025, la temperatura media anual de la región << nombre_region >> es de << ge_tm_media_anual >> °C. Las temperaturas mínimas promedio más bajas se presentan en << ge_t_meses_menor_temp >>, con << ge_tm_minima_mes >> °C, mientras que las máximas promedio se registran en << ge_t_meses_mayor_temp >>, con << ge_tm_maxima_mes >> °C.
+
+Por municipio, << ge_tm_municipio_media_mayor >> registra la temperatura media anual más alta, con << ge_tm_media_mayor_municipal >> °C, y << ge_tm_municipio_media_menor >> la más baja, con << ge_tm_media_menor_municipal >> °C. La temperatura media anual de Jalisco es de << ge_tm_temperatura_media_estatal >> °C.
 
 <% if ge_tm_grafica_activa %>
 \begin{figure}[H]
@@ -465,32 +663,30 @@ Con base en la Información Estadística Climatológica del Servicio Meteorológ
 \newpage
 \setlength{\tabcolsep}{3pt}
 \footnotesize
-\begin{longtable}{>{\raggedright\arraybackslash}m{\dimexpr0.25\linewidth - 2\tabcolsep\relax}
-                  >{\raggedleft\arraybackslash}m{\dimexpr0.25\linewidth - 2\tabcolsep\relax}
-                  >{\raggedleft\arraybackslash}m{\dimexpr0.25\linewidth - 2\tabcolsep\relax}
-                  >{\raggedleft\arraybackslash}m{\dimexpr0.25\linewidth - 2\tabcolsep\relax}}
-
-\caption{\textbf{Temperatura mensual y anual de la región << nombre_region >>} \\
-<< ge_anio.temperatura >>}
+\begin{longtable}{
+  >{\raggedright\arraybackslash}m{\dimexpr0.25\linewidth - 2\tabcolsep\relax}
+  >{\raggedleft\arraybackslash}m{\dimexpr0.25\linewidth - 2\tabcolsep\relax}
+  >{\raggedleft\arraybackslash}m{\dimexpr0.25\linewidth - 2\tabcolsep\relax}
+  >{\raggedleft\arraybackslash}m{\dimexpr0.25\linewidth - 2\tabcolsep\relax}
+}
+\caption{\textbf{Temperatura mensual y anual de la región << nombre_region >>} \\ << ge_anio.temperatura >>}
 \label{tabla_ge_temperatura} \\
-
 \hline
 \rowcolor{gray!30}
-\thh{0.25}{Mes}  &  \thhl{0.25}{Mínima (°C)}  &  \thhl{0.25}{Máxima (°C)}  &  \thhl{0.25}{Media (°C)} \\
+\thh{0.25}{Mes} & \thhl{0.25}{Mínima (°C)} & \thhl{0.25}{Máxima (°C)} & \thhl{0.25}{Media (°C)} \\
 \hline
 \endfirsthead
 \multicolumn{4}{l}{\small\textbf{(continuación)}} \\
 \hline
 \rowcolor{gray!30}
-\thh{0.25}{Mes}  &  \thhl{0.25}{Mínima (°C)}  &  \thhl{0.25}{Máxima (°C)}  &  \thhl{0.25}{Media (°C)} \\
+\thh{0.25}{Mes} & \thhl{0.25}{Mínima (°C)} & \thhl{0.25}{Máxima (°C)} & \thhl{0.25}{Media (°C)} \\
 \hline
 \endhead
 \hline
 \multicolumn{4}{r}{\small\textbf{(continúa)}} \\
 \endfoot
-
 \hline
-\tablefooterrow{4}{<< ge_fuente.temperatura >>}
+\tablefooterrow{4}{Fuente: & IIEG, con base en SMN. Información Estadística Climatológica, 1995-2025}
 \endlastfoot
 
 \rowcolor{filaResaltada}
@@ -523,6 +719,48 @@ Diciembre & << ge_tm_min_dic >> & << ge_tm_max_dic >> & << ge_tm_med_dic >> \\
 
 \end{longtable}
 \normalsize
+
+
+<% if ge_tm_municipios %>
+\newpage
+\setlength{\tabcolsep}{3pt}
+\footnotesize
+\begin{longtable}{
+  >{\raggedright\arraybackslash}m{\dimexpr0.25\linewidth - 2\tabcolsep\relax}
+  >{\raggedleft\arraybackslash}m{\dimexpr0.25\linewidth - 2\tabcolsep\relax}
+  >{\raggedleft\arraybackslash}m{\dimexpr0.25\linewidth - 2\tabcolsep\relax}
+  >{\raggedleft\arraybackslash}m{\dimexpr0.25\linewidth - 2\tabcolsep\relax}
+}
+\caption{\textbf{Temperaturas mínima, media y máxima promedio de los municipios de la región << nombre_region >>} \\ << ge_anio.temperatura >>}
+\label{tabla_ge_tm_municipios} \\
+\hline
+\rowcolor{gray!30}
+\thh{0.25}{Municipio} & \thhl{0.25}{Temperatura media anual (°C)} & \thhl{0.25}{Temperatura mínima promedio anual (°C)} & \thhl{0.25}{Temperatura máxima promedio anual (°C)} \\
+\hline
+\endfirsthead
+\multicolumn{4}{l}{\small\textbf{(continuación)}} \\
+\hline
+\rowcolor{gray!30}
+\thh{0.25}{Municipio} & \thhl{0.25}{Temperatura media anual (°C)} & \thhl{0.25}{Temperatura mínima promedio anual (°C)} & \thhl{0.25}{Temperatura máxima promedio anual (°C)} \\
+\hline
+\endhead
+\hline
+\multicolumn{4}{r}{\small\textbf{(continúa)}} \\
+\endfoot
+\hline
+\tablefooterrow{4}{Fuente: & IIEG, con base en SMN. Información Estadística Climatológica, 1995-2025}
+\endlastfoot
+
+<% for fila in ge_tm_municipios %>
+<< fila.municipio >> & << fila.media_anual >> & << fila.minima_promedio_anual >> & << fila.maxima_promedio_anual >> \\
+\hline
+<% endfor %>
+
+\end{longtable}
+\normalsize
+
+<% endif %>
+
 <% if ge_tm_mapa_activo %>
 \clearpage
 \mapatitulo*{Temperatura media anual histórica de la región << nombre_region >>, << ge_anio_mapa.temperatura >>}
@@ -535,7 +773,9 @@ Diciembre & << ge_tm_min_dic >> & << ge_tm_max_dic >> & << ge_tm_med_dic >> \\
 
 \subsubsection{Precipitación}
 
-Con base en la Información Estadística Climatológica del Servicio Meteorológico Nacional para el periodo 1995-2025, la precipitación acumulada anual estimada es de << ge_p_acumulada_anual >> mm. El mes de menor precipitación es << ge_p_mes_menos_lluvia >>, con una media de << ge_p_media_menos_lluvia >> mm, una mínima de << ge_p_min_menos_lluvia >> mm y una máxima de << ge_p_max_menos_lluvia >> mm. Por su parte, el mes de mayor precipitación es << ge_p_mes_mas_lluvia >>, con una media de << ge_p_media_mas_lluvia >> mm, una mínima de << ge_p_min_mas_lluvia >> mm y una máxima de << ge_p_max_mas_lluvia >> mm.
+Con base en la Información Estadística Climatológica del Servicio Meteorológico Nacional para el período 1995-2025, la precipitación acumulada anual promedio de la región << nombre_region >> es de << ge_p_acumulada_anual >> mm. << ge_p_mes_menos_lluvia >> es el mes con menor precipitación, con una media de << ge_p_media_menos_lluvia >> mm, mientras que << ge_p_mes_mas_lluvia >> registra la mayor, con << ge_p_media_mas_lluvia >> mm.
+
+A escala municipal, << ge_pp_municipio_mayor >> registra la mayor precipitación acumulada anual, con << ge_pp_precipitacion_municipio_mayor >> mm, y << ge_pp_municipio_menor >> la menor, con << ge_pp_precipitacion_municipio_menor >> mm. La precipitación acumulada anual promedio de Jalisco es de << ge_pp_precipitacion_estatal >> mm.
 
 <% if ge_pp_grafica_activa %>
 \begin{figure}[H]
@@ -549,32 +789,30 @@ Con base en la Información Estadística Climatológica del Servicio Meteorológ
 \newpage
 \setlength{\tabcolsep}{3pt}
 \footnotesize
-\begin{longtable}{>{\raggedright\arraybackslash}m{\dimexpr0.25\linewidth - 2\tabcolsep\relax}
-                  >{\raggedleft\arraybackslash}m{\dimexpr0.25\linewidth - 2\tabcolsep\relax}
-                  >{\raggedleft\arraybackslash}m{\dimexpr0.25\linewidth - 2\tabcolsep\relax}
-                  >{\raggedleft\arraybackslash}m{\dimexpr0.25\linewidth - 2\tabcolsep\relax}}
-
-\caption{\textbf{Precipitación media mensual y acumulada de la región << nombre_region >>} \\
-<< ge_anio.precipitacion >>}
+\begin{longtable}{
+  >{\raggedright\arraybackslash}m{\dimexpr0.25\linewidth - 2\tabcolsep\relax}
+  >{\raggedleft\arraybackslash}m{\dimexpr0.25\linewidth - 2\tabcolsep\relax}
+  >{\raggedleft\arraybackslash}m{\dimexpr0.25\linewidth - 2\tabcolsep\relax}
+  >{\raggedleft\arraybackslash}m{\dimexpr0.25\linewidth - 2\tabcolsep\relax}
+}
+\caption{\textbf{Precipitación media mensual y acumulada de la región << nombre_region >>} \\ << ge_anio.precipitacion >>}
 \label{tabla_ge_precipitacion} \\
-
 \hline
 \rowcolor{gray!30}
-\thh{0.25}{Mes}  &  \thhl{0.25}{Media (mm)}  &  \thhl{0.25}{Mínima (mm)}  &  \thhl{0.25}{Máxima (mm)} \\
+\thh{0.25}{Mes} & \thhl{0.25}{Media (mm)} & \thhl{0.25}{Mínima (mm)} & \thhl{0.25}{Máxima (mm)} \\
 \hline
 \endfirsthead
 \multicolumn{4}{l}{\small\textbf{(continuación)}} \\
 \hline
 \rowcolor{gray!30}
-\thh{0.25}{Mes}  &  \thhl{0.25}{Media (mm)}  &  \thhl{0.25}{Mínima (mm)}  &  \thhl{0.25}{Máxima (mm)} \\
+\thh{0.25}{Mes} & \thhl{0.25}{Media (mm)} & \thhl{0.25}{Mínima (mm)} & \thhl{0.25}{Máxima (mm)} \\
 \hline
 \endhead
 \hline
 \multicolumn{4}{r}{\small\textbf{(continúa)}} \\
 \endfoot
-
 \hline
-\tablefooterrow{4}{<< ge_fuente.precipitacion >>}
+\tablefooterrow{4}{Fuente: & IIEG, con base en SMN. Información Estadística Climatológica, 1995-2025}
 \endlastfoot
 
 \rowcolor{filaResaltada}
@@ -607,6 +845,46 @@ Diciembre & << ge_pp_med_dic >> & << ge_pp_min_dic >> & << ge_pp_max_dic >> \\
 
 \end{longtable}
 \normalsize
+
+
+<% if ge_pp_municipios %>
+\newpage
+\setlength{\tabcolsep}{3pt}
+\footnotesize
+\begin{longtable}{
+  >{\raggedright\arraybackslash}m{\dimexpr0.50\linewidth - 2\tabcolsep\relax}
+  >{\raggedleft\arraybackslash}m{\dimexpr0.50\linewidth - 2\tabcolsep\relax}
+}
+\caption{\textbf{Precipitación acumulada anual de los municipios de la región << nombre_region >>} \\ << ge_anio.precipitacion >>}
+\label{tabla_ge_pp_municipios} \\
+\hline
+\rowcolor{gray!30}
+\thh{0.50}{Municipio} & \thhl{0.50}{Precipitación acumulada anual (mm)} \\
+\hline
+\endfirsthead
+\multicolumn{2}{l}{\small\textbf{(continuación)}} \\
+\hline
+\rowcolor{gray!30}
+\thh{0.50}{Municipio} & \thhl{0.50}{Precipitación acumulada anual (mm)} \\
+\hline
+\endhead
+\hline
+\multicolumn{2}{r}{\small\textbf{(continúa)}} \\
+\endfoot
+\hline
+\tablefooterrow{2}{Fuente: & IIEG, con base en SMN. Información Estadística Climatológica, 1995-2025}
+\endlastfoot
+
+<% for fila in ge_pp_municipios %>
+<< fila.municipio >> & << fila.precipitacion_anual >> \\
+\hline
+<% endfor %>
+
+\end{longtable}
+\normalsize
+
+<% endif %>
+
 <% if ge_pp_mapa_activo %>
 \clearpage
 \mapatitulo*{Precipitación histórica acumulada de la región << nombre_region >>, << ge_anio_mapa.precipitacion >>}
@@ -619,7 +897,9 @@ Diciembre & << ge_pp_med_dic >> & << ge_pp_min_dic >> & << ge_pp_max_dic >> \\
 
 \subsubsection{Clima}
 
-<< ge_cl_texto >>
+Con base en << ge_cl_fuente_cartografica >>, el tipo de clima predominante en la región << nombre_region >> es << ge_cl_tipo_predominante >>, que ocupa el << ge_cl_pct_predominante >> \% del territorio; a escala estatal, este mismo tipo climático representa el << ge_cl_porcentaje_predominante_estado >> \%. Le sigue << ge_cl_secundario >>, con el << ge_cl_secundario_pct >> \% de la superficie regional.
+
+La diversidad de tipos climáticos varía entre los municipios de la región << nombre_region >>. Para caracterizarla, se utiliza el índice de Shannon normalizado (de 0 a 1), calculado a partir de la proporción de la superficie municipal ocupada por cada tipo de clima. << ge_cl_municipio_diversidad_mayor >> presenta el valor más alto del índice (<< ge_cl_municipio_diversidad_mayor_indice >>), mientras que << ge_cl_municipio_diversidad_menor >> registra el menor (<< ge_cl_municipio_diversidad_menor_indice >>).
 
 <% if ge_cl_grafica_activa %>
 \begin{figure}[H]
@@ -630,35 +910,33 @@ Diciembre & << ge_pp_med_dic >> & << ge_pp_min_dic >> & << ge_pp_max_dic >> \\
 \tablefooter{<< ge_fuente.clima >>}
 <% endif %>
 
-\newpage
 <% if ge_cl_clasificaciones %>
+\newpage
 \setlength{\tabcolsep}{3pt}
 \footnotesize
-\begin{longtable}{>{\raggedright\arraybackslash}m{\dimexpr0.40\linewidth - 2\tabcolsep\relax}
-                  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
-                  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}}
-
-\caption{\textbf{Clima de la región << nombre_region >>} \\
-<< ge_anio.clima >>}
+\begin{longtable}{
+  >{\raggedright\arraybackslash}m{\dimexpr0.40\linewidth - 2\tabcolsep\relax}
+  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
+  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
+}
+\caption{\textbf{Clima de la región << nombre_region >>} \\ << ge_anio.clima >>}
 \label{tabla_ge_clima} \\
-
 \hline
 \rowcolor{gray!30}
-\thh{0.40}{Clasificación climática}  &  \thhl{0.30}{Superficie (ha)}  &  \thhl{0.30}{Porcentaje} \\
+\thh{0.40}{Clasificación climática} & \thhl{0.30}{Superficie (ha)} & \thhl{0.30}{Porcentaje (\%)} \\
 \hline
 \endfirsthead
 \multicolumn{3}{l}{\small\textbf{(continuación)}} \\
 \hline
 \rowcolor{gray!30}
-\thh{0.40}{Clasificación climática}  &  \thhl{0.30}{Superficie (ha)}  &  \thhl{0.30}{Porcentaje} \\
+\thh{0.40}{Clasificación climática} & \thhl{0.30}{Superficie (ha)} & \thhl{0.30}{Porcentaje (\%)} \\
 \hline
 \endhead
 \hline
 \multicolumn{3}{r}{\small\textbf{(continúa)}} \\
 \endfoot
-
 \hline
-\tablefooterrow{3}{<< ge_fuente.clima >>}
+\tablefooterrow{3}{Fuente: & IIEG, con base en << ge_cl_fuente_cartografica >>.}
 \endlastfoot
 
 <% for fila in ge_cl_clasificaciones %>
@@ -668,6 +946,47 @@ Diciembre & << ge_pp_med_dic >> & << ge_pp_min_dic >> & << ge_pp_max_dic >> \\
 
 \end{longtable}
 \normalsize
+
+<% endif %>
+
+<% if ge_cl_municipios %>
+\newpage
+\setlength{\tabcolsep}{3pt}
+\footnotesize
+\begin{longtable}{
+  >{\raggedright\arraybackslash}m{\dimexpr0.25\linewidth - 2\tabcolsep\relax}
+  >{\raggedright\arraybackslash}m{\dimexpr0.25\linewidth - 2\tabcolsep\relax}
+  >{\raggedleft\arraybackslash}m{\dimexpr0.25\linewidth - 2\tabcolsep\relax}
+  >{\raggedleft\arraybackslash}m{\dimexpr0.25\linewidth - 2\tabcolsep\relax}
+}
+\caption{\textbf{Tipo de clima predominante y diversidad climática de los municipios de la región << nombre_region >>} \\ << ge_anio.clima >>}
+\label{tabla_ge_cl_municipios} \\
+\hline
+\rowcolor{gray!30}
+\thh{0.25}{Municipio} & \thh{0.25}{Clima predominante} & \thhl{0.25}{Superficie municipal (\%)} & \thhl{0.25}{Índice de Shannon normalizado (0–1)} \\
+\hline
+\endfirsthead
+\multicolumn{4}{l}{\small\textbf{(continuación)}} \\
+\hline
+\rowcolor{gray!30}
+\thh{0.25}{Municipio} & \thh{0.25}{Clima predominante} & \thhl{0.25}{Superficie municipal (\%)} & \thhl{0.25}{Índice de Shannon normalizado (0–1)} \\
+\hline
+\endhead
+\hline
+\multicolumn{4}{r}{\small\textbf{(continúa)}} \\
+\endfoot
+\hline
+\tablefooterrow{4}{Fuente: & IIEG, con base en << ge_cl_fuente_cartografica >>.}
+\endlastfoot
+
+<% for fila in ge_cl_municipios %>
+<< fila.municipio >> & << fila.clima_predominante >> & << fila.porcentaje_predominante >> & << fila.indice_shannon >> \\
+\hline
+<% endfor %>
+
+\end{longtable}
+\normalsize
+
 <% endif %>
 
 <% if ge_cl_mapa_activo %>
@@ -682,7 +1001,9 @@ Diciembre & << ge_pp_med_dic >> & << ge_pp_min_dic >> & << ge_pp_max_dic >> \\
 
 \subsubsection{Uso de suelo y vegetación}
 
-Con base en el Conjunto de datos vectoriales de uso del suelo y vegetación Serie VII (INEGI, 2018), la cobertura de uso de suelo y vegetación predominante en el municipio es << ge_usv_dominante_texto >>, con una participación de << ge_usv_dominante_pct >> \% de la superficie. Le sigue << ge_usv_secundario_texto >>, con << ge_usv_secundario_pct >> \%. El resto de las coberturas representa en conjunto << ge_usv_demas_pct >> \% del territorio.
+Con base en el Conjunto de datos vectoriales de uso del suelo y vegetación Serie VII (INEGI, 2018), la cobertura predominante en la región << nombre_region >> es << ge_usv_dominante >>, que ocupa el << ge_usv_dominante_pct >> \% de la superficie regional; a escala estatal, esta misma cobertura representa el << ge_usv_porcentaje_predominante_estado >> \%. Le sigue << ge_usv_secundario >>, con el << ge_usv_secundario_pct >> \% del territorio regional.
+
+La composición de las coberturas varía entre los municipios de la región << nombre_region >>. << ge_usv_municipio_mayor_agricultura >> registra la mayor proporción de superficie agrícola, con el << ge_usv_pct_mayor_agricultura >> \% de su territorio; << ge_usv_municipio_mayor_bosque >> presenta la mayor proporción de superficie forestal, con el << ge_usv_pct_mayor_bosque >> \%; y << ge_usv_municipio_mayor_asentamiento >> concentra la mayor proporción de terrenos ocupados por asentamientos humanos, con el << ge_usv_pct_mayor_asentamiento >> \% de su superficie.
 
 <% if ge_usv_grafica_activa %>
 \begin{figure}[H]
@@ -693,35 +1014,33 @@ Con base en el Conjunto de datos vectoriales de uso del suelo y vegetación Seri
 \tablefooter{<< ge_fuente.usv >>}
 <% endif %>
 
-\newpage
 <% if ge_usv_clasificacion %>
+\newpage
 \setlength{\tabcolsep}{3pt}
 \footnotesize
-\begin{longtable}{>{\raggedright\arraybackslash}m{\dimexpr0.40\linewidth - 2\tabcolsep\relax}
-                  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
-                  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}}
-
-\caption{\textbf{Uso de suelo y vegetación de la región << nombre_region >>} \\
-<< ge_anio.usv >>}
+\begin{longtable}{
+  >{\raggedright\arraybackslash}m{\dimexpr0.40\linewidth - 2\tabcolsep\relax}
+  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
+  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
+}
+\caption{\textbf{Uso de suelo y vegetación de la región << nombre_region >>} \\ << ge_anio.usv >>}
 \label{tabla_ge_uso_suelo} \\
-
 \hline
 \rowcolor{gray!30}
-\thh{0.40}{Uso de suelo}  &  \thhl{0.30}{Superficie (ha)}  &  \thhl{0.30}{Porcentaje} \\
+\thh{0.40}{Uso de suelo y vegetación} & \thhl{0.30}{Superficie (ha)} & \thhl{0.30}{Porcentaje (\%)} \\
 \hline
 \endfirsthead
 \multicolumn{3}{l}{\small\textbf{(continuación)}} \\
 \hline
 \rowcolor{gray!30}
-\thh{0.40}{Uso de suelo}  &  \thhl{0.30}{Superficie (ha)}  &  \thhl{0.30}{Porcentaje} \\
+\thh{0.40}{Uso de suelo y vegetación} & \thhl{0.30}{Superficie (ha)} & \thhl{0.30}{Porcentaje (\%)} \\
 \hline
 \endhead
 \hline
 \multicolumn{3}{r}{\small\textbf{(continúa)}} \\
 \endfoot
-
 \hline
-\tablefooterrow{3}{<< ge_fuente.usv >>}
+\tablefooterrow{3}{Fuente: & IIEG, con base en INEGI. Conjunto de datos vectoriales de uso del suelo y vegetación Serie VII, 2018.}
 \endlastfoot
 
 <% for fila in ge_usv_clasificacion %>
@@ -731,6 +1050,49 @@ Con base en el Conjunto de datos vectoriales de uso del suelo y vegetación Seri
 
 \end{longtable}
 \normalsize
+
+<% endif %>
+
+<% if ge_usv_municipios %>
+\newpage
+\setlength{\tabcolsep}{3pt}
+\footnotesize
+\begin{longtable}{
+  >{\raggedright\arraybackslash}m{\dimexpr0.16\linewidth - 2\tabcolsep\relax}
+  >{\raggedright\arraybackslash}m{\dimexpr0.17\linewidth - 2\tabcolsep\relax}
+  >{\raggedleft\arraybackslash}m{\dimexpr0.15\linewidth - 2\tabcolsep\relax}
+  >{\raggedleft\arraybackslash}m{\dimexpr0.18\linewidth - 2\tabcolsep\relax}
+  >{\raggedleft\arraybackslash}m{\dimexpr0.17\linewidth - 2\tabcolsep\relax}
+  >{\raggedleft\arraybackslash}m{\dimexpr0.17\linewidth - 2\tabcolsep\relax}
+}
+\caption{\textbf{Uso predominante de los municipios de la región  << nombre_region >>} \\ << ge_anio.usv >>}
+\label{tabla_ge_usv_municipios} \\
+\hline
+\rowcolor{gray!30}
+\thh{0.16}{Municipio} & \thh{0.17}{Uso predominante} & \thhl{0.15}{Porcentaje} & \thhl{0.18}{Agricultura (\%)} & \thhl{0.17}{Bosque (\%)} & \thhl{0.17}{Asentamiento humano (\%)} \\
+\hline
+\endfirsthead
+\multicolumn{6}{l}{\small\textbf{(continuación)}} \\
+\hline
+\rowcolor{gray!30}
+\thh{0.16}{Municipio} & \thh{0.17}{Uso predominante} & \thhl{0.15}{Porcentaje} & \thhl{0.18}{Agricultura (\%)} & \thhl{0.17}{Bosque (\%)} & \thhl{0.17}{Asentamiento humano (\%)} \\
+\hline
+\endhead
+\hline
+\multicolumn{6}{r}{\small\textbf{(continúa)}} \\
+\endfoot
+\hline
+\tablefooterrow{6}{Fuente: & IIEG, con base en INEGI. Conjunto de datos vectoriales de uso del suelo y vegetación Serie VII, 2018.}
+\endlastfoot
+
+<% for fila in ge_usv_municipios %>
+<< fila.municipio >> & << fila.uso_predominante >> & << fila.porcentaje_predominante >> & << fila.agricultura_pct >> & << fila.bosque_pct >> & << fila.asentamientos_pct >> \\
+\hline
+<% endfor %>
+
+\end{longtable}
+\normalsize
+
 <% endif %>
 
 <% if ge_usv_mapa_activo %>
@@ -745,9 +1107,11 @@ Con base en el Conjunto de datos vectoriales de uso del suelo y vegetación Seri
 
 \subsubsection{NDVI}
 
-Con base en imágenes Landsat Collection 2 Level-2 Science Products (USGS, 2025), se estimó el Índice de Vegetación de Diferencia Normalizada (NDVI), el cual permite monitorear el estado de la vegetación.
+Con base en imágenes Landsat Collection 2 Level-2 Science Products (USGS, 2025), se estimó el Índice de Vegetación de Diferencia Normalizada (NDVI), utilizado para observar la presencia y condición general de la vegetación.
 
-La categoría predominante es << ge_ndvi_dominante_texto >>, con << ge_ndvi_dominante_pct >> \% de la superficie municipal. Le sigue << ge_ndvi_secundario_texto >>, con << ge_ndvi_secundario_pct >> \%. El resto de las categorías representa << ge_ndvi_otros_pct >> \% del territorio.
+En la región << nombre_region >>, la categoría con mayor superficie es << ge_ndvi_dominante >>, con el << ge_ndvi_dominante_pct >> \% del territorio. Le sigue << ge_ndvi_secundario >>, con el << ge_ndvi_secundario_pct >> \%.
+
+Al agrupar las categorías de vegetación moderada y densa, estas abarcan el << ge_ndvi_pct_moderada_densa_region >> \% de la superficie regional, mientras que en el conjunto de Jalisco representan el << ge_ndvi_pct_moderada_densa_estado >> \% del territorio estatal. Entre los municipios, << ge_ndvi_municipio_mayor_moderada_densa >> registra la mayor proporción de superficie con vegetación moderada o densa, con el << ge_ndvi_pct_mayor_moderada_densa >> \% de su territorio, mientras que << ge_ndvi_municipio_menor_moderada_densa >> presenta la menor, con el << ge_ndvi_pct_menor_moderada_densa >> \%.
 
 <% if ge_ndvi_grafica_activa %>
 \begin{figure}[H]
@@ -758,35 +1122,33 @@ La categoría predominante es << ge_ndvi_dominante_texto >>, con << ge_ndvi_domi
 \tablefooter{<< ge_fuente.ndvi >>}
 <% endif %>
 
-\newpage
 <% if ge_ndvi_categorias %>
+\newpage
 \setlength{\tabcolsep}{3pt}
 \footnotesize
-\begin{longtable}{>{\raggedright\arraybackslash}m{\dimexpr0.40\linewidth - 2\tabcolsep\relax}
-                  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
-                  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}}
-
-\caption{\textbf{NDVI promedio de la región << nombre_region >>} \\
-<< ge_anio.ndvi >>}
+\begin{longtable}{
+  >{\raggedright\arraybackslash}m{\dimexpr0.40\linewidth - 2\tabcolsep\relax}
+  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
+  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
+}
+\caption{\textbf{NDVI promedio de la región << nombre_region >>} \\ << ge_anio.ndvi >>}
 \label{tabla_ge_ndvi} \\
-
 \hline
 \rowcolor{gray!30}
-\thh{0.40}{Categoría}  &  \thhl{0.30}{Superficie (ha)}  &  \thhl{0.30}{Porcentaje} \\
+\thh{0.40}{Categoría} & \thhl{0.30}{Superficie (ha)} & \thhl{0.30}{Porcentaje (\%)} \\
 \hline
 \endfirsthead
 \multicolumn{3}{l}{\small\textbf{(continuación)}} \\
 \hline
 \rowcolor{gray!30}
-\thh{0.40}{Categoría}  &  \thhl{0.30}{Superficie (ha)}  &  \thhl{0.30}{Porcentaje} \\
+\thh{0.40}{Categoría} & \thhl{0.30}{Superficie (ha)} & \thhl{0.30}{Porcentaje (\%)} \\
 \hline
 \endhead
 \hline
 \multicolumn{3}{r}{\small\textbf{(continúa)}} \\
 \endfoot
-
 \hline
-\tablefooterrow{3}{<< ge_fuente.ndvi >>}
+\tablefooterrow{3}{Fuente: & IIEG, con base en USGS. Landsat Collection 2 Level-2 Science Products, 2025.}
 \endlastfoot
 
 <% for fila in ge_ndvi_categorias %>
@@ -796,6 +1158,45 @@ La categoría predominante es << ge_ndvi_dominante_texto >>, con << ge_ndvi_domi
 
 \end{longtable}
 \normalsize
+
+<% endif %>
+
+<% if ge_ndvi_municipios %>
+\newpage
+\setlength{\tabcolsep}{3pt}
+\footnotesize
+\begin{longtable}{
+  >{\raggedright\arraybackslash}m{\dimexpr0.50\linewidth - 2\tabcolsep\relax}
+  >{\raggedleft\arraybackslash}m{\dimexpr0.50\linewidth - 2\tabcolsep\relax}
+}
+\caption{\textbf{Porcentaje de vegetación moderada y densa de los municipios de la región  << nombre_region >>} \\ << ge_anio.ndvi >>}
+\label{tabla_ge_ndvi_municipios} \\
+\hline
+\rowcolor{gray!30}
+\thh{0.50}{Municipio} & \thhl{0.50}{Vegetación moderada y densa (\%)} \\
+\hline
+\endfirsthead
+\multicolumn{2}{l}{\small\textbf{(continuación)}} \\
+\hline
+\rowcolor{gray!30}
+\thh{0.50}{Municipio} & \thhl{0.50}{Vegetación moderada y densa (\%)} \\
+\hline
+\endhead
+\hline
+\multicolumn{2}{r}{\small\textbf{(continúa)}} \\
+\endfoot
+\hline
+\tablefooterrow{2}{Fuente: & IIEG, con base en USGS. Landsat Collection 2 Level-2 Science Products, 2025.}
+\endlastfoot
+
+<% for fila in ge_ndvi_municipios %>
+<< fila.municipio >> & << fila.vegetacion_moderada_densa_pct >> \\
+\hline
+<% endfor %>
+
+\end{longtable}
+\normalsize
+
 <% endif %>
 
 <% if ge_ndvi_mapa_activo %>
@@ -810,9 +1211,11 @@ La categoría predominante es << ge_ndvi_dominante_texto >>, con << ge_ndvi_domi
 
 \subsubsection{NDWI}
 
-Con base en imágenes Landsat Collection 2 Level-2 Science Products (USGS, 2025), se estimó el Índice de Agua de Diferencia Normalizada (NDWI), el cual permite identificar las condiciones de humedad en la superficie.
+Con base en imágenes Landsat Collection 2 Level-2 Science Products (USGS, 2025), se estimó el Índice de Agua de Diferencia Normalizada (NDWI), empleado para identificar variaciones en el contenido de humedad de la vegetación.
 
-La categoría predominante es << ge_ndwi_dominante_texto >>, con << ge_ndwi_dominante_pct >> \% de la superficie municipal. Le sigue << ge_ndwi_secundario_texto >>, con << ge_ndwi_secundario_pct >> \%. El resto de las categorías representa << ge_ndwi_otros_pct >> \% del territorio.
+En la región << nombre_region >>, la categoría predominante es << ge_ndwi_dominante >>, que ocupa el << ge_ndwi_dominante_pct >> \% del territorio. Le sigue << ge_ndwi_secundario >>, con el << ge_ndwi_secundario_pct >> \%.
+
+Las categorías de condición hídrica moderada y de alta humedad en la vegetación abarcan en conjunto el << ge_ndwi_pct_moderada_alta_region >> \% de la superficie regional, en comparación con el << ge_ndwi_pct_moderada_alta_estado >> \% del territorio estatal. << ge_ndwi_municipio_mayor_moderada_alta >> registra la mayor proporción municipal en estas categorías, con el << ge_ndwi_pct_mayor_moderada_alta >> \% de su territorio, y << ge_ndwi_municipio_menor_moderada_alta >> presenta la menor, con el << ge_ndwi_pct_menor_moderada_alta >> \%.
 
 <% if ge_ndwi_grafica_activa %>
 \begin{figure}[H]
@@ -823,35 +1226,33 @@ La categoría predominante es << ge_ndwi_dominante_texto >>, con << ge_ndwi_domi
 \tablefooter{<< ge_fuente.ndwi >>}
 <% endif %>
 
-\newpage
 <% if ge_ndwi_categorias %>
+\newpage
 \setlength{\tabcolsep}{3pt}
 \footnotesize
-\begin{longtable}{>{\raggedright\arraybackslash}m{\dimexpr0.40\linewidth - 2\tabcolsep\relax}
-                  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
-                  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}}
-
-\caption{\textbf{NDWI promedio de la región << nombre_region >>} \\
-<< ge_anio.ndwi >>}
+\begin{longtable}{
+  >{\raggedright\arraybackslash}m{\dimexpr0.40\linewidth - 2\tabcolsep\relax}
+  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
+  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
+}
+\caption{\textbf{NDWI promedio de la región << nombre_region >>} \\ << ge_anio.ndwi >>}
 \label{tabla_ge_ndwi} \\
-
 \hline
 \rowcolor{gray!30}
-\thh{0.40}{Categoría}  &  \thhl{0.30}{Superficie (ha)}  &  \thhl{0.30}{Porcentaje} \\
+\thh{0.40}{Categoría} & \thhl{0.30}{Superficie (ha)} & \thhl{0.30}{Porcentaje (\%)} \\
 \hline
 \endfirsthead
 \multicolumn{3}{l}{\small\textbf{(continuación)}} \\
 \hline
 \rowcolor{gray!30}
-\thh{0.40}{Categoría}  &  \thhl{0.30}{Superficie (ha)}  &  \thhl{0.30}{Porcentaje} \\
+\thh{0.40}{Categoría} & \thhl{0.30}{Superficie (ha)} & \thhl{0.30}{Porcentaje (\%)} \\
 \hline
 \endhead
 \hline
 \multicolumn{3}{r}{\small\textbf{(continúa)}} \\
 \endfoot
-
 \hline
-\tablefooterrow{3}{<< ge_fuente.ndwi >>}
+\tablefooterrow{3}{Fuente: & IIEG, con base en USGS. Landsat Collection 2 Level-2 Science Products, 2025.}
 \endlastfoot
 
 <% for fila in ge_ndwi_categorias %>
@@ -861,6 +1262,45 @@ La categoría predominante es << ge_ndwi_dominante_texto >>, con << ge_ndwi_domi
 
 \end{longtable}
 \normalsize
+
+<% endif %>
+
+<% if ge_ndwi_municipios %>
+\newpage
+\setlength{\tabcolsep}{3pt}
+\footnotesize
+\begin{longtable}{
+  >{\raggedright\arraybackslash}m{\dimexpr0.50\linewidth - 2\tabcolsep\relax}
+  >{\raggedleft\arraybackslash}m{\dimexpr0.50\linewidth - 2\tabcolsep\relax}
+}
+\caption{\textbf{Porcentaje de condición moderada y alta de humedad en vegetación de los municipios de la región << nombre_region >>} \\ << ge_anio.ndwi >>}
+\label{tabla_ge_ndwi_municipios} \\
+\hline
+\rowcolor{gray!30}
+\thh{0.50}{Municipio} & \thhl{0.50}{Condición moderada y alta (\%)} \\
+\hline
+\endfirsthead
+\multicolumn{2}{l}{\small\textbf{(continuación)}} \\
+\hline
+\rowcolor{gray!30}
+\thh{0.50}{Municipio} & \thhl{0.50}{Condición moderada y alta (\%)} \\
+\hline
+\endhead
+\hline
+\multicolumn{2}{r}{\small\textbf{(continúa)}} \\
+\endfoot
+\hline
+\tablefooterrow{2}{Fuente: & IIEG, con base en USGS. Landsat Collection 2 Level-2 Science Products, 2025.}
+\endlastfoot
+
+<% for fila in ge_ndwi_municipios %>
+<< fila.municipio >> & << fila.humedad_moderada_alta_pct >> \\
+\hline
+<% endfor %>
+
+\end{longtable}
+\normalsize
+
 <% endif %>
 
 <% if ge_ndwi_mapa_activo %>
@@ -875,47 +1315,90 @@ La categoría predominante es << ge_ndwi_dominante_texto >>, con << ge_ndwi_domi
 
 \subsubsection{Áreas naturales protegidas y humedales}
 
-<< ge_anp_texto_automatico >>.
+Con base en la información de Áreas Naturales Protegidas (CONANP, 2025) y del Inventario Nacional de Humedales (CONAGUA, 2021), en la región << nombre_region >> se registran << ge_anp_numero_anp >> áreas naturales protegidas. La superficie incluida en alguna categoría de protección suma << ge_anp_superficie_protegida_ha >> hectáreas, equivalentes al << ge_anp_pct_superficie_protegida >> \% del territorio regional, en comparación con el << ge_anp_pct_superficie_protegida_estado >> \% a escala estatal.
 
-<% if ge_anp_categorias %>
+Por ámbito de competencia, << ge_anp_ambito_predominante >> concentra la mayor superficie protegida, equivalente al << ge_anp_pct_ambito_predominante >> \% del territorio regional. Los humedales ocupan << ge_anp_superficie_humedales_ha >> hectáreas, equivalentes al << ge_anp_pct_humedales >> \% de la región.
+
+<< ge_anp_municipio_mayor_proteccion >> registra la mayor proporción de superficie bajo alguna categoría de protección, con el << ge_anp_pct_municipio_mayor_proteccion >> \%, mientras que << ge_anp_municipio_menor_proteccion >> registra el << ge_anp_pct_municipio_menor_proteccion >> \%. En cuanto a los humedales, << ge_anp_municipio_mayor_humedales >> presenta la mayor proporción, con el << ge_anp_pct_municipio_mayor_humedales >> \% de su territorio.
+
+\newpage
 \setlength{\tabcolsep}{3pt}
 \footnotesize
-\begin{longtable}{>{\raggedright\arraybackslash}m{\dimexpr0.20\linewidth - 2\tabcolsep\relax}
-                  >{\raggedleft\arraybackslash}m{\dimexpr0.20\linewidth - 2\tabcolsep\relax}
-                  >{\raggedleft\arraybackslash}m{\dimexpr0.20\linewidth - 2\tabcolsep\relax}
-                  >{\raggedright\arraybackslash}m{\dimexpr0.40\linewidth - 2\tabcolsep\relax}}
-
-\caption{\textbf{Áreas naturales protegidas y humedales de la región << nombre_region >>} \\
-<< ge_anio.anp >>}
+\begin{longtable}{
+  >{\raggedright\arraybackslash}m{\dimexpr0.40\linewidth - 2\tabcolsep\relax}
+  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
+  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
+}
+\caption{\textbf{Áreas naturales protegidas y humedales de la región << nombre_region >>} \\ << ge_anio.anp >>}
 \label{tabla_ge_anp} \\
-
 \hline
 \rowcolor{gray!30}
-\thh{0.20}{Categoría}  &  \thhl{0.20}{Superficie (ha)}  &  \thhl{0.20}{Porcentaje}  &  \thh{0.40}{Descripción}  \\
+\thh{0.40}{Categoría} & \thhl{0.30}{Superficie (ha)} & \thhl{0.30}{Porcentaje (\%)} \\
 \hline
 \endfirsthead
-\multicolumn{4}{l}{\small\textbf{(continuación)}} \\
+\multicolumn{3}{l}{\small\textbf{(continuación)}} \\
 \hline
 \rowcolor{gray!30}
-\thh{0.20}{Categoría}  &  \thhl{0.20}{Superficie (ha)}  &  \thhl{0.20}{Porcentaje}  &  \thh{0.40}{Descripción}  \\
+\thh{0.40}{Categoría} & \thhl{0.30}{Superficie (ha)} & \thhl{0.30}{Porcentaje (\%)} \\
 \hline
 \endhead
 \hline
-\multicolumn{4}{r}{\small\textbf{(continúa)}} \\
+\multicolumn{3}{r}{\small\textbf{(continúa)}} \\
 \endfoot
-
 \hline
-\tablefooterrow{4}{Nota: & Las superficies de las categorías de este cuadro pueden presentar superposición geográfica.\\
-<< ge_fuente.anp >>}
+\tablefooterrow{3}{Fuente: & IIEG, con base en CONANP. Áreas Naturales Protegidas, 2025. CONAGUA. Inventario Nacional de Humedales, 2021.}
 \endlastfoot
 
-<% for fila in ge_anp_categorias %>
-<< fila.categoria >> & << fila.superficie_ha >> & << fila.porcentaje >> & << fila.descripcion >> \\
+ANP federal & << ge_anp_sup_federal >> & << ge_anp_pct_federal >> \\
+\hline
+ANP estatal & << ge_anp_sup_estatal >> & << ge_anp_pct_estatal >> \\
+\hline
+ANP municipal & << ge_anp_sup_municipal >> & << ge_anp_pct_municipal >> \\
+\hline
+Humedales & << ge_anp_sup_humedales >> & << ge_anp_pct_humedales >> \\
+\hline
+
+\end{longtable}
+\normalsize
+
+
+<% if ge_anp_municipios %>
+\newpage
+\setlength{\tabcolsep}{3pt}
+\footnotesize
+\begin{longtable}{
+  >{\raggedright\arraybackslash}m{\dimexpr0.40\linewidth - 2\tabcolsep\relax}
+  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
+  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
+}
+\caption{\textbf{Porcentaje de superficie protegida y de humedales de los municipios de la región << nombre_region >>} \\ << ge_anio.anp >>}
+\label{tabla_ge_anp_municipios} \\
+\hline
+\rowcolor{gray!30}
+\thh{0.40}{Municipio} & \thhl{0.30}{Superficie protegida (\%)} & \thhl{0.30}{Humedales (\%)} \\
+\hline
+\endfirsthead
+\multicolumn{3}{l}{\small\textbf{(continuación)}} \\
+\hline
+\rowcolor{gray!30}
+\thh{0.40}{Municipio} & \thhl{0.30}{Superficie protegida (\%)} & \thhl{0.30}{Humedales (\%)} \\
+\hline
+\endhead
+\hline
+\multicolumn{3}{r}{\small\textbf{(continúa)}} \\
+\endfoot
+\hline
+\tablefooterrow{3}{Fuente: & IIEG, con base en CONANP. Áreas Naturales Protegidas, 2025. CONAGUA. Inventario Nacional de Humedales, 2021.}
+\endlastfoot
+
+<% for fila in ge_anp_municipios %>
+<< fila.municipio >> & << fila.superficie_protegida_pct >> & << fila.humedales_pct >> \\
 \hline
 <% endfor %>
 
 \end{longtable}
 \normalsize
+
 <% endif %>
 
 <% if ge_anp_mapa_activo %>
@@ -931,7 +1414,11 @@ La categoría predominante es << ge_ndwi_dominante_texto >>, con << ge_ndwi_domi
 
 \subsubsection{Sequía}
 
-Con base en imágenes Landsat Collection 2 Level-2 Science Products (USGS, 2025), la categoría << ge_s_dominante_texto >> es la de mayor presencia, con << ge_s_dominante_pct >> \%, seguida por << ge_s_secundario_texto >> con << ge_s_secundario_pct >> \%, mientras que el resto de categorías representa << ge_s_demas_pct >> \% del territorio.
+Con base en imágenes Landsat Collection 2 Level-2 Science Products (USGS, 2025), se estimó el índice de sequedad de diferencia normalizada (NDDI), utilizado para identificar diferencias relativas en las condiciones de sequedad de la superficie.
+
+En la región << nombre_region >>, la categoría con mayor presencia es << ge_ds_dominante >>, que comprende el << ge_ds_dominante_pct >> \% del territorio. Le sigue << ge_ds_secundario >>, con el << ge_ds_secundario_pct >> \%.
+
+Las categorías de mayor sequedad abarcan en conjunto el << ge_ds_pct_severa_extrema_excepcional_region >> \% de la superficie regional, en comparación con el << ge_ds_pct_severa_extrema_excepcional_estado >> \% del territorio estatal. << ge_ds_municipio_mayor_sequedad >> registra la mayor proporción municipal en estas categorías, con el << ge_ds_pct_mayor_sequedad >> \% de su territorio, y << ge_ds_municipio_menor_sequedad >> presenta la menor, con el << ge_ds_pct_menor_sequedad >> \%.
 
 <% if ge_sequia_grafica_activa %>
 \begin{figure}[H]
@@ -942,35 +1429,33 @@ Con base en imágenes Landsat Collection 2 Level-2 Science Products (USGS, 2025)
 \tablefooter{<< ge_fuente.sequia >>}
 <% endif %>
 
-\newpage
 <% if ge_ds_categorias %>
+\newpage
 \setlength{\tabcolsep}{3pt}
 \footnotesize
-\begin{longtable}{>{\raggedright\arraybackslash}m{\dimexpr0.40\linewidth - 2\tabcolsep\relax}
-                  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
-                  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}}
-
-\caption{\textbf{Índice promedio de sequía de la región << nombre_region >>} \\
-<< ge_anio.sequia >>}
+\begin{longtable}{
+  >{\raggedright\arraybackslash}m{\dimexpr0.40\linewidth - 2\tabcolsep\relax}
+  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
+  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
+}
+\caption{\textbf{Índice promedio de sequía de la región << nombre_region >>} \\ << ge_anio.sequia >>}
 \label{tabla_ge_sequia} \\
-
 \hline
 \rowcolor{gray!30}
-\thh{0.40}{Categoría}  &  \thhl{0.30}{Superficie (ha)}  &  \thhl{0.30}{Porcentaje} \\
+\thh{0.40}{Categoría} & \thhl{0.30}{Superficie (ha)} & \thhl{0.30}{Porcentaje (\%)} \\
 \hline
 \endfirsthead
 \multicolumn{3}{l}{\small\textbf{(continuación)}} \\
 \hline
 \rowcolor{gray!30}
-\thh{0.40}{Categoría}  &  \thhl{0.30}{Superficie (ha)}  &  \thhl{0.30}{Porcentaje} \\
+\thh{0.40}{Categoría} & \thhl{0.30}{Superficie (ha)} & \thhl{0.30}{Porcentaje (\%)} \\
 \hline
 \endhead
 \hline
 \multicolumn{3}{r}{\small\textbf{(continúa)}} \\
 \endfoot
-
 \hline
-\tablefooterrow{3}{<< ge_fuente.sequia >>}
+\tablefooterrow{3}{Fuente: & IIEG, con base en USGS. Landsat Collection 2 Level-2 Science Products, 2025.}
 \endlastfoot
 
 <% for fila in ge_ds_categorias %>
@@ -980,6 +1465,45 @@ Con base en imágenes Landsat Collection 2 Level-2 Science Products (USGS, 2025)
 
 \end{longtable}
 \normalsize
+
+<% endif %>
+
+<% if ge_ds_municipios %>
+\newpage
+\setlength{\tabcolsep}{3pt}
+\footnotesize
+\begin{longtable}{
+  >{\raggedright\arraybackslash}m{\dimexpr0.50\linewidth - 2\tabcolsep\relax}
+  >{\raggedleft\arraybackslash}m{\dimexpr0.50\linewidth - 2\tabcolsep\relax}
+}
+\caption{\textbf{Porcentaje de las categorías de mayor sequedad de los municipios de la región << nombre_region >>} \\ << ge_anio.sequia >>}
+\label{tabla_ge_ds_municipios} \\
+\hline
+\rowcolor{gray!30}
+\thh{0.50}{Municipio} & \thhl{0.50}{Categorías de mayor sequía (\%)} \\
+\hline
+\endfirsthead
+\multicolumn{2}{l}{\small\textbf{(continuación)}} \\
+\hline
+\rowcolor{gray!30}
+\thh{0.50}{Municipio} & \thhl{0.50}{Categorías de mayor sequía (\%)} \\
+\hline
+\endhead
+\hline
+\multicolumn{2}{r}{\small\textbf{(continúa)}} \\
+\endfoot
+\hline
+\tablefooterrow{2}{Fuente: & IIEG, con base en USGS. Landsat Collection 2 Level-2 Science Products, 2025.}
+\endlastfoot
+
+<% for fila in ge_ds_municipios %>
+<< fila.municipio >> & << fila.sequedad_alta_pct >> \\
+\hline
+<% endfor %>
+
+\end{longtable}
+\normalsize
+
 <% endif %>
 
 <% if ge_ds_mapa_activo %>
@@ -994,7 +1518,11 @@ Con base en imágenes Landsat Collection 2 Level-2 Science Products (USGS, 2025)
 
 \subsubsection{Erosión potencial}
 
-Con base en información climatológica del periodo 1995-2025, la Carta edafológica Serie III, el Continuo de Elevaciones Mexicano 4.0 y el Mapa General del Estado de Jalisco, se estimaron las pérdidas potenciales de suelo en el estado para el 2025. En la región << nombre_region >> predominan pérdidas potenciales de suelo de << ge_er_dominante_rango_texto >> t/ha/año, clasificadas como << ge_er_dominante_tipo_texto >> que representa el << ge_er_dominante_pct >> \% de la superficie municipal. En segundo lugar, las pérdidas potenciales de suelo de << ge_er_secundario_rango_texto >> abarcan el << ge_er_secundario_pct >> \%. El resto de categorías representan el << ge_er_demas_pct >> \% del territorio.
+Con base en información climatológica del período 1995-2025, la Carta edafológica Serie III, el Continuo de Elevaciones Mexicano 4.0 y el Mapa General del Estado de Jalisco, se estimó la pérdida potencial de suelo para 2025.
+
+En la región << nombre_region >> predomina el rango de pérdida de suelo << ge_er_dominante_rango >>, que representa el << ge_er_dominante_pct >> \% de la superficie regional. Le sigue << ge_er_secundario_rango >>, con el << ge_er_secundario_pct >> \%.
+
+Las superficies con pérdidas potenciales de suelo superiores a 50 t/ha/año representan el << ge_er_pct_mayor_50_region >> \% del territorio regional. Entre los municipios, << ge_er_municipio_mayor_50 >> presenta la mayor proporción en esta categoría, con el << ge_er_pct_municipio_mayor_50 >> \% de su superficie, mientras que << ge_er_municipio_menor_50 >> registra la menor, con el << ge_er_pct_municipio_menor_50 >> \%. A escala estatal, estos niveles de pérdida potencial abarcan el << ge_er_pct_mayor_50_estado >> \% de Jalisco.
 
 <% if ge_er_grafica_activa %>
 \begin{figure}[H]
@@ -1005,35 +1533,33 @@ Con base en información climatológica del periodo 1995-2025, la Carta edafoló
 \tablefooter{<< ge_fuente.erosion_pot >>}
 <% endif %>
 
-\newpage
 <% if ge_er_categorias %>
+\newpage
 \setlength{\tabcolsep}{3pt}
 \footnotesize
-\begin{longtable}{>{\raggedright\arraybackslash}m{\dimexpr0.40\linewidth - 2\tabcolsep\relax}
-                  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
-                  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}}
-
-\caption{\textbf{Erosión potencial de la región << nombre_region >>} \\
-<< ge_anio.erosion_pot >>}
+\begin{longtable}{
+  >{\raggedright\arraybackslash}m{\dimexpr0.40\linewidth - 2\tabcolsep\relax}
+  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
+  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
+}
+\caption{\textbf{Erosión potencial de la región << nombre_region >>} \\ << ge_anio.erosion_pot >>}
 \label{tabla_ge_erosion_pot} \\
-
 \hline
 \rowcolor{gray!30}
-\thh{0.40}{Pérdida de suelo (t/ha/año)}  &  \thhl{0.30}{Superficie (ha)}  &  \thhl{0.30}{Porcentaje} \\
+\thh{0.40}{Pérdida de suelo (t/ha/año)} & \thhl{0.30}{Superficie (ha)} & \thhl{0.30}{Porcentaje (\%)} \\
 \hline
 \endfirsthead
 \multicolumn{3}{l}{\small\textbf{(continuación)}} \\
 \hline
 \rowcolor{gray!30}
-\thh{0.40}{Pérdida de suelo (t/ha/año)}  &  \thhl{0.30}{Superficie (ha)}  &  \thhl{0.30}{Porcentaje} \\
+\thh{0.40}{Pérdida de suelo (t/ha/año)} & \thhl{0.30}{Superficie (ha)} & \thhl{0.30}{Porcentaje (\%)} \\
 \hline
 \endhead
 \hline
 \multicolumn{3}{r}{\small\textbf{(continúa)}} \\
 \endfoot
-
 \hline
-\tablefooterrow{3}{<< ge_fuente.erosion_pot >>}
+\tablefooterrow{3}{Fuente: & IIEG, con base en SMN. Información Estadística Climatológica, 1995-2025. INEGI. Carta edafológica escala 1:250 000 Serie III, 2025. INEGI. Continuo de Elevaciones Mexicano 4.0, 2025. IIEG. Mapa General del Estado de Jalisco, 2012.}
 \endlastfoot
 
 <% for fila in ge_er_categorias %>
@@ -1043,6 +1569,46 @@ Con base en información climatológica del periodo 1995-2025, la Carta edafoló
 
 \end{longtable}
 \normalsize
+
+<% endif %>
+
+<% if ge_er_municipios %>
+\newpage
+\setlength{\tabcolsep}{3pt}
+\footnotesize
+\begin{longtable}{
+  >{\raggedright\arraybackslash}m{\dimexpr0.40\linewidth - 2\tabcolsep\relax}
+  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
+  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
+}
+\caption{\textbf{Erosión potencial de los municipios de la región << nombre_region >>} \\ << ge_anio.erosion_pot >>}
+\label{tabla_ge_er_municipios} \\
+\hline
+\rowcolor{gray!30}
+\thh{0.40}{Municipio} & \thhl{0.30}{Pérdidas >50 t/ha/año (\%)} & \thhl{0.30}{Pérdidas >100 t/ha/año (\%)} \\
+\hline
+\endfirsthead
+\multicolumn{3}{l}{\small\textbf{(continuación)}} \\
+\hline
+\rowcolor{gray!30}
+\thh{0.40}{Municipio} & \thhl{0.30}{Pérdidas >50 t/ha/año (\%)} & \thhl{0.30}{Pérdidas >100 t/ha/año (\%)} \\
+\hline
+\endhead
+\hline
+\multicolumn{3}{r}{\small\textbf{(continúa)}} \\
+\endfoot
+\hline
+\tablefooterrow{3}{Fuente: & IIEG, con base en SMN. Información Estadística Climatológica, 1995-2025. INEGI. Carta edafológica escala 1:250 000 Serie III, 2025. INEGI. Continuo de Elevaciones Mexicano 4.0, 2025. IIEG. Mapa General del Estado de Jalisco, 2012.}
+\endlastfoot
+
+<% for fila in ge_er_municipios %>
+<< fila.municipio >> & << fila.perdida_mayor_50_pct >> & << fila.perdida_mayor_100_pct >> \\
+\hline
+<% endfor %>
+
+\end{longtable}
+\normalsize
+
 <% endif %>
 
 <% if ge_er_mapa_activo %>
@@ -1056,7 +1622,11 @@ Con base en información climatológica del periodo 1995-2025, la Carta edafoló
 
 \subsubsection{Erosión efectiva}
 
-Con base en información climatológica del periodo 1995-2025, la Carta edafológica Serie III, el Continuo de Elevaciones Mexicano 4.0, el Mapa General del Estado de Jalisco y la información de uso del suelo y vegetación Serie VII, se estimaron las pérdidas de suelo en el estado del 2025. En la región << nombre_region >> predominan pérdidas de suelo de << ge_ee_dominante_rango_texto >> t/ha/año, clasificadas como << ge_ee_dominante_tipo_texto >> que representa << ge_ee_dominante_pct >> \% de la superficie municipal. En segundo lugar, las pérdidas de suelo de << ge_ee_secundario_rango_texto >> abarcan el << ge_ee_secundario_pct >> \%. El resto de categorías representan el << ge_ee_demas_pct >> \% del territorio.
+Con base en información climatológica del período 1995-2025, la Carta edafológica Serie III, el Continuo de Elevaciones Mexicano 4.0, el Mapa General del Estado de Jalisco y la información de uso del suelo y vegetación Serie VII, se estimó la pérdida efectiva de suelo para 2025.
+
+En la región << nombre_region >> predomina el rango de pérdida de suelo << ge_ee_dominante_rango >>, que comprende el << ge_ee_dominante_pct >> \% de la superficie regional. Le sigue << ge_ee_secundario_rango >>, con el << ge_ee_secundario_pct >> \%.
+
+Las superficies con pérdidas efectivas de suelo superiores a 50 t/ha/año representan el << ge_ee_pct_mayor_50_region >> \% del territorio regional. Entre los municipios, << ge_ee_municipio_mayor_50 >> presenta la mayor proporción en esta categoría, con el << ge_ee_pct_municipio_mayor_50 >> \% de su superficie, mientras que << ge_ee_municipio_menor_50 >> registra la menor, con el << ge_ee_pct_municipio_menor_50 >> \%. A escala estatal, estos niveles de pérdida efectiva abarcan el << ge_ee_pct_mayor_50_estado >> \% de Jalisco.
 
 <% if ge_ee_grafica_activa %>
 \begin{figure}[H]
@@ -1067,35 +1637,33 @@ Con base en información climatológica del periodo 1995-2025, la Carta edafoló
 \tablefooter{<< ge_fuente.erosion_efe >>}
 <% endif %>
 
-\newpage
 <% if ge_ee_categorias %>
+\newpage
 \setlength{\tabcolsep}{3pt}
 \footnotesize
-\begin{longtable}{>{\raggedright\arraybackslash}m{\dimexpr0.40\linewidth - 2\tabcolsep\relax}
-                  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
-                  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}}
-
-\caption{\textbf{Erosión efectiva de la región << nombre_region >>} \\
-<< ge_anio.erosion_efe >>}
+\begin{longtable}{
+  >{\raggedright\arraybackslash}m{\dimexpr0.40\linewidth - 2\tabcolsep\relax}
+  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
+  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
+}
+\caption{\textbf{Erosión efectiva de la región << nombre_region >>} \\ << ge_anio.erosion_efe >>}
 \label{tabla_ge_erosion_ef} \\
-
 \hline
 \rowcolor{gray!30}
-\thh{0.40}{Pérdida de suelo (t/ha/año)}  &  \thhl{0.30}{Superficie (ha)}  &  \thhl{0.30}{Porcentaje} \\
+\thh{0.40}{Pérdida de suelo (t/ha/año)} & \thhl{0.30}{Superficie (ha)} & \thhl{0.30}{Porcentaje (\%)} \\
 \hline
 \endfirsthead
 \multicolumn{3}{l}{\small\textbf{(continuación)}} \\
 \hline
 \rowcolor{gray!30}
-\thh{0.40}{Pérdida de suelo (t/ha/año)}  &  \thhl{0.30}{Superficie (ha)}  &  \thhl{0.30}{Porcentaje} \\
+\thh{0.40}{Pérdida de suelo (t/ha/año)} & \thhl{0.30}{Superficie (ha)} & \thhl{0.30}{Porcentaje (\%)} \\
 \hline
 \endhead
 \hline
 \multicolumn{3}{r}{\small\textbf{(continúa)}} \\
 \endfoot
-
 \hline
-\tablefooterrow{3}{<< ge_fuente.erosion_efe >>}
+\tablefooterrow{3}{Fuente: & IIEG, con base en SMN. Información Estadística Climatológica, 1995-2025. INEGI. Carta edafológica escala 1:250 000 Serie III, 2025. INEGI. Continuo de Elevaciones Mexicano 4.0, 2025. IIEG. Mapa General del Estado de Jalisco, 2012. INEGI. Conjunto de datos vectoriales de uso del suelo y vegetación Serie VII, 2018.}
 \endlastfoot
 
 <% for fila in ge_ee_categorias %>
@@ -1105,6 +1673,46 @@ Con base en información climatológica del periodo 1995-2025, la Carta edafoló
 
 \end{longtable}
 \normalsize
+
+<% endif %>
+
+<% if ge_ee_municipios %>
+\newpage
+\setlength{\tabcolsep}{3pt}
+\footnotesize
+\begin{longtable}{
+  >{\raggedright\arraybackslash}m{\dimexpr0.40\linewidth - 2\tabcolsep\relax}
+  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
+  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
+}
+\caption{\textbf{Erosión efectiva de los municipios de la región << nombre_region >>} \\ << ge_anio.erosion_efe >>}
+\label{tabla_ge_ee_municipios} \\
+\hline
+\rowcolor{gray!30}
+\thh{0.40}{Municipio} & \thhl{0.30}{Pérdidas >50 t/ha/año (\%)} & \thhl{0.30}{Pérdidas >100 t/ha/año (\%)} \\
+\hline
+\endfirsthead
+\multicolumn{3}{l}{\small\textbf{(continuación)}} \\
+\hline
+\rowcolor{gray!30}
+\thh{0.40}{Municipio} & \thhl{0.30}{Pérdidas >50 t/ha/año (\%)} & \thhl{0.30}{Pérdidas >100 t/ha/año (\%)} \\
+\hline
+\endhead
+\hline
+\multicolumn{3}{r}{\small\textbf{(continúa)}} \\
+\endfoot
+\hline
+\tablefooterrow{3}{Fuente: & IIEG, con base en SMN. Información Estadística Climatológica, 1995-2025. INEGI. Carta edafológica escala 1:250 000 Serie III, 2025. INEGI. Continuo de Elevaciones Mexicano 4.0, 2025. IIEG. Mapa General del Estado de Jalisco, 2012.}
+\endlastfoot
+
+<% for fila in ge_ee_municipios %>
+<< fila.municipio >> & << fila.perdida_mayor_50_pct >> & << fila.perdida_mayor_100_pct >> \\
+\hline
+<% endfor %>
+
+\end{longtable}
+\normalsize
+
 <% endif %>
 
 <% if ge_ee_mapa_activo %>
@@ -1117,11 +1725,16 @@ Con base en información climatológica del periodo 1995-2025, la Carta edafoló
 % & INEGI. Conjunto de datos vectoriales de uso del suelo y vegetación Serie VII, 2018.}
 <% endif %>
 
+
 \subsection{Subsistema antrópico}
 
 \subsubsection{Índice Territorial Urbano-Rural}
 
-Con base en el Índice Territorial Urbano-Rural (INEGI, 2025), en la región << nombre_region >> predomina la categoría << ge_itur_dominante_texto >>, con una cobertura de << ge_itur_dominante_pct >> \% del territorio. Le sigue la categoría << ge_itur_secundario_texto >>, con << ge_itur_secundario_pct >> \%. El resto de las categorías representa << ge_itur_demas_pct >> \% del territorio.
+Con base en el Índice Territorial Urbano-Rural (INEGI, 2025), en la región << nombre_region >> predomina la categoría << ge_itur_dominante >>, que comprende el << ge_itur_dominante_pct >> \% de la superficie regional. Le sigue << ge_itur_secundario >>, con el << ge_itur_secundario_pct >> \%.
+
+La superficie correspondiente a las categorías urbano y urbano transitorio representa en conjunto el << ge_itur_pct_urbano_ampliado_region >> \% de la región, frente al << ge_itur_pct_urbano_ampliado_estado >> \% a escala estatal.
+
+Entre los municipios, << ge_itur_municipio_mayor_urbano >> registra la mayor proporción conjunta de superficie en las categorías urbano y urbano transitorio, con el << ge_itur_pct_mayor_urbano >> \%, mientras que la menor proporción a nivel regional la registra << ge_itur_municipio_menor_urbano >> con el << ge_itur_pct_menor_urbano >> \% de su territorio.
 
 <% if ge_itur_grafica_activa %>
 \begin{figure}[H]
@@ -1132,35 +1745,33 @@ Con base en el Índice Territorial Urbano-Rural (INEGI, 2025), en la región << 
 \tablefooter{<< ge_fuente.itur >>}
 <% endif %>
 
-\newpage
 <% if ge_itur_clasificaciones %>
+\newpage
 \setlength{\tabcolsep}{3pt}
 \footnotesize
-\begin{longtable}{>{\raggedright\arraybackslash}m{\dimexpr0.40\linewidth - 2\tabcolsep\relax}
-                  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
-                  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}}
-
-\caption{\textbf{Índice Territorial Urbano-Rural de la región << nombre_region >>} \\
-<< ge_anio.itur >>}
+\begin{longtable}{
+  >{\raggedright\arraybackslash}m{\dimexpr0.40\linewidth - 2\tabcolsep\relax}
+  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
+  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
+}
+\caption{\textbf{Índice Territorial Urbano-Rural de la región << nombre_region >>} \\ << ge_anio.itur >>}
 \label{tabla_ge_itur} \\
-
 \hline
 \rowcolor{gray!30}
-\thh{0.40}{Clasificación}  &  \thhl{0.30}{Superficie (ha)}  &  \thhl{0.30}{Porcentaje} \\
+\thh{0.40}{Clasificación} & \thhl{0.30}{Superficie (ha)} & \thhl{0.30}{Porcentaje (\%)} \\
 \hline
 \endfirsthead
 \multicolumn{3}{l}{\small\textbf{(continuación)}} \\
 \hline
 \rowcolor{gray!30}
-\thh{0.40}{Clasificación}  &  \thhl{0.30}{Superficie (ha)}  &  \thhl{0.30}{Porcentaje} \\
+\thh{0.40}{Clasificación} & \thhl{0.30}{Superficie (ha)} & \thhl{0.30}{Porcentaje (\%)} \\
 \hline
 \endhead
 \hline
 \multicolumn{3}{r}{\small\textbf{(continúa)}} \\
 \endfoot
-
 \hline
-\tablefooterrow{3}{<< ge_fuente.itur >>}
+\tablefooterrow{3}{Fuente: & IIEG, con base en INEGI. Índice Territorial Urbano-Rural (ITUR), 2025.}
 \endlastfoot
 
 <% for fila in ge_itur_clasificaciones %>
@@ -1170,6 +1781,47 @@ Con base en el Índice Territorial Urbano-Rural (INEGI, 2025), en la región << 
 
 \end{longtable}
 \normalsize
+
+<% endif %>
+
+<% if ge_itur_municipios %>
+\newpage
+\setlength{\tabcolsep}{3pt}
+\footnotesize
+\begin{longtable}{
+  >{\raggedright\arraybackslash}m{\dimexpr0.25\linewidth - 2\tabcolsep\relax}
+  >{\raggedleft\arraybackslash}m{\dimexpr0.25\linewidth - 2\tabcolsep\relax}
+  >{\raggedleft\arraybackslash}m{\dimexpr0.25\linewidth - 2\tabcolsep\relax}
+  >{\raggedleft\arraybackslash}m{\dimexpr0.25\linewidth - 2\tabcolsep\relax}
+}
+\caption{\textbf{Índice Territorial Urbano-Rural de los municipios de la región << nombre_region >>} \\ << ge_anio.itur >>}
+\label{tabla_ge_itur_municipios} \\
+\hline
+\rowcolor{gray!30}
+\thh{0.25}{Municipio} & \thhl{0.25}{Urbano + urbano transitorio (\%)} & \thhl{0.25}{Transición (\%)} & \thhl{0.25}{Rural + rural transitorio (\%)} \\
+\hline
+\endfirsthead
+\multicolumn{4}{l}{\small\textbf{(continuación)}} \\
+\hline
+\rowcolor{gray!30}
+\thh{0.25}{Municipio} & \thhl{0.25}{Urbano + urbano transitorio (\%)} & \thhl{0.25}{Transición (\%)} & \thhl{0.25}{Rural + rural transitorio (\%)} \\
+\hline
+\endhead
+\hline
+\multicolumn{4}{r}{\small\textbf{(continúa)}} \\
+\endfoot
+\hline
+\tablefooterrow{4}{Fuente: & IIEG, con base en INEGI. Índice Territorial Urbano-Rural (ITUR), 2025.}
+\endlastfoot
+
+<% for fila in ge_itur_municipios %>
+<< fila.municipio >> & << fila.urbano_ampliado_pct >> & << fila.transicion_pct >> & << fila.rural_ampliado_pct >> \\
+\hline
+<% endfor %>
+
+\end{longtable}
+\normalsize
+
 <% endif %>
 
 <% if ge_itur_mapa_activo %>
@@ -1184,51 +1836,54 @@ Con base en el Índice Territorial Urbano-Rural (INEGI, 2025), en la región << 
 
 \subsubsection{Salud}
 
-De acuerdo con los registros de la Secretaría de Salud, en el municipio se identifican << ge_salud_total_puntos_muni >> unidades de servicio de salud. En el siguiente cuadro se presenta desglosada la información por institución o dependencia a la que
-pertenecen y el nivel de atención que brinda.
+Con base en la Clave Única de Establecimientos de Salud (CLUES), publicada por la Dirección General de Información en Salud (DGIS) de la Secretaría de Salud del Gobierno de México, en la región << nombre_region >> se identifican << ge_salud_total_unidades >> unidades de servicio de salud. De ellas, << ge_salud_total_primer_nivel >> corresponden al primer nivel de atención, << ge_salud_total_segundo_nivel >> al segundo y << ge_salud_total_tercer_nivel >> al tercero; además, << ge_salud_total_otros >> se encuentran clasificadas en otros tipos de servicio.
 
-<% if ge_salud_unidades %>
+Por institución o dependencia, << ge_salud_institucion_mayor >> concentra << ge_salud_unidades_institucion_mayor >> unidades de salud, la cifra más alta de la región; le sigue << ge_salud_institucion_segunda >>, con << ge_salud_unidades_institucion_segunda >>.
+
+Por municipio, << ge_salud_municipio_mayor_unidades >> registra el mayor número de unidades de salud, con << ge_salud_mayor_unidades_municipales >>, mientras que << ge_salud_municipio_menor_unidades >> presenta el menor número, con << ge_salud_menor_unidades_municipales >>.
+
+\newpage
 \setlength{\tabcolsep}{3pt}
 \footnotesize
-\begin{longtable}{>{\raggedright\arraybackslash}m{\dimexpr0.45\linewidth - 2\tabcolsep\relax}
-                  >{\raggedright\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
-                  >{\raggedleft\arraybackslash}m{\dimexpr0.25\linewidth - 2\tabcolsep\relax}}
-
-\caption{\textbf{Unidades de salud de la región << nombre_region >>} \\
-<< ge_anio.salud >>}
+\begin{longtable}{
+  >{\raggedright\arraybackslash}m{\dimexpr0.40\linewidth - 2\tabcolsep\relax}
+  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
+  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
+}
+\caption{\textbf{Unidades de salud de la región << nombre_region >>} \\ << ge_anio.salud >>}
 \label{tabla_ge_salud} \\
-
 \hline
 \rowcolor{gray!30}
-\thh{0.45}{Institución}  &  \thh{0.30}{Nivel de atención}  &  \thhl{0.25}{Cantidad} \\
+\thh{0.40}{Nivel de atención} & \thhl{0.30}{Cantidad} & \thhl{0.30}{Porcentaje (\%)} \\
 \hline
 \endfirsthead
 \multicolumn{3}{l}{\small\textbf{(continuación)}} \\
 \hline
 \rowcolor{gray!30}
-\thh{0.45}{Institución}  &  \thh{0.30}{Nivel de atención}  &  \thhl{0.25}{Cantidad} \\
+\thh{0.40}{Nivel de atención} & \thhl{0.30}{Cantidad} & \thhl{0.30}{Porcentaje (\%)} \\
 \hline
 \endhead
 \hline
 \multicolumn{3}{r}{\small\textbf{(continúa)}} \\
 \endfoot
-
 \hline
-\tablefooterrow{3}{Nota: & Por efectos de escala, simbolización y superposición cartográfica, los elementos visibles en el mapa de Unidades de salud de la región << nombre_region >> pueden no corresponder con el total reportado en el cuadro.\\
-<< ge_fuente.salud >>}
+\tablefooterrow{3}{Fuente: & IIEG, con base en la Dirección General de Información en Salud. Clave Única de Establecimientos de Salud, 2026.}
 \endlastfoot
 
-\rowcolor{filaResaltada}
-\thdr{Total} & & \thdr{<< ge_salud_total_unidades >>} \\
+Primer nivel & << ge_salud_total_primer_nivel >> & << ge_salud_pct_primer_nivel >> \\
 \hline
-<% for fila in ge_salud_unidades %>
-<< fila.nombre_de_la_institucion >> & << fila.nivel_atencion >> & << fila.cantidad >> \\
+Segundo nivel & << ge_salud_total_segundo_nivel >> & << ge_salud_pct_segundo_nivel >> \\
 \hline
-<% endfor %>
+Tercer nivel & << ge_salud_total_tercer_nivel >> & << ge_salud_pct_tercer_nivel >> \\
+\hline
+Otros & << ge_salud_total_otros >> & << ge_salud_pct_otros >> \\
+\hline
+Total & << ge_salud_total_unidades >> & 100.00 \\
+\hline
 
 \end{longtable}
 \normalsize
-<% endif %>
+
 
 <% if ge_salud_mapa_activo %>
 \clearpage
@@ -1243,46 +1898,50 @@ pertenecen y el nivel de atención que brinda.
 
 \subsubsection{Educación}
 
-De acuerdo con los registros del Sistema de Información y Gestión Educativa, en el municipio existen << ge_edu_total_escuelas_muni >> centros educativos. En el Cuadro \ref{tabla_ge_educacion} se presenta su distribución por nivel educativo y tipo de sostenimiento.
+De acuerdo con los registros del Sistema de Información y Gestión Educativa de la SEP, en la región << nombre_region >> se registran << ge_edu_total_centros >> centros educativos. El nivel con mayor número de planteles es << ge_edu_nivel_mayor >>, con << ge_edu_centros_nivel_mayor >>, seguido de << ge_edu_nivel_segundo >>, con << ge_edu_centros_nivel_segundo >>.
+
+Del total regional, << ge_edu_total_publicos >> centros corresponden al sector público y << ge_edu_total_particulares >> al sector particular, equivalentes al << ge_edu_pct_publicos >> \% y al  << ge_edu_pct_particulares >> \%, respectivamente.
+
+Entre los municipios, << ge_edu_municipio_mayor_centros >> registra el mayor número de centros educativos, con << ge_edu_mayor_centros_municipales >>, mientras que << ge_edu_municipio_menor_centros >> cuenta con el menor número en la región, con  << ge_edu_menor_centros_municipales >> centros educativos.
 
 <% if ge_edu_centros %>
+\newpage
 \setlength{\tabcolsep}{3pt}
 \footnotesize
-\begin{longtable}{>{\raggedright\arraybackslash}m{\dimexpr0.40\linewidth - 2\tabcolsep\relax}
-                  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
-                  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}}
-
-\caption{\textbf{Centros educativos de la región << nombre_region >>} \\
-<< ge_anio.educacion >>}
+\begin{longtable}{
+  >{\raggedright\arraybackslash}m{\dimexpr0.25\linewidth - 2\tabcolsep\relax}
+  >{\raggedleft\arraybackslash}m{\dimexpr0.25\linewidth - 2\tabcolsep\relax}
+  >{\raggedleft\arraybackslash}m{\dimexpr0.25\linewidth - 2\tabcolsep\relax}
+  >{\raggedleft\arraybackslash}m{\dimexpr0.25\linewidth - 2\tabcolsep\relax}
+}
+\caption{\textbf{Centros educativos de la región << nombre_region >>} \\ << ge_anio.educacion >>}
 \label{tabla_ge_educacion} \\
-
 \hline
 \rowcolor{gray!30}
-\thh{0.40}{Nivel educativo}  &  \thhl{0.30}{Sector público}  &  \thhl{0.30}{Sector particular} \\
+\thh{0.25}{Nivel educativo} & \thhl{0.25}{Sector público} & \thhl{0.25}{Sector particular} & \thhl{0.25}{Total} \\
 \hline
 \endfirsthead
-\multicolumn{3}{l}{\small\textbf{(continuación)}} \\
+\multicolumn{4}{l}{\small\textbf{(continuación)}} \\
 \hline
 \rowcolor{gray!30}
-\thh{0.40}{Nivel educativo}  &  \thhl{0.30}{Sector público}  &  \thhl{0.30}{Sector particular} \\
+\thh{0.25}{Nivel educativo} & \thhl{0.25}{Sector público} & \thhl{0.25}{Sector particular} & \thhl{0.25}{Total} \\
 \hline
 \endhead
 \hline
-\multicolumn{3}{r}{\small\textbf{(continúa)}} \\
+\multicolumn{4}{r}{\small\textbf{(continúa)}} \\
 \endfoot
-
 \hline
-\tablefooterrow{3}{Nota: & Por efectos de escala, simbolización y superposición cartográfica, los elementos visibles en el mapa de Centros educativos de la región << nombre_region >> pueden no corresponder con el total reportado en el cuadro.\\
-<< ge_fuente.educacion >>}
+\tablefooterrow{4}{Fuente: & IIEG, con base en Sistema de Información y Gestión Educativa (SIGED). Consulta de escuelas, 2025.}
 \endlastfoot
 
 <% for fila in ge_edu_centros %>
-<< fila.nivel_educativo >> & << fila.publico >> & << fila.particular >> \\
+<< fila.nivel_educativo >> & << fila.publico >> & << fila.particular >> & << fila.total >> \\
 \hline
 <% endfor %>
 
 \end{longtable}
 \normalsize
+
 <% endif %>
 
 <% if ge_edu_mapa_activo %>
@@ -1297,46 +1956,47 @@ De acuerdo con los registros del Sistema de Información y Gestión Educativa, e
 
 \subsubsection{Espacios públicos}
 
-<< ge_ep_resumen_texto >>
+Con base en el Marco Geoestadístico (INEGI, 2025), en la región << nombre_region >> se registran << ge_ep_total_espacios >> espacios públicos. El tipo más frecuente es << ge_ep_tipo_predominante >>, con << ge_ep_cantidad_predominante >> registros, que representan el << ge_ep_porcentaje_predominante >> \% del total regional. Le sigue << ge_ep_tipo_segundo >>, con << ge_ep_cantidad_segundo >> espacios que representan el << ge_ep_porcentaje_segundo >> \% de los espacios públicos en la región.
+
+Entre los municipios, << ge_ep_municipio_mayor_espacios >> concentra el mayor número de espacios públicos, con << ge_ep_mayor_espacios_municipales >>, mientras que << ge_ep_municipio_menor_espacios >> registra el menor número con << ge_ep_menor_espacios_municipales >> espacios.
 
 <% if ge_ep_espacios %>
+\newpage
 \setlength{\tabcolsep}{3pt}
 \footnotesize
-\begin{longtable}{>{\raggedright\arraybackslash}m{\dimexpr0.40\linewidth - 2\tabcolsep\relax}
-                  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
-                  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}}
-
-\caption{\textbf{Espacios públicos de la región << nombre_region >>} \\
-<< ge_anio.espacios >>}
+\begin{longtable}{
+  >{\raggedright\arraybackslash}m{\dimexpr0.40\linewidth - 2\tabcolsep\relax}
+  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
+  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
+}
+\caption{\textbf{Espacios públicos de la región << nombre_region >>} \\ << ge_anio.espacios >>}
 \label{tabla_ge_espacios} \\
-
 \hline
 \rowcolor{gray!30}
-\thh{0.40}{Tipo}  &  \thhl{0.30}{Cantidad}  &  \thhl{0.30}{Porcentaje} \\
+\thh{0.40}{Tipo} & \thhl{0.30}{Cantidad} & \thhl{0.30}{Porcentaje (\%)} \\
 \hline
 \endfirsthead
 \multicolumn{3}{l}{\small\textbf{(continuación)}} \\
 \hline
 \rowcolor{gray!30}
-\thh{0.40}{Tipo}  &  \thhl{0.30}{Cantidad}  &  \thhl{0.30}{Porcentaje} \\
+\thh{0.40}{Tipo} & \thhl{0.30}{Cantidad} & \thhl{0.30}{Porcentaje (\%)} \\
 \hline
 \endhead
 \hline
 \multicolumn{3}{r}{\small\textbf{(continúa)}} \\
 \endfoot
-
 \hline
-\tablefooterrow{3}{Nota: & Por efectos de escala, simbolización y superposición cartográfica, los elementos visibles en el mapa de Espacios públicos de la región << nombre_region >> pueden no corresponder con el total reportado en el cuadro.\\
-<< ge_fuente.espacios >>}
+\tablefooterrow{3}{Fuente: & IIEG, con base en INEGI. Marco Geoestadístico, 2025.}
 \endlastfoot
 
 <% for fila in ge_ep_espacios %>
-<< fila.tipo >> & << fila.superficie_ha >> & << fila.porcentaje >> \\
+<< fila.tipo >> & << fila.cantidad >> & << fila.porcentaje >> \\
 \hline
 <% endfor %>
 
 \end{longtable}
 \normalsize
+
 <% endif %>
 
 <% if ge_ep_mapa_activo %>
@@ -1350,51 +2010,91 @@ De acuerdo con los registros del Sistema de Información y Gestión Educativa, e
 
 \subsubsection{Infraestructura energética}
 
-Con base en el Directorio Estadístico Nacional de Unidades Económicas y la información topográfica del INEGI, así como en el Mapa de Hidrocarburos de la SENER, todos correspondientes al 2025, se identificó la infraestructura para el suministro y distribución de energía en el territorio.
-<< ge_ene_subestaciones_texto >>
-<< ge_ene_linea_transm_l_texto >>
+Con base en el Directorio Estadístico Nacional de Unidades Económicas y la información topográfica del INEGI, así como en el Mapa de Hidrocarburos de la SENER, correspondientes a << ge_ene_anio >>, en la región << nombre_region >> se identifican << ge_ene_total_subestaciones >> subestaciones eléctricas y << ge_ene_linea_transm_l_km >> kilómetros de redes de alta tensión.
 
-<< ge_ie_texto >>
+La red de alta tensión presenta una densidad de << ge_ene_densidad_alta_tension_region >> kilómetros por cada 100 km$^2$ de territorio. << ge_ene_municipio_mayor_densidad_red >> registra la mayor densidad de la región, con << ge_ene_mayor_densidad_red >> km por cada 100 km$^2$, mientras que << ge_ene_municipio_menor_densidad_red >> presenta la menor densidad, con << ge_ene_menor_densidad_red >> km por cada 100 km$^2$. A escala estatal, el indicador es de << ge_ene_densidad_alta_tension_estado >> km por cada 100 km$^2$.
 
-<% if ge_ie_infraestructura %>
+Entre los establecimientos relacionados con el suministro y la comercialización de energía, predomina << ge_ene_tipo_predominante >>, con << ge_ene_cantidad_predominante >> unidades, que representan el << ge_ene_porcentaje_predominante >> \% del total regional. Le sigue << ge_ene_tipo_segundo >>, con << ge_ene_cantidad_segundo >> unidades que representa el << ge_ene_porcentaje_segundo >> \%.
+
+<< ge_ene_municipio_mayor_unidades >> registra el mayor número de establecimientos vinculados con energía, con << ge_ene_mayor_unidades_municipales >>, mientras que << ge_ene_municipio_menor_unidades >> registra << ge_ene_menor_unidades_municipales >>.
+
+\newpage
 \setlength{\tabcolsep}{3pt}
 \footnotesize
-\begin{longtable}{>{\raggedright\arraybackslash}m{\dimexpr0.40\linewidth - 2\tabcolsep\relax}
-                  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
-                  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}}
-
-\caption{\textbf{Infraestructura energética de la región << nombre_region >>} \\
-<< ge_anio.energia >>}
+\begin{longtable}{
+  >{\raggedright\arraybackslash}m{\dimexpr0.50\linewidth - 2\tabcolsep\relax}
+  >{\raggedleft\arraybackslash}m{\dimexpr0.50\linewidth - 2\tabcolsep\relax}
+}
+\caption{\textbf{Red de alta tensión de la región << nombre_region >>} \\ << ge_anio.energia >>}
 \label{tabla_ge_energia} \\
-
 \hline
 \rowcolor{gray!30}
-\thh{0.40}{Tipo de infraestructura}  &  \thhl{0.30}{Valor}  &  \thhl{0.30}{Porcentaje} \\
+\thh{0.50}{Indicador} & \thhl{0.50}{Valor} \\
+\hline
+\endfirsthead
+\multicolumn{2}{l}{\small\textbf{(continuación)}} \\
+\hline
+\rowcolor{gray!30}
+\thh{0.50}{Indicador} & \thhl{0.50}{Valor} \\
+\hline
+\endhead
+\hline
+\multicolumn{2}{r}{\small\textbf{(continúa)}} \\
+\endfoot
+\hline
+\tablefooterrow{2}{Fuente: & IIEG, con base en INEGI. Directorio Estadístico Nacional de Unidades Económicas, 2025. INEGI. Conjunto Nacional de Información Topográfica 1:50 000, 2025. SENER. Mapa de Hidrocarburos, 2025.}
+\endlastfoot
+
+Subestaciones eléctricas & << ge_ene_total_subestaciones >> \\
+\hline
+Red de alta tensión (km) & << ge_ene_linea_transm_l_km >> \\
+\hline
+Red de alta tensión por 100 km$^2$ & << ge_ene_densidad_alta_tension_region >> \\
+\hline
+
+\end{longtable}
+\normalsize
+
+
+<% if ge_ie_infraestructura %>
+\newpage
+\setlength{\tabcolsep}{3pt}
+\footnotesize
+\begin{longtable}{
+  >{\raggedright\arraybackslash}m{\dimexpr0.40\linewidth - 2\tabcolsep\relax}
+  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
+  >{\raggedleft\arraybackslash}m{\dimexpr0.30\linewidth - 2\tabcolsep\relax}
+}
+\caption{\textbf{Unidades económicas relacionadas con energías de la región << nombre_region >>} \\ << ge_anio.energia >>}
+\label{tabla_ge_ie_establecimientos} \\
+\hline
+\rowcolor{gray!30}
+\thh{0.40}{Tipo} & \thhl{0.30}{Cantidad} & \thhl{0.30}{Porcentaje (\%)} \\
 \hline
 \endfirsthead
 \multicolumn{3}{l}{\small\textbf{(continuación)}} \\
 \hline
 \rowcolor{gray!30}
-\thh{0.40}{Tipo de infraestructura}  &  \thhl{0.30}{Valor}  &  \thhl{0.30}{Porcentaje} \\
+\thh{0.40}{Tipo} & \thhl{0.30}{Cantidad} & \thhl{0.30}{Porcentaje (\%)} \\
 \hline
 \endhead
 \hline
 \multicolumn{3}{r}{\small\textbf{(continúa)}} \\
 \endfoot
-
 \hline
-\tablefooterrow{3}{Nota: & Por efectos de escala, simbolización y superposición cartográfica, los elementos visibles en el mapa de Infraestructura energética de la región << nombre_region >> pueden no corresponder con el total reportado en el cuadro.\\
-<< ge_fuente.energia >>}
+\tablefooterrow{3}{Fuente: & IIEG, con base en INEGI. Directorio Estadístico Nacional de Unidades Económicas, 2025. INEGI. Conjunto Nacional de Información Topográfica 1:50 000, 2025. SENER. Mapa de Hidrocarburos, 2025.}
 \endlastfoot
 
 <% for fila in ge_ie_infraestructura %>
-<< fila.tipo_infraestructura >> & << fila.valor >> & << fila.porcentaje >> \\
+<< fila.tipo_infraestructura >> & << fila.cantidad >> & << fila.porcentaje >> \\
 \hline
 <% endfor %>
 
 \end{longtable}
 \normalsize
+
 <% endif %>
+
 <% if ge_ie_mapa_activo %>
 \clearpage
 \mapatitulo*{Infraestructura energética de la región << nombre_region >>, << ge_anio_mapa.energia >>}
