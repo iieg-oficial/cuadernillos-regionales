@@ -182,7 +182,9 @@ def _build_color_lookup(topic_key, categories):
     palette_idx = 0
     for cat in categories:
         key = normalize_category_key(topic_key, cat)
-        if not has_palette and key in explicit:
+        if cat == "Sin datos":
+            lookup[key] = "#9CA3AF"
+        elif not has_palette and key in explicit:
             lookup[key] = explicit[key]
         elif not has_palette:
             lookup[key] = palette[palette_idx % len(palette)]
@@ -195,7 +197,7 @@ def _build_color_lookup(topic_key, categories):
     return lookup
 
 
-RESIDUAL_CATEGORY_KEYS = ("sin_clasificacion", "otros", "no_especificado")
+RESIDUAL_CATEGORY_KEYS = ("sin_clasificacion", "otros", "no_especificado", "sin_datos")
 
 
 def _category_order_key(topic_key, cat, value):
@@ -267,9 +269,9 @@ def _get_legend_ncol(topic_key, n):
     if topic_key == "uso_suelo":
         return n if n <= 5 else 3 if n == 6 else 4
     if topic_key in {"edafologia", "geologia"}:
-        return n if n <= 5 else max(1, math.ceil(n / 2))
+        return min(4, n)
     if topic_key == "clima_koppen":
-        return min(8 if n <= 16 else 9, n)
+        return min(6, n)
     if topic_key.startswith("erosion_"):
         return 4 if n >= 7 else min(4, n)
     if topic_key in {"acuiferos", "cuencas"}:
@@ -302,15 +304,14 @@ def _autofit_label(ax, renderer, text, w, h):
     rect_w = abs(x1 - x0) * TREEMAP_LABEL_INNER_MARGIN
     rect_h = abs(y1 - y0) * TREEMAP_LABEL_INNER_MARGIN
     if rect_w <= 0 or rect_h <= 0:
-        text.set_fontsize(TREEMAP_LABEL_MIN_FONT_SIZE)
-        return
+        return False
     size = rect_h / ax.get_figure().dpi * 72
     text.set_fontsize(size)
     bbox = text.get_window_extent(renderer)
     if bbox.width > 0:
         size = min(size, size * rect_w / bbox.width)
-    size = min(TREEMAP_LABEL_MAX_FONT_SIZE, max(TREEMAP_LABEL_MIN_FONT_SIZE, size))
-    text.set_fontsize(size)
+    text.set_fontsize(min(TREEMAP_LABEL_MAX_FONT_SIZE, size))
+    return size >= TREEMAP_LABEL_MIN_FONT_SIZE
 
 
 def _save(fig, path):
@@ -319,25 +320,39 @@ def _save(fig, path):
     plt.close(fig)
 
 
+def _with_missing(values):
+    missing = 100 - math.fsum(values.values())
+    # Ignore subpixel gaps caused by numerical precision at full coverage.
+    if missing > 0.0001 and "Sin datos" not in values:
+        return {**values, "Sin datos": missing}
+    return values
+
+
+def _percent(value):
+    return "<0.01 %" if 0 < value < 0.005 else f"{value:.2f} %"
+
+
 def plot_proportional_blocks(categories, values, topic_key, output_path):
     _setup_style()
+    distribution = _with_missing(dict(zip(categories, values, strict=True)))
+    categories, values = list(distribution), list(distribution.values())
     colors = _build_color_lookup(topic_key, categories)
-    rects = _split_rectangles(values, 0, 0, min(sum(values), 100), TREEMAP_HEIGHT)
+    total = math.fsum(values)
+    rects = _split_rectangles(values, 0, 0, total, TREEMAP_HEIGHT)
 
     fig, ax = plt.subplots(figsize=FIGSIZE_PROPORTION)
-    ax.set_xlim(0, 100)
+    ax.set_xlim(0, max(100, total))
     ax.set_ylim(0, TREEMAP_HEIGHT)
     ax.axis("off")
     fig.canvas.draw()
     renderer = fig.canvas.get_renderer()
 
-    for (x, y, w, h), cat, val in zip(rects, categories, values):
+    labels = []
+    for (x, y, w, h), cat, val in zip(rects, categories, values, strict=True):
         c = _color_for(cat, colors, topic_key)
         rect = Rectangle((x, y), w, h, facecolor=c, edgecolor="none", linewidth=0)
         ax.add_patch(rect)
-        if val <= 0.2:
-            continue
-        label = f"{val:.2f} %"
+        label = _percent(val)
         text = ax.text(
             x + w / 2,
             y + h / 2,
@@ -348,14 +363,17 @@ def plot_proportional_blocks(categories, values, topic_key, output_path):
             color=_contrast_text_color(c),
             clip_on=True,
         )
-        _autofit_label(ax, renderer, text, w, h)
-        text.set_clip_path(rect)
+        if val > 0.2 and _autofit_label(ax, renderer, text, w, h):
+            text.set_clip_path(rect)
+            labels.append(cat)
+        else:
+            text.remove()
+            labels.append(f"{cat} ({label})")
 
     handles = [
         Patch(facecolor=_color_for(c, colors, topic_key), edgecolor="none", label=c)
         for c in categories
     ]
-    labels = list(categories)
     ncol = _get_legend_ncol(topic_key, len(handles))
     handles, labels = _reorder_legend(handles, labels, ncol)
     fontsize = 6.2 if len(handles) > 36 else 7.0 if len(handles) > 20 else 8.2
@@ -378,6 +396,7 @@ def plot_proportional_blocks(categories, values, topic_key, output_path):
 
 def plot_stacked_pair(row_data, topic_key, output_path):
     _setup_style()
+    row_data = [(label, _with_missing(vals)) for label, vals in row_data]
     segments = [(label, _ordered_segments(topic_key, vals)) for label, vals in row_data]
     legend_order = _stacked_legend_order(topic_key, row_data)
     colors = _build_color_lookup(topic_key, legend_order)
