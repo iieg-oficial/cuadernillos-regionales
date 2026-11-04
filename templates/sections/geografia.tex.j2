@@ -21,7 +21,7 @@
 
 \subsubsection{Descripción general}
 
-La región << nombre_region >> se localiza en << ge_dg_ubicacion_general >> del estado de Jalisco y está integrada por << ge_dg_numero_municipios >> municipios: << ge_dg_municipios_integrantes >>. En conjunto, ocupa una superficie de << ge_dg_superficie_region_km2 >> kilómetros cuadrados, equivalente al << ge_dg_porcentaje_superficie_estatal >> \% del territorio estatal.
+En Jalisco, la región << nombre_region >> está integrada por << ge_dg_numero_municipios >> municipios: << ge_dg_municipios_integrantes >>. En conjunto, ocupa una superficie de << ge_dg_superficie_region_km2 >> kilómetros cuadrados, equivalente al << ge_dg_porcentaje_superficie_estatal >> \% del territorio estatal.
 
 Por su extensión, << ge_dg_municipio_mayor_superficie >> es el municipio de mayor superficie de la región, con << ge_dg_superficie_municipio_mayor_km2 >> km$^2$, mientras que << ge_dg_municipio_menor_superficie >> es el de menor extensión, con << ge_dg_superficie_municipio_menor_km2 >> km$^2$.
 
@@ -29,7 +29,7 @@ El territorio regional presenta altitudes entre << ge_dg_altitud_minima_region >
 
 Al considerar la elevación media de cada municipio, << ge_dg_municipio_altitud_media_mayor >> presenta el valor más alto de la región, con << ge_dg_altitud_media_mayor >> msnm, mientras que << ge_dg_municipio_altitud_media_menor >> registra el menor, con << ge_dg_altitud_media_menor >> msnm. En cuanto al relieve, el rango de pendiente con mayor presencia es << ge_tp_dominante >>, que abarca << ge_tp_dominante_pct >> \% de la superficie regional.
 
-El clima predominante es << ge_cl_tipo_predominante >>, presente en el << ge_cl_pct_predominante >> \% del territorio. La temperatura media anual es de << ge_tm_media_anual >> °C y la precipitación acumulada anual promedio es de << ge_p_acumulada_anual >> mm. El viento dominante proviene de << ge_dg_viento_predom >>, con una frecuencia del << ge_dg_viento_predom_fr >> \%.
+El clima predominante es << ge_cl_tipo_predominante >>, presente en el << ge_cl_pct_predominante >> \% del territorio. La temperatura media anual es de << ge_tm_media_anual >> °C y la precipitación acumulada anual promedio es de << ge_p_acumulada_anual >> mm. <% if ge_dg_viento_predom != "\\ND" %>El viento dominante proviene << ge_dg_viento_origen >>, con una frecuencia del << ge_dg_viento_frecuencia >>.<% endif %>
 
 La unidad geológica con mayor presencia es << ge_geo_dominante >>, que ocupa el << ge_geo_dominante_pct >> \% de la superficie regional. El tipo de suelo predominante es << ge_ed_dominante >>, con una cobertura del << ge_ed_dominante_pct >> \%.
 
@@ -66,7 +66,7 @@ La unidad geológica con mayor presencia es << ge_geo_dominante >>, que ocupa el
 \multicolumn{2}{r}{\small\textbf{(continúa)}} \\
 \endfoot
 \hline
-\tablefooterrow{2}{Fuente: & IIEG, con base en IIEG. Mapa General del Estado de Jalisco, 2012. INEGI. Conjunto de datos vectoriales Geológicos serie I, 1988. INEGI. Carta edafológica escala 1:250 000 Serie III, 2025. INEGI. Conjunto nacional de información topográfica a escala 1:50 000, 2025. INEGI. Continuo de Elevaciones Mexicano 4.0, 2025. SMN. Información Estadística Climatológica, 1995-2025.}
+\tablefooterrow{2}{Fuente: & IIEG, con base en IIEG. Mapa General del Estado de Jalisco, 2012. INEGI. Conjunto de datos vectoriales Geológicos serie I, 1988. INEGI. Carta edafológica escala 1:250 000 Serie III, 2025. INEGI. Conjunto nacional de información topográfica a escala 1:50 000, 2025. INEGI. Continuo de Elevaciones Mexicano 4.0, 2025. SMN. Información Estadística Climatológica, 1995-2025. Copernicus Climate Change Service. Reanálisis ERA5, 2025.}
 \endlastfoot
 
 Región & << nombre_region >> \\
@@ -1315,7 +1315,7 @@ Las categorías de condición hídrica moderada y de alta humedad en la vegetaci
 
 \subsubsection{Áreas naturales protegidas y humedales}
 
-Con base en la información de Áreas Naturales Protegidas (CONANP, 2025) y del Inventario Nacional de Humedales (CONAGUA, 2021), en la región << nombre_region >> se registran << ge_anp_numero_anp >> áreas naturales protegidas. La superficie incluida en alguna categoría de protección suma << ge_anp_superficie_protegida_ha >> hectáreas, equivalentes al << ge_anp_pct_superficie_protegida >> \% del territorio regional, en comparación con el << ge_anp_pct_superficie_protegida_estado >> \% a escala estatal.
+Con base en la información de Áreas Naturales Protegidas (CONANP, 2025) y del Inventario Nacional de Humedales (CONAGUA, 2021), en la región << nombre_region >> se registran << ge_anp_numero_anp >> áreas naturales protegidas. La superficie incluida en alguna categoría de protección suma << ge_anp_superficie_protegida_ha >> hectáreas, equivalentes al << ge_anp_pct_superficie_protegida >> \% del territorio regional, en comparación con el << ge_anp_pct_superficie_protegida_estado >> \% a escala estatal. Las superficies por jurisdicción pueden traslaparse. La superficie protegida total corresponde a la unión geométrica de las áreas protegidas.
 
 Por ámbito de competencia, << ge_anp_ambito_predominante >> concentra la mayor superficie protegida, equivalente al << ge_anp_pct_ambito_predominante >> \% del territorio regional. Los humedales ocupan << ge_anp_superficie_humedales_ha >> hectáreas, equivalentes al << ge_anp_pct_humedales >> \% de la región.
 

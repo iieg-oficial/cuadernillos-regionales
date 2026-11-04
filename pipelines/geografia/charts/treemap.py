@@ -100,7 +100,7 @@ EXPLICIT_COLOR_MAPS = {
     "acuiferos": {
         "con_disponibilidad": COLOR_PALETTE["purple_09"],
         "sin_disponibilidad": COLOR_PALETTE["purple_01"],
-        "no_explotado": COLOR_PALETTE["purple_05"],
+        "no_sobreexplotado": COLOR_PALETTE["purple_05"],
         "sobreexplotado": COLOR_PALETTE["orange"],
         "sin_clasificacion": COLOR_PALETTE["gray"],
     },
@@ -322,7 +322,7 @@ def _save(fig, path):
 def plot_proportional_blocks(categories, values, topic_key, output_path):
     _setup_style()
     colors = _build_color_lookup(topic_key, categories)
-    rects = _split_rectangles(values, 0, 0, 100, TREEMAP_HEIGHT)
+    rects = _split_rectangles(values, 0, 0, min(sum(values), 100), TREEMAP_HEIGHT)
 
     fig, ax = plt.subplots(figsize=FIGSIZE_PROPORTION)
     ax.set_xlim(0, 100)

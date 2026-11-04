@@ -190,8 +190,10 @@ def plot_vientos(wind_data, output_path):
         linewidth=0,
         alpha=0.95,
     )
-    ax.set_xticks(np.deg2rad([0, 90, 180, 270]))
-    ax.set_xticklabels(["N", "E", "S", "O"], fontsize=12, fontweight="bold")
+    ax.set_xticks(np.deg2rad(range(0, 360, 45)))
+    ax.set_xticklabels(
+        ["N", "NE", "E", "SE", "S", "SO", "O", "NO"], fontsize=12, fontweight="bold"
+    )
     radial_max = max(max_val * 1.12, 0.05)
     ax.set_ylim(0, radial_max)
     ax.set_yticks(np.linspace(radial_max / 4, radial_max, 4))
