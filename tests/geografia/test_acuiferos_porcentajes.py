@@ -4,11 +4,11 @@ from sqlalchemy.exc import SQLAlchemyError
 
 from core.db import get_session
 from core.settings import DatabaseSettings
-from pipelines.geografia.analizer import SIN_CLASIFICACION
 from pipelines.geografia.helpers.tables import raw_sum
 
 TOLERANCIA = 0.01
 TOTAL_MUNICIPIOS = 125
+SIN_CLASIFICACION = ["sin clasificacion", "sin clasificación"]
 
 DIMENSIONES = ["acuiferos_situacion", "acuiferos_condicion"]
 

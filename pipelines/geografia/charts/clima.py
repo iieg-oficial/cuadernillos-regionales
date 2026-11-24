@@ -75,7 +75,9 @@ def plot_temperatura(long_rows, output_path):
     maxs = np.array([float(r.get("max", 0) or 0) for r in data])
 
     fig, ax = plt.subplots(figsize=(8.2, 4.2))
-    ax.fill_between(x, mins, maxs, color="#D8B5E8", alpha=0.28, linewidth=0)
+    ax.fill_between(
+        x, mins, maxs, color="#D8B5E8", alpha=0.28, linewidth=0, label="Mínima–máxima"
+    )
     ax.plot(
         x,
         means,
@@ -84,6 +86,7 @@ def plot_temperatura(long_rows, output_path):
         marker="o",
         markersize=5.5,
         markeredgewidth=0,
+        label="Media",
     )
     for xp, val in zip(x, means):
         ax.text(
@@ -107,7 +110,14 @@ def plot_temperatura(long_rows, output_path):
     for label in ax.get_yticklabels():
         label.set_fontsize(12)
         label.set_fontweight("bold")
-    fig.subplots_adjust(left=0.075, right=0.985, top=0.93, bottom=0.13)
+    ax.legend(
+        loc="upper center",
+        bbox_to_anchor=(0.5, -0.07),
+        ncol=2,
+        frameon=False,
+        fontsize=8.5,
+    )
+    fig.subplots_adjust(left=0.075, right=0.985, top=0.93, bottom=0.18)
     fig.patch.set_alpha(0)
     ax.patch.set_alpha(0)
     _save(fig, output_path)
@@ -183,16 +193,18 @@ def plot_vientos(wind_data, output_path):
     ax.bar(
         theta,
         values,
-        width=np.deg2rad(26),
+        width=np.deg2rad(36),
         bottom=0.0,
         color=colors,
         edgecolor="none",
         linewidth=0,
         alpha=0.95,
     )
-    ax.set_xticks(np.deg2rad([0, 90, 180, 270]))
-    ax.set_xticklabels(["N", "E", "S", "O"], fontsize=12, fontweight="bold")
-    radial_max = max(max_val * 1.12, 0.05)
+    ax.set_xticks(np.deg2rad(range(0, 360, 45)))
+    ax.set_xticklabels(
+        ["N", "NE", "E", "SE", "S", "SO", "O", "NO"], fontsize=12, fontweight="bold"
+    )
+    radial_max = max(max_val * 1.37, 0.05)
     ax.set_ylim(0, radial_max)
     ax.set_yticks(np.linspace(radial_max / 4, radial_max, 4))
     ax.set_yticklabels([])
@@ -200,19 +212,16 @@ def plot_vientos(wind_data, output_path):
     ax.grid(True, axis="y", linestyle="-", alpha=0.22, color=AXIS_COLOR)
     ax.spines["polar"].set_color(AXIS_COLOR)
 
-    for angle, val in zip(theta, values):
-        if val < 0.05:
-            continue
-        fontsize = min(8, max(4.5, 4 + (val / max_val) * 4))
+    for angle, val in zip(theta, values, strict=True):
         ax.text(
             angle,
-            val * 0.78,
-            f"{val * 100:.0f} %",
+            max_val * 1.19,
+            f"{val * 100:.2f} %",
             ha="center",
             va="center",
-            fontsize=fontsize,
+            fontsize=8,
             fontweight="bold",
-            color="white",
+            color=TEXT_COLOR,
         )
 
     path = Path(output_path)

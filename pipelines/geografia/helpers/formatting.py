@@ -1,5 +1,6 @@
 import math
 import re
+from decimal import Decimal
 
 from core.constants import ND
 from core.utils.helpers import latex_escape
@@ -9,7 +10,7 @@ __all__ = ["latex_escape"]
 
 def fmt(value, decimals=2) -> str:
     if value is None or (isinstance(value, float) and math.isnan(value)):
-        return "0"
+        return ND
     return f"{round(value, decimals):,.{decimals}f}".replace(",", r"\,")
 
 
@@ -17,20 +18,23 @@ def fmt_no_cero(value, decimals=2, max_decimals=3) -> str:
     if value is None or (isinstance(value, float) and math.isnan(value)):
         return fmt(value, decimals)
     if value != 0 and round(value, decimals) == 0:
+        if round(value, max_decimals) == 0:
+            limit = fmt(Decimal(10) ** -max_decimals, max_decimals)
+            return rf"$>-{limit}$" if value < 0 else rf"$< {limit}$"
         return fmt(value, max_decimals)
     return fmt(value, decimals)
 
 
 def fmt_int(value) -> str:
     if value is None or (isinstance(value, float) and math.isnan(value)):
-        return "0"
+        return ND
     return f"{int(value):,}".replace(",", r"\,")
 
 
 def fmt_pct(value) -> str:
     if value is None or (isinstance(value, float) and math.isnan(value)):
         return ND
-    return f"{value:,.2f}".replace(",", r"\,") + r"\,\%"
+    return fmt_no_cero(value) + r"\,\%"
 
 
 def strip_percent_symbol(value):

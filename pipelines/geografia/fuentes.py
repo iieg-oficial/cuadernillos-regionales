@@ -1,5 +1,5 @@
 CITAS = {
-    "wind_atlas": (r"DTU Wind \& GBM. Global Wind Atlas 4.0", "2026"),
+    "era5": ("Copernicus Climate Change Service. Reanálisis ERA5", "2025"),
     "geoespacial_municipal": ("información geoespacial municipal", "2026"),
     "geologia": ("INEGI. Conjunto de datos vectoriales Geológicos serie I", "1988"),
     "edafologia": (
@@ -44,7 +44,7 @@ CITAS = {
 }
 
 TEMAS = {
-    "wind": ["wind_atlas"],
+    "wind": ["era5"],
     "sintesis": [
         "mapa_jalisco",
         "geologia",
@@ -76,7 +76,7 @@ TEMAS = {
 }
 
 ANIO_TITULO = {
-    "wind": "datos climatológicos del período 2008--2017",
+    "wind": "era5",
     "sintesis": "2026",
     "geologia": "geologia",
     "edafologia": "edafologia",
