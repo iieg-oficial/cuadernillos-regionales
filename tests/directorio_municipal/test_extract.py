@@ -19,10 +19,10 @@ def catalogo():
     "region_clave,municipio_esperado",
     [
         ("03", "Acatic"),
-        ("05", "Atenguillo"),
-        ("01", "Guadalajara"),
-        ("11", "Tuxcueca"),
-        ("01", "Zapopan"),
+        ("09", "Atenguillo"),
+        ("12", "Guadalajara"),
+        ("05", "Tuxcueca"),
+        ("12", "Zapopan"),
         ("03", "San Ignacio Cerro Gordo"),
     ],
 )
