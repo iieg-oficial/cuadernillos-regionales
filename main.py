@@ -10,6 +10,7 @@ from pipelines.directorio_municipal.pipeline import DirectorioMunicipal
 from pipelines.economia.pipeline import Economia
 from pipelines.geografia.pipeline import Geografia
 from pipelines.gobierno_y_seguridad.pipeline import GobiernoYSeguridad
+from pipelines.historia.pipeline import Historia
 
 
 def run(clave: str, pipeline: Pipeline, prod: bool = False) -> None:
@@ -59,6 +60,7 @@ def main() -> None:
 
     pipeline = Pipeline(
         sections=[
+            Historia(),
             Demografia(),
             DirectorioMunicipal(),
             Geografia(),
